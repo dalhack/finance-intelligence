@@ -2,9 +2,19 @@ name: Finance Intelligence CI Pipeline
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main, develop, 'finance-intelligence/*' ]
   pull_request:
     branches: [ main, develop ]
+  workflow_dispatch:
+    inputs:
+      validation_scope:
+        description: 'Validation Scope'
+        required: true
+        default: 'ios_only'
+        type: choice
+        options:
+          - ios_only
+          - all
 
 jobs:
   boundary-and-secret:
