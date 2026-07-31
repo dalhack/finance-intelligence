@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AndroidToolchainInstallAuthorization",
+  "description": "Explicit user authorization artifact required before downloading or installing Android SDK / toolchain components.",
+  "authorizationVersion": "1.0.0",
+  "status": "EXAMPLE_NOT_AUTHORIZED",
+  "installScope": "USER_LOCAL_DEVELOPMENT_ENVIRONMENT",
+  "targetDirectory": "$HOME/Library/Android/sdk",
+  "requestedComponents": {
+    "jdkVersion": "OpenJDK 17",
+    "androidCommandLineTools": "latest (11.0+)",
+    "platformTools": "35.0.0",
+    "buildToolsVersion": "34.0.0",
+    "sdkPlatform": "android-34",
+    "emulatorRequired": true,
+    "systemImage": "system-images;android-34;google_apis;arm64-v8a"
+  },
+  "projectRequirements": {
+    "namespace": "com.example.finance_intelligence",
+    "compileSdk": 34,
+    "minSdk": 21,
+    "targetSdk": 34,
+    "jvmTarget": "17"
+  },
+  "estimatedDiskSpace": "~12.5 GB",
+  "networkDownloadRequired": true,
+  "licenseAcceptanceRequired": true,
+  "environmentVariableChanges": [
+    "export ANDROID_HOME=$HOME/Library/Android/sdk",
+    "export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools"
+  ],
+  "rollbackPlan": "Delete $HOME/Library/Android/sdk directory and remove environment variable exports from ~/.zshrc",
+  "expiresAt": "2026-12-31T23:59:59Z",
+  "approvalFingerprint": "0000000000000000000000000000000000000000000000000000000000000000",
+  "preparedAt": "2026-07-31T20:10:00Z"
+}

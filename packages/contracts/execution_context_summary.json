@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ExecutionContextSummary",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "user_id": { "type": "string", "format": "uuid" },
+    "active_organization_id": { "type": "string", "format": "uuid" },
+    "roles": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "request_id": { "type": "string" },
+    "environment": { "type": "string" }
+  },
+  "required": ["user_id", "active_organization_id", "roles", "request_id", "environment"]
+}

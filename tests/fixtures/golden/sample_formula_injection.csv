@@ -1,0 +1,6 @@
+Account,Amount,Comment
+Sales,10000,Standard Sale
+=1+2,5000,Formula Injection Test
+@SUM(1..10),2500,At Symbol Injection
+-500+2,1200,Minus Prefix Test
++1000,3400,Plus Prefix Test

@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "UserSummary",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "user_id": { "type": "string", "format": "uuid" },
+    "identity_provider": { "type": "string" },
+    "display_name": { "type": "string" },
+    "status": { "type": "string" }
+  },
+  "required": ["user_id", "identity_provider", "display_name", "status"]
+}
