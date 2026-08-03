@@ -15,9 +15,9 @@ RUN groupadd -g 10001 appgroup && \
 
 WORKDIR /app
 
-# Install pinned dependencies
+# Install hash-locked dependencies with mandatory hash enforcement
 COPY services/api/requirements-migration.lock /app/requirements-migration.lock
-RUN pip install --no-cache-dir -r /app/requirements-migration.lock
+RUN python -m pip install --no-cache-dir --require-hashes -r /app/requirements-migration.lock
 
 # Copy migration configuration, scripts, and application files
 COPY services/api/alembic.ini /app/services/api/alembic.ini

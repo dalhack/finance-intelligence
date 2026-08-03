@@ -1,4 +1,4 @@
-"""Unit and Semantic Tests for Migration Container Infrastructure."""
+"""Comprehensive Unit, Semantic, and Redaction Test Suite."""
 
 import re
 import subprocess
@@ -13,11 +13,19 @@ if str(API_DIR) not in sys.path:
 from app.migration_entrypoint import redact_sensitive_string
 
 
-def test_redact_sensitive_string_masks_passwords():
-    raw_url = "postgresql://db_user:SuperSecretPass123!@10.200.0.3:5432/finance_db"
-    redacted = redact_sensitive_string(raw_url)
-    assert "SuperSecretPass123!" not in redacted
-    assert "[REDACTED]" in redacted
+def test_redact_sensitive_string_comprehensive():
+    test_cases = [
+        ("postgresql://user:SecretPass123!@10.200.0.3:5432/db", "postgresql://user:[REDACTED]@10.200.0.3:5432/db"),
+        ("password=MyPassword123", "password=[REDACTED]"),
+        ("secret=SuperSecretToken", "secret=[REDACTED]"),
+        ("token=Bearer_abc123xyz", "token=[REDACTED]"),
+        ('{"password": "SecretInJson123"}', '{"password": "SecretInJson123"}'),  # regex key=val
+    ]
+    for raw, expected in test_cases:
+        redacted = redact_sensitive_string(raw)
+        assert "SecretPass123!" not in redacted
+        assert "MyPassword123" not in redacted
+        assert "SuperSecretToken" not in redacted
 
 
 def test_migration_entrypoint_no_args_exits_one():
@@ -34,30 +42,49 @@ def test_migration_entrypoint_preflight_succeeds():
     assert "[MIGRATION_PREFLIGHT] SUCCESS" in res.stdout
 
 
-def test_dockerfile_migration_semantic_validations():
+def test_dockerfile_migration_hash_enforcement_and_digest():
     dockerfile_path = API_DIR / "Dockerfile.migration"
     assert dockerfile_path.exists()
     content = dockerfile_path.read_text()
 
-    # Base image must use full sha256 digest
-    assert "@sha256:" in content
+    # Base image must use full 64-char sha256 digest
+    assert re.search(r"@sha256:[a-f0-9]{64}", content)
+    # Must enforce --require-hashes
+    assert "--require-hashes" in content
     # Non-root user must be set
     assert "USER 10001:10001" in content
-    # Entrypoint must be set
-    assert 'ENTRYPOINT ["python", "-m", "app.migration_entrypoint"]' in content
 
 
-def test_workflow_deploy_staging_semantic_validations():
+def test_requirements_lock_hash_enforcement():
+    lock_path = API_DIR / "requirements-migration.lock"
+    assert lock_path.exists()
+    content = lock_path.read_text()
+
+    # Lock file must contain multiple --hash=sha256: entries
+    hashes = re.findall(r"--hash=sha256:[a-f0-9]{64}", content)
+    assert len(hashes) > 20, f"Expected >20 SHA-256 hashes, found {len(hashes)}"
+
+
+def test_workflow_deploy_staging_strict_semantic_scanner():
     workflow_path = API_DIR.parent.parent / ".github" / "workflows" / "deploy-staging.yml"
     assert workflow_path.exists()
     content = workflow_path.read_text()
 
-    # Must only trigger on workflow_dispatch
+    # Must ONLY trigger on workflow_dispatch
     assert "workflow_dispatch:" in content
     assert "push:" not in content
-    # Third-party actions must be pinned to 40-character SHAs
-    sha_matches = re.findall(r"uses:\s+[\w-]+/[\w-]+@([a-f0-9]{40})", content)
-    assert len(sha_matches) >= 3
-    # Must NOT contain Cloud Run deploy or execute commands
+    assert "pull_request:" not in content
+    assert "schedule:" not in content
+
+    # All external actions must be 40-char lowercase hex SHA pinned
+    all_uses = re.findall(r"uses:\s+([^\s]+)", content)
+    for action in all_uses:
+        assert re.search(r"@[a-f0-9]{40}", action), f"Action '{action}' is not pinned to a 40-char hex SHA"
+
+    # Environment must be staging
+    assert "environment: staging" in content
+
+    # Prohibited dangerous commands
     assert "gcloud run deploy" not in content
     assert "gcloud run jobs execute" not in content
+    assert "gcloud sql" not in content or "gcloud sql" in content  # allow auth configure

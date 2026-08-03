@@ -1,0 +1,6 @@
+# Direct migration dependencies for Finance Intelligence Staging Migration Runner
+alembic==1.13.2
+SQLAlchemy==2.0.31
+cloud-sql-python-connector[pg8000]==1.9.2
+google-cloud-secret-manager==2.9.2
+pydantic-settings==2.3.4

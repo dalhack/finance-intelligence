@@ -53,7 +53,15 @@ jobs:
 
       - name: Output Immutable Digest Reference
         run: |
-          DIGEST=$(gcloud artifacts docker images describe \
+          RAW_DIGEST=$(gcloud artifacts docker images describe \
             europe-west1-docker.pkg.dev/finance-intel-staging-8f2a/fi-images/migration-runner:migration-${{ github.sha }} \
             --format="value(image_summary.digest)")
-          echo "IMAGE_IMMUTABLE_DIGEST=europe-west1-docker.pkg.dev/finance-intel-staging-8f2a/fi-images/migration-runner@${DIGEST}"
+          
+          if [[ ! "${RAW_DIGEST}" =~ ^sha256:[a-f0-9]{64}$ ]]; then
+            echo "ERROR: Invalid image digest format extracted: '${RAW_DIGEST}'"
+            exit 1
+          fi
+
+          IMMUTABLE_REF="europe-west1-docker.pkg.dev/finance-intel-staging-8f2a/fi-images/migration-runner@${RAW_DIGEST}"
+          echo "IMAGE_IMMUTABLE_DIGEST=${IMMUTABLE_REF}" >> $GITHUB_STEP_SUMMARY
+          echo "Successfully validated immutable image reference: ${IMMUTABLE_REF}"
