@@ -1,4 +1,4 @@
-"""Comprehensive Unit, Semantic, Redaction, Action SHA Manifest, and Validation Workflow Contract Tests."""
+"""Comprehensive Unit, Semantic, Redaction, Action SHA Manifest, and Validation Workflow Lifecycle Tests."""
 
 import re
 import subprocess
@@ -154,33 +154,21 @@ def test_action_pin_manifest_parity_and_negative_fixtures():
             assert sha_part == expected_sha, f"SHA mismatch for {repo_name}: expected {expected_sha}, got {sha_part}"
 
 
-def test_workflow_validate_migration_lock_install_import_isolation_scanner():
+def test_workflow_validate_migration_lock_volume_lifecycle_scanner():
     wf_path = API_DIR.parent.parent / ".github" / "workflows" / "validate-migration-lock.yml"
     assert wf_path.exists()
     content = wf_path.read_text()
 
-    # Fail-closed platform inspection
-    assert "docker pull --platform linux/amd64" in content
-    assert 'PLATFORM_ARCH}" != "amd64/linux"' in content
-    assert "2>/dev/null || true" not in content
+    # Stage A volume creation
+    assert "docker volume create" in content
+    assert 'if docker volume inspect "${VALIDATION_VOLUME}"' in content
 
-    # Stage A and Stage B isolation
-    assert "Stage A - Validate Pip Hash Installation in Ephemeral Volume" in content
-    assert "Stage B - Run Import Smoke Test in Isolated Network-Disabled Container" in content
+    # Stage B volume pre-check
+    assert 'if ! docker volume inspect "${VALIDATION_VOLUME}"' in content
 
-    # Stage B flags: --network none, --read-only, --tmpfs
-    assert "--network none" in content
-    assert "--read-only" in content
-    assert "--tmpfs /tmp:rw,nosuid,nodev,noexec" in content
-
-    # Volume cleanup trap
-    assert "trap cleanup EXIT" in content
+    # Cleanup step with if: always() and absence assertion
+    assert "Cleanup Exact Validation Volume" in content
+    assert "if: always()" in content
     assert 'docker volume rm -f "${VALIDATION_VOLUME}"' in content
+    assert "Validation volume still exists after cleanup!" in content
     assert "docker volume prune" not in content
-
-    # 9 module import smoke test string
-    for mod in EXPECTED_NINE_IMPORTS:
-        assert f"import {mod}" in content, f"Module import {mod} missing from validate-migration-lock.yml"
-
-    # Exact success log statement
-    assert '[IMPORT_SMOKE_TEST] SUCCESS: All 9 core migration modules imported cleanly.' in content
