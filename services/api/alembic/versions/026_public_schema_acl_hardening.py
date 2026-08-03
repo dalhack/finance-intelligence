@@ -15,7 +15,7 @@ depends_on = None
 
 
 def upgrade() -> None:
-    # 1. Hardening: Revoke schema privileges from PUBLIC pseudo-role & db_app_user
+    # 1. Hardening: Revoke schema privileges from PUBLIC pseudo-role & legacy db_app_user
     op.execute("REVOKE ALL ON SCHEMA public FROM PUBLIC;")
 
     op.execute("""
@@ -31,8 +31,18 @@ def upgrade() -> None:
         $$;
     """)
 
-    # 2. Hardening: Revoke function EXECUTE privileges from PUBLIC on all existing functions
+    # 2. Hardening: Revoke function EXECUTE privileges from PUBLIC, db_app_user, and db_bootstrap on all functions
     op.execute("REVOKE EXECUTE ON ALL FUNCTIONS IN SCHEMA public FROM PUBLIC;")
+
+    op.execute("""
+        DO $$
+        BEGIN
+            IF EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_bootstrap') THEN
+                REVOKE EXECUTE ON ALL FUNCTIONS IN SCHEMA public FROM db_bootstrap;
+            END IF;
+        END
+        $$;
+    """)
 
     # 3. Hardening: Default privilege owner scope for future function/table/sequence creations
     op.execute("ALTER DEFAULT PRIVILEGES IN SCHEMA public REVOKE EXECUTE ON FUNCTIONS FROM PUBLIC;")
@@ -66,7 +76,6 @@ def upgrade() -> None:
             END IF;
             IF EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_bootstrap') THEN
                 GRANT USAGE ON SCHEMA public TO db_bootstrap;
-                GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA public TO db_bootstrap;
             END IF;
             IF EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_api_user') THEN
                 GRANT USAGE ON SCHEMA public TO db_api_user;
@@ -81,7 +90,7 @@ def upgrade() -> None:
         $$;
     """)
 
-    # 5. Explicit function EXECUTE grants for specific runtime roles & trigger functions
+    # 5. Explicit function EXECUTE grants for specific runtime roles
     op.execute("""
         DO $$
         BEGIN
