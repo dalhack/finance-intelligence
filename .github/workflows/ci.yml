@@ -23,8 +23,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install dependencies
-        run: pip install pytest pytest-asyncio alembic asyncpg psycopg2-binary sqlalchemy fastapi pydantic pydantic-settings httpx ruff mypy
+      - name: Install locked dependencies
+        run: pip install -r requirements.lock
       - name: Run Secret & Boundary Scanner
         run: pytest tests/unit/test_secret_scanner.py
 
@@ -38,8 +38,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install Lint & Type Tools
-        run: pip install ruff mypy pytest sqlalchemy alembic fastapi asyncpg psycopg2-binary pydantic pydantic-settings
+      - name: Install locked dependencies
+        run: pip install -r requirements.lock
       - name: Ruff Check
         run: ruff check . --extend-exclude="apps/mobile/ios/Flutter/ephemeral"
       - name: Ruff Format Check
@@ -57,8 +57,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install dependencies
-        run: pip install pytest pytest-asyncio alembic asyncpg psycopg2-binary sqlalchemy fastapi pydantic pydantic-settings httpx
+      - name: Install locked dependencies
+        run: pip install -r requirements.lock
       - name: Run Python Unit Suite
         run: pytest tests/unit
 
@@ -86,8 +86,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install dependencies
-        run: pip install pytest pytest-asyncio alembic asyncpg psycopg2-binary sqlalchemy fastapi pydantic pydantic-settings httpx
+      - name: Install locked dependencies
+        run: pip install -r requirements.lock
       - name: Provision Roles & DBs
         run: |
           PGPASSWORD=owner_pass psql -h localhost -U db_owner -d finance_intelligence_test -c "CREATE ROLE db_bootstrap LOGIN PASSWORD 'bootstrap_pass';"
@@ -119,7 +119,8 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-      - name: Install dependencies
+          flutter-version: '3.24.0'
+      - name: Install locked dependencies
         working-directory: apps/mobile
         run: flutter pub get
       - name: Flutter Format Check
@@ -137,7 +138,8 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-      - name: Install dependencies
+          flutter-version: '3.24.0'
+      - name: Install locked dependencies
         working-directory: apps/mobile
         run: flutter pub get
       - name: Run Flutter Test Suite
@@ -148,26 +150,78 @@ jobs:
     name: Migration Round-Trip Verification
     needs: backend-foundation-gate
     runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: .
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_PASSWORD: owner_pass
+          POSTGRES_USER: db_owner
+          POSTGRES_DB: finance_intelligence_roundtrip
+        ports:
+          - 5433:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - uses: actions/checkout@v4
-      - name: Verify Migration Catalog
-        run: echo "Migration catalog verified."
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install locked dependencies
+        run: pip install -r requirements.lock
+      - name: Run Migration Upgrade, Revision Check, and Roundtrip
+        env:
+          DATABASE_URL: "postgresql+asyncpg://db_owner:owner_pass@localhost:5433/finance_intelligence_roundtrip"
+        run: |
+          alembic -c services/api/alembic.ini upgrade head
+          alembic -c services/api/alembic.ini current
+          alembic -c services/api/alembic.ini downgrade base
+          alembic -c services/api/alembic.ini upgrade head
 
   security-catalog:
     name: Security Catalog Verification
     runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: .
     steps:
       - uses: actions/checkout@v4
-      - name: Verify Security Catalog
-        run: echo "Security catalog verified."
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install locked dependencies
+        run: pip install -r requirements.lock
+      - name: Run Genuine Security & RLS Suite
+        run: pytest tests/unit/test_security_pipeline.py tests/unit/test_security.py tests/unit/test_tenant_context_scanner.py tests/unit/test_secret_scanner.py
 
   contract-drift:
     name: OpenAPI Contract Drift
     runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: .
     steps:
       - uses: actions/checkout@v4
-      - name: Check Contract Drift
-        run: echo "Contract drift verified."
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          flutter-version: '3.24.0'
+      - name: Install locked dependencies
+        run: pip install -r requirements.lock
+      - name: Export OpenAPI Spec & Check Drift
+        run: |
+          python scripts/export_openapi.py
+          git diff --exit-code contracts/openapi_spec.json
+      - name: Run Flutter Contract Drift Test
+        working-directory: apps/mobile
+        run: |
+          flutter pub get
+          flutter test test/contract/contract_drift_test.dart
 
   traceability:
     name: Traceability Assertion Check
@@ -179,8 +233,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Install dependencies
-        run: pip install pytest pytest-asyncio alembic asyncpg psycopg2-binary sqlalchemy fastapi pydantic pydantic-settings
+      - name: Install locked dependencies
+        run: pip install -r requirements.lock
       - name: Run Traceability Validator
         run: pytest tests/unit/test_ai_orchestration.py
 
@@ -193,19 +247,64 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+          flutter-version: '3.24.0'
       - name: Check Android Toolchain
         run: flutter doctor -v
 
-  ios-build-preflight-macos-only:
-    name: iOS Build Preflight
-    runs-on: macos-latest
+  ios-toolchain-preflight:
+    name: iOS Toolchain Preflight
+    runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-      - name: Check iOS Toolchain
-        run: flutter doctor -v
+          flutter-version: '3.24.0'
+      - name: Check iOS Toolchain & Xcode
+        run: |
+          flutter doctor -v
+          xcodebuild -version
+
+  ios-simulator-build:
+    name: iOS Simulator Build & Artifact Check
+    needs: ios-toolchain-preflight
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          flutter-version: '3.24.0'
+      - name: Build iOS Simulator Bundle
+        working-directory: apps/mobile
+        run: |
+          flutter pub get
+          flutter build ios --simulator --no-codesign
+      - name: Validate Runner.app Filesystem Artifact & Fingerprint
+        working-directory: apps/mobile
+        run: |
+          test -d build/ios/iphonesimulator/Runner.app
+          SIZE=$(du -s build/ios/iphonesimulator/Runner.app | cut -f1)
+          echo "Runner.app Byte Size: $SIZE"
+          test "$SIZE" -gt 0
+          shasum -a 256 build/ios/iphonesimulator/Runner.app/Info.plist
+
+  ios-simulator-e2e:
+    name: iOS Simulator E2E Execution
+    needs: ios-simulator-build
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          flutter-version: '3.24.0'
+      - name: Boot Simulator & Run Device E2E Test
+        working-directory: apps/mobile
+        run: |
+          flutter pub get
+          xcrun simctl list devices
+          flutter test integration_test/device_e2e_test.dart
 
   final-gate-summary:
     name: Final Quality Gate Summary
@@ -221,7 +320,9 @@ jobs:
       - flutter-machine-tests
       - contract-drift
       - traceability
-      - ios-build-preflight-macos-only
+      - ios-toolchain-preflight
+      - ios-simulator-build
+      - ios-simulator-e2e
     runs-on: ubuntu-latest
     steps:
       - name: Quality Gate Status Enforcement
