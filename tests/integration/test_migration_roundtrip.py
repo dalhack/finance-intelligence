@@ -60,6 +60,7 @@ async def test_migration_upgrade_downgrade_roundtrip():
         "023_analysis_clarification_workflow",
         "024_maintenance_scheduler_and_operational_resilience",
         "025_distributed_provider_circuit_breaker",
+        "026_public_schema_acl_hardening",
     ]
     await conn1.close()
 
