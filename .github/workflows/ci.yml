@@ -94,7 +94,9 @@ jobs:
       - name: Provision Roles via Canonical Single Source Script
         run: python scripts/provision_ci_roles.py --target-url "postgresql://db_owner:owner_pass@localhost:5432/finance_intelligence_test"
       - name: Provision Test Database
-        run: PGPASSWORD=owner_pass psql -h localhost -U db_owner -d finance_intelligence_test -c "CREATE DATABASE finance_intelligence_roundtrip_test OWNER db_owner;" || true
+        run: |
+          PGPASSWORD=owner_pass psql -h localhost -U db_owner -d finance_intelligence_test -c "CREATE DATABASE finance_intelligence_roundtrip_test OWNER db_owner;" || true
+          python scripts/provision_ci_roles.py --target-url "postgresql://db_owner:owner_pass@localhost:5432/finance_intelligence_roundtrip_test"
       - name: Run Alembic Upgrade on Both Test Databases
         env:
           DATABASE_URL: "postgresql+asyncpg://db_owner:owner_pass@localhost:5432/finance_intelligence_test"

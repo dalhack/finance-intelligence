@@ -141,7 +141,35 @@ async def provision_ci_roles(dsn: str, allow_local: bool = False) -> None:
             else:
                 await conn.execute(f"ALTER ROLE {role_name} WITH LOGIN PASSWORD {quoted_pass};")
 
-        # 5. Database Catalog Verification & Security Assertions
+        # 5. Schema ACL Hardening: Revoke PUBLIC access and grant explicit USAGE to canonical runtime roles
+        schema_acl_sql = """
+        DO $$
+        BEGIN
+            REVOKE ALL ON SCHEMA public FROM PUBLIC;
+            IF EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_app_user') THEN
+                REVOKE ALL ON SCHEMA public FROM db_app_user;
+            END IF;
+            IF EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_owner') THEN
+                GRANT USAGE ON SCHEMA public TO db_owner;
+            END IF;
+            IF EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_bootstrap') THEN
+                GRANT USAGE ON SCHEMA public TO db_bootstrap;
+            END IF;
+            IF EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_api_user') THEN
+                GRANT USAGE ON SCHEMA public TO db_api_user;
+            END IF;
+            IF EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_ingestion_worker') THEN
+                GRANT USAGE ON SCHEMA public TO db_ingestion_worker;
+            END IF;
+            IF EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_maintenance_worker') THEN
+                GRANT USAGE ON SCHEMA public TO db_maintenance_worker;
+            END IF;
+        END
+        $$;
+        """
+        await conn.execute(schema_acl_sql)
+
+        # 6. Database Catalog Verification & Security Assertions
         app_user_info = await conn.fetchrow(
             "SELECT rolname, rolcanlogin, rolsuper, rolbypassrls FROM pg_roles WHERE rolname = 'db_app_user'"
         )
@@ -167,9 +195,17 @@ async def provision_ci_roles(dsn: str, allow_local: bool = False) -> None:
             print("ERROR: CI_ROLE_PROVISIONING_SECURITY_VIOLATION: db_app_user has active members.", file=sys.stderr)
             sys.exit(1)
 
+        has_schema_usage = await conn.fetchval("SELECT has_schema_privilege('db_app_user', 'public', 'USAGE');")
+        if has_schema_usage:
+            print(
+                "ERROR: CI_ROLE_PROVISIONING_SECURITY_VIOLATION: db_app_user retains effective public schema USAGE.",
+                file=sys.stderr,
+            )
+            sys.exit(1)
+
         print("SINGLE SOURCE CI ROLE PROVISIONING SUCCESSFUL!")
         print("STATIC_EVENT_CODE: CI_ROLE_PROVISIONING_SUCCESS")
-        print("Verified Catalog: db_app_user is NOLOGIN, NOBYPASSRLS, NOSUPERUSER with 0 members.")
+        print("Verified Catalog: db_app_user is NOLOGIN, NOBYPASSRLS, NOSUPERUSER with 0 members and 0 schema usage.")
 
     except Exception as e:  # noqa: BLE001
         redacted_msg = sanitize_connection_error(str(e))

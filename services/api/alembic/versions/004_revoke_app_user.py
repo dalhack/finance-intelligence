@@ -34,13 +34,15 @@ ALL_TABLES = [
 
 
 def upgrade() -> None:
-    # 1. Revoke all privileges from legacy db_app_user
+    # 1. Revoke all privileges from legacy db_app_user and PUBLIC
     op.execute("""
         DO $$
         BEGIN
+            REVOKE ALL ON SCHEMA public FROM PUBLIC;
             IF EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_app_user') THEN
                 REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA public FROM db_app_user;
                 REVOKE ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public FROM db_app_user;
+                REVOKE ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public FROM db_app_user;
                 REVOKE USAGE ON SCHEMA public FROM db_app_user;
             END IF;
         END
