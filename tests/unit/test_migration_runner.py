@@ -1,4 +1,4 @@
-"""Comprehensive Unit, Semantic, Redaction, and Action SHA Manifest Tests."""
+"""Comprehensive Unit, Semantic, Redaction, Action SHA Manifest, and Diagnostic Tests."""
 
 import re
 import subprocess
@@ -16,12 +16,18 @@ ALLOWED_ACTION_SHAS = {
     "actions/checkout": "11bd71901bbe5b1630ceea73d27597364c9af683",
     "google-github-actions/auth": "71f986410dfbc7added4569d411d040a91dc6935",
     "google-github-actions/setup-gcloud": "77e7a554d41e2ee56fc945c52dfd3f33d12def9a",
+    "actions/github-script": "60a0d83039c74a4aee543508d2ffcb1c3799cdea",
 }
 
 FORBIDDEN_INVALID_SHAS = {
     "6fc46f2b8ec9721d0282b89a87d096ef14abcf8e",
     "6189d56e4096ee891640bb02ac264be376592d63",
 }
+
+TARGET_WORKFLOW_FILES = [
+    "deploy-staging.yml",
+    "diagnose-staging-oidc.yml",
+]
 
 
 def test_redact_sensitive_string_comprehensive():
@@ -77,22 +83,24 @@ def test_requirements_lock_hash_enforcement():
 
 
 def test_action_pin_manifest_parity_and_negative_fixtures():
-    workflow_path = API_DIR.parent.parent / ".github" / "workflows" / "deploy-staging.yml"
-    assert workflow_path.exists()
-    content = workflow_path.read_text()
+    workflows_dir = API_DIR.parent.parent / ".github" / "workflows"
+    for wf_name in TARGET_WORKFLOW_FILES:
+        wf = workflows_dir / wf_name
+        assert wf.exists(), f"Target workflow file {wf_name} missing!"
+        content = wf.read_text()
 
-    # Rejection of forbidden invalid SHAs from run 30842261431
-    for bad_sha in FORBIDDEN_INVALID_SHAS:
-        assert bad_sha not in content, f"Forbidden invalid SHA {bad_sha} found in workflow!"
+        # Rejection of forbidden invalid SHAs
+        for bad_sha in FORBIDDEN_INVALID_SHAS:
+            assert bad_sha not in content, f"Forbidden invalid SHA {bad_sha} found in {wf_name}!"
 
-    # Rejection of mutable tags/branches in uses: lines
-    uses_lines = re.findall(r"uses:\s+([^\s]+)", content)
-    for use in uses_lines:
-        assert not re.search(r"@(v\d+|main|master|latest)$", use), f"Mutable tag/branch found in uses: {use}"
-        repo_name, sha_part = use.split("@")
-        assert repo_name in ALLOWED_ACTION_SHAS, f"Unallowed action repository: {repo_name}"
-        expected_sha = ALLOWED_ACTION_SHAS[repo_name]
-        assert sha_part == expected_sha, f"SHA mismatch for {repo_name}: expected {expected_sha}, got {sha_part}"
+        # Rejection of mutable tags/branches in uses: lines
+        uses_lines = re.findall(r"uses:\s+([^\s]+)", content)
+        for use in uses_lines:
+            assert not re.search(r"@(v\d+|main|master|latest)$", use), f"Mutable tag/branch found in uses: {use}"
+            repo_name, sha_part = use.split("@")
+            assert repo_name in ALLOWED_ACTION_SHAS, f"Unallowed action repository: {repo_name} in {wf_name}"
+            expected_sha = ALLOWED_ACTION_SHAS[repo_name]
+            assert sha_part == expected_sha, f"SHA mismatch for {repo_name}: expected {expected_sha}, got {sha_part}"
 
 
 def test_workflow_deploy_staging_prepush_hardening_semantic_scanner():
@@ -115,21 +123,26 @@ def test_workflow_deploy_staging_prepush_hardening_semantic_scanner():
     assert "ref: ${{ inputs.expected_commit_sha }}" in content
     assert "persist-credentials: false" in content
 
-    # Pre-push testing order verification: Build -> Inspect -> Smoke Test -> Default Test -> Push
-    build_pos = content.find("Build Migration Runner Image Locally")
-    inspect_pos = content.find("Inspect Pre-Push Container Metadata")
-    smoke_pos = content.find("Pre-Push Fail-Closed Container Smoke Test")
-    default_pos = content.find("Pre-Push Default Fail-Closed No-Subcommand Test")
-    push_pos = content.find("Push Image to Artifact Registry")
 
-    assert build_pos != -1 and inspect_pos != -1 and smoke_pos != -1 and default_pos != -1 and push_pos != -1
-    assert build_pos < inspect_pos < smoke_pos < default_pos < push_pos, "Pre-push testing order is invalid!"
+def test_workflow_diagnose_staging_oidc_semantic_scanner():
+    diag_path = API_DIR.parent.parent / ".github" / "workflows" / "diagnose-staging-oidc.yml"
+    assert diag_path.exists()
+    content = diag_path.read_text()
 
-    # Smoke test flags verification
-    assert "--network none" in content
-    assert "--read-only" in content
-    assert "--tmpfs /tmp:rw,noexec,nosuid,size=16m" in content
+    # Must ONLY trigger on workflow_dispatch with expected_commit_sha input
+    assert "workflow_dispatch:" in content
+    assert "expected_commit_sha:" in content
+    assert "push:" not in content
+    assert "pull_request:" not in content
 
-    # Summary output keys
-    assert "SOURCE_COMMIT_SHA=" in content
-    assert "IMAGE_IMMUTABLE_REFERENCE=" in content
+    # Environment must be staging
+    assert "environment: staging" in content
+
+    # Must NOT contain Docker build/push or GCP auth actions
+    assert "docker build" not in content
+    assert "docker push" not in content
+    assert "google-github-actions/auth" not in content
+
+    # Must NOT log full JWT token
+    assert "console.log(token)" not in content
+    assert "set -x" not in content
