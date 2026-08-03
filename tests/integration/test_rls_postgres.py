@@ -70,7 +70,11 @@ async def test_runtime_role_privileges_and_force_rls():
 async def test_lookup_user_membership_function_owner_and_acl_attributes():
     owner_conn = await asyncpg.connect(OWNER_URL)
     func_row = await owner_conn.fetchrow("""
-        SELECT p.prosecdef, pg_get_userbyid(p.proowner) AS owner_name, p.proacl::text AS acl_text
+        SELECT
+            p.prosecdef,
+            pg_get_userbyid(p.proowner) AS owner_name,
+            p.proacl::text AS acl_text,
+            has_function_privilege('db_bootstrap', p.oid, 'EXECUTE') AS bootstrap_can_execute
         FROM pg_proc p
         JOIN pg_namespace n ON n.oid = p.pronamespace
         WHERE n.nspname = 'public' AND p.proname = 'lookup_user_membership';
@@ -80,7 +84,8 @@ async def test_lookup_user_membership_function_owner_and_acl_attributes():
     assert func_row is not None
     assert func_row["prosecdef"] is True, "Function MUST be defined with SECURITY DEFINER."
     assert func_row["owner_name"] == "db_owner", "Function owner MUST be db_owner."
-    assert "db_bootstrap=X" in str(func_row["acl_text"]), "db_bootstrap MUST possess EXECUTE privilege."
+    assert "db_bootstrap=X" not in str(func_row["acl_text"])
+    assert func_row["bootstrap_can_execute"] is False, "db_bootstrap MUST NOT possess runtime EXECUTE privilege."
 
 
 @pytest.mark.asyncio
@@ -413,15 +418,16 @@ async def test_all_public_functions_deny_public_and_app_user_execute():
         SELECT 
             p.proname,
             has_function_privilege('public', p.oid, 'EXECUTE') as public_exec,
-            has_function_privilege('db_app_user', p.oid, 'EXECUTE') as app_user_exec
+            has_function_privilege('db_app_user', p.oid, 'EXECUTE') as app_user_exec,
+            has_function_privilege('db_bootstrap', p.oid, 'EXECUTE') as bootstrap_exec
         FROM pg_proc p
         JOIN pg_namespace n ON p.pronamespace = n.oid
         WHERE n.nspname = 'public';
     """)
 
-    failing_funcs = [r["proname"] for r in rows if r["public_exec"] or r["app_user_exec"]]
+    failing_funcs = [r["proname"] for r in rows if r["public_exec"] or r["app_user_exec"] or r["bootstrap_exec"]]
     await owner_conn.close()
 
     assert len(failing_funcs) == 0, (
-        f"SECURITY_VIOLATION: Functions retaining PUBLIC or db_app_user EXECUTE: {failing_funcs}"
+        f"SECURITY_VIOLATION: Functions retaining PUBLIC, db_app_user, or db_bootstrap EXECUTE: {failing_funcs}"
     )
