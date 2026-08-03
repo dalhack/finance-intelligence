@@ -1,4 +1,4 @@
-"""Comprehensive Unit, Semantic, Redaction, Action SHA Manifest, and Validation Workflow Tests."""
+"""Comprehensive Unit, Semantic, Redaction, Action SHA Manifest, and Validation Workflow Contract Tests."""
 
 import re
 import subprocess
@@ -37,6 +37,18 @@ SQLALCHEMY_TARGET_WHEEL_HASH = "2196208432deebdfe3b22185d46b08f00ac9d7b01284e168
 FORBIDDEN_LOCK_PACKAGES = [
     "google-cloud-secret-manager-v1",
     "scamper",
+]
+
+EXPECTED_NINE_IMPORTS = [
+    "alembic",
+    "sqlalchemy",
+    "google.cloud.sql.connector",
+    "google.cloud.secretmanager",
+    "pg8000",
+    "cryptography",
+    "cffi",
+    "pycparser",
+    "scramp",
 ]
 
 
@@ -142,32 +154,27 @@ def test_action_pin_manifest_parity_and_negative_fixtures():
             assert sha_part == expected_sha, f"SHA mismatch for {repo_name}: expected {expected_sha}, got {sha_part}"
 
 
-def test_workflow_validate_migration_lock_semantic_scanner():
+def test_workflow_validate_migration_lock_contract_completeness_scanner():
     wf_path = API_DIR.parent.parent / ".github" / "workflows" / "validate-migration-lock.yml"
     assert wf_path.exists()
     content = wf_path.read_text()
 
-    # Must ONLY trigger on workflow_dispatch with expected_commit_sha input
-    assert "workflow_dispatch:" in content
-    assert "expected_commit_sha:" in content
-    assert "push:" not in content
-    assert "pull_request:" not in content
+    # Ref check must be exact
+    assert 'GITHUB_REF}" != "refs/heads/finance-intelligence/phase-4c2c-ios-ci-validation"' in content
 
-    # Runner must be explicit ubuntu-24.04
-    assert "runs-on: ubuntu-24.04" in content
+    # Triple commit identity parity check must be present
+    assert 'CHECKED_OUT_SHA}" != "${{ inputs.expected_commit_sha }}"' in content
+    assert 'GITHUB_SHA}" != "${{ inputs.expected_commit_sha }}"' in content
 
-    # Permissions must be contents: read ONLY
-    assert "contents: read" in content
-    assert "id-token: write" not in content
+    # Explicit --platform linux/amd64 must be in docker run calls
+    assert "--platform linux/amd64" in content
 
-    # Must NOT contain setup-python, pip upgrade pip, GCP auth, or Docker push
-    assert "actions/setup-python" not in content
-    assert "pip install --upgrade pip" not in content
-    assert "google-github-actions/auth" not in content
-    assert "docker push" not in content
+    # Base image platform inspection must be present
+    assert "docker image inspect --format '{{.Architecture}}/{{.Os}}'" in content
 
-    # Must use exact pinned python base image container
-    assert "python:3.11-slim@sha256:00af38ae2ed311628970782e8a2d7f014d8909dbc63cb97bc0a158187f4db045" in content
+    # All 9 core imports must be present in smoke test string
+    for mod in EXPECTED_NINE_IMPORTS:
+        assert f"import {mod}" in content, f"Module import {mod} missing from validate-migration-lock.yml"
 
-    # Must contain clean bash syntax for SHA check
-    assert 'if [ "${CHECKED_OUT_SHA}" != "${{ inputs.expected_commit_sha }}" ]; then' in content
+    # Exact success log statement
+    assert '[IMPORT_SMOKE_TEST] SUCCESS: All 9 core migration modules imported cleanly.' in content

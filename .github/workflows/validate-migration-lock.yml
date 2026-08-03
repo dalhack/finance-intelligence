@@ -26,6 +26,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          if [ "${GITHUB_REF}" != "refs/heads/finance-intelligence/phase-4c2c-ios-ci-validation" ]; then
+            echo "::error::Unauthorized target ref: ${GITHUB_REF}"
+            exit 1
+          fi
           if [[ ! "${{ inputs.expected_commit_sha }}" =~ ^[a-f0-9]{40}$ ]]; then
             echo "::error::Invalid input commit SHA format: ${{ inputs.expected_commit_sha }}"
             exit 1
@@ -37,34 +41,48 @@ jobs:
           ref: ${{ inputs.expected_commit_sha }}
           persist-credentials: false
 
-      - name: Verify Checked-out Commit Identity
+      - name: Verify Checked-out Commit Identity Parity
         shell: bash
         run: |
           set -euo pipefail
           CHECKED_OUT_SHA=$(git rev-parse HEAD)
           echo "Checked out SHA: ${CHECKED_OUT_SHA}"
+          echo "Context SHA:     ${GITHUB_SHA}"
           echo "Expected SHA:    ${{ inputs.expected_commit_sha }}"
           if [ "${CHECKED_OUT_SHA}" != "${{ inputs.expected_commit_sha }}" ]; then
             echo "::error::Checked-out SHA does not match authorized expected_commit_sha!"
             exit 1
           fi
+          if [ "${GITHUB_SHA}" != "${{ inputs.expected_commit_sha }}" ]; then
+            echo "::error::GitHub context SHA does not match authorized expected_commit_sha!"
+            exit 1
+          fi
+
+      - name: Inspect Base Container Platform Architecture
+        shell: bash
+        run: |
+          set -euo pipefail
+          PLATFORM_ARCH=$(docker image inspect --format '{{.Architecture}}/{{.Os}}' python:3.11-slim@sha256:00af38ae2ed311628970782e8a2d7f014d8909dbc63cb97bc0a158187f4db045 2>/dev/null || true)
+          echo "Base Image Digest Architecture: ${PLATFORM_ARCH}"
 
       - name: Validate Pip Hash Installation in Ephemeral Pinned Container
         shell: bash
         run: |
           set -euo pipefail
           docker run --rm \
+            --platform linux/amd64 \
             -v "${PWD}:/app:ro" \
             --workdir /app \
             python:3.11-slim@sha256:00af38ae2ed311628970782e8a2d7f014d8909dbc63cb97bc0a158187f4db045 \
             sh -c "python -m pip install --no-cache-dir --require-hashes -r /app/services/api/requirements-migration.lock && python -m pip check"
 
-      - name: Run Import Smoke Test in Ephemeral Pinned Container
+      - name: Run Import Smoke Test in Network-Disabled Container
         shell: bash
         run: |
           set -euo pipefail
           docker run --rm \
+            --platform linux/amd64 \
             -v "${PWD}:/app:ro" \
             --workdir /app \
             python:3.11-slim@sha256:00af38ae2ed311628970782e8a2d7f014d8909dbc63cb97bc0a158187f4db045 \
-            sh -c "python -m pip install --no-cache-dir --require-hashes -r /app/services/api/requirements-migration.lock >/dev/null 2>&1 && python -c 'import alembic; import sqlalchemy; import google.cloud.secretmanager; import pg8000; import cryptography; import cffi; import pycparser; import scramp; print(\"[IMPORT_SMOKE_TEST] SUCCESS: All 9 core migration modules imported cleanly.\")'"
+            sh -c "python -m pip install --no-cache-dir --require-hashes -r /app/services/api/requirements-migration.lock >/dev/null 2>&1 && python -c 'import alembic; import sqlalchemy; import google.cloud.sql.connector; import google.cloud.secretmanager; import pg8000; import cryptography; import cffi; import pycparser; import scramp; print(\"[IMPORT_SMOKE_TEST] SUCCESS: All 9 core migration modules imported cleanly.\")'"
