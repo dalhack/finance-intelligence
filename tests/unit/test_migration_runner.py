@@ -73,14 +73,16 @@ def test_dockerfile_migration_hash_enforcement_and_digest():
     assert "USER 10001:10001" in content
 
 
-def test_requirements_lock_hash_enforcement():
+def test_requirements_lock_hash_enforcement_and_greenlet():
     lock_path = API_DIR / "requirements-migration.lock"
     assert lock_path.exists()
     content = lock_path.read_text()
 
-    # Lock file must contain multiple --hash=sha256: entries
+    # Lock file must contain greenlet== entry for linux/amd64 SQLAlchemy transitive dependency
+    assert "greenlet==" in content
+    # Must contain multiple --hash=sha256: entries
     hashes = re.findall(r"--hash=sha256:[a-f0-9]{64}", content)
-    assert len(hashes) > 20, f"Expected >20 SHA-256 hashes, found {len(hashes)}"
+    assert len(hashes) > 30, f"Expected >30 SHA-256 hashes, found {len(hashes)}"
 
 
 def test_action_pin_manifest_parity_and_negative_fixtures():
