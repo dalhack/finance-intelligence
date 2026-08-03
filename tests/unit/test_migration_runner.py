@@ -1,4 +1,4 @@
-"""Comprehensive Unit, Semantic, and Workflow Hardening Tests."""
+"""Comprehensive Unit, Semantic, Redaction, and Action SHA Manifest Tests."""
 
 import re
 import subprocess
@@ -11,6 +11,17 @@ if str(API_DIR) not in sys.path:
     sys.path.insert(0, str(API_DIR))
 
 from app.migration_entrypoint import redact_sensitive_string
+
+ALLOWED_ACTION_SHAS = {
+    "actions/checkout": "11bd71901bbe5b1630ceea73d27597364c9af683",
+    "google-github-actions/auth": "71f986410dfbc7added4569d411d040a91dc6935",
+    "google-github-actions/setup-gcloud": "77e7a554d41e2ee56fc945c52dfd3f33d12def9a",
+}
+
+FORBIDDEN_INVALID_SHAS = {
+    "6fc46f2b8ec9721d0282b89a87d096ef14abcf8e",
+    "6189d56e4096ee891640bb02ac264be376592d63",
+}
 
 
 def test_redact_sensitive_string_comprehensive():
@@ -65,6 +76,25 @@ def test_requirements_lock_hash_enforcement():
     assert len(hashes) > 20, f"Expected >20 SHA-256 hashes, found {len(hashes)}"
 
 
+def test_action_pin_manifest_parity_and_negative_fixtures():
+    workflow_path = API_DIR.parent.parent / ".github" / "workflows" / "deploy-staging.yml"
+    assert workflow_path.exists()
+    content = workflow_path.read_text()
+
+    # Rejection of forbidden invalid SHAs from run 30842261431
+    for bad_sha in FORBIDDEN_INVALID_SHAS:
+        assert bad_sha not in content, f"Forbidden invalid SHA {bad_sha} found in workflow!"
+
+    # Rejection of mutable tags/branches in uses: lines
+    uses_lines = re.findall(r"uses:\s+([^\s]+)", content)
+    for use in uses_lines:
+        assert not re.search(r"@(v\d+|main|master|latest)$", use), f"Mutable tag/branch found in uses: {use}"
+        repo_name, sha_part = use.split("@")
+        assert repo_name in ALLOWED_ACTION_SHAS, f"Unallowed action repository: {repo_name}"
+        expected_sha = ALLOWED_ACTION_SHAS[repo_name]
+        assert sha_part == expected_sha, f"SHA mismatch for {repo_name}: expected {expected_sha}, got {sha_part}"
+
+
 def test_workflow_deploy_staging_prepush_hardening_semantic_scanner():
     workflow_path = API_DIR.parent.parent / ".github" / "workflows" / "deploy-staging.yml"
     assert workflow_path.exists()
@@ -84,11 +114,6 @@ def test_workflow_deploy_staging_prepush_hardening_semantic_scanner():
     # Checkout must use expected_commit_sha and persist-credentials: false
     assert "ref: ${{ inputs.expected_commit_sha }}" in content
     assert "persist-credentials: false" in content
-
-    # All external actions must be 40-char lowercase hex SHA pinned
-    all_uses = re.findall(r"uses:\s+([^\s]+)", content)
-    for action in all_uses:
-        assert re.search(r"@[a-f0-9]{40}", action), f"Action '{action}' is not pinned to a 40-char hex SHA"
 
     # Pre-push testing order verification: Build -> Inspect -> Smoke Test -> Default Test -> Push
     build_pos = content.find("Build Migration Runner Image Locally")
