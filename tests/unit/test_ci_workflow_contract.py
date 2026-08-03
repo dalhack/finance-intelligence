@@ -6,6 +6,7 @@ import pytest
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 CI_YML_PATH = REPO_ROOT / ".github" / "workflows" / "ci.yml"
 GITIGNORE_PATH = REPO_ROOT / ".gitignore"
+PROVISION_SCRIPT_PATH = REPO_ROOT / "scripts" / "provision_ci_roles.py"
 
 
 def validate_workflow_semantics(raw_content: str) -> None:
@@ -44,22 +45,47 @@ def validate_workflow_semantics(raw_content: str) -> None:
     # 5. Require single canonical Python role provisioning tool across postgres jobs
     assert raw_content.count("python scripts/provision_ci_roles.py") >= 3, "CRITICAL: All postgres jobs must execute python scripts/provision_ci_roles.py!"
 
-    # 6. Require early UDID persistence to GITHUB_ENV
+    # 6. Require central env contract variables for test passwords in workflow
+    assert "TEST_BOOTSTRAP_PASSWORD:" in raw_content
+    assert "TEST_API_PASSWORD:" in raw_content
+    assert "TEST_WORKER_PASSWORD:" in raw_content
+    assert "TEST_MAINTENANCE_PASSWORD:" in raw_content
+
+    # 7. Require early UDID persistence to GITHUB_ENV
     assert 'SIMULATOR_UDID=$SIM_UDID" >> "$GITHUB_ENV"' in raw_content or 'echo "SIMULATOR_UDID=' in raw_content
 
-    # 7. Require genuine iOS build and Runner executable artifact checks
+    # 8. Require genuine iOS build and Runner executable artifact checks
     assert "flutter build ios --simulator --no-codesign" in raw_content
     assert "test -d build/ios/iphonesimulator/Runner.app" in raw_content
     assert "test -f build/ios/iphonesimulator/Runner.app/Runner" in raw_content
     assert "shasum -a 256" in raw_content
 
-    # 8. Require fail-closed boot and explicit device target
+    # 9. Require fail-closed boot and explicit device target
     assert 'xcrun simctl boot "$SIMULATOR_UDID"' in raw_content
     assert 'xcrun simctl bootstatus "$SIMULATOR_UDID" -b' in raw_content
     assert 'flutter test integration_test/device_e2e_test.dart -d "$SIMULATOR_UDID"' in raw_content
 
-    # 9. Require cleanup teardown checking SIMULATOR_UDID
+    # 10. Require cleanup teardown checking SIMULATOR_UDID
     assert 'if [ -n "$SIMULATOR_UDID" ]; then' in raw_content
+
+
+def test_provision_script_has_zero_fallback_constants():
+    """Scanner verifying provision_ci_roles.py has zero string fallback constants for passwords."""
+    assert PROVISION_SCRIPT_PATH.exists()
+    code = PROVISION_SCRIPT_PATH.read_text(encoding="utf-8")
+
+    forbidden_fallbacks = [
+        'os.environ.get("TEST_BOOTSTRAP_PASSWORD",',
+        'os.environ.get("TEST_API_PASSWORD",',
+        'os.environ.get("TEST_WORKER_PASSWORD",',
+        'os.environ.get("TEST_MAINTENANCE_PASSWORD",',
+        '"bootstrap_pass"',
+        '"api_pass"',
+        '"worker_pass"',
+        '"dev_maintenance_pass_123"',
+    ]
+    for pattern in forbidden_fallbacks:
+        assert pattern not in code, f"CRITICAL SECURITY VIOLATION: Hardcoded fallback constant {pattern} found in provision_ci_roles.py!"
 
 
 def test_gitignore_containment_and_repository_completeness():

@@ -12,12 +12,17 @@ on:
           - ios_only
           - all
 
+env:
+  PYTHONPATH: .
+  TEST_BOOTSTRAP_PASSWORD: 'bootstrap_pass'
+  TEST_API_PASSWORD: 'api_pass'
+  TEST_WORKER_PASSWORD: 'worker_pass'
+  TEST_MAINTENANCE_PASSWORD: 'dev_maintenance_pass_123'
+
 jobs:
   boundary-and-secret:
     name: Boundary & Secret Scanner
     runs-on: ubuntu-latest
-    env:
-      PYTHONPATH: .
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -31,8 +36,6 @@ jobs:
   python-static:
     name: Python Lint & Type Check
     runs-on: ubuntu-latest
-    env:
-      PYTHONPATH: .
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -50,8 +53,6 @@ jobs:
   python-unit-contract:
     name: Python Unit & Contract Tests
     runs-on: ubuntu-latest
-    env:
-      PYTHONPATH: .
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -68,8 +69,6 @@ jobs:
   backend-foundation-gate:
     name: PostgreSQL Integration Suite
     runs-on: ubuntu-latest
-    env:
-      PYTHONPATH: .
     services:
       postgres:
         image: postgres:16-alpine
@@ -102,11 +101,11 @@ jobs:
       - name: Run Integration Tests with JUnit XML Output
         env:
           TEST_OWNER_DATABASE_URL: "postgresql+asyncpg://db_owner:owner_pass@localhost:5432/finance_intelligence_test"
-          TEST_BOOTSTRAP_DATABASE_URL: "postgresql+asyncpg://db_bootstrap:bootstrap_pass@localhost:5432/finance_intelligence_test"
-          TEST_API_DATABASE_URL: "postgresql+asyncpg://db_api_user:api_pass@localhost:5432/finance_intelligence_test"
-          TEST_WORKER_DATABASE_URL: "postgresql+asyncpg://db_ingestion_worker:worker_pass@localhost:5432/finance_intelligence_test"
+          TEST_BOOTSTRAP_DATABASE_URL: "postgresql+asyncpg://db_bootstrap:${{ env.TEST_BOOTSTRAP_PASSWORD }}@localhost:5432/finance_intelligence_test"
+          TEST_API_DATABASE_URL: "postgresql+asyncpg://db_api_user:${{ env.TEST_API_PASSWORD }}@localhost:5432/finance_intelligence_test"
+          TEST_WORKER_DATABASE_URL: "postgresql+asyncpg://db_ingestion_worker:${{ env.TEST_WORKER_PASSWORD }}@localhost:5432/finance_intelligence_test"
           TEST_ROUNDTRIP_DATABASE_URL: "postgresql+asyncpg://db_owner:owner_pass@localhost:5432/finance_intelligence_roundtrip_test"
-          TEST_MAINTENANCE_DATABASE_URL: "postgresql+asyncpg://db_maintenance_worker:dev_maintenance_pass_123@localhost:5432/finance_intelligence_test"
+          TEST_MAINTENANCE_DATABASE_URL: "postgresql+asyncpg://db_maintenance_worker:${{ env.TEST_MAINTENANCE_PASSWORD }}@localhost:5432/finance_intelligence_test"
         run: pytest tests/integration --junitxml=pytest-integration-report.xml
       - name: Real Zero-Skip Integration XML Machine Verification
         run: |
@@ -156,8 +155,6 @@ jobs:
     name: Migration Round-Trip Verification
     needs: backend-foundation-gate
     runs-on: ubuntu-latest
-    env:
-      PYTHONPATH: .
     services:
       postgres:
         image: postgres:16-alpine
@@ -193,8 +190,6 @@ jobs:
   security-catalog:
     name: Security Catalog Verification
     runs-on: ubuntu-latest
-    env:
-      PYTHONPATH: .
     services:
       postgres:
         image: postgres:16-alpine
@@ -225,17 +220,15 @@ jobs:
       - name: Run Genuine Security & RLS Suite
         env:
           TEST_OWNER_DATABASE_URL: "postgresql+asyncpg://db_owner:owner_pass@localhost:5432/finance_intelligence_test"
-          TEST_BOOTSTRAP_DATABASE_URL: "postgresql+asyncpg://db_bootstrap:bootstrap_pass@localhost:5432/finance_intelligence_test"
-          TEST_API_DATABASE_URL: "postgresql+asyncpg://db_api_user:api_pass@localhost:5432/finance_intelligence_test"
-          TEST_WORKER_DATABASE_URL: "postgresql+asyncpg://db_ingestion_worker:worker_pass@localhost:5432/finance_intelligence_test"
-          TEST_MAINTENANCE_DATABASE_URL: "postgresql+asyncpg://db_maintenance_worker:dev_maintenance_pass_123@localhost:5432/finance_intelligence_test"
+          TEST_BOOTSTRAP_DATABASE_URL: "postgresql+asyncpg://db_bootstrap:${{ env.TEST_BOOTSTRAP_PASSWORD }}@localhost:5432/finance_intelligence_test"
+          TEST_API_DATABASE_URL: "postgresql+asyncpg://db_api_user:${{ env.TEST_API_PASSWORD }}@localhost:5432/finance_intelligence_test"
+          TEST_WORKER_DATABASE_URL: "postgresql+asyncpg://db_ingestion_worker:${{ env.TEST_WORKER_PASSWORD }}@localhost:5432/finance_intelligence_test"
+          TEST_MAINTENANCE_DATABASE_URL: "postgresql+asyncpg://db_maintenance_worker:${{ env.TEST_MAINTENANCE_PASSWORD }}@localhost:5432/finance_intelligence_test"
         run: pytest tests/unit/test_security_pipeline.py tests/unit/test_security.py tests/unit/test_tenant_context_scanner.py tests/unit/test_secret_scanner.py
 
   contract-drift:
     name: OpenAPI Contract Drift
     runs-on: ubuntu-latest
-    env:
-      PYTHONPATH: .
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -260,8 +253,6 @@ jobs:
   traceability:
     name: Traceability Assertion Check
     runs-on: ubuntu-latest
-    env:
-      PYTHONPATH: .
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5

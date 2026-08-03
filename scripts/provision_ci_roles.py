@@ -2,13 +2,54 @@ import argparse
 import asyncio
 import os
 import sys
+from typing import Dict
 from urllib.parse import urlparse
 import asyncpg
+
+ALLOWED_LOGIN_ROLES = {
+    "db_bootstrap",
+    "db_api_user",
+    "db_ingestion_worker",
+    "db_maintenance_worker",
+}
 
 
 def sanitize_connection_error(error_msg: str) -> str:
     """Strip sensitive information like passwords, usernames, and DSNs from error messages."""
     return "CI_ROLE_PROVISIONING_CONNECTION_FAILED: Connection to target database failed."
+
+
+def validate_credential_contract() -> Dict[str, str]:
+    """Strict validation of CI test role password environment contract.
+
+    Fails closed BEFORE opening database connection if any variable is missing or empty.
+    Zero string fallback constants permitted.
+    """
+    required_envs = {
+        "db_bootstrap": "TEST_BOOTSTRAP_PASSWORD",
+        "db_api_user": "TEST_API_PASSWORD",
+        "db_ingestion_worker": "TEST_WORKER_PASSWORD",
+        "db_maintenance_worker": "TEST_MAINTENANCE_PASSWORD",
+    }
+
+    credentials = {}
+    missing_vars = []
+
+    for role_name, env_var in required_envs.items():
+        val = os.environ.get(env_var)
+        if not val or not val.strip():
+            missing_vars.append(env_var)
+        else:
+            credentials[role_name] = val.strip()
+
+    if missing_vars:
+        print(
+            f"ERROR: CI_ROLE_PROVISIONING_CREDENTIAL_CONTRACT_INCOMPLETE: Required env vars missing or empty: {', '.join(missing_vars)}",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+    return credentials
 
 
 def verify_ci_target_allowlist(dsn: str, allow_local: bool = False) -> None:
@@ -47,80 +88,52 @@ def verify_ci_target_allowlist(dsn: str, allow_local: bool = False) -> None:
 
 
 async def provision_ci_roles(dsn: str, allow_local: bool = False) -> None:
+    # 1. Validate Credential Contract FIRST (Fail-Closed before connection)
+    role_passwords = validate_credential_contract()
+
+    # 2. Verify Target Allowlist & CI Marker
     verify_ci_target_allowlist(dsn, allow_local)
 
     connect_dsn = dsn.replace("postgresql+asyncpg://", "postgresql://")
 
-    # Ephemeral non-production test credentials from environment contracts
-    bootstrap_pass = os.environ.get("TEST_BOOTSTRAP_PASSWORD", "bootstrap_pass")
-    api_pass = os.environ.get("TEST_API_PASSWORD", "api_pass")
-    worker_pass = os.environ.get("TEST_WORKER_PASSWORD", "worker_pass")
-    maint_pass = os.environ.get("TEST_MAINTENANCE_PASSWORD", "dev_maintenance_pass_123")
-
     try:
         conn = await asyncpg.connect(connect_dsn)
     except Exception as e:
-        # Redact connection details completely on error
         redacted_msg = sanitize_connection_error(str(e))
         print(f"ERROR: {redacted_msg}", file=sys.stderr)
         sys.exit(1)
 
     try:
-        # 1. Idempotent Role Provisioning
-        role_statements = [
-            """
-            DO $$
-            BEGIN
-                IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_app_user') THEN
-                    CREATE ROLE db_app_user NOLOGIN NOBYPASSRLS NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT;
-                ELSE
-                    ALTER ROLE db_app_user NOLOGIN NOBYPASSRLS NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT;
-                END IF;
-            END
-            $$;
-            """,
-            f"""
-            DO $$
-            BEGIN
-                IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_bootstrap') THEN
-                    CREATE ROLE db_bootstrap LOGIN PASSWORD '{bootstrap_pass}';
-                END IF;
-            END
-            $$;
-            """,
-            f"""
-            DO $$
-            BEGIN
-                IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_api_user') THEN
-                    CREATE ROLE db_api_user LOGIN PASSWORD '{api_pass}';
-                END IF;
-            END
-            $$;
-            """,
-            f"""
-            DO $$
-            BEGIN
-                IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_ingestion_worker') THEN
-                    CREATE ROLE db_ingestion_worker LOGIN PASSWORD '{worker_pass}';
-                END IF;
-            END
-            $$;
-            """,
-            f"""
-            DO $$
-            BEGIN
-                IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_maintenance_worker') THEN
-                    CREATE ROLE db_maintenance_worker LOGIN PASSWORD '{maint_pass}';
-                END IF;
-            END
-            $$;
-            """,
-        ]
+        # 3. Provision db_app_user (Strict NOLOGIN compatibility role - no password parameter)
+        app_user_sql = """
+        DO $$
+        BEGIN
+            IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_app_user') THEN
+                CREATE ROLE db_app_user NOLOGIN NOBYPASSRLS NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT;
+            ELSE
+                ALTER ROLE db_app_user NOLOGIN NOBYPASSRLS NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT;
+            END IF;
+        END
+        $$;
+        """
+        await conn.execute(app_user_sql)
 
-        for stmt in role_statements:
-            await conn.execute(stmt)
+        # 4. Server-Side Escaped Role Provisioning using PostgreSQL quote_literal
+        for role_name, password in role_passwords.items():
+            if role_name not in ALLOWED_LOGIN_ROLES:
+                print(f"ERROR: CI_ROLE_PROVISIONING_UNAUTHORIZED_ROLE: Role {role_name} not in allowlist.", file=sys.stderr)
+                sys.exit(1)
 
-        # 2. Database Catalog Verification & Assertions
+            # Use PostgreSQL engine to safely escape password into a 100% injection-proof literal
+            quoted_pass = await conn.fetchval("SELECT quote_literal(CAST($1 AS text))", password)
+            role_exists = await conn.fetchval("SELECT EXISTS(SELECT 1 FROM pg_roles WHERE rolname = $1)", role_name)
+
+            if not role_exists:
+                await conn.execute(f"CREATE ROLE {role_name} WITH LOGIN PASSWORD {quoted_pass};")
+            else:
+                await conn.execute(f"ALTER ROLE {role_name} WITH LOGIN PASSWORD {quoted_pass};")
+
+        # 5. Database Catalog Verification & Security Assertions
         app_user_info = await conn.fetchrow("SELECT rolname, rolcanlogin, rolsuper, rolbypassrls FROM pg_roles WHERE rolname = 'db_app_user'")
         if not app_user_info:
             print("ERROR: CI_ROLE_PROVISIONING_CATALOG_FAILED: Role db_app_user missing.", file=sys.stderr)
@@ -154,7 +167,7 @@ async def provision_ci_roles(dsn: str, allow_local: bool = False) -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Canonical Single-Source CI Role Provisioning Tool with Credential Redaction")
+    parser = argparse.ArgumentParser(description="Canonical Single-Source CI Role Provisioning Tool with Parameterized SQL and Zero Fallbacks")
     parser.add_argument(
         "--target-url",
         default=os.environ.get("DATABASE_URL"),
