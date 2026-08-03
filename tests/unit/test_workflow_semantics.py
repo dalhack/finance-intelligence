@@ -52,3 +52,10 @@ def test_negative_timeout_budget_fixtures():
     # Negative Fixture 5: Cleanup not if: always()
     bad_fixture_5 = valid_content.replace("if: always()", "if: success()")
     assert verify_workflow_semantics(bad_fixture_5) is False
+
+    # Negative Fixture 6: Invalid --device-timeout flag on flutter test
+    bad_fixture_6 = valid_content.replace(
+        '-d "$SIMULATOR_UDID"',
+        '-d "$SIMULATOR_UDID" --device-timeout=30',
+    )
+    assert verify_workflow_semantics(bad_fixture_6) is False

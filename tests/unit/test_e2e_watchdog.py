@@ -3,7 +3,19 @@
 import sys
 import time
 
-from scripts.run_e2e_watchdog import is_command_allowed, redact_line, run_watchdog
+import pytest
+
+from scripts.run_e2e_watchdog import (
+    EVENT_WATCHDOG_CHILD_FAILED,
+    EVENT_WATCHDOG_KILLED,
+    EVENT_WATCHDOG_STARTED,
+    EVENT_WATCHDOG_SUCCEEDED,
+    EVENT_WATCHDOG_TERMINATING,
+    EVENT_WATCHDOG_TIMEOUT,
+    is_command_allowed,
+    redact_line,
+    run_watchdog,
+)
 
 
 def test_watchdog_log_redaction():
@@ -26,57 +38,117 @@ def test_watchdog_command_allowlist():
     assert is_command_allowed(["curl", "https://malicious.com"]) is False
 
 
-def test_watchdog_fast_success():
-    """Verifies fast success returning exit code 0."""
+def test_watchdog_invalid_parameters():
+    """Verifies invalid timeout or grace period parameters raise ValueError."""
+    with pytest.raises(ValueError, match="timeout_seconds"):
+        run_watchdog(cmd_args=[sys.executable, "-c", "pass"], timeout_seconds=0)
+
+    with pytest.raises(ValueError, match="grace_seconds"):
+        run_watchdog(cmd_args=[sys.executable, "-c", "pass"], timeout_seconds=5, grace_seconds=0.0)
+
+
+def test_watchdog_fast_success(capsys):
+    """Verifies fast success returning exit code 0 and correct event sequence."""
     code = run_watchdog(
         cmd_args=[sys.executable, "-c", "import sys; print('Fast success test'); sys.exit(0)"],
         timeout_seconds=5,
+        grace_seconds=0.2,
         heartbeat_interval_seconds=1,
     )
     assert code == 0
+    captured = capsys.readouterr()
+    assert EVENT_WATCHDOG_STARTED in captured.out
+    assert EVENT_WATCHDOG_SUCCEEDED in captured.out
+    assert EVENT_WATCHDOG_CHILD_FAILED not in captured.err
 
 
-def test_watchdog_nonzero_failure():
-    """Verifies non-zero exit code propagation."""
+def test_watchdog_nonzero_failure(capsys):
+    """Verifies non-zero exit code propagation and child failure event."""
     code = run_watchdog(
         cmd_args=[sys.executable, "-c", "import sys; print('Failing test'); sys.exit(42)"],
         timeout_seconds=5,
+        grace_seconds=0.2,
         heartbeat_interval_seconds=1,
     )
     assert code == 42
+    captured = capsys.readouterr()
+    assert EVENT_WATCHDOG_STARTED in captured.out
+    assert EVENT_WATCHDOG_CHILD_FAILED in captured.err
+    assert EVENT_WATCHDOG_SUCCEEDED not in captured.out
 
 
-def test_watchdog_silent_hang_timeout():
-    """Verifies silent hang is terminated on timeout returning exit code 124."""
+def test_watchdog_silent_hang_timeout(capsys):
+    """Verifies silent hang is terminated on timeout using configurable grace period."""
+    timeout_sec = 1
+    grace_sec = 0.2
     start = time.time()
     code = run_watchdog(
         cmd_args=[sys.executable, "-c", "import time; time.sleep(10)"],
-        timeout_seconds=2,
+        timeout_seconds=timeout_sec,
+        grace_seconds=grace_sec,
         heartbeat_interval_seconds=1,
     )
     elapsed = time.time() - start
+
     assert code == 124
-    assert elapsed < 5.0  # Terminated within timeout budget
+    # Assertion models timeout + grace_seconds + 1.0s scheduling tolerance
+    assert elapsed < (timeout_sec + grace_sec + 1.0)
+    captured = capsys.readouterr()
+    assert EVENT_WATCHDOG_TIMEOUT in captured.err
+    assert EVENT_WATCHDOG_TERMINATING in captured.err
 
 
-def test_watchdog_output_hang_timeout():
-    """Verifies output-producing hang is terminated on timeout returning exit code 124."""
+def test_watchdog_output_hang_timeout(capsys):
+    """Verifies output-producing hang is terminated on timeout using configurable grace period."""
     cmd = (
         "import time, sys\n"
         "for i in range(100):\n"
         "    print(f'Hanging step {i}')\n"
         "    sys.stdout.flush()\n"
-        "    time.sleep(0.5)\n"
+        "    time.sleep(0.2)\n"
     )
+    timeout_sec = 1
+    grace_sec = 0.2
     start = time.time()
     code = run_watchdog(
         cmd_args=[sys.executable, "-c", cmd],
-        timeout_seconds=2,
+        timeout_seconds=timeout_sec,
+        grace_seconds=grace_sec,
         heartbeat_interval_seconds=1,
     )
     elapsed = time.time() - start
+
     assert code == 124
-    assert elapsed < 5.0
+    assert elapsed < (timeout_sec + grace_sec + 1.0)
+    captured = capsys.readouterr()
+    assert EVENT_WATCHDOG_TIMEOUT in captured.err
+
+
+def test_watchdog_sigkill_escalation(capsys):
+    """Verifies child process ignoring SIGTERM escalates to SIGKILL."""
+    cmd = (
+        "import signal, time, sys\n"
+        "signal.signal(signal.SIGTERM, signal.SIG_IGN)\n"
+        "print('Ignoring SIGTERM...')\n"
+        "sys.stdout.flush()\n"
+        "time.sleep(10)\n"
+    )
+    timeout_sec = 1
+    grace_sec = 0.3
+    start = time.time()
+    code = run_watchdog(
+        cmd_args=[sys.executable, "-c", cmd],
+        timeout_seconds=timeout_sec,
+        grace_seconds=grace_sec,
+        heartbeat_interval_seconds=1,
+    )
+    elapsed = time.time() - start
+
+    assert code == 124
+    assert elapsed >= (timeout_sec + grace_sec)
+    captured = capsys.readouterr()
+    assert EVENT_WATCHDOG_TERMINATING in captured.err
+    assert EVENT_WATCHDOG_KILLED in captured.err
 
 
 def test_watchdog_child_process_tree_cleanup():
@@ -88,7 +160,8 @@ def test_watchdog_child_process_tree_cleanup():
     )
     code = run_watchdog(
         cmd_args=[sys.executable, "-c", cmd],
-        timeout_seconds=2,
+        timeout_seconds=1,
+        grace_seconds=0.2,
         heartbeat_interval_seconds=1,
     )
     assert code == 124

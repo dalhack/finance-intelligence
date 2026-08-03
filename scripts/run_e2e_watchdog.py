@@ -14,9 +14,14 @@ import sys
 import time
 
 # Event codes
-EVENT_WATCHDOG_SUCCESS = "IOS_E2E_WATCHDOG_SUCCESS"
-EVENT_WATCHDOG_FAILURE = "IOS_E2E_WATCHDOG_FAILURE"
+EVENT_WATCHDOG_STARTED = "IOS_E2E_WATCHDOG_STARTED"
+EVENT_WATCHDOG_HEARTBEAT = "IOS_E2E_WATCHDOG_HEARTBEAT"
+EVENT_WATCHDOG_SUCCEEDED = "IOS_E2E_WATCHDOG_SUCCEEDED"
+EVENT_WATCHDOG_CHILD_FAILED = "IOS_E2E_WATCHDOG_CHILD_FAILED"
 EVENT_WATCHDOG_TIMEOUT = "IOS_E2E_TIMEOUT"
+EVENT_WATCHDOG_TERMINATING = "IOS_E2E_TERMINATING"
+EVENT_WATCHDOG_KILLED = "IOS_E2E_KILLED"
+EVENT_WATCHDOG_FAILED = "IOS_E2E_WATCHDOG_FAILED"
 EVENT_WATCHDOG_DISALLOWED = "IOS_E2E_COMMAND_DISALLOWED"
 
 # Redaction patterns for security
@@ -61,6 +66,8 @@ def is_command_allowed(cmd_args: list[str]) -> bool:
 
 def terminate_process_group(pgid: int, grace_period_sec: float = 5.0) -> None:
     """Terminates entire process group cleanly with SIGTERM, falling back to SIGKILL."""
+    sys.stderr.write(f"[WATCHDOG SIGTERM] Event={EVENT_WATCHDOG_TERMINATING} PGID={pgid}\n")
+    sys.stderr.flush()
     try:
         os.killpg(pgid, signal.SIGTERM)
     except ProcessLookupError:
@@ -73,14 +80,15 @@ def terminate_process_group(pgid: int, grace_period_sec: float = 5.0) -> None:
         try:
             # Check if process group is still alive
             os.killpg(pgid, 0)
-            time.sleep(0.2)
+            time.sleep(0.05)
         except ProcessLookupError:
             return
         except OSError:
             break
 
     try:
-        sys.stderr.write(f"[WATCHDOG] Sending SIGKILL to process group {pgid}\n")
+        sys.stderr.write(f"[WATCHDOG SIGKILL] Event={EVENT_WATCHDOG_KILLED} PGID={pgid}\n")
+        sys.stderr.flush()
         os.killpg(pgid, signal.SIGKILL)
     except ProcessLookupError:
         pass
@@ -92,10 +100,16 @@ def run_watchdog(
     cmd_args: list[str],
     timeout_seconds: int = 900,
     heartbeat_interval_seconds: int = 30,
+    grace_seconds: float = 5.0,
     cwd: str | None = None,
     env: dict | None = None,
 ) -> int:
     """Runs command in isolated process group with live log redaction and timeout watchdog."""
+    if timeout_seconds <= 0:
+        raise ValueError(f"Invalid timeout_seconds {timeout_seconds}; must be > 0")
+    if grace_seconds < 0.1:
+        raise ValueError(f"Invalid grace_seconds {grace_seconds}; must be >= 0.1")
+
     if not is_command_allowed(cmd_args):
         sys.stderr.write(f"CRITICAL: {EVENT_WATCHDOG_DISALLOWED}: Command {cmd_args} is not in CI allowlist!\n")
         return 126
@@ -118,7 +132,7 @@ def run_watchdog(
 
     pgid = os.getpgid(proc.pid)
     sys.stdout.write(
-        f"[WATCHDOG START] Event={EVENT_WATCHDOG_SUCCESS} PID={proc.pid} PGID={pgid} Timeout={timeout_seconds}s\n"
+        f"[WATCHDOG START] Event={EVENT_WATCHDOG_STARTED} PID={proc.pid} PGID={pgid} Timeout={timeout_seconds}s Grace={grace_seconds}s\n"
     )
     sys.stdout.flush()
 
@@ -137,7 +151,7 @@ def run_watchdog(
                     f"\nCRITICAL FAIL-CLOSED [{EVENT_WATCHDOG_TIMEOUT}]: Execution exceeded {timeout_seconds}s timeout boundary!\n"
                 )
                 sys.stderr.flush()
-                terminate_process_group(pgid)
+                terminate_process_group(pgid, grace_period_sec=grace_seconds)
                 return 124
 
             # Read available output lines
@@ -157,27 +171,40 @@ def run_watchdog(
                         if remaining:
                             sys.stdout.write(redact_line(remaining))
                             sys.stdout.flush()
+
+                        if poll_res == 0:
+                            sys.stdout.write(
+                                f"[WATCHDOG SUCCESS] Event={EVENT_WATCHDOG_SUCCEEDED} PID={proc.pid} ExitCode=0\n"
+                            )
+                        else:
+                            sys.stderr.write(
+                                f"[WATCHDOG CHILD FAIL] Event={EVENT_WATCHDOG_CHILD_FAILED} PID={proc.pid} ExitCode={poll_res}\n"
+                            )
+                        sys.stdout.flush()
+                        sys.stderr.flush()
                         return poll_res
-                    time.sleep(0.1)
+                    time.sleep(0.05)
             except Exception:  # noqa: BLE001
-                time.sleep(0.1)
+                time.sleep(0.05)
 
             # Periodic heartbeat check
             if now - last_heartbeat_time >= heartbeat_interval_seconds:
                 silence_duration = int(now - last_activity_time)
                 sys.stdout.write(
-                    f"[WATCHDOG HEARTBEAT] Elapsed={int(elapsed)}s Silence={silence_duration}s Status=RUNNING PGID={pgid}\n"
+                    f"[WATCHDOG HEARTBEAT] Event={EVENT_WATCHDOG_HEARTBEAT} Elapsed={int(elapsed)}s Silence={silence_duration}s Status=RUNNING PGID={pgid}\n"
                 )
                 sys.stdout.flush()
                 last_heartbeat_time = now
 
     except KeyboardInterrupt:
         sys.stderr.write(f"\n[WATCHDOG INTERRUPT] Received SIGINT/KeyboardInterrupt. Terminating PGID {pgid}...\n")
-        terminate_process_group(pgid)
+        terminate_process_group(pgid, grace_period_sec=grace_seconds)
         return 130
     except Exception as e:  # noqa: BLE001
-        sys.stderr.write(f"\n[WATCHDOG ERROR] Unexpected exception: {e}. Terminating PGID {pgid}...\n")
-        terminate_process_group(pgid)
+        sys.stderr.write(
+            f"\n[WATCHDOG ERROR] Event={EVENT_WATCHDOG_FAILED}: Unexpected exception: {e}. Terminating PGID {pgid}...\n"
+        )
+        terminate_process_group(pgid, grace_period_sec=grace_seconds)
         return 1
 
 
@@ -185,6 +212,7 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="E2E Process Watchdog Runner")
     parser.add_argument("--timeout-seconds", type=int, default=900, help="Max execution timeout in seconds")
     parser.add_argument("--heartbeat-seconds", type=int, default=30, help="Heartbeat logging interval")
+    parser.add_argument("--grace-seconds", type=float, default=5.0, help="Grace period for SIGTERM before SIGKILL")
     parser.add_argument("--cwd", type=str, default=None, help="Working directory for child command")
     parser.add_argument("cmd", nargs=argparse.REMAINDER, help="Target command to execute")
 
@@ -202,6 +230,7 @@ def main() -> None:
         cmd_args=cmd,
         timeout_seconds=args.timeout_seconds,
         heartbeat_interval_seconds=args.heartbeat_seconds,
+        grace_seconds=args.grace_seconds,
         cwd=args.cwd,
     )
     sys.exit(code)

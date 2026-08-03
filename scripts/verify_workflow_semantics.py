@@ -144,7 +144,7 @@ def verify_workflow_semantics(workflow_content: str | None = None) -> bool:
         )
         return False
 
-    # Rule 8: Required logic assertions
+    # Rule 8: Required logic assertions & Flutter CLI contract
     if "Boot Simulator & Run Device E2E Target Test" in content:
         sys.stderr.write("CRITICAL FAIL: Prohibited combined boot/test step found in workflow!\n")
         return False
@@ -157,20 +157,34 @@ def verify_workflow_semantics(workflow_content: str | None = None) -> bool:
         sys.stderr.write("CRITICAL FAIL: E2E step must specify '-d \"$SIMULATOR_UDID\"'!\n")
         return False
 
+    # Flutter CLI contract rule: flutter test does not accept --device-timeout flag
+    if "flutter test" in content and "--device-timeout" in content:
+        sys.stderr.write("CRITICAL FAIL: Prohibited '--device-timeout' flag found on flutter test command!\n")
+        return False
+
     if "if: always()" not in content:
         sys.stderr.write("CRITICAL FAIL: Cleanup step must specify 'if: always()'!\n")
         return False
 
-    # Rule 9: Verify Watchdog Script Exists and Enforces Allowlist
+    # Rule 9: Verify Watchdog Script Exists and Enforces Deterministic Events
     if workflow_content is None and not WATCHDOG_PATH.exists():
         sys.stderr.write(f"CRITICAL FAIL: Watchdog script '{WATCHDOG_PATH}' missing!\n")
         return False
 
     if WATCHDOG_PATH.exists():
         watchdog_content = WATCHDOG_PATH.read_text(encoding="utf-8")
-        if "is_command_allowed" not in watchdog_content or "EVENT_WATCHDOG_DISALLOWED" not in watchdog_content:
-            sys.stderr.write("CRITICAL FAIL: Watchdog runner script missing command allowlist enforcement!\n")
-            return False
+        required_events = [
+            "EVENT_WATCHDOG_STARTED",
+            "EVENT_WATCHDOG_SUCCEEDED",
+            "EVENT_WATCHDOG_CHILD_FAILED",
+            "EVENT_WATCHDOG_TIMEOUT",
+            "EVENT_WATCHDOG_TERMINATING",
+            "EVENT_WATCHDOG_KILLED",
+        ]
+        for ev in required_events:
+            if ev not in watchdog_content:
+                sys.stderr.write(f"CRITICAL FAIL: Watchdog runner script missing event definition '{ev}'!\n")
+                return False
 
     if workflow_content is None:
         print(
