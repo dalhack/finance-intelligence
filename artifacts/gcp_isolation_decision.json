@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "1.0.0",
+  "generatedAt": "2026-08-03T10:18:15Z",
+  "targetPhase": "PHASE_4C_2C_PLATFORM_AUDIT",
+  "platformSelection": {
+    "primaryProductionPlatform": "GCP_PRIMARY_RECOMMENDED",
+    "auxiliaryStagingPlatform": "RENDER_STATUS_DEFERRED",
+    "supabaseStatus": "SUPABASE_STATUS_COMPATIBILITY_PILOT_ONLY"
+  },
+  "gcpTargetProjects": {
+    "stagingProject": "finance-intelligence-staging",
+    "productionProject": "finance-intelligence-prod"
+  },
+  "currentGcpState": {
+    "activeGcpProject": "travel-mapper-9dffe",
+    "usageStatus": "FORBIDDEN_CROSS_PROJECT",
+    "crossProjectRisk": "HIGH_CONTAMINATION_RISK"
+  },
+  "leastPrivilegeServiceAccounts": [
+    {
+      "name": "finance-intelligence-ci",
+      "email": "ci@finance-intelligence-prod.iam.gserviceaccount.com",
+      "roles": ["roles/artifactregistry.writer", "roles/run.developer", "roles/iam.serviceAccountUser"]
+    },
+    {
+      "name": "finance-intelligence-api",
+      "email": "api@finance-intelligence-prod.iam.gserviceaccount.com",
+      "roles": ["roles/secretmanager.secretAccessor", "roles/cloudsql.client"]
+    },
+    {
+      "name": "finance-intelligence-worker",
+      "email": "worker@finance-intelligence-prod.iam.gserviceaccount.com",
+      "roles": ["roles/secretmanager.secretAccessor", "roles/cloudsql.client"]
+    },
+    {
+      "name": "finance-intelligence-maintenance",
+      "email": "maint@finance-intelligence-prod.iam.gserviceaccount.com",
+      "roles": ["roles/secretmanager.secretAccessor", "roles/cloudsql.client"]
+    },
+    {
+      "name": "finance-intelligence-migration",
+      "email": "migr@finance-intelligence-prod.iam.gserviceaccount.com",
+      "roles": ["roles/secretmanager.secretAccessor", "roles/cloudsql.client"]
+    }
+  ],
+  "authorizationGates": {
+    "RESOURCE_CREATION_GATE": "NOT_AUTHORIZED",
+    "COST_AUTHORIZATION_GATE": "NOT_AUTHORIZED",
+    "DEPLOYMENT_GATE": "NOT_AUTHORIZED"
+  }
+}

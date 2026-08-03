@@ -313,27 +313,32 @@ jobs:
         run: |
           test -d build/ios/iphonesimulator/Runner.app
           test -f build/ios/iphonesimulator/Runner.app/Info.plist
-          SIZE=$(du -s build/ios/iphonesimulator/Runner.app | cut -f1)
-          echo "Runner.app Byte Size: $SIZE"
+          test -f build/ios/iphonesimulator/Runner.app/Runner
+          SIZE=$(du -s build/ios/iphonesimulator/Runner.app/Runner | cut -f1)
+          echo "Runner.app Executable Byte Size: $SIZE"
           test "$SIZE" -gt 0
-          shasum -a 256 build/ios/iphonesimulator/Runner.app/Info.plist
+          shasum -a 256 build/ios/iphonesimulator/Runner.app/Runner build/ios/iphonesimulator/Runner.app/Info.plist
+      - name: Create Dedicated Simulator Device & Persist UDID
+        run: |
+          xcrun simctl list runtimes
+          SIM_UDID=$(xcrun simctl create "CI_Runner_${{ github.run_id }}_${{ github.run_attempt }}" "com.apple.CoreSimulator.SimDeviceType.iPhone-15")
+          echo "Created Dedicated Simulator UDID: $SIM_UDID"
+          test -n "$SIM_UDID"
+          echo "SIMULATOR_UDID=$SIM_UDID" >> "$GITHUB_ENV"
       - name: Boot Simulator & Run Device E2E Target Test
         working-directory: apps/mobile
         run: |
-          xcrun simctl list runtimes
-          UDID=$(xcrun simctl create "CI_iPhone_15" "com.apple.CoreSimulator.SimDeviceType.iPhone-15" || xcrun simctl list devices | grep "iPhone 15" | head -n1 | sed -E 's/.*\(([-A-F0-9]+)\).*/\1/')
-          echo "Selected Device UDID: $UDID"
-          xcrun simctl boot "$UDID" || true
-          xcrun simctl bootstatus "$UDID" -b
+          xcrun simctl boot "$SIMULATOR_UDID"
+          xcrun simctl bootstatus "$SIMULATOR_UDID" -b
           flutter devices
-          flutter test integration_test/device_e2e_test.dart -d "$UDID"
-          echo "UDID=$UDID" >> $GITHUB_ENV
+          flutter test integration_test/device_e2e_test.dart -d "$SIMULATOR_UDID"
       - name: Simulator Teardown & Cleanup
         if: always()
         run: |
-          if [ -n "$UDID" ]; then
-            xcrun simctl shutdown "$UDID" || true
-            xcrun simctl delete "$UDID" || true
+          if [ -n "$SIMULATOR_UDID" ]; then
+            echo "Shutting down and deleting dedicated CI simulator $SIMULATOR_UDID..."
+            xcrun simctl shutdown "$SIMULATOR_UDID" || true
+            xcrun simctl delete "$SIMULATOR_UDID" || true
           fi
 
   final-gate-summary:
