@@ -292,8 +292,12 @@ jobs:
   ios-build-and-simulator-e2e:
     name: iOS Build & Simulator E2E Execution
     runs-on: macos-14
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
@@ -318,26 +322,59 @@ jobs:
           test "$SIZE" -gt 0
           shasum -a 256 build/ios/iphonesimulator/Runner.app/Runner build/ios/iphonesimulator/Runner.app/Info.plist
       - name: Create Dedicated Simulator Device & Persist UDID
+        timeout-minutes: 2
         run: |
           xcrun simctl list runtimes
           SIM_UDID=$(xcrun simctl create "CI_Runner_${{ github.run_id }}_${{ github.run_attempt }}" "com.apple.CoreSimulator.SimDeviceType.iPhone-15")
           echo "Created Dedicated Simulator UDID: $SIM_UDID"
           test -n "$SIM_UDID"
           echo "SIMULATOR_UDID=$SIM_UDID" >> "$GITHUB_ENV"
-      - name: Boot Simulator & Run Device E2E Target Test
-        working-directory: apps/mobile
+      - name: Boot Dedicated Simulator
+        timeout-minutes: 5
         run: |
+          echo "Booting dedicated simulator $SIMULATOR_UDID..."
           xcrun simctl boot "$SIMULATOR_UDID"
           xcrun simctl bootstatus "$SIMULATOR_UDID" -b
-          flutter devices
-          flutter test integration_test/device_e2e_test.dart -d "$SIMULATOR_UDID"
+      - name: Verify Flutter Device Visibility
+        timeout-minutes: 2
+        run: |
+          echo "Checking device visibility for exact UDID $SIMULATOR_UDID..."
+          flutter devices > flutter_devices_summary.txt
+          cat flutter_devices_summary.txt
+          grep "$SIMULATOR_UDID" flutter_devices_summary.txt || (echo "CRITICAL FAIL-CLOSED: Persisted UDID $SIMULATOR_UDID not visible in flutter devices!" && exit 1)
+      - name: Run Device E2E with Process Watchdog
+        working-directory: apps/mobile
+        timeout-minutes: 15
+        run: |
+          python ../../scripts/run_e2e_watchdog.py --timeout-seconds 900 --heartbeat-seconds 30 flutter test integration_test/device_e2e_test.dart -d "$SIMULATOR_UDID" --device-timeout=30
+      - name: Collect Redacted Diagnostic Context
+        if: failure() || cancelled()
+        timeout-minutes: 2
+        run: |
+          echo "=== REDACTED DIAGNOSTIC CONTEXT ==="
+          echo "Target Simulator UDID: $SIMULATOR_UDID"
+          echo "--- SIMULATOR LIST SUMMARY ---"
+          xcrun simctl list devices | grep -C 2 "$SIMULATOR_UDID" || true
+          echo "--- FLUTTER DEVICES ---"
+          flutter devices || true
+          echo "--- DISK SPACE SUMMARY ---"
+          df -h /
+          echo "=== END DIAGNOSTIC CONTEXT ==="
       - name: Simulator Teardown & Cleanup
         if: always()
+        timeout-minutes: 3
         run: |
           if [ -n "$SIMULATOR_UDID" ]; then
-            echo "Shutting down and deleting dedicated CI simulator $SIMULATOR_UDID..."
-            xcrun simctl shutdown "$SIMULATOR_UDID" || true
-            xcrun simctl delete "$SIMULATOR_UDID" || true
+            echo "Validating ownership for simulator UDID $SIMULATOR_UDID..."
+            OWNED_NAME=$(xcrun simctl list devices | grep "$SIMULATOR_UDID" || true)
+            echo "Simulator info: $OWNED_NAME"
+            if echo "$OWNED_NAME" | grep -q "CI_Runner_${{ github.run_id }}_"; then
+              echo "Shutting down and deleting dedicated CI simulator $SIMULATOR_UDID..."
+              xcrun simctl shutdown "$SIMULATOR_UDID" || true
+              xcrun simctl delete "$SIMULATOR_UDID" || true
+            else
+              echo "SAFETY ALERT: Simulator UDID $SIMULATOR_UDID does not match runner pattern! Skipping deletion."
+            fi
           fi
 
   final-gate-summary:

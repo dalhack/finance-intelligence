@@ -3,9 +3,9 @@
 Defines machine-readable policies and boundaries for applied historical migrations.
 """
 
-from typing import Any, Dict, Final
+from typing import Any, Final
 
-IRREVERSIBLE_MIGRATION_POLICIES: Final[Dict[str, Dict[str, Any]]] = {
+IRREVERSIBLE_MIGRATION_POLICIES: Final[dict[str, dict[str, Any]]] = {
     "023_analysis_clarification_workflow": {
         "revision": "023_analysis_clarification_workflow",
         "classification": "IRREVERSIBLE",
@@ -27,7 +27,7 @@ def get_minimum_safe_downgrade_target(current_head: str) -> str:
     If any migration up to current_head is marked IRREVERSIBLE, the minimum safe
     target is the latest IRREVERSIBLE migration boundary.
     """
-    for rev_id, policy in IRREVERSIBLE_MIGRATION_POLICIES.items():
+    for policy in IRREVERSIBLE_MIGRATION_POLICIES.values():
         if policy.get("classification") == "IRREVERSIBLE":
             return str(policy["minimum_safe_downgrade_target"])
     return "base"
