@@ -1,0 +1,60 @@
+name: Validate Migration Lock Parity (Install-Only)
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_commit_sha:
+        description: 'Authorized Git Commit SHA to checkout and validate'
+        required: true
+        type: string
+
+concurrency:
+  group: validate-migration-lock-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  validate-lock:
+    name: Validate Migration Lock Parity (Install-Only)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Validate Ref and Input SHA Format
+        run: |
+          if [[ ! "${{ inputs.expected_commit_sha }}" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "::error::Invalid input commit SHA format: ${{ inputs.expected_commit_sha }}"
+            exit 1
+          fi
+
+      - name: Checkout Code at Authorized Commit
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: ${{ inputs.expected_commit_sha }}
+          persist-credentials: false
+
+      - name: Verify Checked-out Commit Identity
+        run: |
+          CHECKED_OUT_SHA=$(git rev-parse HEAD)
+          echo "Checked out SHA: ${CHECKED_OUT_SHA}"
+          echo "Expected SHA:    ${{ inputs.expected_commit_sha }}"
+          if [ "${CHECKED_OUT_SHA}" != "${{ inputs.expected_commit_sha }}" ]; post_step_err=1; then
+            echo "::error::Checked-out SHA does not match authorized expected_commit_sha!"
+            exit 1
+          fi
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@0b58c1de1358c17001f26005565067eefe7f8aaf
+        with:
+          python-version: "3.11"
+
+      - name: Validate Pip --require-hashes Installation
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install --no-cache-dir --require-hashes -r services/api/requirements-migration.lock
+
+      - name: Validate Pip Check Consistency
+        run: |
+          python -m pip check

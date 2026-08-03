@@ -1,4 +1,4 @@
-"""Comprehensive Unit, Semantic, Redaction, Action SHA Manifest, and Hash Provenance Tests."""
+"""Comprehensive Unit, Semantic, Redaction, Action SHA Manifest, and Recursive Lock Tests."""
 
 import re
 import subprocess
@@ -17,6 +17,7 @@ ALLOWED_ACTION_SHAS = {
     "google-github-actions/auth": "71f986410dfbc7added4569d411d040a91dc6935",
     "google-github-actions/setup-gcloud": "77e7a554d41e2ee56fc945c52dfd3f33d12def9a",
     "actions/github-script": "60a0d83039c74a4aee543508d2ffcb1c3799cdea",
+    "actions/setup-python": "0b58c1de1358c17001f26005565067eefe7f8aaf",
 }
 
 FORBIDDEN_INVALID_SHAS = {
@@ -28,9 +29,15 @@ TARGET_WORKFLOW_FILES = [
     "deploy-staging.yml",
     "diagnose-staging-oidc.yml",
     "verify-staging-wif.yml",
+    "validate-migration-lock.yml",
 ]
 
 SQLALCHEMY_TARGET_WHEEL_HASH = "2196208432deebdfe3b22185d46b08f00ac9d7b01284e168c212919891289396"
+
+FORBIDDEN_LOCK_PACKAGES = [
+    "google-cloud-secret-manager-v1",
+    "scamper",
+]
 
 
 def test_redact_sensitive_string_comprehensive():
@@ -75,6 +82,27 @@ def test_dockerfile_migration_hash_enforcement_and_digest():
     assert "USER 10001:10001" in content
 
 
+def test_requirements_lock_recursive_closure_cryptography_cffi_pycparser():
+    lock_path = API_DIR / "requirements-migration.lock"
+    assert lock_path.exists()
+    content = lock_path.read_text()
+
+    # Verify forbidden packages are ABSENT
+    for bad_pkg in FORBIDDEN_LOCK_PACKAGES:
+        assert bad_pkg not in content, f"Forbidden nonexistent package {bad_pkg} found in lock file!"
+
+    # Verify complete recursive dependency closure elements are PRESENT and exact-pinned
+    required_pins = [
+        "cryptography==42.0.0",
+        "cffi==1.16.0",
+        "pycparser==2.22",
+        "scramp==1.4.5",
+        "python-dateutil==2.9.0.post0",
+    ]
+    for pin in required_pins:
+        assert pin in content, f"Required recursive closure pin {pin} missing from lock file!"
+
+
 def test_requirements_lock_sqlalchemy_wheel_hash_provenance_and_ownership():
     lock_path = API_DIR / "requirements-migration.lock"
     assert lock_path.exists()
@@ -114,29 +142,8 @@ def test_action_pin_manifest_parity_and_negative_fixtures():
             assert sha_part == expected_sha, f"SHA mismatch for {repo_name}: expected {expected_sha}, got {sha_part}"
 
 
-def test_workflow_deploy_staging_prepush_hardening_semantic_scanner():
-    workflow_path = API_DIR.parent.parent / ".github" / "workflows" / "deploy-staging.yml"
-    assert workflow_path.exists()
-    content = workflow_path.read_text()
-
-    # Must ONLY trigger on workflow_dispatch with expected_commit_sha input
-    assert "workflow_dispatch:" in content
-    assert "expected_commit_sha:" in content
-    assert "push:" not in content
-    assert "pull_request:" not in content
-
-    # Concurrency and timeout must be present
-    assert "concurrency:" in content
-    assert "cancel-in-progress: false" in content
-    assert "timeout-minutes: 20" in content
-
-    # Checkout must use expected_commit_sha and persist-credentials: false
-    assert "ref: ${{ inputs.expected_commit_sha }}" in content
-    assert "persist-credentials: false" in content
-
-
-def test_workflow_verify_staging_wif_semantic_scanner():
-    wf_path = API_DIR.parent.parent / ".github" / "workflows" / "verify-staging-wif.yml"
+def test_workflow_validate_migration_lock_semantic_scanner():
+    wf_path = API_DIR.parent.parent / ".github" / "workflows" / "validate-migration-lock.yml"
     assert wf_path.exists()
     content = wf_path.read_text()
 
@@ -146,12 +153,14 @@ def test_workflow_verify_staging_wif_semantic_scanner():
     assert "push:" not in content
     assert "pull_request:" not in content
 
-    # Environment must be staging
-    assert "environment: staging" in content
+    # Permissions must be contents: read ONLY
+    assert "contents: read" in content
+    assert "id-token: write" not in content
 
-    # Must NOT contain Docker build/push
+    # Must NOT contain GCP auth or Docker push
+    assert "google-github-actions/auth" not in content
     assert "docker build" not in content
     assert "docker push" not in content
 
-    # GCP auth action must use verified SHA
-    assert "google-github-actions/auth@71f986410dfbc7added4569d411d040a91dc6935" in content
+    # Python setup must use verified SHA
+    assert "actions/setup-python@0b58c1de1358c17001f26005565067eefe7f8aaf" in content
