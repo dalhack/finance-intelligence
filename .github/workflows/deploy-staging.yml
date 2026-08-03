@@ -2,6 +2,15 @@ name: Build & Push Staging Migration Runner Container
 
 on:
   workflow_dispatch:
+    inputs:
+      expected_commit_sha:
+        description: Exact 40-character commit SHA authorized for image build
+        required: true
+        type: string
+
+concurrency:
+  group: finance-intelligence-staging-migration-image
+  cancel-in-progress: false
 
 permissions:
   contents: read
@@ -12,16 +21,40 @@ jobs:
     name: Build & Push Migration Image to Artifact Registry
     runs-on: ubuntu-latest
     environment: staging
+    timeout-minutes: 20
     steps:
-      - name: Validate Ref
+      - name: Validate Ref and Input SHA Format
         run: |
           if [ "${{ github.ref }}" != "refs/heads/finance-intelligence/phase-4c2c-ios-ci-validation" ]; then
             echo "ERROR: Workflow can only be dispatched from finance-intelligence/phase-4c2c-ios-ci-validation"
             exit 1
           fi
 
-      - name: Checkout Code
+          COMMIT_INPUT="${{ inputs.expected_commit_sha }}"
+          if [[ ! "${COMMIT_INPUT}" =~ ^[a-f0-9]{40}$ ]]; then
+            echo "ERROR: Input expected_commit_sha must be an exact 40-character lowercase hex string."
+            exit 1
+          fi
+
+      - name: Checkout Code at Authorized Commit
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ inputs.expected_commit_sha }}
+          persist-credentials: false
+
+      - name: Verify Checked-out Commit Identity
+        run: |
+          CHECKED_OUT_HEAD=$(git rev-parse HEAD)
+          EXPECTED_SHA="${{ inputs.expected_commit_sha }}"
+          GITHUB_SHA_VAL="${{ github.sha }}"
+
+          echo "Checked-out HEAD: ${CHECKED_OUT_HEAD}"
+          echo "Expected Input SHA: ${EXPECTED_SHA}"
+
+          if [ "${CHECKED_OUT_HEAD}" != "${EXPECTED_SHA}" ]; then
+            echo "ERROR: Checked-out HEAD '${CHECKED_OUT_HEAD}' does not match expected input SHA '${EXPECTED_SHA}'"
+            exit 1
+          fi
 
       - name: Authenticate to GCP via Workload Identity Federation
         uses: google-github-actions/auth@6fc46f2b8ec9721d0282b89a87d096ef14abcf8e # v2.1.8
@@ -39,22 +72,62 @@ jobs:
         run: |
           gcloud auth configure-docker europe-west1-docker.pkg.dev --quiet
 
-      - name: Build Migration Runner Image
+      - name: Build Migration Runner Image Locally
         run: |
           docker build \
             --platform linux/amd64 \
             -f services/api/Dockerfile.migration \
-            -t europe-west1-docker.pkg.dev/finance-intel-staging-8f2a/fi-images/migration-runner:migration-${{ github.sha }} \
+            -t local/migration-runner:build-test \
+            -t europe-west1-docker.pkg.dev/finance-intel-staging-8f2a/fi-images/migration-runner:migration-${{ inputs.expected_commit_sha }} \
             .
+
+      - name: Inspect Pre-Push Container Metadata
+        run: |
+          ARCH=$(docker image inspect local/migration-runner:build-test --format='{{.Architecture}}')
+          OS=$(docker image inspect local/migration-runner:build-test --format='{{.Os}}')
+          USER_CFG=$(docker image inspect local/migration-runner:build-test --format='{{.Config.User}}')
+
+          echo "Container Architecture: ${ARCH}"
+          echo "Container OS: ${OS}"
+          echo "Container User: ${USER_CFG}"
+
+          if [ "${ARCH}" != "amd64" ] || [ "${OS}" != "linux" ]; then
+            echo "ERROR: Target platform must be linux/amd64"
+            exit 1
+          fi
+
+          if [ "${USER_CFG}" != "10001:10001" ]; then
+            echo "ERROR: Effective user must be non-root 10001:10001"
+            exit 1
+          fi
+
+      - name: Pre-Push Fail-Closed Container Smoke Test
+        run: |
+          docker run --rm \
+            --platform linux/amd64 \
+            --network none \
+            --read-only \
+            --tmpfs /tmp:rw,noexec,nosuid,size=16m \
+            local/migration-runner:build-test \
+            preflight
+
+      - name: Pre-Push Default Fail-Closed No-Subcommand Test
+        run: |
+          if docker run --rm --platform linux/amd64 --network none --read-only --tmpfs /tmp:rw,noexec,nosuid,size=16m local/migration-runner:build-test ; then
+            echo "ERROR: Running container without subcommand unexpectedly succeeded!"
+            exit 1
+          else
+            echo "SUCCESS: Running container without subcommand failed as expected."
+          fi
 
       - name: Push Image to Artifact Registry
         run: |
-          docker push europe-west1-docker.pkg.dev/finance-intel-staging-8f2a/fi-images/migration-runner:migration-${{ github.sha }}
+          docker push europe-west1-docker.pkg.dev/finance-intel-staging-8f2a/fi-images/migration-runner:migration-${{ inputs.expected_commit_sha }}
 
-      - name: Output Immutable Digest Reference
+      - name: Query & Validate Registry Immutable Digest Reference
         run: |
           RAW_DIGEST=$(gcloud artifacts docker images describe \
-            europe-west1-docker.pkg.dev/finance-intel-staging-8f2a/fi-images/migration-runner:migration-${{ github.sha }} \
+            europe-west1-docker.pkg.dev/finance-intel-staging-8f2a/fi-images/migration-runner:migration-${{ inputs.expected_commit_sha }} \
             --format="value(image_summary.digest)")
           
           if [[ ! "${RAW_DIGEST}" =~ ^sha256:[a-f0-9]{64}$ ]]; then
@@ -63,5 +136,6 @@ jobs:
           fi
 
           IMMUTABLE_REF="europe-west1-docker.pkg.dev/finance-intel-staging-8f2a/fi-images/migration-runner@${RAW_DIGEST}"
-          echo "IMAGE_IMMUTABLE_DIGEST=${IMMUTABLE_REF}" >> $GITHUB_STEP_SUMMARY
+          echo "SOURCE_COMMIT_SHA=${{ inputs.expected_commit_sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "IMAGE_IMMUTABLE_REFERENCE=${IMMUTABLE_REF}" >> $GITHUB_STEP_SUMMARY
           echo "Successfully validated immutable image reference: ${IMMUTABLE_REF}"

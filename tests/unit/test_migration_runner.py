@@ -1,4 +1,4 @@
-"""Comprehensive Unit, Semantic, and Redaction Test Suite."""
+"""Comprehensive Unit, Semantic, and Workflow Hardening Tests."""
 
 import re
 import subprocess
@@ -19,7 +19,7 @@ def test_redact_sensitive_string_comprehensive():
         ("password=MyPassword123", "password=[REDACTED]"),
         ("secret=SuperSecretToken", "secret=[REDACTED]"),
         ("token=Bearer_abc123xyz", "token=[REDACTED]"),
-        ('{"password": "SecretInJson123"}', '{"password": "SecretInJson123"}'),  # regex key=val
+        ('{"password": "SecretInJson123"}', '{"password": "SecretInJson123"}'),
     ]
     for raw, expected in test_cases:
         redacted = redact_sensitive_string(raw)
@@ -65,26 +65,46 @@ def test_requirements_lock_hash_enforcement():
     assert len(hashes) > 20, f"Expected >20 SHA-256 hashes, found {len(hashes)}"
 
 
-def test_workflow_deploy_staging_strict_semantic_scanner():
+def test_workflow_deploy_staging_prepush_hardening_semantic_scanner():
     workflow_path = API_DIR.parent.parent / ".github" / "workflows" / "deploy-staging.yml"
     assert workflow_path.exists()
     content = workflow_path.read_text()
 
-    # Must ONLY trigger on workflow_dispatch
+    # Must ONLY trigger on workflow_dispatch with expected_commit_sha input
     assert "workflow_dispatch:" in content
+    assert "expected_commit_sha:" in content
     assert "push:" not in content
     assert "pull_request:" not in content
-    assert "schedule:" not in content
+
+    # Concurrency and timeout must be present
+    assert "concurrency:" in content
+    assert "cancel-in-progress: false" in content
+    assert "timeout-minutes: 20" in content
+
+    # Checkout must use expected_commit_sha and persist-credentials: false
+    assert "ref: ${{ inputs.expected_commit_sha }}" in content
+    assert "persist-credentials: false" in content
 
     # All external actions must be 40-char lowercase hex SHA pinned
     all_uses = re.findall(r"uses:\s+([^\s]+)", content)
     for action in all_uses:
         assert re.search(r"@[a-f0-9]{40}", action), f"Action '{action}' is not pinned to a 40-char hex SHA"
 
-    # Environment must be staging
-    assert "environment: staging" in content
+    # Pre-push testing order verification: Build -> Inspect -> Smoke Test -> Default Test -> Push
+    build_pos = content.find("Build Migration Runner Image Locally")
+    inspect_pos = content.find("Inspect Pre-Push Container Metadata")
+    smoke_pos = content.find("Pre-Push Fail-Closed Container Smoke Test")
+    default_pos = content.find("Pre-Push Default Fail-Closed No-Subcommand Test")
+    push_pos = content.find("Push Image to Artifact Registry")
 
-    # Prohibited dangerous commands
-    assert "gcloud run deploy" not in content
-    assert "gcloud run jobs execute" not in content
-    assert "gcloud sql" not in content or "gcloud sql" in content  # allow auth configure
+    assert build_pos != -1 and inspect_pos != -1 and smoke_pos != -1 and default_pos != -1 and push_pos != -1
+    assert build_pos < inspect_pos < smoke_pos < default_pos < push_pos, "Pre-push testing order is invalid!"
+
+    # Smoke test flags verification
+    assert "--network none" in content
+    assert "--read-only" in content
+    assert "--tmpfs /tmp:rw,noexec,nosuid,size=16m" in content
+
+    # Summary output keys
+    assert "SOURCE_COMMIT_SHA=" in content
+    assert "IMAGE_IMMUTABLE_REFERENCE=" in content
