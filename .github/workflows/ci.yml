@@ -59,8 +59,11 @@ jobs:
           python-version: '3.12'
       - name: Install locked dependencies
         run: pip install -r requirements.lock
-      - name: Run Python Unit Suite
-        run: pytest tests/unit
+      - name: Run Python Unit Suite with JUnit XML Output
+        run: pytest tests/unit --junitxml=pytest-unit-report.xml
+      - name: Real Zero-Skip XML Machine Verification
+        run: |
+          python -c "import xml.etree.ElementTree as ET; tree = ET.parse('pytest-unit-report.xml'); root = tree.getroot(); suite = root if root.tag == 'testsuite' else root.find('testsuite'); skips = int(suite.attrib.get('skipped', 0)); fails = int(suite.attrib.get('failures', 0)) + int(suite.attrib.get('errors', 0)); total = int(suite.attrib.get('tests', 0)); print(f'Pytest Unit Results: total={total}, passed={total-skips-fails}, skipped={skips}, failed={fails}'); assert total > 0, 'No unit tests executed!'; assert skips == 0, f'CRITICAL: {skips} skipped tests found!'; assert fails == 0, f'CRITICAL: {fails} failed tests found!'"
 
   backend-foundation-gate:
     name: PostgreSQL Integration Suite
@@ -99,7 +102,7 @@ jobs:
         env:
           DATABASE_URL: "postgresql+asyncpg://db_owner:owner_pass@localhost:5432/finance_intelligence_test"
         run: alembic -c services/api/alembic.ini upgrade head
-      - name: Run Integration Tests
+      - name: Run Integration Tests with JUnit XML Output
         env:
           TEST_OWNER_DATABASE_URL: "postgresql+asyncpg://db_owner:owner_pass@localhost:5432/finance_intelligence_test"
           TEST_BOOTSTRAP_DATABASE_URL: "postgresql+asyncpg://db_bootstrap:bootstrap_pass@localhost:5432/finance_intelligence_test"
@@ -107,9 +110,10 @@ jobs:
           TEST_WORKER_DATABASE_URL: "postgresql+asyncpg://db_ingestion_worker:worker_pass@localhost:5432/finance_intelligence_test"
           TEST_ROUNDTRIP_DATABASE_URL: "postgresql+asyncpg://db_owner:owner_pass@localhost:5432/finance_intelligence_roundtrip_test"
           TEST_MAINTENANCE_DATABASE_URL: "postgresql+asyncpg://db_maintenance_worker:dev_maintenance_pass_123@localhost:5432/finance_intelligence_test"
+        run: pytest tests/integration --junitxml=pytest-integration-report.xml
+      - name: Real Zero-Skip Integration XML Machine Verification
         run: |
-          pytest tests/integration
-          python -c "skips = 0; assert skips == 0, 'CRITICAL CI FAILURE: Integration tests contained skipped tests!'"
+          python -c "import xml.etree.ElementTree as ET; tree = ET.parse('pytest-integration-report.xml'); root = tree.getroot(); suite = root if root.tag == 'testsuite' else root.find('testsuite'); skips = int(suite.attrib.get('skipped', 0)); fails = int(suite.attrib.get('failures', 0)) + int(suite.attrib.get('errors', 0)); total = int(suite.attrib.get('tests', 0)); print(f'Pytest Integration Results: total={total}, passed={total-skips-fails}, skipped={skips}, failed={fails}'); assert total > 0, 'No integration tests executed!'; assert skips == 0, f'CRITICAL: {skips} skipped tests found!'; assert fails == 0, f'CRITICAL: {fails} failed tests found!'"
 
   mobile-gate:
     name: Flutter Analyze & Format
@@ -119,7 +123,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          flutter-version: '3.24.0'
+          flutter-version: '3.44.8'
       - name: Install locked dependencies
         working-directory: apps/mobile
         run: flutter pub get
@@ -135,16 +139,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          flutter-version: '3.24.0'
+          flutter-version: '3.44.8'
       - name: Install locked dependencies
         working-directory: apps/mobile
         run: flutter pub get
-      - name: Run Flutter Test Suite
+      - name: Run Flutter Machine Test Suite
         working-directory: apps/mobile
-        run: flutter test
+        run: flutter test --machine > flutter_test_report.jsonl
+      - name: Real Flutter Machine Manifest Verification
+        run: python scripts/parse_flutter_machine_output.py apps/mobile/flutter_test_report.jsonl
 
   migration-roundtrip:
     name: Migration Round-Trip Verification
@@ -187,6 +196,20 @@ jobs:
     runs-on: ubuntu-latest
     env:
       PYTHONPATH: .
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_PASSWORD: owner_pass
+          POSTGRES_USER: db_owner
+          POSTGRES_DB: finance_intelligence_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -194,7 +217,23 @@ jobs:
           python-version: '3.12'
       - name: Install locked dependencies
         run: pip install -r requirements.lock
+      - name: Provision Roles & DBs
+        run: |
+          PGPASSWORD=owner_pass psql -h localhost -U db_owner -d finance_intelligence_test -c "CREATE ROLE db_bootstrap LOGIN PASSWORD 'bootstrap_pass';"
+          PGPASSWORD=owner_pass psql -h localhost -U db_owner -d finance_intelligence_test -c "CREATE ROLE db_api_user LOGIN PASSWORD 'api_pass';"
+          PGPASSWORD=owner_pass psql -h localhost -U db_owner -d finance_intelligence_test -c "CREATE ROLE db_ingestion_worker LOGIN PASSWORD 'worker_pass';"
+          PGPASSWORD=owner_pass psql -h localhost -U db_owner -d finance_intelligence_test -c "CREATE ROLE db_maintenance_worker LOGIN PASSWORD 'dev_maintenance_pass_123';"
+      - name: Run Alembic Upgrade
+        env:
+          DATABASE_URL: "postgresql+asyncpg://db_owner:owner_pass@localhost:5432/finance_intelligence_test"
+        run: alembic -c services/api/alembic.ini upgrade head
       - name: Run Genuine Security & RLS Suite
+        env:
+          TEST_OWNER_DATABASE_URL: "postgresql+asyncpg://db_owner:owner_pass@localhost:5432/finance_intelligence_test"
+          TEST_BOOTSTRAP_DATABASE_URL: "postgresql+asyncpg://db_bootstrap:bootstrap_pass@localhost:5432/finance_intelligence_test"
+          TEST_API_DATABASE_URL: "postgresql+asyncpg://db_api_user:api_pass@localhost:5432/finance_intelligence_test"
+          TEST_WORKER_DATABASE_URL: "postgresql+asyncpg://db_ingestion_worker:worker_pass@localhost:5432/finance_intelligence_test"
+          TEST_MAINTENANCE_DATABASE_URL: "postgresql+asyncpg://db_maintenance_worker:dev_maintenance_pass_123@localhost:5432/finance_intelligence_test"
         run: pytest tests/unit/test_security_pipeline.py tests/unit/test_security.py tests/unit/test_tenant_context_scanner.py tests/unit/test_secret_scanner.py
 
   contract-drift:
@@ -210,7 +249,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          flutter-version: '3.24.0'
+          flutter-version: '3.44.8'
       - name: Install locked dependencies
         run: pip install -r requirements.lock
       - name: Export OpenAPI Spec & Check Drift
@@ -247,34 +286,23 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          flutter-version: '3.24.0'
+          flutter-version: '3.44.8'
       - name: Check Android Toolchain
         run: flutter doctor -v
 
-  ios-toolchain-preflight:
-    name: iOS Toolchain Preflight
+  ios-build-and-simulator-e2e:
+    name: iOS Build & Simulator E2E Execution
     runs-on: macos-14
     steps:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-          flutter-version: '3.24.0'
+          flutter-version: '3.44.8'
       - name: Check iOS Toolchain & Xcode
         run: |
           flutter doctor -v
           xcodebuild -version
-
-  ios-simulator-build:
-    name: iOS Simulator Build & Artifact Check
-    needs: ios-toolchain-preflight
-    runs-on: macos-14
-    steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-          flutter-version: '3.24.0'
       - name: Build iOS Simulator Bundle
         working-directory: apps/mobile
         run: |
@@ -284,27 +312,29 @@ jobs:
         working-directory: apps/mobile
         run: |
           test -d build/ios/iphonesimulator/Runner.app
+          test -f build/ios/iphonesimulator/Runner.app/Info.plist
           SIZE=$(du -s build/ios/iphonesimulator/Runner.app | cut -f1)
           echo "Runner.app Byte Size: $SIZE"
           test "$SIZE" -gt 0
           shasum -a 256 build/ios/iphonesimulator/Runner.app/Info.plist
-
-  ios-simulator-e2e:
-    name: iOS Simulator E2E Execution
-    needs: ios-simulator-build
-    runs-on: macos-14
-    steps:
-      - uses: actions/checkout@v4
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-          flutter-version: '3.24.0'
-      - name: Boot Simulator & Run Device E2E Test
+      - name: Boot Simulator & Run Device E2E Target Test
         working-directory: apps/mobile
         run: |
-          flutter pub get
-          xcrun simctl list devices
-          flutter test integration_test/device_e2e_test.dart
+          xcrun simctl list runtimes
+          UDID=$(xcrun simctl create "CI_iPhone_15" "com.apple.CoreSimulator.SimDeviceType.iPhone-15" || xcrun simctl list devices | grep "iPhone 15" | head -n1 | sed -E 's/.*\(([-A-F0-9]+)\).*/\1/')
+          echo "Selected Device UDID: $UDID"
+          xcrun simctl boot "$UDID" || true
+          xcrun simctl bootstatus "$UDID" -b
+          flutter devices
+          flutter test integration_test/device_e2e_test.dart -d "$UDID"
+          echo "UDID=$UDID" >> $GITHUB_ENV
+      - name: Simulator Teardown & Cleanup
+        if: always()
+        run: |
+          if [ -n "$UDID" ]; then
+            xcrun simctl shutdown "$UDID" || true
+            xcrun simctl delete "$UDID" || true
+          fi
 
   final-gate-summary:
     name: Final Quality Gate Summary
@@ -320,17 +350,26 @@ jobs:
       - flutter-machine-tests
       - contract-drift
       - traceability
-      - ios-toolchain-preflight
-      - ios-simulator-build
-      - ios-simulator-e2e
+      - ios-build-and-simulator-e2e
     runs-on: ubuntu-latest
     steps:
       - name: Quality Gate Status Enforcement
         run: |
-          STATUSES="${{ join(needs.*.result, ' ') }}"
-          echo "Upstream Job Results: $STATUSES"
-          if [[ "$STATUSES" =~ "failure" || "$STATUSES" =~ "cancelled" ]]; then
-            echo "CRITICAL: Required upstream job failed!"
-            exit 1
-          fi
-          echo "ALL REQUIRED QUALITY GATES PASSED CLEANLY!"
+          echo "Enforcing strict success on all required upstream jobs..."
+          for RES in "${{ needs.boundary-and-secret.result }}" \
+                     "${{ needs.python-static.result }}" \
+                     "${{ needs.python-unit-contract.result }}" \
+                     "${{ needs.backend-foundation-gate.result }}" \
+                     "${{ needs.migration-roundtrip.result }}" \
+                     "${{ needs.security-catalog.result }}" \
+                     "${{ needs.mobile-gate.result }}" \
+                     "${{ needs.flutter-machine-tests.result }}" \
+                     "${{ needs.contract-drift.result }}" \
+                     "${{ needs.traceability.result }}" \
+                     "${{ needs.ios-build-and-simulator-e2e.result }}"; do
+            if [[ "$RES" != "success" ]]; then
+              echo "CRITICAL FAIL-CLOSED: Upstream job result is '$RES' (not success)!"
+              exit 1
+            fi
+          done
+          echo "ALL REQUIRED QUALITY GATES PASSED CLEANLY WITH SUCCESS!"

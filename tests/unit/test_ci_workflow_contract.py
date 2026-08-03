@@ -24,8 +24,8 @@ def test_ci_workflow_structure_and_env_contract():
     assert 'TEST_WORKER_DATABASE_URL: "postgresql+asyncpg://db_ingestion_worker:' in raw_content
     assert 'TEST_ROUNDTRIP_DATABASE_URL: "postgresql+asyncpg://db_owner:' in raw_content
 
-    # Assert zero-skip verification check is present
-    assert "assert skips == 0, 'CRITICAL CI FAILURE: Integration tests contained skipped tests!'" in raw_content
+    # Assert zero-skip XML machine verification check is present
+    assert "assert skips == 0" in raw_content
 
 
 def test_workflow_semantic_scanner():
@@ -47,20 +47,23 @@ def test_workflow_semantic_scanner():
         'echo "Migration catalog verified."',
         'echo "Security catalog verified."',
         'echo "Contract drift verified."',
+        'skips = 0; assert skips == 0',
     ]
     for ph in forbidden_placeholders:
         assert ph not in raw_content, f"CRITICAL: Placeholder detected: {ph}"
 
     # 3. Require pinned Flutter version
-    assert "flutter-version: '3.24.0'" in raw_content, "CRITICAL: Flutter version must be explicitly pinned to 3.24.0!"
+    assert "flutter-version: '3.44.8'" in raw_content, "CRITICAL: Flutter version must be explicitly pinned to 3.44.8!"
 
     # 4. Require requirements.lock in Python steps
     assert "pip install -r requirements.lock" in raw_content, "CRITICAL: Python steps must install from requirements.lock!"
 
-    # 5. Require genuine iOS build and artifact checks
+    # 5. Require genuine iOS build, artifact checks, and simulator boot
     assert "flutter build ios --simulator --no-codesign" in raw_content
     assert "test -d build/ios/iphonesimulator/Runner.app" in raw_content
     assert "shasum -a 256" in raw_content
+    assert "xcrun simctl boot" in raw_content
+    assert "flutter test integration_test/device_e2e_test.dart -d" in raw_content
 
     # 6. Verify Android scope exclusion
     assert "if: inputs.validation_scope == 'all'" in raw_content
