@@ -27,6 +27,7 @@ FORBIDDEN_INVALID_SHAS = {
 TARGET_WORKFLOW_FILES = [
     "deploy-staging.yml",
     "diagnose-staging-oidc.yml",
+    "verify-staging-wif.yml",
 ]
 
 
@@ -124,10 +125,10 @@ def test_workflow_deploy_staging_prepush_hardening_semantic_scanner():
     assert "persist-credentials: false" in content
 
 
-def test_workflow_diagnose_staging_oidc_semantic_scanner():
-    diag_path = API_DIR.parent.parent / ".github" / "workflows" / "diagnose-staging-oidc.yml"
-    assert diag_path.exists()
-    content = diag_path.read_text()
+def test_workflow_verify_staging_wif_semantic_scanner():
+    wf_path = API_DIR.parent.parent / ".github" / "workflows" / "verify-staging-wif.yml"
+    assert wf_path.exists()
+    content = wf_path.read_text()
 
     # Must ONLY trigger on workflow_dispatch with expected_commit_sha input
     assert "workflow_dispatch:" in content
@@ -138,11 +139,9 @@ def test_workflow_diagnose_staging_oidc_semantic_scanner():
     # Environment must be staging
     assert "environment: staging" in content
 
-    # Must NOT contain Docker build/push or GCP auth actions
+    # Must NOT contain Docker build/push
     assert "docker build" not in content
     assert "docker push" not in content
-    assert "google-github-actions/auth" not in content
 
-    # Must NOT log full JWT token
-    assert "console.log(token)" not in content
-    assert "set -x" not in content
+    # GCP auth action must use verified SHA
+    assert "google-github-actions/auth@71f986410dfbc7added4569d411d040a91dc6935" in content
