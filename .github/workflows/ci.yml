@@ -65,6 +65,11 @@ jobs:
   backend-foundation-gate:
     name: PostgreSQL Integration Suite
     runs-on: ubuntu-latest
+    env:
+      TEST_BOOTSTRAP_PASSWORD: 'bootstrap_pass'
+      TEST_API_PASSWORD: 'api_pass'
+      TEST_WORKER_PASSWORD: 'worker_pass'
+      TEST_MAINTENANCE_PASSWORD: 'dev_maintenance_pass_123'
     services:
       postgres:
         image: postgres:16-alpine
@@ -87,11 +92,6 @@ jobs:
       - name: Install locked dependencies
         run: pip install -r requirements.lock
       - name: Provision Roles via Canonical Single Source Script
-        env:
-          TEST_BOOTSTRAP_PASSWORD: 'bootstrap_pass'
-          TEST_API_PASSWORD: 'api_pass'
-          TEST_WORKER_PASSWORD: 'worker_pass'
-          TEST_MAINTENANCE_PASSWORD: 'dev_maintenance_pass_123'
         run: python scripts/provision_ci_roles.py --target-url "postgresql://db_owner:owner_pass@localhost:5432/finance_intelligence_test"
       - name: Provision Test Database
         run: PGPASSWORD=owner_pass psql -h localhost -U db_owner -d finance_intelligence_test -c "CREATE DATABASE finance_intelligence_roundtrip_test OWNER db_owner;" || true
@@ -158,6 +158,11 @@ jobs:
     name: Migration Round-Trip Verification
     needs: backend-foundation-gate
     runs-on: ubuntu-latest
+    env:
+      TEST_BOOTSTRAP_PASSWORD: 'bootstrap_pass'
+      TEST_API_PASSWORD: 'api_pass'
+      TEST_WORKER_PASSWORD: 'worker_pass'
+      TEST_MAINTENANCE_PASSWORD: 'dev_maintenance_pass_123'
     services:
       postgres:
         image: postgres:16-alpine
@@ -180,11 +185,6 @@ jobs:
       - name: Install locked dependencies
         run: pip install -r requirements.lock
       - name: Provision Roles via Canonical Single Source Script
-        env:
-          TEST_BOOTSTRAP_PASSWORD: 'bootstrap_pass'
-          TEST_API_PASSWORD: 'api_pass'
-          TEST_WORKER_PASSWORD: 'worker_pass'
-          TEST_MAINTENANCE_PASSWORD: 'dev_maintenance_pass_123'
         run: python scripts/provision_ci_roles.py --target-url "postgresql://db_owner:owner_pass@localhost:5433/finance_intelligence_roundtrip"
       - name: Run Migration Upgrade, Revision Check, and Roundtrip
         env:
@@ -198,6 +198,11 @@ jobs:
   security-catalog:
     name: Security Catalog Verification
     runs-on: ubuntu-latest
+    env:
+      TEST_BOOTSTRAP_PASSWORD: 'bootstrap_pass'
+      TEST_API_PASSWORD: 'api_pass'
+      TEST_WORKER_PASSWORD: 'worker_pass'
+      TEST_MAINTENANCE_PASSWORD: 'dev_maintenance_pass_123'
     services:
       postgres:
         image: postgres:16-alpine
@@ -220,11 +225,6 @@ jobs:
       - name: Install locked dependencies
         run: pip install -r requirements.lock
       - name: Provision Roles via Canonical Single Source Script
-        env:
-          TEST_BOOTSTRAP_PASSWORD: 'bootstrap_pass'
-          TEST_API_PASSWORD: 'api_pass'
-          TEST_WORKER_PASSWORD: 'worker_pass'
-          TEST_MAINTENANCE_PASSWORD: 'dev_maintenance_pass_123'
         run: python scripts/provision_ci_roles.py --target-url "postgresql://db_owner:owner_pass@localhost:5432/finance_intelligence_test"
       - name: Run Alembic Upgrade
         env:
@@ -354,6 +354,7 @@ jobs:
       - flutter-machine-tests
       - contract-drift
       - traceability
+      - android-build-preflight
       - ios-build-and-simulator-e2e
     runs-on: ubuntu-latest
     steps:
@@ -376,4 +377,11 @@ jobs:
               exit 1
             fi
           done
+
+          AND_RES="${{ needs.android-build-preflight.result }}"
+          if [[ "$AND_RES" != "success" && "$AND_RES" != "skipped" ]]; then
+            echo "CRITICAL FAIL-CLOSED: Android preflight result is '$AND_RES' (expected success or skipped)!"
+            exit 1
+          fi
+
           echo "ALL REQUIRED QUALITY GATES PASSED CLEANLY WITH SUCCESS!"

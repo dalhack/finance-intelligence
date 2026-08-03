@@ -131,7 +131,8 @@ class ClarificationModel {
   });
 
   factory ClarificationModel.fromJson(Map<String, dynamic> json) {
-    final rawCode = json['clarification_code'] as String? ?? json['clarificationCode'] as String?;
+    final rawCode = json['clarification_code'] as String? ??
+        json['clarificationCode'] as String?;
     final code = ClarificationCode.fromWire(rawCode);
 
     final rawStatus = json['status'] as String?;
