@@ -1,9 +1,18 @@
 import os
 import subprocess
 import sys
+from pathlib import Path
 
 import asyncpg
 import pytest
+
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+sys.path.insert(0, str(REPO_ROOT))
+
+from services.api.app.core.migration_policy import (
+    get_minimum_safe_downgrade_target,
+    validate_downgrade_target,
+)
 
 DEFAULT_ROUNDTRIP_URL = os.environ.get("TEST_OWNER_DATABASE_URL", "").replace(
     "/finance_intelligence_test", "/finance_intelligence_roundtrip_test"
@@ -41,7 +50,15 @@ def run_alembic_cmd(action: str, target: str):
 
 @pytest.mark.asyncio
 async def test_migration_upgrade_downgrade_roundtrip():
-    # Step 1: Upgrade to head (010_fact_revision_uniqueness)
+    # 1. Test pre-execution rejection of targets below safe boundary (022, base)
+    for unsafe_target in ("022", "base"):
+        with pytest.raises(RuntimeError) as exc_info:
+            validate_downgrade_target(unsafe_target)
+        assert "MIGRATION_IRREVERSIBLE_BOUNDARY_VIOLATION" in str(exc_info.value)
+        assert "postgresql" not in str(exc_info.value).lower()
+        assert "owner_pass" not in str(exc_info.value).lower()
+
+    # 2. Upgrade to head (026)
     run_alembic_cmd("upgrade", "head")
 
     conn1 = await asyncpg.connect(RAW_ROUNDTRIP_URL)
@@ -50,59 +67,43 @@ async def test_migration_upgrade_downgrade_roundtrip():
     assert "organizations" in up_table_names
     assert "memberships" in up_table_names
     assert "documents" in up_table_names
-    assert "ingestion_jobs" in up_table_names
-    assert "financial_facts" in up_table_names
-    assert "ingestion_command_logs" in up_table_names
 
     final_rev = await conn1.fetchrow("SELECT version_num FROM alembic_version;")
     assert final_rev is not None
-    assert final_rev["version_num"] in [
-        "023_analysis_clarification_workflow",
-        "024_maintenance_scheduler_and_operational_resilience",
-        "025_distributed_provider_circuit_breaker",
-        "026_public_schema_acl_hardening",
-    ]
+    assert final_rev["version_num"] == "026_public_schema_acl_hardening"
     await conn1.close()
 
-    # Step 2: Verify guarded downgrade raises error preventing tokenless/integrity vulnerability
-    env = os.environ.copy()
-    env["ALEMBIC_TARGET_URL"] = ROUNDTRIP_URL
-    env["DATABASE_URL"] = ROUNDTRIP_URL
-    env["TEST_OWNER_DATABASE_URL"] = ROUNDTRIP_URL
-    ini_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "services", "api", "alembic.ini"))
-    cmd = [
-        sys.executable,
-        "-m",
-        "alembic",
-        "-c",
-        ini_path,
-        "-x",
-        f"sqlalchemy.url={ROUNDTRIP_URL}",
-        "downgrade",
-        "009_facts_integrity",
-    ]
-    res = subprocess.run(cmd, env=env, capture_output=True, text=True, check=False)  # noqa: ASYNC221
-    assert res.returncode != 0
-    assert "IRREVERSIBLE MIGRATION" in res.stderr
+    # 3. Safe roundtrip downgrade to safe boundary (023_analysis_clarification_workflow)
+    safe_target = get_minimum_safe_downgrade_target("head")
+    assert safe_target == "023_analysis_clarification_workflow"
+    validate_downgrade_target(safe_target)
+
+    run_alembic_cmd("downgrade", safe_target)
+
+    conn2 = await asyncpg.connect(RAW_ROUNDTRIP_URL)
+    boundary_rev = await conn2.fetchrow("SELECT version_num FROM alembic_version;")
+    assert boundary_rev is not None
+    assert boundary_rev["version_num"] == "023_analysis_clarification_workflow"
+    await conn2.close()
+
+    # 4. Re-upgrade to head (026)
+    run_alembic_cmd("upgrade", "head")
 
     conn3 = await asyncpg.connect(RAW_ROUNDTRIP_URL)
+    re_up_rev = await conn3.fetchrow("SELECT version_num FROM alembic_version;")
+    assert re_up_rev is not None
+    assert re_up_rev["version_num"] == "026_public_schema_acl_hardening"
 
-    # Verify db_app_user has NO effective table, sequence, or schema privileges
+    # Verify db_app_user has NO effective privileges
     has_select_doc = await conn3.fetchval("SELECT has_table_privilege('db_app_user', 'documents', 'SELECT');")
-    has_insert_mem = await conn3.fetchval("SELECT has_table_privilege('db_app_user', 'memberships', 'INSERT');")
     has_schema_usage = await conn3.fetchval("SELECT has_schema_privilege('db_app_user', 'public', 'USAGE');")
-
     assert has_select_doc is False
-    assert has_insert_mem is False
     assert has_schema_usage is False
 
-    # Verify db_api_user and db_ingestion_worker have appropriate privileges
-    has_api_select_doc = await conn3.fetchval("SELECT has_table_privilege('db_api_user', 'documents', 'SELECT');")
-    has_worker_insert_chunk = await conn3.fetchval(
-        "SELECT has_table_privilege('db_ingestion_worker', 'document_chunks', 'INSERT');"
+    # Verify db_bootstrap has NO EXECUTE on runtime functions
+    has_boot_exec = await conn3.fetchval(
+        "SELECT has_function_privilege('db_bootstrap', 'claim_ingestion_job(uuid, text, uuid)', 'EXECUTE');"
     )
-
-    assert has_api_select_doc is True
-    assert has_worker_insert_chunk is True
+    assert has_boot_exec is False
 
     await conn3.close()

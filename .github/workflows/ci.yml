@@ -188,14 +188,12 @@ jobs:
         run: pip install -r requirements.lock
       - name: Provision Roles via Canonical Single Source Script
         run: python scripts/provision_ci_roles.py --target-url "postgresql://db_owner:owner_pass@localhost:5433/finance_intelligence_roundtrip"
-      - name: Run Migration Upgrade, Revision Check, and Roundtrip
+      - name: Run Safe Migration Upgrade, Boundary Rejection Check, and Roundtrip
         env:
           DATABASE_URL: "postgresql+asyncpg://db_owner:owner_pass@localhost:5433/finance_intelligence_roundtrip"
         run: |
-          alembic -c services/api/alembic.ini upgrade head
-          alembic -c services/api/alembic.ini current
-          alembic -c services/api/alembic.ini downgrade base
-          alembic -c services/api/alembic.ini upgrade head
+          python scripts/verify_migration_roundtrip.py
+
 
   security-catalog:
     name: Security Catalog Verification
