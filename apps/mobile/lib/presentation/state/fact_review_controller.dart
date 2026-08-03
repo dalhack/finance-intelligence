@@ -1,0 +1,104 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../core/models/app_exception.dart';
+import '../../data/repositories/fact_review_repository.dart';
+import 'async_value_state.dart';
+
+class FactReviewController
+    extends StateNotifier<UiState<List<Map<String, dynamic>>>> {
+  final FactReviewRepository _repository;
+  int _generationToken = 0;
+
+  FactReviewController(this._repository) : super(UiState.initial());
+
+  Future<void> loadCandidates() async {
+    final currentToken = ++_generationToken;
+    state =
+        UiState.loading(requestToken: currentToken, currentData: state.data);
+
+    try {
+      final items = await _repository.getCandidateQueue();
+      if (_generationToken != currentToken) return;
+
+      if (items.isEmpty) {
+        state = UiState.empty(requestToken: currentToken);
+      } else {
+        state = UiState.success(data: items, requestToken: currentToken);
+      }
+    } catch (e) {
+      if (_generationToken != currentToken) return;
+      state = UiState.failure(
+        exception: e is AppException
+            ? e
+            : UnknownException(
+                code: 'UNKNOWN', message: e.toString(), requestId: 'req-local'),
+        requestToken: currentToken,
+      );
+    }
+  }
+
+  Future<void> approveCandidate(
+      {required String candidateId,
+      String? notes,
+      String? targetReportingBasis}) async {
+    final currentToken = ++_generationToken;
+    try {
+      await _repository.approveCandidate(
+          candidateId: candidateId,
+          notes: notes,
+          targetReportingBasis: targetReportingBasis);
+      await loadCandidates();
+    } catch (e) {
+      state = UiState.failure(
+        exception: e is AppException
+            ? e
+            : UnknownException(
+                code: 'UNKNOWN', message: e.toString(), requestId: 'req-local'),
+        requestToken: currentToken,
+      );
+    }
+  }
+
+  Future<void> rejectCandidate(
+      {required String candidateId, required String reason}) async {
+    final currentToken = ++_generationToken;
+    try {
+      await _repository.rejectCandidate(
+          candidateId: candidateId, reason: reason);
+      await loadCandidates();
+    } catch (e) {
+      state = UiState.failure(
+        exception: e is AppException
+            ? e
+            : UnknownException(
+                code: 'UNKNOWN', message: e.toString(), requestId: 'req-local'),
+        requestToken: currentToken,
+      );
+    }
+  }
+
+  Future<void> approveCandidateRevision({
+    required String candidateId,
+    required String expectedExistingFactId,
+    String? notes,
+    String? targetReportingBasis,
+  }) async {
+    final currentToken = ++_generationToken;
+    try {
+      await _repository.approveCandidateRevision(
+        candidateId: candidateId,
+        expectedExistingFactId: expectedExistingFactId,
+        notes: notes,
+        targetReportingBasis: targetReportingBasis,
+      );
+      await loadCandidates();
+    } catch (e) {
+      state = UiState.failure(
+        exception: e is AppException
+            ? e
+            : UnknownException(
+                code: 'UNKNOWN', message: e.toString(), requestId: 'req-local'),
+        requestToken: currentToken,
+      );
+    }
+  }
+}

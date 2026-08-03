@@ -1,8 +1,11 @@
 from pathlib import Path
 import re
+import subprocess
 import pytest
 
-CI_YML_PATH = Path(__file__).resolve().parent.parent.parent / ".github" / "workflows" / "ci.yml"
+REPO_ROOT = Path(__file__).resolve().parent.parent.parent
+CI_YML_PATH = REPO_ROOT / ".github" / "workflows" / "ci.yml"
+GITIGNORE_PATH = REPO_ROOT / ".gitignore"
 
 
 def validate_workflow_semantics(raw_content: str) -> None:
@@ -52,6 +55,33 @@ def validate_workflow_semantics(raw_content: str) -> None:
 
     # 8. Require cleanup teardown checking SIMULATOR_UDID
     assert 'if [ -n "$SIMULATOR_UDID" ]; then' in raw_content
+
+    # 9. Require db_app_user NOLOGIN compatibility role in CI database provisioning
+    assert "db_app_user NOLOGIN" in raw_content
+
+
+def test_gitignore_containment_and_repository_completeness():
+    """Scanner verifying .gitignore does not swallow production source code and essential entrypoints are tracked."""
+    assert GITIGNORE_PATH.exists()
+    gitignore_lines = [line.strip() for line in GITIGNORE_PATH.read_text(encoding="utf-8").splitlines()]
+
+    # Reject unanchored 'lib/' or 'storage/' rules in .gitignore
+    assert "lib/" not in gitignore_lines, "CRITICAL: Unanchored 'lib/' rule found in .gitignore (swallows Flutter source)!"
+    assert "storage/" not in gitignore_lines, "CRITICAL: Unanchored 'storage/' rule found in .gitignore (swallows backend storage package)!"
+
+    # Verify essential production entrypoints exist on filesystem
+    main_dart = REPO_ROOT / "apps" / "mobile" / "lib" / "main.dart"
+    storage_adapter = REPO_ROOT / "services" / "api" / "app" / "storage" / "local_adapter.py"
+
+    assert main_dart.exists(), "apps/mobile/lib/main.dart missing!"
+    assert storage_adapter.exists(), "services/api/app/storage/local_adapter.py missing!"
+
+    # Verify git status / ls-files sees them as tracked or staged (not ignored)
+    proc1 = subprocess.run(["git", "status", "--porcelain", str(main_dart)], capture_output=True, text=True, cwd=REPO_ROOT)
+    assert "!?" not in proc1.stdout, "apps/mobile/lib/main.dart is ignored by git!"
+
+    proc2 = subprocess.run(["git", "status", "--porcelain", str(storage_adapter)], capture_output=True, text=True, cwd=REPO_ROOT)
+    assert "!?" not in proc2.stdout, "services/api/app/storage/local_adapter.py is ignored by git!"
 
 
 def test_ci_workflow_structure_and_env_contract():
