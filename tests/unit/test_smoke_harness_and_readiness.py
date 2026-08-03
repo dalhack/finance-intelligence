@@ -57,6 +57,8 @@ def test_release_readiness_artifact_structure():
         "BLOCKED_BEFORE_EXTERNAL_AUTHORIZATION_DECISIONS",
         "AWAITING_USER_AUTHORIZATION_FOR_REMOTE_IOS_CI",
         "REMOTE_IOS_VALIDATION_BLOCKED_BY_AUTHORIZATION_OR_REMOTE_ACCESS",
+        "REMOTE_IOS_VALIDATION_BLOCKED_BY_GITHUB_ACCESS",
+        "REMOTE_IOS_VALIDATION_FAILED_REVIEW_REQUIRED",
     )
     assert len(data["gates"]) >= 10
 
@@ -67,6 +69,7 @@ def test_release_readiness_artifact_structure():
         "BLOCKED_BY_TOOLCHAIN",
         "BLOCKED_AMBIGUOUS_REMOTE",
         "BLOCKED_BY_REMOTE_ACCESS",
+        "BLOCKED_BY_GITHUB_ACCESS",
         "UNVERIFIED",
         "NOT_IMPLEMENTED",
         "NOT_AUTHORIZED",

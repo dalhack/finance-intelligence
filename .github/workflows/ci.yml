@@ -28,7 +28,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install dependencies
-        run: pip install pytest pytest-asyncio alembic asyncpg sqlalchemy fastapi ruff mypy
+        run: pip install -r requirements.lock
       - name: Run Secret & Boundary Scanner
         run: pytest tests/unit/test_secret_scanner.py
 
@@ -43,7 +43,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install Lint & Type Tools
-        run: pip install ruff mypy pytest sqlalchemy alembic fastapi asyncpg pydantic pydantic-settings
+        run: pip install -r requirements.lock
       - name: Ruff Check
         run: ruff check . --extend-exclude="apps/mobile/ios/Flutter/ephemeral"
       - name: Ruff Format Check
@@ -62,9 +62,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install dependencies
-        run: |
-          pip install -r requirements.txt || true
-          pip install pytest pytest-asyncio alembic asyncpg sqlalchemy fastapi pydantic pydantic-settings
+        run: pip install -r requirements.lock
       - name: Run Python Unit Suite
         run: pytest tests/unit
 
@@ -93,7 +91,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install dependencies
-        run: pip install pytest pytest-asyncio alembic asyncpg sqlalchemy fastapi pydantic pydantic-settings httpx
+        run: pip install -r requirements.lock
       - name: Provision Roles & DBs
         run: |
           PGPASSWORD=owner_pass psql -h localhost -U db_owner -d finance_intelligence_test -c "CREATE ROLE db_bootstrap LOGIN PASSWORD 'bootstrap_pass';"
@@ -186,7 +184,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install dependencies
-        run: pip install pytest pytest-asyncio alembic asyncpg sqlalchemy fastapi pydantic pydantic-settings
+        run: pip install -r requirements.lock
       - name: Run Traceability Validator
         run: pytest tests/unit/test_ai_orchestration.py
 
@@ -230,5 +228,12 @@ jobs:
       - ios-build-preflight-macos-only
     runs-on: ubuntu-latest
     steps:
-      - name: Quality Gate PASS Summary
-        run: echo "ALL REQUIRED QUALITY GATES PASSED CLEANLY!"
+      - name: Quality Gate Status Enforcement
+        run: |
+          STATUSES="${{ join(needs.*.result, ' ') }}"
+          echo "Upstream Job Results: $STATUSES"
+          if [[ "$STATUSES" =~ "failure" || "$STATUSES" =~ "cancelled" ]]; then
+            echo "CRITICAL: Required upstream job failed!"
+            exit 1
+          fi
+          echo "ALL REQUIRED QUALITY GATES PASSED CLEANLY!"
