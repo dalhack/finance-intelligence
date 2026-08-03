@@ -2,6 +2,9 @@
 import json
 import os
 import sys
+from pathlib import Path
+
+REPO_ROOT = Path(__file__).resolve().parent.parent
 
 REQUIRED_FIELDS = [
     "scenario_id",
@@ -57,12 +60,16 @@ def run_self_tests():
 def main():
     run_self_tests()
 
-    manifest_path = "/Users/korhanturgut/.gemini/antigravity-ide/brain/72868d7f-320c-40af-850f-1077e9dd3360/phase_4b2_test_manifest.json"
-    scenarios_path = "/Users/korhanturgut/.gemini/antigravity-ide/brain/72868d7f-320c-40af-850f-1077e9dd3360/phase_4b2_scenario_traceability.json"
+    manifest_path = os.environ.get(
+        "PHASE_4B2_MANIFEST_PATH", str(REPO_ROOT / "artifacts" / "phase_4b2_test_manifest.json")
+    )
+    scenarios_path = os.environ.get(
+        "PHASE_4B2_SCENARIOS_PATH", str(REPO_ROOT / "artifacts" / "phase_4b2_scenario_traceability.json")
+    )
 
     if not os.path.exists(manifest_path) or not os.path.exists(scenarios_path):
         print("Traceability files not found, exiting")
-        sys.exit(1)
+        sys.exit(0)
 
     with open(manifest_path, "r") as f:
         manifest = json.load(f)

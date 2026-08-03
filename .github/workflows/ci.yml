@@ -14,10 +14,6 @@ on:
 
 env:
   PYTHONPATH: .
-  TEST_BOOTSTRAP_PASSWORD: 'bootstrap_pass'
-  TEST_API_PASSWORD: 'api_pass'
-  TEST_WORKER_PASSWORD: 'worker_pass'
-  TEST_MAINTENANCE_PASSWORD: 'dev_maintenance_pass_123'
 
 jobs:
   boundary-and-secret:
@@ -91,21 +87,28 @@ jobs:
       - name: Install locked dependencies
         run: pip install -r requirements.lock
       - name: Provision Roles via Canonical Single Source Script
+        env:
+          TEST_BOOTSTRAP_PASSWORD: 'bootstrap_pass'
+          TEST_API_PASSWORD: 'api_pass'
+          TEST_WORKER_PASSWORD: 'worker_pass'
+          TEST_MAINTENANCE_PASSWORD: 'dev_maintenance_pass_123'
         run: python scripts/provision_ci_roles.py --target-url "postgresql://db_owner:owner_pass@localhost:5432/finance_intelligence_test"
       - name: Provision Test Database
         run: PGPASSWORD=owner_pass psql -h localhost -U db_owner -d finance_intelligence_test -c "CREATE DATABASE finance_intelligence_roundtrip_test OWNER db_owner;" || true
-      - name: Run Alembic Upgrade
+      - name: Run Alembic Upgrade on Both Test Databases
         env:
           DATABASE_URL: "postgresql+asyncpg://db_owner:owner_pass@localhost:5432/finance_intelligence_test"
-        run: alembic -c services/api/alembic.ini upgrade head
+        run: |
+          alembic -c services/api/alembic.ini upgrade head
+          DATABASE_URL="postgresql+asyncpg://db_owner:owner_pass@localhost:5432/finance_intelligence_roundtrip_test" alembic -c services/api/alembic.ini upgrade head
       - name: Run Integration Tests with JUnit XML Output
         env:
           TEST_OWNER_DATABASE_URL: "postgresql+asyncpg://db_owner:owner_pass@localhost:5432/finance_intelligence_test"
-          TEST_BOOTSTRAP_DATABASE_URL: "postgresql+asyncpg://db_bootstrap:${{ env.TEST_BOOTSTRAP_PASSWORD }}@localhost:5432/finance_intelligence_test"
-          TEST_API_DATABASE_URL: "postgresql+asyncpg://db_api_user:${{ env.TEST_API_PASSWORD }}@localhost:5432/finance_intelligence_test"
-          TEST_WORKER_DATABASE_URL: "postgresql+asyncpg://db_ingestion_worker:${{ env.TEST_WORKER_PASSWORD }}@localhost:5432/finance_intelligence_test"
+          TEST_BOOTSTRAP_DATABASE_URL: "postgresql+asyncpg://db_bootstrap:bootstrap_pass@localhost:5432/finance_intelligence_test"
+          TEST_API_DATABASE_URL: "postgresql+asyncpg://db_api_user:api_pass@localhost:5432/finance_intelligence_test"
+          TEST_WORKER_DATABASE_URL: "postgresql+asyncpg://db_ingestion_worker:worker_pass@localhost:5432/finance_intelligence_test"
           TEST_ROUNDTRIP_DATABASE_URL: "postgresql+asyncpg://db_owner:owner_pass@localhost:5432/finance_intelligence_roundtrip_test"
-          TEST_MAINTENANCE_DATABASE_URL: "postgresql+asyncpg://db_maintenance_worker:${{ env.TEST_MAINTENANCE_PASSWORD }}@localhost:5432/finance_intelligence_test"
+          TEST_MAINTENANCE_DATABASE_URL: "postgresql+asyncpg://db_maintenance_worker:dev_maintenance_pass_123@localhost:5432/finance_intelligence_test"
         run: pytest tests/integration --junitxml=pytest-integration-report.xml
       - name: Real Zero-Skip Integration XML Machine Verification
         run: |
@@ -177,6 +180,11 @@ jobs:
       - name: Install locked dependencies
         run: pip install -r requirements.lock
       - name: Provision Roles via Canonical Single Source Script
+        env:
+          TEST_BOOTSTRAP_PASSWORD: 'bootstrap_pass'
+          TEST_API_PASSWORD: 'api_pass'
+          TEST_WORKER_PASSWORD: 'worker_pass'
+          TEST_MAINTENANCE_PASSWORD: 'dev_maintenance_pass_123'
         run: python scripts/provision_ci_roles.py --target-url "postgresql://db_owner:owner_pass@localhost:5433/finance_intelligence_roundtrip"
       - name: Run Migration Upgrade, Revision Check, and Roundtrip
         env:
@@ -212,6 +220,11 @@ jobs:
       - name: Install locked dependencies
         run: pip install -r requirements.lock
       - name: Provision Roles via Canonical Single Source Script
+        env:
+          TEST_BOOTSTRAP_PASSWORD: 'bootstrap_pass'
+          TEST_API_PASSWORD: 'api_pass'
+          TEST_WORKER_PASSWORD: 'worker_pass'
+          TEST_MAINTENANCE_PASSWORD: 'dev_maintenance_pass_123'
         run: python scripts/provision_ci_roles.py --target-url "postgresql://db_owner:owner_pass@localhost:5432/finance_intelligence_test"
       - name: Run Alembic Upgrade
         env:
@@ -220,10 +233,10 @@ jobs:
       - name: Run Genuine Security & RLS Suite
         env:
           TEST_OWNER_DATABASE_URL: "postgresql+asyncpg://db_owner:owner_pass@localhost:5432/finance_intelligence_test"
-          TEST_BOOTSTRAP_DATABASE_URL: "postgresql+asyncpg://db_bootstrap:${{ env.TEST_BOOTSTRAP_PASSWORD }}@localhost:5432/finance_intelligence_test"
-          TEST_API_DATABASE_URL: "postgresql+asyncpg://db_api_user:${{ env.TEST_API_PASSWORD }}@localhost:5432/finance_intelligence_test"
-          TEST_WORKER_DATABASE_URL: "postgresql+asyncpg://db_ingestion_worker:${{ env.TEST_WORKER_PASSWORD }}@localhost:5432/finance_intelligence_test"
-          TEST_MAINTENANCE_DATABASE_URL: "postgresql+asyncpg://db_maintenance_worker:${{ env.TEST_MAINTENANCE_PASSWORD }}@localhost:5432/finance_intelligence_test"
+          TEST_BOOTSTRAP_DATABASE_URL: "postgresql+asyncpg://db_bootstrap:bootstrap_pass@localhost:5432/finance_intelligence_test"
+          TEST_API_DATABASE_URL: "postgresql+asyncpg://db_api_user:api_pass@localhost:5432/finance_intelligence_test"
+          TEST_WORKER_DATABASE_URL: "postgresql+asyncpg://db_ingestion_worker:worker_pass@localhost:5432/finance_intelligence_test"
+          TEST_MAINTENANCE_DATABASE_URL: "postgresql+asyncpg://db_maintenance_worker:dev_maintenance_pass_123@localhost:5432/finance_intelligence_test"
         run: pytest tests/unit/test_security_pipeline.py tests/unit/test_security.py tests/unit/test_tenant_context_scanner.py tests/unit/test_secret_scanner.py
 
   contract-drift:

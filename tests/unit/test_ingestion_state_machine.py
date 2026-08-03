@@ -12,6 +12,7 @@ from services.api.app.services.state_machine import InvalidStateTransitionExcept
 @pytest.mark.asyncio
 async def test_state_machine_invalid_transition_raises_exception():
     db = AsyncMock()
+    db.add = MagicMock()
     job = IngestionJob(id=uuid4(), organization_id=uuid4(), status="PENDING_UPLOAD")
     mock_res = MagicMock()
     mock_res.scalar_one_or_none.return_value = job
@@ -27,6 +28,7 @@ async def test_state_machine_invalid_transition_raises_exception():
 @pytest.mark.asyncio
 async def test_state_machine_upload_session_valid_transition():
     db = AsyncMock()
+    db.add = MagicMock()
     session_id = uuid4()
     org_id = uuid4()
     session = UploadSession(id=session_id, organization_id=org_id, status="PENDING_UPLOAD")

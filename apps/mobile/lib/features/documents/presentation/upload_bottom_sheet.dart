@@ -108,7 +108,7 @@ class _UploadBottomSheetState extends ConsumerState<UploadBottomSheet> {
             Container(
               padding: const EdgeInsets.all(8.0),
               margin: const EdgeInsets.only(bottom: 8.0),
-              color: SemanticTokens.errorRedLight.withOpacity(0.1),
+              color: SemanticTokens.errorRedLight.withValues(alpha: 0.1),
               child: Text(_errorMessage!,
                   style: const TextStyle(color: SemanticTokens.errorRedLight)),
             ),

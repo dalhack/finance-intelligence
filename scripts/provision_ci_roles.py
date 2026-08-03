@@ -2,8 +2,8 @@ import argparse
 import asyncio
 import os
 import sys
-from typing import Dict
 from urllib.parse import urlparse
+
 import asyncpg
 
 ALLOWED_LOGIN_ROLES = {
@@ -19,7 +19,7 @@ def sanitize_connection_error(error_msg: str) -> str:
     return "CI_ROLE_PROVISIONING_CONNECTION_FAILED: Connection to target database failed."
 
 
-def validate_credential_contract() -> Dict[str, str]:
+def validate_credential_contract() -> dict[str, str]:
     """Strict validation of CI test role password environment contract.
 
     Fails closed BEFORE opening database connection if any variable is missing or empty.
@@ -65,7 +65,7 @@ def verify_ci_target_allowlist(dsn: str, allow_local: bool = False) -> None:
     clean_dsn = dsn.replace("postgresql+asyncpg://", "postgresql://")
     try:
         parsed = urlparse(clean_dsn)
-    except Exception:
+    except Exception:  # noqa: BLE001
         print("ERROR: CI_ROLE_PROVISIONING_INVALID_DSN: Could not parse target DSN.", file=sys.stderr)
         sys.exit(1)
 
@@ -74,7 +74,9 @@ def verify_ci_target_allowlist(dsn: str, allow_local: bool = False) -> None:
 
     # 3. Production Target Ban
     if "prod" in hostname or "production" in hostname or "prod" in dbname or "production" in dbname:
-        print("ERROR: CI_ROLE_PROVISIONING_PRODUCTION_TARGET_FORBIDDEN: Target is marked as production.", file=sys.stderr)
+        print(
+            "ERROR: CI_ROLE_PROVISIONING_PRODUCTION_TARGET_FORBIDDEN: Target is marked as production.", file=sys.stderr
+        )
         sys.exit(1)
 
     # 4. Strict Loopback / Service-Container Allowlist
@@ -83,7 +85,10 @@ def verify_ci_target_allowlist(dsn: str, allow_local: bool = False) -> None:
     is_safe_db = "test" in dbname or "roundtrip" in dbname or "ci" in dbname
 
     if not (is_safe_host and is_safe_db):
-        print(f"ERROR: CI_ROLE_PROVISIONING_TARGET_NOT_ALLOWED: Target DB ({hostname}/{dbname}) not in CI allowlist.", file=sys.stderr)
+        print(
+            f"ERROR: CI_ROLE_PROVISIONING_TARGET_NOT_ALLOWED: Target DB ({hostname}/{dbname}) not in CI allowlist.",
+            file=sys.stderr,
+        )
         sys.exit(1)
 
 
@@ -98,7 +103,7 @@ async def provision_ci_roles(dsn: str, allow_local: bool = False) -> None:
 
     try:
         conn = await asyncpg.connect(connect_dsn)
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         redacted_msg = sanitize_connection_error(str(e))
         print(f"ERROR: {redacted_msg}", file=sys.stderr)
         sys.exit(1)
@@ -121,7 +126,10 @@ async def provision_ci_roles(dsn: str, allow_local: bool = False) -> None:
         # 4. Server-Side Escaped Role Provisioning using PostgreSQL quote_literal
         for role_name, password in role_passwords.items():
             if role_name not in ALLOWED_LOGIN_ROLES:
-                print(f"ERROR: CI_ROLE_PROVISIONING_UNAUTHORIZED_ROLE: Role {role_name} not in allowlist.", file=sys.stderr)
+                print(
+                    f"ERROR: CI_ROLE_PROVISIONING_UNAUTHORIZED_ROLE: Role {role_name} not in allowlist.",
+                    file=sys.stderr,
+                )
                 sys.exit(1)
 
             # Use PostgreSQL engine to safely escape password into a 100% injection-proof literal
@@ -134,7 +142,9 @@ async def provision_ci_roles(dsn: str, allow_local: bool = False) -> None:
                 await conn.execute(f"ALTER ROLE {role_name} WITH LOGIN PASSWORD {quoted_pass};")
 
         # 5. Database Catalog Verification & Security Assertions
-        app_user_info = await conn.fetchrow("SELECT rolname, rolcanlogin, rolsuper, rolbypassrls FROM pg_roles WHERE rolname = 'db_app_user'")
+        app_user_info = await conn.fetchrow(
+            "SELECT rolname, rolcanlogin, rolsuper, rolbypassrls FROM pg_roles WHERE rolname = 'db_app_user'"
+        )
         if not app_user_info:
             print("ERROR: CI_ROLE_PROVISIONING_CATALOG_FAILED: Role db_app_user missing.", file=sys.stderr)
             sys.exit(1)
@@ -144,13 +154,16 @@ async def provision_ci_roles(dsn: str, allow_local: bool = False) -> None:
             sys.exit(1)
 
         if app_user_info["rolsuper"] or app_user_info["rolbypassrls"]:
-            print("ERROR: CI_ROLE_PROVISIONING_SECURITY_VIOLATION: db_app_user has SUPERUSER or BYPASSRLS capability.", file=sys.stderr)
+            print(
+                "ERROR: CI_ROLE_PROVISIONING_SECURITY_VIOLATION: db_app_user has SUPERUSER or BYPASSRLS capability.",
+                file=sys.stderr,
+            )
             sys.exit(1)
 
         member_count = await conn.fetchval(
             "SELECT COUNT(*) FROM pg_auth_members WHERE roleid = (SELECT oid FROM pg_roles WHERE rolname = 'db_app_user')"
         )
-        if member_count > 0:
+        if int(member_count or 0) > 0:
             print("ERROR: CI_ROLE_PROVISIONING_SECURITY_VIOLATION: db_app_user has active members.", file=sys.stderr)
             sys.exit(1)
 
@@ -158,7 +171,7 @@ async def provision_ci_roles(dsn: str, allow_local: bool = False) -> None:
         print("STATIC_EVENT_CODE: CI_ROLE_PROVISIONING_SUCCESS")
         print("Verified Catalog: db_app_user is NOLOGIN, NOBYPASSRLS, NOSUPERUSER with 0 members.")
 
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001
         redacted_msg = sanitize_connection_error(str(e))
         print(f"ERROR: {redacted_msg}", file=sys.stderr)
         sys.exit(1)
@@ -167,7 +180,9 @@ async def provision_ci_roles(dsn: str, allow_local: bool = False) -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Canonical Single-Source CI Role Provisioning Tool with Parameterized SQL and Zero Fallbacks")
+    parser = argparse.ArgumentParser(
+        description="Canonical Single-Source CI Role Provisioning Tool with Parameterized SQL and Zero Fallbacks"
+    )
     parser.add_argument(
         "--target-url",
         default=os.environ.get("DATABASE_URL"),

@@ -38,7 +38,7 @@ class ComparisonResultScreen extends StatelessWidget {
           children: [
             // Metadata Header Card
             Container(
-              color: SemanticTokens.primaryNavyLight.withOpacity(0.05),
+              color: SemanticTokens.primaryNavyLight.withValues(alpha: 0.05),
               padding: const EdgeInsets.all(12.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

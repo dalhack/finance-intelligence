@@ -30,8 +30,8 @@ def parse_flutter_machine(file_path: str):
                             "result": result,
                             "skipped": skipped_flag,
                         }
-            except Exception:
-                pass
+            except (json.JSONDecodeError, KeyError, TypeError):
+                continue
 
     passed = 0
     failed = 0

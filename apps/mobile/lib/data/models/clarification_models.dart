@@ -1,18 +1,82 @@
 enum ClarificationCode {
-  INSTITUTION_REQUIRED,
-  REPORTING_PERIOD_REQUIRED,
-  REPORTING_BASIS_REQUIRED,
-  MEASURE_REQUIRED,
-  DOCUMENT_SCOPE_REQUIRED,
-  COMPARISON_SCOPE_AMBIGUOUS,
-  UNSUPPORTED_REQUEST_SCOPE,
+  institutionRequired,
+  reportingPeriodRequired,
+  reportingBasisRequired,
+  measureRequired,
+  documentScopeRequired,
+  comparisonScopeAmbiguous,
+  unsupportedRequestScope;
+
+  String get wireValue {
+    switch (this) {
+      case ClarificationCode.institutionRequired:
+        return 'INSTITUTION_REQUIRED';
+      case ClarificationCode.reportingPeriodRequired:
+        return 'REPORTING_PERIOD_REQUIRED';
+      case ClarificationCode.reportingBasisRequired:
+        return 'REPORTING_BASIS_REQUIRED';
+      case ClarificationCode.measureRequired:
+        return 'MEASURE_REQUIRED';
+      case ClarificationCode.documentScopeRequired:
+        return 'DOCUMENT_SCOPE_REQUIRED';
+      case ClarificationCode.comparisonScopeAmbiguous:
+        return 'COMPARISON_SCOPE_AMBIGUOUS';
+      case ClarificationCode.unsupportedRequestScope:
+        return 'UNSUPPORTED_REQUEST_SCOPE';
+    }
+  }
+
+  static ClarificationCode fromWire(String? raw) {
+    switch (raw) {
+      case 'INSTITUTION_REQUIRED':
+        return ClarificationCode.institutionRequired;
+      case 'REPORTING_PERIOD_REQUIRED':
+        return ClarificationCode.reportingPeriodRequired;
+      case 'REPORTING_BASIS_REQUIRED':
+        return ClarificationCode.reportingBasisRequired;
+      case 'MEASURE_REQUIRED':
+        return ClarificationCode.measureRequired;
+      case 'DOCUMENT_SCOPE_REQUIRED':
+        return ClarificationCode.documentScopeRequired;
+      case 'COMPARISON_SCOPE_AMBIGUOUS':
+        return ClarificationCode.comparisonScopeAmbiguous;
+      default:
+        return ClarificationCode.unsupportedRequestScope;
+    }
+  }
 }
 
 enum ClarificationStatus {
-  AWAITING_CLARIFICATION,
-  CLARIFICATION_RECEIVED,
-  CLARIFICATION_EXPIRED,
-  CLARIFICATION_CANCELLED,
+  awaitingClarification,
+  clarificationReceived,
+  clarificationExpired,
+  clarificationCancelled;
+
+  String get wireValue {
+    switch (this) {
+      case ClarificationStatus.awaitingClarification:
+        return 'AWAITING_CLARIFICATION';
+      case ClarificationStatus.clarificationReceived:
+        return 'CLARIFICATION_RECEIVED';
+      case ClarificationStatus.clarificationExpired:
+        return 'CLARIFICATION_EXPIRED';
+      case ClarificationStatus.clarificationCancelled:
+        return 'CLARIFICATION_CANCELLED';
+    }
+  }
+
+  static ClarificationStatus fromWire(String? raw) {
+    switch (raw) {
+      case 'CLARIFICATION_RECEIVED':
+        return ClarificationStatus.clarificationReceived;
+      case 'CLARIFICATION_EXPIRED':
+        return ClarificationStatus.clarificationExpired;
+      case 'CLARIFICATION_CANCELLED':
+        return ClarificationStatus.clarificationCancelled;
+      default:
+        return ClarificationStatus.awaitingClarification;
+    }
+  }
 }
 
 class ClarificationOptionModel {
@@ -67,18 +131,11 @@ class ClarificationModel {
   });
 
   factory ClarificationModel.fromJson(Map<String, dynamic> json) {
-    final rawCode =
-        json['clarification_code'] as String? ?? 'UNSUPPORTED_REQUEST_SCOPE';
-    final code = ClarificationCode.values.firstWhere(
-      (e) => e.name == rawCode,
-      orElse: () => ClarificationCode.UNSUPPORTED_REQUEST_SCOPE,
-    );
+    final rawCode = json['clarification_code'] as String? ?? json['clarificationCode'] as String?;
+    final code = ClarificationCode.fromWire(rawCode);
 
-    final rawStatus = json['status'] as String? ?? 'AWAITING_CLARIFICATION';
-    final status = ClarificationStatus.values.firstWhere(
-      (e) => e.name == rawStatus,
-      orElse: () => ClarificationStatus.AWAITING_CLARIFICATION,
-    );
+    final rawStatus = json['status'] as String?;
+    final status = ClarificationStatus.fromWire(rawStatus);
 
     final optionsRaw = json['options'] as List<dynamic>? ?? [];
     final optionsList = optionsRaw
@@ -123,7 +180,6 @@ class ClarificationResponseRequest {
   });
 
   Map<String, dynamic> toJson() {
-    // Sanitization check: Ensure no forbidden keys exist in request
     final forbiddenKeys = {
       'organization_id',
       'user_id',

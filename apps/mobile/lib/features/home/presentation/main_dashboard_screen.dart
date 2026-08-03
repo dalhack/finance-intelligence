@@ -16,7 +16,7 @@ class MainDashboardScreen extends ConsumerStatefulWidget {
 
 class _MainDashboardScreenState extends ConsumerState<MainDashboardScreen> {
   final TextEditingController _queryController = TextEditingController();
-  bool _showOrchestrationBanner = false;
+  final bool _showOrchestrationBanner = false;
 
   @override
   void initState() {

@@ -13,10 +13,10 @@ void main() {
       app.main();
       await tester.pumpAndSettle();
 
-      // Verify Dashboard Screen renders title
-      expect(find.text('Financial Intelligence'), findsOneWidget);
+      // Verify Dashboard Screen renders genuine production title
+      expect(find.text('Finance Intelligence'), findsOneWidget);
 
-      // Verify Navigation controls
+      // Verify Navigation controls and root app widget
       await tester.pump(const Duration(seconds: 1));
       expect(find.byType(FinanceIntelligenceApp), findsOneWidget);
     });
