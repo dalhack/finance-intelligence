@@ -403,3 +403,25 @@ async def test_missing_tenant_context_returns_zero_rows():
     assert len(mem_rows) == 0, "Query without app.current_organization_id MUST return 0 rows for memberships."
     assert len(org_rows) == 0, "Query without app.current_organization_id MUST return 0 rows for organizations."
     assert len(user_rows) == 0, "Query without app.current_organization_id MUST return 0 rows for users."
+
+
+@pytest.mark.asyncio
+async def test_all_public_functions_deny_public_and_app_user_execute():
+    owner_conn = await asyncpg.connect(OWNER_URL)
+
+    rows = await owner_conn.fetch("""
+        SELECT 
+            p.proname,
+            has_function_privilege('public', p.oid, 'EXECUTE') as public_exec,
+            has_function_privilege('db_app_user', p.oid, 'EXECUTE') as app_user_exec
+        FROM pg_proc p
+        JOIN pg_namespace n ON p.pronamespace = n.oid
+        WHERE n.nspname = 'public';
+    """)
+
+    failing_funcs = [r["proname"] for r in rows if r["public_exec"] or r["app_user_exec"]]
+    await owner_conn.close()
+
+    assert len(failing_funcs) == 0, (
+        f"SECURITY_VIOLATION: Functions retaining PUBLIC or db_app_user EXECUTE: {failing_funcs}"
+    )
