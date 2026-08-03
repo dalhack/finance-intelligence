@@ -1,4 +1,4 @@
-"""Comprehensive Unit, Semantic, Redaction, Action SHA Manifest, and Recursive Lock Tests."""
+"""Comprehensive Unit, Semantic, Redaction, Action SHA Manifest, and Validation Workflow Tests."""
 
 import re
 import subprocess
@@ -17,12 +17,12 @@ ALLOWED_ACTION_SHAS = {
     "google-github-actions/auth": "71f986410dfbc7added4569d411d040a91dc6935",
     "google-github-actions/setup-gcloud": "77e7a554d41e2ee56fc945c52dfd3f33d12def9a",
     "actions/github-script": "60a0d83039c74a4aee543508d2ffcb1c3799cdea",
-    "actions/setup-python": "0b58c1de1358c17001f26005565067eefe7f8aaf",
 }
 
 FORBIDDEN_INVALID_SHAS = {
     "6fc46f2b8ec9721d0282b89a87d096ef14abcf8e",
     "6189d56e4096ee891640bb02ac264be376592d63",
+    "0b58c1de1358c17001f26005565067eefe7f8aaf",
 }
 
 TARGET_WORKFLOW_FILES = [
@@ -153,14 +153,21 @@ def test_workflow_validate_migration_lock_semantic_scanner():
     assert "push:" not in content
     assert "pull_request:" not in content
 
+    # Runner must be explicit ubuntu-24.04
+    assert "runs-on: ubuntu-24.04" in content
+
     # Permissions must be contents: read ONLY
     assert "contents: read" in content
     assert "id-token: write" not in content
 
-    # Must NOT contain GCP auth or Docker push
+    # Must NOT contain setup-python, pip upgrade pip, GCP auth, or Docker push
+    assert "actions/setup-python" not in content
+    assert "pip install --upgrade pip" not in content
     assert "google-github-actions/auth" not in content
-    assert "docker build" not in content
     assert "docker push" not in content
 
-    # Python setup must use verified SHA
-    assert "actions/setup-python@0b58c1de1358c17001f26005565067eefe7f8aaf" in content
+    # Must use exact pinned python base image container
+    assert "python:3.11-slim@sha256:00af38ae2ed311628970782e8a2d7f014d8909dbc63cb97bc0a158187f4db045" in content
+
+    # Must contain clean bash syntax for SHA check
+    assert 'if [ "${CHECKED_OUT_SHA}" != "${{ inputs.expected_commit_sha }}" ]; then' in content
