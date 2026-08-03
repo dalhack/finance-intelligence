@@ -43,7 +43,7 @@ jobs:
       - name: Ruff Check
         run: ruff check . --extend-exclude="apps/mobile/ios/Flutter/ephemeral"
       - name: Ruff Format Check
-        run: ruff format --check .
+        run: ruff format --check . --extend-exclude="apps/mobile/ios/Flutter/ephemeral"
       - name: MyPy Type Check
         run: mypy .
 
@@ -91,13 +91,10 @@ jobs:
           python-version: '3.12'
       - name: Install locked dependencies
         run: pip install -r requirements.lock
-      - name: Provision Roles & DBs
-        run: |
-          PGPASSWORD=owner_pass psql -h localhost -U db_owner -d finance_intelligence_test -c "CREATE ROLE db_bootstrap LOGIN PASSWORD 'bootstrap_pass';"
-          PGPASSWORD=owner_pass psql -h localhost -U db_owner -d finance_intelligence_test -c "CREATE ROLE db_api_user LOGIN PASSWORD 'api_pass';"
-          PGPASSWORD=owner_pass psql -h localhost -U db_owner -d finance_intelligence_test -c "CREATE ROLE db_ingestion_worker LOGIN PASSWORD 'worker_pass';"
-          PGPASSWORD=owner_pass psql -h localhost -U db_owner -d finance_intelligence_test -c "CREATE ROLE db_maintenance_worker LOGIN PASSWORD 'dev_maintenance_pass_123';"
-          PGPASSWORD=owner_pass psql -h localhost -U db_owner -d finance_intelligence_test -c "CREATE DATABASE finance_intelligence_roundtrip_test OWNER db_owner;"
+      - name: Provision Roles via Canonical Single Source Script
+        run: python scripts/provision_ci_roles.py --target-url "postgresql://db_owner:owner_pass@localhost:5432/finance_intelligence_test"
+      - name: Provision Test Database
+        run: PGPASSWORD=owner_pass psql -h localhost -U db_owner -d finance_intelligence_test -c "CREATE DATABASE finance_intelligence_roundtrip_test OWNER db_owner;" || true
       - name: Run Alembic Upgrade
         env:
           DATABASE_URL: "postgresql+asyncpg://db_owner:owner_pass@localhost:5432/finance_intelligence_test"
@@ -182,6 +179,8 @@ jobs:
           python-version: '3.12'
       - name: Install locked dependencies
         run: pip install -r requirements.lock
+      - name: Provision Roles via Canonical Single Source Script
+        run: python scripts/provision_ci_roles.py --target-url "postgresql://db_owner:owner_pass@localhost:5433/finance_intelligence_roundtrip"
       - name: Run Migration Upgrade, Revision Check, and Roundtrip
         env:
           DATABASE_URL: "postgresql+asyncpg://db_owner:owner_pass@localhost:5433/finance_intelligence_roundtrip"
@@ -217,12 +216,8 @@ jobs:
           python-version: '3.12'
       - name: Install locked dependencies
         run: pip install -r requirements.lock
-      - name: Provision Roles & DBs
-        run: |
-          PGPASSWORD=owner_pass psql -h localhost -U db_owner -d finance_intelligence_test -c "CREATE ROLE db_bootstrap LOGIN PASSWORD 'bootstrap_pass';"
-          PGPASSWORD=owner_pass psql -h localhost -U db_owner -d finance_intelligence_test -c "CREATE ROLE db_api_user LOGIN PASSWORD 'api_pass';"
-          PGPASSWORD=owner_pass psql -h localhost -U db_owner -d finance_intelligence_test -c "CREATE ROLE db_ingestion_worker LOGIN PASSWORD 'worker_pass';"
-          PGPASSWORD=owner_pass psql -h localhost -U db_owner -d finance_intelligence_test -c "CREATE ROLE db_maintenance_worker LOGIN PASSWORD 'dev_maintenance_pass_123';"
+      - name: Provision Roles via Canonical Single Source Script
+        run: python scripts/provision_ci_roles.py --target-url "postgresql://db_owner:owner_pass@localhost:5432/finance_intelligence_test"
       - name: Run Alembic Upgrade
         env:
           DATABASE_URL: "postgresql+asyncpg://db_owner:owner_pass@localhost:5432/finance_intelligence_test"

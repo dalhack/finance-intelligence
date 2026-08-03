@@ -20,7 +20,7 @@ def validate_workflow_semantics(raw_content: str) -> None:
     assert "pull_request:" not in on_block, "CRITICAL: pull_request trigger is forbidden in ci.yml!"
     assert "workflow_dispatch:" in on_block, "CRITICAL: workflow_dispatch must be present!"
 
-    # 2. Reject echo placeholders and hardcoded skips=0
+    # 2. Reject echo placeholders, hardcoded skips=0, and duplicated inline CREATE ROLE statements
     forbidden_patterns = [
         'echo "Migration catalog verified."',
         'echo "Security catalog verified."',
@@ -29,6 +29,8 @@ def validate_workflow_semantics(raw_content: str) -> None:
         'xcrun simctl boot "$SIMULATOR_UDID" || true',
         'xcrun simctl boot "$UDID" || true',
         'grep "iPhone 15"',
+        'psql -h localhost -U db_owner -d finance_intelligence_test -c "CREATE ROLE',
+        'psql -h localhost -p 5433 -U db_owner -d finance_intelligence_roundtrip -c "CREATE ROLE',
     ]
     for ph in forbidden_patterns:
         assert ph not in raw_content, f"CRITICAL: Forbidden pattern detected: {ph}"
@@ -39,25 +41,25 @@ def validate_workflow_semantics(raw_content: str) -> None:
     # 4. Require requirements.lock in Python steps
     assert "pip install -r requirements.lock" in raw_content, "CRITICAL: Python steps must install from requirements.lock!"
 
-    # 5. Require early UDID persistence to GITHUB_ENV
+    # 5. Require single canonical Python role provisioning tool across postgres jobs
+    assert raw_content.count("python scripts/provision_ci_roles.py") >= 3, "CRITICAL: All postgres jobs must execute python scripts/provision_ci_roles.py!"
+
+    # 6. Require early UDID persistence to GITHUB_ENV
     assert 'SIMULATOR_UDID=$SIM_UDID" >> "$GITHUB_ENV"' in raw_content or 'echo "SIMULATOR_UDID=' in raw_content
 
-    # 6. Require genuine iOS build and Runner executable artifact checks
+    # 7. Require genuine iOS build and Runner executable artifact checks
     assert "flutter build ios --simulator --no-codesign" in raw_content
     assert "test -d build/ios/iphonesimulator/Runner.app" in raw_content
     assert "test -f build/ios/iphonesimulator/Runner.app/Runner" in raw_content
     assert "shasum -a 256" in raw_content
 
-    # 7. Require fail-closed boot and explicit device target
+    # 8. Require fail-closed boot and explicit device target
     assert 'xcrun simctl boot "$SIMULATOR_UDID"' in raw_content
     assert 'xcrun simctl bootstatus "$SIMULATOR_UDID" -b' in raw_content
     assert 'flutter test integration_test/device_e2e_test.dart -d "$SIMULATOR_UDID"' in raw_content
 
-    # 8. Require cleanup teardown checking SIMULATOR_UDID
+    # 9. Require cleanup teardown checking SIMULATOR_UDID
     assert 'if [ -n "$SIMULATOR_UDID" ]; then' in raw_content
-
-    # 9. Require db_app_user NOLOGIN compatibility role in CI database provisioning
-    assert "db_app_user NOLOGIN" in raw_content
 
 
 def test_gitignore_containment_and_repository_completeness():
@@ -150,3 +152,11 @@ def test_negative_scanner_fixtures():
     bad_fixture_6 = valid_content.replace('if [ -n "$SIMULATOR_UDID" ]; then', 'if true; then')
     with pytest.raises(AssertionError):
         validate_workflow_semantics(bad_fixture_6)
+
+    # Negative Fixture 7: Duplicated inline CREATE ROLE statements
+    bad_fixture_7 = valid_content.replace(
+        'python scripts/provision_ci_roles.py --target-url "postgresql://db_owner:owner_pass@localhost:5432/finance_intelligence_test"',
+        'psql -h localhost -U db_owner -d finance_intelligence_test -c "CREATE ROLE db_app_user ..."'
+    )
+    with pytest.raises(AssertionError):
+        validate_workflow_semantics(bad_fixture_7)
