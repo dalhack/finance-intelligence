@@ -1,4 +1,4 @@
-"""Comprehensive Unit, Semantic, Redaction, Action SHA Manifest, and Diagnostic Tests."""
+"""Comprehensive Unit, Semantic, Redaction, Action SHA Manifest, and Hash Provenance Tests."""
 
 import re
 import subprocess
@@ -29,6 +29,8 @@ TARGET_WORKFLOW_FILES = [
     "diagnose-staging-oidc.yml",
     "verify-staging-wif.yml",
 ]
+
+SQLALCHEMY_TARGET_WHEEL_HASH = "2196208432deebdfe3b22185d46b08f00ac9d7b01284e168c212919891289396"
 
 
 def test_redact_sensitive_string_comprehensive():
@@ -73,16 +75,22 @@ def test_dockerfile_migration_hash_enforcement_and_digest():
     assert "USER 10001:10001" in content
 
 
-def test_requirements_lock_hash_enforcement_and_greenlet():
+def test_requirements_lock_sqlalchemy_wheel_hash_provenance_and_ownership():
     lock_path = API_DIR / "requirements-migration.lock"
     assert lock_path.exists()
     content = lock_path.read_text()
 
-    # Lock file must contain greenlet== entry for linux/amd64 SQLAlchemy transitive dependency
-    assert "greenlet==" in content
-    # Must contain multiple --hash=sha256: entries
-    hashes = re.findall(r"--hash=sha256:[a-f0-9]{64}", content)
-    assert len(hashes) > 30, f"Expected >30 SHA-256 hashes, found {len(hashes)}"
+    # Extract SQLAlchemy block
+    sqla_match = re.search(r"SQLAlchemy==2\.0\.31\s*\\?\n((?:\s*--hash=sha256:[a-f0-9]{64}\s*\\?\n?)+)", content)
+    assert sqla_match, "SQLAlchemy==2.0.31 entry missing from lock file"
+    sqla_hashes = sqla_match.group(1)
+    assert SQLALCHEMY_TARGET_WHEEL_HASH in sqla_hashes, f"SQLAlchemy target wheel hash {SQLALCHEMY_TARGET_WHEEL_HASH} missing from SQLAlchemy entry!"
+
+    # Extract greenlet block and verify SQLALCHEMY_TARGET_WHEEL_HASH is NOT owned by greenlet
+    greenlet_match = re.search(r"greenlet==3\.0\.3\s*\\?\n((?:\s*--hash=sha256:[a-f0-9]{64}\s*\\?\n?)+)", content)
+    assert greenlet_match, "greenlet==3.0.3 entry missing from lock file"
+    greenlet_hashes = greenlet_match.group(1)
+    assert SQLALCHEMY_TARGET_WHEEL_HASH not in greenlet_hashes, f"Hash {SQLALCHEMY_TARGET_WHEEL_HASH} incorrectly assigned to greenlet!"
 
 
 def test_action_pin_manifest_parity_and_negative_fixtures():
