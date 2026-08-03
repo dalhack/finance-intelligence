@@ -1,0 +1,13 @@
+# Exact locked dependencies for Finance Intelligence Migration Runner
+alembic==1.18.5
+SQLAlchemy==2.0.51
+psycopg2-binary==2.9.12
+asyncpg==0.31.0
+pydantic==2.13.4
+pydantic-settings==2.14.2
+Mako==1.3.12
+MarkupSafe==3.0.3
+python-dotenv==1.2.2
+cloudsql-python-connector[pg8000]==1.18.0
+google-cloud-secretmanager==2.24.0
+pg8000==1.31.5

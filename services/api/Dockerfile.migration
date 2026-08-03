@@ -1,0 +1,31 @@
+# FINANCE INTELLIGENCE MIGRATION RUNNER CONTAINER IMAGE
+# Target Architecture: linux/amd64
+# Base Image Digest: python:3.11-slim@sha256:00af38ae2ed311628970782e8a2d7f014d8909dbc63cb97bc0a158187f4db045
+FROM python:3.11-slim@sha256:00af38ae2ed311628970782e8a2d7f014d8909dbc63cb97bc0a158187f4db045
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONPATH=/app/services/api \
+    HOME=/tmp
+
+# Create non-root runtime user
+RUN groupadd -g 10001 appgroup && \
+    useradd -u 10001 -g appgroup -s /bin/false -d /tmp appuser
+
+WORKDIR /app
+
+# Install pinned dependencies
+COPY services/api/requirements-migration.lock /app/requirements-migration.lock
+RUN pip install --no-cache-dir -r /app/requirements-migration.lock
+
+# Copy migration configuration, scripts, and application files
+COPY services/api/alembic.ini /app/services/api/alembic.ini
+COPY services/api/alembic /app/services/api/alembic
+COPY services/api/app /app/services/api/app
+
+# Switch to non-root user
+USER 10001:10001
+
+# Default fail-closed entrypoint
+ENTRYPOINT ["python", "-m", "app.migration_entrypoint"]
