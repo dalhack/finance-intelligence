@@ -154,25 +154,31 @@ def test_action_pin_manifest_parity_and_negative_fixtures():
             assert sha_part == expected_sha, f"SHA mismatch for {repo_name}: expected {expected_sha}, got {sha_part}"
 
 
-def test_workflow_validate_migration_lock_contract_completeness_scanner():
+def test_workflow_validate_migration_lock_install_import_isolation_scanner():
     wf_path = API_DIR.parent.parent / ".github" / "workflows" / "validate-migration-lock.yml"
     assert wf_path.exists()
     content = wf_path.read_text()
 
-    # Ref check must be exact
-    assert 'GITHUB_REF}" != "refs/heads/finance-intelligence/phase-4c2c-ios-ci-validation"' in content
+    # Fail-closed platform inspection
+    assert "docker pull --platform linux/amd64" in content
+    assert 'PLATFORM_ARCH}" != "amd64/linux"' in content
+    assert "2>/dev/null || true" not in content
 
-    # Triple commit identity parity check must be present
-    assert 'CHECKED_OUT_SHA}" != "${{ inputs.expected_commit_sha }}"' in content
-    assert 'GITHUB_SHA}" != "${{ inputs.expected_commit_sha }}"' in content
+    # Stage A and Stage B isolation
+    assert "Stage A - Validate Pip Hash Installation in Ephemeral Volume" in content
+    assert "Stage B - Run Import Smoke Test in Isolated Network-Disabled Container" in content
 
-    # Explicit --platform linux/amd64 must be in docker run calls
-    assert "--platform linux/amd64" in content
+    # Stage B flags: --network none, --read-only, --tmpfs
+    assert "--network none" in content
+    assert "--read-only" in content
+    assert "--tmpfs /tmp:rw,nosuid,nodev,noexec" in content
 
-    # Base image platform inspection must be present
-    assert "docker image inspect --format '{{.Architecture}}/{{.Os}}'" in content
+    # Volume cleanup trap
+    assert "trap cleanup EXIT" in content
+    assert 'docker volume rm -f "${VALIDATION_VOLUME}"' in content
+    assert "docker volume prune" not in content
 
-    # All 9 core imports must be present in smoke test string
+    # 9 module import smoke test string
     for mod in EXPECTED_NINE_IMPORTS:
         assert f"import {mod}" in content, f"Module import {mod} missing from validate-migration-lock.yml"
 

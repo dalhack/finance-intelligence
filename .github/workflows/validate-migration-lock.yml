@@ -58,31 +58,55 @@ jobs:
             exit 1
           fi
 
-      - name: Inspect Base Container Platform Architecture
+      - name: Pull Base Image and Assert Platform Architecture
         shell: bash
         run: |
           set -euo pipefail
-          PLATFORM_ARCH=$(docker image inspect --format '{{.Architecture}}/{{.Os}}' python:3.11-slim@sha256:00af38ae2ed311628970782e8a2d7f014d8909dbc63cb97bc0a158187f4db045 2>/dev/null || true)
+          docker pull --platform linux/amd64 python:3.11-slim@sha256:00af38ae2ed311628970782e8a2d7f014d8909dbc63cb97bc0a158187f4db045
+          PLATFORM_ARCH=$(docker image inspect --format '{{.Architecture}}/{{.Os}}' python:3.11-slim@sha256:00af38ae2ed311628970782e8a2d7f014d8909dbc63cb97bc0a158187f4db045)
           echo "Base Image Digest Architecture: ${PLATFORM_ARCH}"
+          if [ "${PLATFORM_ARCH}" != "amd64/linux" ]; then
+            echo "::error::Unexpected base image platform: ${PLATFORM_ARCH}"
+            exit 1
+          fi
 
-      - name: Validate Pip Hash Installation in Ephemeral Pinned Container
+      - name: Stage A - Validate Pip Hash Installation in Ephemeral Volume
         shell: bash
         run: |
           set -euo pipefail
+          VALIDATION_VOLUME="fi-migration-lock-validation-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          cleanup() {
+            docker volume rm -f "${VALIDATION_VOLUME}" >/dev/null 2>&1 || true
+          }
+          trap cleanup EXIT
+
+          docker volume create "${VALIDATION_VOLUME}" >/dev/null
+
           docker run --rm \
             --platform linux/amd64 \
             -v "${PWD}:/app:ro" \
+            -v "${VALIDATION_VOLUME}:/validation-venv" \
             --workdir /app \
             python:3.11-slim@sha256:00af38ae2ed311628970782e8a2d7f014d8909dbc63cb97bc0a158187f4db045 \
-            sh -c "python -m pip install --no-cache-dir --require-hashes -r /app/services/api/requirements-migration.lock && python -m pip check"
+            sh -c "python -m venv /validation-venv && /validation-venv/bin/python -m pip install --no-cache-dir --require-hashes -r /app/services/api/requirements-migration.lock && /validation-venv/bin/python -m pip check"
 
-      - name: Run Import Smoke Test in Network-Disabled Container
+      - name: Stage B - Run Import Smoke Test in Isolated Network-Disabled Container
         shell: bash
         run: |
           set -euo pipefail
+          VALIDATION_VOLUME="fi-migration-lock-validation-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          cleanup() {
+            docker volume rm -f "${VALIDATION_VOLUME}" >/dev/null 2>&1 || true
+          }
+          trap cleanup EXIT
+
           docker run --rm \
             --platform linux/amd64 \
+            --network none \
+            --read-only \
+            --tmpfs /tmp:rw,nosuid,nodev,noexec \
             -v "${PWD}:/app:ro" \
+            -v "${VALIDATION_VOLUME}:/validation-venv:ro" \
             --workdir /app \
             python:3.11-slim@sha256:00af38ae2ed311628970782e8a2d7f014d8909dbc63cb97bc0a158187f4db045 \
-            sh -c "python -m pip install --no-cache-dir --require-hashes -r /app/services/api/requirements-migration.lock >/dev/null 2>&1 && python -c 'import alembic; import sqlalchemy; import google.cloud.sql.connector; import google.cloud.secretmanager; import pg8000; import cryptography; import cffi; import pycparser; import scramp; print(\"[IMPORT_SMOKE_TEST] SUCCESS: All 9 core migration modules imported cleanly.\")'"
+            /validation-venv/bin/python -c "import alembic; import sqlalchemy; import google.cloud.sql.connector; import google.cloud.secretmanager; import pg8000; import cryptography; import cffi; import pycparser; import scramp; print(\"[IMPORT_SMOKE_TEST] SUCCESS: All 9 core migration modules imported cleanly.\")"
