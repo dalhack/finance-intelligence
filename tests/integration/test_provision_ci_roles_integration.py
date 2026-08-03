@@ -57,4 +57,21 @@ async def test_provision_ci_roles_live_postgres_sql_injection_and_single_quote_s
         )
         await api_conn.close()
     finally:
+        # Restore canonical role passwords so subsequent integration tests retain password parity
+        await loop.run_in_executor(
+            None,
+            lambda: subprocess.run(
+                [
+                    sys.executable,
+                    str(SCRIPT_PATH),
+                    "--target-url",
+                    "postgresql://db_owner:owner_pass@localhost:5432/finance_intelligence_test",
+                ],
+                capture_output=True,
+                text=True,
+                env=VALID_ENV,
+                cwd=REPO_ROOT,
+                check=False,
+            ),
+        )
         await conn.close()
