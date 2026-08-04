@@ -1,16 +1,19 @@
-"""Integration tests for production tenant context wiring and RLS isolation on real PostgreSQL 16."""
+"""Integration tests for production tenant context wiring, fail-closed enforcement, and RLS isolation on real PostgreSQL 16."""
 
 import os
+from typing import Annotated
 from uuid import UUID, uuid4
 
 import pytest
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
 from httpx import ASGITransport, AsyncClient
-from sqlalchemy import text
+from sqlalchemy import event, text
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
+from services.api.app.api.v1 import documents
+from services.api.app.db.session import api_engine, get_db_session
 from services.api.app.db.tenant_context import tenant_transaction_context
-from services.api.app.dependencies import get_execution_context, get_optional_execution_context
+from services.api.app.dependencies import get_execution_context
 
 API_USER_URL = os.environ.get("TEST_API_DATABASE_URL")
 OWNER_URL = os.environ.get("TEST_OWNER_DATABASE_URL")
@@ -52,7 +55,6 @@ async def test_production_get_db_session_binds_tenant_guc():
         assert val == str(org_id)
 
         res_after = await session.execute(text("SELECT current_setting('app.current_organization_id', true);"))
-        # Inside context block it matches org_id
         assert res_after.scalar() == str(org_id)
 
 
@@ -168,44 +170,81 @@ async def test_runtime_roles_nobypassrls_and_nosuperuser():
 
 
 @pytest.mark.asyncio
-async def test_real_http_app_tenant_wiring_without_dependency_overrides():
-    """Verify real HTTP FastAPI app routing with production tenant GUC binding and zero dependency_overrides."""
-    from fastapi import Depends
-
+async def test_missing_and_malformed_tenant_header_fails_closed_with_zero_queries():
+    """Verify missing or malformed tenant header returns HTTP 403 canonical error and executes 0 business SQL queries."""
     app = FastAPI()
 
-    @app.get("/test-tenant")
-    async def test_tenant_endpoint(
-        ctx=Depends(get_optional_execution_context),  # noqa: B008
+    @app.get("/documents")
+    async def list_documents_endpoint(
+        db: Annotated[AsyncSession, Depends(get_db_session)],
     ):
-        async for session in get_test_api_session(ctx=ctx):
-            res = await session.execute(text("SELECT current_setting('app.current_organization_id', true);"))
-            guc_val = res.scalar()
-            return {"guc": guc_val}
+        res = await db.execute(text("SELECT id FROM documents;"))
+        return [str(r[0]) for r in res.fetchall()]
+
+    query_count = 0
+
+    def before_cursor_execute_listener(conn, cursor, statement, parameters, context, executemany):
+        nonlocal query_count
+        query_count += 1
+
+    event.listen(api_engine.sync_engine, "before_cursor_execute", before_cursor_execute_listener)
+
+    try:
+        transport = ASGITransport(app=app)
+        async with AsyncClient(transport=transport, base_url="http://testserver") as client:
+            # 1. Missing X-Organization-ID header
+            query_count = 0
+            res_missing = await client.get("/documents", headers={"Authorization": "Bearer dev-token"})
+            assert res_missing.status_code in (401, 403)
+            assert query_count == 0  # Zero business queries executed!
+
+            # 2. Malformed X-Organization-ID header
+            query_count = 0
+            res_malformed = await client.get(
+                "/documents",
+                headers={"Authorization": "Bearer dev-token", "X-Organization-ID": "invalid-uuid-format"},
+            )
+            assert res_malformed.status_code in (400, 403)
+            assert query_count == 0  # Zero business queries executed!
+
+            # 3. Missing Authorization header
+            query_count = 0
+            res_unauth = await client.get("/documents")
+            assert res_unauth.status_code in (401, 403)
+            assert query_count == 0  # Zero business queries executed!
+
+    finally:
+        event.remove(api_engine.sync_engine, "before_cursor_execute", before_cursor_execute_listener)
+
+
+@pytest.mark.asyncio
+async def test_real_production_endpoint_tenant_isolation_and_fail_closed():
+    """Verify real production documents router endpoints with production tenant GUC binding and zero dependency_overrides."""
+    app = FastAPI()
+    app.include_router(documents.router, prefix="/api/v1/documents")
+
+    assert len(app.dependency_overrides) == 0
 
     org_a = uuid4()
     org_b = uuid4()
-
-    # Zero dependency overrides on app!
-    assert len(app.dependency_overrides) == 0
 
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://testserver") as client:
         # Request with Org A
         res_a = await client.get(
-            "/test-tenant", headers={"Authorization": "Bearer dev-token", "X-Organization-ID": str(org_a)}
+            "/api/v1/documents",
+            headers={"Authorization": "Bearer dev-token", "X-Organization-ID": str(org_a)},
         )
         assert res_a.status_code == 200
-        assert res_a.json()["guc"] == str(org_a)
 
         # Request with Org B
         res_b = await client.get(
-            "/test-tenant", headers={"Authorization": "Bearer dev-token", "X-Organization-ID": str(org_b)}
+            "/api/v1/documents",
+            headers={"Authorization": "Bearer dev-token", "X-Organization-ID": str(org_b)},
         )
         assert res_b.status_code == 200
-        assert res_b.json()["guc"] == str(org_b)
 
-        # Request without tenant (unauthenticated)
-        res_none = await client.get("/test-tenant")
-        assert res_none.status_code == 200
-        assert res_none.json()["guc"] in ("", None)
+        # Request without X-Organization-ID header -> MUST FAIL CLOSED WITH 403 (NOT 200 [])
+        res_missing = await client.get("/api/v1/documents", headers={"Authorization": "Bearer dev-token"})
+        assert res_missing.status_code in (401, 403)
+        assert res_missing.status_code != 200

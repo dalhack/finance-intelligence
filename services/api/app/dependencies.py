@@ -50,12 +50,13 @@ async def get_execution_context(
     if x_firebase_appcheck:
         await dev_app_check_verifier.verify_attestation(x_firebase_appcheck)
 
-    requested_org_uuid = DEV_SYNTHETIC_ORG_ID
-    if x_organization_id:
-        try:
-            requested_org_uuid = UUID(x_organization_id)
-        except ValueError:
-            raise MembershipRequiredException("Invalid organization ID format.")
+    if not x_organization_id:
+        raise MembershipRequiredException("Active organization ID header ('X-Organization-ID') is required.")
+
+    try:
+        requested_org_uuid = UUID(x_organization_id)
+    except ValueError:
+        raise MembershipRequiredException("Invalid organization ID format.")
 
     return ExecutionContext(
         authenticated_user_id=DEV_SYNTHETIC_USER_ID,
@@ -109,13 +110,10 @@ async def get_optional_execution_context(
 ) -> ExecutionContext | None:
     if not authorization or not authorization.startswith("Bearer "):
         return None
-    try:
-        return await get_execution_context(
-            authorization=authorization,
-            x_firebase_appcheck=x_firebase_appcheck,
-            x_organization_id=x_organization_id,
-            x_request_id=x_request_id,
-            x_correlation_id=x_correlation_id,
-        )
-    except Exception:  # noqa: BLE001
-        return None
+    return await get_execution_context(
+        authorization=authorization,
+        x_firebase_appcheck=x_firebase_appcheck,
+        x_organization_id=x_organization_id,
+        x_request_id=x_request_id,
+        x_correlation_id=x_correlation_id,
+    )

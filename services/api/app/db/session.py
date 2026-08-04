@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_asyn
 
 from services.api.app.core.config import settings
 from services.api.app.db.tenant_context import tenant_transaction_context
-from services.api.app.dependencies import get_optional_execution_context
+from services.api.app.dependencies import get_execution_context
 from services.api.app.middleware.execution_context import ExecutionContext
 
 # 1. API Role Engine & Session Factory (db_api_user)
@@ -23,11 +23,11 @@ ApiSessionLocal = async_sessionmaker(
     autoflush=False,
 )
 
-# 2. Worker Role Engine & Session Factory (db_ingestion_worker)
+# 2. Ingestion Worker Role Engine & Session Factory (db_ingestion_worker)
 worker_engine = create_async_engine(
     settings.effective_worker_database_url,
-    pool_size=settings.DATABASE_POOL_SIZE,
-    max_overflow=settings.DATABASE_MAX_OVERFLOW,
+    pool_size=10,
+    max_overflow=5,
     echo=settings.DEBUG,
 )
 
@@ -38,11 +38,11 @@ WorkerSessionLocal = async_sessionmaker(
     autoflush=False,
 )
 
-# 3. Maintenance Role Engine & Session Factory (db_maintenance_worker)
+# 3. Maintenance Worker Role Engine & Session Factory (db_maintenance_worker)
 maintenance_engine = create_async_engine(
     settings.effective_maintenance_database_url,
-    pool_size=settings.DATABASE_POOL_SIZE,
-    max_overflow=settings.DATABASE_MAX_OVERFLOW,
+    pool_size=5,
+    max_overflow=5,
     echo=settings.DEBUG,
 )
 
@@ -70,21 +70,23 @@ BootstrapSessionLocal = async_sessionmaker(
 
 
 async def get_db_session(
-    ctx: ExecutionContext | None = Depends(get_optional_execution_context),  # noqa: B008
+    ctx: ExecutionContext = Depends(get_execution_context),  # noqa: B008
 ) -> AsyncGenerator[AsyncSession, None]:
-    """Primary DB session provider for FastAPI requests using db_api_user role with transaction-local tenant GUC setting."""
+    """Primary DB session provider for FastAPI tenant requests using db_api_user role with transaction-local tenant GUC setting."""
+    async with ApiSessionLocal() as session, tenant_transaction_context(session, ctx.active_organization_id):
+        try:
+            yield session
+        finally:
+            await session.close()
+
+
+async def get_system_db_session() -> AsyncGenerator[AsyncSession, None]:
+    """System DB session provider for unauthenticated health/readiness endpoints using db_api_user role without tenant GUC."""
     async with ApiSessionLocal() as session:
-        if ctx and ctx.active_organization_id:
-            async with tenant_transaction_context(session, ctx.active_organization_id):
-                try:
-                    yield session
-                finally:
-                    await session.close()
-        else:
-            try:
-                yield session
-            finally:
-                await session.close()
+        try:
+            yield session
+        finally:
+            await session.close()
 
 
 async def get_worker_db_session() -> AsyncGenerator[AsyncSession, None]:
@@ -97,17 +99,8 @@ async def get_worker_db_session() -> AsyncGenerator[AsyncSession, None]:
 
 
 async def get_maintenance_db_session() -> AsyncGenerator[AsyncSession, None]:
-    """DB session provider for background maintenance worker using db_maintenance_worker role."""
+    """DB session provider for background maintenance scheduler using db_maintenance_worker role."""
     async with MaintenanceSessionLocal() as session:
-        try:
-            yield session
-        finally:
-            await session.close()
-
-
-async def get_bootstrap_db_session() -> AsyncGenerator[AsyncSession, None]:
-    """DB session provider for bootstrap membership initialization using db_bootstrap role."""
-    async with BootstrapSessionLocal() as session:
         try:
             yield session
         finally:

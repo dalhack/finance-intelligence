@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends, Response, status
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from services.api.app.db.session import get_db_session
+from services.api.app.db.session import get_system_db_session
 from services.api.app.schemas.common import HealthResponseDTO
 
 router = APIRouter()
@@ -19,7 +19,7 @@ async def health_check():
 @router.get("/ready")
 async def readiness_check(
     response: Response,
-    db: AsyncSession = Depends(get_db_session),  # noqa: B008
+    db: AsyncSession = Depends(get_system_db_session),  # noqa: B008
 ) -> dict[str, Any]:
     try:
         await db.execute(text("SELECT 1;"))
