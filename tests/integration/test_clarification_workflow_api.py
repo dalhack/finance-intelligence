@@ -8,7 +8,9 @@ from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 from services.api.app.db.session import get_db_session
+from services.api.app.dependencies import get_execution_context
 from services.api.app.main import app
+from services.api.app.middleware.execution_context import ExecutionContext
 from services.api.app.models.institution import Institution
 from services.api.app.models.membership import Membership
 from services.api.app.models.orchestration import AnalysisJob
@@ -27,6 +29,7 @@ async def test_clarification_full_lifecycle_and_security():
 
     org_id = uuid4()
     user_id = uuid4()
+    mem_id = uuid4()
     inst_id = uuid4()
     job_id = uuid4()
 
@@ -39,7 +42,7 @@ async def test_clarification_full_lifecycle_and_security():
 
     async with OwnerSession() as db_owner:
         await db_owner.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
-        mem = Membership(id=uuid4(), organization_id=org_id, user_id=user_id)
+        mem = Membership(id=mem_id, organization_id=org_id, user_id=user_id)
         db_owner.add(mem)
         await db_owner.commit()
 
@@ -80,7 +83,21 @@ async def test_clarification_full_lifecycle_and_security():
             await session.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
             yield session
 
+    async def override_get_execution_context():
+        return ExecutionContext(
+            authenticated_user_id=user_id,
+            active_organization_id=org_id,
+            membership_id=mem_id,
+            roles=["ANALYST"],
+            permissions=["analyses:create"],
+            request_id="req-clar-test",
+            correlation_id="corr-clar-test",
+            authentication_method="development",
+            environment="test",
+        )
+
     app.dependency_overrides[get_db_session] = override_get_db_session
+    app.dependency_overrides[get_execution_context] = override_get_execution_context
 
     try:
         async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
@@ -160,6 +177,7 @@ async def test_clarification_cancellation_flow():
 
     org_id = uuid4()
     user_id = uuid4()
+    mem_id = uuid4()
     job_id = uuid4()
 
     async with OwnerSession() as db_owner:
@@ -172,7 +190,7 @@ async def test_clarification_cancellation_flow():
         await db_owner.execute(
             text("SELECT set_config('app.current_organization_id', :org_id, true);"), {"org_id": str(org_id)}
         )
-        mem = Membership(id=uuid4(), organization_id=org_id, user_id=user_id)
+        mem = Membership(id=mem_id, organization_id=org_id, user_id=user_id)
         now = datetime.now(UTC)
         job = AnalysisJob(
             id=job_id,
@@ -204,7 +222,21 @@ async def test_clarification_cancellation_flow():
             await session.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
             yield session
 
+    async def override_get_execution_context():
+        return ExecutionContext(
+            authenticated_user_id=user_id,
+            active_organization_id=org_id,
+            membership_id=mem_id,
+            roles=["ANALYST"],
+            permissions=["analyses:create"],
+            request_id="req-clar-cancel",
+            correlation_id="corr-clar-cancel",
+            authentication_method="development",
+            environment="test",
+        )
+
     app.dependency_overrides[get_db_session] = override_get_db_session
+    app.dependency_overrides[get_execution_context] = override_get_execution_context
 
     try:
         async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:

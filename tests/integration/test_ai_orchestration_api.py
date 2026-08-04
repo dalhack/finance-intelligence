@@ -7,7 +7,9 @@ from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 from services.api.app.db.session import get_db_session
+from services.api.app.dependencies import get_execution_context
 from services.api.app.main import app
+from services.api.app.middleware.execution_context import ExecutionContext
 from services.api.app.models.membership import Membership
 from services.api.app.models.organization import Organization
 from services.api.app.models.user import User
@@ -23,6 +25,7 @@ async def test_create_and_get_analysis_job():
 
     org_id = uuid4()
     user_id = uuid4()
+    mem_id = uuid4()
 
     async with OwnerSession() as db_owner:
         org = Organization(id=org_id, name="AI Org", slug=f"ai-{org_id.hex[:6]}")
@@ -32,7 +35,7 @@ async def test_create_and_get_analysis_job():
 
     async with OwnerSession() as db_owner:
         await db_owner.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
-        mem = Membership(id=uuid4(), organization_id=org_id, user_id=user_id)
+        mem = Membership(id=mem_id, organization_id=org_id, user_id=user_id)
         db_owner.add(mem)
         await db_owner.commit()
 
@@ -41,7 +44,21 @@ async def test_create_and_get_analysis_job():
             await session.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
             yield session
 
+    async def override_get_execution_context():
+        return ExecutionContext(
+            authenticated_user_id=user_id,
+            active_organization_id=org_id,
+            membership_id=mem_id,
+            roles=["ANALYST"],
+            permissions=["analyses:create"],
+            request_id="req-test",
+            correlation_id="corr-test",
+            authentication_method="development",
+            environment="test",
+        )
+
     app.dependency_overrides[get_db_session] = override_get_db_session
+    app.dependency_overrides[get_execution_context] = override_get_execution_context
 
     try:
         async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
@@ -93,6 +110,7 @@ async def test_concurrent_idempotency_create_analysis():
 
     org_id = uuid4()
     user_id = uuid4()
+    mem_id = uuid4()
 
     async with OwnerSession() as db_owner:
         org = Organization(id=org_id, name="Idem Org", slug=f"idem-{org_id.hex[:6]}")
@@ -102,7 +120,7 @@ async def test_concurrent_idempotency_create_analysis():
 
     async with OwnerSession() as db_owner:
         await db_owner.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
-        mem = Membership(id=uuid4(), organization_id=org_id, user_id=user_id)
+        mem = Membership(id=mem_id, organization_id=org_id, user_id=user_id)
         db_owner.add(mem)
         await db_owner.commit()
 
@@ -111,7 +129,21 @@ async def test_concurrent_idempotency_create_analysis():
             await session.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
             yield session
 
+    async def override_get_execution_context():
+        return ExecutionContext(
+            authenticated_user_id=user_id,
+            active_organization_id=org_id,
+            membership_id=mem_id,
+            roles=["ANALYST"],
+            permissions=["analyses:create"],
+            request_id="req-test",
+            correlation_id="corr-test",
+            authentication_method="development",
+            environment="test",
+        )
+
     app.dependency_overrides[get_db_session] = override_get_db_session
+    app.dependency_overrides[get_execution_context] = override_get_execution_context
 
     try:
         async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:

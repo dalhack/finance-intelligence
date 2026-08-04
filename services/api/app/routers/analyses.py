@@ -10,6 +10,8 @@ from sqlalchemy import select, text
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from services.api.app.db.session import get_db_session
+from services.api.app.dependencies import get_execution_context
+from services.api.app.middleware.execution_context import ExecutionContext
 from services.api.app.models.orchestration import AnalysisJob
 from services.api.app.orchestration.event_engine import AnalysisEventEngine
 from services.api.app.orchestration.state_machine import AnalysisJobStatus, AnalysisStateMachine
@@ -43,36 +45,12 @@ class AnalysisJobDTO(BaseModel):
 async def create_analysis(
     req: AnalysisCreateRequest,
     x_idempotency_key: str | None = Header(None, alias="X-Idempotency-Key"),
+    ctx: ExecutionContext = Depends(get_execution_context),  # noqa: B008
     db: AsyncSession = Depends(get_db_session),  # noqa: B008
 ) -> AnalysisJobDTO:
-    org_res = await db.execute(text("SELECT current_setting('app.current_organization_id', true);"))
-    org_str = org_res.scalar()
-    if not org_str:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={
-                "error": {
-                    "code": "MISSING_TENANT_CONTEXT",
-                    "message": "Tenant context is required to create an analysis job.",
-                    "request_id": "req-api",
-                }
-            },
-        )
-    org_id = UUID(org_str)
-
-    user_res = await db.execute(text("SELECT public.get_current_user_id(:org_id);"), {"org_id": org_id})
-    user_id = user_res.scalar()
-    if not user_id:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={
-                "error": {
-                    "code": "MISSING_USER_CONTEXT",
-                    "message": "User context is required to create an analysis job.",
-                    "request_id": "req-api",
-                }
-            },
-        )
+    org_id = ctx.active_organization_id
+    user_id = ctx.authenticated_user_id
+    await db.execute(text("SELECT set_config('app.current_organization_id', :org_id, true);"), {"org_id": str(org_id)})
 
     if x_idempotency_key:
         existing_res = await db.execute(
@@ -366,24 +344,12 @@ async def get_analysis_result(
 @router.get("/{analysis_id}/clarification", response_model=AnalysisClarificationDTO)
 async def get_analysis_clarification(
     analysis_id: UUID,
+    ctx: ExecutionContext = Depends(get_execution_context),  # noqa: B008
     db: AsyncSession = Depends(get_db_session),  # noqa: B008
 ) -> AnalysisClarificationDTO:
-    org_res = await db.execute(text("SELECT current_setting('app.current_organization_id', true);"))
-    org_str = org_res.scalar()
-    if not org_str:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={"error": {"code": "MISSING_TENANT_CONTEXT", "message": "Tenant context is required."}},
-        )
-    org_id = UUID(org_str)
-
-    user_res = await db.execute(text("SELECT public.get_current_user_id(:org_id);"), {"org_id": org_id})
-    user_id = user_res.scalar()
-    if not user_id:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={"error": {"code": "MISSING_USER_CONTEXT", "message": "User context is required."}},
-        )
+    org_id = ctx.active_organization_id
+    user_id = ctx.authenticated_user_id
+    await db.execute(text("SELECT set_config('app.current_organization_id', :org_id, true);"), {"org_id": str(org_id)})
 
     service = ClarificationService(db, organization_id=org_id, user_id=user_id)
     clar = await service.get_open_clarification(analysis_id)
@@ -414,24 +380,12 @@ async def get_analysis_clarification(
 async def respond_analysis_clarification(
     analysis_id: UUID,
     body: ClarificationRespondRequestDTO,
+    ctx: ExecutionContext = Depends(get_execution_context),  # noqa: B008
     db: AsyncSession = Depends(get_db_session),  # noqa: B008
 ) -> AnalysisJobDTO:
-    org_res = await db.execute(text("SELECT current_setting('app.current_organization_id', true);"))
-    org_str = org_res.scalar()
-    if not org_str:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={"error": {"code": "MISSING_TENANT_CONTEXT", "message": "Tenant context is required."}},
-        )
-    org_id = UUID(org_str)
-
-    user_res = await db.execute(text("SELECT public.get_current_user_id(:org_id);"), {"org_id": org_id})
-    user_id = user_res.scalar()
-    if not user_id:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={"error": {"code": "MISSING_USER_CONTEXT", "message": "User context is required."}},
-        )
+    org_id = ctx.active_organization_id
+    user_id = ctx.authenticated_user_id
+    await db.execute(text("SELECT set_config('app.current_organization_id', :org_id, true);"), {"org_id": str(org_id)})
 
     service = ClarificationService(db, organization_id=org_id, user_id=user_id)
     job = await service.respond(
@@ -457,24 +411,12 @@ async def respond_analysis_clarification(
 async def cancel_analysis_clarification(
     analysis_id: UUID,
     body: ClarificationCancelRequestDTO,
+    ctx: ExecutionContext = Depends(get_execution_context),  # noqa: B008
     db: AsyncSession = Depends(get_db_session),  # noqa: B008
 ) -> AnalysisJobDTO:
-    org_res = await db.execute(text("SELECT current_setting('app.current_organization_id', true);"))
-    org_str = org_res.scalar()
-    if not org_str:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={"error": {"code": "MISSING_TENANT_CONTEXT", "message": "Tenant context is required."}},
-        )
-    org_id = UUID(org_str)
-
-    user_res = await db.execute(text("SELECT public.get_current_user_id(:org_id);"), {"org_id": org_id})
-    user_id = user_res.scalar()
-    if not user_id:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail={"error": {"code": "MISSING_USER_CONTEXT", "message": "User context is required."}},
-        )
+    org_id = ctx.active_organization_id
+    user_id = ctx.authenticated_user_id
+    await db.execute(text("SELECT set_config('app.current_organization_id', :org_id, true);"), {"org_id": str(org_id)})
 
     service = ClarificationService(db, organization_id=org_id, user_id=user_id)
     job = await service.cancel(

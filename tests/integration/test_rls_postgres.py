@@ -46,6 +46,7 @@ async def test_migration_applies_cleanly():
         "025_distributed_provider_circuit_breaker",
         "026_public_schema_acl_hardening",
         "027_auth_context_lookup_security_plane",
+        "028_remove_organization_only_actor_lookup",
     ]
 
 

@@ -57,7 +57,7 @@ async def test_migration_upgrade_downgrade_roundtrip():
         assert "postgresql" not in str(exc_info.value).lower()
         assert "owner_pass" not in str(exc_info.value).lower()
 
-    # 2. Upgrade to head (027)
+    # 2. Upgrade to head (028)
     run_alembic_cmd("upgrade", "head")
 
     conn1 = await asyncpg.connect(RAW_ROUNDTRIP_URL)
@@ -69,35 +69,45 @@ async def test_migration_upgrade_downgrade_roundtrip():
 
     final_rev = await conn1.fetchrow("SELECT version_num FROM alembic_version;")
     assert final_rev is not None
-    assert final_rev["version_num"] == "027_auth_context_lookup_security_plane"
+    assert final_rev["version_num"] == "028_remove_organization_only_actor_lookup"
+
+    helper_exists_028 = await conn1.fetchval(
+        "SELECT EXISTS(SELECT 1 FROM pg_proc WHERE proname = 'get_current_user_id');"
+    )
+    assert helper_exists_028 is False
     await conn1.close()
 
-    # 3. Roundtrip downgrade 027 -> 026
-    run_alembic_cmd("downgrade", "026_public_schema_acl_hardening")
+    # 3. Roundtrip downgrade 028 -> 027
+    run_alembic_cmd("downgrade", "027_auth_context_lookup_security_plane")
 
     conn2 = await asyncpg.connect(RAW_ROUNDTRIP_URL)
     downgrade_rev = await conn2.fetchrow("SELECT version_num FROM alembic_version;")
     assert downgrade_rev is not None
-    assert downgrade_rev["version_num"] == "026_public_schema_acl_hardening"
+    assert downgrade_rev["version_num"] == "027_auth_context_lookup_security_plane"
 
-    func_exists_026 = await conn2.fetchval(
-        "SELECT EXISTS(SELECT 1 FROM pg_proc WHERE proname = 'resolve_auth_context');"
+    helper_exists_027 = await conn2.fetchval(
+        "SELECT EXISTS(SELECT 1 FROM pg_proc WHERE proname = 'get_current_user_id');"
     )
-    assert func_exists_026 is False
+    assert helper_exists_027 is True
     await conn2.close()
 
-    # 4. Re-upgrade 026 -> 027
+    # 4. Re-upgrade 027 -> 028
     run_alembic_cmd("upgrade", "head")
 
     conn3 = await asyncpg.connect(RAW_ROUNDTRIP_URL)
     re_up_rev = await conn3.fetchrow("SELECT version_num FROM alembic_version;")
     assert re_up_rev is not None
-    assert re_up_rev["version_num"] == "027_auth_context_lookup_security_plane"
+    assert re_up_rev["version_num"] == "028_remove_organization_only_actor_lookup"
 
-    func_exists_027 = await conn3.fetchval(
+    helper_exists_028_again = await conn3.fetchval(
+        "SELECT EXISTS(SELECT 1 FROM pg_proc WHERE proname = 'get_current_user_id');"
+    )
+    assert helper_exists_028_again is False
+
+    func_exists_028 = await conn3.fetchval(
         "SELECT EXISTS(SELECT 1 FROM pg_proc WHERE proname = 'resolve_auth_context');"
     )
-    assert func_exists_027 is True
+    assert func_exists_028 is True
 
     # 5. Verify ACL Privileges for resolve_auth_context
     has_api_exec = await conn3.fetchval(

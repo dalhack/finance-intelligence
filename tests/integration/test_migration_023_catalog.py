@@ -22,6 +22,7 @@ async def test_migration_023_catalog_and_security():
             "025_distributed_provider_circuit_breaker",
             "026_public_schema_acl_hardening",
             "027_auth_context_lookup_security_plane",
+            "028_remove_organization_only_actor_lookup",
         ]
 
         # 2. Verify RLS & FORCE RLS attributes on analysis_clarifications
