@@ -51,6 +51,8 @@ def obtain_staging_firebase_id_token() -> tuple[str, str]:
         return id_token, uid
 
 
+@pytest.mark.integration
+@pytest.mark.live_acceptance
 @pytest.mark.asyncio
 async def test_live_firebase_authentication_and_auth_context_resolution():
     """Live acceptance test: real signed Firebase token -> production verifier -> resolve_auth_context -> ExecutionContext."""

@@ -183,6 +183,12 @@ class Settings(BaseSettings):
                 raise ValueError(
                     "CRITICAL SECURITY VIOLATION: PSEUDONYMIZATION_SALT must be configured to a non-default secret in production/staging."
                 )
+            if not self.FIREBASE_PROJECT_ID or not self.FIREBASE_PROJECT_ID.strip():
+                raise ValueError(
+                    "CRITICAL SECURITY VIOLATION: FIREBASE_PROJECT_ID must be explicitly provided in production/staging."
+                )
+            if "travel-mapper" in self.FIREBASE_PROJECT_ID.lower():
+                raise ValueError("CRITICAL SECURITY VIOLATION: Prohibited project ID cannot be configured.")
 
             # Strict Production Role Isolation Verification
             if not self.API_DATABASE_URL:

@@ -45,6 +45,7 @@ markers = [
     "unit: Unit tests",
     "contract: Wire contract tests",
     "integration: PostgreSQL & RLS integration tests",
+    "live_acceptance: Live acceptance tests requiring external GCP/Firebase credentials",
 ]
 
 [tool.ruff]

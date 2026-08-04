@@ -47,41 +47,60 @@ class DevelopmentAppAttestationVerifier:
         return bool(attestation_token and attestation_token != "invalid")
 
 
-_firebase_app_initialized = False
+import threading
+from typing import Any
+
+_firebase_init_lock = threading.Lock()
 
 
-def _initialize_firebase_app(project_id: str | None = None) -> None:
-    global _firebase_app_initialized
-    if not _firebase_app_initialized:
-        pid = project_id or settings.FIREBASE_PROJECT_ID or "finance-intel-staging-8f2a"
+def get_or_create_firebase_app(project_id: str) -> Any:
+    """Thread-safe, project-aware named Firebase app initializer and retriever."""
+    if not project_id or not isinstance(project_id, str):
+        raise InvalidCredentialsException("FIREBASE_PROJECT_ID must be a non-empty string.")
+
+    with _firebase_init_lock:
+        import firebase_admin
+        from firebase_admin import credentials
+
+        app_name = f"app-{project_id}"
         try:
-            import firebase_admin
-            from firebase_admin import credentials
-
-            try:
-                firebase_admin.get_app()
-            except ValueError:
-                cred = credentials.ApplicationDefault()
-                firebase_admin.initialize_app(cred, {"projectId": pid})
-        except Exception as e:  # noqa: BLE001
-            # App already initialized or ADC unavailable in dev mode
-            _ = e
-        _firebase_app_initialized = True
+            return firebase_admin.get_app(name=app_name)
+        except ValueError:
+            cred = credentials.ApplicationDefault()
+            return firebase_admin.initialize_app(cred, options={"projectId": project_id}, name=app_name)
 
 
 class FirebaseIdentityVerifier:
     def __init__(self, expected_project_id: str | None = None):
-        self.expected_project_id = expected_project_id or settings.FIREBASE_PROJECT_ID or "finance-intel-staging-8f2a"
-        _initialize_firebase_app(self.expected_project_id)
+        pid = expected_project_id or settings.FIREBASE_PROJECT_ID
+        if not pid or not pid.strip():
+            if not settings.is_development:
+                raise ValueError(
+                    "CRITICAL SECURITY VIOLATION: FIREBASE_PROJECT_ID must be explicitly configured in staging/production."
+                )
+            pid = "finance-intel-staging-8f2a"
+        if "travel-mapper" in pid.lower():
+            raise InvalidCredentialsException("Prohibited project ID cannot be configured.")
+
+        self.expected_project_id = pid
+        try:
+            self.app = get_or_create_firebase_app(self.expected_project_id)
+        except Exception as e:  # noqa: BLE001
+            # Wrap initialization failure cleanly
+            self.app = None
+            self.init_error = e
 
     async def verify_token(self, token: str) -> AuthenticatedIdentity:
         if not token or not isinstance(token, str):
             raise InvalidCredentialsException("Bearer token required.")
 
+        if getattr(self, "app", None) is None:
+            raise InvalidCredentialsException("Firebase authentication app is not configured or initialized.")
+
         try:
             from firebase_admin import auth
 
-            decoded = auth.verify_id_token(token, check_revoked=False)
+            decoded = auth.verify_id_token(token, app=self.app, check_revoked=False)
         except Exception as e:
             err_type = type(e).__name__
             if "Expired" in err_type or "expired" in str(e).lower():
