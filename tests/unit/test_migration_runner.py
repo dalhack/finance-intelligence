@@ -1,9 +1,11 @@
-"""Comprehensive Unit, Semantic, Redaction, Action SHA Manifest, and Validation Workflow Lifecycle Tests."""
+"""Comprehensive Unit, Semantic, Redaction, Action SHA Manifest, PEP 440, and Validation Workflow Contract Tests."""
 
 import re
 import subprocess
 import sys
 from pathlib import Path
+from packaging.specifiers import SpecifierSet
+from packaging.version import Version
 
 # Ensure services/api is in sys.path
 API_DIR = Path(__file__).resolve().parent.parent.parent / "services" / "api"
@@ -37,6 +39,7 @@ SQLALCHEMY_TARGET_WHEEL_HASH = "2196208432deebdfe3b22185d46b08f00ac9d7b01284e168
 FORBIDDEN_LOCK_PACKAGES = [
     "google-cloud-secret-manager-v1",
     "scamper",
+    "grpc-google-iam-v1==0.13.1",
 ]
 
 EXPECTED_NINE_IMPORTS = [
@@ -110,9 +113,30 @@ def test_requirements_lock_recursive_closure_cryptography_cffi_pycparser():
         "pycparser==2.22",
         "scramp==1.4.5",
         "python-dateutil==2.9.0.post0",
+        "grpc-google-iam-v1==0.12.7",
     ]
     for pin in required_pins:
         assert pin in content, f"Required recursive closure pin {pin} missing from lock file!"
+
+
+def test_pep440_specifier_evaluation_and_rejection_fixtures():
+    spec = SpecifierSet(">=0.12.3,<0.13dev")
+
+    # Reject upper bound and prerelease violations
+    rejected_candidates = ["0.13.1", "0.13.0", "0.13.0rc1", "0.13.1rc0", "0.14.0"]
+    for cand in rejected_candidates:
+        assert Version(cand) not in spec, f"Candidate {cand} incorrectly accepted by specifier {spec}!"
+
+    # Accept valid in-range releases
+    allowed_candidates = ["0.12.3", "0.12.4", "0.12.6", "0.12.7"]
+    for cand in allowed_candidates:
+        assert Version(cand) in spec, f"Candidate {cand} incorrectly rejected by specifier {spec}!"
+
+    # Verify lock file has exact compatible pin 0.12.7
+    lock_path = API_DIR / "requirements-migration.lock"
+    content = lock_path.read_text()
+    assert "grpc-google-iam-v1==0.12.7" in content
+    assert "grpc-google-iam-v1==0.13.1" not in content
 
 
 def test_requirements_lock_sqlalchemy_wheel_hash_provenance_and_ownership():
