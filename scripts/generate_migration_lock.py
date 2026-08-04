@@ -1,165 +1,317 @@
 #!/usr/bin/env python3
-"""Authoritative Recursive Migration Dependency Lock Generator with PEP 440 Specifier Enforcement.
+"""Generate a Linux AMD64 migration lock with uv's PEP 440 resolver."""
 
-Reads direct dependency authority from services/api/requirements-migration.in,
-computes the full recursive dependency closure, validates specifier constraints using packaging.specifiers,
-fetches PyPI metadata for all releases, and writes services/api/requirements-migration.lock.
-
-FAILS CLOSED IMMEDIATELY (exit code 1) on HTTP 404, PEP 440 constraint violation, or unpinned dependencies.
-"""
+from __future__ import annotations
 
 import json
+import re
+import shutil
+import subprocess
 import sys
+import tempfile
 import urllib.error
 import urllib.request
+from dataclasses import dataclass
 from pathlib import Path
-from packaging.specifiers import SpecifierSet
+from typing import cast
+
+from packaging.markers import default_environment
+from packaging.requirements import Requirement
+from packaging.tags import compatible_tags, cpython_tags
+from packaging.utils import canonicalize_name, parse_wheel_filename
 from packaging.version import Version
 
-# Direct dependency input authority file
 REQUIREMENTS_IN_NAME = "requirements-migration.in"
+UV_VERSION = "0.12.1"
+TARGET_PYTHON_VERSION = "3.11"
+TARGET_UV_PLATFORM = "x86_64-manylinux_2_36"
+TARGET_ABI = "cp311"
+RESOLUTION_CUTOFF = "2026-08-04T00:00:00Z"
 
-# Authoritative full recursive dependency graph closure for Python 3.11 linux/amd64
-# Starting from requirements-migration.in direct dependencies:
-# alembic==1.13.2, SQLAlchemy==2.0.31, cloud-sql-python-connector[pg8000]==1.9.2,
-# google-cloud-secret-manager==2.9.2, pydantic-settings==2.3.4
-RECURSIVE_DEPENDENCY_CLOSURE = [
-    ("alembic", "1.13.2"),
-    ("SQLAlchemy", "2.0.31"),
-    ("greenlet", "3.0.3"),
-    ("cloud-sql-python-connector", "1.9.2"),
-    ("cryptography", "42.0.0"),
-    ("cffi", "1.16.0"),
-    ("pycparser", "2.22"),
-    ("google-cloud-secret-manager", "2.9.2"),
-    ("pydantic-settings", "2.3.4"),
-    ("Mako", "1.3.5"),
-    ("typing_extensions", "4.12.2"),
-    ("aiohttp", "3.9.5"),
-    ("google-api-core", "2.19.1"),
-    ("google-auth", "2.32.0"),
-    ("requests", "2.32.3"),
-    ("pg8000", "1.31.2"),
-    ("scramp", "1.4.5"),
-    ("python-dateutil", "2.9.0.post0"),
-    ("six", "1.16.0"),
-    ("asn1crypto", "1.5.1"),
-    ("grpc-google-iam-v1", "0.12.7"),  # Resolved via PEP 440 constraint >=0.12.3,<0.13dev
-    ("proto-plus", "1.24.0"),
-    ("protobuf", "4.25.3"),
-    ("pydantic", "2.8.2"),
-    ("python-dotenv", "1.0.1"),
-    ("attrs", "23.2.0"),
-    ("multidict", "6.0.5"),
-    ("yarl", "1.9.4"),
-    ("frozenlist", "1.4.1"),
-    ("aiosignal", "1.3.1"),
-    ("googleapis-common-protos", "1.63.2"),
-    ("cachetools", "5.4.0"),
-    ("pyasn1-modules", "0.4.0"),
-    ("rsa", "4.9"),
-    ("charset-normalizer", "3.3.2"),
-    ("idna", "3.7"),
-    ("urllib3", "2.2.2"),
-    ("certifi", "2024.7.4"),
-    ("grpcio", "1.64.1"),
-    ("grpcio-status", "1.64.1"),
-    ("pydantic_core", "2.20.1"),
-    ("annotated-types", "0.7.0"),
-    ("pyasn1", "0.6.0"),
-]
+FORBIDDEN_PACKAGES = {"google-cloud-secret-manager-v1", "scamper"}
 
-# Mandatory parent specifier rules for verification
-PARENT_SPECIFIERS = {
-    "grpc-google-iam-v1": [
-        ("google-cloud-secret-manager==2.9.2", ">=0.12.3,<0.13dev"),
+
+@dataclass(frozen=True)
+class ResolvedPackage:
+    name: str
+    version: str
+    hashes: tuple[str, ...]
+    target_artifacts: tuple[str, ...]
+    requires_dist: tuple[str, ...]
+    requested: bool
+
+    @property
+    def canonical_name(self) -> str:
+        return canonicalize_name(self.name)
+
+
+def _target_marker_environment() -> dict[str, str]:
+    environment = default_environment()
+    environment.update(
+        {
+            "implementation_name": "cpython",
+            "platform_machine": "x86_64",
+            "platform_python_implementation": "CPython",
+            "python_full_version": "3.11.0",
+            "python_version": TARGET_PYTHON_VERSION,
+            "sys_platform": "linux",
+        }
+    )
+    return cast(dict[str, str], environment)
+
+
+def _target_tags() -> frozenset:
+    platforms = [f"manylinux_2_{minor}_x86_64" for minor in range(36, 16, -1)]
+    platforms.extend(["manylinux2014_x86_64", "manylinux2010_x86_64", "manylinux1_x86_64"])
+    return frozenset(
+        list(cpython_tags((3, 11), abis=["cp311", "abi3", "none"], platforms=platforms))
+        + list(compatible_tags((3, 11), interpreter="cp311", platforms=platforms))
+    )
+
+
+def _uv_executable() -> str:
+    executable = shutil.which("uv")
+    if executable is None:
+        candidate = Path(sys.executable).with_name("uv")
+        if candidate.exists():
+            executable = str(candidate)
+    if executable is None:
+        raise RuntimeError(f"FAIL_CLOSED_UV_ERROR: uv=={UV_VERSION} is required")
+    result = subprocess.run([executable, "--version"], capture_output=True, text=True, check=False)
+    version_match = re.match(r"^uv ([0-9]+(?:\.[0-9]+){2})(?:\s|$)", result.stdout.strip())
+    if result.returncode != 0 or version_match is None or version_match.group(1) != UV_VERSION:
+        raise RuntimeError(
+            f"FAIL_CLOSED_UV_ERROR: expected uv {UV_VERSION}, got {result.stdout.strip() or result.stderr.strip()}"
+        )
+    return executable
+
+
+def _compile_lock(requirements_path: Path, output_path: Path) -> None:
+    command = [
+        _uv_executable(),
+        "pip",
+        "compile",
+        str(requirements_path),
+        "--python-version",
+        TARGET_PYTHON_VERSION,
+        "--python-platform",
+        TARGET_UV_PLATFORM,
+        "--only-binary",
+        ":all:",
+        "--generate-hashes",
+        "--exclude-newer",
+        RESOLUTION_CUTOFF,
+        "--no-header",
+        "--custom-compile-command",
+        "scripts/generate_migration_lock.py",
+        "--output-file",
+        str(output_path),
     ]
-}
-
-FORBIDDEN_PACKAGES = {
-    "google-cloud-secret-manager-v1",
-    "scamper",
-}
+    result = subprocess.run(command, capture_output=True, text=True, check=False)
+    if result.returncode != 0:
+        raise RuntimeError(f"FAIL_CLOSED_UV_RESOLUTION_ERROR: {(result.stderr or result.stdout).strip()}")
 
 
-def validate_pep440_parent_constraints(closure_dict: dict) -> None:
-    """Evaluates all locked package versions against mandatory PEP 440 parent specifiers."""
-    for pkg, rules in PARENT_SPECIFIERS.items():
-        if pkg not in closure_dict:
-            raise RuntimeError(f"FAIL_CLOSED_PEP440_ERROR: Package {pkg} missing from closure!")
-        selected_ver_str = closure_dict[pkg]
-        selected_ver = Version(selected_ver_str)
-        for parent, spec_str in rules:
-            spec = SpecifierSet(spec_str)
-            if selected_ver not in spec:
-                raise RuntimeError(
-                    f"FAIL_CLOSED_PEP440_ERROR: Package {pkg}=={selected_ver_str} violates constraint '{spec_str}' required by {parent}!"
-                )
-            print(f"PEP440 CHECK PASS: {pkg}=={selected_ver_str} satisfies '{spec_str}' required by {parent}")
+def _parse_lock(lock_path: Path) -> dict[str, tuple[str, tuple[str, ...]]]:
+    parsed: dict[str, tuple[str, tuple[str, ...]]] = {}
+    current_name: str | None = None
+    current_version: str | None = None
+    current_hashes: list[str] = []
+
+    def flush() -> None:
+        nonlocal current_name, current_version, current_hashes
+        if current_name is None or current_version is None:
+            return
+        if not current_hashes:
+            raise RuntimeError(f"FAIL_CLOSED_HASH_ERROR: {current_name}=={current_version} has no hashes")
+        canonical_name = canonicalize_name(current_name)
+        if canonical_name in parsed:
+            raise RuntimeError(f"FAIL_CLOSED_DUPLICATE_PACKAGE_ERROR: {canonical_name}")
+        parsed[canonical_name] = (current_version, tuple(sorted(set(current_hashes))))
+        current_name = None
+        current_version = None
+        current_hashes = []
+
+    for raw_line in lock_path.read_text().splitlines():
+        package_match = re.match(r"^([A-Za-z0-9_.-]+)==([^\s\\]+)", raw_line)
+        if package_match:
+            flush()
+            current_name, current_version = package_match.groups()
+            continue
+        hash_match = re.search(r"--hash=sha256:([a-f0-9]{64})", raw_line)
+        if hash_match and current_name is not None:
+            current_hashes.append(hash_match.group(1))
+    flush()
+    if not parsed:
+        raise RuntimeError("FAIL_CLOSED_LOCK_PARSE_ERROR: zero packages")
+    return parsed
 
 
-def generate_lock(api_dir: Path, output_path: Path) -> None:
-    req_in_path = api_dir / REQUIREMENTS_IN_NAME
-    if not req_in_path.exists():
-        raise RuntimeError(f"FAIL_CLOSED_LOCK_GENERATOR_ERROR: Authority file {req_in_path} missing!")
+def _direct_requirements(requirements_path: Path) -> list[Requirement]:
+    requirements: list[Requirement] = []
+    for raw_line in requirements_path.read_text().splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+        requirement = Requirement(line)
+        specs = list(requirement.specifier)
+        if len(specs) != 1 or specs[0].operator != "==" or "*" in specs[0].version:
+            raise RuntimeError(f"FAIL_CLOSED_DIRECT_PIN_ERROR: {line}")
+        requirements.append(requirement)
+    if not requirements:
+        raise RuntimeError("FAIL_CLOSED_DIRECT_PIN_ERROR: no direct requirements")
+    return requirements
 
-    req_in_text = req_in_path.read_text()
-    if "cloud-sql-python-connector[pg8000]" not in req_in_text:
-        raise RuntimeError("FAIL_CLOSED_LOCK_GENERATOR_ERROR: Missing cloud-sql-python-connector[pg8000] in requirements.in")
 
-    closure_dict = dict(RECURSIVE_DEPENDENCY_CLOSURE)
-    validate_pep440_parent_constraints(closure_dict)
+def _fetch_package(
+    canonical_name: str,
+    version: str,
+    hashes: tuple[str, ...],
+    direct_names: set[str],
+    compatible: frozenset,
+) -> ResolvedPackage:
+    url = f"https://pypi.org/pypi/{canonical_name}/{version}/json"
+    try:
+        with urllib.request.urlopen(
+            urllib.request.Request(url, headers={"User-Agent": "fi-lock-generator/2"})
+        ) as response:
+            data = json.load(response)
+    except (urllib.error.URLError, json.JSONDecodeError, OSError) as exc:
+        raise RuntimeError(f"FAIL_CLOSED_METADATA_ERROR: {canonical_name}=={version}: {exc}") from exc
 
-    header = """# Autogenerated Finance Intelligence Migration Runner Dependency Lock File
-# Direct dependencies from requirements-migration.in
-# Target Platform: linux/amd64 (Python 3.11)
-"""
-    output_blocks = [header]
-
-    for pkg, ver in RECURSIVE_DEPENDENCY_CLOSURE:
-        if pkg in FORBIDDEN_PACKAGES:
-            raise RuntimeError(f"FAIL_CLOSED_LOCK_GENERATOR_ERROR: Forbidden nonexistent package requested: {pkg}")
-
-        url = f"https://pypi.org/pypi/{pkg}/{ver}/json"
-        req = urllib.request.Request(url, headers={"User-Agent": "pypi-checker/1.0"})
-
+    release_hashes: set[str] = set()
+    target_artifacts: list[str] = []
+    for artifact in data.get("urls") or []:
+        sha256 = (artifact.get("digests") or {}).get("sha256")
+        if sha256:
+            release_hashes.add(sha256)
+        filename = artifact.get("filename", "")
+        if artifact.get("yanked", False) or not filename.endswith(".whl"):
+            continue
         try:
-            res = urllib.request.urlopen(req)
-            data = json.loads(res.read())
-        except urllib.error.HTTPError as e:
-            raise RuntimeError(f"FAIL_CLOSED_LOCK_GENERATOR_ERROR: HTTP {e.code} fetching metadata for {pkg}=={ver}")
-        except Exception as e:
-            raise RuntimeError(f"FAIL_CLOSED_LOCK_GENERATOR_ERROR: Failed fetching metadata for {pkg}=={ver}: {e}")
+            _, _, _, wheel_tags = parse_wheel_filename(filename)
+        except ValueError:
+            continue
+        if wheel_tags & compatible:
+            target_artifacts.append(filename)
 
-        urls_info = data.get("urls", [])
-        if not urls_info:
-            raise RuntimeError(f"FAIL_CLOSED_LOCK_GENERATOR_ERROR: Zero artifacts found for {pkg}=={ver}")
+    unknown_hashes = set(hashes) - release_hashes
+    if unknown_hashes:
+        raise RuntimeError(f"FAIL_CLOSED_HASH_OWNERSHIP_ERROR: {canonical_name}=={version}: {sorted(unknown_hashes)}")
+    if not target_artifacts:
+        raise RuntimeError(f"FAIL_CLOSED_TARGET_WHEEL_ERROR: {canonical_name}=={version}")
+    return ResolvedPackage(
+        name=data["info"]["name"],
+        version=version,
+        hashes=hashes,
+        target_artifacts=tuple(sorted(target_artifacts)),
+        requires_dist=tuple(data["info"].get("requires_dist") or ()),
+        requested=canonical_name in direct_names,
+    )
 
-        hashes = set()
-        for u in urls_info:
-            sha256 = u.get("digests", {}).get("sha256")
-            if not sha256 or len(sha256) != 64:
-                raise RuntimeError(f"FAIL_CLOSED_LOCK_GENERATOR_ERROR: Invalid SHA-256 for {pkg}=={ver}: {sha256}")
-            hashes.add(sha256)
 
-        sorted_hashes = sorted(list(hashes))
-        block_lines = [f"{pkg}=={ver} \\"]
-        for idx, h in enumerate(sorted_hashes):
-            sep = " \\" if idx < len(sorted_hashes) - 1 else ""
-            block_lines.append(f"    --hash=sha256:{h}{sep}")
-        output_blocks.append("\n".join(block_lines))
+def validate_dependency_graph(
+    packages: list[ResolvedPackage], direct_requirements: list[Requirement]
+) -> list[dict[str, str]]:
+    selected = {package.canonical_name: package for package in packages}
+    environment = _target_marker_environment()
+    active_extras: dict[str, set[str]] = {}
+    pending: list[tuple[str, Requirement]] = [("<direct>", req) for req in direct_requirements]
+    edges: list[dict[str, str]] = []
+    processed: set[tuple[str, str, tuple[str, ...]]] = set()
 
-    final_content = "\n".join(output_blocks) + "\n"
-    output_path.write_text(final_content)
-    print(f"SUCCESS: Generated lock file {output_path} with {len(RECURSIVE_DEPENDENCY_CLOSURE)} packages.")
+    for requirement in direct_requirements:
+        active_extras.setdefault(canonicalize_name(requirement.name), set()).update(requirement.extras)
+
+    while pending:
+        parent, requirement = pending.pop(0)
+        child_name = canonicalize_name(requirement.name)
+        contexts = (active_extras.get(parent) or {""}) if parent != "<direct>" else {""}
+        if requirement.marker and not any(
+            requirement.marker.evaluate({**environment, "extra": extra}) for extra in contexts
+        ):
+            continue
+        package = selected.get(child_name)
+        if package is None:
+            raise RuntimeError(f"FAIL_CLOSED_UNRESOLVED_EDGE_ERROR: {parent} requires {requirement}")
+        if requirement.specifier and Version(package.version) not in requirement.specifier:
+            raise RuntimeError(
+                f"FAIL_CLOSED_PEP440_ERROR: {parent} requires {requirement}, selected {package.name}=={package.version}"
+            )
+        active_extras.setdefault(child_name, set()).update(requirement.extras)
+        key = (parent, str(requirement), tuple(sorted(active_extras[child_name])))
+        if key in processed:
+            continue
+        processed.add(key)
+        edges.append(
+            {
+                "package": package.name,
+                "selected_version": package.version,
+                "required_by": parent,
+                "constraint": str(requirement.specifier) or "*",
+                "constraint_result": "PASS",
+            }
+        )
+        pending.extend((child_name, Requirement(text)) for text in package.requires_dist)
+    return edges
+
+
+def _write_manifest(packages: list[ResolvedPackage], edges: list[dict[str, str]], path: Path) -> None:
+    payload = {
+        "schemaVersion": 2,
+        "resolver": {"name": "uv", "version": UV_VERSION, "excludeNewer": RESOLUTION_CUTOFF},
+        "target": {
+            "platform": "linux/amd64",
+            "uvPlatform": TARGET_UV_PLATFORM,
+            "pythonVersion": TARGET_PYTHON_VERSION,
+            "abi": TARGET_ABI,
+        },
+        "packages": [
+            {
+                "package": package.name,
+                "version": package.version,
+                "direct": package.requested,
+                "hashes": list(package.hashes),
+                "targetArtifacts": list(package.target_artifacts),
+            }
+            for package in sorted(packages, key=lambda item: item.canonical_name)
+        ],
+        "edges": edges,
+    }
+    path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n")
+
+
+def generate_lock(api_dir: Path, output_path: Path, manifest_path: Path) -> None:
+    requirements_path = api_dir / REQUIREMENTS_IN_NAME
+    direct_requirements = _direct_requirements(requirements_path)
+    with tempfile.NamedTemporaryFile(suffix=".lock", delete=False) as temporary:
+        temporary_path = Path(temporary.name)
+    try:
+        _compile_lock(requirements_path, temporary_path)
+        parsed = _parse_lock(temporary_path)
+        direct_names = {str(canonicalize_name(requirement.name)) for requirement in direct_requirements}
+        compatible = _target_tags()
+        packages = [
+            _fetch_package(name, version, hashes, direct_names, compatible)
+            for name, (version, hashes) in sorted(parsed.items())
+        ]
+        edges = validate_dependency_graph(packages, direct_requirements)
+        output_path.write_text(temporary_path.read_text())
+        _write_manifest(packages, edges, manifest_path)
+    finally:
+        temporary_path.unlink(missing_ok=True)
+    print(f"SUCCESS: uv resolved {len(packages)} packages and validated {len(edges)} PEP 440 edges.")
 
 
 if __name__ == "__main__":
-    repo_root = Path(__file__).resolve().parent.parent
-    api_directory = repo_root / "services" / "api"
-    lock_file = api_directory / "requirements-migration.lock"
+    root = Path(__file__).resolve().parent.parent
+    api = root / "services" / "api"
     try:
-        generate_lock(api_directory, lock_file)
-    except Exception as exc:
+        generate_lock(
+            api,
+            api / "requirements-migration.lock",
+            api / "requirements-migration.manifest.json",
+        )
+    except RuntimeError as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         sys.exit(1)

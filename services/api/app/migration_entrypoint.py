@@ -5,11 +5,28 @@ Enforces CLI subcommand isolation, secret redaction, and project identity valida
 """
 
 import argparse
+import logging
 import re
 import sys
 from typing import NoReturn
 
 from app.core.migration_policy import IRREVERSIBLE_MIGRATION_POLICIES
+
+# Configure logger with stdout for INFO and stderr for ERROR
+logger = logging.getLogger("migration_runner")
+logger.setLevel(logging.INFO)
+
+stdout_handler = logging.StreamHandler(sys.stdout)
+stdout_handler.setLevel(logging.INFO)
+stdout_handler.addFilter(lambda record: record.levelno < logging.ERROR)
+stdout_handler.setFormatter(logging.Formatter("%(message)s"))
+
+stderr_handler = logging.StreamHandler(sys.stderr)
+stderr_handler.setLevel(logging.ERROR)
+stderr_handler.setFormatter(logging.Formatter("%(message)s"))
+
+logger.addHandler(stdout_handler)
+logger.addHandler(stderr_handler)
 
 
 def redact_sensitive_string(text: str) -> str:
@@ -25,9 +42,9 @@ def redact_sensitive_string(text: str) -> str:
 
 def run_preflight() -> int:
     """Validates runtime configuration and project identity in a read-only manner."""
-    print("[MIGRATION_PREFLIGHT] Validating runtime configuration...")
-    print(f"[MIGRATION_PREFLIGHT] Irreversible boundary active: {list(IRREVERSIBLE_MIGRATION_POLICIES.keys())}")
-    print("[MIGRATION_PREFLIGHT] SUCCESS - Preflight check clean.")
+    logger.info("[MIGRATION_PREFLIGHT] Validating runtime configuration...")
+    logger.info(f"[MIGRATION_PREFLIGHT] Irreversible boundary active: {list(IRREVERSIBLE_MIGRATION_POLICIES.keys())}")
+    logger.info("[MIGRATION_PREFLIGHT] SUCCESS - Preflight check clean.")
     return 0
 
 
@@ -48,14 +65,14 @@ def main() -> NoReturn:
 
     if not args.subcommand:
         parser.print_help()
-        print("\nERROR: No subcommand provided. Executing without subcommand is forbidden.", file=sys.stderr)
+        logger.error("\nERROR: No subcommand provided. Executing without subcommand is forbidden.")
         sys.exit(1)
 
     if args.subcommand == "preflight":
         exit_code = run_preflight()
         sys.exit(exit_code)
     else:
-        print(f"[MIGRATION_RUNNER] Subcommand '{args.subcommand}' requires explicit execution plane authorization.")
+        logger.error(f"[MIGRATION_RUNNER] Subcommand '{args.subcommand}' requires explicit execution plane authorization.")
         sys.exit(1)
 
 
