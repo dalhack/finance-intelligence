@@ -13,7 +13,7 @@ REQUIRED_ENV_ROLES = {
     "TEST_ROUNDTRIP_DATABASE_URL": "db_owner",
 }
 
-EXPECTED_HEAD_REVISION = "028_remove_organization_only_actor_lookup"
+EXPECTED_HEAD_REVISION = "029_analysis_authorization_policy"
 
 
 async def run_real_preflight_checks():

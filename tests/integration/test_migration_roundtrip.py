@@ -57,7 +57,7 @@ async def test_migration_upgrade_downgrade_roundtrip():
         assert "postgresql" not in str(exc_info.value).lower()
         assert "owner_pass" not in str(exc_info.value).lower()
 
-    # 2. Upgrade to head (028)
+    # 2. Upgrade to head (029)
     run_alembic_cmd("upgrade", "head")
 
     conn1 = await asyncpg.connect(RAW_ROUNDTRIP_URL)
@@ -66,48 +66,63 @@ async def test_migration_upgrade_downgrade_roundtrip():
     assert "organizations" in up_table_names
     assert "memberships" in up_table_names
     assert "documents" in up_table_names
+    assert "permissions" in up_table_names
 
     final_rev = await conn1.fetchrow("SELECT version_num FROM alembic_version;")
     assert final_rev is not None
-    assert final_rev["version_num"] == "028_remove_organization_only_actor_lookup"
+    assert final_rev["version_num"] == "029_analysis_authorization_policy"
 
-    helper_exists_028 = await conn1.fetchval(
-        "SELECT EXISTS(SELECT 1 FROM pg_proc WHERE proname = 'get_current_user_id');"
+    total_perms_029 = await conn1.fetchval("SELECT COUNT(*) FROM public.permissions;")
+    assert total_perms_029 == 17
+
+    viewer_perms_029 = await conn1.fetchval(
+        "SELECT COUNT(*) FROM public.role_permissions rp JOIN public.roles r ON r.id = rp.role_id WHERE r.name = 'VIEWER';"
     )
-    assert helper_exists_028 is False
+    assert viewer_perms_029 == 8
+
+    analyst_perms_029 = await conn1.fetchval(
+        "SELECT COUNT(*) FROM public.role_permissions rp JOIN public.roles r ON r.id = rp.role_id WHERE r.name = 'ANALYST';"
+    )
+    assert analyst_perms_029 == 15
     await conn1.close()
 
-    # 3. Roundtrip downgrade 028 -> 027
-    run_alembic_cmd("downgrade", "027_auth_context_lookup_security_plane")
+    # 3. Roundtrip downgrade 029 -> 028
+    run_alembic_cmd("downgrade", "028_remove_organization_only_actor_lookup")
 
     conn2 = await asyncpg.connect(RAW_ROUNDTRIP_URL)
     downgrade_rev = await conn2.fetchrow("SELECT version_num FROM alembic_version;")
     assert downgrade_rev is not None
-    assert downgrade_rev["version_num"] == "027_auth_context_lookup_security_plane"
+    assert downgrade_rev["version_num"] == "028_remove_organization_only_actor_lookup"
 
-    helper_exists_027 = await conn2.fetchval(
-        "SELECT EXISTS(SELECT 1 FROM pg_proc WHERE proname = 'get_current_user_id');"
+    total_perms_028 = await conn2.fetchval("SELECT COUNT(*) FROM public.permissions;")
+    assert total_perms_028 == 13
+
+    viewer_perms_028 = await conn2.fetchval(
+        "SELECT COUNT(*) FROM public.role_permissions rp JOIN public.roles r ON r.id = rp.role_id WHERE r.name = 'VIEWER';"
     )
-    assert helper_exists_027 is True
+    assert viewer_perms_028 == 7
+
+    analyst_perms_028 = await conn2.fetchval(
+        "SELECT COUNT(*) FROM public.role_permissions rp JOIN public.roles r ON r.id = rp.role_id WHERE r.name = 'ANALYST';"
+    )
+    assert analyst_perms_028 == 11
     await conn2.close()
 
-    # 4. Re-upgrade 027 -> 028
+    # 4. Re-upgrade 028 -> 029
     run_alembic_cmd("upgrade", "head")
 
     conn3 = await asyncpg.connect(RAW_ROUNDTRIP_URL)
     re_up_rev = await conn3.fetchrow("SELECT version_num FROM alembic_version;")
     assert re_up_rev is not None
-    assert re_up_rev["version_num"] == "028_remove_organization_only_actor_lookup"
+    assert re_up_rev["version_num"] == "029_analysis_authorization_policy"
 
-    helper_exists_028_again = await conn3.fetchval(
-        "SELECT EXISTS(SELECT 1 FROM pg_proc WHERE proname = 'get_current_user_id');"
-    )
-    assert helper_exists_028_again is False
+    total_perms_re_up = await conn3.fetchval("SELECT COUNT(*) FROM public.permissions;")
+    assert total_perms_re_up == 17
 
-    func_exists_028 = await conn3.fetchval(
+    func_exists_029 = await conn3.fetchval(
         "SELECT EXISTS(SELECT 1 FROM pg_proc WHERE proname = 'resolve_auth_context');"
     )
-    assert func_exists_028 is True
+    assert func_exists_029 is True
 
     # 5. Verify ACL Privileges for resolve_auth_context
     has_api_exec = await conn3.fetchval(

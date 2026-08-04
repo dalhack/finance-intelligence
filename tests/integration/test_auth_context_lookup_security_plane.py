@@ -88,10 +88,11 @@ async def test_resolve_auth_context_dynamic_permissions_and_acl_isolation():
         assert row.actor_user_id == user_id
         assert row.active_organization_id == org_id
         assert row.roles == ["ANALYST"]
-        # Exactly 11 permissions assigned to ANALYST
-        assert len(row.permissions) == 11
+        # Exactly 15 permissions assigned to ANALYST (11 base + 4 analyses)
+        assert len(row.permissions) == 15
         assert "documents:upload" in row.permissions
         assert "documents:finalize" in row.permissions
+        assert "analyses:run" in row.permissions
         assert "facts:candidates:review" not in row.permissions
         assert "facts:verify_revision" not in row.permissions
 
@@ -104,9 +105,10 @@ async def test_resolve_auth_context_dynamic_permissions_and_acl_isolation():
         row = res.fetchone()
         assert row is not None
         assert row.roles == ["VIEWER"]
-        # Exactly 7 permissions assigned to VIEWER
-        assert len(row.permissions) == 7
+        # Exactly 8 permissions assigned to VIEWER (7 base + 1 analyses:read)
+        assert len(row.permissions) == 8
         assert "documents:read" in row.permissions
+        assert "analyses:read" in row.permissions
         assert "documents:upload" not in row.permissions
 
     # 3. Verify Direct Table SELECT Revocation (Option 3B) for db_api_user

@@ -175,7 +175,7 @@ async def test_ai_orchestrator_full_e2e_positive_flow():
             organization_id=org_id,
             user_id=user_id,
             role="OWNER",
-            permissions={"analyses:create", "analyses:read"},
+            permissions={"analyses:read", "analyses:run", "analyses:clarifications:respond", "analyses:cancel"},
         )
         engine = AnalysisOrchestratorEngine(
             db_session=db_api,

@@ -33,6 +33,7 @@ async def test_migration_018_catalog_and_immutability():
             "026_public_schema_acl_hardening",
             "027_auth_context_lookup_security_plane",
             "028_remove_organization_only_actor_lookup",
+            "029_analysis_authorization_policy",
         ]
 
         # 2. Verify RLS & FORCE RLS attributes

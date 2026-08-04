@@ -32,11 +32,13 @@ class DevelopmentIdentityVerifier:
         if not token or token == "invalid":
             raise InvalidCredentialsException("Invalid development authentication token.")
 
+        subject = token[10:] if token.startswith("dev-token-") and len(token) > 10 else "dev_sub_synthetic_99182"
+
         return AuthenticatedIdentity(
-            external_subject="dev_sub_synthetic_99182",
+            external_subject=subject,
             identity_provider="development_adapter",
-            display_name="Dev Synthetic Analyst User",
-            email_masked="dev.analyst@synthetic.internal",
+            display_name=f"Dev User {subject}",
+            email_masked=f"{subject}@synthetic.internal",
         )
 
 

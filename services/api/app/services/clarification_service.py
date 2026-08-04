@@ -123,6 +123,17 @@ class ClarificationService:
                 detail={"error": {"code": "ANALYSIS_NOT_FOUND", "message": "Analysis job not found."}},
             )
 
+        if job.user_id != self.user_id:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail={
+                    "error": {
+                        "code": "FORBIDDEN_MUTATION",
+                        "message": "Only the analysis job creator can respond to clarification requests.",
+                    }
+                },
+            )
+
         if job.status != AnalysisJobStatus.NEEDS_CLARIFICATION.value:
             raise HTTPException(
                 status_code=status.HTTP_400_BAD_REQUEST,
@@ -295,6 +306,17 @@ class ClarificationService:
             raise HTTPException(
                 status_code=status.HTTP_404_NOT_FOUND,
                 detail={"error": {"code": "ANALYSIS_NOT_FOUND", "message": "Analysis job not found."}},
+            )
+
+        if job.user_id != self.user_id:
+            raise HTTPException(
+                status_code=status.HTTP_403_FORBIDDEN,
+                detail={
+                    "error": {
+                        "code": "FORBIDDEN_MUTATION",
+                        "message": "Only the analysis job creator can cancel clarification requests.",
+                    }
+                },
             )
 
         clar_res = await self.db.execute(

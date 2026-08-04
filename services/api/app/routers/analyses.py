@@ -10,7 +10,7 @@ from sqlalchemy import select, text
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from services.api.app.db.session import get_db_session
-from services.api.app.dependencies import get_execution_context
+from services.api.app.dependencies import require_permission
 from services.api.app.middleware.execution_context import ExecutionContext
 from services.api.app.models.orchestration import AnalysisJob
 from services.api.app.orchestration.event_engine import AnalysisEventEngine
@@ -45,7 +45,7 @@ class AnalysisJobDTO(BaseModel):
 async def create_analysis(
     req: AnalysisCreateRequest,
     x_idempotency_key: str | None = Header(None, alias="X-Idempotency-Key"),
-    ctx: ExecutionContext = Depends(get_execution_context),  # noqa: B008
+    ctx: ExecutionContext = Depends(require_permission("analyses:run")),  # noqa: B008
     db: AsyncSession = Depends(get_db_session),  # noqa: B008
 ) -> AnalysisJobDTO:
     org_id = ctx.active_organization_id
@@ -102,6 +102,7 @@ async def create_analysis(
 @router.get("/{analysis_id}", response_model=AnalysisJobDTO)
 async def get_analysis(
     analysis_id: UUID,
+    ctx: ExecutionContext = Depends(require_permission("analyses:read")),  # noqa: B008
     db: AsyncSession = Depends(get_db_session),  # noqa: B008
 ) -> AnalysisJobDTO:
     job = await db.get(AnalysisJob, analysis_id)
@@ -132,6 +133,7 @@ async def get_analysis(
 async def stream_analysis_events(
     analysis_id: UUID,
     last_event_id: str | None = Header(None, alias="Last-Event-ID"),
+    ctx: ExecutionContext = Depends(require_permission("analyses:read")),  # noqa: B008
     db: AsyncSession = Depends(get_db_session),  # noqa: B008
 ) -> StreamingResponse:
     org_res = await db.execute(text("SELECT current_setting('app.current_organization_id', true);"))
@@ -180,6 +182,7 @@ async def stream_analysis_events(
 @router.post("/{analysis_id}/cancel", response_model=AnalysisJobDTO)
 async def cancel_analysis(
     analysis_id: UUID,
+    ctx: ExecutionContext = Depends(require_permission("analyses:cancel")),  # noqa: B008
     db: AsyncSession = Depends(get_db_session),  # noqa: B008
 ) -> AnalysisJobDTO:
     job = await db.get(AnalysisJob, analysis_id)
@@ -190,6 +193,18 @@ async def cancel_analysis(
                 "error": {
                     "code": "ANALYSIS_NOT_FOUND",
                     "message": "Analysis job not found.",
+                    "request_id": "req-api",
+                }
+            },
+        )
+
+    if job.user_id != ctx.authenticated_user_id:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail={
+                "error": {
+                    "code": "FORBIDDEN_MUTATION",
+                    "message": "Only the analysis job creator can cancel this analysis.",
                     "request_id": "req-api",
                 }
             },
@@ -219,6 +234,7 @@ async def list_analyses(
     limit: int = 20,
     offset: int = 0,
     status_filter: str | None = None,
+    ctx: ExecutionContext = Depends(require_permission("analyses:read")),  # noqa: B008
     db: AsyncSession = Depends(get_db_session),  # noqa: B008
 ) -> list[AnalysisJobDTO]:
     org_res = await db.execute(text("SELECT current_setting('app.current_organization_id', true);"))
@@ -269,6 +285,7 @@ async def list_analyses(
 @router.get("/{analysis_id}/result")
 async def get_analysis_result(
     analysis_id: UUID,
+    ctx: ExecutionContext = Depends(require_permission("analyses:read")),  # noqa: B008
     db: AsyncSession = Depends(get_db_session),  # noqa: B008
 ) -> dict[str, Any]:
     org_res = await db.execute(text("SELECT current_setting('app.current_organization_id', true);"))
@@ -344,7 +361,7 @@ async def get_analysis_result(
 @router.get("/{analysis_id}/clarification", response_model=AnalysisClarificationDTO)
 async def get_analysis_clarification(
     analysis_id: UUID,
-    ctx: ExecutionContext = Depends(get_execution_context),  # noqa: B008
+    ctx: ExecutionContext = Depends(require_permission("analyses:read")),  # noqa: B008
     db: AsyncSession = Depends(get_db_session),  # noqa: B008
 ) -> AnalysisClarificationDTO:
     org_id = ctx.active_organization_id
@@ -380,7 +397,7 @@ async def get_analysis_clarification(
 async def respond_analysis_clarification(
     analysis_id: UUID,
     body: ClarificationRespondRequestDTO,
-    ctx: ExecutionContext = Depends(get_execution_context),  # noqa: B008
+    ctx: ExecutionContext = Depends(require_permission("analyses:clarifications:respond")),  # noqa: B008
     db: AsyncSession = Depends(get_db_session),  # noqa: B008
 ) -> AnalysisJobDTO:
     org_id = ctx.active_organization_id
@@ -411,7 +428,7 @@ async def respond_analysis_clarification(
 async def cancel_analysis_clarification(
     analysis_id: UUID,
     body: ClarificationCancelRequestDTO,
-    ctx: ExecutionContext = Depends(get_execution_context),  # noqa: B008
+    ctx: ExecutionContext = Depends(require_permission("analyses:cancel")),  # noqa: B008
     db: AsyncSession = Depends(get_db_session),  # noqa: B008
 ) -> AnalysisJobDTO:
     org_id = ctx.active_organization_id
