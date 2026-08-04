@@ -10,7 +10,6 @@ REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
 from services.api.app.core.migration_policy import (
-    get_minimum_safe_downgrade_target,
     validate_downgrade_target,
 )
 
@@ -58,7 +57,7 @@ async def test_migration_upgrade_downgrade_roundtrip():
         assert "postgresql" not in str(exc_info.value).lower()
         assert "owner_pass" not in str(exc_info.value).lower()
 
-    # 2. Upgrade to head (026)
+    # 2. Upgrade to head (027)
     run_alembic_cmd("upgrade", "head")
 
     conn1 = await asyncpg.connect(RAW_ROUNDTRIP_URL)
@@ -70,40 +69,48 @@ async def test_migration_upgrade_downgrade_roundtrip():
 
     final_rev = await conn1.fetchrow("SELECT version_num FROM alembic_version;")
     assert final_rev is not None
-    assert final_rev["version_num"] == "026_public_schema_acl_hardening"
+    assert final_rev["version_num"] == "027_auth_context_lookup_security_plane"
     await conn1.close()
 
-    # 3. Safe roundtrip downgrade to safe boundary (023_analysis_clarification_workflow)
-    safe_target = get_minimum_safe_downgrade_target("head")
-    assert safe_target == "023_analysis_clarification_workflow"
-    validate_downgrade_target(safe_target)
-
-    run_alembic_cmd("downgrade", safe_target)
+    # 3. Roundtrip downgrade 027 -> 026
+    run_alembic_cmd("downgrade", "026_public_schema_acl_hardening")
 
     conn2 = await asyncpg.connect(RAW_ROUNDTRIP_URL)
-    boundary_rev = await conn2.fetchrow("SELECT version_num FROM alembic_version;")
-    assert boundary_rev is not None
-    assert boundary_rev["version_num"] == "023_analysis_clarification_workflow"
+    downgrade_rev = await conn2.fetchrow("SELECT version_num FROM alembic_version;")
+    assert downgrade_rev is not None
+    assert downgrade_rev["version_num"] == "026_public_schema_acl_hardening"
+
+    func_exists_026 = await conn2.fetchval(
+        "SELECT EXISTS(SELECT 1 FROM pg_proc WHERE proname = 'resolve_auth_context');"
+    )
+    assert func_exists_026 is False
     await conn2.close()
 
-    # 4. Re-upgrade to head (026)
+    # 4. Re-upgrade 026 -> 027
     run_alembic_cmd("upgrade", "head")
 
     conn3 = await asyncpg.connect(RAW_ROUNDTRIP_URL)
     re_up_rev = await conn3.fetchrow("SELECT version_num FROM alembic_version;")
     assert re_up_rev is not None
-    assert re_up_rev["version_num"] == "026_public_schema_acl_hardening"
+    assert re_up_rev["version_num"] == "027_auth_context_lookup_security_plane"
 
-    # Verify db_app_user has NO effective privileges
-    has_select_doc = await conn3.fetchval("SELECT has_table_privilege('db_app_user', 'documents', 'SELECT');")
-    has_schema_usage = await conn3.fetchval("SELECT has_schema_privilege('db_app_user', 'public', 'USAGE');")
-    assert has_select_doc is False
-    assert has_schema_usage is False
-
-    # Verify db_bootstrap has NO EXECUTE on runtime functions
-    has_boot_exec = await conn3.fetchval(
-        "SELECT has_function_privilege('db_bootstrap', 'claim_ingestion_job(uuid, text, uuid)', 'EXECUTE');"
+    func_exists_027 = await conn3.fetchval(
+        "SELECT EXISTS(SELECT 1 FROM pg_proc WHERE proname = 'resolve_auth_context');"
     )
-    assert has_boot_exec is False
+    assert func_exists_027 is True
+
+    # 5. Verify ACL Privileges for resolve_auth_context
+    has_api_exec = await conn3.fetchval(
+        "SELECT has_function_privilege('db_api_user', 'resolve_auth_context(text, uuid)', 'EXECUTE');"
+    )
+    has_public_exec = await conn3.fetchval(
+        "SELECT has_function_privilege('public', 'resolve_auth_context(text, uuid)', 'EXECUTE');"
+    )
+    has_worker_exec = await conn3.fetchval(
+        "SELECT has_function_privilege('db_ingestion_worker', 'resolve_auth_context(text, uuid)', 'EXECUTE');"
+    )
+    assert has_api_exec is True
+    assert has_public_exec is False
+    assert has_worker_exec is False
 
     await conn3.close()

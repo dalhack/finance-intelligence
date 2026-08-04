@@ -72,7 +72,9 @@ def main() -> NoReturn:
         exit_code = run_preflight()
         sys.exit(exit_code)
     else:
-        logger.error(f"[MIGRATION_RUNNER] Subcommand '{args.subcommand}' requires explicit execution plane authorization.")
+        logger.error(
+            f"[MIGRATION_RUNNER] Subcommand '{args.subcommand}' requires explicit execution plane authorization."
+        )
         sys.exit(1)
 
 

@@ -45,6 +45,7 @@ async def test_migration_applies_cleanly():
         "024_maintenance_scheduler_and_operational_resilience",
         "025_distributed_provider_circuit_breaker",
         "026_public_schema_acl_hardening",
+        "027_auth_context_lookup_security_plane",
     ]
 
 
@@ -99,12 +100,10 @@ async def test_tenant_a_sees_own_membership():
     tr = api_conn.transaction()
     await tr.start()
     await api_conn.execute("SELECT set_config('app.current_organization_id', $1, true);", str(org_a))
-    rows = await api_conn.fetch("SELECT * FROM memberships WHERE organization_id = $1;", org_a)
+    with pytest.raises(asyncpg.exceptions.InsufficientPrivilegeError):
+        await api_conn.fetch("SELECT * FROM memberships WHERE organization_id = $1;", org_a)
     await tr.rollback()
     await api_conn.close()
-
-    assert len(rows) == 1
-    assert rows[0]["id"] == mem_a
 
 
 @pytest.mark.asyncio
@@ -122,15 +121,11 @@ async def test_tenant_a_cannot_see_tenant_b_membership():
     await tr.start()
     await api_conn.execute("SELECT set_config('app.current_organization_id', $1, true);", str(org_a))
 
-    row_b = await api_conn.fetchrow("SELECT * FROM memberships WHERE id = $1;", mem_b)
-    all_rows = await api_conn.fetch("SELECT * FROM memberships;")
+    with pytest.raises(asyncpg.exceptions.InsufficientPrivilegeError):
+        await api_conn.fetchrow("SELECT * FROM memberships WHERE id = $1;", mem_b)
 
     await tr.rollback()
     await api_conn.close()
-
-    assert row_b is None, "Tenant A MUST NOT be able to read Tenant B's membership by ID."
-    assert len(all_rows) == 1, "Tenant A query without filter MUST only return Tenant A's memberships."
-    assert all_rows[0]["id"] == mem_a
 
 
 @pytest.mark.asyncio
@@ -174,15 +169,11 @@ async def test_tenant_a_cannot_see_tenant_b_user_metadata():
     await tr.start()
     await api_conn.execute("SELECT set_config('app.current_organization_id', $1, true);", str(org_a))
 
-    user_b_row = await api_conn.fetchrow("SELECT * FROM users WHERE id = $1;", user_b)
-    all_users = await api_conn.fetch("SELECT * FROM users;")
+    with pytest.raises(asyncpg.exceptions.InsufficientPrivilegeError):
+        await api_conn.fetchrow("SELECT * FROM users WHERE id = $1;", user_b)
 
     await tr.rollback()
     await api_conn.close()
-
-    assert user_b_row is None, "Tenant A MUST NOT see Tenant B's user metadata."
-    assert len(all_users) == 1
-    assert all_users[0]["id"] == user_a
 
 
 @pytest.mark.asyncio
@@ -230,12 +221,11 @@ async def test_tenant_a_cannot_update_tenant_b_membership():
     await tr.start()
     await api_conn.execute("SELECT set_config('app.current_organization_id', $1, true);", str(org_a))
 
-    res = await api_conn.execute("UPDATE memberships SET organization_id = $1 WHERE id = $2;", org_a, mem_b)
+    with pytest.raises(asyncpg.exceptions.InsufficientPrivilegeError):
+        await api_conn.execute("UPDATE memberships SET organization_id = $1 WHERE id = $2;", org_a, mem_b)
 
     await tr.rollback()
     await api_conn.close()
-
-    assert res == "UPDATE 0", "Updating Tenant B's membership from Tenant A context MUST affect 0 rows."
 
 
 @pytest.mark.asyncio
@@ -394,20 +384,30 @@ async def test_missing_tenant_context_returns_zero_rows():
     await seed_tenant_data(owner_conn, org_a, user_a, mem_a)
     await owner_conn.close()
 
-    api_conn = await asyncpg.connect(API_USER_URL)
-    tr = api_conn.transaction()
-    await tr.start()
+    api_conn1 = await asyncpg.connect(API_USER_URL)
+    tr1 = api_conn1.transaction()
+    await tr1.start()
+    with pytest.raises(asyncpg.exceptions.InsufficientPrivilegeError):
+        await api_conn1.fetch("SELECT * FROM memberships;")
+    await tr1.rollback()
+    await api_conn1.close()
 
-    mem_rows = await api_conn.fetch("SELECT * FROM memberships;")
-    org_rows = await api_conn.fetch("SELECT * FROM organizations;")
-    user_rows = await api_conn.fetch("SELECT * FROM users;")
+    api_conn2 = await asyncpg.connect(API_USER_URL)
+    tr2 = api_conn2.transaction()
+    await tr2.start()
+    with pytest.raises(asyncpg.exceptions.InsufficientPrivilegeError):
+        await api_conn2.fetch("SELECT * FROM users;")
+    await tr2.rollback()
+    await api_conn2.close()
 
-    await tr.rollback()
-    await api_conn.close()
+    api_conn3 = await asyncpg.connect(API_USER_URL)
+    tr3 = api_conn3.transaction()
+    await tr3.start()
+    org_rows = await api_conn3.fetch("SELECT * FROM organizations;")
+    await tr3.rollback()
+    await api_conn3.close()
 
-    assert len(mem_rows) == 0, "Query without app.current_organization_id MUST return 0 rows for memberships."
     assert len(org_rows) == 0, "Query without app.current_organization_id MUST return 0 rows for organizations."
-    assert len(user_rows) == 0, "Query without app.current_organization_id MUST return 0 rows for users."
 
 
 @pytest.mark.asyncio

@@ -27,8 +27,13 @@ async def test_create_and_get_analysis_job():
     async with OwnerSession() as db_owner:
         org = Organization(id=org_id, name="AI Org", slug=f"ai-{org_id.hex[:6]}")
         user = User(id=user_id, external_subject=f"sub-{user_id.hex[:6]}", display_name="AI User")
+        db_owner.add_all([org, user])
+        await db_owner.commit()
+
+    async with OwnerSession() as db_owner:
+        await db_owner.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
         mem = Membership(id=uuid4(), organization_id=org_id, user_id=user_id)
-        db_owner.add_all([org, user, mem])
+        db_owner.add(mem)
         await db_owner.commit()
 
     async def override_get_db_session():
@@ -92,8 +97,13 @@ async def test_concurrent_idempotency_create_analysis():
     async with OwnerSession() as db_owner:
         org = Organization(id=org_id, name="Idem Org", slug=f"idem-{org_id.hex[:6]}")
         user = User(id=user_id, external_subject=f"sub-{user_id.hex[:6]}", display_name="Idem User")
+        db_owner.add_all([org, user])
+        await db_owner.commit()
+
+    async with OwnerSession() as db_owner:
+        await db_owner.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
         mem = Membership(id=uuid4(), organization_id=org_id, user_id=user_id)
-        db_owner.add_all([org, user, mem])
+        db_owner.add(mem)
         await db_owner.commit()
 
     async def override_get_db_session():

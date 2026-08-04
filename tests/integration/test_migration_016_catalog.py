@@ -28,6 +28,7 @@ async def test_migration_016_catalog_and_security_grants():
             "024_maintenance_scheduler_and_operational_resilience",
             "025_distributed_provider_circuit_breaker",
             "026_public_schema_acl_hardening",
+            "027_auth_context_lookup_security_plane",
         ]
 
         # 2. Verify Security Definer Function ACL Grants (No Direct EXECUTE for db_api_user / PUBLIC)

@@ -7,7 +7,6 @@ from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 from services.api.app.models.institution import Institution
-from services.api.app.models.membership import Membership
 from services.api.app.models.orchestration import AnalysisJob
 from services.api.app.models.organization import Organization
 from services.api.app.models.user import User
@@ -34,9 +33,8 @@ async def test_clarification_concurrency_and_expiry_scenarios():
         db_owner.add_all([org, user])
         await db_owner.commit()
 
-    async with OwnerSession() as db_owner:
-        await db_owner.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
-        mem = Membership(id=uuid4(), organization_id=org_id, user_id=user_id)
+    async with ApiSession() as db_api:
+        await db_api.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
         inst = Institution(id=inst_id, canonical_name="Akbank", display_name="Akbank", organization_id=org_id)
         now = datetime.now(UTC)
         job = AnalysisJob(
@@ -49,8 +47,8 @@ async def test_clarification_concurrency_and_expiry_scenarios():
             created_at=now,
             updated_at=now,
         )
-        db_owner.add_all([mem, inst, job])
-        await db_owner.commit()
+        db_api.add_all([inst, job])
+        await db_api.commit()
 
     # 2. Test require_clarification
     async with ApiSession() as db_api:

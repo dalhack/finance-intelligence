@@ -66,8 +66,8 @@ async def test_ai_orchestrator_full_e2e_positive_flow():
         metric_def_id = metric_def.id
 
     # 2. Add RLS-protected parent objects (Institution, Period, Document, StoredObject)
-    async with OwnerSession() as db_owner:
-        await db_owner.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
+    async with ApiSession() as db_api:
+        await db_api.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
         mem = Membership(id=uuid4(), organization_id=org_id, user_id=user_id)
         inst = Institution(
             id=inst_id, canonical_name="Garanti BBVA", display_name="Garanti BBVA", organization_id=org_id
@@ -98,22 +98,22 @@ async def test_ai_orchestrator_full_e2e_positive_flow():
             server_computed_sha256="a" * 64,
             detected_mime_type="application/pdf",
         )
-        db_owner.add_all([mem, inst, period, doc, stored_obj])
-        await db_owner.commit()
+        db_api.add_all([mem, inst, period, doc, stored_obj])
+        await db_api.commit()
 
     # 3. Add DocumentVersion & Candidate
-    async with OwnerSession() as db_owner:
-        await db_owner.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
+    async with ApiSession() as db_api:
+        await db_api.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
         doc_ver = DocumentVersion(
             id=doc_ver_id,
             organization_id=org_id,
             document_id=doc_id,
-            stored_object_id=stored_obj_id,
             version_number=1,
             content_hash_sha256="a" * 64,
             file_size_bytes=1000,
             declared_mime_type="application/pdf",
             detected_mime_type="application/pdf",
+            stored_object_id=stored_obj_id,
         )
         cand = FinancialFactCandidate(
             id=cand_id,
@@ -127,26 +127,32 @@ async def test_ai_orchestrator_full_e2e_positive_flow():
             source_document_id=doc_id,
             source_document_version_id=doc_ver_id,
         )
-        db_owner.add_all([doc_ver, cand])
-        await db_owner.commit()
+        db_api.add_all([doc_ver, cand])
+        await db_api.commit()
 
     # 4. Add FinancialFact & AnalysisJob
-    async with OwnerSession() as db_owner:
-        await db_owner.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
+    async with ApiSession() as db_api:
+        await db_api.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
         fact = FinancialFact(
             id=uuid4(),
             organization_id=org_id,
             institution_id=inst_id,
             reporting_period_id=period_id,
-            metric_code="TOTAL_ASSETS",
             metric_definition_id=metric_def_id,
-            value=1500000.0,
-            normalized_value=1500000.0,
+            metric_code="TOTAL_ASSETS",
+            value=1500000.00,
+            currency="TRY",
+            unit="CURRENCY",
+            scale="ONE",
+            normalized_value=1500000.00,
             reporting_basis="SOLO",
-            review_status="HUMAN_VERIFIED",
-            value_origin="SOURCE_REPORTED",
             source_candidate_id=cand_id,
             source_document_id=doc_id,
+            source_location={},
+            extraction_method="PARSER_TABLE",
+            confidence_score=1.000,
+            review_status="HUMAN_VERIFIED",
+            value_origin="SOURCE_REPORTED",
         )
         now = datetime.now(UTC)
         job = AnalysisJob(
@@ -154,13 +160,13 @@ async def test_ai_orchestrator_full_e2e_positive_flow():
             organization_id=org_id,
             user_id=user_id,
             status="RECEIVED",
-            request_prompt="Garanti 2025 Q4 Toplam Aktif analizi yapınız.",
+            request_prompt="Garanti BBVA 2025 Q4 toplam aktif analizi.",
             normalized_request={},
             created_at=now,
             updated_at=now,
         )
-        db_owner.add_all([fact, job])
-        await db_owner.commit()
+        db_api.add_all([fact, job])
+        await db_api.commit()
 
     # 5. Run E2E Orchestrator Engine as db_api_user
     async with ApiSession() as db_api:

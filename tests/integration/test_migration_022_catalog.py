@@ -22,6 +22,7 @@ async def test_migration_022_catalog_and_immutability():
             "024_maintenance_scheduler_and_operational_resilience",
             "025_distributed_provider_circuit_breaker",
             "026_public_schema_acl_hardening",
+            "027_auth_context_lookup_security_plane",
         ]
 
         # 2. Verify RLS & FORCE RLS attributes on analysis_events

@@ -40,6 +40,11 @@ async def test_clarification_full_lifecycle_and_security():
     async with OwnerSession() as db_owner:
         await db_owner.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
         mem = Membership(id=uuid4(), organization_id=org_id, user_id=user_id)
+        db_owner.add(mem)
+        await db_owner.commit()
+
+    async with ApiSession() as db_api:
+        await db_api.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
         inst = Institution(
             id=inst_id, canonical_name="Garanti Bank", display_name="Garanti Bank", organization_id=org_id
         )
@@ -54,8 +59,8 @@ async def test_clarification_full_lifecycle_and_security():
             created_at=now,
             updated_at=now,
         )
-        db_owner.add_all([mem, inst, job])
-        await db_owner.commit()
+        db_api.add_all([inst, job])
+        await db_api.commit()
 
     # 2. Require Clarification via Service
     async with ApiSession() as db_api:
@@ -164,7 +169,9 @@ async def test_clarification_cancellation_flow():
         await db_owner.commit()
 
     async with OwnerSession() as db_owner:
-        await db_owner.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
+        await db_owner.execute(
+            text("SELECT set_config('app.current_organization_id', :org_id, true);"), {"org_id": str(org_id)}
+        )
         mem = Membership(id=uuid4(), organization_id=org_id, user_id=user_id)
         now = datetime.now(UTC)
         job = AnalysisJob(
@@ -231,7 +238,9 @@ async def test_clarification_partial_unique_constraint():
         await db_owner.commit()
 
     async with OwnerSession() as db_owner:
-        await db_owner.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
+        await db_owner.execute(
+            text("SELECT set_config('app.current_organization_id', :org_id, true);"), {"org_id": str(org_id)}
+        )
         mem = Membership(id=uuid4(), organization_id=org_id, user_id=user_id)
         now = datetime.now(UTC)
         job = AnalysisJob(

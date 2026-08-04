@@ -48,6 +48,7 @@ async def readiness_check(
             "024_maintenance_scheduler_and_operational_resilience",
             "025_distributed_provider_circuit_breaker",
             "026_public_schema_acl_hardening",
+            "027_auth_context_lookup_security_plane",
         ]:
             response.status_code = status.HTTP_503_SERVICE_UNAVAILABLE
 

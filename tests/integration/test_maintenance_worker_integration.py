@@ -29,6 +29,10 @@ async def test_maintenance_worker_concurrency_and_fencing():
             {"id": org_id, "slug": f"test-maint-org-{org_id.hex[:6]}"},
         )
         await conn.execute(
+            text("SELECT set_config('app.current_organization_id', :org_id, true);"),
+            {"org_id": str(org_id)},
+        )
+        await conn.execute(
             text("""
                 INSERT INTO maintenance_jobs (id, job_code, organization_id, status, available_at, max_attempts)
                 VALUES (:id, 'CLARIFICATION_EXPIRY', :org_id, 'QUEUED', now(), 3);
@@ -37,6 +41,10 @@ async def test_maintenance_worker_concurrency_and_fencing():
         )
 
     async with MaintenanceSessionLocal() as session:
+        await session.execute(
+            text("SELECT set_config('app.current_organization_id', :org_id, true);"),
+            {"org_id": str(org_id)},
+        )
         # 1. Claim job with worker 1
         claim_token_1 = uuid.uuid4()
         res1 = await session.execute(

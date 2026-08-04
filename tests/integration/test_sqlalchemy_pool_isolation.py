@@ -6,7 +6,7 @@ from sqlalchemy import text
 
 from services.api.app.db.session import ApiSessionLocal
 from services.api.app.db.tenant_context import tenant_transaction_context
-from services.api.app.models.membership import Membership
+from services.api.app.models.document import Document
 
 API_USER_URL = os.environ.get("TEST_API_DATABASE_URL")
 
@@ -26,6 +26,6 @@ async def test_sqlalchemy_pool_reuse_isolation():
     async with ApiSessionLocal() as session2:
         await session2.execute(text("SELECT set_config('app.current_organization_id', '', true);"))
 
-        res = await session2.execute(__import__("sqlalchemy").select(Membership))
+        res = await session2.execute(__import__("sqlalchemy").select(Document))
         rows = res.scalars().all()
         assert len(rows) == 0

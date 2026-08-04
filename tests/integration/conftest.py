@@ -13,7 +13,7 @@ REQUIRED_ENV_ROLES = {
     "TEST_ROUNDTRIP_DATABASE_URL": "db_owner",
 }
 
-EXPECTED_HEAD_REVISION = "026_public_schema_acl_hardening"
+EXPECTED_HEAD_REVISION = "027_auth_context_lookup_security_plane"
 
 
 async def run_real_preflight_checks():

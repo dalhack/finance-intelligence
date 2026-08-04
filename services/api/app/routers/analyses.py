@@ -60,7 +60,7 @@ async def create_analysis(
         )
     org_id = UUID(org_str)
 
-    user_res = await db.execute(text("SELECT id FROM users LIMIT 1;"))
+    user_res = await db.execute(text("SELECT public.get_current_user_id(:org_id);"), {"org_id": org_id})
     user_id = user_res.scalar()
     if not user_id:
         raise HTTPException(
@@ -377,7 +377,7 @@ async def get_analysis_clarification(
         )
     org_id = UUID(org_str)
 
-    user_res = await db.execute(text("SELECT id FROM users LIMIT 1;"))
+    user_res = await db.execute(text("SELECT public.get_current_user_id(:org_id);"), {"org_id": org_id})
     user_id = user_res.scalar()
     if not user_id:
         raise HTTPException(
@@ -425,7 +425,7 @@ async def respond_analysis_clarification(
         )
     org_id = UUID(org_str)
 
-    user_res = await db.execute(text("SELECT id FROM users LIMIT 1;"))
+    user_res = await db.execute(text("SELECT public.get_current_user_id(:org_id);"), {"org_id": org_id})
     user_id = user_res.scalar()
     if not user_id:
         raise HTTPException(
@@ -468,7 +468,7 @@ async def cancel_analysis_clarification(
         )
     org_id = UUID(org_str)
 
-    user_res = await db.execute(text("SELECT id FROM users LIMIT 1;"))
+    user_res = await db.execute(text("SELECT public.get_current_user_id(:org_id);"), {"org_id": org_id})
     user_id = user_res.scalar()
     if not user_id:
         raise HTTPException(
