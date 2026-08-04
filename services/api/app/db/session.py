@@ -1,8 +1,12 @@
 from collections.abc import AsyncGenerator
 
+from fastapi import Depends
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 from services.api.app.core.config import settings
+from services.api.app.db.tenant_context import tenant_transaction_context
+from services.api.app.dependencies import get_optional_execution_context
+from services.api.app.middleware.execution_context import ExecutionContext
 
 # 1. API Role Engine & Session Factory (db_api_user)
 api_engine = create_async_engine(
@@ -65,13 +69,22 @@ BootstrapSessionLocal = async_sessionmaker(
 )
 
 
-async def get_db_session() -> AsyncGenerator[AsyncSession, None]:
-    """Primary DB session provider for FastAPI requests using db_api_user role."""
+async def get_db_session(
+    ctx: ExecutionContext | None = Depends(get_optional_execution_context),  # noqa: B008
+) -> AsyncGenerator[AsyncSession, None]:
+    """Primary DB session provider for FastAPI requests using db_api_user role with transaction-local tenant GUC setting."""
     async with ApiSessionLocal() as session:
-        try:
-            yield session
-        finally:
-            await session.close()
+        if ctx and ctx.active_organization_id:
+            async with tenant_transaction_context(session, ctx.active_organization_id):
+                try:
+                    yield session
+                finally:
+                    await session.close()
+        else:
+            try:
+                yield session
+            finally:
+                await session.close()
 
 
 async def get_worker_db_session() -> AsyncGenerator[AsyncSession, None]:

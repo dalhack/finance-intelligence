@@ -31,8 +31,8 @@ async def get_execution_context(
     x_request_id: str | None = Header(None),
     x_correlation_id: str | None = Header(None),
 ) -> ExecutionContext:
-    request_id = x_request_id or str(uuid.uuid4())
-    correlation_id = x_correlation_id or request_id
+    request_id = x_request_id if isinstance(x_request_id, str) and x_request_id else str(uuid.uuid4())
+    correlation_id = x_correlation_id if isinstance(x_correlation_id, str) and x_correlation_id else request_id
 
     # Enforce fail-closed check in production if development auth is used
     if not settings.is_development:
@@ -45,7 +45,7 @@ async def get_execution_context(
         raise InvalidCredentialsException("Bearer token required for development session.")
 
     token = authorization.split("Bearer ")[1].strip()
-    identity = await dev_identity_verifier.verify_token(token)
+    _ = await dev_identity_verifier.verify_token(token)
 
     if x_firebase_appcheck:
         await dev_app_check_verifier.verify_attestation(x_firebase_appcheck)
@@ -57,14 +57,9 @@ async def get_execution_context(
         except ValueError:
             raise MembershipRequiredException("Invalid organization ID format.")
 
-    if requested_org_uuid != DEV_SYNTHETIC_ORG_ID:
-        raise MembershipRequiredException(
-            f"User '{identity.display_name}' has no active membership in organization '{requested_org_uuid}'."
-        )
-
     return ExecutionContext(
         authenticated_user_id=DEV_SYNTHETIC_USER_ID,
-        active_organization_id=DEV_SYNTHETIC_ORG_ID,
+        active_organization_id=requested_org_uuid,
         membership_id=DEV_SYNTHETIC_MEMBERSHIP_ID,
         roles=["ANALYST"],
         permissions=[
@@ -103,3 +98,24 @@ def require_permission(permission_code: str):
         return ctx
 
     return permission_checker
+
+
+async def get_optional_execution_context(
+    authorization: str | None = Header(None),
+    x_firebase_appcheck: str | None = Header(None),
+    x_organization_id: str | None = Header(None),
+    x_request_id: str | None = Header(None),
+    x_correlation_id: str | None = Header(None),
+) -> ExecutionContext | None:
+    if not authorization or not authorization.startswith("Bearer "):
+        return None
+    try:
+        return await get_execution_context(
+            authorization=authorization,
+            x_firebase_appcheck=x_firebase_appcheck,
+            x_organization_id=x_organization_id,
+            x_request_id=x_request_id,
+            x_correlation_id=x_correlation_id,
+        )
+    except Exception:  # noqa: BLE001
+        return None
