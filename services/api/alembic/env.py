@@ -50,15 +50,21 @@ def run_migrations_offline() -> None:
 
 
 def run_migrations_online() -> None:
-    url = config.get_main_option("sqlalchemy.url")
-    assert url is not None
-    connectable = create_engine(url)
-    with connectable.connect() as connection:
-        context.configure(connection=connection, target_metadata=target_metadata)
+    injected_connection = config.attributes.get("connection")
+    if injected_connection is not None:
+        context.configure(connection=injected_connection, target_metadata=target_metadata)
         with context.begin_transaction():
             context.run_migrations()
-        connection.commit()
-    connectable.dispose()
+    else:
+        url = config.get_main_option("sqlalchemy.url")
+        assert url is not None
+        connectable = create_engine(url)
+        with connectable.connect() as connection:
+            context.configure(connection=connection, target_metadata=target_metadata)
+            with context.begin_transaction():
+                context.run_migrations()
+            connection.commit()
+        connectable.dispose()
 
 
 if context.is_offline_mode():

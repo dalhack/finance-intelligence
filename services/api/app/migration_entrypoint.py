@@ -6,38 +6,33 @@ Enforces CLI subcommand isolation, secret redaction, and project identity valida
 
 import argparse
 import logging
-import re
 import sys
 from typing import NoReturn
 
 from app.core.migration_policy import IRREVERSIBLE_MIGRATION_POLICIES
+from app.migration_execution.alembic_runner import run_alembic_migrations
+from app.migration_execution.cloudsql_admin import update_user_password
+from app.migration_execution.config import MigrationExecutionConfig
+from app.migration_execution.provisioning import provision_application_database
+from app.migration_execution.redaction import redact_text
+from app.migration_execution.verification import run_security_verification
 
 # Configure logger with stdout for INFO and stderr for ERROR
 logger = logging.getLogger("migration_runner")
 logger.setLevel(logging.INFO)
 
-stdout_handler = logging.StreamHandler(sys.stdout)
-stdout_handler.setLevel(logging.INFO)
-stdout_handler.addFilter(lambda record: record.levelno < logging.ERROR)
-stdout_handler.setFormatter(logging.Formatter("%(message)s"))
+if not logger.handlers:
+    stdout_handler = logging.StreamHandler(sys.stdout)
+    stdout_handler.setLevel(logging.INFO)
+    stdout_handler.addFilter(lambda record: record.levelno < logging.ERROR)
+    stdout_handler.setFormatter(logging.Formatter("%(message)s"))
 
-stderr_handler = logging.StreamHandler(sys.stderr)
-stderr_handler.setLevel(logging.ERROR)
-stderr_handler.setFormatter(logging.Formatter("%(message)s"))
+    stderr_handler = logging.StreamHandler(sys.stderr)
+    stderr_handler.setLevel(logging.ERROR)
+    stderr_handler.setFormatter(logging.Formatter("%(message)s"))
 
-logger.addHandler(stdout_handler)
-logger.addHandler(stderr_handler)
-
-
-def redact_sensitive_string(text: str) -> str:
-    """Redacts passwords, tokens, and secret payloads from log strings."""
-    if not text:
-        return ""
-    # Redact DB passwords in connection URIs (postgresql://user:password@host)
-    text = re.sub(r"://([^:]+):([^@]+)@", r"://\1:[REDACTED]@", text)
-    # Redact key-value secrets
-    text = re.sub(r"(password|secret|token|key)=\S+", r"\1=[REDACTED]", text, flags=re.IGNORECASE)
-    return text
+    logger.addHandler(stdout_handler)
+    logger.addHandler(stderr_handler)
 
 
 def run_preflight() -> int:
@@ -68,13 +63,47 @@ def main() -> NoReturn:
         logger.error("\nERROR: No subcommand provided. Executing without subcommand is forbidden.")
         sys.exit(1)
 
-    if args.subcommand == "preflight":
-        exit_code = run_preflight()
-        sys.exit(exit_code)
-    else:
-        logger.error(
-            f"[MIGRATION_RUNNER] Subcommand '{args.subcommand}' requires explicit execution plane authorization."
-        )
+    try:
+        if args.subcommand == "preflight":
+            exit_code = run_preflight()
+            sys.exit(exit_code)
+
+        config = MigrationExecutionConfig.from_env(args.subcommand)
+        logger.info(f"[MIGRATION_ENTRYPOINT] Dispatching subcommand '{args.subcommand}' with config: {config}")
+
+        if args.subcommand == "bootstrap-password":
+            assert config.initial_admin_password is not None
+            update_user_password(
+                config.project_id,
+                config.instance_name,
+                username="postgres",
+                password=config.initial_admin_password,
+            )
+            logger.info("[MIGRATION_ENTRYPOINT] SUCCESS: Subcommand 'bootstrap-password' completed.")
+            sys.exit(0)
+
+        elif args.subcommand == "provision-database":
+            provision_application_database(config)
+            logger.info("[MIGRATION_ENTRYPOINT] SUCCESS: Subcommand 'provision-database' completed.")
+            sys.exit(0)
+
+        elif args.subcommand == "migrate":
+            run_alembic_migrations(config)
+            logger.info("[MIGRATION_ENTRYPOINT] SUCCESS: Subcommand 'migrate' completed.")
+            sys.exit(0)
+
+        elif args.subcommand == "verify":
+            run_security_verification(config)
+            logger.info("[MIGRATION_ENTRYPOINT] SUCCESS: Subcommand 'verify' completed.")
+            sys.exit(0)
+
+        else:
+            logger.error(f"[MIGRATION_ENTRYPOINT] Unknown subcommand: '{args.subcommand}'")
+            sys.exit(1)
+
+    except Exception as e:  # noqa: BLE001
+        redacted_err = redact_text(str(e))
+        logger.error(f"[MIGRATION_ENTRYPOINT] Subcommand '{args.subcommand}' failed: {redacted_err}")
         sys.exit(1)
 
 
