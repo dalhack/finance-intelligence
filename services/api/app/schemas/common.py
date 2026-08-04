@@ -47,7 +47,7 @@ class OrganizationSummaryDTO(BaseDTO):
     organization_id: UUID
     name: str
     slug: str
-    role: str
+    role: str | None = None
     status: str
 
 

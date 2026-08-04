@@ -13,6 +13,6 @@ async def get_current_organization(ctx: ExecutionContext = Depends(get_execution
         organization_id=ctx.active_organization_id,
         name="Synthetic Dev Organization",
         slug="dev-org-synthetic",
-        role=ctx.roles[0] if ctx.roles else "ANALYST",
+        role=ctx.roles[0] if ctx.roles else None,
         status="ACTIVE",
     )

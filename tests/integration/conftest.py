@@ -13,7 +13,7 @@ REQUIRED_ENV_ROLES = {
     "TEST_ROUNDTRIP_DATABASE_URL": "db_owner",
 }
 
-EXPECTED_HEAD_REVISION = "029_analysis_authorization_policy"
+EXPECTED_HEAD_REVISION = "030_reconcile_application_role_catalog"
 
 
 async def run_real_preflight_checks():

@@ -31,6 +31,7 @@ async def test_migration_016_catalog_and_security_grants():
             "027_auth_context_lookup_security_plane",
             "028_remove_organization_only_actor_lookup",
             "029_analysis_authorization_policy",
+            "030_reconcile_application_role_catalog",
         ]
 
         # 2. Verify Security Definer Function ACL Grants (No Direct EXECUTE for db_api_user / PUBLIC)

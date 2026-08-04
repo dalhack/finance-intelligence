@@ -57,7 +57,7 @@ async def test_migration_upgrade_downgrade_roundtrip():
         assert "postgresql" not in str(exc_info.value).lower()
         assert "owner_pass" not in str(exc_info.value).lower()
 
-    # 2. Upgrade to head (029)
+    # 2. Upgrade to head (030)
     run_alembic_cmd("upgrade", "head")
 
     conn1 = await asyncpg.connect(RAW_ROUNDTRIP_URL)
@@ -70,59 +70,57 @@ async def test_migration_upgrade_downgrade_roundtrip():
 
     final_rev = await conn1.fetchrow("SELECT version_num FROM alembic_version;")
     assert final_rev is not None
-    assert final_rev["version_num"] == "029_analysis_authorization_policy"
+    assert final_rev["version_num"] == "030_reconcile_application_role_catalog"
 
-    total_perms_029 = await conn1.fetchval("SELECT COUNT(*) FROM public.permissions;")
-    assert total_perms_029 == 17
+    total_perms_030 = await conn1.fetchval("SELECT COUNT(*) FROM public.permissions;")
+    assert total_perms_030 == 17
 
-    viewer_perms_029 = await conn1.fetchval(
+    admin_count_030 = await conn1.fetchval("SELECT COUNT(*) FROM public.roles WHERE name = 'ADMIN';")
+    assert admin_count_030 == 0
+
+    viewer_perms_030 = await conn1.fetchval(
         "SELECT COUNT(*) FROM public.role_permissions rp JOIN public.roles r ON r.id = rp.role_id WHERE r.name = 'VIEWER';"
     )
-    assert viewer_perms_029 == 8
+    assert viewer_perms_030 == 8
 
-    analyst_perms_029 = await conn1.fetchval(
+    analyst_perms_030 = await conn1.fetchval(
         "SELECT COUNT(*) FROM public.role_permissions rp JOIN public.roles r ON r.id = rp.role_id WHERE r.name = 'ANALYST';"
     )
-    assert analyst_perms_029 == 15
+    assert analyst_perms_030 == 15
     await conn1.close()
 
-    # 3. Roundtrip downgrade 029 -> 028
-    run_alembic_cmd("downgrade", "028_remove_organization_only_actor_lookup")
+    # 3. Roundtrip downgrade 030 -> 029
+    run_alembic_cmd("downgrade", "029_analysis_authorization_policy")
 
     conn2 = await asyncpg.connect(RAW_ROUNDTRIP_URL)
     downgrade_rev = await conn2.fetchrow("SELECT version_num FROM alembic_version;")
     assert downgrade_rev is not None
-    assert downgrade_rev["version_num"] == "028_remove_organization_only_actor_lookup"
+    assert downgrade_rev["version_num"] == "029_analysis_authorization_policy"
 
-    total_perms_028 = await conn2.fetchval("SELECT COUNT(*) FROM public.permissions;")
-    assert total_perms_028 == 13
+    admin_count_029 = await conn2.fetchval("SELECT COUNT(*) FROM public.roles WHERE name = 'ADMIN';")
+    assert admin_count_029 == 1
 
-    viewer_perms_028 = await conn2.fetchval(
-        "SELECT COUNT(*) FROM public.role_permissions rp JOIN public.roles r ON r.id = rp.role_id WHERE r.name = 'VIEWER';"
+    admin_perms_029 = await conn2.fetchval(
+        "SELECT COUNT(*) FROM public.role_permissions rp JOIN public.roles r ON r.id = rp.role_id WHERE r.name = 'ADMIN';"
     )
-    assert viewer_perms_028 == 7
-
-    analyst_perms_028 = await conn2.fetchval(
-        "SELECT COUNT(*) FROM public.role_permissions rp JOIN public.roles r ON r.id = rp.role_id WHERE r.name = 'ANALYST';"
-    )
-    assert analyst_perms_028 == 11
+    assert admin_perms_029 == 0
     await conn2.close()
 
-    # 4. Re-upgrade 028 -> 029
+    # 4. Re-upgrade 029 -> 030
     run_alembic_cmd("upgrade", "head")
 
     conn3 = await asyncpg.connect(RAW_ROUNDTRIP_URL)
     re_up_rev = await conn3.fetchrow("SELECT version_num FROM alembic_version;")
     assert re_up_rev is not None
-    assert re_up_rev["version_num"] == "029_analysis_authorization_policy"
+    assert re_up_rev["version_num"] == "030_reconcile_application_role_catalog"
 
-    total_perms_re_up = await conn3.fetchval("SELECT COUNT(*) FROM public.permissions;")
-    assert total_perms_re_up == 17
+    admin_count_re_up = await conn3.fetchval("SELECT COUNT(*) FROM public.roles WHERE name = 'ADMIN';")
+    assert admin_count_re_up == 0
 
-    func_exists_029 = await conn3.fetchval(
+    func_exists_030 = await conn3.fetchval(
         "SELECT EXISTS(SELECT 1 FROM pg_proc WHERE proname = 'resolve_auth_context');"
     )
-    assert func_exists_029 is True
+    assert func_exists_030 is True
 
     # 5. Verify ACL Privileges for resolve_auth_context
     has_api_exec = await conn3.fetchval(

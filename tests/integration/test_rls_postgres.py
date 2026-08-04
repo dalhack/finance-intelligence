@@ -48,6 +48,7 @@ async def test_migration_applies_cleanly():
         "027_auth_context_lookup_security_plane",
         "028_remove_organization_only_actor_lookup",
         "029_analysis_authorization_policy",
+        "030_reconcile_application_role_catalog",
     ]
 
 
