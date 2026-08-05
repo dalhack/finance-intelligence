@@ -13,6 +13,7 @@ from app.migration_execution.cloudsql_admin import (
     update_user_password,
 )
 from app.migration_execution.config import MigrationConfigError, MigrationExecutionConfig
+from app.migration_execution.provisioning import ProvisioningError, provision_application_database
 from app.migration_execution.redaction import redact_text, safe_close_connector, sanitize_dict_for_logging
 
 
@@ -260,3 +261,157 @@ def test_cloudsql_admin_unexpected_operation_status_fails(mock_auth, mock_api):
     assert "secret_state" not in err
     assert "bearer_canary_999" not in err
     assert "[REDACTED]" in err or "failed" in err.lower()
+
+
+def test_provisioning_missing_secret_fails_upfront():
+    incomplete_config = MigrationExecutionConfig(
+        project_id="finance-intel-staging-8f2a",
+        instance_name="fi-staging-db",
+        region="europe-west1",
+        target_database="finance_intelligence_staging",
+        expected_head="030_reconcile_application_role_catalog",
+        initial_admin_password="pwd_admin",
+        bootstrap_password="pwd_bootstrap",
+        api_password=None,
+        worker_password="pwd_worker",
+        maintenance_password="pwd_maint",
+    )
+    with pytest.raises(ProvisioningError, match="Missing required environment secret"):
+        provision_application_database(incomplete_config)
+
+
+@patch("app.migration_execution.provisioning.get_cloudsql_engine")
+@patch("app.migration_execution.provisioning.create_user_if_missing")
+def test_provisioning_transient_membership_grant_and_revoke_success(mock_create_user, mock_get_engine):
+    mock_sys_engine = MagicMock()
+    mock_sys_conn = MagicMock()
+    mock_sys_engine.connect.return_value.__enter__.return_value = mock_sys_conn
+
+    mock_target_engine = MagicMock()
+    mock_target_conn = MagicMock()
+    mock_target_engine.connect.return_value.__enter__.return_value = mock_target_conn
+
+    mock_get_engine.side_effect = [
+        (mock_sys_engine, MagicMock()),
+        (mock_target_engine, MagicMock()),
+    ]
+
+    def mock_sys_exec(sql, *args, **kwargs):
+        sql_str = str(sql)
+        if "SELECT CURRENT_USER" in sql_str:
+            return MagicMock(scalar=lambda: "postgres")
+        if "pg_auth_members" in sql_str:
+            return MagicMock(scalar=lambda: False)
+        return MagicMock(scalar=lambda: 0)
+
+    mock_sys_conn.execute.side_effect = mock_sys_exec
+
+    config = MigrationExecutionConfig(
+        project_id="finance-intel-staging-8f2a",
+        instance_name="fi-staging-db",
+        region="europe-west1",
+        target_database="finance_intelligence_staging",
+        expected_head="030_reconcile_application_role_catalog",
+        initial_admin_password="adm",
+        bootstrap_password="boot",
+        api_password="api",
+        worker_password="wrk",
+        maintenance_password="mnt",
+    )
+
+    provision_application_database(config)
+
+    assert mock_create_user.call_count == 4
+
+    executed_sqls = [str(call[0][0]) for call in mock_sys_conn.execute.call_args_list]
+    assert any('GRANT db_owner TO "postgres"' in sql for sql in executed_sqls)
+    assert any('REVOKE db_owner FROM "postgres"' in sql for sql in executed_sqls)
+
+
+@patch("app.migration_execution.provisioning.get_cloudsql_engine")
+@patch("app.migration_execution.provisioning.create_user_if_missing")
+def test_provisioning_transient_membership_preexisting_preserved(mock_create_user, mock_get_engine):
+    mock_sys_engine = MagicMock()
+    mock_sys_conn = MagicMock()
+    mock_sys_engine.connect.return_value.__enter__.return_value = mock_sys_conn
+
+    mock_target_engine = MagicMock()
+    mock_target_conn = MagicMock()
+    mock_target_engine.connect.return_value.__enter__.return_value = mock_target_conn
+
+    mock_get_engine.side_effect = [
+        (mock_sys_engine, MagicMock()),
+        (mock_target_engine, MagicMock()),
+    ]
+
+    def mock_sys_exec(sql, *args, **kwargs):
+        sql_str = str(sql)
+        if "SELECT CURRENT_USER" in sql_str:
+            return MagicMock(scalar=lambda: "postgres")
+        if "pg_auth_members" in sql_str:
+            return MagicMock(scalar=lambda: True)
+        return MagicMock(scalar=lambda: 0)
+
+    mock_sys_conn.execute.side_effect = mock_sys_exec
+
+    config = MigrationExecutionConfig(
+        project_id="finance-intel-staging-8f2a",
+        instance_name="fi-staging-db",
+        region="europe-west1",
+        target_database="finance_intelligence_staging",
+        expected_head="030_reconcile_application_role_catalog",
+        initial_admin_password="adm",
+        bootstrap_password="boot",
+        api_password="api",
+        worker_password="wrk",
+        maintenance_password="mnt",
+    )
+
+    provision_application_database(config)
+
+    executed_sqls = [str(call[0][0]) for call in mock_sys_conn.execute.call_args_list]
+    assert not any('GRANT db_owner TO "postgres"' in sql for sql in executed_sqls)
+    assert not any('REVOKE db_owner FROM "postgres"' in sql for sql in executed_sqls)
+
+
+@patch("app.migration_execution.provisioning.get_cloudsql_engine")
+@patch("app.migration_execution.provisioning.create_user_if_missing")
+def test_provisioning_transient_membership_cleanup_runs_on_failure(mock_create_user, mock_get_engine):
+    mock_sys_engine = MagicMock()
+    mock_sys_conn = MagicMock()
+    mock_sys_engine.connect.return_value.__enter__.return_value = mock_sys_conn
+
+    mock_get_engine.side_effect = [
+        (mock_sys_engine, MagicMock()),
+    ]
+
+    def mock_sys_execute(sql, *args, **kwargs):
+        sql_str = str(sql)
+        if "CREATE DATABASE" in sql_str:
+            raise RuntimeError("Database creation simulated failure")
+        if "SELECT CURRENT_USER" in sql_str:
+            return MagicMock(scalar=lambda: "postgres")
+        if "pg_auth_members" in sql_str:
+            return MagicMock(scalar=lambda: False)
+        return MagicMock(scalar=lambda: 0)
+
+    mock_sys_conn.execute.side_effect = mock_sys_execute
+
+    config = MigrationExecutionConfig(
+        project_id="finance-intel-staging-8f2a",
+        instance_name="fi-staging-db",
+        region="europe-west1",
+        target_database="finance_intelligence_staging",
+        expected_head="030_reconcile_application_role_catalog",
+        initial_admin_password="adm",
+        bootstrap_password="boot",
+        api_password="api",
+        worker_password="wrk",
+        maintenance_password="mnt",
+    )
+
+    with pytest.raises(ProvisioningError, match="Database creation simulated failure"):
+        provision_application_database(config)
+
+    executed_sqls = [str(call[0][0]) for call in mock_sys_conn.execute.call_args_list]
+    assert any('REVOKE db_owner FROM "postgres"' in sql for sql in executed_sqls)

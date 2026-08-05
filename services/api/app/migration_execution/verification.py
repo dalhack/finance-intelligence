@@ -105,8 +105,8 @@ def run_security_verification(config: MigrationExecutionConfig) -> None:
             if not res:
                 raise VerificationError("Gate 4 Failed: 'db_bootstrap' is not a member of 'db_owner'.")
 
-            # Gate 5 (Cont.): Runtime roles must NOT be members of db_owner
-            for rt_role in ["db_api_user", "db_ingestion_worker", "db_maintenance_worker"]:
+            # Gate 5 (Cont.): Admin & Runtime roles must NOT be members of db_owner
+            for rt_role in ["postgres", "db_api_user", "db_ingestion_worker", "db_maintenance_worker"]:
                 res = conn.execute(
                     text("""
                         SELECT 1 FROM pg_auth_members m
@@ -118,7 +118,7 @@ def run_security_verification(config: MigrationExecutionConfig) -> None:
                 ).fetchone()
                 if res:
                     raise VerificationError(
-                        f"Gate 5 Failed: Runtime role '{rt_role}' is illegally a member of 'db_owner'!"
+                        f"Gate 5 Failed: Non-owner role '{rt_role}' is illegally a member of 'db_owner'!"
                     )
 
             logger.info("[VERIFICATION Gate 5/11] Runtime role least-privilege isolation: PASS")

@@ -130,7 +130,7 @@ def test_real_provisioning_idempotence(mock_connector_cls, mock_create_user, tes
     except Exception:  # noqa: BLE001
         mock_engine = MagicMock()
         mock_conn = MagicMock()
-        mock_conn.execute.return_value.scalar.return_value = None
+        mock_conn.execute.return_value.scalar.return_value = "postgres"
         mock_get_engine = MagicMock(return_value=(mock_engine, MagicMock()))
         mock_engine.connect.return_value.__enter__.return_value = mock_conn
 
@@ -157,7 +157,7 @@ def test_real_security_verification_11_gates(mock_connector_cls, test_config):
             MagicMock(fetchone=lambda: ("db_owner",)),  # Gate 2
             *[MagicMock(fetchone=lambda: (False, False, False, False)) for _ in range(5)],  # Gate 3
             MagicMock(fetchone=lambda: (1,)),  # Gate 4
-            *[MagicMock(fetchone=lambda: None) for _ in range(3)],  # Gate 5
+            *[MagicMock(fetchone=lambda: None) for _ in range(4)],  # Gate 5
             *[MagicMock(fetchone=lambda: (True, True)) for _ in range(len(DOMAIN_TABLES))],  # Gate 6
             MagicMock(fetchone=lambda: (False,)),  # Gate 7
             MagicMock(
@@ -303,7 +303,7 @@ def _make_mock_verification_engine(overrides: dict):
         "gate2": ("db_owner",),
         "gate3": [(False, False, False, False)] * 5,
         "gate4": (1,),
-        "gate5": [None] * 3,
+        "gate5": [None] * 4,
         "gate6": [(True, True)] * len(DOMAIN_TABLES),
         "gate7": (False,),
         "gate8": (1001, True, "db_owner", ["search_path=public, pg_catalog, pg_temp"], False, True),
