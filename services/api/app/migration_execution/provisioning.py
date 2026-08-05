@@ -152,7 +152,7 @@ def provision_application_database(config: MigrationExecutionConfig) -> None:
                 )
         finally:
             target_engine.dispose()
-            target_connector.cleanup()
+            target_connector.close()
 
         logger.info(f"[PROVISIONING] SUCCESS: Database '{config.target_database}' and roles provisioned cleanly.")
 
@@ -163,4 +163,4 @@ def provision_application_database(config: MigrationExecutionConfig) -> None:
         if sys_engine:
             sys_engine.dispose()
         if sys_connector:
-            sys_connector.cleanup()
+            sys_connector.close()

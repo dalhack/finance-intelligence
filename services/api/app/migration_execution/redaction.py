@@ -28,7 +28,7 @@ def redact_text(text: str) -> str:
 
 def sanitize_dict_for_logging(data: dict[str, Any]) -> dict[str, Any]:
     """Returns a copy of the dictionary with sensitive fields redacted."""
-    sanitized = {}
+    sanitized: dict[str, Any] = {}
     for key, value in data.items():
         key_lower = key.lower()
         if any(s in key_lower for s in ("password", "secret", "token", "key", "authorization", "auth")):

@@ -167,10 +167,10 @@ def run_security_verification(config: MigrationExecutionConfig) -> None:
                 raise VerificationError(f"Gate 9 Failed: Expected 17 canonical permissions, found {perm_count}.")
 
             # Gate 10: Role Catalog Breakdown (8 VIEWER, 15 ANALYST, ADMIN absent)
-            res = conn.execute(
+            role_rows = conn.execute(
                 text("SELECT role_name, COUNT(*) FROM application_role_permissions GROUP BY role_name;")
             ).fetchall()
-            role_counts = {row[0]: row[1] for row in res}
+            role_counts = {row[0]: row[1] for row in role_rows}
             logger.info(f"[VERIFICATION Gate 10/11] Role permission counts: {role_counts}")
 
             if "ADMIN" in role_counts:
@@ -206,4 +206,4 @@ def run_security_verification(config: MigrationExecutionConfig) -> None:
         if engine:
             engine.dispose()
         if connector:
-            connector.cleanup()
+            connector.close()

@@ -15,6 +15,9 @@ from app.migration_execution.cloudsql_admin import update_user_password
 from app.migration_execution.config import MigrationExecutionConfig
 from app.migration_execution.provisioning import provision_application_database
 from app.migration_execution.redaction import redact_text
+
+# Backward-compatible alias for existing test imports
+redact_sensitive_string = redact_text
 from app.migration_execution.verification import run_security_verification
 
 # Configure logger with stdout for INFO and stderr for ERROR

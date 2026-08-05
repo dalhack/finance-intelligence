@@ -98,4 +98,4 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
         if engine:
             engine.dispose()
         if connector:
-            connector.cleanup()
+            connector.close()
