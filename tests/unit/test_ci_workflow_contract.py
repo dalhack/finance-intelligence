@@ -198,3 +198,42 @@ def test_negative_scanner_fixtures():
     )
     with pytest.raises(AssertionError):
         validate_workflow_semantics(bad_fixture_7)
+
+
+def test_validate_migration_lock_workflow_contract():
+    """Static contract scanner for validate-migration-lock.yml workflow."""
+    lock_wf_path = REPO_ROOT / ".github" / "workflows" / "validate-migration-lock.yml"
+    assert lock_wf_path.exists()
+    content = lock_wf_path.read_text(encoding="utf-8")
+
+    assert "workflow_dispatch:" in content
+    assert "expected_commit_sha:" in content
+    assert "persist-credentials: false" in content
+    assert "platform linux/amd64" in content
+    assert "pip install --no-cache-dir --require-hashes -r /app/services/api/requirements-migration.lock" in content
+    assert "pip check" in content
+    assert "--network none" in content
+    assert "--read-only" in content
+    assert "--tmpfs /tmp:rw,nosuid,nodev,noexec" in content
+    assert "PYTHONPATH=/app/services/api" in content
+    assert "PYTHONDONTWRITEBYTECODE=1" in content
+    assert '-v "${PWD}/services/api:/app/services/api:ro"' in content
+
+    required_imports = [
+        "import app.migration_entrypoint",
+        "import app.migration_execution.config",
+        "import app.migration_execution.cloudsql_admin",
+        "import app.migration_execution.provisioning",
+        "import app.migration_execution.alembic_runner",
+        "import app.migration_execution.verification",
+        "import app.migration_execution.redaction",
+        "import google.auth",
+        "assert version('cloud-sql-python-connector') == '1.9.2'",
+        "assert callable(getattr(Connector, 'close', None))",
+        "[EXECUTION_PLANE_IMPORT_SMOKE] SUCCESS",
+    ]
+    for req_imp in required_imports:
+        assert req_imp in content, f"Missing required import contract: {req_imp}"
+
+    assert "if: always()" in content
+    assert "docker volume rm -f" in content

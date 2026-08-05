@@ -112,11 +112,14 @@ jobs:
             --network none \
             --read-only \
             --tmpfs /tmp:rw,nosuid,nodev,noexec \
-            -v "${PWD}:/app:ro" \
+            --env PYTHONPATH=/app/services/api \
+            --env PYTHONDONTWRITEBYTECODE=1 \
+            --env PYTHONUNBUFFERED=1 \
+            -v "${PWD}/services/api:/app/services/api:ro" \
             -v "${VALIDATION_VOLUME}:/validation-venv:ro" \
             --workdir /app \
             python:3.11-slim@sha256:00af38ae2ed311628970782e8a2d7f014d8909dbc63cb97bc0a158187f4db045 \
-            /validation-venv/bin/python -c "import alembic; import sqlalchemy; import google.cloud.sql.connector; import google.cloud.secretmanager; import pg8000; import cryptography; import cffi; import pycparser; import scramp; print(\"[IMPORT_SMOKE_TEST] SUCCESS: All 9 core migration modules imported cleanly.\")"
+            /validation-venv/bin/python -c "import alembic; import sqlalchemy; import google.cloud.sql.connector; import google.cloud.secretmanager; import google.auth; import pg8000; import cryptography; import cffi; import pycparser; import scramp; import app.migration_entrypoint; import app.migration_execution.config; import app.migration_execution.cloudsql_admin; import app.migration_execution.provisioning; import app.migration_execution.alembic_runner; import app.migration_execution.verification; import app.migration_execution.redaction; from importlib.metadata import version; from google.cloud.sql.connector import Connector; assert version('cloud-sql-python-connector') == '1.9.2'; assert callable(getattr(Connector, 'close', None)); print('[EXECUTION_PLANE_IMPORT_SMOKE] SUCCESS'); print('[CONNECTOR_VERSION] 1.9.2'); print('[CONNECTOR_CLOSE_API] PRESENT')"
 
       - name: Cleanup Exact Validation Volume
         if: always()
