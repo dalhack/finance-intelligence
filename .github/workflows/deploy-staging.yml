@@ -36,17 +36,11 @@ jobs:
             exit 1
           fi
 
-      - name: Checkout Repository
+      - name: Checkout Code at Authorized Commit
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
-          ref: ${{ github.ref }}
-          fetch-depth: 0
+          ref: ${{ inputs.expected_commit_sha }}
           persist-credentials: false
-
-      - name: Checkout Code at Authorized Commit
-        run: |
-          git fetch origin "+refs/heads/*:refs/remotes/origin/*" --unshallow || git fetch origin "+refs/heads/*:refs/remotes/origin/*" || true
-          git checkout ${{ inputs.expected_commit_sha }}
 
       - name: Verify Checked-out Commit Identity
         run: |
