@@ -6,6 +6,7 @@ import sys
 
 from alembic import command
 from alembic.config import Config
+from app.migration_execution.compatibility import execute_compatibility_bridge
 from app.migration_execution.config import MigrationExecutionConfig
 from app.migration_execution.redaction import redact_text, safe_close_connector
 from google.cloud.sql.connector import Connector, IPTypes
@@ -75,8 +76,23 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
                 # Pass the active connection object directly to Alembic
                 alembic_cfg.attributes["connection"] = connection
 
+                # Check current revision in alembic_version
+                res = connection.execute(text("SELECT version_num FROM alembic_version;")).fetchone()
+                current_rev = res[0] if res else None
+                logger.info(f"[MIGRATION_RUNNER] Current alembic_version before upgrade: '{current_rev}'")
+
+                if current_rev and current_rev < "023_analysis_clarification_workflow":
+                    logger.info("[MIGRATION_RUNNER] Upgrading to '023_analysis_clarification_workflow'...")
+                    command.upgrade(alembic_cfg, "023_analysis_clarification_workflow")
+                    res = connection.execute(text("SELECT version_num FROM alembic_version;")).fetchone()
+                    current_rev = res[0] if res else None
+
+                if current_rev == "023_analysis_clarification_workflow":
+                    logger.info("[MIGRATION_RUNNER] Executing Revision 024 Production-Safe Compatibility Bridge...")
+                    execute_compatibility_bridge(connection)
+
                 logger.info(f"[MIGRATION_RUNNER] Executing Alembic upgrade to '{config.expected_head}'...")
-                command.upgrade(alembic_cfg, "head")
+                command.upgrade(alembic_cfg, config.expected_head)
 
                 # Verify applied head in alembic_version table
                 res = connection.execute(text("SELECT version_num FROM alembic_version;")).fetchone()

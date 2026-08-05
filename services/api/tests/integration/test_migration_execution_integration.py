@@ -106,8 +106,9 @@ def test_same_connection_and_advisory_lock_continuity(mock_connector_cls, test_c
             MagicMock(),  # SET ROLE
             MagicMock(fetchone=lambda: ("db_bootstrap", "db_owner")),  # session user
             MagicMock(),  # advisory lock
-            MagicMock(fetchone=lambda: ("030_reconcile_application_role_catalog",)),  # alembic_version
-            MagicMock(),  # advisory unlock
+            MagicMock(fetchone=lambda: ("030_reconcile_application_role_catalog",)),  # pre-upgrade alembic_version
+            MagicMock(fetchone=lambda: ("030_reconcile_application_role_catalog",)),  # post-upgrade alembic_version
+            MagicMock(fetchone=lambda: (True,)),  # advisory unlock
         ]
         with (
             patch("app.migration_execution.alembic_runner.create_engine", return_value=mock_engine),
