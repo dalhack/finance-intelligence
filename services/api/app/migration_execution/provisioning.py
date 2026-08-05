@@ -108,6 +108,9 @@ def provision_application_database(config: MigrationExecutionConfig) -> None:
 
         # 3. Verify and set role attributes & memberships via SQL
         with sys_engine.connect() as conn:
+            # Grant db_owner membership to CURRENT_USER (admin role) to allow SET ROLE / OWNER db_owner in PostgreSQL 16
+            conn.execute(text("GRANT db_owner TO CURRENT_USER;"))
+
             # Grant db_owner membership to db_bootstrap
             logger.info("[PROVISIONING] Granting 'db_owner' membership to 'db_bootstrap'...")
             conn.execute(text("GRANT db_owner TO db_bootstrap;"))
