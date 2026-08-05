@@ -6,7 +6,7 @@ import os
 from alembic import command
 from alembic.config import Config
 from app.migration_execution.config import MigrationExecutionConfig
-from app.migration_execution.redaction import redact_text
+from app.migration_execution.redaction import redact_text, safe_close_connector
 from google.cloud.sql.connector import Connector, IPTypes
 from sqlalchemy import create_engine, text
 from sqlalchemy.engine import Engine
@@ -97,5 +97,4 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
     finally:
         if engine:
             engine.dispose()
-        if connector:
-            connector.close()
+        safe_close_connector(connector)

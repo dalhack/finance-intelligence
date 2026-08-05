@@ -3,7 +3,7 @@
 import logging
 
 from app.migration_execution.config import MigrationExecutionConfig
-from app.migration_execution.redaction import redact_text
+from app.migration_execution.redaction import redact_text, safe_close_connector
 from google.cloud.sql.connector import Connector, IPTypes
 from sqlalchemy import create_engine, text
 from sqlalchemy.engine import Engine
@@ -167,22 +167,28 @@ def run_security_verification(config: MigrationExecutionConfig) -> None:
                 raise VerificationError(f"Gate 9 Failed: Expected 17 canonical permissions, found {perm_count}.")
 
             # Gate 10: Role Catalog Breakdown (8 VIEWER, 15 ANALYST, ADMIN absent)
-            role_rows = conn.execute(
-                text("SELECT role_name, COUNT(*) FROM application_role_permissions GROUP BY role_name;")
+            # Authoritative schema: public.roles, public.role_permissions, public.permissions
+            roles_rows = conn.execute(
+                text("""
+                    SELECT r.name, COUNT(DISTINCT rp.permission_id)
+                    FROM public.roles r
+                    LEFT JOIN public.role_permissions rp ON r.id = rp.role_id
+                    GROUP BY r.id, r.name;
+                """)
             ).fetchall()
-            role_counts = {row[0]: row[1] for row in role_rows}
-            logger.info(f"[VERIFICATION Gate 10/11] Role permission counts: {role_counts}")
+            role_map = {row[0]: row[1] for row in roles_rows}
+            logger.info(f"[VERIFICATION Gate 10/11] Role permission counts: {role_map}")
 
-            if "ADMIN" in role_counts:
+            if "ADMIN" in role_map:
                 raise VerificationError("Gate 10 Failed: Prohibited 'ADMIN' application role present in catalog!")
-            if role_counts.get("VIEWER") != 8:
-                raise VerificationError(
-                    f"Gate 10 Failed: Expected 8 VIEWER permissions, got {role_counts.get('VIEWER')}."
-                )
-            if role_counts.get("ANALYST") != 15:
-                raise VerificationError(
-                    f"Gate 10 Failed: Expected 15 ANALYST permissions, got {role_counts.get('ANALYST')}."
-                )
+            if "VIEWER" not in role_map:
+                raise VerificationError("Gate 10 Failed: Mandatory role 'VIEWER' is missing from public.roles.")
+            if role_map["VIEWER"] != 8:
+                raise VerificationError(f"Gate 10 Failed: Expected 8 VIEWER permissions, got {role_map['VIEWER']}.")
+            if "ANALYST" not in role_map:
+                raise VerificationError("Gate 10 Failed: Mandatory role 'ANALYST' is missing from public.roles.")
+            if role_map["ANALYST"] != 15:
+                raise VerificationError(f"Gate 10 Failed: Expected 15 ANALYST permissions, got {role_map['ANALYST']}.")
 
             # Gate 11: Uppercase Constraint on roles(name)
             res = conn.execute(
@@ -205,5 +211,4 @@ def run_security_verification(config: MigrationExecutionConfig) -> None:
     finally:
         if engine:
             engine.dispose()
-        if connector:
-            connector.close()
+        safe_close_connector(connector)

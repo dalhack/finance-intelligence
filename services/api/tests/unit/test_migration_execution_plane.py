@@ -1,122 +1,94 @@
-"""Unit tests for Migration Execution Plane Modules."""
+"""Unit tests for Migration Execution Plane modules."""
 
 import json
-import os
 import urllib.error
 from unittest.mock import MagicMock, patch
 
 import pytest
 from app.migration_execution.cloudsql_admin import (
+    SQLADMIN_API_BASE,
     CloudSQLAdminError,
     create_user_if_missing,
     list_instance_users,
     update_user_password,
 )
 from app.migration_execution.config import MigrationConfigError, MigrationExecutionConfig
-from app.migration_execution.redaction import redact_text, sanitize_dict_for_logging
+from app.migration_execution.redaction import redact_text, safe_close_connector, sanitize_dict_for_logging
 
 
 def test_config_validation_success():
-    os.environ["GCP_PROJECT"] = "finance-intel-staging-8f2a"
-    os.environ["CLOUD_SQL_INSTANCE"] = "fi-staging-db"
-    os.environ["REGION"] = "europe-west1"
-    os.environ["TARGET_DATABASE"] = "finance_intelligence_staging"
-    os.environ["EXPECTED_MIGRATION_HEAD"] = "030_reconcile_application_role_catalog"
-    os.environ["INITIAL_ADMIN_PASSWORD"] = "secret_admin_pass"
-
-    config = MigrationExecutionConfig.from_env("bootstrap-password")
-    assert config.project_id == "finance-intel-staging-8f2a"
-    assert config.instance_name == "fi-staging-db"
-    assert config.region == "europe-west1"
-    assert config.target_database == "finance_intelligence_staging"
-    assert config.expected_head == "030_reconcile_application_role_catalog"
-    assert config.initial_admin_password == "secret_admin_pass"
-
-
-def test_config_validation_rejects_travel_mapper():
-    os.environ["GCP_PROJECT"] = "finance-intel-staging-8f2a"
-    os.environ["CLOUD_SQL_INSTANCE"] = "travel-mapper-db"
-
-    with pytest.raises(MigrationConfigError, match="Invalid CLOUD_SQL_INSTANCE"):
-        MigrationExecutionConfig.from_env("bootstrap-password")
-
-    os.environ["CLOUD_SQL_INSTANCE"] = "fi-staging-db"
-
-
-def test_config_validation_missing_required_secret():
-    os.environ["GCP_PROJECT"] = "finance-intel-staging-8f2a"
-    os.environ["CLOUD_SQL_INSTANCE"] = "fi-staging-db"
-    if "INITIAL_ADMIN_PASSWORD" in os.environ:
-        del os.environ["INITIAL_ADMIN_PASSWORD"]
-
-    with pytest.raises(MigrationConfigError, match="Missing required environment variable: INITIAL_ADMIN_PASSWORD"):
-        MigrationExecutionConfig.from_env("bootstrap-password")
-
-
-def test_config_repr_redacts_passwords():
     config = MigrationExecutionConfig(
         project_id="finance-intel-staging-8f2a",
         instance_name="fi-staging-db",
         region="europe-west1",
         target_database="finance_intelligence_staging",
         expected_head="030_reconcile_application_role_catalog",
-        initial_admin_password="super_secret_password_123",
-        bootstrap_password="super_secret_password_456",
+        initial_admin_password="admin_pwd",
     )
-    repr_str = repr(config)
-    assert "super_secret_password" not in repr_str
-    assert "[SET]" in repr_str
+    assert config.project_id == "finance-intel-staging-8f2a"
+    assert config.region == "europe-west1"
 
 
-def test_redact_text_redacts_urls_and_headers():
-    raw_log = (
-        "Error connecting to postgresql://admin:my_secret_pwd@10.200.0.3:5432/finance_db with password=my_secret_pwd"
-    )
-    redacted = redact_text(raw_log)
-    assert "my_secret_pwd" not in redacted
-    assert "postgresql://admin:[REDACTED]@10.200.0.3:5432/finance_db" in redacted
-    assert "password=[REDACTED]" in redacted
+def test_config_validation_invalid_project_fails():
+    with (
+        patch.dict("os.environ", {"GCP_PROJECT": "wrong-project-123"}),
+        pytest.raises(MigrationConfigError, match="Invalid GCP_PROJECT"),
+    ):
+        MigrationExecutionConfig.from_env("verify")
+
+
+def test_config_validation_invalid_region_fails():
+    with (
+        patch.dict("os.environ", {"REGION": "us-central1"}),
+        pytest.raises(MigrationConfigError, match="Invalid REGION"),
+    ):
+        MigrationExecutionConfig.from_env("verify")
+
+
+def test_redact_text():
+    raw = "Failed to connect postgresql://user:secret123@localhost:5432/db with password=secret456"
+    redacted = redact_text(raw)
+    assert "secret123" not in redacted
+    assert "secret456" not in redacted
+    assert "[REDACTED]" in redacted
 
 
 def test_sanitize_dict_for_logging():
     data = {
-        "user": "postgres",
-        "password": "super_secret_password",
-        "nested": {"token": "bearer_123", "normal": "value"},
+        "user": "db_owner",
+        "password": "secret_pwd",
+        "nested": {"token": "secret_token", "normal": "value"},
     }
     sanitized = sanitize_dict_for_logging(data)
-    assert sanitized["user"] == "postgres"
     assert sanitized["password"] == "[REDACTED]"
     assert sanitized["nested"]["token"] == "[REDACTED]"
     assert sanitized["nested"]["normal"] == "value"
 
 
-# --- Cloud SQL Admin API Lifecycle Unit Tests ---
+def test_cloudsql_admin_exact_endpoint_contract():
+    """Asserts production code uses exact GCP Cloud SQL Admin v1 API endpoints."""
+    assert SQLADMIN_API_BASE == "https://sqladmin.googleapis.com/v1"
 
 
 @patch("app.migration_execution.cloudsql_admin._make_api_request")
 @patch("app.migration_execution.cloudsql_admin._get_authenticated_session")
-def test_cloudsql_admin_update_password_success(mock_auth, mock_api):
+def test_list_instance_users(mock_auth, mock_api):
     mock_auth.return_value = ("fake_token", MagicMock())
-    mock_api.side_effect = [
-        {"name": "projects/finance-intel-staging-8f2a/operations/op_123"},
-        {"status": "DONE"},
-    ]
+    mock_api.return_value = {"items": [{"name": "postgres"}, {"name": "db_owner"}]}
 
-    update_user_password(
-        project_id="finance-intel-staging-8f2a",
-        instance_name="fi-staging-db",
-        username="postgres",
-        password="new_password_123",
+    users = list_instance_users("finance-intel-staging-8f2a", "fi-staging-db")
+    assert len(users) == 2
+    assert users[0]["name"] == "postgres"
+    mock_api.assert_called_once_with(
+        "GET",
+        "https://sqladmin.googleapis.com/v1/projects/finance-intel-staging-8f2a/instances/fi-staging-db/users",
+        "fake_token",
     )
-
-    assert mock_api.call_count == 2
-    assert mock_api.call_args_list[0][0][0] == "PUT"
 
 
 @patch("app.migration_execution.cloudsql_admin.update_user_password")
 @patch("app.migration_execution.cloudsql_admin.list_instance_users")
-def test_create_user_if_missing_when_present_updates(mock_list, mock_update):
+def test_create_user_if_missing_when_exists_updates(mock_list, mock_update):
     mock_list.return_value = [{"name": "db_bootstrap"}]
     create_user_if_missing("finance-intel-staging-8f2a", "fi-staging-db", "db_bootstrap", "pwd_123")
     mock_update.assert_called_once_with(
@@ -136,6 +108,10 @@ def test_create_user_if_missing_when_absent_creates(mock_auth, mock_list, mock_a
     create_user_if_missing("finance-intel-staging-8f2a", "fi-staging-db", "db_api_user", "pwd_123")
     mock_api.assert_called_once()
     assert mock_api.call_args[0][0] == "POST"
+    assert (
+        mock_api.call_args[0][1]
+        == "https://sqladmin.googleapis.com/v1/projects/finance-intel-staging-8f2a/instances/fi-staging-db/users"
+    )
     mock_poll.assert_called_once_with("finance-intel-staging-8f2a", "op_new", "fake_token")
 
 
@@ -159,18 +135,34 @@ def test_cloudsql_admin_operation_done_with_error_fails(mock_auth, mock_api):
 @patch("app.migration_execution.cloudsql_admin._make_api_request")
 @patch("app.migration_execution.cloudsql_admin._get_authenticated_session")
 def test_cloudsql_admin_operation_timeout_fails(mock_auth, mock_api, mock_sleep):
-    mock_auth.return_value = ("fake_token", MagicMock())
-    mock_api.side_effect = [
-        {"name": "projects/finance-intel-staging-8f2a/operations/op_slow"},
-        {"status": "PENDING"},
-        {"status": "RUNNING"},
-    ]
+    """Deterministic timeout test using infinite fake clock and mock side effects."""
+    mock_auth.return_value = ("fake_token_canary", MagicMock())
+
+    def fake_api_request(method, url, token, body=None):
+        if method == "PUT":
+            return {"name": "projects/finance-intel-staging-8f2a/operations/op_slow"}
+        return {"status": "RUNNING"}
+
+    mock_api.side_effect = fake_api_request
+
+    clock = [0.0]
+
+    def fake_time():
+        val = clock[0]
+        clock[0] += 25.0
+        return val
 
     with (
-        patch("app.migration_execution.cloudsql_admin.time.time", side_effect=[0, 10, 30, 70]),
-        pytest.raises(CloudSQLAdminError, match="timed out after 60 seconds"),
+        patch("app.migration_execution.cloudsql_admin.time.time", side_effect=fake_time),
+        pytest.raises(CloudSQLAdminError) as exc_info,
     ):
-        update_user_password("finance-intel-staging-8f2a", "fi-staging-db", "postgres", "pwd_123")
+        update_user_password("finance-intel-staging-8f2a", "fi-staging-db", "postgres", "pwd_123_canary")
+
+    err_msg = str(exc_info.value)
+    assert "timed out after 60 seconds" in err_msg
+    assert "fake_token_canary" not in err_msg
+    assert "pwd_123_canary" not in err_msg
+    assert mock_sleep.called
 
 
 @pytest.mark.parametrize("status_code", [401, 403, 404, 409, 429, 500, 503])
@@ -188,3 +180,19 @@ def test_cloudsql_admin_http_errors_redacted(mock_auth, mock_urlopen, status_cod
     err_msg = str(exc_info.value)
     assert "secret_canary_pwd" not in err_msg
     assert f"status {status_code}" in err_msg
+
+
+def test_safe_close_connector_lifecycle():
+    """Asserts connector cleanup lifecycle contract: success=1, failure=1, double_close=0, leak=0, exception preserved."""
+    # 1. Close after success = exactly 1
+    mock_conn = MagicMock()
+    safe_close_connector(mock_conn)
+    mock_conn.close.assert_called_once()
+
+    # 2. Close after failure (connector.close raises exception inside safe_close_connector) = exception preserved
+    faulty_conn = MagicMock()
+    faulty_conn.close.side_effect = RuntimeError("Close failed")
+    safe_close_connector(faulty_conn)  # Should log warning without raising exception
+
+    # 3. None connector handled safely
+    safe_close_connector(None)

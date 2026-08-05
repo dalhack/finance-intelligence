@@ -4,7 +4,7 @@ import logging
 
 from app.migration_execution.cloudsql_admin import create_user_if_missing
 from app.migration_execution.config import MigrationExecutionConfig
-from app.migration_execution.redaction import redact_text
+from app.migration_execution.redaction import redact_text, safe_close_connector
 from google.cloud.sql.connector import Connector, IPTypes
 from sqlalchemy import create_engine, text
 from sqlalchemy.engine import Engine
@@ -152,7 +152,7 @@ def provision_application_database(config: MigrationExecutionConfig) -> None:
                 )
         finally:
             target_engine.dispose()
-            target_connector.close()
+            safe_close_connector(target_connector)
 
         logger.info(f"[PROVISIONING] SUCCESS: Database '{config.target_database}' and roles provisioned cleanly.")
 
@@ -162,5 +162,4 @@ def provision_application_database(config: MigrationExecutionConfig) -> None:
     finally:
         if sys_engine:
             sys_engine.dispose()
-        if sys_connector:
-            sys_connector.close()
+        safe_close_connector(sys_connector)
