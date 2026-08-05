@@ -129,7 +129,7 @@ def create_user_if_missing(
     password: str,
     host: str = "%",
 ) -> None:
-    """Creates user if absent, or updates password if user already exists."""
+    """Creates user if absent. If user already exists, skips password update during provisioning."""
     logger.info(f"[CLOUD_SQL_ADMIN] Ensuring user '{username}' exists on instance '{instance_name}'...")
     token, _ = _get_authenticated_session()
 
@@ -137,8 +137,10 @@ def create_user_if_missing(
     existing = [u for u in users if u.get("name") == username]
 
     if existing:
-        logger.info(f"[CLOUD_SQL_ADMIN] User '{username}' already exists. Updating password...")
-        update_user_password(project_id, instance_name, username, password, host=host)
+        logger.info(
+            f"[CLOUD_SQL_ADMIN] User '{username}' already exists on instance '{instance_name}'. "
+            "Skipping password update during provisioning."
+        )
         return
 
     logger.info(f"[CLOUD_SQL_ADMIN] User '{username}' missing. Creating user...")
