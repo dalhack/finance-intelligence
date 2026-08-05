@@ -1,9 +1,10 @@
-"""Revision 024 Production-Safe Compatibility Executor (Remediated Invariant Model).
+"""Revision 024 Production-Safe Compatibility Executor (Remediated Exact Invariant Model).
 
 Bridges historical revision 024_maintenance_scheduler_and_operational_resilience
 without executing static development passwords against Cloud SQL staging database
 while maintaining exact 001-030 file immutability, Secret Manager password parity,
-100% partial-object manifest checking, and 100% deep postcondition catalog verification.
+100% partial-object manifest checking, 100% exact postcondition catalog verification,
+and deterministic physical transaction ownership.
 """
 
 from __future__ import annotations
@@ -154,7 +155,6 @@ def verify_compatibility_preconditions(conn: Connection, expected_database: str 
         raise Migration024CompatibilityError("Role 'postgres' must NOT be a member of 'db_owner'")
 
     # 6. 100% Partial-Object Manifest Check: Query ALL 9 named artifacts
-    # Check tables
     for tbl in REVISION_024_TABLES:
         t_exists = conn.execute(
             sa.text("SELECT 1 FROM information_schema.tables WHERE table_schema = 'public' AND table_name = :tname;"),
@@ -165,7 +165,6 @@ def verify_compatibility_preconditions(conn: Connection, expected_database: str 
                 f"Partial Revision 024 artifact '{tbl}' (table) exists while alembic_version is at 023"
             )
 
-    # Check indexes
     for idx in REVISION_024_INDEXES:
         i_exists = conn.execute(
             sa.text(
@@ -179,7 +178,6 @@ def verify_compatibility_preconditions(conn: Connection, expected_database: str 
                 f"Partial Revision 024 artifact '{idx}' (index) exists while alembic_version is at 023"
             )
 
-    # Check policies
     for pol in REVISION_024_POLICIES:
         p_exists = conn.execute(
             sa.text("SELECT 1 FROM pg_policy WHERE polname = :pname;"),
@@ -190,7 +188,6 @@ def verify_compatibility_preconditions(conn: Connection, expected_database: str 
                 f"Partial Revision 024 artifact '{pol}' (policy) exists while alembic_version is at 023"
             )
 
-    # Check functions
     for fn in REVISION_024_FUNCTIONS:
         f_exists = conn.execute(
             sa.text(
@@ -402,9 +399,50 @@ def apply_safe_024_ddl(conn: Connection) -> None:
 
 
 def verify_postconditions(conn: Connection) -> None:
-    """Verifies 100% deep catalog definitions for Revision 024 objects and privileges."""
-    # 1. Deep Table & Column Verifications
-    for tbl in REVISION_024_TABLES:
+    """Verifies 100% exact catalog definitions for Revision 024 objects and privileges."""
+    # 1. Deep Table, Column Types, Nullability, and Defaults Verifications
+    expected_cols = {
+        "maintenance_jobs": {
+            "id": ("uuid", "NO"),
+            "job_code": ("character varying", "NO"),
+            "organization_id": ("uuid", "NO"),
+            "target_entity_id": ("character varying", "YES"),
+            "status": ("character varying", "NO"),
+            "available_at": ("timestamp with time zone", "NO"),
+            "locked_by": ("character varying", "YES"),
+            "locked_at": ("timestamp with time zone", "YES"),
+            "lease_expires_at": ("timestamp with time zone", "YES"),
+            "claim_token": ("uuid", "YES"),
+            "attempt_count": ("integer", "NO"),
+            "max_attempts": ("integer", "NO"),
+            "last_error_code": ("character varying", "YES"),
+            "created_at": ("timestamp with time zone", "NO"),
+            "completed_at": ("timestamp with time zone", "YES"),
+        },
+        "maintenance_attempts": {
+            "id": ("uuid", "NO"),
+            "maintenance_job_id": ("uuid", "NO"),
+            "organization_id": ("uuid", "NO"),
+            "attempt_number": ("integer", "NO"),
+            "worker_instance_key": ("character varying", "NO"),
+            "claim_token_fingerprint": ("character varying", "NO"),
+            "status": ("character varying", "NO"),
+            "error_code": ("character varying", "YES"),
+            "started_at": ("timestamp with time zone", "NO"),
+            "finished_at": ("timestamp with time zone", "YES"),
+            "created_at": ("timestamp with time zone", "NO"),
+        },
+        "maintenance_worker_heartbeats": {
+            "worker_instance_key": ("character varying", "NO"),
+            "worker_role": ("character varying", "NO"),
+            "started_at": ("timestamp with time zone", "NO"),
+            "last_seen_at": ("timestamp with time zone", "NO"),
+            "status": ("character varying", "NO"),
+            "contract_version": ("character varying", "NO"),
+        },
+    }
+
+    for tbl, cols_spec in expected_cols.items():
         t_exists = conn.execute(
             sa.text("SELECT 1 FROM information_schema.tables WHERE table_schema = 'public' AND table_name = :tname;"),
             {"tname": tbl},
@@ -412,31 +450,63 @@ def verify_postconditions(conn: Connection) -> None:
         if not t_exists:
             raise Migration024CompatibilityError(f"Postcondition failed: Table '{tbl}' missing")
 
-        cols = conn.execute(
+        db_cols = conn.execute(
             sa.text(
                 "SELECT column_name, data_type, is_nullable FROM information_schema.columns "
                 "WHERE table_schema = 'public' AND table_name = :tname;"
             ),
             {"tname": tbl},
         ).fetchall()
-        if not cols:
-            raise Migration024CompatibilityError(f"Postcondition failed: Columns for table '{tbl}' empty")
+        db_col_map = {row[0]: (row[1], row[2]) for row in db_cols}
 
-    # 2. Deep Index Verifications
-    for idx in REVISION_024_INDEXES:
-        idx_valid = conn.execute(
+        for col_name, (exp_type, exp_null) in cols_spec.items():
+            if col_name not in db_col_map:
+                raise Migration024CompatibilityError(
+                    f"Postcondition failed: Column '{col_name}' missing from table '{tbl}'"
+                )
+            act_type, act_null = db_col_map[col_name]
+            if act_type != exp_type or act_null != exp_null:
+                raise Migration024CompatibilityError(
+                    f"Postcondition failed: Column '{col_name}' in table '{tbl}' mismatch: expected ({exp_type}, {exp_null}), got ({act_type}, {act_null})"
+                )
+
+    # 2. Deep Constraint Definitions (PK, FK, Check)
+    expected_constraints = [
+        "pk_maintenance_jobs",
+        "pk_maintenance_attempts",
+        "pk_maintenance_worker_heartbeats",
+        "chk_maintenance_job_attempts",
+        "fk_maintenance_jobs_organization_id_organizations",
+        "fk_maintenance_attempts_maintenance_job_id_maintenance_jobs",
+        "fk_maintenance_attempts_organization_id_organizations",
+    ]
+    for cname in expected_constraints:
+        c_def = conn.execute(
             sa.text(
-                "SELECT i.indisvalid FROM pg_index i "
+                "SELECT pg_get_constraintdef(c.oid) FROM pg_constraint c "
+                "JOIN pg_namespace n ON c.connamespace = n.oid "
+                "WHERE n.nspname = 'public' AND c.conname = :cname;"
+            ),
+            {"cname": cname},
+        ).scalar()
+        if not c_def:
+            raise Migration024CompatibilityError(f"Postcondition failed: Constraint '{cname}' missing or unreadable")
+
+    # 3. Deep Index Verifications (indisvalid, indisready, pg_get_indexdef)
+    for idx in REVISION_024_INDEXES:
+        idx_info = conn.execute(
+            sa.text(
+                "SELECT i.indisvalid, i.indisready, pg_get_indexdef(c.oid) FROM pg_index i "
                 "JOIN pg_class c ON c.oid = i.indexrelid "
                 "JOIN pg_namespace n ON c.relnamespace = n.oid "
                 "WHERE n.nspname = 'public' AND c.relname = :iname;"
             ),
             {"iname": idx},
-        ).scalar()
-        if not idx_valid:
-            raise Migration024CompatibilityError(f"Postcondition failed: Index '{idx}' missing or invalid")
+        ).fetchone()
+        if not idx_info or not idx_info[0] or not idx_info[1] or not idx_info[2]:
+            raise Migration024CompatibilityError(f"Postcondition failed: Index '{idx}' missing, invalid, or unreadable")
 
-    # 3. Deep RLS Flags Verifications (relrowsecurity AND relforcerowsecurity)
+    # 4. Deep RLS Flags Verifications (relrowsecurity AND relforcerowsecurity)
     for rls_tbl in ["maintenance_jobs", "maintenance_attempts"]:
         rls_flags = conn.execute(
             sa.text(
@@ -451,19 +521,22 @@ def verify_postconditions(conn: Connection) -> None:
                 f"Postcondition failed: RLS enable/force flags invalid for table '{rls_tbl}'"
             )
 
-    # 4. Deep Policy Verifications
+    # 5. Deep Policy Verifications (polcmd, polqual, polwithcheck)
     for pol in REVISION_024_POLICIES:
-        p_cmd = conn.execute(
-            sa.text("SELECT polcmd FROM pg_policy WHERE polname = :pname;"),
+        pol_info = conn.execute(
+            sa.text(
+                "SELECT polcmd, pg_get_expr(polqual, polrelid), pg_get_expr(polwithcheck, polrelid) "
+                "FROM pg_policy WHERE polname = :pname;"
+            ),
             {"pname": pol},
-        ).scalar()
-        if not p_cmd:
-            raise Migration024CompatibilityError(f"Postcondition failed: Policy '{pol}' missing")
+        ).fetchone()
+        if not pol_info or not pol_info[0] or not pol_info[1] or not pol_info[2]:
+            raise Migration024CompatibilityError(f"Postcondition failed: Policy '{pol}' missing or incomplete")
 
-    # 5. Deep Function Attributes Verifications
+    # 6. Deep Function Attributes Verifications
     fn_info = conn.execute(
         sa.text(
-            "SELECT r.rolname, p.prosecdef, pg_get_functiondef(p.oid) FROM pg_proc p "
+            "SELECT r.rolname, p.prosecdef, pg_get_functiondef(p.oid), pg_get_function_identity_arguments(p.oid) FROM pg_proc p "
             "JOIN pg_namespace n ON p.pronamespace = n.oid "
             "JOIN pg_roles r ON p.proowner = r.oid "
             "WHERE n.nspname = 'public' AND p.proname = 'claim_next_maintenance_job';"
@@ -471,30 +544,70 @@ def verify_postconditions(conn: Connection) -> None:
     ).fetchone()
     if not fn_info:
         raise Migration024CompatibilityError("Postcondition failed: Function 'claim_next_maintenance_job' missing")
-    fn_owner, prosecdef, fn_def = fn_info
-    if fn_owner != "db_owner" or not prosecdef or "search_path" not in fn_def:
+    fn_owner, prosecdef, fn_def, fn_args = fn_info
+    if (
+        fn_owner != "db_owner"
+        or not prosecdef
+        or "search_path" not in fn_def
+        or "p_worker_id text, p_claim_token uuid, p_allowed_job_codes text[]" not in fn_args
+    ):
         raise Migration024CompatibilityError(
-            f"Postcondition failed: Invalid function attributes for claim_next_maintenance_job: owner={fn_owner}, prosecdef={prosecdef}"
+            f"Postcondition failed: Invalid function attributes for claim_next_maintenance_job: owner={fn_owner}, prosecdef={prosecdef}, args={fn_args}"
+        )
+
+    # 7. Deep Privilege & Grant Verifications
+    has_conn = conn.execute(
+        sa.text("SELECT has_database_privilege('db_maintenance_worker', current_database(), 'CONNECT');")
+    ).scalar()
+    has_usage = conn.execute(
+        sa.text("SELECT has_schema_privilege('db_maintenance_worker', 'public', 'USAGE');")
+    ).scalar()
+    if not has_conn or not has_usage:
+        raise Migration024CompatibilityError(
+            "Postcondition failed: db_maintenance_worker database CONNECT or schema USAGE missing"
+        )
+
+    for tbl in REVISION_024_TABLES:
+        has_tbl_priv = conn.execute(
+            sa.text("SELECT has_table_privilege('db_maintenance_worker', :tname, 'SELECT, INSERT, UPDATE');"),
+            {"tname": tbl},
+        ).scalar()
+        if not has_tbl_priv:
+            raise Migration024CompatibilityError(
+                f"Postcondition failed: Table privileges missing for 'db_maintenance_worker' on '{tbl}'"
+            )
+
+    has_fn_exec = conn.execute(
+        sa.text(
+            "SELECT has_function_privilege('db_maintenance_worker', 'claim_next_maintenance_job(text, uuid, text[])', 'EXECUTE');"
+        )
+    ).scalar()
+    if not has_fn_exec:
+        raise Migration024CompatibilityError(
+            "Postcondition failed: Function EXECUTE privilege missing for db_maintenance_worker"
         )
 
 
 def execute_compatibility_bridge(conn: Connection, expected_database: str | None = None) -> None:
-    """Executes atomic Migration 024 compatibility bridge inside explicit transaction boundaries."""
+    """Executes atomic Migration 024 compatibility bridge inside explicit, physical transaction boundaries."""
     logger.info("[COMPATIBILITY_RUNNER] Evaluating Migration 024 compatibility preconditions...")
 
-    # Begin explicit nested/outer transaction boundary
-    trans = conn.begin_nested() if conn.in_transaction() else conn.begin()
-    try:
+    # Ensure connection starts in transaction-free state so that with conn.begin() commits physically
+    if conn.in_transaction():
+        logger.info("[COMPATIBILITY_RUNNER] Ending active init transaction prior to physical bridge transaction...")
+        conn.commit()
+
+    with conn.begin():
         verify_compatibility_preconditions(conn, expected_database)
         logger.info(f"[COMPATIBILITY_RUNNER] Revision 024 checksum matched ({EXPECTED_REVISION_024_SHA256[:12]}...).")
 
         logger.info("[COMPATIBILITY_RUNNER] Applying safe Revision 024 DDL (tables, RLS, functions, ACLs)...")
         apply_safe_024_ddl(conn)
 
-        logger.info("[COMPATIBILITY_RUNNER] Verifying Revision 024 deep postconditions...")
+        logger.info("[COMPATIBILITY_RUNNER] Verifying Revision 024 exact 100% catalog postconditions...")
         verify_postconditions(conn)
 
-        logger.info("[COMPATIBILITY_RUNNER] Advancing alembic_version from 023 to 024 atomically...")
+        logger.info("[COMPATIBILITY_RUNNER] Advancing alembic_version from 023 to 024 physically...")
         res = conn.execute(
             sa.text("UPDATE alembic_version SET version_num = :to_ver WHERE version_num = :from_ver;"),
             {"to_ver": COMPATIBILITY_REVISION, "from_ver": SOURCE_REVISION},
@@ -510,11 +623,6 @@ def execute_compatibility_bridge(conn: Connection, expected_database: str | None
                 f"Failed alembic_version update assertion: expected {COMPATIBILITY_REVISION}, got '{version_check}'"
             )
 
-        trans.commit()
-        logger.info(
-            f"[COMPATIBILITY_RUNNER] Transaction committed successfully. Alembic version advanced to '{COMPATIBILITY_REVISION}'."
-        )
-    except Exception as ex:
-        trans.rollback()
-        logger.error(f"[COMPATIBILITY_RUNNER] Compatibility bridge failed and rolled back: {ex}")
-        raise
+    logger.info(
+        f"[COMPATIBILITY_RUNNER] Physical database transaction committed. Alembic version advanced to '{COMPATIBILITY_REVISION}'."
+    )

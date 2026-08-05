@@ -66,6 +66,10 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
             )
             logger.info(f"[MIGRATION_RUNNER] Advisory lock ({MIGRATION_ADVISORY_LOCK_ID}) acquired.")
 
+            # Commit session initialization statements so connection is in clean, transaction-free state
+            if connection.in_transaction():
+                connection.commit()
+
             try:
                 # Locate alembic.ini path
                 ini_path = os.path.join(os.path.dirname(__file__), "..", "..", "alembic.ini")

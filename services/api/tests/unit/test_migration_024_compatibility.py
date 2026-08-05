@@ -238,38 +238,95 @@ def test_postconditions_missing_function_raises():
     """Verifies that invalid function owner or attributes in postcondition verification raises error."""
     mock_conn = MagicMock()
 
-    # Tables exist
-    mock_res1 = MagicMock(scalar=lambda: 1)
-    mock_res2 = MagicMock(fetchall=lambda: [("col1", "uuid", "NO")])
-    # Indexes exist
-    mock_res3 = MagicMock(scalar=lambda: True)
-    # RLS flags valid
-    mock_res4 = MagicMock(fetchone=lambda: (True, True))
-    # Policies exist
-    mock_res5 = MagicMock(scalar=lambda: "ALL")
+    # Table existence & exact columns
+    mock_res1_tbl = MagicMock(scalar=lambda: 1)
+    mock_res2_jobs = MagicMock(
+        fetchall=lambda: [
+            ("id", "uuid", "NO"),
+            ("job_code", "character varying", "NO"),
+            ("organization_id", "uuid", "NO"),
+            ("target_entity_id", "character varying", "YES"),
+            ("status", "character varying", "NO"),
+            ("available_at", "timestamp with time zone", "NO"),
+            ("locked_by", "character varying", "YES"),
+            ("locked_at", "timestamp with time zone", "YES"),
+            ("lease_expires_at", "timestamp with time zone", "YES"),
+            ("claim_token", "uuid", "YES"),
+            ("attempt_count", "integer", "NO"),
+            ("max_attempts", "integer", "NO"),
+            ("last_error_code", "character varying", "YES"),
+            ("created_at", "timestamp with time zone", "NO"),
+            ("completed_at", "timestamp with time zone", "YES"),
+        ]
+    )
+    mock_res2_attempts = MagicMock(
+        fetchall=lambda: [
+            ("id", "uuid", "NO"),
+            ("maintenance_job_id", "uuid", "NO"),
+            ("organization_id", "uuid", "NO"),
+            ("attempt_number", "integer", "NO"),
+            ("worker_instance_key", "character varying", "NO"),
+            ("claim_token_fingerprint", "character varying", "NO"),
+            ("status", "character varying", "NO"),
+            ("error_code", "character varying", "YES"),
+            ("started_at", "timestamp with time zone", "NO"),
+            ("finished_at", "timestamp with time zone", "YES"),
+            ("created_at", "timestamp with time zone", "NO"),
+        ]
+    )
+    mock_res2_heartbeats = MagicMock(
+        fetchall=lambda: [
+            ("worker_instance_key", "character varying", "NO"),
+            ("worker_role", "character varying", "NO"),
+            ("started_at", "timestamp with time zone", "NO"),
+            ("last_seen_at", "timestamp with time zone", "NO"),
+            ("status", "character varying", "NO"),
+            ("contract_version", "character varying", "NO"),
+        ]
+    )
+    mock_res_constraint = MagicMock(scalar=lambda: "PRIMARY KEY (id)")
+    mock_res_index = MagicMock(fetchone=lambda: (True, True, "CREATE INDEX ..."))
+    mock_res_rls = MagicMock(fetchone=lambda: (True, True))
+    mock_res_pol = MagicMock(fetchone=lambda: ("ALL", "USING ...", "WITH CHECK ..."))
+
     # Function owner is wrong ("postgres" instead of "db_owner")
-    mock_res6 = MagicMock(fetchone=lambda: ("postgres", False, "CREATE FUNCTION"))
+    mock_res_fn = MagicMock(
+        fetchone=lambda: (
+            "postgres",
+            False,
+            "CREATE FUNCTION",
+            "p_worker_id text, p_claim_token uuid, p_allowed_job_codes text[]",
+        )
+    )
 
     side_effects = [
-        # 3 tables (exists + columns)
-        mock_res1,
-        mock_res2,
-        mock_res1,
-        mock_res2,
-        mock_res1,
-        mock_res2,
+        # 3 tables (exists + cols)
+        mock_res1_tbl,
+        mock_res2_jobs,
+        mock_res1_tbl,
+        mock_res2_attempts,
+        mock_res1_tbl,
+        mock_res2_heartbeats,
+        # 7 constraints
+        mock_res_constraint,
+        mock_res_constraint,
+        mock_res_constraint,
+        mock_res_constraint,
+        mock_res_constraint,
+        mock_res_constraint,
+        mock_res_constraint,
         # 3 indexes
-        mock_res3,
-        mock_res3,
-        mock_res3,
+        mock_res_index,
+        mock_res_index,
+        mock_res_index,
         # 2 RLS flags
-        mock_res4,
-        mock_res4,
+        mock_res_rls,
+        mock_res_rls,
         # 2 policies
-        mock_res5,
-        mock_res5,
+        mock_res_pol,
+        mock_res_pol,
         # Function info
-        mock_res6,
+        mock_res_fn,
     ]
     mock_conn.execute.side_effect = side_effects
 
