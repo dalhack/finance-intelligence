@@ -196,3 +196,67 @@ def test_safe_close_connector_lifecycle():
 
     # 3. None connector handled safely
     safe_close_connector(None)
+
+
+@patch("urllib.request.urlopen")
+@patch("app.migration_execution.cloudsql_admin._get_authenticated_session")
+def test_cloudsql_admin_malformed_json_redacted(mock_auth, mock_urlopen):
+    mock_auth.return_value = ("bearer_canary_123", MagicMock())
+    mock_resp = MagicMock()
+    mock_resp.read.return_value = b"{ invalid json with password=secret_canary }"
+    mock_resp.__enter__.return_value = mock_resp
+    mock_urlopen.return_value = mock_resp
+
+    with pytest.raises(CloudSQLAdminError) as exc_info:
+        list_instance_users("finance-intel-staging-8f2a", "fi-staging-db")
+
+    err = str(exc_info.value)
+    assert "secret_canary" not in err
+    assert "bearer_canary_123" not in err
+    assert "Failed to communicate with Cloud SQL Admin API" in err
+
+
+@patch("urllib.request.urlopen")
+@patch("app.migration_execution.cloudsql_admin._get_authenticated_session")
+def test_cloudsql_admin_network_exception_redacted(mock_auth, mock_urlopen):
+    mock_auth.return_value = ("bearer_canary_456", MagicMock())
+    mock_urlopen.side_effect = urllib.error.URLError("Connection refused for token=bearer_canary_456")
+
+    with pytest.raises(CloudSQLAdminError) as exc_info:
+        list_instance_users("finance-intel-staging-8f2a", "fi-staging-db")
+
+    err = str(exc_info.value)
+    assert "bearer_canary_456" not in err
+    assert "Failed to communicate with Cloud SQL Admin API" in err
+
+
+@patch("app.migration_execution.cloudsql_admin._make_api_request")
+@patch("app.migration_execution.cloudsql_admin._get_authenticated_session")
+def test_cloudsql_admin_missing_operation_name_fails(mock_auth, mock_api):
+    mock_auth.return_value = ("bearer_canary_789", MagicMock())
+    mock_api.return_value = {}  # Empty dict missing operation name
+
+    with pytest.raises(CloudSQLAdminError) as exc_info:
+        update_user_password("finance-intel-staging-8f2a", "fi-staging-db", "postgres", "pwd_123")
+
+    err = str(exc_info.value)
+    assert "bearer_canary_789" not in err
+    assert "operation" in err.lower()
+
+
+@patch("app.migration_execution.cloudsql_admin._make_api_request")
+@patch("app.migration_execution.cloudsql_admin._get_authenticated_session")
+def test_cloudsql_admin_unexpected_operation_status_fails(mock_auth, mock_api):
+    mock_auth.return_value = ("bearer_canary_999", MagicMock())
+    mock_api.side_effect = [
+        {"name": "projects/finance-intel-staging-8f2a/operations/op_unknown"},
+        {"status": "DONE", "error": {"message": "Operation failed with password=secret_state"}},
+    ]
+
+    with pytest.raises(CloudSQLAdminError) as exc_info:
+        update_user_password("finance-intel-staging-8f2a", "fi-staging-db", "postgres", "pwd_123")
+
+    err = str(exc_info.value)
+    assert "secret_state" not in err
+    assert "bearer_canary_999" not in err
+    assert "[REDACTED]" in err or "failed" in err.lower()

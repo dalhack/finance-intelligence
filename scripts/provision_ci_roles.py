@@ -114,9 +114,7 @@ async def provision_ci_roles(dsn: str, allow_local: bool = False) -> None:
         DO $$
         BEGIN
             IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_app_user') THEN
-                CREATE ROLE db_app_user NOLOGIN NOBYPASSRLS NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT;
-            ELSE
-                ALTER ROLE db_app_user NOLOGIN NOBYPASSRLS NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT;
+                CREATE ROLE db_app_user NOLOGIN NOINHERIT;
             END IF;
         END
         $$;

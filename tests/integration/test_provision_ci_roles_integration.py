@@ -1,4 +1,5 @@
 import asyncio
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -23,6 +24,7 @@ async def test_provision_ci_roles_live_postgres_sql_injection_and_single_quote_s
     """Live Integration Test: Verifies single quotes and injection payloads pass safely against active PostgreSQL."""
     injection_pass = "p'ass'; DROP TABLE users; --"
     env = {
+        **os.environ,
         **VALID_ENV,
         "TEST_API_PASSWORD": injection_pass,
     }

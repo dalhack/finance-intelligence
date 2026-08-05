@@ -2,6 +2,7 @@
 
 import logging
 import os
+import sys
 
 from alembic import command
 from alembic.config import Config
@@ -58,7 +59,10 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
 
             # Acquire session-level advisory lock
             logger.info(f"[MIGRATION_RUNNER] Acquiring advisory lock ({MIGRATION_ADVISORY_LOCK_ID})...")
-            connection.execute(text(f"SELECT pg_advisory_lock({MIGRATION_ADVISORY_LOCK_ID});"))
+            connection.execute(
+                text("SELECT pg_advisory_lock(:lock_id);"),
+                {"lock_id": MIGRATION_ADVISORY_LOCK_ID},
+            )
             logger.info(f"[MIGRATION_RUNNER] Advisory lock ({MIGRATION_ADVISORY_LOCK_ID}) acquired.")
 
             try:
@@ -89,7 +93,27 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
             finally:
                 # Release advisory lock in finally block
                 logger.info(f"[MIGRATION_RUNNER] Releasing advisory lock ({MIGRATION_ADVISORY_LOCK_ID})...")
-                connection.execute(text(f"SELECT pg_advisory_unlock({MIGRATION_ADVISORY_LOCK_ID});"))
+                unlock_ok = False
+                unlock_err_ex = None
+                try:
+                    unlock_res = connection.execute(
+                        text("SELECT pg_advisory_unlock(:lock_id);"),
+                        {"lock_id": MIGRATION_ADVISORY_LOCK_ID},
+                    ).fetchone()
+                    unlock_ok = bool(unlock_res and unlock_res[0])
+                except Exception as ex:  # noqa: BLE001
+                    unlock_err_ex = ex
+                    unlock_ok = False
+
+                if unlock_ok:
+                    logger.info(f"[MIGRATION_RUNNER] Advisory lock ({MIGRATION_ADVISORY_LOCK_ID}) released.")
+                else:
+                    err_msg = f"Advisory lock ({MIGRATION_ADVISORY_LOCK_ID}) unlock returned false or failed."
+                    logger.error(f"[MIGRATION_RUNNER] {err_msg}")
+                    if sys.exc_info()[0] is None:
+                        if unlock_err_ex:
+                            raise MigrationRunnerError(err_msg) from unlock_err_ex
+                        raise MigrationRunnerError(err_msg)
 
     except Exception as e:
         logger.error(f"[MIGRATION_RUNNER] Migration failed: {redact_text(str(e))}")

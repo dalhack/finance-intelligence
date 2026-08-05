@@ -18,7 +18,10 @@ def run_cmd(cmd_list, cwd=None, env=None):
         text=True,
         check=False,
     )
-    return proc.returncode, proc.stdout + "\n" + proc.stderr
+    output = proc.stdout + "\n" + proc.stderr
+    if proc.returncode != 0:
+        print(f"--- GATE FAILED: {' '.join(cmd_list)} ---\n{output}", file=sys.stderr)
+    return proc.returncode, output
 
 
 def main():
@@ -49,9 +52,14 @@ def main():
         },
         {
             "gateId": "LOCAL_POSTGRES_INTEGRATION_GATE",
-            "args": [pytest_bin, "tests/integration"],
+            "args": [pytest_bin, "tests/integration", "services/api/tests/integration", "-m", "not live_acceptance"],
             "env": {
-                "PYTHONPATH": ".",
+                "PYTHONPATH": ".:services/api",
+                "CI": "true",
+                "TEST_BOOTSTRAP_PASSWORD": "bootstrap_pass",
+                "TEST_API_PASSWORD": "api_pass",
+                "TEST_WORKER_PASSWORD": "worker_pass",
+                "TEST_MAINTENANCE_PASSWORD": "dev_maintenance_pass_123",
                 "TEST_OWNER_DATABASE_URL": "postgresql+asyncpg://db_owner:owner_pass@localhost:5432/finance_intelligence_test",
                 "TEST_BOOTSTRAP_DATABASE_URL": "postgresql+asyncpg://db_bootstrap:bootstrap_pass@localhost:5432/finance_intelligence_test",
                 "TEST_API_DATABASE_URL": "postgresql+asyncpg://db_api_user:api_pass@localhost:5432/finance_intelligence_test",

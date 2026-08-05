@@ -143,21 +143,63 @@ def run_security_verification(config: MigrationExecutionConfig) -> None:
 
             logger.info("[VERIFICATION Gate 7/11] PUBLIC schema & ACL privileges: PASS")
 
-            # Gate 8: resolve_auth_context SECURITY DEFINER check
+            # Gate 8: resolve_auth_context SECURITY DEFINER, owner, search_path, and EXECUTE ACL checks
+            # Query exact function signature 'text, uuid' to prevent overload ambiguity
             res = conn.execute(
                 text("""
-                    SELECT p.prosecdef, pg_get_userbyid(p.proowner), p.proconfig
+                    SELECT p.oid,
+                           p.prosecdef,
+                           pg_get_userbyid(p.proowner) AS owner_name,
+                           p.proconfig,
+                           has_function_privilege('public', p.oid, 'EXECUTE') AS public_execute,
+                           CASE WHEN EXISTS (SELECT 1 FROM pg_roles WHERE rolname = 'db_api_user')
+                                THEN has_function_privilege('db_api_user', p.oid, 'EXECUTE')
+                                ELSE false END AS db_api_user_execute
                     FROM pg_proc p
                     JOIN pg_namespace n ON p.pronamespace = n.oid
-                    WHERE n.nspname = 'public' AND p.proname = 'resolve_auth_context';
+                    WHERE n.nspname = 'public'
+                      AND p.proname = 'resolve_auth_context'
+                      AND pg_get_function_identity_arguments(p.oid) = 'text, uuid';
                 """)
             ).fetchone()
-            if not res or not res[0] or res[1] != "db_owner":
+            if not res:
+                raise VerificationError("Gate 8 Failed: Function 'resolve_auth_context(text, uuid)' not found.")
+
+            _fn_oid, prosecdef, owner_name, proconfig, public_execute, db_api_user_execute = res
+
+            if owner_name != "db_owner":
                 raise VerificationError(
-                    "Gate 8 Failed: 'resolve_auth_context' function is not SECURITY DEFINER or not owned by db_owner."
+                    f"Gate 8a Failed: 'resolve_auth_context' owned by '{owner_name}', expected 'db_owner'."
                 )
 
-            logger.info("[VERIFICATION Gate 8/11] resolve_auth_context SECURITY DEFINER: PASS")
+            if not prosecdef:
+                raise VerificationError(
+                    "Gate 8b Failed: 'resolve_auth_context' is SECURITY INVOKER, expected SECURITY DEFINER."
+                )
+
+            # Verify search_path configuration in proconfig
+            search_path_val = None
+            if proconfig:
+                for item in proconfig:
+                    if item.lower().startswith("search_path="):
+                        search_path_val = item.split("=", 1)[1].strip()
+                        break
+
+            sp_parts = [p.strip() for p in search_path_val.split(",")] if search_path_val else []
+            if sp_parts != ["public", "pg_catalog", "pg_temp"]:
+                raise VerificationError(
+                    f"Gate 8c Failed: 'resolve_auth_context' search_path is '{search_path_val}', expected 'public, pg_catalog, pg_temp'."
+                )
+
+            if public_execute:
+                raise VerificationError("Gate 8d Failed: PUBLIC has EXECUTE privilege on 'resolve_auth_context'.")
+
+            if not db_api_user_execute:
+                raise VerificationError(
+                    "Gate 8e Failed: role 'db_api_user' lacks EXECUTE privilege on 'resolve_auth_context'."
+                )
+
+            logger.info("[VERIFICATION Gate 8/11] resolve_auth_context SECURITY DEFINER, search_path, & ACLs: PASS")
 
             # Gate 9: Permission Table Count (17 canonical permissions)
             res = conn.execute(text("SELECT COUNT(*) FROM permissions;")).fetchone()
