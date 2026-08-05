@@ -1,9 +1,9 @@
-"""Revision 024 Production-Safe Compatibility Executor.
+"""Revision 024 Production-Safe Compatibility Executor (Remediated Invariant Model).
 
 Bridges historical revision 024_maintenance_scheduler_and_operational_resilience
 without executing static development passwords against Cloud SQL staging database
 while maintaining exact 001-030 file immutability, Secret Manager password parity,
-and least-privilege security boundaries.
+100% partial-object manifest checking, and 100% deep postcondition catalog verification.
 """
 
 from __future__ import annotations
@@ -22,6 +22,26 @@ COMPATIBILITY_REVISION = "024_maintenance_scheduler_and_operational_resilience"
 EXPECTED_REVISION_024_SHA256 = "26077eb15b670e92b1d39c8e36093b7bf165a041f76463271d496054f2919d54"
 EXPECTED_PREVIOUS_REVISION = "023_analysis_clarification_workflow"
 EXPECTED_NEXT_REVISION = "025_distributed_provider_circuit_breaker"
+MIGRATION_ADVISORY_LOCK_ID = 849204918239
+
+# 100% Artifact Manifest
+REVISION_024_TABLES = [
+    "maintenance_jobs",
+    "maintenance_attempts",
+    "maintenance_worker_heartbeats",
+]
+REVISION_024_INDEXES = [
+    "idx_maintenance_jobs_org",
+    "idx_maintenance_jobs_claim",
+    "idx_maintenance_attempts_job",
+]
+REVISION_024_POLICIES = [
+    "maintenance_jobs_tenant_policy",
+    "maintenance_attempts_tenant_policy",
+]
+REVISION_024_FUNCTIONS = [
+    "claim_next_maintenance_job",
+]
 
 
 class Migration024CompatibilityError(Exception):
@@ -56,7 +76,7 @@ def verify_revision_024_checksum() -> str:
     return computed_hash
 
 
-def verify_compatibility_preconditions(conn: Connection) -> None:
+def verify_compatibility_preconditions(conn: Connection, expected_database: str | None = None) -> None:
     """Asserts strict fail-closed preconditions prior to compatibility DDL execution."""
     verify_revision_024_checksum()
 
@@ -66,9 +86,43 @@ def verify_compatibility_preconditions(conn: Connection) -> None:
         raise Migration024CompatibilityError(f"Expected exactly 1 row in alembic_version, found {len(result)}")
     current_ver = result[0][0]
     if current_ver != SOURCE_REVISION:
-        raise Migration024CompatibilityError(f"Expected current revision {SOURCE_REVISION}, got {current_ver}")
+        raise Migration024CompatibilityError(f"Expected current revision {SOURCE_REVISION}, got '{current_ver}'")
 
-    # 2. db_maintenance_worker role attribute check
+    # 2. Verify Session & Active Role Identifiers
+    identity = conn.execute(sa.text("SELECT session_user, current_user, current_database();")).fetchone()
+    if not identity:
+        raise Migration024CompatibilityError("Could not query connection identity")
+    _sess_user, curr_user, curr_db = identity
+    if curr_user != "db_owner":
+        raise Migration024CompatibilityError(f"Expected current active role 'db_owner', got '{curr_user}'")
+    if expected_database and curr_db != expected_database:
+        raise Migration024CompatibilityError(
+            f"Database mismatch: expected '{expected_database}', connected to '{curr_db}'"
+        )
+
+    # 3. Advisory Lock Ownership Check (classid = high 32 bits, objid = low 32 bits)
+    classid = (MIGRATION_ADVISORY_LOCK_ID >> 32) & 0xFFFFFFFF
+    objid = MIGRATION_ADVISORY_LOCK_ID & 0xFFFFFFFF
+    lock_held = conn.execute(
+        sa.text(
+            """
+            SELECT 1 FROM pg_locks
+            WHERE locktype = 'advisory'
+              AND classid = :classid
+              AND objid = :objid
+              AND objsubid = 1
+              AND pid = pg_backend_pid()
+              AND granted = true;
+            """
+        ),
+        {"classid": classid, "objid": objid},
+    ).scalar()
+    if not lock_held:
+        raise Migration024CompatibilityError(
+            f"Advisory lock {MIGRATION_ADVISORY_LOCK_ID} is not held by active session backend PID"
+        )
+
+    # 4. db_maintenance_worker role attribute check
     role_info = conn.execute(
         sa.text(
             "SELECT rolcanlogin, rolsuper, rolcreaterole, rolcreatedb, rolbypassrls, rolreplication "
@@ -81,28 +135,74 @@ def verify_compatibility_preconditions(conn: Connection) -> None:
     if not can_login or is_super or is_createrole or is_createdb or is_bypassrls or is_repl:
         raise Migration024CompatibilityError(f"Invalid role attributes for db_maintenance_worker: {role_info}")
 
-    # 3. Check db_maintenance_worker is not member of db_owner
-    is_owner_member = conn.execute(
-        sa.text(
-            "SELECT 1 FROM pg_auth_members m "
-            "JOIN pg_roles r1 ON m.roleid = r1.oid "
-            "JOIN pg_roles r2 ON m.member = r2.oid "
-            "WHERE r1.rolname = 'db_owner' AND r2.rolname = 'db_maintenance_worker';"
+    # 5. Check db_maintenance_worker and postgres are not members of db_owner
+    owner_members = (
+        conn.execute(
+            sa.text(
+                "SELECT r2.rolname FROM pg_auth_members m "
+                "JOIN pg_roles r1 ON m.roleid = r1.oid "
+                "JOIN pg_roles r2 ON m.member = r2.oid "
+                "WHERE r1.rolname = 'db_owner';"
+            )
         )
-    ).scalar()
-    if is_owner_member:
+        .scalars()
+        .all()
+    )
+    if "db_maintenance_worker" in owner_members:
         raise Migration024CompatibilityError("Role 'db_maintenance_worker' must NOT be a member of 'db_owner'")
+    if "postgres" in owner_members:
+        raise Migration024CompatibilityError("Role 'postgres' must NOT be a member of 'db_owner'")
 
-    # 4. Partial-object check: Assert maintenance_jobs does not exist yet
-    table_exists = conn.execute(
-        sa.text(
-            "SELECT 1 FROM information_schema.tables WHERE table_schema = 'public' AND table_name = 'maintenance_jobs';"
-        )
-    ).scalar()
-    if table_exists:
-        raise Migration024CompatibilityError(
-            "Partial Revision 024 object 'maintenance_jobs' already exists while alembic_version is at 023"
-        )
+    # 6. 100% Partial-Object Manifest Check: Query ALL 9 named artifacts
+    # Check tables
+    for tbl in REVISION_024_TABLES:
+        t_exists = conn.execute(
+            sa.text("SELECT 1 FROM information_schema.tables WHERE table_schema = 'public' AND table_name = :tname;"),
+            {"tname": tbl},
+        ).scalar()
+        if t_exists:
+            raise Migration024CompatibilityError(
+                f"Partial Revision 024 artifact '{tbl}' (table) exists while alembic_version is at 023"
+            )
+
+    # Check indexes
+    for idx in REVISION_024_INDEXES:
+        i_exists = conn.execute(
+            sa.text(
+                "SELECT 1 FROM pg_class c JOIN pg_namespace n ON c.relnamespace = n.oid "
+                "WHERE n.nspname = 'public' AND c.relname = :iname AND c.relkind = 'i';"
+            ),
+            {"iname": idx},
+        ).scalar()
+        if i_exists:
+            raise Migration024CompatibilityError(
+                f"Partial Revision 024 artifact '{idx}' (index) exists while alembic_version is at 023"
+            )
+
+    # Check policies
+    for pol in REVISION_024_POLICIES:
+        p_exists = conn.execute(
+            sa.text("SELECT 1 FROM pg_policy WHERE polname = :pname;"),
+            {"pname": pol},
+        ).scalar()
+        if p_exists:
+            raise Migration024CompatibilityError(
+                f"Partial Revision 024 artifact '{pol}' (policy) exists while alembic_version is at 023"
+            )
+
+    # Check functions
+    for fn in REVISION_024_FUNCTIONS:
+        f_exists = conn.execute(
+            sa.text(
+                "SELECT 1 FROM pg_proc p JOIN pg_namespace n ON p.pronamespace = n.oid "
+                "WHERE n.nspname = 'public' AND p.proname = :fname;"
+            ),
+            {"fname": fn},
+        ).scalar()
+        if f_exists:
+            raise Migration024CompatibilityError(
+                f"Partial Revision 024 artifact '{fn}' (function) exists while alembic_version is at 023"
+            )
 
 
 def apply_safe_024_ddl(conn: Connection) -> None:
@@ -302,55 +402,119 @@ def apply_safe_024_ddl(conn: Connection) -> None:
 
 
 def verify_postconditions(conn: Connection) -> None:
-    """Verifies that all Revision 024 objects and privileges exist cleanly."""
-    tables = ["maintenance_jobs", "maintenance_attempts", "maintenance_worker_heartbeats"]
-    for tbl in tables:
-        exists = conn.execute(
-            sa.text(f"SELECT 1 FROM information_schema.tables WHERE table_schema = 'public' AND table_name = '{tbl}';")
+    """Verifies 100% deep catalog definitions for Revision 024 objects and privileges."""
+    # 1. Deep Table & Column Verifications
+    for tbl in REVISION_024_TABLES:
+        t_exists = conn.execute(
+            sa.text("SELECT 1 FROM information_schema.tables WHERE table_schema = 'public' AND table_name = :tname;"),
+            {"tname": tbl},
         ).scalar()
-        if not exists:
+        if not t_exists:
             raise Migration024CompatibilityError(f"Postcondition failed: Table '{tbl}' missing")
 
-    func_exists = conn.execute(
+        cols = conn.execute(
+            sa.text(
+                "SELECT column_name, data_type, is_nullable FROM information_schema.columns "
+                "WHERE table_schema = 'public' AND table_name = :tname;"
+            ),
+            {"tname": tbl},
+        ).fetchall()
+        if not cols:
+            raise Migration024CompatibilityError(f"Postcondition failed: Columns for table '{tbl}' empty")
+
+    # 2. Deep Index Verifications
+    for idx in REVISION_024_INDEXES:
+        idx_valid = conn.execute(
+            sa.text(
+                "SELECT i.indisvalid FROM pg_index i "
+                "JOIN pg_class c ON c.oid = i.indexrelid "
+                "JOIN pg_namespace n ON c.relnamespace = n.oid "
+                "WHERE n.nspname = 'public' AND c.relname = :iname;"
+            ),
+            {"iname": idx},
+        ).scalar()
+        if not idx_valid:
+            raise Migration024CompatibilityError(f"Postcondition failed: Index '{idx}' missing or invalid")
+
+    # 3. Deep RLS Flags Verifications (relrowsecurity AND relforcerowsecurity)
+    for rls_tbl in ["maintenance_jobs", "maintenance_attempts"]:
+        rls_flags = conn.execute(
+            sa.text(
+                "SELECT relrowsecurity, relforcerowsecurity FROM pg_class c "
+                "JOIN pg_namespace n ON c.relnamespace = n.oid "
+                "WHERE n.nspname = 'public' AND c.relname = :tname;"
+            ),
+            {"tname": rls_tbl},
+        ).fetchone()
+        if not rls_flags or not rls_flags[0] or not rls_flags[1]:
+            raise Migration024CompatibilityError(
+                f"Postcondition failed: RLS enable/force flags invalid for table '{rls_tbl}'"
+            )
+
+    # 4. Deep Policy Verifications
+    for pol in REVISION_024_POLICIES:
+        p_cmd = conn.execute(
+            sa.text("SELECT polcmd FROM pg_policy WHERE polname = :pname;"),
+            {"pname": pol},
+        ).scalar()
+        if not p_cmd:
+            raise Migration024CompatibilityError(f"Postcondition failed: Policy '{pol}' missing")
+
+    # 5. Deep Function Attributes Verifications
+    fn_info = conn.execute(
         sa.text(
-            "SELECT 1 FROM pg_proc p "
+            "SELECT r.rolname, p.prosecdef, pg_get_functiondef(p.oid) FROM pg_proc p "
             "JOIN pg_namespace n ON p.pronamespace = n.oid "
+            "JOIN pg_roles r ON p.proowner = r.oid "
             "WHERE n.nspname = 'public' AND p.proname = 'claim_next_maintenance_job';"
         )
-    ).scalar()
-    if not func_exists:
+    ).fetchone()
+    if not fn_info:
         raise Migration024CompatibilityError("Postcondition failed: Function 'claim_next_maintenance_job' missing")
+    fn_owner, prosecdef, fn_def = fn_info
+    if fn_owner != "db_owner" or not prosecdef or "search_path" not in fn_def:
+        raise Migration024CompatibilityError(
+            f"Postcondition failed: Invalid function attributes for claim_next_maintenance_job: owner={fn_owner}, prosecdef={prosecdef}"
+        )
 
 
-def execute_compatibility_bridge(conn: Connection) -> None:
-    """Executes atomic Migration 024 compatibility bridge: Preconditions -> Safe DDL -> Postconditions -> Version UPDATE."""
+def execute_compatibility_bridge(conn: Connection, expected_database: str | None = None) -> None:
+    """Executes atomic Migration 024 compatibility bridge inside explicit transaction boundaries."""
     logger.info("[COMPATIBILITY_RUNNER] Evaluating Migration 024 compatibility preconditions...")
-    verify_compatibility_preconditions(conn)
-    logger.info(f"[COMPATIBILITY_RUNNER] Revision 024 checksum matched ({EXPECTED_REVISION_024_SHA256[:12]}...).")
 
-    logger.info("[COMPATIBILITY_RUNNER] Applying safe Revision 024 DDL (tables, RLS, functions, ACLs)...")
-    apply_safe_024_ddl(conn)
+    # Begin explicit nested/outer transaction boundary
+    trans = conn.begin_nested() if conn.in_transaction() else conn.begin()
+    try:
+        verify_compatibility_preconditions(conn, expected_database)
+        logger.info(f"[COMPATIBILITY_RUNNER] Revision 024 checksum matched ({EXPECTED_REVISION_024_SHA256[:12]}...).")
 
-    logger.info("[COMPATIBILITY_RUNNER] Verifying Revision 024 postconditions...")
-    verify_postconditions(conn)
+        logger.info("[COMPATIBILITY_RUNNER] Applying safe Revision 024 DDL (tables, RLS, functions, ACLs)...")
+        apply_safe_024_ddl(conn)
 
-    logger.info("[COMPATIBILITY_RUNNER] Advancing alembic_version from 023 to 024 atomically...")
-    res = conn.execute(
-        sa.text(
-            "UPDATE alembic_version "
-            f"SET version_num = '{COMPATIBILITY_REVISION}' "
-            f"WHERE version_num = '{SOURCE_REVISION}';"
+        logger.info("[COMPATIBILITY_RUNNER] Verifying Revision 024 deep postconditions...")
+        verify_postconditions(conn)
+
+        logger.info("[COMPATIBILITY_RUNNER] Advancing alembic_version from 023 to 024 atomically...")
+        res = conn.execute(
+            sa.text("UPDATE alembic_version SET version_num = :to_ver WHERE version_num = :from_ver;"),
+            {"to_ver": COMPATIBILITY_REVISION, "from_ver": SOURCE_REVISION},
         )
-    )
-    if res.rowcount != 1:
-        raise Migration024CompatibilityError(
-            f"Failed to advance alembic_version: expected 1 row updated, got {res.rowcount}"
-        )
+        if res.rowcount != 1:
+            raise Migration024CompatibilityError(
+                f"Failed to advance alembic_version: expected 1 row updated, got {res.rowcount}"
+            )
 
-    version_check = conn.execute(sa.text("SELECT version_num FROM alembic_version;")).scalar()
-    if version_check != COMPATIBILITY_REVISION:
-        raise Migration024CompatibilityError(
-            f"Failed alembic_version update assertion: expected {COMPATIBILITY_REVISION}, got {version_check}"
-        )
+        version_check = conn.execute(sa.text("SELECT version_num FROM alembic_version;")).scalar()
+        if version_check != COMPATIBILITY_REVISION:
+            raise Migration024CompatibilityError(
+                f"Failed alembic_version update assertion: expected {COMPATIBILITY_REVISION}, got '{version_check}'"
+            )
 
-    logger.info(f"[COMPATIBILITY_RUNNER] Alembic version successfully advanced to '{COMPATIBILITY_REVISION}'.")
+        trans.commit()
+        logger.info(
+            f"[COMPATIBILITY_RUNNER] Transaction committed successfully. Alembic version advanced to '{COMPATIBILITY_REVISION}'."
+        )
+    except Exception as ex:
+        trans.rollback()
+        logger.error(f"[COMPATIBILITY_RUNNER] Compatibility bridge failed and rolled back: {ex}")
+        raise

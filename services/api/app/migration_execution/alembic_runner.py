@@ -89,7 +89,7 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
 
                 if current_rev == "023_analysis_clarification_workflow":
                     logger.info("[MIGRATION_RUNNER] Executing Revision 024 Production-Safe Compatibility Bridge...")
-                    execute_compatibility_bridge(connection)
+                    execute_compatibility_bridge(connection, expected_database=config.target_database)
 
                 logger.info(f"[MIGRATION_RUNNER] Executing Alembic upgrade to '{config.expected_head}'...")
                 command.upgrade(alembic_cfg, config.expected_head)

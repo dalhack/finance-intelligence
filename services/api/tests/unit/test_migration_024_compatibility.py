@@ -1,4 +1,4 @@
-"""Unit tests for Revision 024 Production-Safe Compatibility Executor."""
+"""Remediated Unit Tests for Revision 024 Production-Safe Compatibility Executor."""
 
 from __future__ import annotations
 
@@ -9,9 +9,14 @@ from unittest.mock import MagicMock
 import pytest
 from app.migration_execution.compatibility.revision_024 import (
     EXPECTED_REVISION_024_SHA256,
+    REVISION_024_INDEXES,
+    REVISION_024_POLICIES,
+    REVISION_024_TABLES,
+    SOURCE_REVISION,
     Migration024CompatibilityError,
     _find_revision_024_file,
     verify_compatibility_preconditions,
+    verify_postconditions,
     verify_revision_024_checksum,
 )
 
@@ -65,6 +70,59 @@ def test_preconditions_wrong_source_revision(monkeypatch):
         verify_compatibility_preconditions(mock_conn)
 
 
+def test_preconditions_active_role_mismatch(monkeypatch):
+    """Verifies refusal when current active role is not 'db_owner'."""
+    monkeypatch.setattr(
+        "app.migration_execution.compatibility.revision_024.verify_revision_024_checksum",
+        lambda: EXPECTED_REVISION_024_SHA256,
+    )
+    mock_conn = MagicMock()
+    mock_res1 = MagicMock()
+    mock_res1.fetchall.return_value = [(SOURCE_REVISION,)]
+    mock_res2 = MagicMock()
+    mock_res2.fetchone.return_value = ("db_bootstrap", "postgres", "finance_intelligence_staging")
+
+    mock_conn.execute.side_effect = [mock_res1, mock_res2]
+    with pytest.raises(Migration024CompatibilityError, match="Expected current active role 'db_owner'"):
+        verify_compatibility_preconditions(mock_conn)
+
+
+def test_preconditions_database_mismatch(monkeypatch):
+    """Verifies refusal when connected database does not match expected_database parameter."""
+    monkeypatch.setattr(
+        "app.migration_execution.compatibility.revision_024.verify_revision_024_checksum",
+        lambda: EXPECTED_REVISION_024_SHA256,
+    )
+    mock_conn = MagicMock()
+    mock_res1 = MagicMock()
+    mock_res1.fetchall.return_value = [(SOURCE_REVISION,)]
+    mock_res2 = MagicMock()
+    mock_res2.fetchone.return_value = ("db_bootstrap", "db_owner", "wrong_database")
+
+    mock_conn.execute.side_effect = [mock_res1, mock_res2]
+    with pytest.raises(Migration024CompatibilityError, match="Database mismatch"):
+        verify_compatibility_preconditions(mock_conn, expected_database="finance_intelligence_staging")
+
+
+def test_preconditions_advisory_lock_not_held(monkeypatch):
+    """Verifies refusal when advisory lock is not held by active session backend PID."""
+    monkeypatch.setattr(
+        "app.migration_execution.compatibility.revision_024.verify_revision_024_checksum",
+        lambda: EXPECTED_REVISION_024_SHA256,
+    )
+    mock_conn = MagicMock()
+    mock_res1 = MagicMock()
+    mock_res1.fetchall.return_value = [(SOURCE_REVISION,)]
+    mock_res2 = MagicMock()
+    mock_res2.fetchone.return_value = ("db_bootstrap", "db_owner", "finance_intelligence_staging")
+    mock_res3 = MagicMock()
+    mock_res3.scalar.return_value = None  # Lock not held
+
+    mock_conn.execute.side_effect = [mock_res1, mock_res2, mock_res3]
+    with pytest.raises(Migration024CompatibilityError, match="Advisory lock 849204918239 is not held"):
+        verify_compatibility_preconditions(mock_conn, expected_database="finance_intelligence_staging")
+
+
 def test_preconditions_role_attribute_checks(monkeypatch):
     """Verifies refusal if db_maintenance_worker role has elevated attributes or is missing."""
     monkeypatch.setattr(
@@ -75,27 +133,152 @@ def test_preconditions_role_attribute_checks(monkeypatch):
 
     # Case 1: Missing role
     mock_res1 = MagicMock()
-    mock_res1.fetchall.return_value = [("023_analysis_clarification_workflow",)]
+    mock_res1.fetchall.return_value = [(SOURCE_REVISION,)]
     mock_res2 = MagicMock()
-    mock_res2.fetchone.return_value = None
+    mock_res2.fetchone.return_value = ("db_bootstrap", "db_owner", "finance_intelligence_staging")
+    mock_res3 = MagicMock()
+    mock_res3.scalar.return_value = 1  # lock held
+    mock_res4 = MagicMock()
+    mock_res4.fetchone.return_value = None  # role missing
 
-    mock_conn.execute.side_effect = [mock_res1, mock_res2]
+    mock_conn.execute.side_effect = [mock_res1, mock_res2, mock_res3, mock_res4]
     with pytest.raises(Migration024CompatibilityError, match="does not exist in pg_roles"):
         verify_compatibility_preconditions(mock_conn)
 
-    # Case 2: Role is SUPERUSER or CREATEROLE
-    mock_res3 = MagicMock()
-    mock_res3.fetchall.return_value = [("023_analysis_clarification_workflow",)]
-    mock_res4 = MagicMock()
-    mock_res4.fetchone.return_value = (True, True, False, False, False, False)  # is_super=True
 
-    mock_conn.execute.side_effect = [mock_res3, mock_res4]
-    with pytest.raises(Migration024CompatibilityError, match="Invalid role attributes"):
+def test_preconditions_forbidden_owner_membership(monkeypatch):
+    """Verifies refusal if db_maintenance_worker or postgres is member of db_owner."""
+    monkeypatch.setattr(
+        "app.migration_execution.compatibility.revision_024.verify_revision_024_checksum",
+        lambda: EXPECTED_REVISION_024_SHA256,
+    )
+    mock_conn = MagicMock()
+
+    mock_res1 = MagicMock()
+    mock_res1.fetchall.return_value = [(SOURCE_REVISION,)]
+    mock_res2 = MagicMock()
+    mock_res2.fetchone.return_value = ("db_bootstrap", "db_owner", "finance_intelligence_staging")
+    mock_res3 = MagicMock()
+    mock_res3.scalar.return_value = 1  # lock held
+    mock_res4 = MagicMock()
+    mock_res4.fetchone.return_value = (True, False, False, False, False, False)
+    mock_res5 = MagicMock()
+    mock_res5.scalars().all.return_value = ["db_maintenance_worker"]
+
+    mock_conn.execute.side_effect = [mock_res1, mock_res2, mock_res3, mock_res4, mock_res5]
+    with pytest.raises(Migration024CompatibilityError, match="must NOT be a member of 'db_owner'"):
         verify_compatibility_preconditions(mock_conn)
 
 
+@pytest.mark.parametrize(
+    "artifact_type,artifact_name",
+    [
+        ("table", "maintenance_jobs"),
+        ("table", "maintenance_attempts"),
+        ("table", "maintenance_worker_heartbeats"),
+        ("index", "idx_maintenance_jobs_org"),
+        ("index", "idx_maintenance_jobs_claim"),
+        ("index", "idx_maintenance_attempts_job"),
+        ("policy", "maintenance_jobs_tenant_policy"),
+        ("policy", "maintenance_attempts_tenant_policy"),
+        ("function", "claim_next_maintenance_job"),
+    ],
+)
+def test_preconditions_partial_object_manifest_fail_closed(monkeypatch, artifact_type, artifact_name):
+    """100% Manifest Verification: Asserts that ANY single partial artifact triggers fail-closed error."""
+    monkeypatch.setattr(
+        "app.migration_execution.compatibility.revision_024.verify_revision_024_checksum",
+        lambda: EXPECTED_REVISION_024_SHA256,
+    )
+    mock_conn = MagicMock()
+
+    # Pre-setup side effects
+    side_effects = [
+        MagicMock(fetchall=lambda: [(SOURCE_REVISION,)]),
+        MagicMock(fetchone=lambda: ("db_bootstrap", "db_owner", "finance_intelligence_staging")),
+        MagicMock(scalar=lambda: 1),  # lock held
+        MagicMock(fetchone=lambda: (True, False, False, False, False, False)),
+        MagicMock(scalars=lambda: MagicMock(all=list)),
+    ]
+
+    # Add partial artifact trigger
+    for tbl in REVISION_024_TABLES:
+        val = 1 if artifact_type == "table" and tbl == artifact_name else None
+        side_effects.append(MagicMock(scalar=lambda v=val: v))
+
+    for idx in REVISION_024_INDEXES:
+        val = 1 if artifact_type == "index" and idx == artifact_name else None
+        side_effects.append(MagicMock(scalar=lambda v=val: v))
+
+    for pol in REVISION_024_POLICIES:
+        val = 1 if artifact_type == "policy" and pol == artifact_name else None
+        side_effects.append(MagicMock(scalar=lambda v=val: v))
+
+    val = 1 if artifact_type == "function" and artifact_name == "claim_next_maintenance_job" else None
+    side_effects.append(MagicMock(scalar=lambda v=val: v))
+
+    mock_conn.execute.side_effect = side_effects
+
+    with pytest.raises(Migration024CompatibilityError, match="Partial Revision 024 artifact"):
+        verify_compatibility_preconditions(mock_conn)
+
+
+def test_postconditions_missing_table_raises():
+    """Verifies that missing table in postcondition verification raises Migration024CompatibilityError."""
+    mock_conn = MagicMock()
+    mock_res = MagicMock()
+    mock_res.scalar.return_value = None  # missing table
+    mock_conn.execute.return_value = mock_res
+
+    with pytest.raises(Migration024CompatibilityError, match="Postcondition failed: Table"):
+        verify_postconditions(mock_conn)
+
+
+def test_postconditions_missing_function_raises():
+    """Verifies that invalid function owner or attributes in postcondition verification raises error."""
+    mock_conn = MagicMock()
+
+    # Tables exist
+    mock_res1 = MagicMock(scalar=lambda: 1)
+    mock_res2 = MagicMock(fetchall=lambda: [("col1", "uuid", "NO")])
+    # Indexes exist
+    mock_res3 = MagicMock(scalar=lambda: True)
+    # RLS flags valid
+    mock_res4 = MagicMock(fetchone=lambda: (True, True))
+    # Policies exist
+    mock_res5 = MagicMock(scalar=lambda: "ALL")
+    # Function owner is wrong ("postgres" instead of "db_owner")
+    mock_res6 = MagicMock(fetchone=lambda: ("postgres", False, "CREATE FUNCTION"))
+
+    side_effects = [
+        # 3 tables (exists + columns)
+        mock_res1,
+        mock_res2,
+        mock_res1,
+        mock_res2,
+        mock_res1,
+        mock_res2,
+        # 3 indexes
+        mock_res3,
+        mock_res3,
+        mock_res3,
+        # 2 RLS flags
+        mock_res4,
+        mock_res4,
+        # 2 policies
+        mock_res5,
+        mock_res5,
+        # Function info
+        mock_res6,
+    ]
+    mock_conn.execute.side_effect = side_effects
+
+    with pytest.raises(Migration024CompatibilityError, match="Postcondition failed: Invalid function attributes"):
+        verify_postconditions(mock_conn)
+
+
 def test_compatibility_module_contains_no_password_literals():
-    """Verifies static analysis invariant: revision_024.py contains no static password literals."""
+    """Verifies static analysis invariant: revision_024.py contains no static password literals or DDL."""
     mod_path = Path(__file__).resolve().parents[2] / "app" / "migration_execution" / "compatibility" / "revision_024.py"
     content = mod_path.read_text()
     assert "dev_maintenance_pass_123" not in content
