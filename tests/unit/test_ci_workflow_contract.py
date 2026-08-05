@@ -227,10 +227,18 @@ def test_validate_migration_lock_workflow_contract():
         "import app.migration_execution.alembic_runner",
         "import app.migration_execution.verification",
         "import app.migration_execution.redaction",
+        "import app.migration_execution.compatibility",
+        "import app.migration_execution.compatibility.revision_024",
+        "from app.migration_execution.compatibility.revision_024 import EXPECTED_REVISION_024_SHA256, SOURCE_REVISION, COMPATIBILITY_REVISION",
+        "assert EXPECTED_REVISION_024_SHA256 == '26077eb15b670e92b1d39c8e36093b7bf165a041f76463271d496054f2919d54'",
+        "assert SOURCE_REVISION == '023_analysis_clarification_workflow'",
+        "assert COMPATIBILITY_REVISION == '024_maintenance_scheduler_and_operational_resilience'",
         "import google.auth",
         "assert version('cloud-sql-python-connector') == '1.9.2'",
         "assert callable(getattr(Connector, 'close', None))",
         "[EXECUTION_PLANE_IMPORT_SMOKE] SUCCESS",
+        "[REVISION_024_COMPATIBILITY_IMPORT] SUCCESS",
+        "[REVISION_024_CHECKSUM_CONSTANT]",
     ]
     for req_imp in required_imports:
         assert req_imp in content, f"Missing required import contract: {req_imp}"
