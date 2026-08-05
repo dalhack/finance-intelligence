@@ -39,8 +39,13 @@ jobs:
       - name: Checkout Code at Authorized Commit
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
-          ref: ${{ inputs.expected_commit_sha }}
+          ref: ${{ github.ref }}
+          fetch-depth: 0
           persist-credentials: false
+
+      - name: Switch to Expected Commit SHA
+        run: |
+          git checkout ${{ inputs.expected_commit_sha }}
 
       - name: Verify Checked-out Commit Identity
         run: |
