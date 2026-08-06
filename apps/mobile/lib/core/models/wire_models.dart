@@ -129,6 +129,7 @@ class DocumentItem {
 
 class IngestionJob {
   final String jobId;
+  final String documentId;
   final String organizationId;
   final String documentVersionId;
   final String status;
@@ -137,6 +138,7 @@ class IngestionJob {
 
   const IngestionJob({
     required this.jobId,
+    this.documentId = '',
     required this.organizationId,
     required this.documentVersionId,
     required this.status,
@@ -172,7 +174,11 @@ class IngestionJob {
           'UNSUPPORTED_JOB_STATUS: Ingestion job status "$st" is unsupported.');
     }
     return IngestionJob(
-      jobId: json['id']?.toString() ?? json['job_id']?.toString() ?? '',
+      jobId: json['ingestion_job_id']?.toString() ??
+          json['id']?.toString() ??
+          json['job_id']?.toString() ??
+          '',
+      documentId: json['document_id']?.toString() ?? '',
       organizationId: json['organization_id']?.toString() ?? '',
       documentVersionId: json['document_version_id']?.toString() ?? '',
       status: st,
@@ -587,10 +593,13 @@ class AnalysisDomainEventModel {
     const allowedEvents = [
       'analysis.accepted',
       'analysis.state_changed',
-      'analysis.clarification_required',
       'analysis.plan_ready',
       'analysis.tool_started',
       'analysis.tool_completed',
+      'analysis.clarification_required',
+      'analysis.clarification_received',
+      'analysis.resumed',
+      'analysis.clarification_expired',
       'analysis.warning',
       'analysis.partial_result',
       'analysis.completed',

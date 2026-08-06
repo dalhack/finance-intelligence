@@ -54,7 +54,7 @@ class AnalysisSseClient {
                 data: parsedJson,
               );
             } catch (_) {
-              // Ignore malformed JSON payloads gracefully
+              // Ignore malformed JSON or unsupported event FormatExceptions gracefully
             }
           }
           currentType = '';

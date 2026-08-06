@@ -243,6 +243,13 @@ class AnalysisController extends StateNotifier<AnalysisState> {
   }
 
   void _handleDomainEvent(AnalysisDomainEventModel event) {
+    if (state.statusState == AnalysisStatusState.completed ||
+        state.statusState == AnalysisStatusState.failedTerminal ||
+        state.statusState == AnalysisStatusState.cancelled ||
+        state.statusState == AnalysisStatusState.clarificationExpired) {
+      return;
+    }
+
     if (event.analysisId.isNotEmpty &&
         state.activeAnalysisId != null &&
         event.analysisId != state.activeAnalysisId) {

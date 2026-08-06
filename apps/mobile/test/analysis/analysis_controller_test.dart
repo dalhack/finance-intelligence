@@ -123,5 +123,147 @@ void main() {
           controller.state.statusState, equals(AnalysisStatusState.cancelled));
       expect(fakeApi.cancelCalled, isTrue);
     });
+
+    test(
+        'UNKNOWN_EVENT_TEST_NODE: ignores unknown events without state mutation',
+        () async {
+      final fakeApi = FakeApiClient();
+      final fakeSse = FakeSseClient();
+      final controller =
+          AnalysisController(apiClient: fakeApi, sseClient: fakeSse);
+
+      await controller.submitAnalysis(
+        prompt: 'Test prompt',
+        idempotencyKey: 'idem-unk',
+      );
+
+      final initialStatus = controller.state.statusState;
+
+      // Try constructing or emitting un-allowlisted event through AnalysisSseClient try/catch stream logic
+      try {
+        final unknownEv = AnalysisDomainEventModel.fromSseLine(
+          type: 'unknown.synthetic_event',
+          id: '99',
+          data: {'job_id': 'job-100'},
+        );
+        fakeSse.controller.add(unknownEv);
+        await Future.delayed(const Duration(milliseconds: 10));
+      } catch (_) {
+        // Expected FormatException for unsupported event
+      }
+
+      expect(controller.state.statusState, equals(initialStatus));
+    });
+
+    test(
+        'CROSS_JOB_EVENT_TEST_NODE: ignores events with mismatching analysisId',
+        () async {
+      final fakeApi = FakeApiClient();
+      final fakeSse = FakeSseClient();
+      final controller =
+          AnalysisController(apiClient: fakeApi, sseClient: fakeSse);
+
+      await controller.submitAnalysis(
+        prompt: 'Test prompt',
+        idempotencyKey: 'idem-cross',
+      );
+
+      final initialStatus = controller.state.statusState;
+
+      // Emit event for different job ID
+      fakeSse.controller.add(
+        const AnalysisDomainEventModel(
+          eventType: 'analysis.completed',
+          sequence: 10,
+          analysisId: 'other-job-999',
+          payload: {'status': 'COMPLETED'},
+        ),
+      );
+      await Future.delayed(const Duration(milliseconds: 10));
+
+      expect(controller.state.statusState, equals(initialStatus));
+    });
+
+    test(
+        'DUPLICATE_TERMINAL_TEST_NODE: handles duplicate terminal event idempotently',
+        () async {
+      final fakeApi = FakeApiClient();
+      final fakeSse = FakeSseClient();
+      final controller =
+          AnalysisController(apiClient: fakeApi, sseClient: fakeSse);
+
+      await controller.submitAnalysis(
+        prompt: 'Test prompt',
+        idempotencyKey: 'idem-dup',
+      );
+
+      fakeSse.controller.add(
+        const AnalysisDomainEventModel(
+          eventType: 'analysis.completed',
+          sequence: 1,
+          analysisId: 'job-100',
+          payload: {'status': 'COMPLETED'},
+        ),
+      );
+      await Future.delayed(const Duration(milliseconds: 10));
+
+      expect(
+          controller.state.statusState, equals(AnalysisStatusState.completed));
+
+      // Emit second duplicate terminal event
+      fakeSse.controller.add(
+        const AnalysisDomainEventModel(
+          eventType: 'analysis.completed',
+          sequence: 2,
+          analysisId: 'job-100',
+          payload: {'status': 'COMPLETED'},
+        ),
+      );
+      await Future.delayed(const Duration(milliseconds: 10));
+
+      expect(
+          controller.state.statusState, equals(AnalysisStatusState.completed));
+    });
+
+    test(
+        'POST_TERMINAL_EVENT_TEST_NODE: ignores events after reaching terminal state',
+        () async {
+      final fakeApi = FakeApiClient();
+      final fakeSse = FakeSseClient();
+      final controller =
+          AnalysisController(apiClient: fakeApi, sseClient: fakeSse);
+
+      await controller.submitAnalysis(
+        prompt: 'Test prompt',
+        idempotencyKey: 'idem-post',
+      );
+
+      fakeSse.controller.add(
+        const AnalysisDomainEventModel(
+          eventType: 'analysis.completed',
+          sequence: 1,
+          analysisId: 'job-100',
+          payload: {'status': 'COMPLETED'},
+        ),
+      );
+      await Future.delayed(const Duration(milliseconds: 10));
+
+      expect(
+          controller.state.statusState, equals(AnalysisStatusState.completed));
+
+      // Emit post-terminal state change event
+      fakeSse.controller.add(
+        const AnalysisDomainEventModel(
+          eventType: 'analysis.state_changed',
+          sequence: 2,
+          analysisId: 'job-100',
+          payload: {'to_state': 'UNDERSTANDING_REQUEST'},
+        ),
+      );
+      await Future.delayed(const Duration(milliseconds: 10));
+
+      expect(
+          controller.state.statusState, equals(AnalysisStatusState.completed));
+    });
   });
 }
