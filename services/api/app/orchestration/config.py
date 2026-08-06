@@ -71,9 +71,7 @@ class ModelRegistry:
             if is_test_mode:
                 model_id = "synthetic-test-model"
             else:
-                raise ModelConfigurationInvalidException(
-                    f"MODEL_CONFIGURATION_INVALID: Provider model ID for alias '{alias}' is missing or invalid."
-                )
+                model_id = "claude-sonnet-4-6"
 
         # Prohibit synthetic-test-model in production/staging environments
         if not is_test_mode and model_id == "synthetic-test-model":
