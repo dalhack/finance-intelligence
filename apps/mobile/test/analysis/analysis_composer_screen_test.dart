@@ -14,6 +14,7 @@ class MockComposerApiClient implements FinanceIntelligenceApiClient {
   Future<AnalysisJobModel> createAnalysis({
     required String prompt,
     required String idempotencyKey,
+    List<String>? selectedDocumentIds,
   }) async {
     createCalled = true;
     return AnalysisJobModel(

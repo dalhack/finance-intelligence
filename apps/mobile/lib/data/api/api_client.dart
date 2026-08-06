@@ -196,14 +196,17 @@ class FinanceIntelligenceApiClient {
   Future<AnalysisJobModel> createAnalysis({
     required String prompt,
     required String idempotencyKey,
+    List<String>? selectedDocumentIds,
   }) async {
     return _safeCall(() async {
+      final reqModel = AnalysisCreateRequestModel(
+        userQuery: prompt,
+        idempotencyKey: idempotencyKey,
+        selectedDocumentIds: selectedDocumentIds,
+      );
       final res = await _dio.post(
         '/analyses',
-        data: {
-          'prompt': prompt,
-          'idempotency_key': idempotencyKey,
-        },
+        data: reqModel.toJson(),
       );
       return AnalysisJobModel.fromJson(res.data as Map<String, dynamic>);
     });

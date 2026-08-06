@@ -12,6 +12,7 @@ class RealE2EMockApiClient implements FinanceIntelligenceApiClient {
   Future<AnalysisJobModel> createAnalysis({
     required String prompt,
     required String idempotencyKey,
+    List<String>? selectedDocumentIds,
   }) async {
     return AnalysisJobModel(
       id: 'job-synthetic-e2e-001',

@@ -84,11 +84,10 @@ void main() {
         'Full Real Local E2E Upload -> Finalize -> Ingestion -> Analysis -> SSE Pipeline',
         () async {
       if (!isBackendOnline) {
-        // Report unverified when local FastAPI process is offline
-        expect(isBackendOnline, isFalse,
-            reason:
-                'LOCAL_BACKEND_E2E_GATE = UNVERIFIED (FastAPI backend is offline on $backendBaseUrl)');
-        return;
+        fail(
+          'FAIL_CLOSED: Local FastAPI backend on $backendBaseUrl is OFFLINE. '
+          'Real HTTP contract test requires a live running backend process.',
+        );
       }
 
       // 1. Create Upload Session

@@ -155,6 +155,7 @@ class AnalysisController extends StateNotifier<AnalysisState> {
   Future<void> submitAnalysis({
     required String prompt,
     required String idempotencyKey,
+    List<String>? selectedDocumentIds,
   }) async {
     if (state.isSubmitting) return;
 
@@ -169,6 +170,7 @@ class AnalysisController extends StateNotifier<AnalysisState> {
       final job = await _apiClient.createAnalysis(
         prompt: prompt,
         idempotencyKey: idempotencyKey,
+        selectedDocumentIds: selectedDocumentIds,
       );
 
       state = state.copyWith(

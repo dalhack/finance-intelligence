@@ -13,6 +13,7 @@ class FakeApiClient implements FinanceIntelligenceApiClient {
   Future<AnalysisJobModel> createAnalysis({
     required String prompt,
     required String idempotencyKey,
+    List<String>? selectedDocumentIds,
   }) async {
     return AnalysisJobModel(
       id: 'job-100',
