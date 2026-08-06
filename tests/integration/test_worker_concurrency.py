@@ -4,6 +4,7 @@ from uuid import uuid4
 
 import asyncpg
 import pytest
+from app.db.tenant_context import tenant_transaction_context
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
@@ -56,12 +57,7 @@ async def test_worker_concurrency_strict_invariants():
 
     # Seed Document and QUEUED Job via Owner Engine
     job_id = uuid4()
-    async with session_factory_owner() as setup_session:
-        await setup_session.execute(
-            __import__("sqlalchemy").text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-            {"org_id": str(org_id)},
-        )
-
+    async with session_factory_owner() as setup_session, tenant_transaction_context(setup_session, org_id):
         csv_path = os.path.join(GOLDEN_DIR, "sample_bom.csv")
         with open(csv_path, "rb") as f:  # noqa: ASYNC230
             csv_bytes = f.read()
@@ -126,12 +122,7 @@ async def test_worker_concurrency_strict_invariants():
     assert sum(1 for r in results if not r.claimed) == 1
 
     # Invariant Verification on DB
-    async with session_factory_owner() as v_session:
-        await v_session.execute(
-            __import__("sqlalchemy").text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-            {"org_id": str(org_id)},
-        )
-
+    async with session_factory_owner() as v_session, tenant_transaction_context(v_session, org_id):
         # Invariant 1: Exactly 1 IngestionAttempt
         att_res = await v_session.execute(select(IngestionAttempt).where(IngestionAttempt.ingestion_job_id == job_id))
         attempts = att_res.scalars().all()

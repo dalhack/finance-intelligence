@@ -5,7 +5,8 @@ from uuid import uuid4
 
 import asyncpg
 import pytest
-from sqlalchemy import select, text
+from app.db.tenant_context import tenant_transaction_context
+from sqlalchemy import select
 
 from services.api.app.db.session import ApiSessionLocal, WorkerSessionLocal
 from services.api.app.models.audit_event import AuditEvent
@@ -89,12 +90,7 @@ async def test_canonical_5_status_parametric_matrix(
     adapter = LocalStorageAdapter()
     await adapter.put_object(str(org_id), opaque_key, BytesIO(payload))
 
-    async with ApiSessionLocal() as session:
-        await session.execute(
-            text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-            {"org_id": str(org_id)},
-        )
-
+    async with ApiSessionLocal() as session, tenant_transaction_context(session, org_id):
         stored_obj = StoredObject(
             id=obj_id,
             organization_id=org_id,
@@ -158,11 +154,7 @@ async def test_canonical_5_status_parametric_matrix(
         assert outcome.job_id == job_id
 
     # Verify persisted DB records
-    async with ApiSessionLocal() as v_session:
-        await v_session.execute(
-            text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-            {"org_id": str(org_id)},
-        )
+    async with ApiSessionLocal() as v_session, tenant_transaction_context(v_session, org_id):
         job_obj = (await v_session.execute(select(IngestionJob).where(IngestionJob.id == job_id))).scalar_one()
         ver_obj = (
             await v_session.execute(select(DocumentVersion).where(DocumentVersion.id == version_id))
@@ -230,12 +222,7 @@ async def test_unknown_parser_status_fail_closed_matrix(monkeypatch, unknown_sta
     adapter = LocalStorageAdapter()
     await adapter.put_object(str(org_id), opaque_key, BytesIO(payload))
 
-    async with ApiSessionLocal() as session:
-        await session.execute(
-            text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-            {"org_id": str(org_id)},
-        )
-
+    async with ApiSessionLocal() as session, tenant_transaction_context(session, org_id):
         stored_obj = StoredObject(
             id=obj_id,
             organization_id=org_id,
@@ -297,11 +284,7 @@ async def test_unknown_parser_status_fail_closed_matrix(monkeypatch, unknown_sta
         assert outcome.outcome_status == WorkerOutcomeStatus.PROCESSED_FAILED
         assert outcome.error_code == "UNKNOWN_PARSER_STATUS"
 
-    async with ApiSessionLocal() as v_session:
-        await v_session.execute(
-            text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-            {"org_id": str(org_id)},
-        )
+    async with ApiSessionLocal() as v_session, tenant_transaction_context(v_session, org_id):
         job_obj = (await v_session.execute(select(IngestionJob).where(IngestionJob.id == job_id))).scalar_one()
         ver_obj = (
             await v_session.execute(select(DocumentVersion).where(DocumentVersion.id == version_id))

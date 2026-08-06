@@ -2,6 +2,7 @@ import os
 import uuid
 
 import pytest
+from app.db.tenant_context import tenant_transaction_context
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import create_async_engine
 
@@ -23,14 +24,10 @@ async def test_maintenance_worker_concurrency_and_fencing():
     org_id = uuid.uuid4()
     job_id = uuid.uuid4()
 
-    async with owner_engine.begin() as conn:
+    async with owner_engine.begin() as conn, tenant_transaction_context(conn, org_id):
         await conn.execute(
             text("INSERT INTO organizations (id, name, slug, created_at) VALUES (:id, 'Test Maint Org', :slug, now())"),
             {"id": org_id, "slug": f"test-maint-org-{org_id.hex[:6]}"},
-        )
-        await conn.execute(
-            text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-            {"org_id": str(org_id)},
         )
         await conn.execute(
             text("""
@@ -40,11 +37,7 @@ async def test_maintenance_worker_concurrency_and_fencing():
             {"id": job_id, "org_id": org_id},
         )
 
-    async with MaintenanceSessionLocal() as session:
-        await session.execute(
-            text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-            {"org_id": str(org_id)},
-        )
+    async with MaintenanceSessionLocal() as session, tenant_transaction_context(session, org_id):
         # 1. Claim job with worker 1
         claim_token_1 = uuid.uuid4()
         res1 = await session.execute(

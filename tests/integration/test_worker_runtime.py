@@ -5,6 +5,7 @@ from uuid import uuid4
 import asyncpg
 import pytest
 import sqlalchemy
+from app.db.tenant_context import tenant_transaction_context
 from sqlalchemy import text
 
 from services.api.app.db.session import ApiSessionLocal, BootstrapSessionLocal, WorkerSessionLocal
@@ -23,34 +24,34 @@ OWNER_URL = os.environ.get(
 
 @pytest.mark.asyncio
 async def test_worker_session_role_is_db_ingestion_worker():
-    """Verify that WorkerSessionLocal connects explicitly as db_ingestion_worker role."""
+    """Verify that WorkerSessionLocal executes as db_ingestion_worker role."""
     async with WorkerSessionLocal() as session:
         res = await session.execute(text("SELECT current_user;"))
-        current_user = res.scalar()
-        assert current_user == "db_ingestion_worker"
+        user = res.scalar_one()
+        assert user == "db_ingestion_worker"
 
 
 @pytest.mark.asyncio
 async def test_api_session_role_is_db_api_user():
-    """Verify that ApiSessionLocal connects explicitly as db_api_user role."""
+    """Verify that ApiSessionLocal executes as db_api_user role."""
     async with ApiSessionLocal() as session:
         res = await session.execute(text("SELECT current_user;"))
-        current_user = res.scalar()
-        assert current_user == "db_api_user"
+        user = res.scalar_one()
+        assert user == "db_api_user"
 
 
 @pytest.mark.asyncio
 async def test_bootstrap_session_role_is_db_bootstrap():
-    """Verify that BootstrapSessionLocal connects explicitly as db_bootstrap role."""
+    """Verify that BootstrapSessionLocal executes as db_bootstrap role."""
     async with BootstrapSessionLocal() as session:
         res = await session.execute(text("SELECT current_user;"))
-        current_user = res.scalar()
-        assert current_user == "db_bootstrap"
+        user = res.scalar_one()
+        assert user == "db_bootstrap"
 
 
 @pytest.mark.asyncio
 async def test_worker_run_once_claims_and_processes_job():
-    """Verify real worker run_once loop using WorkerSessionLocal and control-plane claim function."""
+    """Verify end-to-end execution of a QUEUED job by IngestionWorker."""
     org_id = uuid4()
     user_id = uuid4()
     doc_id = uuid4()
@@ -58,13 +59,13 @@ async def test_worker_run_once_claims_and_processes_job():
     job_id = uuid4()
     obj_id = uuid4()
     opaque_key = f"{uuid4().hex}.csv"
-    payload = b"header1,header2\nworker_test_val,999"
+    payload = b"item_code,description,quantity\nA100,Widget,10\n"
 
     conn_owner = await asyncpg.connect(OWNER_URL)
     await conn_owner.execute(
         "INSERT INTO organizations (id, name, slug) VALUES ($1, $2, $3);",
         str(org_id),
-        f"Org {org_id}",
+        "Runtime Test Org",
         f"org-{org_id}",
     )
 
@@ -77,12 +78,7 @@ async def test_worker_run_once_claims_and_processes_job():
     await conn_owner.close()
 
     # Setup tenant data via ApiSessionLocal
-    async with ApiSessionLocal() as session:
-        await session.execute(
-            text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-            {"org_id": str(org_id)},
-        )
-
+    async with ApiSessionLocal() as session, tenant_transaction_context(session, org_id):
         # Seed physical storage
         adapter = LocalStorageAdapter()
         await adapter.put_object(str(org_id), opaque_key, BytesIO(payload))
@@ -149,11 +145,7 @@ async def test_worker_run_once_claims_and_processes_job():
         assert outcome.outcome_status == WorkerOutcomeStatus.PROCESSED_SUCCESS
 
     # Verify document processing state via ApiSessionLocal
-    async with ApiSessionLocal() as v_session:
-        await v_session.execute(
-            text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-            {"org_id": str(org_id)},
-        )
+    async with ApiSessionLocal() as v_session, tenant_transaction_context(v_session, org_id):
         ver_res = await v_session.execute(sqlalchemy.select(DocumentVersion).where(DocumentVersion.id == version_id))
         ver = ver_res.scalar_one()
         assert ver.ingestion_status in ["COMPLETED", "COMPLETED_WITH_WARNINGS", "EXTRACTED"]

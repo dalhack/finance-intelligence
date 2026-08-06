@@ -9,6 +9,7 @@ import pytest
 from sqlalchemy import func, select
 
 from services.api.app.db.session import ApiSessionLocal, get_db_session
+from services.api.app.db.tenant_context import tenant_transaction_context
 from services.api.app.dependencies import get_execution_context
 from services.api.app.main import app
 from services.api.app.middleware.execution_context import ExecutionContext
@@ -52,11 +53,7 @@ async def test_dedup_concurrency_same_tenant_api_finalize():
         shutil.rmtree(tenant_storage_dir)
 
     async def override_get_db_session():
-        async with ApiSessionLocal() as session:
-            await session.execute(
-                __import__("sqlalchemy").text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-                {"org_id": str(org_id)},
-            )
+        async with ApiSessionLocal() as session, tenant_transaction_context(session, org_id):
             yield session
 
     async def override_get_execution_context():
@@ -114,12 +111,7 @@ async def test_dedup_concurrency_same_tenant_api_finalize():
             assert False in dedup_flags
 
             # Invariant Verification in DB
-            async with ApiSessionLocal() as verify_session:
-                await verify_session.execute(
-                    __import__("sqlalchemy").text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-                    {"org_id": str(org_id)},
-                )
-
+            async with ApiSessionLocal() as verify_session, tenant_transaction_context(verify_session, org_id):
                 # Invariant 1: StoredObject count = 1
                 so_res = await verify_session.execute(
                     select(StoredObject).where(StoredObject.organization_id == org_id)
@@ -185,11 +177,7 @@ async def test_dedup_cross_tenant_isolation():
 
     async def run_tenant_flow(org_uuid, user_uuid):
         async def override_db():
-            async with ApiSessionLocal() as session:
-                await session.execute(
-                    __import__("sqlalchemy").text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-                    {"org_id": str(org_uuid)},
-                )
+            async with ApiSessionLocal() as session, tenant_transaction_context(session, org_uuid):
                 yield session
 
         async def override_ctx():

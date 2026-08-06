@@ -4,6 +4,7 @@ from uuid import uuid4
 
 import asyncpg
 import pytest
+from app.db.tenant_context import tenant_transaction_context
 from sqlalchemy import text
 
 from services.api.app.db.session import ApiSessionLocal, WorkerSessionLocal
@@ -133,12 +134,7 @@ async def test_stale_lease_recovery_concurrency():
     )
     await conn_owner.close()
 
-    async with ApiSessionLocal() as session:
-        await session.execute(
-            text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-            {"org_id": str(org_id)},
-        )
-
+    async with ApiSessionLocal() as session, tenant_transaction_context(session, org_id):
         stored_obj = StoredObject(
             id=obj_id,
             organization_id=org_id,
@@ -206,11 +202,7 @@ async def test_stale_lease_recovery_concurrency():
         assert outcome_b.claimed is True
 
     # Worker A attempts to process with stale ClaimedJob
-    async with WorkerSessionLocal() as w_session_a:
-        await w_session_a.execute(
-            text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-            {"org_id": str(org_id)},
-        )
+    async with WorkerSessionLocal() as w_session_a, tenant_transaction_context(w_session_a, org_id):
         stale_claimed_job = ClaimedJob(
             job_id=job_id,
             organization_id=org_id,

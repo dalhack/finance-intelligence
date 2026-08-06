@@ -4,7 +4,8 @@ from uuid import uuid4
 
 import asyncpg
 import pytest
-from sqlalchemy import select, text
+from app.db.tenant_context import tenant_transaction_context
+from sqlalchemy import select
 
 from services.api.app.db.session import ApiSessionLocal, WorkerSessionLocal
 from services.api.app.models.document import Document
@@ -22,7 +23,7 @@ OWNER_URL = os.environ.get(
 
 @pytest.mark.asyncio
 async def test_worker_status_mapping_rejected(monkeypatch):
-    """Verify parser returning REJECTED transitions attempt, job, and version to REJECTED."""
+    """Verify that parser status REJECTED is deterministically mapped across attempt, job, and document version."""
     from services.api.app.core.config import settings
 
     monkeypatch.setattr(settings, "MAX_ZIP_ENTRIES", 1)
@@ -41,7 +42,7 @@ async def test_worker_status_mapping_rejected(monkeypatch):
     await conn_owner.execute(
         "INSERT INTO organizations (id, name, slug) VALUES ($1, $2, $3);",
         str(org_id),
-        f"Org {org_id}",
+        "Status Mapping Test Org",
         f"org-{org_id}",
     )
 
@@ -64,12 +65,7 @@ async def test_worker_status_mapping_rejected(monkeypatch):
         zf.writestr("f3.txt", "content3")
     payload = buf.getvalue()
 
-    async with ApiSessionLocal() as session:
-        await session.execute(
-            text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-            {"org_id": str(org_id)},
-        )
-
+    async with ApiSessionLocal() as session, tenant_transaction_context(session, org_id):
         adapter = LocalStorageAdapter()
         await adapter.put_object(str(org_id), opaque_key, BytesIO(payload))
 
@@ -134,11 +130,7 @@ async def test_worker_status_mapping_rejected(monkeypatch):
         assert outcome.claimed is True
 
     # Verify attempt, job, and version status
-    async with ApiSessionLocal() as v_session:
-        await v_session.execute(
-            text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-            {"org_id": str(org_id)},
-        )
+    async with ApiSessionLocal() as v_session, tenant_transaction_context(v_session, org_id):
         job_obj = (await v_session.execute(select(IngestionJob).where(IngestionJob.id == job_id))).scalar_one()
         ver_obj = (
             await v_session.execute(select(DocumentVersion).where(DocumentVersion.id == version_id))
