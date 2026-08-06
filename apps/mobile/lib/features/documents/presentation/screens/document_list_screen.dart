@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../presentation/providers/providers.dart';
 import '../../data/models/document_model.dart';
 
-class DocumentListScreen extends StatefulWidget {
+class DocumentListScreen extends ConsumerStatefulWidget {
   const DocumentListScreen({super.key});
 
   @override
-  State<DocumentListScreen> createState() => _DocumentListScreenState();
+  ConsumerState<DocumentListScreen> createState() => _DocumentListScreenState();
 }
 
-class _DocumentListScreenState extends State<DocumentListScreen> {
+class _DocumentListScreenState extends ConsumerState<DocumentListScreen> {
   final List<DocumentModel> _documents = [];
   bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    _fetchDocuments();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _fetchDocuments();
+    });
   }
 
   Future<void> _fetchDocuments() async {
@@ -23,12 +27,15 @@ class _DocumentListScreenState extends State<DocumentListScreen> {
       _isLoading = true;
     });
 
-    // Simulated API response for Flutter presentation
-    await Future.delayed(const Duration(milliseconds: 300));
+    try {
+      await ref.read(documentListControllerProvider.notifier).loadDocuments();
+    } catch (_) {}
 
-    setState(() {
-      _isLoading = false;
-    });
+    if (mounted) {
+      setState(() {
+        _isLoading = false;
+      });
+    }
   }
 
   Color _getStatusColor(String? status) {

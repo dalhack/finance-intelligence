@@ -11,6 +11,8 @@ import '../../data/repositories/evidence_repository.dart';
 import '../../data/repositories/fact_review_repository.dart';
 import '../../data/repositories/ingestion_repository.dart';
 import '../../data/storage/analysis_resume_store.dart';
+import '../../data/api/analysis_sse_client.dart';
+import '../../features/analysis/controllers/analysis_controller.dart';
 import '../state/async_value_state.dart';
 import '../state/comparison_controller.dart';
 import '../state/document_list_controller.dart';
@@ -129,4 +131,16 @@ final factReviewControllerProvider = StateNotifierProvider<FactReviewController,
     UiState<List<Map<String, dynamic>>>>((ref) {
   final repo = ref.watch(factReviewRepositoryProvider);
   return FactReviewController(repo);
+});
+
+final analysisSseClientProvider = Provider<AnalysisSseClient>((ref) {
+  final dio = ref.watch(dioClientProvider);
+  return AnalysisSseClient(dio: dio);
+});
+
+final analysisControllerProvider =
+    StateNotifierProvider<AnalysisController, AnalysisState>((ref) {
+  final apiClient = ref.watch(apiClientProvider);
+  final sseClient = ref.watch(analysisSseClientProvider);
+  return AnalysisController(apiClient: apiClient, sseClient: sseClient);
 });

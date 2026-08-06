@@ -1,28 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../data/api/analysis_sse_client.dart';
-import '../../../data/api/api_client.dart';
+import '../../../presentation/providers/providers.dart';
 import '../controllers/analysis_controller.dart';
 import 'widgets/executive_summary_widget.dart';
 import 'widgets/progress_timeline_widget.dart';
-
-final analysisApiClientProvider = Provider<FinanceIntelligenceApiClient>((ref) {
-  throw UnimplementedError(
-      'Override analysisApiClientProvider in ProviderScope');
-});
-
-final analysisSseClientProvider = Provider<AnalysisSseClient>((ref) {
-  throw UnimplementedError(
-      'Override analysisSseClientProvider in ProviderScope');
-});
-
-final analysisControllerProvider =
-    StateNotifierProvider<AnalysisController, AnalysisState>((ref) {
-  final apiClient = ref.watch(analysisApiClientProvider);
-  final sseClient = ref.watch(analysisSseClientProvider);
-  return AnalysisController(apiClient: apiClient, sseClient: sseClient);
-});
 
 class AnalysisComposerScreen extends ConsumerStatefulWidget {
   const AnalysisComposerScreen({super.key});

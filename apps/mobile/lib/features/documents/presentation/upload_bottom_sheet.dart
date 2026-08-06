@@ -3,6 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../app/theme/semantic_tokens.dart';
+import '../../../presentation/providers/providers.dart';
 
 class UploadBottomSheet extends ConsumerStatefulWidget {
   const UploadBottomSheet({super.key});
@@ -56,26 +57,31 @@ class _UploadBottomSheetState extends ConsumerState<UploadBottomSheet> {
     setState(() {
       _isUploading = true;
       _uploadProgress = 0.1;
+      _errorMessage = null;
     });
 
-    // Simulate progress ticks
-    for (int i = 1; i <= 10; i++) {
-      await Future.delayed(const Duration(milliseconds: 100));
-      if (!mounted) return;
-      setState(() {
-        _uploadProgress = i / 10.0;
-      });
-    }
+    try {
+      await ref
+          .read(uploadLifecycleControllerProvider.notifier)
+          .startUploadAndFinalize(_selectedFile!);
 
-    if (mounted) {
-      Navigator.pop(context);
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content:
-              Text('Belge başarıyla yüklendi ve ayrıştırma kuyruğuna alındı.'),
-          backgroundColor: SemanticTokens.verifiedGreenLight,
-        ),
-      );
+      if (mounted) {
+        Navigator.pop(context);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+                'Belge başarıyla yüklendi ve ayrıştırma kuyruğuna alındı.'),
+            backgroundColor: SemanticTokens.verifiedGreenLight,
+          ),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        setState(() {
+          _isUploading = false;
+          _errorMessage = e.toString();
+        });
+      }
     }
   }
 

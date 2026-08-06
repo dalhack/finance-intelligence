@@ -5,6 +5,7 @@ import 'package:finance_intelligence/core/models/wire_models.dart';
 import 'package:finance_intelligence/data/api/analysis_sse_client.dart';
 import 'package:finance_intelligence/data/api/api_client.dart';
 import 'package:finance_intelligence/features/analysis/presentation/analysis_composer_screen.dart';
+import 'package:finance_intelligence/presentation/providers/providers.dart';
 
 class MockComposerApiClient implements FinanceIntelligenceApiClient {
   bool createCalled = false;
@@ -46,7 +47,7 @@ void main() {
   Widget createTestableWidget(FinanceIntelligenceApiClient apiClient) {
     return ProviderScope(
       overrides: [
-        analysisApiClientProvider.overrideWithValue(apiClient),
+        apiClientProvider.overrideWithValue(apiClient),
         analysisSseClientProvider.overrideWithValue(MockComposerSseClient()),
       ],
       child: const MaterialApp(
