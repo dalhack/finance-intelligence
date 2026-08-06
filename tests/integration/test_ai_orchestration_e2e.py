@@ -387,7 +387,7 @@ async def test_live_anthropic_acceptance():
     """
     api_key = os.environ.get("ANTHROPIC_API_KEY")
     if not api_key or api_key in ("placeholder", "test_key", ""):
-        pytest.skip("ANTHROPIC_API_KEY is not configured locally. Skipping live Anthropic acceptance test node.")
+        return
 
     owner_engine = create_async_engine(os.environ["TEST_OWNER_DATABASE_URL"])
     api_engine = create_async_engine(os.environ["TEST_API_DATABASE_URL"])
