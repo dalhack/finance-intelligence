@@ -229,6 +229,10 @@ def test_validate_migration_lock_workflow_contract():
         "import app.migration_execution.redaction",
         "import app.migration_execution.compatibility",
         "import app.migration_execution.compatibility.revision_024",
+        "import app.migration_execution.role_security",
+        "from app.migration_execution.role_security import HARDENING_TARGET_ALLOWLIST",
+        "assert HARDENING_TARGET_ALLOWLIST == ('db_api_user', 'db_ingestion_worker', 'db_maintenance_worker', 'db_bootstrap')",
+        "assert EXPECTED_ADMIN_SESSION_USER == 'postgres'",
         "from app.migration_execution.compatibility.revision_024 import EXPECTED_REVISION_024_SHA256, SOURCE_REVISION, COMPATIBILITY_REVISION",
         "assert EXPECTED_REVISION_024_SHA256 == '26077eb15b670e92b1d39c8e36093b7bf165a041f76463271d496054f2919d54'",
         "assert SOURCE_REVISION == '023_analysis_clarification_workflow'",
@@ -239,6 +243,11 @@ def test_validate_migration_lock_workflow_contract():
         "[EXECUTION_PLANE_IMPORT_SMOKE] SUCCESS",
         "[REVISION_024_COMPATIBILITY_IMPORT] SUCCESS",
         "[REVISION_024_CHECKSUM_CONSTANT]",
+        "[ROLE_SECURITY_IMPORT] SUCCESS",
+        "[ROLE_HARDENING_TARGET_COUNT]",
+        "[ROLE_HARDENING_LAST_TARGET]",
+        "[ROLE_HARDENING_ADMIN_SESSION]",
+        "[ROLE_HARDENING_POSTCONDITION_CONTRACT] COMPLETE",
     ]
     for req_imp in required_imports:
         assert req_imp in content, f"Missing required import contract: {req_imp}"
