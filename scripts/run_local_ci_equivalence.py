@@ -52,7 +52,13 @@ def main():
         },
         {
             "gateId": "LOCAL_POSTGRES_INTEGRATION_GATE",
-            "args": [pytest_bin, "tests/integration", "services/api/tests/integration", "-m", "not live_acceptance"],
+            "args": [
+                pytest_bin,
+                "tests/integration",
+                "services/api/tests/integration",
+                "-m",
+                "not live_acceptance and not live_anthropic",
+            ],
             "env": {
                 "PYTHONPATH": ".:services/api",
                 "CI": "true",

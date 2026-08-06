@@ -377,17 +377,16 @@ async def test_ai_orchestrator_concurrent_double_completion_snapshot_atomicity()
         assert count == 1
 
 
+@pytest.mark.live_anthropic
 @pytest.mark.asyncio
 async def test_live_anthropic_acceptance():
     """Opt-in live Anthropic acceptance test node.
 
     Executes a single real engine invocation using AnthropicProviderAdapter(use_fake_transport=False)
-    when ANTHROPIC_API_KEY is present in the execution environment.
-    If ANTHROPIC_API_KEY is missing, skips gracefully without failing normal local CI.
+    when explicitly invoked via `pytest -m live_anthropic`.
     """
-    api_key = os.environ.get("ANTHROPIC_API_KEY")
-    if not api_key or api_key in ("placeholder", "test_key", ""):
-        return
+    assert os.environ.get("ANTHROPIC_API_KEY"), "ANTHROPIC_API_KEY is required for explicit live acceptance"
+    api_key = os.environ["ANTHROPIC_API_KEY"]
 
     owner_engine = create_async_engine(os.environ["TEST_OWNER_DATABASE_URL"])
     api_engine = create_async_engine(os.environ["TEST_API_DATABASE_URL"])
