@@ -196,6 +196,11 @@ def provision_application_database(config: MigrationExecutionConfig) -> None:
                 )
             )
 
+        # 5. Atomic least-privilege role security hardening
+        from app.migration_execution.role_security import harden_application_login_roles
+
+        harden_application_login_roles(sys_engine)
+
         logger.info(f"[PROVISIONING] SUCCESS: Database '{config.target_database}' and roles provisioned cleanly.")
 
     except Exception as e:
