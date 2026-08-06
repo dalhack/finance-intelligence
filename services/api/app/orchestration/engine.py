@@ -1,3 +1,4 @@
+import json
 from datetime import UTC, datetime
 from uuid import UUID, uuid4
 
@@ -323,7 +324,7 @@ class AnalysisOrchestratorEngine:
                                 {
                                     "type": "tool_result",
                                     "tool_use_id": "call_compare_001",
-                                    "content": tool_outputs[0] if tool_outputs else {},
+                                    "content": json.dumps(tool_outputs[0], default=str) if tool_outputs else "{}",
                                 }
                             ],
                         },

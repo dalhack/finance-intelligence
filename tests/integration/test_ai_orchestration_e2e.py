@@ -539,6 +539,7 @@ async def test_live_anthropic_acceptance():
         provider = AnthropicProviderAdapter(
             application_model_alias="finance_analysis_balanced",
             api_key=api_key,
+            environment="production",
             use_fake_transport=False,
         )
         engine = AnalysisOrchestratorEngine(
