@@ -236,7 +236,8 @@ async def test_ai_orchestrator_full_e2e_positive_flow():
         )
         row = res_snap.fetchone()
         assert row is not None
-        assert "1,500,000" in str(row[0])
+        assert "result_dataset_id" in str(row[0])
+        assert "narrative" in str(row[0])
 
         # 9. analysis_events (monotonic positive sequence)
         res_evt = await db_verify.execute(

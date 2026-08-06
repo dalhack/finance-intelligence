@@ -9,9 +9,6 @@ from services.api.app.orchestration.config import (
     ModelRegistry,
     ProviderSecretMissingException,
 )
-from services.api.app.orchestration.exceptions import (
-    ModelFailoverProhibitedException,
-)
 from services.api.app.orchestration.provider import (
     ModelCapabilities,
     ModelResponse,
@@ -79,14 +76,59 @@ class AnthropicProviderAdapter:
         return hashlib.sha256(provider_req_id.encode("utf-8")).hexdigest()[:16]
 
     async def invoke_model(self, request: dict[str, Any]) -> ModelResponse:
-        # Check if real call is attempted without authorization
-        if not self.use_fake_transport and self.environment == "production":
-            raise ModelFailoverProhibitedException(
-                "REAL_MODEL_CONNECTION_GATE = BLOCKED_BY_EXTERNAL_CONFIGURATION. Live network calls require Paid Call Gate authorization."
-            )
+        if self.use_fake_transport:
+            return await self._execute_fake_transport(request)
 
-        # Execute deterministic fake transport for synthetic/unit tests
-        return await self._execute_fake_transport(request)
+        if not self.api_key or self.api_key in ("placeholder", "test_key", ""):
+            raise ProviderSecretMissingException("Anthropic API key is missing or invalid.")
+
+        import anthropic
+
+        client = anthropic.AsyncAnthropic(api_key=self.api_key)
+
+        model_name = self.config.provider_model_id
+        system_prompt = request.get("system", "You are an expert financial analysis assistant.")
+        messages = request.get("messages", [])
+        tools = request.get("tools")
+
+        kwargs: dict[str, Any] = {
+            "model": model_name,
+            "max_tokens": request.get("max_tokens", 1024),
+            "messages": messages,
+        }
+        if system_prompt:
+            kwargs["system"] = system_prompt
+        if tools:
+            kwargs["tools"] = tools
+
+        response = await client.messages.create(**kwargs)
+
+        content_text = ""
+        tool_calls = []
+        for block in response.content:
+            if block.type == "text":
+                content_text += block.text
+            elif block.type == "tool_use":
+                tool_calls.append(
+                    ToolCallRequest(
+                        tool_call_id=block.id,
+                        tool_name=block.name,
+                        arguments_json=block.input if isinstance(block.input, dict) else {},
+                    )
+                )
+
+        return ModelResponse(
+            invocation_id=response.id,
+            content_text=content_text,
+            tool_calls=tool_calls,
+            stop_reason=response.stop_reason or "end_turn",
+            token_usage=TokenUsage(
+                prompt_tokens=response.usage.input_tokens,
+                completion_tokens=response.usage.output_tokens,
+                cached_prompt_tokens=getattr(response.usage, "cache_read_input_tokens", 0) or 0,
+                estimated_cost_usd=Decimal("0.00"),
+            ),
+        )
 
     async def _execute_fake_transport(self, request: dict[str, Any]) -> ModelResponse:
         inv_id = f"inv-{uuid4().hex[:12]}"

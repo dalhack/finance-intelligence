@@ -299,8 +299,52 @@ class AnalysisOrchestratorEngine:
             job.status = AnalysisJobStatus.GENERATING_STRUCTURED_RESULT.value
             await self.db.flush()
 
-            narrative = "Analiz sonucunda toplam aktifler 1,500,000 TRY seviyesinde gerçekleşmiştir."
-            dataset_summary = {"result_dataset_id": "ds-1", "cells": [{"display_value": "1,500,000"}]}
+            # Invoke second turn to generate narrative from tool execution outputs
+            turn_2_response = await self.provider.invoke_model(
+                {
+                    "messages": [
+                        {"role": "user", "content": job.request_prompt or "Analiz yapınız."},
+                        {
+                            "role": "assistant",
+                            "content": [
+                                {
+                                    "type": "tool_use",
+                                    "id": "call_compare_001",
+                                    "name": plan.ordered_steps[0].tool_name
+                                    if plan.ordered_steps
+                                    else "compare_institutions",
+                                    "input": plan.ordered_steps[0].tool_arguments if plan.ordered_steps else {},
+                                }
+                            ],
+                        },
+                        {
+                            "role": "user",
+                            "content": [
+                                {
+                                    "type": "tool_result",
+                                    "tool_use_id": "call_compare_001",
+                                    "content": tool_outputs[0] if tool_outputs else {},
+                                }
+                            ],
+                        },
+                    ]
+                }
+            )
+
+            narrative = turn_2_response.content_text or "Analiz tamamlandı."
+
+            # Construct dataset summary from real validated tool output
+            first_tool_res = tool_outputs[0] if tool_outputs and isinstance(tool_outputs[0], dict) else {}
+            comparison_id = first_tool_res.get("comparison_id")
+            if not comparison_id:
+                raise OrchestrationException(
+                    "DATASET_NOT_FOUND", "Real tool execution did not yield a valid result dataset."
+                )
+
+            dataset_summary = {
+                "result_dataset_id": str(comparison_id),
+                "cells": first_tool_res.get("cells", []),
+            }
 
             # 7. State: QUALITY_GATE
             AnalysisStateMachine.validate_transition(AnalysisJobStatus(job.status), AnalysisJobStatus.QUALITY_GATE)
