@@ -1,29 +1,91 @@
-"""Alembic Migration Execution Runner with Session-Bound Advisory Locking."""
+"""Alembic Migration Execution Runner with Session-Bound Advisory Locking and Lock-Scoped Phased State Machine."""
 
 import logging
 import os
-import sys
 
 from alembic import command
 from alembic.config import Config
-from app.migration_execution.compatibility import execute_compatibility_bridge
+from alembic.runtime.migration import MigrationContext
+from app.migration_execution.compatibility.revision_024 import (
+    execute_compatibility_bridge,
+)
+from app.migration_execution.compatibility.revision_024 import (
+    verify_postconditions as verify_revision_024_postconditions,
+)
 from app.migration_execution.config import MigrationExecutionConfig
 from app.migration_execution.redaction import redact_text, safe_close_connector
 from google.cloud.sql.connector import Connector, IPTypes
 from sqlalchemy import create_engine, text
-from sqlalchemy.engine import Engine
+from sqlalchemy.engine import Connection, Engine
 
 logger = logging.getLogger("migration_runner")
 
 MIGRATION_ADVISORY_LOCK_ID = 849204918239
+MIGRATION_ADVISORY_LOCK_CLASSID = 197
+MIGRATION_ADVISORY_LOCK_OBJID = 3096360927
+
+KNOWN_REVISIONS = {
+    None,
+    "001_initial_tenant_schema_and_rls",
+    "002_document_ingestion_schema",
+    "003_role_separation",
+    "004_revoke_app_user",
+    "005_worker_claim_and_guarded_downgrade",
+    "006_status_mapping_and_claim_tokens",
+    "007_drop_legacy_claim_overload",
+    "008_financial_facts_and_command_envelope",
+    "009_command_envelope_and_fact_integrity",
+    "010_fact_revision_and_active_uniqueness",
+    "011_calculation_engine_schema",
+    "012_calculation_correctness_and_unrounded_result",
+    "013_calculation_checksum_and_lineage_hardening",
+    "014_calculation_identity_and_evidence_integrity",
+    "015_sec_context_calc_integrity",
+    "016_traceability_integrity_repair",
+    "017_comparison_dataset",
+    "018_comparison_dataset_correctness",
+    "019_comparison_semantics_and_snapshot_integrity",
+    "020_ai_orchestration_foundation",
+    "021_ai_runtime_execution_integrity",
+    "022_model_provider_and_analysis_events",
+    "023_analysis_clarification_workflow",
+    "024_maintenance_scheduler_and_operational_resilience",
+    "025_distributed_provider_circuit_breaker",
+    "026_model_routing_policy_catalog",
+    "027_orchestration_lease_fencing",
+    "028_analysis_clarification_integrity_constraints",
+    "029_ai_execution_audit_lineage",
+    "030_reconcile_application_role_catalog",
+}
 
 
 class MigrationRunnerError(Exception):
     """Raised when Alembic migration execution fails or boundary is violated."""
 
 
+def get_safe_current_revision(connection: Connection) -> str | None:
+    """Safely inspects current database revision using Alembic MigrationContext without aborting PostgreSQL transaction if version table is absent."""
+    context = MigrationContext.configure(connection)
+    current_rev = context.get_current_revision()
+    if connection.in_transaction():
+        connection.commit()
+
+    if current_rev not in KNOWN_REVISIONS:
+        raise MigrationRunnerError(f"Unknown or invalid migration revision detected: '{current_rev}'")
+
+    return current_rev
+
+
+def ensure_clean_transaction(connection: Connection, phase_label: str) -> None:
+    """Enforces clean (transaction-free) state on the connection before/after phase boundary."""
+    if connection.in_transaction():
+        logger.info(f"[MIGRATION_RUNNER] Committing active transaction prior to {phase_label}...")
+        connection.commit()
+    assert not connection.in_transaction(), f"Connection must be clean prior to {phase_label}"
+
+
 def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
-    """Executes Alembic migrations to head on the target database using session-level locking."""
+    """Executes Alembic migrations to head on the target database using session-level locking and phased state machine."""
     logger.info(f"[MIGRATION_RUNNER] Starting migration execution on '{config.target_database}'...")
 
     if not config.bootstrap_password:
@@ -31,6 +93,7 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
 
     connector: Connector | None = None
     engine: Engine | None = None
+    lock_acquired = False
 
     try:
         connector = Connector()
@@ -51,12 +114,16 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
             logger.info("[MIGRATION_RUNNER] Setting active role to 'db_owner'...")
             connection.execute(text("SET ROLE db_owner;"))
 
-            # Verify session and current user identity
-            user_check = connection.execute(text("SELECT session_user, current_user;")).fetchone()
-            if user_check:
-                logger.info(f"[MIGRATION_RUNNER] Session user: '{user_check[0]}', Current role: '{user_check[1]}'")
-                if user_check[1] != "db_owner":
-                    raise MigrationRunnerError(f"Role activation failed. Expected 'db_owner', got '{user_check[1]}'.")
+            # Verify session, current user identity, and backend PID
+            identity_check = connection.execute(text("SELECT session_user, current_user, pg_backend_pid();")).fetchone()
+            if not identity_check:
+                raise MigrationRunnerError("Could not query session identity and backend PID.")
+            sess_user, curr_user, backend_pid = identity_check
+            logger.info(
+                f"[MIGRATION_RUNNER] Session user: '{sess_user}', Current role: '{curr_user}', Backend PID: {backend_pid}"
+            )
+            if curr_user != "db_owner":
+                raise MigrationRunnerError(f"Role activation failed. Expected 'db_owner', got '{curr_user}'.")
 
             # Acquire session-level advisory lock
             logger.info(f"[MIGRATION_RUNNER] Acquiring advisory lock ({MIGRATION_ADVISORY_LOCK_ID})...")
@@ -64,79 +131,164 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
                 text("SELECT pg_advisory_lock(:lock_id);"),
                 {"lock_id": MIGRATION_ADVISORY_LOCK_ID},
             )
+            lock_acquired = True
             logger.info(f"[MIGRATION_RUNNER] Advisory lock ({MIGRATION_ADVISORY_LOCK_ID}) acquired.")
 
-            # Commit session initialization statements so connection is in clean, transaction-free state
-            if connection.in_transaction():
-                connection.commit()
+            # Commit setup transaction so connection is in clean, transaction-free state
+            ensure_clean_transaction(connection, "setup completion")
 
-            try:
-                # Locate alembic.ini path
-                ini_path = os.path.join(os.path.dirname(__file__), "..", "..", "alembic.ini")
-                if not os.path.exists(ini_path):
-                    ini_path = "/app/services/api/alembic.ini"
+            # Verify lock persistence and backend PID continuity
+            lock_check = connection.execute(
+                text(
+                    "SELECT count(*) FROM pg_locks WHERE locktype = 'advisory' AND classid = :classid AND objid = :objid;"
+                ),
+                {
+                    "classid": MIGRATION_ADVISORY_LOCK_CLASSID,
+                    "objid": MIGRATION_ADVISORY_LOCK_OBJID,
+                },
+            ).scalar()
+            if lock_check != 1:
+                raise MigrationRunnerError(
+                    f"Advisory lock verification failed after setup commit. Expected 1 lock, found {lock_check}."
+                )
 
-                alembic_cfg = Config(ini_path)
-                # Pass the active connection object directly to Alembic
-                alembic_cfg.attributes["connection"] = connection
+            current_pid = connection.execute(text("SELECT pg_backend_pid();")).scalar()
+            if current_pid != backend_pid:
+                raise MigrationRunnerError(
+                    f"Backend PID mismatch after setup commit! Initial PID: {backend_pid}, Current PID: {current_pid}"
+                )
 
-                # Check current revision in alembic_version
-                res = connection.execute(text("SELECT version_num FROM alembic_version;")).fetchone()
-                current_rev = res[0] if res else None
-                logger.info(f"[MIGRATION_RUNNER] Current alembic_version before upgrade: '{current_rev}'")
+            ensure_clean_transaction(connection, "migration state machine entry")
 
-                if current_rev and current_rev < "023_analysis_clarification_workflow":
-                    logger.info("[MIGRATION_RUNNER] Upgrading to '023_analysis_clarification_workflow'...")
-                    command.upgrade(alembic_cfg, "023_analysis_clarification_workflow")
-                    res = connection.execute(text("SELECT version_num FROM alembic_version;")).fetchone()
-                    current_rev = res[0] if res else None
+            # Locate alembic.ini path
+            ini_path = os.path.join(os.path.dirname(__file__), "..", "..", "alembic.ini")
+            if not os.path.exists(ini_path):
+                ini_path = "/app/services/api/alembic.ini"
 
-                if current_rev == "023_analysis_clarification_workflow":
-                    logger.info("[MIGRATION_RUNNER] Executing Revision 024 Production-Safe Compatibility Bridge...")
-                    execute_compatibility_bridge(connection, expected_database=config.target_database)
+            alembic_cfg = Config(ini_path)
+            alembic_cfg.attributes["connection"] = connection
 
-                logger.info(f"[MIGRATION_RUNNER] Executing Alembic upgrade to '{config.expected_head}'...")
-                command.upgrade(alembic_cfg, config.expected_head)
+            # Detect current revision safely
+            current_rev = get_safe_current_revision(connection)
+            logger.info(f"[MIGRATION_RUNNER] Detected current database revision: '{current_rev}'")
 
-                # Verify applied head in alembic_version table
-                res = connection.execute(text("SELECT version_num FROM alembic_version;")).fetchone()
-                applied_head = res[0] if res else None
-                logger.info(f"[MIGRATION_RUNNER] Alembic version table head: '{applied_head}'")
+            # PHASE 1: Standard Alembic Upgrade 001 -> 023 (if pristine or < 023)
+            if current_rev is None or current_rev < "023_analysis_clarification_workflow":
+                ensure_clean_transaction(connection, "Phase 1 entry")
+                logger.info(
+                    "[MIGRATION_RUNNER] Phase 1: Executing standard Alembic upgrade to '023_analysis_clarification_workflow'..."
+                )
+                command.upgrade(alembic_cfg, "023_analysis_clarification_workflow")
+                ensure_clean_transaction(connection, "Phase 1 exit")
 
-                if applied_head != config.expected_head:
+                current_rev = get_safe_current_revision(connection)
+                logger.info(f"[MIGRATION_RUNNER] Phase 1 committed. Revision verified at '{current_rev}'.")
+                if current_rev != "023_analysis_clarification_workflow":
                     raise MigrationRunnerError(
-                        f"Migration head mismatch! Expected '{config.expected_head}', got '{applied_head}'."
+                        f"Phase 1 verification failed! Expected '023_analysis_clarification_workflow', got '{current_rev}'."
                     )
 
-                logger.info(f"[MIGRATION_RUNNER] SUCCESS: Applied migration head verified at '{applied_head}'.")
+            # PHASE 2: Production-Safe Compatibility Bridge 023 -> 024 (if at 023)
+            if current_rev == "023_analysis_clarification_workflow":
+                ensure_clean_transaction(connection, "Phase 2 entry")
+                logger.info(
+                    "[MIGRATION_RUNNER] Phase 2: Executing Revision 024 Production-Safe Compatibility Bridge..."
+                )
+                execute_compatibility_bridge(connection, expected_database=config.target_database)
+                ensure_clean_transaction(connection, "Phase 2 exit")
 
-            finally:
-                # Release advisory lock in finally block
-                logger.info(f"[MIGRATION_RUNNER] Releasing advisory lock ({MIGRATION_ADVISORY_LOCK_ID})...")
-                unlock_ok = False
-                unlock_err_ex = None
-                try:
-                    unlock_res = connection.execute(
-                        text("SELECT pg_advisory_unlock(:lock_id);"),
-                        {"lock_id": MIGRATION_ADVISORY_LOCK_ID},
-                    ).fetchone()
-                    unlock_ok = bool(unlock_res and unlock_res[0])
-                except Exception as ex:  # noqa: BLE001
-                    unlock_err_ex = ex
-                    unlock_ok = False
+                current_rev = get_safe_current_revision(connection)
+                logger.info(f"[MIGRATION_RUNNER] Phase 2 committed. Revision verified at '{current_rev}'.")
+                if current_rev != "024_maintenance_scheduler_and_operational_resilience":
+                    raise MigrationRunnerError(
+                        f"Phase 2 verification failed! Expected '024_maintenance_scheduler_and_operational_resilience', got '{current_rev}'."
+                    )
 
-                if unlock_ok:
-                    logger.info(f"[MIGRATION_RUNNER] Advisory lock ({MIGRATION_ADVISORY_LOCK_ID}) released.")
-                else:
-                    err_msg = f"Advisory lock ({MIGRATION_ADVISORY_LOCK_ID}) unlock returned false or failed."
-                    logger.error(f"[MIGRATION_RUNNER] {err_msg}")
-                    if sys.exc_info()[0] is None:
-                        if unlock_err_ex:
-                            raise MigrationRunnerError(err_msg) from unlock_err_ex
-                        raise MigrationRunnerError(err_msg)
+            # Verification of 024 catalog postconditions for 024+ resume paths
+            if current_rev and current_rev >= "024_maintenance_scheduler_and_operational_resilience":
+                logger.info(
+                    "[MIGRATION_RUNNER] Verifying Revision 024 exact catalog postconditions prior to Phase 3..."
+                )
+                verify_revision_024_postconditions(connection)
+                ensure_clean_transaction(connection, "024 postcondition check exit")
+
+            # PHASE 3: Standard Alembic Upgrade 024 -> 030 (if < expected_head)
+            if current_rev != config.expected_head:
+                ensure_clean_transaction(connection, "Phase 3 entry")
+                logger.info(f"[MIGRATION_RUNNER] Phase 3: Executing Alembic upgrade to '{config.expected_head}'...")
+                command.upgrade(alembic_cfg, config.expected_head)
+                ensure_clean_transaction(connection, "Phase 3 exit")
+
+                applied_head = get_safe_current_revision(connection)
+                logger.info(f"[MIGRATION_RUNNER] Phase 3 committed. Revision verified at '{applied_head}'.")
+                if applied_head != config.expected_head:
+                    raise MigrationRunnerError(
+                        f"Phase 3 verification failed! Expected '{config.expected_head}', got '{applied_head}'."
+                    )
+            else:
+                logger.info(
+                    f"[MIGRATION_RUNNER] Database is already at target head '{config.expected_head}'. Idempotent no-op."
+                )
+
+            # Final Head Assertion and Lock Release
+            final_head = get_safe_current_revision(connection)
+            if final_head != config.expected_head:
+                raise MigrationRunnerError(
+                    f"Final migration head mismatch! Expected '{config.expected_head}', got '{final_head}'."
+                )
+
+            ensure_clean_transaction(connection, "explicit unlock")
+
+            # Verify PID continuity prior to unlock
+            unlock_pid = connection.execute(text("SELECT pg_backend_pid();")).scalar()
+            if unlock_pid != backend_pid:
+                raise MigrationRunnerError(
+                    f"Backend PID changed prior to unlock! Initial: {backend_pid}, Current: {unlock_pid}"
+                )
+
+            logger.info(f"[MIGRATION_RUNNER] Releasing advisory lock ({MIGRATION_ADVISORY_LOCK_ID})...")
+            unlock_res = connection.execute(
+                text("SELECT pg_advisory_unlock(:lock_id);"),
+                {"lock_id": MIGRATION_ADVISORY_LOCK_ID},
+            ).fetchone()
+            unlock_ok = bool(unlock_res and unlock_res[0])
+            ensure_clean_transaction(connection, "unlock completion")
+
+            if not unlock_ok:
+                raise MigrationRunnerError(
+                    f"Advisory lock ({MIGRATION_ADVISORY_LOCK_ID}) unlock returned false or failed."
+                )
+
+            logger.info(
+                f"[MIGRATION_RUNNER] SUCCESS: Session advisory lock released. Migration head verified at '{final_head}'."
+            )
 
     except Exception as e:
         logger.error(f"[MIGRATION_RUNNER] Migration failed: {redact_text(str(e))}")
+
+        # Cleanup on failure: rollback aborted transaction before attempting unlock
+        if lock_acquired and "connection" in locals() and connection and not connection.closed:
+            try:
+                if connection.in_transaction():
+                    connection.rollback()
+            except Exception as rb_ex:  # noqa: BLE001
+                logger.warning(f"[MIGRATION_RUNNER] Failure rollback failed: {rb_ex}")
+
+            if not connection.invalidated:
+                try:
+                    unl_res = connection.execute(
+                        text("SELECT pg_advisory_unlock(:lock_id);"),
+                        {"lock_id": MIGRATION_ADVISORY_LOCK_ID},
+                    ).fetchone()
+                    if unl_res and unl_res[0]:
+                        logger.info(
+                            f"[MIGRATION_RUNNER] Session advisory lock ({MIGRATION_ADVISORY_LOCK_ID}) released after failure rollback."
+                        )
+                        if connection.in_transaction():
+                            connection.commit()
+                except Exception as unl_ex:  # noqa: BLE001
+                    logger.warning(f"[MIGRATION_RUNNER] Failure advisory unlock query failed: {unl_ex}")
+
         raise MigrationRunnerError(f"Migration execution failed: {redact_text(str(e))}") from e
     finally:
         if engine:

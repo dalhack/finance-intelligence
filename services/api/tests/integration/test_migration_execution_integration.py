@@ -101,21 +101,35 @@ def test_same_connection_and_advisory_lock_continuity(mock_connector_cls, test_c
         # Fallback simulation if local DB server is not active
         mock_engine = MagicMock()
         mock_conn = MagicMock()
+        mock_conn.in_transaction.return_value = False
         mock_engine.connect.return_value.__enter__.return_value = mock_conn
         mock_conn.execute.side_effect = [
             MagicMock(),  # SET ROLE
-            MagicMock(fetchone=lambda: ("db_bootstrap", "db_owner")),  # session user
+            MagicMock(fetchone=lambda: ("db_bootstrap", "db_owner", 12345)),  # identity
             MagicMock(),  # advisory lock
-            MagicMock(fetchone=lambda: ("030_reconcile_application_role_catalog",)),  # pre-upgrade alembic_version
-            MagicMock(fetchone=lambda: ("030_reconcile_application_role_catalog",)),  # post-upgrade alembic_version
+            MagicMock(scalar=lambda: 1),  # pg_locks check
+            MagicMock(scalar=lambda: 12345),  # PID check
+            MagicMock(scalar=lambda: 12345),  # pre-unlock PID check
             MagicMock(fetchone=lambda: (True,)),  # advisory unlock
         ]
         with (
             patch("app.migration_execution.alembic_runner.create_engine", return_value=mock_engine),
+            patch(
+                "app.migration_execution.alembic_runner.get_safe_current_revision",
+                side_effect=[
+                    None,
+                    "023_analysis_clarification_workflow",
+                    "024_maintenance_scheduler_and_operational_resilience",
+                    "030_reconcile_application_role_catalog",
+                    "030_reconcile_application_role_catalog",
+                ],
+            ),
+            patch("app.migration_execution.alembic_runner.execute_compatibility_bridge"),
+            patch("app.migration_execution.alembic_runner.verify_revision_024_postconditions"),
             patch("app.migration_execution.alembic_runner.command.upgrade") as mock_upgrade,
         ):
             run_alembic_migrations(test_config)
-            assert mock_upgrade.call_count == 1
+            assert mock_upgrade.call_count == 2
 
 
 @patch("app.migration_execution.provisioning.create_user_if_missing")
