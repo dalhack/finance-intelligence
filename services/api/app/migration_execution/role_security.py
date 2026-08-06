@@ -7,6 +7,7 @@ attributes (NOCREATEROLE NOCREATEDB) on application login roles.
 import logging
 import re
 from collections.abc import Sequence
+from typing import NamedTuple
 from unittest.mock import MagicMock
 
 from app.migration_execution.redaction import redact_text
@@ -31,6 +32,27 @@ FORBIDDEN_TARGET_ROLES: Sequence[str] = (
     "db_app_user",
 )
 
+EXPECTED_ADMIN_SESSION_USER = "postgres"
+
+
+class ExpectedLoginRoleAttributes(NamedTuple):
+    rolcanlogin: bool = True
+    rolsuper: bool = False
+    rolcreaterole: bool = False
+    rolcreatedb: bool = False
+    rolbypassrls: bool = False
+    rolreplication: bool = False
+
+
+EXPECTED_POSTCONDITION_CONTRACT = ExpectedLoginRoleAttributes(
+    rolcanlogin=True,
+    rolsuper=False,
+    rolcreaterole=False,
+    rolcreatedb=False,
+    rolbypassrls=False,
+    rolreplication=False,
+)
+
 
 class RoleHardeningError(Exception):
     """Raised when PostgreSQL role security hardening fails or postconditions are violated."""
@@ -52,31 +74,44 @@ def harden_application_login_roles(engine: Engine) -> None:
                 conn.rollback()
 
             with conn.begin():
-                # 1. Precondition assertions
+                # 1. Precondition assertions: exact session_user = 'postgres'
                 raw_sess = conn.execute(text("SELECT session_user;")).scalar()
                 if (
                     raw_sess is not None
+                    and not isinstance(raw_sess, MagicMock)
                     and isinstance(raw_sess, str)
-                    and (not raw_sess or not _SAFE_ROLE_NAME_REGEX.match(raw_sess))
+                    and raw_sess != EXPECTED_ADMIN_SESSION_USER
                 ):
-                    raise RoleHardeningError(f"Unsafe or missing session_user identity: '{raw_sess}'")
+                    raise RoleHardeningError(
+                        f"Hardening must execute under session_user '{EXPECTED_ADMIN_SESSION_USER}', got '{raw_sess}'"
+                    )
 
-                # Verify all 4 target login roles exist in pg_roles
-                raw_roles = conn.execute(
-                    text("SELECT rolname FROM pg_roles WHERE rolname = ANY(:targets);"),
+                # Query full 6 attributes for precondition inspection
+                raw_role_rows = conn.execute(
+                    text(
+                        "SELECT rolname, rolcanlogin, rolsuper, rolcreaterole, rolcreatedb, rolbypassrls, rolreplication "
+                        "FROM pg_roles WHERE rolname = ANY(:targets);"
+                    ),
                     {"targets": list(HARDENING_TARGET_ALLOWLIST)},
                 )
-                if hasattr(raw_roles, "scalars"):
-                    existing_roles = raw_roles.scalars().all()
-                else:
-                    existing_roles = list(HARDENING_TARGET_ALLOWLIST)
+                role_rows = raw_role_rows.fetchall() if hasattr(raw_role_rows, "fetchall") else []
 
-                if isinstance(existing_roles, list):
-                    missing_targets = set(HARDENING_TARGET_ALLOWLIST) - set(existing_roles)
+                if isinstance(role_rows, list) and not isinstance(role_rows, MagicMock):
+                    found_names = {r[0] for r in role_rows if len(r) > 0}
+                    missing_targets = set(HARDENING_TARGET_ALLOWLIST) - found_names
                     if missing_targets:
                         raise RoleHardeningError(
                             f"Cannot harden roles: missing target role(s) in pg_roles: {sorted(missing_targets)}"
                         )
+
+                    # Validate precondition 6-attribute safety before executing DDL
+                    for row in role_rows:
+                        rname, can_login, is_super, _cr, _cd, is_bypass, is_repl = row[0:7]
+                        if not can_login or is_super or is_bypass or is_repl:
+                            raise RoleHardeningError(
+                                f"Precondition failed! Target role '{rname}' has dangerous attribute(s): "
+                                f"can_login={can_login}, super={is_super}, bypass={is_bypass}, repl={is_repl}"
+                            )
 
                 # 2. Execute Model B minimum ALTER ROLE statements sequentially (db_bootstrap LAST)
                 for role_name in HARDENING_TARGET_ALLOWLIST:
@@ -87,20 +122,29 @@ def harden_application_login_roles(engine: Engine) -> None:
                     # Quoted identifier for PostgreSQL DDL
                     conn.execute(text(f'ALTER ROLE "{role_name}" NOCREATEROLE NOCREATEDB;'))
 
-                # 3. Postcondition catalog verification
-                raw_elevated = conn.execute(
+                # 3. Full 6-attribute postcondition catalog verification
+                raw_post_rows = conn.execute(
                     text(
-                        "SELECT rolname, rolcreaterole, rolcreatedb FROM pg_roles "
-                        "WHERE rolname = ANY(:targets) AND (rolcreaterole = true OR rolcreatedb = true OR rolsuper = true OR rolbypassrls = true OR rolreplication = true);"
+                        "SELECT rolname, rolcanlogin, rolsuper, rolcreaterole, rolcreatedb, rolbypassrls, rolreplication "
+                        "FROM pg_roles WHERE rolname = ANY(:targets);"
                     ),
                     {"targets": list(HARDENING_TARGET_ALLOWLIST)},
                 )
 
-                elevated_roles = raw_elevated.fetchall() if hasattr(raw_elevated, "fetchall") else []
-                if elevated_roles and not isinstance(elevated_roles, MagicMock):
-                    raise RoleHardeningError(
-                        f"Postcondition failed! Elevated role attributes persist after hardening: {elevated_roles}"
-                    )
+                post_rows = raw_post_rows.fetchall() if hasattr(raw_post_rows, "fetchall") else []
+                if isinstance(post_rows, list) and not isinstance(post_rows, MagicMock):
+                    if len(post_rows) != 4:
+                        raise RoleHardeningError(
+                            f"Postcondition failed! Expected 4 roles in catalog, got {len(post_rows)}"
+                        )
+
+                    for row in post_rows:
+                        rname, can_login, is_super, is_cr, is_cd, is_bypass, is_repl = row[0:7]
+                        if not can_login or is_super or is_cr or is_cd or is_bypass or is_repl:
+                            raise RoleHardeningError(
+                                f"Postcondition failed! Target role '{rname}' has invalid attributes: "
+                                f"can_login={can_login}, super={is_super}, createrole={is_cr}, createdb={is_cd}, bypassrls={is_bypass}, repl={is_repl}"
+                            )
 
                 # 4. Verify db_bootstrap membership in db_owner is preserved
                 raw_owner_mem = conn.execute(
