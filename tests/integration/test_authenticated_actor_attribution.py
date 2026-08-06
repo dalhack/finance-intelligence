@@ -50,14 +50,13 @@ async def test_multi_user_same_org_actor_attribution_isolation():
         db_owner.add_all([org, user_a, user_b])
         await db_owner.commit()
 
-    async with OwnerSession() as db_owner:
-        await db_owner.execute(
-            text("SELECT set_config('app.current_organization_id', :org_id, true);"), {"org_id": str(org_id)}
-        )
-        mem_a = Membership(id=uuid4(), organization_id=org_id, user_id=user_a_id, status="active")
-        mem_b = Membership(id=uuid4(), organization_id=org_id, user_id=user_b_id, status="active")
-        db_owner.add_all([mem_a, mem_b])
-        await db_owner.commit()
+        from app.db.tenant_context import tenant_transaction_context
+
+        async with tenant_transaction_context(db_owner, org_id):
+            mem_a = Membership(id=uuid4(), organization_id=org_id, user_id=user_a_id, status="active")
+            mem_b = Membership(id=uuid4(), organization_id=org_id, user_id=user_b_id, status="active")
+            db_owner.add_all([mem_a, mem_b])
+            await db_owner.commit()
 
     # 2. Test Request A (User A authenticated)
     async def override_get_db_session():
@@ -156,13 +155,13 @@ async def test_clarification_actor_attribution_user_b_response_and_cancellation(
         await db_owner.commit()
 
     async with OwnerSession() as db_owner:
-        await db_owner.execute(
-            text("SELECT set_config('app.current_organization_id', :org_id, true);"), {"org_id": str(org_id)}
-        )
-        mem_a = Membership(id=uuid4(), organization_id=org_id, user_id=user_a_id)
-        mem_b = Membership(id=uuid4(), organization_id=org_id, user_id=user_b_id)
-        db_owner.add_all([mem_a, mem_b])
-        await db_owner.commit()
+        from app.db.tenant_context import tenant_transaction_context
+
+        async with tenant_transaction_context(db_owner, org_id):
+            mem_a = Membership(id=uuid4(), organization_id=org_id, user_id=user_a_id)
+            mem_b = Membership(id=uuid4(), organization_id=org_id, user_id=user_b_id)
+            db_owner.add_all([mem_a, mem_b])
+            await db_owner.commit()
 
     async with ApiSession() as db_api:
         await db_api.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))

@@ -4,7 +4,6 @@ from uuid import uuid4
 
 import asyncpg
 import pytest
-from sqlalchemy import text
 
 from services.api.app.db.session import ApiSessionLocal, WorkerSessionLocal
 from services.api.app.models.document import Document
@@ -91,42 +90,43 @@ async def test_command_envelope_lifecycle_and_persistent_replay_protection():
     await conn.close()
 
     async with ApiSessionLocal() as session:
-        await session.execute(
-            text("SELECT set_config('app.current_organization_id', :org_id, true);"), {"org_id": str(org_id)}
-        )
+        from app.db.tenant_context import tenant_transaction_context
 
-        stored_obj = StoredObject(
-            id=obj_id,
-            organization_id=org_id,
-            opaque_object_key=f"{uuid4().hex}.pdf",
-            server_computed_sha256="dummy_hash_env",
-            byte_size=500,
-            detected_mime_type="application/pdf",
-            storage_provider="LOCAL",
-        )
-        session.add(stored_obj)
-        await session.flush()
+        async with tenant_transaction_context(session, org_id):
+            stored_obj = StoredObject(
+                id=obj_id,
+                organization_id=org_id,
+                opaque_object_key=f"{uuid4().hex}.pdf",
+                server_computed_sha256="dummy_hash_env",
+                byte_size=500,
+                detected_mime_type="application/pdf",
+                storage_provider="LOCAL",
+            )
+            session.add(stored_obj)
+            await session.flush()
 
-        doc = Document(id=doc_id, organization_id=org_id, uploaded_by_user_id=user_id, display_name="env_test.pdf")
-        session.add(doc)
-        await session.flush()
+            doc = Document(id=doc_id, organization_id=org_id, uploaded_by_user_id=user_id, display_name="env_test.pdf")
+            session.add(doc)
+            await session.flush()
 
-        doc_ver = DocumentVersion(
-            id=version_id,
-            organization_id=org_id,
-            document_id=doc_id,
-            version_number=1,
-            stored_object_id=obj_id,
-            content_hash_sha256="dummy_hash_env",
-            file_size_bytes=500,
-            declared_mime_type="application/pdf",
-            detected_mime_type="application/pdf",
-            ingestion_status="QUEUED",
-        )
-        session.add(doc_ver)
-        job = IngestionJob(id=job_id, organization_id=org_id, document_version_id=version_id, status="QUEUED")
-        session.add(job)
-        await session.commit()
+            doc_ver = DocumentVersion(
+                id=version_id,
+                organization_id=org_id,
+                document_id=doc_id,
+                version_number=1,
+                stored_object_id=obj_id,
+                content_hash_sha256="dummy_hash_env",
+                file_size_bytes=500,
+                declared_mime_type="application/pdf",
+                detected_mime_type="application/pdf",
+                ingestion_status="QUEUED",
+            )
+            session.add(doc_ver)
+            await session.flush()
+
+            job = IngestionJob(id=job_id, organization_id=org_id, document_version_id=version_id, status="QUEUED")
+            session.add(job)
+            await session.commit()
 
     # 1. Valid Signed Envelope Claim Execution (v2.0.0, no organization_id field)
     env = IngestionCommandEnvelope(

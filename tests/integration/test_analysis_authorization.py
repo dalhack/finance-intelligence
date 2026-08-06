@@ -96,15 +96,15 @@ async def test_analyses_authorization_and_ownership_matrix():
         r_analyst = (await db.execute(text("SELECT id FROM roles WHERE name = 'ANALYST';"))).scalar()
         r_viewer = (await db.execute(text("SELECT id FROM roles WHERE name = 'VIEWER';"))).scalar()
 
+        from app.db.tenant_context import tenant_transaction_context
+
         # Seed Memberships in Org A
-        await db.execute(
-            text("SELECT set_config('app.current_organization_id', :org_id, true);"), {"org_id": str(org_a_id)}
-        )
-        m_a = Membership(id=mem_analyst_a_id, organization_id=org_a_id, user_id=user_analyst_a_id, status="active")
-        m_b = Membership(id=mem_analyst_b_id, organization_id=org_a_id, user_id=user_analyst_b_id, status="active")
-        m_v = Membership(id=mem_viewer_id, organization_id=org_a_id, user_id=user_viewer_id, status="active")
-        db.add_all([m_a, m_b, m_v])
-        await db.commit()
+        async with tenant_transaction_context(db, org_a_id):
+            m_a = Membership(id=mem_analyst_a_id, organization_id=org_a_id, user_id=user_analyst_a_id, status="active")
+            m_b = Membership(id=mem_analyst_b_id, organization_id=org_a_id, user_id=user_analyst_b_id, status="active")
+            m_v = Membership(id=mem_viewer_id, organization_id=org_a_id, user_id=user_viewer_id, status="active")
+            db.add_all([m_a, m_b, m_v])
+            await db.commit()
 
         # Seed Role Permissions Mapping
         await db.execute(

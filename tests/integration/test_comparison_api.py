@@ -4,7 +4,7 @@ from decimal import Decimal
 from uuid import uuid4
 
 import pytest
-from sqlalchemy import select, text
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 from services.api.app.models.candidate_evidence import CandidateEvidence
@@ -62,124 +62,122 @@ async def test_comparison_service_execution_and_persistence():
         metric_def_id = m_def.id
 
     async with ApiSession() as db_api:
-        await db_api.execute(
-            text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-            {"org_id": str(org_id)},
-        )
+        from app.db.tenant_context import tenant_transaction_context
 
-        st_obj = StoredObject(
-            id=obj_id,
-            organization_id=org_id,
-            opaque_object_key=f"{uuid4().hex}.pdf",
-            server_computed_sha256="dummy_hash_comp",
-            byte_size=100,
-            detected_mime_type="application/pdf",
-            storage_provider="LOCAL",
-        )
-        inst = Institution(
-            id=inst_id,
-            organization_id=org_id,
-            canonical_name=f"bank_{inst_id.hex[:6]}",
-            display_name="Bank A",
-        )
-        period = ReportingPeriod(
-            id=period_id,
-            organization_id=org_id,
-            period_type="YEAR",
-            period_presentation="FULL_YEAR",
-            fiscal_year=2024,
-            start_date=date(2024, 1, 1),
-            end_date=date(2024, 12, 31),
-            label="2024-Q1",
-            comparison_key="2024-Q1",
-        )
-        doc = Document(
-            id=doc_id,
-            organization_id=org_id,
-            uploaded_by_user_id=user_id,
-            display_name="report.pdf",
-        )
-        db_api.add_all([st_obj, inst, period, doc])
-        await db_api.flush()
+        async with tenant_transaction_context(db_api, org_id):
+            st_obj = StoredObject(
+                id=obj_id,
+                organization_id=org_id,
+                opaque_object_key=f"{uuid4().hex}.pdf",
+                server_computed_sha256="dummy_hash_comp",
+                byte_size=100,
+                detected_mime_type="application/pdf",
+                storage_provider="LOCAL",
+            )
+            inst = Institution(
+                id=inst_id,
+                organization_id=org_id,
+                canonical_name=f"bank_{inst_id.hex[:6]}",
+                display_name="Bank A",
+            )
+            period = ReportingPeriod(
+                id=period_id,
+                organization_id=org_id,
+                period_type="YEAR",
+                period_presentation="FULL_YEAR",
+                fiscal_year=2024,
+                start_date=date(2024, 1, 1),
+                end_date=date(2024, 12, 31),
+                label="2024-Q1",
+                comparison_key="2024-Q1",
+            )
+            doc = Document(
+                id=doc_id,
+                organization_id=org_id,
+                uploaded_by_user_id=user_id,
+                display_name="report.pdf",
+            )
+            db_api.add_all([st_obj, inst, period, doc])
+            await db_api.flush()
 
-        ver = DocumentVersion(
-            id=ver_id,
-            organization_id=org_id,
-            document_id=doc_id,
-            stored_object_id=obj_id,
-            version_number=1,
-            content_hash_sha256="dummy_hash_comp",
-            file_size_bytes=100,
-            declared_mime_type="application/pdf",
-            detected_mime_type="application/pdf",
-        )
-        db_api.add(ver)
-        await db_api.flush()
+            ver = DocumentVersion(
+                id=ver_id,
+                organization_id=org_id,
+                document_id=doc_id,
+                stored_object_id=obj_id,
+                version_number=1,
+                content_hash_sha256="dummy_hash_comp",
+                file_size_bytes=100,
+                declared_mime_type="application/pdf",
+                detected_mime_type="application/pdf",
+            )
+            db_api.add(ver)
+            await db_api.flush()
 
-        cand = FinancialFactCandidate(
-            id=cand_id,
-            organization_id=org_id,
-            institution_id=inst_id,
-            reporting_period_id=period_id,
-            raw_label="Total Assets",
-            raw_value="1500000",
-            source_document_id=doc_id,
-            source_document_version_id=ver_id,
-        )
-        db_api.add(cand)
-        await db_api.flush()
+            cand = FinancialFactCandidate(
+                id=cand_id,
+                organization_id=org_id,
+                institution_id=inst_id,
+                reporting_period_id=period_id,
+                raw_label="Total Assets",
+                raw_value="1500000",
+                source_document_id=doc_id,
+                source_document_version_id=ver_id,
+            )
+            db_api.add(cand)
+            await db_api.flush()
 
-        ev = CandidateEvidence(
-            id=ev_id,
-            organization_id=org_id,
-            candidate_id=cand_id,
-            source_document_version_id=ver_id,
-            page_number=1,
-            bounding_box={"x0": 10.0, "y0": 20.0, "x1": 100.0, "y1": 50.0},
-            raw_snippet="Total Assets: 1,500,000 TRY",
-        )
-        db_api.add(ev)
-        await db_api.flush()
+            ev = CandidateEvidence(
+                id=ev_id,
+                organization_id=org_id,
+                candidate_id=cand_id,
+                source_document_version_id=ver_id,
+                page_number=1,
+                bounding_box={"x0": 10.0, "y0": 20.0, "x1": 100.0, "y1": 50.0},
+                raw_snippet="Total Assets: 1,500,000 TRY",
+            )
+            db_api.add(ev)
+            await db_api.flush()
 
-        fact = FinancialFact(
-            id=uuid4(),
-            organization_id=org_id,
-            institution_id=inst_id,
-            reporting_period_id=period_id,
-            metric_definition_id=metric_def_id,
-            metric_code="TOTAL_ASSETS",
-            value=Decimal("1500000.0000"),
-            normalized_value=Decimal("1500000.0000"),
-            currency="TRY",
-            unit="CURRENCY",
-            scale="ONE",
-            reporting_basis="SOLO",
-            value_origin="SOURCE_REPORTED",
-            review_status="HUMAN_VERIFIED",
-            source_candidate_id=cand_id,
-            source_document_id=doc_id,
-        )
-        db_api.add(fact)
-        await db_api.commit()
+            fact = FinancialFact(
+                id=uuid4(),
+                organization_id=org_id,
+                institution_id=inst_id,
+                reporting_period_id=period_id,
+                metric_definition_id=metric_def_id,
+                metric_code="TOTAL_ASSETS",
+                value=Decimal("1500000.0000"),
+                normalized_value=Decimal("1500000.0000"),
+                currency="TRY",
+                unit="CURRENCY",
+                scale="ONE",
+                reporting_basis="SOLO",
+                value_origin="SOURCE_REPORTED",
+                review_status="HUMAN_VERIFIED",
+                source_candidate_id=cand_id,
+                source_document_id=doc_id,
+            )
+            db_api.add(fact)
+            await db_api.commit()
 
-        req = ComparisonRequestDTO(
-            institution_ids=[inst_id],
-            semantic_measures=[SemanticMeasureSelectorDTO(semantic_measure_code="TOTAL_ASSETS")],
-            reporting_period_ids=[period_id],
-            reporting_basis="SOLO",
-            currency="TRY",
-            display_scale="MILLION",
-            value_source_policy="SOURCE_REPORTED_ONLY",
-            comparison_mode="CROSS_INSTITUTION",
-            chart_types=["vertical_bar", "line"],
-        )
+            req = ComparisonRequestDTO(
+                institution_ids=[inst_id],
+                semantic_measures=[SemanticMeasureSelectorDTO(semantic_measure_code="TOTAL_ASSETS")],
+                reporting_period_ids=[period_id],
+                reporting_basis="SOLO",
+                currency="TRY",
+                display_scale="MILLION",
+                value_source_policy="SOURCE_REPORTED_ONLY",
+                comparison_mode="CROSS_INSTITUTION",
+                chart_types=["vertical_bar", "line"],
+            )
 
-        res = await ComparisonService.execute_comparison(
-            db=db_api,
-            organization_id=org_id,
-            requested_by_user_id=user_id,
-            payload=req,
-        )
+            res = await ComparisonService.execute_comparison(
+                db=db_api,
+                organization_id=org_id,
+                requested_by_user_id=user_id,
+                payload=req,
+            )
 
         assert res.comparison_id is not None
         assert res.result_dataset.query_snapshot.currency == "TRY"

@@ -98,12 +98,12 @@ async def test_live_firebase_authentication_and_auth_context_resolution():
         await db_owner.commit()
 
     async with OwnerSession() as db_owner:
-        await db_owner.execute(
-            text("SELECT set_config('app.current_organization_id', :org_id, true);"), {"org_id": str(org_authorized_id)}
-        )
-        mem = Membership(id=mem_id, organization_id=org_authorized_id, user_id=user_id, status="active")
-        db_owner.add(mem)
-        await db_owner.commit()
+        from app.db.tenant_context import tenant_transaction_context
+
+        async with tenant_transaction_context(db_owner, org_authorized_id):
+            mem = Membership(id=mem_id, organization_id=org_authorized_id, user_id=user_id, status="active")
+            db_owner.add(mem)
+            await db_owner.commit()
 
         # Retrieve ANALYST role ID
         res = await db_owner.execute(text("SELECT id FROM roles WHERE name = 'ANALYST';"))

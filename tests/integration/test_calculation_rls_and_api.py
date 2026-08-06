@@ -4,6 +4,7 @@ from decimal import Decimal
 from uuid import UUID, uuid4
 
 import pytest
+from app.db.tenant_context import tenant_transaction_context
 from sqlalchemy import select, text
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
@@ -122,165 +123,162 @@ async def test_calculation_service_end_to_end_and_reconciliation(db_owner_sessio
 
     await db_owner_session.commit()
 
-    # Seed tenant data using API user session with set_config
-    await db_api_session.execute(
-        text("SELECT set_config('app.current_organization_id', :org_id, true);"), {"org_id": str(org_id)}
-    )
+    from app.db.tenant_context import tenant_transaction_context
 
-    inst = Institution(
-        id=inst_id, organization_id=org_id, canonical_name=f"calc_bank_{uuid4().hex[:6]}", display_name="Calc Bank"
-    )
-    period = ReportingPeriod(
-        id=period_id,
-        organization_id=org_id,
-        period_type="YEAR",
-        period_presentation="FULL_YEAR",
-        fiscal_year=2024,
-        start_date=date(2024, 1, 1),
-        end_date=date(2024, 12, 31),
-        label="2024 FY",
-        comparison_key="2024",
-    )
+    # Seed tenant data using API user session with tenant_transaction_context
+    async with tenant_transaction_context(db_api_session, org_id):
+        inst = Institution(
+            id=inst_id, organization_id=org_id, canonical_name=f"calc_bank_{uuid4().hex[:6]}", display_name="Calc Bank"
+        )
+        period = ReportingPeriod(
+            id=period_id,
+            organization_id=org_id,
+            period_type="YEAR",
+            period_presentation="FULL_YEAR",
+            fiscal_year=2024,
+            start_date=date(2024, 1, 1),
+            end_date=date(2024, 12, 31),
+            label="2024 FY",
+            comparison_key="2024",
+        )
 
-    obj_id = uuid4()
-    stored_obj = StoredObject(
-        id=obj_id,
-        organization_id=org_id,
-        opaque_object_key=f"pdf_key_{uuid4().hex[:6]}.pdf",
-        server_computed_sha256="hash123",
-        byte_size=100,
-        detected_mime_type="application/pdf",
-        storage_provider="LOCAL",
-    )
-    doc = Document(id=doc_id, organization_id=org_id, uploaded_by_user_id=user_id, display_name="report.pdf")
-    doc_ver = DocumentVersion(
-        id=doc_ver_id,
-        organization_id=org_id,
-        document_id=doc_id,
-        version_number=1,
-        stored_object_id=obj_id,
-        content_hash_sha256="hash123",
-        file_size_bytes=100,
-        declared_mime_type="application/pdf",
-        detected_mime_type="application/pdf",
-    )
+        obj_id = uuid4()
+        stored_obj = StoredObject(
+            id=obj_id,
+            organization_id=org_id,
+            opaque_object_key=f"pdf_key_{uuid4().hex[:6]}.pdf",
+            server_computed_sha256="hash123",
+            byte_size=100,
+            detected_mime_type="application/pdf",
+            storage_provider="LOCAL",
+        )
+        doc = Document(id=doc_id, organization_id=org_id, uploaded_by_user_id=user_id, display_name="report.pdf")
+        doc_ver = DocumentVersion(
+            id=doc_ver_id,
+            organization_id=org_id,
+            document_id=doc_id,
+            version_number=1,
+            stored_object_id=obj_id,
+            content_hash_sha256="hash123",
+            file_size_bytes=100,
+            declared_mime_type="application/pdf",
+            detected_mime_type="application/pdf",
+        )
 
-    db_api_session.add(stored_obj)
-    await db_api_session.flush()
+        db_api_session.add(stored_obj)
+        await db_api_session.flush()
 
-    db_api_session.add_all([inst, period, doc, doc_ver])
-    await db_api_session.flush()
+        db_api_session.add_all([inst, period, doc, doc_ver])
+        await db_api_session.flush()
 
-    # Seed Candidates & Evidence
-    cand1 = FinancialFactCandidate(
-        id=cand1_id,
-        organization_id=org_id,
-        institution_id=inst_id,
-        reporting_period_id=period_id,
-        suggested_metric_code="TOTAL_LOANS",
-        raw_label="Toplam Krediler",
-        raw_value="800.00",
-        parsed_decimal_value=Decimal("800.00"),
-        source_document_id=doc_id,
-        source_document_version_id=doc_ver_id,
-        extraction_method="PARSER_TABLE",
-        review_status="HUMAN_VERIFIED",
-    )
-    cand2 = FinancialFactCandidate(
-        id=cand2_id,
-        organization_id=org_id,
-        institution_id=inst_id,
-        reporting_period_id=period_id,
-        suggested_metric_code="TOTAL_DEPOSITS",
-        raw_label="Toplam Mevduat",
-        raw_value="1000.00",
-        parsed_decimal_value=Decimal("1000.00"),
-        source_document_id=doc_id,
-        source_document_version_id=doc_ver_id,
-        extraction_method="PARSER_TABLE",
-        review_status="HUMAN_VERIFIED",
-    )
-    db_api_session.add_all([cand1, cand2])
-    await db_api_session.flush()
+        # Seed Candidates & Evidence
+        cand1 = FinancialFactCandidate(
+            id=cand1_id,
+            organization_id=org_id,
+            institution_id=inst_id,
+            reporting_period_id=period_id,
+            suggested_metric_code="TOTAL_LOANS",
+            raw_label="Toplam Krediler",
+            raw_value="800.00",
+            parsed_decimal_value=Decimal("800.00"),
+            source_document_id=doc_id,
+            source_document_version_id=doc_ver_id,
+            extraction_method="PARSER_TABLE",
+            review_status="HUMAN_VERIFIED",
+        )
+        cand2 = FinancialFactCandidate(
+            id=cand2_id,
+            organization_id=org_id,
+            institution_id=inst_id,
+            reporting_period_id=period_id,
+            suggested_metric_code="TOTAL_DEPOSITS",
+            raw_label="Toplam Mevduat",
+            raw_value="1000.00",
+            parsed_decimal_value=Decimal("1000.00"),
+            source_document_id=doc_id,
+            source_document_version_id=doc_ver_id,
+            extraction_method="PARSER_TABLE",
+            review_status="HUMAN_VERIFIED",
+        )
+        db_api_session.add_all([cand1, cand2])
+        await db_api_session.flush()
 
-    ev1 = CandidateEvidence(
-        id=uuid4(),
-        organization_id=org_id,
-        candidate_id=cand1_id,
-        source_document_version_id=doc_ver_id,
-        page_number=5,
-        bounding_box={"x0": 0.1, "y0": 0.1, "x1": 0.5, "y1": 0.5},
-        raw_snippet="Krediler 800",
-    )
-    ev2 = CandidateEvidence(
-        id=uuid4(),
-        organization_id=org_id,
-        candidate_id=cand2_id,
-        source_document_version_id=doc_ver_id,
-        page_number=5,
-        bounding_box={"x0": 0.1, "y0": 0.1, "x1": 0.5, "y1": 0.5},
-        raw_snippet="Mevduat 1000",
-    )
-    db_api_session.add_all([ev1, ev2])
-    await db_api_session.flush()
+        ev1 = CandidateEvidence(
+            id=uuid4(),
+            organization_id=org_id,
+            candidate_id=cand1_id,
+            source_document_version_id=doc_ver_id,
+            page_number=5,
+            bounding_box={"x0": 0.1, "y0": 0.1, "x1": 0.5, "y1": 0.5},
+            raw_snippet="Krediler 800",
+        )
+        ev2 = CandidateEvidence(
+            id=uuid4(),
+            organization_id=org_id,
+            candidate_id=cand2_id,
+            source_document_version_id=doc_ver_id,
+            page_number=5,
+            bounding_box={"x0": 0.1, "y0": 0.1, "x1": 0.5, "y1": 0.5},
+            raw_snippet="Mevduat 1000",
+        )
+        db_api_session.add_all([ev1, ev2])
+        await db_api_session.flush()
 
-    # Seed Financial Facts (HUMAN_VERIFIED, SOURCE_REPORTED, valid_to=None)
-    fact1 = FinancialFact(
-        id=fact1_id,
-        organization_id=org_id,
-        institution_id=inst_id,
-        reporting_period_id=period_id,
-        metric_definition_id=UUID("a0000000-0000-0000-0000-000000000002"),
-        metric_code="TOTAL_LOANS",
-        value=Decimal("800.000000"),
-        currency="TRY",
-        unit="CURRENCY",
-        scale="ONE",
-        normalized_value=Decimal("800.000000"),
-        reporting_basis="SOLO",
-        source_candidate_id=cand1_id,
-        source_document_id=doc_id,
-        review_status="HUMAN_VERIFIED",
-        verified_by_user_id=user_id,
-        value_origin="SOURCE_REPORTED",
-    )
-    fact2 = FinancialFact(
-        id=fact2_id,
-        organization_id=org_id,
-        institution_id=inst_id,
-        reporting_period_id=period_id,
-        metric_definition_id=UUID("a0000000-0000-0000-0000-000000000003"),
-        metric_code="TOTAL_DEPOSITS",
-        value=Decimal("1000.000000"),
-        currency="TRY",
-        unit="CURRENCY",
-        scale="ONE",
-        normalized_value=Decimal("1000.000000"),
-        reporting_basis="SOLO",
-        source_candidate_id=cand2_id,
-        source_document_id=doc_id,
-        review_status="HUMAN_VERIFIED",
-        verified_by_user_id=user_id,
-        value_origin="SOURCE_REPORTED",
-    )
-    db_api_session.add_all([fact1, fact2])
+        # Seed Financial Facts (HUMAN_VERIFIED, SOURCE_REPORTED, valid_to=None)
+        fact1 = FinancialFact(
+            id=fact1_id,
+            organization_id=org_id,
+            institution_id=inst_id,
+            reporting_period_id=period_id,
+            metric_definition_id=UUID("a0000000-0000-0000-0000-000000000002"),
+            metric_code="TOTAL_LOANS",
+            value=Decimal("800.000000"),
+            currency="TRY",
+            unit="CURRENCY",
+            scale="ONE",
+            normalized_value=Decimal("800.000000"),
+            reporting_basis="SOLO",
+            source_candidate_id=cand1_id,
+            source_document_id=doc_id,
+            review_status="HUMAN_VERIFIED",
+            verified_by_user_id=user_id,
+            value_origin="SOURCE_REPORTED",
+        )
+        fact2 = FinancialFact(
+            id=fact2_id,
+            organization_id=org_id,
+            institution_id=inst_id,
+            reporting_period_id=period_id,
+            metric_definition_id=UUID("a0000000-0000-0000-0000-000000000003"),
+            metric_code="TOTAL_DEPOSITS",
+            value=Decimal("1000.000000"),
+            currency="TRY",
+            unit="CURRENCY",
+            scale="ONE",
+            normalized_value=Decimal("1000.000000"),
+            reporting_basis="SOLO",
+            source_candidate_id=cand2_id,
+            source_document_id=doc_id,
+            review_status="HUMAN_VERIFIED",
+            verified_by_user_id=user_id,
+            value_origin="SOURCE_REPORTED",
+        )
+        db_api_session.add_all([fact1, fact2])
+        await db_api_session.flush()
+
     await db_api_session.commit()
 
-    # Re-apply set_config for post-commit transaction
-    await db_api_session.execute(
-        text("SELECT set_config('app.current_organization_id', :org_id, true);"), {"org_id": str(org_id)}
-    )
-
     # Execute Calculation Service
-    calc, calc_inputs, _reconciliation = await CalculationService.run_calculation(
-        db=db_api_session,
-        organization_id=org_id,
-        requested_by_user_id=user_id,
-        formula_code="LOAN_TO_DEPOSIT_RATIO",
-        institution_id=inst_id,
-        reporting_period_id=period_id,
-        comparison_policy="EXPLICIT_PERIOD",
-    )
+    async with tenant_transaction_context(db_api_session, org_id):
+        calc, calc_inputs, _reconciliation = await CalculationService.run_calculation(
+            db=db_api_session,
+            organization_id=org_id,
+            requested_by_user_id=user_id,
+            formula_code="LOAN_TO_DEPOSIT_RATIO",
+            institution_id=inst_id,
+            reporting_period_id=period_id,
+            comparison_policy="EXPLICIT_PERIOD",
+        )
 
     assert calc.status == "COMPLETED"
     assert calc.result_value_unrounded == Decimal("80.0")
@@ -311,98 +309,94 @@ async def test_calculation_immutability_trigger(db_owner_session, db_api_session
     db_owner_session.add_all([org, user])
     await db_owner_session.commit()
 
-    await db_api_session.execute(
-        text("SELECT set_config('app.current_organization_id', :org_id, true);"), {"org_id": str(org_id)}
-    )
+    async with tenant_transaction_context(db_api_session, org_id):
+        inst = Institution(
+            id=inst_id, organization_id=org_id, canonical_name=f"imm_bank_{uuid4().hex[:6]}", display_name="Imm Bank"
+        )
+        period = ReportingPeriod(
+            id=period_id,
+            organization_id=org_id,
+            period_type="YEAR",
+            fiscal_year=2024,
+            start_date=date(2024, 1, 1),
+            end_date=date(2024, 12, 31),
+            label="2024 FY",
+            comparison_key="2024",
+        )
+        db_api_session.add_all([inst, period])
+        await db_api_session.flush()
 
-    inst = Institution(
-        id=inst_id, organization_id=org_id, canonical_name=f"imm_bank_{uuid4().hex[:6]}", display_name="Imm Bank"
-    )
-    period = ReportingPeriod(
-        id=period_id,
-        organization_id=org_id,
-        period_type="YEAR",
-        fiscal_year=2024,
-        start_date=date(2024, 1, 1),
-        end_date=date(2024, 12, 31),
-        label="2024 FY",
-        comparison_key="2024",
-    )
-    db_api_session.add_all([inst, period])
-    await db_api_session.flush()
+        req_id = uuid4()
+        att_id = uuid4()
+        calc_req = CalculationRequest(
+            id=req_id,
+            organization_id=org_id,
+            request_fingerprint=f"fp_{uuid4().hex}",
+            formula_code="LOAN_TO_DEPOSIT_RATIO",
+            formula_version="1.0.0",
+            institution_id=inst_id,
+            reporting_period_id=period_id,
+            requested_by_user_id=user_id,
+        )
+        same_hash = f"{'a' * 64}"
+        spec_check = f"{'b' * 64}"
+        impl_check = f"{'c' * 64}"
 
-    req_id = uuid4()
-    att_id = uuid4()
-    calc_req = CalculationRequest(
-        id=req_id,
-        organization_id=org_id,
-        request_fingerprint=f"fp_{uuid4().hex}",
-        formula_code="LOAN_TO_DEPOSIT_RATIO",
-        formula_version="1.0.0",
-        institution_id=inst_id,
-        reporting_period_id=period_id,
-        requested_by_user_id=user_id,
-    )
-    same_hash = f"{'a' * 64}"
-    spec_check = f"{'b' * 64}"
-    impl_check = f"{'c' * 64}"
+        calc_att = CalculationAttempt(
+            id=att_id,
+            organization_id=org_id,
+            calculation_request_id=req_id,
+            attempt_number=1,
+            execution_idempotency_hash=same_hash,
+            formula_spec_checksum=spec_check,
+            implementation_checksum=impl_check,
+            completed_at=datetime.now(UTC),
+            status="COMPLETED",
+        )
+        db_api_session.add(calc_req)
+        await db_api_session.flush()
+        db_api_session.add(calc_att)
+        await db_api_session.flush()
 
-    calc_att = CalculationAttempt(
-        id=att_id,
-        organization_id=org_id,
-        calculation_request_id=req_id,
-        attempt_number=1,
-        execution_idempotency_hash=same_hash,
-        formula_spec_checksum=spec_check,
-        implementation_checksum=impl_check,
-        completed_at=datetime.now(UTC),
-        status="COMPLETED",
-    )
-    db_api_session.add(calc_req)
-    await db_api_session.flush()
-    db_api_session.add(calc_att)
-    await db_api_session.flush()
+        calc = Calculation(
+            id=calc_id,
+            organization_id=org_id,
+            calculation_request_id=req_id,
+            calculation_attempt_id=att_id,
+            institution_id=inst_id,
+            reporting_period_id=period_id,
+            formula_code="LOAN_TO_DEPOSIT_RATIO",
+            formula_version="1.0.0",
+            status="COMPLETED",
+            result_value_unrounded=Decimal("80.0"),
+            result_value_display=Decimal("80.00"),
+            result_unit="PERCENT",
+            result_scale="ONE",
+            result_currency=None,
+            value_representation="PERCENT_DISPLAY",
+            working_precision=38,
+            rounding_policy="ROUND_HALF_UP",
+            idempotency_hash=same_hash,
+            implementation_checksum=impl_check,
+            requested_by_user_id=user_id,
+        )
+        db_api_session.add(calc)
+        await db_api_session.flush()
 
-    calc = Calculation(
-        id=calc_id,
-        organization_id=org_id,
-        calculation_request_id=req_id,
-        calculation_attempt_id=att_id,
-        institution_id=inst_id,
-        reporting_period_id=period_id,
-        formula_code="LOAN_TO_DEPOSIT_RATIO",
-        formula_version="1.0.0",
-        status="COMPLETED",
-        result_value_unrounded=Decimal("80.0"),
-        result_value_display=Decimal("80.00"),
-        result_unit="PERCENT",
-        result_scale="ONE",
-        result_currency=None,
-        value_representation="PERCENT_DISPLAY",
-        working_precision=38,
-        rounding_policy="ROUND_HALF_UP",
-        idempotency_hash=same_hash,
-        implementation_checksum=impl_check,
-        requested_by_user_id=user_id,
-    )
-    db_api_session.add(calc)
     await db_api_session.commit()
 
-    await db_api_session.execute(
-        text("SELECT set_config('app.current_organization_id', :org_id, true);"), {"org_id": str(org_id)}
-    )
-
     # Try updating completed calculation -> trigger blocks
-    try:
-        await db_api_session.execute(
-            text("UPDATE calculations SET result_value_display = 90.00 WHERE id = :id"),
-            {"id": str(calc_id)},
-        )
-        await db_api_session.commit()
-    except Exception as err:  # noqa: BLE001
-        assert "CALCULATION_IMMUTABLE" in str(err) or "IMMUTABLE" in str(err)
-    finally:
-        await db_api_session.rollback()
+    async with tenant_transaction_context(db_api_session, org_id):
+        try:
+            await db_api_session.execute(
+                text("UPDATE calculations SET result_value_display = 90.00 WHERE id = :id"),
+                {"id": str(calc_id)},
+            )
+            await db_api_session.commit()
+        except Exception as err:  # noqa: BLE001
+            assert "CALCULATION_IMMUTABLE" in str(err) or "IMMUTABLE" in str(err)
+        finally:
+            await db_api_session.rollback()
 
 
 @pytest.mark.asyncio
@@ -420,186 +414,185 @@ async def test_terminal_lineage_mutation_denial_trigger(db_owner_session, db_api
     db_owner_session.add_all([org, user])
     await db_owner_session.commit()
 
-    await db_api_session.execute(
-        text("SELECT set_config('app.current_organization_id', :org_id, true);"), {"org_id": str(org_id)}
-    )
+    async with tenant_transaction_context(db_api_session, org_id):
+        inst = Institution(
+            id=inst_id,
+            organization_id=org_id,
+            canonical_name=f"lin_bank_{uuid4().hex[:6]}",
+            display_name="Lineage Bank",
+        )
+        period = ReportingPeriod(
+            id=period_id,
+            organization_id=org_id,
+            period_type="YEAR",
+            period_presentation="FULL_YEAR",
+            fiscal_year=2024,
+            start_date=date(2024, 1, 1),
+            end_date=date(2024, 12, 31),
+            label="2024 FY",
+            comparison_key="2024",
+        )
+        db_api_session.add_all([inst, period])
+        await db_api_session.flush()
 
-    inst = Institution(
-        id=inst_id, organization_id=org_id, canonical_name=f"lin_bank_{uuid4().hex[:6]}", display_name="Lineage Bank"
-    )
-    period = ReportingPeriod(
-        id=period_id,
-        organization_id=org_id,
-        period_type="YEAR",
-        period_presentation="FULL_YEAR",
-        fiscal_year=2024,
-        start_date=date(2024, 1, 1),
-        end_date=date(2024, 12, 31),
-        label="2024 FY",
-        comparison_key="2024",
-    )
-    db_api_session.add_all([inst, period])
-    await db_api_session.flush()
+        req_id = uuid4()
+        att_id = uuid4()
+        calc_req = CalculationRequest(
+            id=req_id,
+            organization_id=org_id,
+            request_fingerprint=f"fp_{uuid4().hex}",
+            formula_code="LOAN_TO_DEPOSIT_RATIO",
+            formula_version="1.0.0",
+            institution_id=inst_id,
+            reporting_period_id=period_id,
+            requested_by_user_id=user_id,
+        )
+        same_hash2 = f"{'d' * 64}"
+        spec_check2 = f"{'e' * 64}"
+        impl_check2 = f"{'f' * 64}"
 
-    req_id = uuid4()
-    att_id = uuid4()
-    calc_req = CalculationRequest(
-        id=req_id,
-        organization_id=org_id,
-        request_fingerprint=f"fp_{uuid4().hex}",
-        formula_code="LOAN_TO_DEPOSIT_RATIO",
-        formula_version="1.0.0",
-        institution_id=inst_id,
-        reporting_period_id=period_id,
-        requested_by_user_id=user_id,
-    )
-    same_hash2 = f"{'d' * 64}"
-    spec_check2 = f"{'e' * 64}"
-    impl_check2 = f"{'f' * 64}"
+        calc_att = CalculationAttempt(
+            id=att_id,
+            organization_id=org_id,
+            calculation_request_id=req_id,
+            attempt_number=1,
+            execution_idempotency_hash=same_hash2,
+            formula_spec_checksum=spec_check2,
+            implementation_checksum=impl_check2,
+            completed_at=datetime.now(UTC),
+            status="COMPLETED",
+        )
+        db_api_session.add(calc_req)
+        await db_api_session.flush()
+        db_api_session.add(calc_att)
+        await db_api_session.flush()
 
-    calc_att = CalculationAttempt(
-        id=att_id,
-        organization_id=org_id,
-        calculation_request_id=req_id,
-        attempt_number=1,
-        execution_idempotency_hash=same_hash2,
-        formula_spec_checksum=spec_check2,
-        implementation_checksum=impl_check2,
-        completed_at=datetime.now(UTC),
-        status="COMPLETED",
-    )
-    db_api_session.add(calc_req)
-    await db_api_session.flush()
-    db_api_session.add(calc_att)
-    await db_api_session.flush()
+        calc = Calculation(
+            id=calc_id,
+            organization_id=org_id,
+            calculation_request_id=req_id,
+            calculation_attempt_id=att_id,
+            institution_id=inst_id,
+            reporting_period_id=period_id,
+            formula_code="LOAN_TO_DEPOSIT_RATIO",
+            formula_version="1.0.0",
+            status="COMPLETED",
+            result_value_unrounded=Decimal("80.0"),
+            result_value_display=Decimal("80.00"),
+            result_unit="PERCENT",
+            result_scale="ONE",
+            value_representation="PERCENT_DISPLAY",
+            working_precision=38,
+            rounding_policy="ROUND_HALF_UP",
+            idempotency_hash=same_hash2,
+            formula_spec_checksum=spec_check2,
+            implementation_checksum=impl_check2,
+            requested_by_user_id=user_id,
+        )
+        db_api_session.add(calc)
+        await db_api_session.flush()
 
-    calc = Calculation(
-        id=calc_id,
-        organization_id=org_id,
-        calculation_request_id=req_id,
-        calculation_attempt_id=att_id,
-        institution_id=inst_id,
-        reporting_period_id=period_id,
-        formula_code="LOAN_TO_DEPOSIT_RATIO",
-        formula_version="1.0.0",
-        status="COMPLETED",
-        result_value_unrounded=Decimal("80.0"),
-        result_value_display=Decimal("80.00"),
-        result_unit="PERCENT",
-        result_scale="ONE",
-        value_representation="PERCENT_DISPLAY",
-        working_precision=38,
-        rounding_policy="ROUND_HALF_UP",
-        idempotency_hash=same_hash2,
-        formula_spec_checksum=spec_check2,
-        implementation_checksum=impl_check2,
-        requested_by_user_id=user_id,
-    )
-    db_api_session.add(calc)
-    await db_api_session.flush()
+        doc_id = uuid4()
+        cand_id = uuid4()
+        doc = Document(id=doc_id, organization_id=org_id, uploaded_by_user_id=user_id, display_name="report.pdf")
+        doc_ver_id = uuid4()
+        obj_id = uuid4()
+        stored_obj = StoredObject(
+            id=obj_id,
+            organization_id=org_id,
+            opaque_object_key=f"pdf_key_{uuid4().hex[:6]}.pdf",
+            server_computed_sha256="hash123",
+            byte_size=100,
+            detected_mime_type="application/pdf",
+            storage_provider="LOCAL",
+        )
+        doc_ver = DocumentVersion(
+            id=doc_ver_id,
+            organization_id=org_id,
+            document_id=doc_id,
+            version_number=1,
+            stored_object_id=obj_id,
+            content_hash_sha256="hash123",
+            file_size_bytes=100,
+            declared_mime_type="application/pdf",
+            detected_mime_type="application/pdf",
+        )
+        db_api_session.add(stored_obj)
+        await db_api_session.flush()
+        db_api_session.add_all([doc, doc_ver])
+        await db_api_session.flush()
 
-    doc_id = uuid4()
-    cand_id = uuid4()
-    doc = Document(id=doc_id, organization_id=org_id, uploaded_by_user_id=user_id, display_name="report.pdf")
-    doc_ver_id = uuid4()
-    obj_id = uuid4()
-    stored_obj = StoredObject(
-        id=obj_id,
-        organization_id=org_id,
-        opaque_object_key=f"pdf_key_{uuid4().hex[:6]}.pdf",
-        server_computed_sha256="hash123",
-        byte_size=100,
-        detected_mime_type="application/pdf",
-        storage_provider="LOCAL",
-    )
-    doc_ver = DocumentVersion(
-        id=doc_ver_id,
-        organization_id=org_id,
-        document_id=doc_id,
-        version_number=1,
-        stored_object_id=obj_id,
-        content_hash_sha256="hash123",
-        file_size_bytes=100,
-        declared_mime_type="application/pdf",
-        detected_mime_type="application/pdf",
-    )
-    db_api_session.add(stored_obj)
-    await db_api_session.flush()
-    db_api_session.add_all([doc, doc_ver])
-    await db_api_session.flush()
+        cand = FinancialFactCandidate(
+            id=cand_id,
+            organization_id=org_id,
+            institution_id=inst_id,
+            reporting_period_id=period_id,
+            suggested_metric_code="TOTAL_LOANS",
+            raw_label="Toplam Krediler",
+            raw_value="800.00",
+            parsed_decimal_value=Decimal("800.00"),
+            source_document_id=doc_id,
+            source_document_version_id=doc_ver_id,
+            extraction_method="PARSER_TABLE",
+            review_status="HUMAN_VERIFIED",
+        )
+        db_api_session.add(cand)
+        await db_api_session.flush()
 
-    cand = FinancialFactCandidate(
-        id=cand_id,
-        organization_id=org_id,
-        institution_id=inst_id,
-        reporting_period_id=period_id,
-        suggested_metric_code="TOTAL_LOANS",
-        raw_label="Toplam Krediler",
-        raw_value="800.00",
-        parsed_decimal_value=Decimal("800.00"),
-        source_document_id=doc_id,
-        source_document_version_id=doc_ver_id,
-        extraction_method="PARSER_TABLE",
-        review_status="HUMAN_VERIFIED",
-    )
-    db_api_session.add(cand)
-    await db_api_session.flush()
+        fact = FinancialFact(
+            id=fact_id,
+            organization_id=org_id,
+            institution_id=inst_id,
+            reporting_period_id=period_id,
+            metric_definition_id=UUID("a0000000-0000-0000-0000-000000000002"),
+            metric_code="TOTAL_LOANS",
+            value=Decimal("800.0"),
+            currency="TRY",
+            unit="CURRENCY",
+            scale="ONE",
+            normalized_value=Decimal("800.0"),
+            reporting_basis="SOLO",
+            source_candidate_id=cand_id,
+            source_document_id=doc_id,
+            review_status="HUMAN_VERIFIED",
+            verified_by_user_id=user_id,
+            value_origin="SOURCE_REPORTED",
+        )
+        db_api_session.add(fact)
+        await db_api_session.flush()
 
-    fact = FinancialFact(
-        id=fact_id,
-        organization_id=org_id,
-        institution_id=inst_id,
-        reporting_period_id=period_id,
-        metric_definition_id=UUID("a0000000-0000-0000-0000-000000000002"),
-        metric_code="TOTAL_LOANS",
-        value=Decimal("800.0"),
-        currency="TRY",
-        unit="CURRENCY",
-        scale="ONE",
-        normalized_value=Decimal("800.0"),
-        reporting_basis="SOLO",
-        source_candidate_id=cand_id,
-        source_document_id=doc_id,
-        review_status="HUMAN_VERIFIED",
-        verified_by_user_id=user_id,
-        value_origin="SOURCE_REPORTED",
-    )
-    db_api_session.add(fact)
-    await db_api_session.flush()
+        inp_id = uuid4()
+        inp = CalculationInput(
+            id=inp_id,
+            organization_id=org_id,
+            calculation_id=calc_id,
+            financial_fact_id=fact_id,
+            input_role="NUMERATOR",
+            metric_code="TOTAL_LOANS",
+            normalized_value_snapshot=Decimal("800.0"),
+            currency_snapshot="TRY",
+            unit_snapshot="CURRENCY",
+            scale_snapshot="ONE",
+            reporting_basis_snapshot="SOLO",
+            reporting_period_id_snapshot=period_id,
+        )
+        db_api_session.add(inp)
+        await db_api_session.flush()
 
-    inp_id = uuid4()
-    inp = CalculationInput(
-        id=inp_id,
-        organization_id=org_id,
-        calculation_id=calc_id,
-        financial_fact_id=fact_id,
-        input_role="NUMERATOR",
-        metric_code="TOTAL_LOANS",
-        normalized_value_snapshot=Decimal("800.0"),
-        currency_snapshot="TRY",
-        unit_snapshot="CURRENCY",
-        scale_snapshot="ONE",
-        reporting_basis_snapshot="SOLO",
-        reporting_period_id_snapshot=period_id,
-    )
-    db_api_session.add(inp)
     await db_api_session.commit()
 
-    await db_api_session.execute(
-        text("SELECT set_config('app.current_organization_id', :org_id, true);"), {"org_id": str(org_id)}
-    )
-
     # Attempt updating lineage row -> trigger raises IMMUTABLE_LINEAGE
-    try:
-        await db_api_session.execute(
-            text("UPDATE calculation_inputs SET metric_code = 'MUTATED' WHERE id = :id"),
-            {"id": str(inp_id)},
-        )
-        await db_api_session.commit()
-    except Exception as err:  # noqa: BLE001
-        assert "IMMUTABLE_LINEAGE" in str(err) or "IMMUTABLE" in str(err)
-    finally:
-        await db_api_session.rollback()
+    async with tenant_transaction_context(db_api_session, org_id):
+        try:
+            await db_api_session.execute(
+                text("UPDATE calculation_inputs SET metric_code = 'MUTATED' WHERE id = :id"),
+                {"id": str(inp_id)},
+            )
+            await db_api_session.commit()
+        except Exception as err:  # noqa: BLE001
+            assert "IMMUTABLE_LINEAGE" in str(err) or "IMMUTABLE" in str(err)
+        finally:
+            await db_api_session.rollback()
 
 
 @pytest.mark.asyncio
@@ -620,137 +613,132 @@ async def test_evidence_completeness_gate_raises_evidence_incomplete(db_owner_se
     db_owner_session.add_all([org, user])
     await db_owner_session.commit()
 
-    await db_api_session.execute(
-        text("SELECT set_config('app.current_organization_id', :org_id, true);"), {"org_id": str(org_id)}
-    )
-
-    inst = Institution(
-        id=inst_id, organization_id=org_id, canonical_name=f"evi_bank_{uuid4().hex[:6]}", display_name="Evi Bank"
-    )
-    period = ReportingPeriod(
-        id=period_id,
-        organization_id=org_id,
-        period_type="YEAR",
-        period_presentation="FULL_YEAR",
-        fiscal_year=2024,
-        start_date=date(2024, 1, 1),
-        end_date=date(2024, 12, 31),
-        label="2024 FY",
-        comparison_key="2024",
-    )
-    doc = Document(id=doc_id, organization_id=org_id, uploaded_by_user_id=user_id, display_name="report.pdf")
-    doc_ver_id = uuid4()
-    obj_id = uuid4()
-    stored_obj = StoredObject(
-        id=obj_id,
-        organization_id=org_id,
-        opaque_object_key=f"pdf_key_{uuid4().hex[:6]}.pdf",
-        server_computed_sha256="hash123",
-        byte_size=100,
-        detected_mime_type="application/pdf",
-        storage_provider="LOCAL",
-    )
-    doc_ver = DocumentVersion(
-        id=doc_ver_id,
-        organization_id=org_id,
-        document_id=doc_id,
-        version_number=1,
-        stored_object_id=obj_id,
-        content_hash_sha256="hash123",
-        file_size_bytes=100,
-        declared_mime_type="application/pdf",
-        detected_mime_type="application/pdf",
-    )
-    db_api_session.add(stored_obj)
-    await db_api_session.flush()
-    db_api_session.add_all([inst, period, doc, doc_ver])
-    await db_api_session.flush()
-
-    cand1 = FinancialFactCandidate(
-        id=cand1_id,
-        organization_id=org_id,
-        institution_id=inst_id,
-        reporting_period_id=period_id,
-        suggested_metric_code="TOTAL_LOANS",
-        raw_label="Toplam Krediler",
-        raw_value="800.00",
-        parsed_decimal_value=Decimal("800.00"),
-        source_document_id=doc_id,
-        source_document_version_id=doc_ver_id,
-        extraction_method="PARSER_TABLE",
-        review_status="HUMAN_VERIFIED",
-    )
-    cand2 = FinancialFactCandidate(
-        id=cand2_id,
-        organization_id=org_id,
-        institution_id=inst_id,
-        reporting_period_id=period_id,
-        suggested_metric_code="TOTAL_DEPOSITS",
-        raw_label="Toplam Mevduat",
-        raw_value="1000.00",
-        parsed_decimal_value=Decimal("1000.00"),
-        source_document_id=doc_id,
-        source_document_version_id=doc_ver_id,
-        extraction_method="PARSER_TABLE",
-        review_status="HUMAN_VERIFIED",
-    )
-    db_api_session.add_all([cand1, cand2])
-    await db_api_session.flush()
-
-    fact1 = FinancialFact(
-        id=fact1_id,
-        organization_id=org_id,
-        institution_id=inst_id,
-        reporting_period_id=period_id,
-        metric_definition_id=UUID("a0000000-0000-0000-0000-000000000002"),
-        metric_code="TOTAL_LOANS",
-        value=Decimal("800.0"),
-        currency="TRY",
-        unit="CURRENCY",
-        scale="ONE",
-        normalized_value=Decimal("800.0"),
-        reporting_basis="SOLO",
-        source_candidate_id=cand1_id,
-        source_document_id=doc_id,
-        review_status="HUMAN_VERIFIED",
-        verified_by_user_id=user_id,
-        value_origin="SOURCE_REPORTED",
-    )
-    fact2 = FinancialFact(
-        id=fact2_id,
-        organization_id=org_id,
-        institution_id=inst_id,
-        reporting_period_id=period_id,
-        metric_definition_id=UUID("a0000000-0000-0000-0000-000000000003"),
-        metric_code="TOTAL_DEPOSITS",
-        value=Decimal("1000.0"),
-        currency="TRY",
-        unit="CURRENCY",
-        scale="ONE",
-        normalized_value=Decimal("1000.0"),
-        reporting_basis="SOLO",
-        source_candidate_id=cand2_id,
-        source_document_id=doc_id,
-        review_status="HUMAN_VERIFIED",
-        verified_by_user_id=user_id,
-        value_origin="SOURCE_REPORTED",
-    )
-    db_api_session.add_all([fact1, fact2])
-    await db_api_session.commit()
-
-    # Re-apply tenant context for post-commit transaction
-    await db_api_session.execute(
-        text("SELECT set_config('app.current_organization_id', :org_id, true);"), {"org_id": str(org_id)}
-    )
-
-    # Calculation should fail with EVIDENCE_INCOMPLETE since CandidateEvidence was NOT seeded
-    with pytest.raises(ValueError, match="EVIDENCE_INCOMPLETE"):
-        await CalculationService.run_calculation(
-            db=db_api_session,
+    async with tenant_transaction_context(db_api_session, org_id):
+        inst = Institution(
+            id=inst_id, organization_id=org_id, canonical_name=f"evi_bank_{uuid4().hex[:6]}", display_name="Evi Bank"
+        )
+        period = ReportingPeriod(
+            id=period_id,
             organization_id=org_id,
-            requested_by_user_id=user_id,
-            formula_code="LOAN_TO_DEPOSIT_RATIO",
+            period_type="YEAR",
+            period_presentation="FULL_YEAR",
+            fiscal_year=2024,
+            start_date=date(2024, 1, 1),
+            end_date=date(2024, 12, 31),
+            label="2024 FY",
+            comparison_key="2024",
+        )
+        doc = Document(id=doc_id, organization_id=org_id, uploaded_by_user_id=user_id, display_name="report.pdf")
+        doc_ver_id = uuid4()
+        obj_id = uuid4()
+        stored_obj = StoredObject(
+            id=obj_id,
+            organization_id=org_id,
+            opaque_object_key=f"pdf_key_{uuid4().hex[:6]}.pdf",
+            server_computed_sha256="hash123",
+            byte_size=100,
+            detected_mime_type="application/pdf",
+            storage_provider="LOCAL",
+        )
+        doc_ver = DocumentVersion(
+            id=doc_ver_id,
+            organization_id=org_id,
+            document_id=doc_id,
+            version_number=1,
+            stored_object_id=obj_id,
+            content_hash_sha256="hash123",
+            file_size_bytes=100,
+            declared_mime_type="application/pdf",
+            detected_mime_type="application/pdf",
+        )
+        db_api_session.add(stored_obj)
+        await db_api_session.flush()
+        db_api_session.add_all([inst, period, doc, doc_ver])
+        await db_api_session.flush()
+
+        cand1 = FinancialFactCandidate(
+            id=cand1_id,
+            organization_id=org_id,
             institution_id=inst_id,
             reporting_period_id=period_id,
-            comparison_policy="EXPLICIT_PERIOD",
+            suggested_metric_code="TOTAL_LOANS",
+            raw_label="Toplam Krediler",
+            raw_value="800.00",
+            parsed_decimal_value=Decimal("800.00"),
+            source_document_id=doc_id,
+            source_document_version_id=doc_ver_id,
+            extraction_method="PARSER_TABLE",
+            review_status="HUMAN_VERIFIED",
         )
+        cand2 = FinancialFactCandidate(
+            id=cand2_id,
+            organization_id=org_id,
+            institution_id=inst_id,
+            reporting_period_id=period_id,
+            suggested_metric_code="TOTAL_DEPOSITS",
+            raw_label="Toplam Mevduat",
+            raw_value="1000.00",
+            parsed_decimal_value=Decimal("1000.00"),
+            source_document_id=doc_id,
+            source_document_version_id=doc_ver_id,
+            extraction_method="PARSER_TABLE",
+            review_status="HUMAN_VERIFIED",
+        )
+        db_api_session.add_all([cand1, cand2])
+        await db_api_session.flush()
+
+        fact1 = FinancialFact(
+            id=fact1_id,
+            organization_id=org_id,
+            institution_id=inst_id,
+            reporting_period_id=period_id,
+            metric_definition_id=UUID("a0000000-0000-0000-0000-000000000002"),
+            metric_code="TOTAL_LOANS",
+            value=Decimal("800.0"),
+            currency="TRY",
+            unit="CURRENCY",
+            scale="ONE",
+            normalized_value=Decimal("800.0"),
+            reporting_basis="SOLO",
+            source_candidate_id=cand1_id,
+            source_document_id=doc_id,
+            review_status="HUMAN_VERIFIED",
+            verified_by_user_id=user_id,
+            value_origin="SOURCE_REPORTED",
+        )
+        fact2 = FinancialFact(
+            id=fact2_id,
+            organization_id=org_id,
+            institution_id=inst_id,
+            reporting_period_id=period_id,
+            metric_definition_id=UUID("a0000000-0000-0000-0000-000000000003"),
+            metric_code="TOTAL_DEPOSITS",
+            value=Decimal("1000.0"),
+            currency="TRY",
+            unit="CURRENCY",
+            scale="ONE",
+            normalized_value=Decimal("1000.0"),
+            reporting_basis="SOLO",
+            source_candidate_id=cand2_id,
+            source_document_id=doc_id,
+            review_status="HUMAN_VERIFIED",
+            verified_by_user_id=user_id,
+            value_origin="SOURCE_REPORTED",
+        )
+        db_api_session.add_all([fact1, fact2])
+        await db_api_session.flush()
+
+    await db_api_session.commit()
+
+    # Calculation should fail with EVIDENCE_INCOMPLETE since CandidateEvidence was NOT seeded
+    async with tenant_transaction_context(db_api_session, org_id):
+        with pytest.raises(ValueError, match="EVIDENCE_INCOMPLETE"):
+            await CalculationService.run_calculation(
+                db=db_api_session,
+                organization_id=org_id,
+                requested_by_user_id=user_id,
+                formula_code="LOAN_TO_DEPOSIT_RATIO",
+                institution_id=inst_id,
+                reporting_period_id=period_id,
+                comparison_policy="EXPLICIT_PERIOD",
+            )

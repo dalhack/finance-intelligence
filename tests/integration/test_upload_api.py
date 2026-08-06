@@ -46,11 +46,9 @@ async def test_upload_api_streamed_success():
     session_factory = async_sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
 
     async def override_get_db_session():
-        async with session_factory() as session:
-            await session.execute(
-                __import__("sqlalchemy").text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-                {"org_id": str(org_id)},
-            )
+        from app.db.tenant_context import tenant_transaction_context
+
+        async with session_factory() as session, tenant_transaction_context(session, org_id):
             yield session
 
     async def override_get_execution_context():
@@ -100,11 +98,9 @@ async def test_upload_api_classifications_preservation():
     session_factory = async_sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
 
     async def override_get_db_session():
-        async with session_factory() as session:
-            await session.execute(
-                __import__("sqlalchemy").text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-                {"org_id": str(org_id)},
-            )
+        from app.db.tenant_context import tenant_transaction_context
+
+        async with session_factory() as session, tenant_transaction_context(session, org_id):
             yield session
 
     async def override_get_execution_context():
