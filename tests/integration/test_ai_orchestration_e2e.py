@@ -404,11 +404,28 @@ async def test_live_anthropic_acceptance():
     doc_id = uuid4()
     metric_def_id = uuid4()
 
+    doc_id = uuid4()
+    doc_ver_id = uuid4()
+    stored_obj_id = uuid4()
+
     async with OwnerSession() as db_owner:
         org = Organization(id=org_id, name="Live Anthropic Test Org", slug=f"live-{org_id.hex[:6]}")
         user = User(id=user_id, external_subject=f"sub-{user_id.hex[:6]}", display_name="Live Test User")
+        m_def = (
+            await db_owner.execute(select(MetricDefinition).where(MetricDefinition.metric_code == "TOTAL_ASSETS"))
+        ).scalar_one_or_none()
+        if not m_def:
+            m_def = MetricDefinition(
+                id=uuid4(),
+                metric_code="TOTAL_ASSETS",
+                canonical_name="Total Assets",
+                value_type="CURRENCY",
+                default_unit="TRY",
+            )
+            db_owner.add(m_def)
         db_owner.add_all([org, user])
         await db_owner.commit()
+        metric_def_id = m_def.id
 
     async with ApiSession() as db_api:
         await db_api.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
@@ -419,15 +436,58 @@ async def test_live_anthropic_acceptance():
             id=period_id,
             organization_id=org_id,
             period_type="QUARTER",
-            period_presentation="Q4",
+            period_presentation="DISCRETE_PERIOD",
             fiscal_year=2025,
-            fiscal_quarter=4,
+            quarter=4,
             start_date=date(2025, 10, 1),
             end_date=date(2025, 12, 31),
             label="2025-Q4",
             comparison_key="2025-Q4",
         )
-        db_api.add_all([inst, period])
+        doc = Document(
+            id=doc_id,
+            organization_id=org_id,
+            uploaded_by_user_id=user_id,
+            display_name="garanti_2025_q4.pdf",
+            classification="PUBLIC",
+        )
+        stored_obj = StoredObject(
+            id=stored_obj_id,
+            organization_id=org_id,
+            opaque_object_key=f"obj-{stored_obj_id.hex[:6]}",
+            byte_size=1000,
+            server_computed_sha256="a" * 64,
+            detected_mime_type="application/pdf",
+        )
+        db_api.add_all([inst, period, doc, stored_obj])
+        await db_api.commit()
+
+    async with ApiSession() as db_api:
+        await db_api.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
+        doc_ver = DocumentVersion(
+            id=doc_ver_id,
+            organization_id=org_id,
+            document_id=doc_id,
+            version_number=1,
+            stored_object_id=stored_obj_id,
+            content_hash_sha256="a" * 64,
+            file_size_bytes=1000,
+            declared_mime_type="application/pdf",
+            detected_mime_type="application/pdf",
+        )
+        cand = FinancialFactCandidate(
+            id=cand_id,
+            organization_id=org_id,
+            institution_id=inst_id,
+            reporting_period_id=period_id,
+            metric_definition_id=metric_def_id,
+            suggested_metric_code="TOTAL_ASSETS",
+            raw_label="Toplam Aktifler",
+            raw_value="1,500,000",
+            source_document_id=doc_id,
+            source_document_version_id=doc_ver_id,
+        )
+        db_api.add_all([doc_ver, cand])
         await db_api.commit()
 
     async with ApiSession() as db_api:
