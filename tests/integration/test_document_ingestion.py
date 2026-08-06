@@ -4,7 +4,7 @@ from uuid import uuid4
 import asyncpg
 import httpx
 import pytest
-from sqlalchemy import text
+from app.db.tenant_context import tenant_transaction_context
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 from services.api.app.db.session import get_db_session
@@ -54,11 +54,7 @@ async def test_full_api_upload_finalize_worker_flow():
     session_factory_worker = async_sessionmaker(bind=engine_worker, class_=AsyncSession, expire_on_commit=False)
 
     async def override_get_db_session():
-        async with session_factory_api() as session:
-            await session.execute(
-                text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-                {"org_id": str(org_id)},
-            )
+        async with session_factory_api() as session, tenant_transaction_context(session, org_id):
             yield session
 
     async def override_get_execution_context():
@@ -154,11 +150,7 @@ async def test_api_upload_unsupported_file_type_returns_415():
     session_factory_api = async_sessionmaker(bind=engine_api, class_=AsyncSession, expire_on_commit=False)
 
     async def override_get_db_session():
-        async with session_factory_api() as session:
-            await session.execute(
-                text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-                {"org_id": str(org_id)},
-            )
+        async with session_factory_api() as session, tenant_transaction_context(session, org_id):
             yield session
 
     async def override_get_execution_context():

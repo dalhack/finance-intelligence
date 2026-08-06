@@ -4,7 +4,8 @@ from uuid import UUID, uuid4
 import asyncpg
 import httpx
 import pytest
-from sqlalchemy import select, text
+from app.db.tenant_context import tenant_transaction_context
+from sqlalchemy import select
 
 from services.api.app.db.session import ApiSessionLocal, WorkerSessionLocal, get_db_session
 from services.api.app.dependencies import get_execution_context
@@ -46,11 +47,7 @@ async def test_audit_full_lifecycle_event_trail_and_sanitization():
     await conn_owner.close()
 
     async def override_get_db_session():
-        async with ApiSessionLocal() as session:
-            await session.execute(
-                text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-                {"org_id": str(org_id)},
-            )
+        async with ApiSessionLocal() as session, tenant_transaction_context(session, org_id):
             yield session
 
     async def override_get_execution_context():
@@ -88,11 +85,7 @@ async def test_audit_full_lifecycle_event_trail_and_sanitization():
             assert fin.json()["ingestion_job_id"] is not None
 
             # 3. Worker process job (triggers PARSING_STARTED, PARSING_COMPLETED) using WorkerSessionLocal
-            async with WorkerSessionLocal() as w_session:
-                await w_session.execute(
-                    text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-                    {"org_id": str(org_id)},
-                )
+            async with WorkerSessionLocal() as w_session, tenant_transaction_context(w_session, org_id):
                 from tests.fixtures.envelope_factory import TEST_HMAC_SECRET, make_signed_envelope
 
                 worker = IngestionWorker(w_session)
@@ -107,12 +100,7 @@ async def test_audit_full_lifecycle_event_trail_and_sanitization():
                 assert outcome.outcome_status == WorkerOutcomeStatus.PROCESSED_SUCCESS
 
             # 4. Verify persistent audit log sequence in DB via ApiSessionLocal
-            async with ApiSessionLocal() as v_session:
-                await v_session.execute(
-                    text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-                    {"org_id": str(org_id)},
-                )
-
+            async with ApiSessionLocal() as v_session, tenant_transaction_context(v_session, org_id):
                 events_res = await v_session.execute(
                     select(AuditEvent).where(AuditEvent.organization_id == org_id).order_by(AuditEvent.created_at.asc())
                 )
@@ -135,11 +123,7 @@ async def test_audit_full_lifecycle_event_trail_and_sanitization():
                         )
 
             # 5. Tenant isolation check: Tenant B cannot see Tenant A's audit events
-            async with ApiSessionLocal() as v_session_b:
-                await v_session_b.execute(
-                    text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-                    {"org_id": str(org_b)},
-                )
+            async with ApiSessionLocal() as v_session_b, tenant_transaction_context(v_session_b, org_b):
                 events_b = (
                     (await v_session_b.execute(select(AuditEvent).where(AuditEvent.organization_id == org_id)))
                     .scalars()

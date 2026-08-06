@@ -3,6 +3,7 @@ from datetime import UTC, datetime
 from uuid import uuid4
 
 import pytest
+from app.db.tenant_context import tenant_transaction_context
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
@@ -186,10 +187,7 @@ async def test_clarification_cancellation_flow():
         db_owner.add_all([org, user])
         await db_owner.commit()
 
-    async with OwnerSession() as db_owner:
-        await db_owner.execute(
-            text("SELECT set_config('app.current_organization_id', :org_id, true);"), {"org_id": str(org_id)}
-        )
+    async with OwnerSession() as db_owner, tenant_transaction_context(db_owner, org_id):
         mem = Membership(id=mem_id, organization_id=org_id, user_id=user_id)
         now = datetime.now(UTC)
         job = AnalysisJob(
@@ -269,10 +267,7 @@ async def test_clarification_partial_unique_constraint():
         db_owner.add_all([org, user])
         await db_owner.commit()
 
-    async with OwnerSession() as db_owner:
-        await db_owner.execute(
-            text("SELECT set_config('app.current_organization_id', :org_id, true);"), {"org_id": str(org_id)}
-        )
+    async with OwnerSession() as db_owner, tenant_transaction_context(db_owner, org_id):
         mem = Membership(id=uuid4(), organization_id=org_id, user_id=user_id)
         now = datetime.now(UTC)
         job = AnalysisJob(

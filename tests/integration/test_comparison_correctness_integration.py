@@ -4,7 +4,8 @@ from decimal import Decimal
 from uuid import uuid4
 
 import pytest
-from sqlalchemy import select, text
+from app.db.tenant_context import tenant_transaction_context
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 from services.api.app.models.candidate_evidence import CandidateEvidence
@@ -54,12 +55,7 @@ async def test_both_separate_series_policy_and_measure_keys():
         await db_owner.commit()
         metric_def_id = m_def.id
 
-    async with ApiSession() as db_api:
-        await db_api.execute(
-            text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-            {"org_id": str(org_id)},
-        )
-
+    async with ApiSession() as db_api, tenant_transaction_context(db_api, org_id):
         st_obj = StoredObject(
             id=uuid4(),
             organization_id=org_id,
@@ -192,12 +188,7 @@ async def test_strict_common_period_policy_rejection():
         db_owner.add(org)
         await db_owner.commit()
 
-    async with ApiSession() as db_api:
-        await db_api.execute(
-            text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-            {"org_id": str(org_id)},
-        )
-
+    async with ApiSession() as db_api, tenant_transaction_context(db_api, org_id):
         inst = Institution(id=inst_id, organization_id=org_id, canonical_name="bank_s", display_name="Bank S")
         period = ReportingPeriod(
             id=period_id,
@@ -252,12 +243,7 @@ async def test_missing_institution_or_period_rejection():
         db_owner.add(org)
         await db_owner.commit()
 
-    async with ApiSession() as db_api:
-        await db_api.execute(
-            text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-            {"org_id": str(org_id)},
-        )
-
+    async with ApiSession() as db_api, tenant_transaction_context(db_api, org_id):
         req = ComparisonRequestDTO(
             institution_ids=[uuid4()],
             semantic_measures=[SemanticMeasureSelectorDTO(semantic_measure_code="TOTAL_ASSETS")],
