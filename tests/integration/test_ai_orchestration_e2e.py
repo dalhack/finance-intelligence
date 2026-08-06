@@ -375,3 +375,127 @@ async def test_ai_orchestrator_concurrent_double_completion_snapshot_atomicity()
         )
         count = res.scalar()
         assert count == 1
+
+
+@pytest.mark.asyncio
+async def test_live_anthropic_acceptance():
+    """Opt-in live Anthropic acceptance test node.
+
+    Executes a single real engine invocation using AnthropicProviderAdapter(use_fake_transport=False)
+    when ANTHROPIC_API_KEY is present in the execution environment.
+    If ANTHROPIC_API_KEY is missing, skips gracefully without failing normal local CI.
+    """
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    if not api_key or api_key in ("placeholder", "test_key", ""):
+        pytest.skip("ANTHROPIC_API_KEY is not configured locally. Skipping live Anthropic acceptance test node.")
+
+    owner_engine = create_async_engine(os.environ["TEST_OWNER_DATABASE_URL"])
+    api_engine = create_async_engine(os.environ["TEST_API_DATABASE_URL"])
+
+    OwnerSession = async_sessionmaker(owner_engine, class_=AsyncSession, expire_on_commit=False)
+    ApiSession = async_sessionmaker(api_engine, class_=AsyncSession, expire_on_commit=False)
+
+    org_id = uuid4()
+    user_id = uuid4()
+    job_id = uuid4()
+    inst_id = uuid4()
+    period_id = uuid4()
+    cand_id = uuid4()
+    doc_id = uuid4()
+    metric_def_id = uuid4()
+
+    async with OwnerSession() as db_owner:
+        org = Organization(id=org_id, name="Live Anthropic Test Org", slug=f"live-{org_id.hex[:6]}")
+        user = User(id=user_id, external_subject=f"sub-{user_id.hex[:6]}", display_name="Live Test User")
+        db_owner.add_all([org, user])
+        await db_owner.commit()
+
+    async with ApiSession() as db_api:
+        await db_api.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
+        inst = Institution(
+            id=inst_id, organization_id=org_id, canonical_name="garanti_bbva", display_name="Garanti BBVA"
+        )
+        period = ReportingPeriod(
+            id=period_id,
+            organization_id=org_id,
+            period_type="QUARTER",
+            period_presentation="Q4",
+            fiscal_year=2025,
+            fiscal_quarter=4,
+            start_date=date(2025, 10, 1),
+            end_date=date(2025, 12, 31),
+            label="2025-Q4",
+            comparison_key="2025-Q4",
+        )
+        db_api.add_all([inst, period])
+        await db_api.commit()
+
+    async with ApiSession() as db_api:
+        await db_api.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
+        fact = FinancialFact(
+            id=uuid4(),
+            organization_id=org_id,
+            institution_id=inst_id,
+            reporting_period_id=period_id,
+            metric_definition_id=metric_def_id,
+            metric_code="TOTAL_ASSETS",
+            value=1500000.00,
+            currency="TRY",
+            unit="CURRENCY",
+            scale="ONE",
+            normalized_value=1500000.00,
+            reporting_basis="SOLO",
+            source_candidate_id=cand_id,
+            source_document_id=doc_id,
+            source_location={},
+            extraction_method="PARSER_TABLE",
+            confidence_score=1.000,
+            review_status="HUMAN_VERIFIED",
+            value_origin="SOURCE_REPORTED",
+        )
+        now = datetime.now(UTC)
+        job = AnalysisJob(
+            id=job_id,
+            organization_id=org_id,
+            user_id=user_id,
+            status="RECEIVED",
+            request_prompt="Garanti BBVA 2025 Q4 toplam aktif analizi.",
+            normalized_request={},
+            created_at=now,
+            updated_at=now,
+        )
+        db_api.add_all([fact, job])
+        await db_api.commit()
+
+    async with ApiSession() as db_api:
+        await db_api.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
+        context = ExecutionContext(
+            organization_id=org_id,
+            user_id=user_id,
+            role="OWNER",
+            permissions={"analyses:read", "analyses:run", "analyses:clarifications:respond", "analyses:cancel"},
+        )
+        from services.api.app.orchestration.provider_anthropic import AnthropicProviderAdapter
+
+        provider = AnthropicProviderAdapter(
+            application_model_alias="finance_analysis_balanced",
+            api_key=api_key,
+            use_fake_transport=False,
+        )
+        engine = AnalysisOrchestratorEngine(
+            db_session=db_api,
+            context=context,
+            provider=provider,
+        )
+
+        completed_job = await engine.execute_job(job_id, request_classification=DataClassification.PUBLIC)
+        assert completed_job.status == "COMPLETED"
+
+    async with OwnerSession() as db_verify:
+        await db_verify.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
+        res_snap = await db_verify.execute(
+            text(f"SELECT result_json FROM final_result_snapshots WHERE analysis_job_id = '{job_id}';")
+        )
+        row = res_snap.fetchone()
+        assert row is not None
+        assert "result_dataset_id" in str(row[0])
