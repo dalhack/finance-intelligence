@@ -41,6 +41,14 @@ if not logger.handlers:
 def run_preflight() -> int:
     """Validates runtime configuration and project identity in a read-only manner."""
     logger.info("[MIGRATION_PREFLIGHT] Validating runtime configuration...")
+    from app.migration_execution.compatibility.revision_024 import (
+        EXPECTED_REVISION_024_SHA256,
+        verify_revision_024_checksum,
+    )
+
+    verify_revision_024_checksum()
+    logger.info("[REVISION_024_COMPATIBILITY_IMPORT] SUCCESS")
+    logger.info(f"[REVISION_024_CHECKSUM_CONSTANT] {EXPECTED_REVISION_024_SHA256}")
     logger.info(f"[MIGRATION_PREFLIGHT] Irreversible boundary active: {list(IRREVERSIBLE_MIGRATION_POLICIES.keys())}")
     logger.info("[MIGRATION_PREFLIGHT] SUCCESS - Preflight check clean.")
     return 0
