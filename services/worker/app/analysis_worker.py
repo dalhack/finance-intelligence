@@ -2,7 +2,6 @@ import asyncio
 import logging
 import uuid
 from dataclasses import dataclass
-from datetime import UTC, datetime
 from uuid import UUID
 
 from sqlalchemy import text
@@ -103,7 +102,7 @@ class AnalysisWorker:
                             hb_session, job_id, claim_token, self.worker_id
                         )
                         await hb_session.commit()
-                except Exception as ex:
+                except Exception as ex:  # noqa: BLE001
                     logger.error(f"HEARTBEAT_LEASE_RENEWAL_EXCEPTION for job {job_id}: {ex}")
                     renewed = False
 
@@ -115,7 +114,7 @@ class AnalysisWorker:
                     break
         except asyncio.CancelledError:
             pass
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
             logger.error(f"HEARTBEAT_UNHANDLED_EXCEPTION: {e}")
 
     async def process_analysis_job(
@@ -153,7 +152,8 @@ class AnalysisWorker:
         except asyncio.CancelledError:
             logger.warning(f"ANALYSIS_JOB_CANCELLED_BY_HEARTBEAT: {job_id}")
             return False
-        except Exception as e:
+        except Exception as e:  # noqa: BLE001
+
             logger.error(f"ANALYSIS_JOB_FAILED_EXCEPTION: {job_id} - {e}")
             return False
         finally:

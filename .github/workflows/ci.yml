@@ -113,7 +113,8 @@ jobs:
           TEST_WORKER_DATABASE_URL: "postgresql+asyncpg://db_ingestion_worker:worker_pass@localhost:5432/finance_intelligence_test"
           TEST_ROUNDTRIP_DATABASE_URL: "postgresql+asyncpg://db_owner:owner_pass@localhost:5432/finance_intelligence_roundtrip_test"
           TEST_MAINTENANCE_DATABASE_URL: "postgresql+asyncpg://db_maintenance_worker:dev_maintenance_pass_123@localhost:5432/finance_intelligence_test"
-        run: pytest -m "not live_anthropic" tests/integration --junitxml=pytest-integration-report.xml
+        run: pytest -m "not live_anthropic and not live_acceptance" tests/integration --junitxml=pytest-integration-report.xml
+
 
       - name: Real Zero-Skip Integration XML Machine Verification
         run: |

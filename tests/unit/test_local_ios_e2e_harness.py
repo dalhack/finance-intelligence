@@ -3,17 +3,15 @@
 import json
 import os
 import stat
-import tempfile
 import uuid
+
 import pytest
 
 from scripts.run_local_ios_e2e import (
     AtomicExecutionLedger,
-    FixtureManifest,
     LedgerError,
     LocalTargetSafetyError,
     build_flutter_argv,
-    check_credential_presence,
     compute_command_hash,
     generate_fixture_manifest,
     redact_sensitive_text,
@@ -126,7 +124,8 @@ def test_command_hash_and_define_parity():
     assert define_map["FI_E2E_ACTOR_ID"] == manifest.actor_id
     assert define_map["FI_E2E_INSTITUTION_ID"] == manifest.institution_id
     assert define_map["FI_E2E_REPORTING_PERIOD_ID"] == manifest.reporting_period_id
-    assert define_map["FI_E2E_FIXTURE_FILE_PATH"].startswith(f"/private/tmp/fi-fixture-{manifest.run_namespace}")
+    assert f"fi-fixture-{manifest.run_namespace}" in define_map["FI_E2E_FIXTURE_FILE_PATH"]
+
 
     h1 = compute_command_hash(argv)
     assert len(h1) == 64

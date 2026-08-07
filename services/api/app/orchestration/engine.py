@@ -502,6 +502,5 @@ class AnalysisOrchestratorEngine:
             except ClaimOwnershipLostException:
                 await self.db.rollback()
                 # Ownership was lost; suppress failure persistence so new owner is not affected
-                pass
 
             raise

@@ -1,8 +1,8 @@
-import asyncio
 import os
 import uuid
+from datetime import UTC, datetime
+
 import pytest
-from datetime import UTC, datetime, timedelta
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
@@ -15,7 +15,6 @@ from services.api.app.orchestration.provider import DeterministicTestModelProvid
 from services.api.app.orchestration.tools.base import ExecutionContext
 from services.worker.app.analysis_worker import (
     AnalysisWorker,
-    ClaimedAnalysisJob,
     claim_next_analysis_job,
     recover_next_stale_analysis_job,
     renew_analysis_job_lease,
@@ -132,8 +131,9 @@ async def test_engine_fencing_and_ownership_loss():
             period_presentation="DISCRETE_PERIOD",
             fiscal_year=2025,
             quarter=4,
-            start_date=datetime(2025, 10, 1).date(),
-            end_date=datetime(2025, 12, 31).date(),
+            start_date=datetime(2025, 10, 1, tzinfo=UTC).date(),
+            end_date=datetime(2025, 12, 31, tzinfo=UTC).date(),
+
             label="2025 Q4",
             comparison_key="2025-Q4",
         )
