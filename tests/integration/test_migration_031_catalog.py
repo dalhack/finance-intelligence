@@ -123,7 +123,7 @@ async def test_migration_031_catalog_and_security():
             "VALUES (:uid, :sub, 'firebase', 'Test User 031', 'ACTIVE', now(), now());"
         ), {"uid": user_id, "sub": f"firebase_sub_{uuid.uuid4().hex[:12]}"})
 
-        await owner_db.execute(text("TRUNCATE TABLE public.analysis_attempts, public.analysis_jobs CASCADE;"))
+        await owner_db.execute(text("DELETE FROM public.analysis_jobs WHERE status = 'RECEIVED';"))
         await owner_db.execute(text("SELECT set_config('app.current_organization_id', :oid, true);"), {"oid": str(org_id)})
         await owner_db.execute(text(
             "INSERT INTO public.analysis_jobs (id, organization_id, user_id, status, request_prompt, created_at, updated_at) "
@@ -131,11 +131,7 @@ async def test_migration_031_catalog_and_security():
         ), {"jid": job_id, "oid": org_id, "uid": user_id})
         await owner_db.commit()
 
-    unrel_job_id = None
-    unrel_att_id = None
-    att_id = None
     try:
-
         # 7. Valid Worker ID 1-char & 100-char testing + Fresh Claim
         async with ApiSession() as api_db:
             # Valid 1-char worker ID
