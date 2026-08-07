@@ -181,6 +181,7 @@ def check_credential_presence() -> bool:
 def build_flutter_argv(
     device_id: str,
     manifest: FixtureManifest,
+    authorization_id: str,
     api_base_url: str = "http://127.0.0.1:8000",
     fixture_file_path: str = "",
 ) -> list[str]:
@@ -193,7 +194,7 @@ def build_flutter_argv(
         "-d",
         device_id,
         f"--dart-define=FI_E2E_API_BASE_URL={api_base_url}",
-        f"--dart-define=FI_E2E_AUTHORIZATION_ID={manifest.run_namespace}",
+        f"--dart-define=FI_E2E_AUTHORIZATION_ID={authorization_id}",
         f"--dart-define=FI_E2E_ORGANIZATION_ID={manifest.organization_id}",
         f"--dart-define=FI_E2E_ACTOR_ID={manifest.actor_id}",
         f"--dart-define=FI_E2E_INSTITUTION_ID={manifest.institution_id}",
@@ -206,7 +207,7 @@ def run_harness_dry_run(
     authorization_id: str,
     device_id: str,
     credential_env_file: str | None = None,
-    target_head: str = "e226a5ddba42761759e22dcb8579f742a754df98",
+    target_head: str = "78f6f9d00499298dbe0eaf7adaf0670877cef360",
     api_base_url: str = "http://127.0.0.1:8000",
 ) -> dict[str, Any]:
     """Perform dry-run preflight validation. Zero DB writes, zero process starts, zero test executions."""
@@ -222,7 +223,7 @@ def run_harness_dry_run(
     manifest = generate_fixture_manifest(authorization_id)
 
     # 4. Command hash
-    argv = build_flutter_argv(device_id, manifest, api_base_url=api_base_url)
+    argv = build_flutter_argv(device_id, manifest, authorization_id=authorization_id, api_base_url=api_base_url)
     cmd_hash = compute_command_hash(argv)
 
     plan = {
@@ -248,7 +249,7 @@ def run_harness_execute(
     authorization_id: str,
     device_id: str,
     credential_env_file: str | None = None,
-    target_head: str = "e226a5ddba42761759e22dcb8579f742a754df98",
+    target_head: str = "78f6f9d00499298dbe0eaf7adaf0670877cef360",
     api_base_url: str = "http://127.0.0.1:8000",
     runner_fn: Any = None,
     seed_fn: Any = None,
@@ -301,8 +302,9 @@ def run_harness_execute(
             created_fixture_by_harness = True
 
     # 4. Command hash
-    argv = build_flutter_argv(device_id, manifest, api_base_url=api_base_url, fixture_file_path=eff_fixture_path)
+    argv = build_flutter_argv(device_id, manifest, authorization_id=authorization_id, api_base_url=api_base_url, fixture_file_path=eff_fixture_path)
     cmd_hash = compute_command_hash(argv)
+
 
     # 5. Atomic ledger creation
     ledger = AtomicExecutionLedger(authorization_id)

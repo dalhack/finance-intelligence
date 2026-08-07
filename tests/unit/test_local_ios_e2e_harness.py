@@ -109,10 +109,10 @@ def test_fixture_manifest_uuidv5_derivation():
 
 
 def test_command_hash_and_define_parity():
-    """Verify build_flutter_argv produces exactly 7 unique --dart-define parameters including API base URL and fixture path."""
-    auth_id = f"test-defines-{uuid.uuid4().hex[:8]}"
+    """Verify build_flutter_argv produces exactly 7 unique --dart-define parameters with CLI authorization_id provenance."""
+    auth_id = "auth-slice4-r5-78f6f9d-01"
     manifest = generate_fixture_manifest(auth_id)
-    argv = build_flutter_argv("device-sim-123", manifest, api_base_url="http://127.0.0.1:8000")
+    argv = build_flutter_argv("device-sim-123", manifest, authorization_id=auth_id, api_base_url="http://127.0.0.1:8000")
 
     defines = [arg for arg in argv if arg.startswith("--dart-define=")]
     assert len(defines) == 7
@@ -120,15 +120,17 @@ def test_command_hash_and_define_parity():
 
     define_map = dict(d.replace("--dart-define=", "").split("=", 1) for d in defines)
     assert define_map["FI_E2E_API_BASE_URL"] == "http://127.0.0.1:8000"
-    assert define_map["FI_E2E_AUTHORIZATION_ID"] == manifest.run_namespace
+    assert define_map["FI_E2E_AUTHORIZATION_ID"] == auth_id
+    assert define_map["FI_E2E_AUTHORIZATION_ID"] != manifest.run_namespace
     assert define_map["FI_E2E_ORGANIZATION_ID"] == manifest.organization_id
     assert define_map["FI_E2E_ACTOR_ID"] == manifest.actor_id
     assert define_map["FI_E2E_INSTITUTION_ID"] == manifest.institution_id
     assert define_map["FI_E2E_REPORTING_PERIOD_ID"] == manifest.reporting_period_id
-    assert define_map["FI_E2E_FIXTURE_FILE_PATH"].startswith("/private/tmp/fi-fixture-")
+    assert define_map["FI_E2E_FIXTURE_FILE_PATH"].startswith(f"/private/tmp/fi-fixture-{manifest.run_namespace}")
 
     h1 = compute_command_hash(argv)
     assert len(h1) == 64
+
 
 
 def test_harness_fixture_file_creation_and_cleanup():
