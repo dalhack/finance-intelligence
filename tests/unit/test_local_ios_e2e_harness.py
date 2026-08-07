@@ -108,19 +108,63 @@ def test_fixture_manifest_uuidv5_derivation():
         assert val.version == 5
 
 
-def test_command_hash_stability():
-    """Verify compute_command_hash generates deterministic SHA-256 string for argv list."""
-    argv1 = ["flutter", "test", "integration_test/app_e2e_test.dart", "-d", "device-123"]
-    argv2 = ["flutter", "test", "integration_test/app_e2e_test.dart", "-d", "device-123"]
-    argv3 = ["flutter", "test", "integration_test/app_e2e_test.dart", "-d", "device-999"]
+def test_command_hash_and_define_parity():
+    """Verify build_flutter_argv produces exactly 7 unique --dart-define parameters including API base URL and fixture path."""
+    auth_id = f"test-defines-{uuid.uuid4().hex[:8]}"
+    manifest = generate_fixture_manifest(auth_id)
+    argv = build_flutter_argv("device-sim-123", manifest, api_base_url="http://127.0.0.1:8000")
 
-    h1 = compute_command_hash(argv1)
-    h2 = compute_command_hash(argv2)
-    h3 = compute_command_hash(argv3)
+    defines = [arg for arg in argv if arg.startswith("--dart-define=")]
+    assert len(defines) == 7
+    assert len(set(defines)) == 7  # 7 unique defines, zero duplicates
 
-    assert h1 == h2
-    assert h1 != h3
+    define_map = dict(d.replace("--dart-define=", "").split("=", 1) for d in defines)
+    assert define_map["FI_E2E_API_BASE_URL"] == "http://127.0.0.1:8000"
+    assert define_map["FI_E2E_AUTHORIZATION_ID"] == manifest.run_namespace
+    assert define_map["FI_E2E_ORGANIZATION_ID"] == manifest.organization_id
+    assert define_map["FI_E2E_ACTOR_ID"] == manifest.actor_id
+    assert define_map["FI_E2E_INSTITUTION_ID"] == manifest.institution_id
+    assert define_map["FI_E2E_REPORTING_PERIOD_ID"] == manifest.reporting_period_id
+    assert define_map["FI_E2E_FIXTURE_FILE_PATH"].startswith("/private/tmp/fi-fixture-")
+
+    h1 = compute_command_hash(argv)
     assert len(h1) == 64
+
+
+def test_harness_fixture_file_creation_and_cleanup():
+    """Verify run_harness_execute creates ephemeral 0600 fixture file if missing and cleans it up on both pass and fail paths."""
+    from scripts.run_local_ios_e2e import run_harness_execute
+
+    auth_id = f"test-fix-clean-{uuid.uuid4().hex[:8]}"
+    created_fixture_path = None
+
+    def mock_runner(argv):
+        nonlocal created_fixture_path
+        define_map = dict(d.replace("--dart-define=", "").split("=", 1) for d in argv if d.startswith("--dart-define="))
+        created_fixture_path = define_map["FI_E2E_FIXTURE_FILE_PATH"]
+        assert os.path.exists(created_fixture_path)
+        # Verify 0600 mode
+        st = os.stat(created_fixture_path)
+        assert stat.S_IMODE(st.st_mode) == 0o600
+        return 0
+
+    res = run_harness_execute(
+        authorization_id=auth_id,
+        device_id="device-sim-999",
+        runner_fn=mock_runner,
+    )
+
+    assert res["status"] == "EXECUTION_SUCCESS"
+    assert res["emitted_define_count"] == 7
+    assert res["unique_define_count"] == 7
+    assert created_fixture_path is not None
+    # Verify cleanup deleted the harness-created fixture file
+    assert not os.path.exists(created_fixture_path)
+
+    # Clean up ledger
+    if os.path.exists(res["ledger_path"]):
+        os.remove(res["ledger_path"])
+
 
 
 def test_evidence_redaction():

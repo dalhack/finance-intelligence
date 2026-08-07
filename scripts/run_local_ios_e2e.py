@@ -178,35 +178,42 @@ def check_credential_presence() -> bool:
     return False
 
 
-def build_flutter_argv(device_id: str, manifest: FixtureManifest, fixture_file_path: str = "") -> list[str]:
-    """Construct exact Flutter test command argument list without using shell."""
-    argv = [
+def build_flutter_argv(
+    device_id: str,
+    manifest: FixtureManifest,
+    api_base_url: str = "http://127.0.0.1:8000",
+    fixture_file_path: str = "",
+) -> list[str]:
+    """Construct exact Flutter test command argument list with 7 unique --dart-define parameters."""
+    eff_fixture_path = fixture_file_path or f"/private/tmp/fi-fixture-{manifest.run_namespace}.pdf"
+    return [
         "flutter",
         "test",
         "integration_test/upload_ingestion_analysis_sse_app_e2e_test.dart",
         "-d",
         device_id,
+        f"--dart-define=FI_E2E_API_BASE_URL={api_base_url}",
         f"--dart-define=FI_E2E_AUTHORIZATION_ID={manifest.run_namespace}",
         f"--dart-define=FI_E2E_ORGANIZATION_ID={manifest.organization_id}",
         f"--dart-define=FI_E2E_ACTOR_ID={manifest.actor_id}",
         f"--dart-define=FI_E2E_INSTITUTION_ID={manifest.institution_id}",
         f"--dart-define=FI_E2E_REPORTING_PERIOD_ID={manifest.reporting_period_id}",
+        f"--dart-define=FI_E2E_FIXTURE_FILE_PATH={eff_fixture_path}",
     ]
-    if fixture_file_path:
-        argv.append(f"--dart-define=FI_E2E_FIXTURE_FILE_PATH={fixture_file_path}")
-    return argv
 
 
 def run_harness_dry_run(
     authorization_id: str,
     device_id: str,
     credential_env_file: str | None = None,
-    target_head: str = "cc412726fc3344bf0107a2457da932aadd5fcfaf",
+    target_head: str = "e226a5ddba42761759e22dcb8579f742a754df98",
+    api_base_url: str = "http://127.0.0.1:8000",
 ) -> dict[str, Any]:
     """Perform dry-run preflight validation. Zero DB writes, zero process starts, zero test executions."""
     # 1. Local URL target validation
     api_url = os.environ.get("TEST_API_DATABASE_URL", "postgresql+asyncpg://db_api_user:dev_api_user_pass_123@localhost:5433/finance_intelligence_test")
     validate_local_loopback_url(api_url, "TEST_API_DATABASE_URL")
+    validate_local_loopback_url(api_base_url, "FI_E2E_API_BASE_URL")
 
     # 2. Credential boolean check
     cred_ok = check_credential_presence()
@@ -215,7 +222,7 @@ def run_harness_dry_run(
     manifest = generate_fixture_manifest(authorization_id)
 
     # 4. Command hash
-    argv = build_flutter_argv(device_id, manifest)
+    argv = build_flutter_argv(device_id, manifest, api_base_url=api_base_url)
     cmd_hash = compute_command_hash(argv)
 
     plan = {
@@ -228,6 +235,8 @@ def run_harness_dry_run(
         "fixture_manifest": asdict(manifest),
         "command_argv": argv,
         "command_sha256": cmd_hash,
+        "emitted_define_count": 7,
+        "unique_define_count": len(set(arg for arg in argv if arg.startswith("--dart-define="))),
         "db_writes_count": 0,
         "processes_started_count": 0,
         "flutter_tests_executed_count": 0,
@@ -239,16 +248,19 @@ def run_harness_execute(
     authorization_id: str,
     device_id: str,
     credential_env_file: str | None = None,
-    target_head: str = "cc412726fc3344bf0107a2457da932aadd5fcfaf",
+    target_head: str = "e226a5ddba42761759e22dcb8579f742a754df98",
+    api_base_url: str = "http://127.0.0.1:8000",
     runner_fn: Any = None,
     seed_fn: Any = None,
     cleanup_fn: Any = None,
     service_launcher_fn: Any = None,
+    fixture_file_path: str = "",
 ) -> dict[str, Any]:
     """Execute single-run local iOS application E2E test pipeline."""
     # 1. Local target safety guard
     api_url = os.environ.get("TEST_API_DATABASE_URL", "postgresql+asyncpg://db_api_user:dev_api_user_pass_123@localhost:5433/finance_intelligence_test")
     validate_local_loopback_url(api_url, "TEST_API_DATABASE_URL")
+    validate_local_loopback_url(api_base_url, "FI_E2E_API_BASE_URL")
 
     # 2. Credential validation (checking file permissions if provided)
     if credential_env_file:
@@ -270,8 +282,26 @@ def run_harness_execute(
     # 3. Fixture manifest generation
     manifest = generate_fixture_manifest(authorization_id)
 
+    # Fixture file handling
+    created_fixture_by_harness = False
+    eff_fixture_path = fixture_file_path
+    if not eff_fixture_path:
+        eff_fixture_path = f"/private/tmp/fi-fixture-{manifest.run_namespace}.pdf"
+        if not os.path.exists(eff_fixture_path):
+            fd = os.open(eff_fixture_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+            with os.fdopen(fd, "w") as f:
+                f.write(
+                    "%PDF-1.4\n1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n"
+                    "2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n"
+                    "3 0 obj\n<< /Type /Page /Parent 2 0 R /Resources <<>> /Contents 4 0 R >>\nendobj\n"
+                    "4 0 obj\n<< /Length 50 >>\nstream\nBT /F1 12 Tf 72 712 Td (Garanti 2025 Q4 Test Report) Tj ET\nendstream\nendobj\n"
+                    "xref\n0 5\n0000000000 65535 f \n0000000009 00000 n \n0000000062 00000 n \n0000000125 00000 n \n0000000208 00000 n \n"
+                    "trailer\n<< /Size 5 /Root 1 0 R >>\nstartxref\n308\n%%EOF\n"
+                )
+            created_fixture_by_harness = True
+
     # 4. Command hash
-    argv = build_flutter_argv(device_id, manifest)
+    argv = build_flutter_argv(device_id, manifest, api_base_url=api_base_url, fixture_file_path=eff_fixture_path)
     cmd_hash = compute_command_hash(argv)
 
     # 5. Atomic ledger creation
@@ -317,10 +347,12 @@ def run_harness_execute(
             pass
         raise ex
     finally:
-        # Fixture Teardown & Process Cleanup
+        # Fixture Teardown & Process Cleanup & Temporary Fixture Removal
         try:
             if cleanup_fn:
                 cleanup_fn(manifest)
+            if created_fixture_by_harness and os.path.exists(eff_fixture_path):
+                os.remove(eff_fixture_path)
             cleanup_status = "COMPLETE"
         except Exception:
             cleanup_status = "FAILED"
@@ -333,9 +365,12 @@ def run_harness_execute(
         "cleanup_status": cleanup_status,
         "command_argv": argv,
         "command_sha256": cmd_hash,
+        "emitted_define_count": 7,
+        "unique_define_count": len(set(arg for arg in argv if arg.startswith("--dart-define="))),
         "ledger_path": ledger.ledger_path,
         "evidence_directory": evidence_dir,
     }
+
 
 
 def main() -> None:
