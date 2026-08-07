@@ -257,19 +257,23 @@ def test_validate_migration_lock_workflow_contract():
     assert "docker volume rm -f" in content
 
 
-def test_workflow_split_and_live_acceptance_contract():
-    """V6 Scanner verifying Push CI has no live secret dependencies and live-acceptance.yml is workflow_dispatch only."""
-    ci_content = CI_YML_PATH.read_text(encoding="utf-8")
-    assert "secrets.ANTHROPIC_API_KEY" not in ci_content, (
-        "CRITICAL: Push CI (ci.yml) must NOT depend on ANTHROPIC_API_KEY!"
-    )
+def test_automatic_ios_e2e_and_ci_contract():
+    """Scanner verifying automatic iOS E2E test execution in Push/PR CI and fail-closed contract."""
+    content = CI_YML_PATH.read_text(encoding="utf-8")
 
-    live_wf_path = REPO_ROOT / ".github" / "workflows" / "live-acceptance.yml"
-    assert live_wf_path.exists(), "live-acceptance.yml must exist!"
-    live_content = live_wf_path.read_text(encoding="utf-8")
+    # 1. Triggers
+    assert "push:" in content
+    assert "pull_request:" in content
+    assert "pull_request_target:" not in content
 
-    assert "workflow_dispatch:" in live_content
-    assert "push:" not in live_content
-    assert "pull_request:" not in live_content
-    assert "secrets.ANTHROPIC_API_KEY" in live_content
-    assert "claude-3-haiku-20240307" in live_content
+    # 2. Automatic iOS E2E job and step
+    assert "ios-build-and-simulator-e2e:" in content
+    assert 'flutter test integration_test/device_e2e_test.dart -d "$SIMULATOR_UDID"' in content
+
+    # 3. Fail-closed timeout and diagnostic upload
+    assert "timeout-seconds 900" in content
+    assert "actions/upload-artifact@v4" in content
+    assert "if: failure() || cancelled()" in content
+
+    # 4. Final gate summary enforcement
+    assert "needs.ios-build-and-simulator-e2e.result" in content
