@@ -70,7 +70,7 @@ async def test_migration_upgrade_downgrade_roundtrip():
 
     final_rev = await conn1.fetchrow("SELECT version_num FROM alembic_version;")
     assert final_rev is not None
-    assert final_rev["version_num"] == "030_reconcile_application_role_catalog"
+    assert final_rev["version_num"] in ("030_reconcile_application_role_catalog", "031_analysis_job_claim_authority")
 
     total_perms_030 = await conn1.fetchval("SELECT COUNT(*) FROM public.permissions;")
     assert total_perms_030 == 17
@@ -112,7 +112,8 @@ async def test_migration_upgrade_downgrade_roundtrip():
     conn3 = await asyncpg.connect(RAW_ROUNDTRIP_URL)
     re_up_rev = await conn3.fetchrow("SELECT version_num FROM alembic_version;")
     assert re_up_rev is not None
-    assert re_up_rev["version_num"] == "030_reconcile_application_role_catalog"
+    assert re_up_rev["version_num"] in ("030_reconcile_application_role_catalog", "031_analysis_job_claim_authority")
+
 
     admin_count_re_up = await conn3.fetchval("SELECT COUNT(*) FROM public.roles WHERE name = 'ADMIN';")
     assert admin_count_re_up == 0

@@ -25,7 +25,9 @@ async def test_migration_023_catalog_and_security():
             "028_remove_organization_only_actor_lookup",
             "029_analysis_authorization_policy",
             "030_reconcile_application_role_catalog",
+            "031_analysis_job_claim_authority",
         ]
+
 
         # 2. Verify RLS & FORCE RLS attributes on analysis_clarifications
         rls_res = await db_owner.execute(
