@@ -113,8 +113,7 @@ jobs:
           TEST_WORKER_DATABASE_URL: "postgresql+asyncpg://db_ingestion_worker:worker_pass@localhost:5432/finance_intelligence_test"
           TEST_ROUNDTRIP_DATABASE_URL: "postgresql+asyncpg://db_owner:owner_pass@localhost:5432/finance_intelligence_roundtrip_test"
           TEST_MAINTENANCE_DATABASE_URL: "postgresql+asyncpg://db_maintenance_worker:dev_maintenance_pass_123@localhost:5432/finance_intelligence_test"
-        run: pytest -m "not live_anthropic" tests/integration --junitxml=pytest-integration-report.xml
-
+        run: pytest tests/integration --junitxml=pytest-integration-report.xml
       - name: Real Zero-Skip Integration XML Machine Verification
         run: |
           python -c "import xml.etree.ElementTree as ET; tree = ET.parse('pytest-integration-report.xml'); root = tree.getroot(); suite = root if root.tag == 'testsuite' else root.find('testsuite'); skips = int(suite.attrib.get('skipped', 0)); fails = int(suite.attrib.get('failures', 0)) + int(suite.attrib.get('errors', 0)); total = int(suite.attrib.get('tests', 0)); print(f'Pytest Integration Results: total={total}, passed={total-skips-fails}, skipped={skips}, failed={fails}'); assert total > 0, 'No integration tests executed!'; assert skips == 0, f'CRITICAL: {skips} skipped tests found!'; assert fails == 0, f'CRITICAL: {fails} failed tests found!'"

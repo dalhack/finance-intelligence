@@ -72,19 +72,12 @@ async def test_create_and_get_analysis_job():
             assert data["status"] == "RECEIVED"
             job_id = data["id"]
 
-            async with OwnerSession() as owner_db:
-                await owner_db.execute(text("SELECT set_config('app.current_organization_id', :oid, true);"), {"oid": str(org_id)})
-                await owner_db.execute(text("UPDATE public.analysis_jobs SET status = 'NEEDS_CLARIFICATION' WHERE id = :jid;"), {"jid": job_id})
-                await owner_db.commit()
-
-
             # 2. Get analysis job
             get_res = await client.get(f"/api/v1/analyses/{job_id}")
             assert get_res.status_code == 200
             get_data = get_res.json()
             assert get_data["id"] == job_id
-            assert get_data["status"] in ("RECEIVED", "NEEDS_CLARIFICATION")
-
+            assert get_data["status"] == "RECEIVED"
 
             # 3. List analyses
             list_res = await client.get("/api/v1/analyses?limit=10")
@@ -105,14 +98,6 @@ async def test_create_and_get_analysis_job():
             assert cancel_data["status"] == "CANCELLED"
     finally:
         app.dependency_overrides.clear()
-        async with OwnerSession() as db_clean:
-            await db_clean.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
-            await db_clean.execute(text(f"DELETE FROM analysis_jobs WHERE organization_id = '{org_id}';"))
-            await db_clean.execute(text(f"DELETE FROM memberships WHERE organization_id = '{org_id}';"))
-            await db_clean.execute(text(f"DELETE FROM users WHERE id = '{user_id}';"))
-            await db_clean.execute(text(f"DELETE FROM organizations WHERE id = '{org_id}';"))
-            await db_clean.commit()
-
 
 
 @pytest.mark.asyncio
@@ -175,19 +160,5 @@ async def test_concurrent_idempotency_create_analysis():
             assert res1.status_code == 201
             assert res2.status_code in [200, 201]
             assert res1.json()["id"] == res2.json()["id"]
-
-            async with OwnerSession() as owner_db:
-                await owner_db.execute(text("SELECT set_config('app.current_organization_id', :oid, true);"), {"oid": str(org_id)})
-                await owner_db.execute(text("UPDATE public.analysis_jobs SET status = 'NEEDS_CLARIFICATION' WHERE id = :jid;"), {"jid": res1.json()["id"]})
-                await owner_db.commit()
-
     finally:
         app.dependency_overrides.clear()
-        async with OwnerSession() as db_clean:
-            await db_clean.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
-            await db_clean.execute(text(f"DELETE FROM analysis_jobs WHERE organization_id = '{org_id}';"))
-            await db_clean.execute(text(f"DELETE FROM memberships WHERE organization_id = '{org_id}';"))
-            await db_clean.execute(text(f"DELETE FROM users WHERE id = '{user_id}';"))
-            await db_clean.execute(text(f"DELETE FROM organizations WHERE id = '{org_id}';"))
-            await db_clean.commit()
-

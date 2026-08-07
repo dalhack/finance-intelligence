@@ -26,9 +26,7 @@ async def test_migration_020_catalog_and_immutability():
             "028_remove_organization_only_actor_lookup",
             "029_analysis_authorization_policy",
             "030_reconcile_application_role_catalog",
-            "031_analysis_job_claim_authority",
         ]
-
 
         # 2. Verify RLS & FORCE RLS attributes
         for table_name in (

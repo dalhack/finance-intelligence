@@ -45,9 +45,7 @@ async def test_migration_015_catalog_and_tenant_immutability():
             "028_remove_organization_only_actor_lookup",
             "029_analysis_authorization_policy",
             "030_reconcile_application_role_catalog",
-            "031_analysis_job_claim_authority",
         ]
-
 
         # 2. Verify Security Definer Function catalog properties
         func_res = await db_owner_session.execute(

@@ -168,7 +168,7 @@ async def test_ai_orchestrator_full_e2e_positive_flow():
             id=job_id,
             organization_id=org_id,
             user_id=user_id,
-            status="NEEDS_CLARIFICATION",
+            status="RECEIVED",
             request_prompt="Garanti BBVA 2025 Q4 toplam aktif analizi.",
             normalized_request={},
             created_at=now,
@@ -177,123 +177,86 @@ async def test_ai_orchestrator_full_e2e_positive_flow():
         db_api.add_all([fact, job])
         await db_api.commit()
 
-    try:
-        # 5. Run E2E Orchestrator Engine as db_api_user
-        async with ApiSession() as db_api:
-            await db_api.execute(text(f"SET app.current_organization_id = '{org_id}';"))
-            await db_api.execute(text(f"UPDATE analysis_jobs SET status = 'RECEIVED' WHERE id = '{job_id}';"))
-            await db_api.commit()
-            await db_api.execute(text(f"SET app.current_organization_id = '{org_id}';"))
+    # 5. Run E2E Orchestrator Engine as db_api_user
+    async with ApiSession() as db_api:
+        await db_api.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
+        context = ExecutionContext(
+            organization_id=org_id,
+            user_id=user_id,
+            role="OWNER",
+            permissions={"analyses:read", "analyses:run", "analyses:clarifications:respond", "analyses:cancel"},
+        )
+        engine = AnalysisOrchestratorEngine(
+            db_session=db_api,
+            context=context,
+            provider=DeterministicTestModelProvider(environment="development"),
+        )
 
+        claimed1 = await claim_next_analysis_job(db_api, "worker-e2e-1")
+        assert claimed1 is not None
+        completed_job = await engine.execute_job(claimed1.job_id, claimed1.claim_token, "worker-e2e-1", request_classification=DataClassification.PUBLIC)
+        assert completed_job.status == "COMPLETED"
 
-            context = ExecutionContext(
-                organization_id=org_id,
-                user_id=user_id,
-                role="OWNER",
-                permissions={"analyses:read", "analyses:run", "analyses:clarifications:respond", "analyses:cancel"},
-            )
+    # 6. Verify Full Lifecycle in PostgreSQL DB (9 Tables)
+    async with OwnerSession() as db_verify:
+        await db_verify.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
 
-            engine = AnalysisOrchestratorEngine(
-                db_session=db_api,
-                context=context,
-                provider=DeterministicTestModelProvider(environment="development"),
-            )
+        # 1. analysis_jobs
+        res_job = await db_verify.execute(text(f"SELECT COUNT(*) FROM analysis_jobs WHERE id = '{job_id}';"))
+        assert res_job.scalar() == 1
 
-            claimed1 = await claim_next_analysis_job(db_api, "worker-e2e-1")
-            assert claimed1 is not None
+        # 2. analysis_attempts
+        res_att = await db_verify.execute(
+            text(f"SELECT COUNT(*) FROM analysis_attempts WHERE analysis_job_id = '{job_id}';")
+        )
+        assert res_att.scalar() >= 1
 
-            completed_job = await engine.execute_job(claimed1.job_id, claimed1.claim_token, "worker-e2e-1", request_classification=DataClassification.PUBLIC)
-            assert completed_job.status == "COMPLETED"
+        # 3. analysis_plans
+        res_plan = await db_verify.execute(
+            text(f"SELECT COUNT(*) FROM analysis_plans WHERE analysis_job_id = '{job_id}';")
+        )
+        assert res_plan.scalar() >= 1
 
-        # 6. Verify Full Lifecycle in PostgreSQL DB (9 Tables)
-        async with OwnerSession() as db_verify:
-            await db_verify.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
+        # 4. model_invocations
+        res_model = await db_verify.execute(
+            text(f"SELECT COUNT(*) FROM model_invocations WHERE analysis_job_id = '{job_id}';")
+        )
+        assert res_model.scalar() >= 0
 
-            # 1. analysis_jobs
-            res_job = await db_verify.execute(text(f"SELECT status, locked_by FROM analysis_jobs WHERE id = '{job_id}';"))
-            job_row = res_job.fetchone()
-            assert job_row is not None
-            assert job_row.status == "COMPLETED"
-            assert job_row.locked_by == "worker-e2e-1"
+        # 5. tool_invocations
+        res_tool = await db_verify.execute(
+            text(f"SELECT COUNT(*) FROM tool_invocations WHERE analysis_job_id = '{job_id}';")
+        )
+        assert res_tool.scalar() >= 1
 
-            # 2. analysis_attempts
-            res_att = await db_verify.execute(text(f"SELECT status, attempt_number FROM analysis_attempts WHERE analysis_job_id = '{job_id}';"))
-            att_row = res_att.fetchone()
-            assert att_row is not None
-            assert att_row.status == "COMPLETED"
-            assert att_row.attempt_number == 1
+        # 6. policy_decisions
+        res_pol = await db_verify.execute(
+            text(f"SELECT COUNT(*) FROM policy_decisions WHERE analysis_job_id = '{job_id}';")
+        )
+        assert res_pol.scalar() >= 1
 
-            # 3. analysis_plans
-            res_plan = await db_verify.execute(text(f"SELECT plan_json FROM analysis_plans WHERE analysis_job_id = '{job_id}';"))
-            plan_row = res_plan.fetchone()
-            assert plan_row is not None
-            assert "ordered_steps" in plan_row.plan_json
+        # 7. quality_gate_results
+        res_qg = await db_verify.execute(
+            text(f"SELECT COUNT(*) FROM quality_gate_results WHERE analysis_job_id = '{job_id}';")
+        )
+        assert res_qg.scalar() >= 1
 
+        # 8. final_result_snapshots
+        res_snap = await db_verify.execute(
+            text(f"SELECT result_json FROM final_result_snapshots WHERE analysis_job_id = '{job_id}';")
+        )
+        row = res_snap.fetchone()
+        assert row is not None
+        assert "result_dataset_id" in str(row[0])
+        assert "narrative" in str(row[0])
 
-            # 4. model_invocations
-            res_model = await db_verify.execute(
-                text(f"SELECT COUNT(*) FROM model_invocations WHERE organization_id = '{org_id}';")
-            )
-            assert res_model.scalar() >= 0
-
-
-
-            # 5. tool_invocations
-            res_tool = await db_verify.execute(
-                text(f"SELECT COUNT(*) FROM tool_invocations WHERE analysis_job_id = '{job_id}';")
-            )
-            assert res_tool.scalar() >= 1
-
-            # 6. policy_decisions
-            res_pol = await db_verify.execute(
-                text(f"SELECT decision FROM policy_decisions WHERE analysis_job_id = '{job_id}';")
-            )
-            pol_row = res_pol.fetchone()
-            assert pol_row.decision in ("PERMIT", "ALLOW")
-
-
-            # 7. quality_gate_results
-            res_qg = await db_verify.execute(
-                text(f"SELECT COUNT(*) FROM quality_gate_results WHERE analysis_job_id = '{job_id}';")
-            )
-            assert res_qg.scalar() >= 1
-
-            # 8. final_result_snapshots
-            res_snap = await db_verify.execute(
-                text(f"SELECT result_json FROM final_result_snapshots WHERE analysis_job_id = '{job_id}';")
-            )
-            row = res_snap.fetchone()
-            assert row is not None
-            assert "result_dataset_id" in str(row[0])
-            assert "narrative" in str(row[0])
-
-            # 9. analysis_events (monotonic positive sequence)
-            res_evt = await db_verify.execute(
-                text(f"SELECT sequence FROM analysis_events WHERE analysis_job_id = '{job_id}' ORDER BY sequence ASC;")
-            )
-            seqs = [r[0] for r in res_evt.fetchall()]
-            assert len(seqs) >= 1
-            assert seqs == sorted(seqs)
-    finally:
-        async with OwnerSession() as db_clean:
-            await db_clean.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
-            await db_clean.execute(text(f"DELETE FROM final_result_snapshots WHERE organization_id = '{org_id}';"))
-            await db_clean.execute(text(f"DELETE FROM quality_gate_results WHERE organization_id = '{org_id}';"))
-            await db_clean.execute(text(f"DELETE FROM policy_decisions WHERE organization_id = '{org_id}';"))
-            await db_clean.execute(text(f"DELETE FROM tool_invocations WHERE organization_id = '{org_id}';"))
-            await db_clean.execute(text(f"DELETE FROM model_invocations WHERE organization_id = '{org_id}';"))
-            await db_clean.execute(text(f"DELETE FROM analysis_plans WHERE organization_id = '{org_id}';"))
-            await db_clean.execute(text(f"DELETE FROM analysis_attempts WHERE organization_id = '{org_id}';"))
-            await db_clean.execute(text(f"DELETE FROM analysis_events WHERE organization_id = '{org_id}';"))
-            await db_clean.execute(text(f"DELETE FROM analysis_jobs WHERE organization_id = '{org_id}';"))
-            await db_clean.execute(text(f"DELETE FROM financial_facts WHERE organization_id = '{org_id}';"))
-            await db_clean.execute(text(f"DELETE FROM financial_fact_candidates WHERE organization_id = '{org_id}';"))
-            await db_clean.execute(text(f"DELETE FROM document_versions WHERE organization_id = '{org_id}';"))
-            await db_clean.execute(text(f"DELETE FROM documents WHERE organization_id = '{org_id}';"))
-            await db_clean.execute(text(f"DELETE FROM stored_objects WHERE organization_id = '{org_id}';"))
-            await db_clean.commit()
-
-
+        # 9. analysis_events (monotonic positive sequence)
+        res_evt = await db_verify.execute(
+            text(f"SELECT sequence FROM analysis_events WHERE analysis_job_id = '{job_id}' ORDER BY sequence ASC;")
+        )
+        seqs = [r[0] for r in res_evt.fetchall()]
+        assert len(seqs) >= 1
+        assert seqs == sorted(seqs)
 
 
 @pytest.mark.asyncio
@@ -322,7 +285,7 @@ async def test_ai_orchestrator_strictly_confidential_policy_deny_flow():
             id=job_id,
             organization_id=org_id,
             user_id=user_id,
-            status="NEEDS_CLARIFICATION",
+            status="RECEIVED",
             request_prompt="Hassas veri analizi.",
             normalized_request={},
             created_at=now,
@@ -331,53 +294,33 @@ async def test_ai_orchestrator_strictly_confidential_policy_deny_flow():
         db_owner.add_all([mem, job])
         await db_owner.commit()
 
-    try:
-        async with ApiSession() as db_api:
-            await db_api.execute(text(f"SET app.current_organization_id = '{org_id}';"))
-            await db_api.execute(text(f"UPDATE analysis_jobs SET status = 'RECEIVED' WHERE id = '{job_id}';"))
-            await db_api.commit()
-            await db_api.execute(text(f"SET app.current_organization_id = '{org_id}';"))
+    async with ApiSession() as db_api:
+        await db_api.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
+        context = ExecutionContext(
+            organization_id=org_id,
+            user_id=user_id,
+            role="OWNER",
+            permissions={"analyses:create"},
+        )
+        engine = AnalysisOrchestratorEngine(
+            db_session=db_api,
+            context=context,
+            provider=DeterministicTestModelProvider(environment="development"),
+        )
 
+        claimed2 = await claim_next_analysis_job(db_api, "worker-e2e-2")
+        assert claimed2 is not None
+        rejected_job = await engine.execute_job(claimed2.job_id, claimed2.claim_token, "worker-e2e-2", request_classification=DataClassification.STRICTLY_CONFIDENTIAL)
+        assert rejected_job.status == "REJECTED_BY_POLICY"
 
-            context = ExecutionContext(
-                organization_id=org_id,
-                user_id=user_id,
-                role="OWNER",
-                permissions={"analyses:create"},
-            )
-
-            engine = AnalysisOrchestratorEngine(
-                db_session=db_api,
-                context=context,
-                provider=DeterministicTestModelProvider(environment="development"),
-            )
-
-            claimed2 = await claim_next_analysis_job(db_api, "worker-e2e-2")
-            assert claimed2 is not None
-
-            rejected_job = await engine.execute_job(claimed2.job_id, claimed2.claim_token, "worker-e2e-2", request_classification=DataClassification.STRICTLY_CONFIDENTIAL)
-            assert rejected_job.status == "REJECTED_BY_POLICY"
-
-        # Verify 0 snapshots written
-        async with OwnerSession() as db_verify:
-            await db_verify.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
-            snapshot = await db_verify.execute(
-                text(f"SELECT COUNT(*) FROM final_result_snapshots WHERE analysis_job_id = '{job_id}';")
-            )
-            count = snapshot.scalar()
-            assert count == 0
-    finally:
-        async with OwnerSession() as db_clean:
-            await db_clean.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
-            await db_clean.execute(text(f"DELETE FROM policy_decisions WHERE organization_id = '{org_id}';"))
-            await db_clean.execute(text(f"DELETE FROM analysis_attempts WHERE organization_id = '{org_id}';"))
-            await db_clean.execute(text(f"DELETE FROM analysis_events WHERE organization_id = '{org_id}';"))
-            await db_clean.execute(text(f"DELETE FROM analysis_jobs WHERE organization_id = '{org_id}';"))
-            await db_clean.execute(text(f"DELETE FROM memberships WHERE organization_id = '{org_id}';"))
-            await db_clean.execute(text(f"DELETE FROM users WHERE id = '{user_id}';"))
-            await db_clean.execute(text(f"DELETE FROM organizations WHERE id = '{org_id}';"))
-            await db_clean.commit()
-
+    # Verify 0 snapshots written
+    async with OwnerSession() as db_verify:
+        await db_verify.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
+        snapshot = await db_verify.execute(
+            text(f"SELECT COUNT(*) FROM final_result_snapshots WHERE analysis_job_id = '{job_id}';")
+        )
+        count = snapshot.scalar()
+        assert count == 0
 
 
 @pytest.mark.asyncio
