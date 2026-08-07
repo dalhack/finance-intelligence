@@ -109,7 +109,6 @@ async def test_migration_upgrade_downgrade_roundtrip():
     assert re_up_rev is not None
     assert re_up_rev["version_num"] == "031_analysis_job_claim_authority"
 
-
     admin_count_re_up = await conn3.fetchval("SELECT COUNT(*) FROM public.roles WHERE name = 'ADMIN';")
     assert admin_count_re_up == 0
 

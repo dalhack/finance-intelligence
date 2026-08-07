@@ -14,8 +14,11 @@ async def test_migration_029_catalog_counts():
     async with OwnerSession() as session:
         head_res = await session.execute(text("SELECT version_num FROM alembic_version;"))
         version = head_res.scalar()
-        assert version in ("029_analysis_authorization_policy", "030_reconcile_application_role_catalog", "031_analysis_job_claim_authority")
-
+        assert version in (
+            "029_analysis_authorization_policy",
+            "030_reconcile_application_role_catalog",
+            "031_analysis_job_claim_authority",
+        )
 
         total_perms = (await session.execute(text("SELECT COUNT(*) FROM public.permissions;"))).scalar()
         assert total_perms == 17

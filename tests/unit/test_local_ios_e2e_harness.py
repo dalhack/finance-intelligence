@@ -78,7 +78,9 @@ def test_local_target_safety_guard():
 
     # Staging/remote targets -> Reject
     with pytest.raises(LocalTargetSafetyError):
-        validate_local_loopback_url("postgresql+asyncpg://user:pass@staging-db.example.com:5432/finance_intelligence_prod", "DB_URL")
+        validate_local_loopback_url(
+            "postgresql+asyncpg://user:pass@staging-db.example.com:5432/finance_intelligence_prod", "DB_URL"
+        )
 
     with pytest.raises(LocalTargetSafetyError):
         validate_local_loopback_url("postgresql+asyncpg://user:pass@10.0.0.5:5432/finance_intelligence_test", "DB_URL")
@@ -110,7 +112,9 @@ def test_command_hash_and_define_parity():
     """Verify build_flutter_argv produces exactly 7 unique --dart-define parameters with CLI authorization_id provenance."""
     auth_id = "auth-slice4-r5-78f6f9d-01"
     manifest = generate_fixture_manifest(auth_id)
-    argv = build_flutter_argv("device-sim-123", manifest, authorization_id=auth_id, api_base_url="http://127.0.0.1:8000")
+    argv = build_flutter_argv(
+        "device-sim-123", manifest, authorization_id=auth_id, api_base_url="http://127.0.0.1:8000"
+    )
 
     defines = [arg for arg in argv if arg.startswith("--dart-define=")]
     assert len(defines) == 7
@@ -126,10 +130,8 @@ def test_command_hash_and_define_parity():
     assert define_map["FI_E2E_REPORTING_PERIOD_ID"] == manifest.reporting_period_id
     assert f"fi-fixture-{manifest.run_namespace}" in define_map["FI_E2E_FIXTURE_FILE_PATH"]
 
-
     h1 = compute_command_hash(argv)
     assert len(h1) == 64
-
 
 
 def test_harness_fixture_file_creation_and_cleanup():
@@ -165,7 +167,6 @@ def test_harness_fixture_file_creation_and_cleanup():
     # Clean up ledger
     if os.path.exists(res["ledger_path"]):
         os.remove(res["ledger_path"])
-
 
 
 def test_evidence_redaction():
@@ -270,4 +271,3 @@ def test_harness_execute_pipeline_failure_runs_cleanup():
     ledger_path = res["ledger_path"]
     if os.path.exists(ledger_path):
         os.remove(ledger_path)
-

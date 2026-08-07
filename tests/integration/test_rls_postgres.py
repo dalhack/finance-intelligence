@@ -53,7 +53,6 @@ async def test_migration_applies_cleanly():
     ]
 
 
-
 @pytest.mark.asyncio
 async def test_runtime_role_privileges_and_force_rls():
     conn = await asyncpg.connect(OWNER_URL)

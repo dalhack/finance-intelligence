@@ -35,7 +35,6 @@ async def test_migration_016_catalog_and_security_grants():
             "031_analysis_job_claim_authority",
         ]
 
-
         # 2. Verify Security Definer Function ACL Grants (No Direct EXECUTE for db_api_user / PUBLIC)
         for func_name in (
             "fn_prevent_terminal_child_lineage_mutation",

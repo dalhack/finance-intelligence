@@ -73,8 +73,13 @@ async def test_create_and_get_analysis_job():
             job_id = data["id"]
 
             async with OwnerSession() as owner_db:
-                await owner_db.execute(text("SELECT set_config('app.current_organization_id', :oid, true);"), {"oid": str(org_id)})
-                await owner_db.execute(text("UPDATE public.analysis_jobs SET status = 'NEEDS_CLARIFICATION' WHERE id = :jid;"), {"jid": job_id})
+                await owner_db.execute(
+                    text("SELECT set_config('app.current_organization_id', :oid, true);"), {"oid": str(org_id)}
+                )
+                await owner_db.execute(
+                    text("UPDATE public.analysis_jobs SET status = 'NEEDS_CLARIFICATION' WHERE id = :jid;"),
+                    {"jid": job_id},
+                )
                 await owner_db.commit()
 
             # 2. Get analysis job
@@ -174,8 +179,13 @@ async def test_concurrent_idempotency_create_analysis():
             assert res1.json()["id"] == res2.json()["id"]
 
             async with OwnerSession() as owner_db:
-                await owner_db.execute(text("SELECT set_config('app.current_organization_id', :oid, true);"), {"oid": str(org_id)})
-                await owner_db.execute(text("UPDATE public.analysis_jobs SET status = 'NEEDS_CLARIFICATION' WHERE id = :jid;"), {"jid": res1.json()["id"]})
+                await owner_db.execute(
+                    text("SELECT set_config('app.current_organization_id', :oid, true);"), {"oid": str(org_id)}
+                )
+                await owner_db.execute(
+                    text("UPDATE public.analysis_jobs SET status = 'NEEDS_CLARIFICATION' WHERE id = :jid;"),
+                    {"jid": res1.json()["id"]},
+                )
                 await owner_db.commit()
     finally:
         app.dependency_overrides.clear()
@@ -186,4 +196,3 @@ async def test_concurrent_idempotency_create_analysis():
             await db_clean.execute(text(f"DELETE FROM users WHERE id = '{user_id}';"))
             await db_clean.execute(text(f"DELETE FROM organizations WHERE id = '{org_id}';"))
             await db_clean.commit()
-

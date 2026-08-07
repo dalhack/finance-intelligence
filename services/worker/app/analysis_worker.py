@@ -98,9 +98,7 @@ class AnalysisWorker:
                 renewed = False
                 try:
                     async with self.session_factory() as hb_session:
-                        renewed = await renew_analysis_job_lease(
-                            hb_session, job_id, claim_token, self.worker_id
-                        )
+                        renewed = await renew_analysis_job_lease(hb_session, job_id, claim_token, self.worker_id)
                         await hb_session.commit()
                 except Exception as ex:  # noqa: BLE001
                     logger.error(f"HEARTBEAT_LEASE_RENEWAL_EXCEPTION for job {job_id}: {ex}")
@@ -138,9 +136,7 @@ class AnalysisWorker:
 
         loop = asyncio.get_running_loop()
         engine_task = loop.create_task(_run_engine())
-        heartbeat_task = loop.create_task(
-            self._lease_heartbeat_loop(job_id, claim_token, engine_task)
-        )
+        heartbeat_task = loop.create_task(self._lease_heartbeat_loop(job_id, claim_token, engine_task))
 
         try:
             await engine_task
@@ -153,7 +149,6 @@ class AnalysisWorker:
             logger.warning(f"ANALYSIS_JOB_CANCELLED_BY_HEARTBEAT: {job_id}")
             return False
         except Exception as e:  # noqa: BLE001
-
             logger.error(f"ANALYSIS_JOB_FAILED_EXCEPTION: {job_id} - {e}")
             return False
         finally:
@@ -182,9 +177,7 @@ class AnalysisWorker:
         if not claimed:
             return False
 
-        return await self.process_analysis_job(
-            claimed.job_id, claimed.organization_id, claimed.claim_token
-        )
+        return await self.process_analysis_job(claimed.job_id, claimed.organization_id, claimed.claim_token)
 
 
 async def run_analysis_worker_once(worker_id: str = WORKER_ID) -> bool:

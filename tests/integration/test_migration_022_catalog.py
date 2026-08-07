@@ -29,7 +29,6 @@ async def test_migration_022_catalog_and_immutability():
             "031_analysis_job_claim_authority",
         ]
 
-
         # 2. Verify RLS & FORCE RLS attributes on analysis_events
         rls_res = await db_owner.execute(
             text("SELECT relrowsecurity, relforcerowsecurity FROM pg_class WHERE relname = 'analysis_events';")

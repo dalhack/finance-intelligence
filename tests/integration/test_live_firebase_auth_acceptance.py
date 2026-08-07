@@ -58,9 +58,6 @@ async def test_live_firebase_authentication_and_auth_context_resolution():
     """Live acceptance test: real signed Firebase token -> production verifier -> resolve_auth_context -> ExecutionContext."""
     id_token, firebase_uid = obtain_staging_firebase_id_token()
 
-
-
-
     assert id_token is not None and len(id_token) > 100
     assert firebase_uid == "rjGDaHght0UbcxcBALew186w4Qx1"
 

@@ -93,8 +93,6 @@ void main() {
         );
       }
 
-
-
       // 1. Create Upload Session
       final session = await apiClient.createUploadSession(
         filename: tempFile.path.split('/').last,

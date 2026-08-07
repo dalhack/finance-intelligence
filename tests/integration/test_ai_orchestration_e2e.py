@@ -167,7 +167,6 @@ async def test_ai_orchestrator_full_e2e_positive_flow():
             updated_at=now,
         )
 
-
         db_api.add_all([fact, job])
         await db_api.commit()
 
@@ -176,18 +175,22 @@ async def test_ai_orchestrator_full_e2e_positive_flow():
         async with OwnerSession() as owner_db:
             org_rows = await owner_db.execute(text("SELECT id FROM public.organizations;"))
             for r in org_rows.fetchall():
-                await owner_db.execute(text("SELECT set_config('app.current_organization_id', :oid, true);"), {"oid": str(r[0])})
-                await owner_db.execute(text("DELETE FROM public.analysis_jobs WHERE status = 'RECEIVED' AND id != :jid;"), {"jid": job_id})
-            await owner_db.execute(text("SELECT set_config('app.current_organization_id', :oid, true);"), {"oid": str(org_id)})
-            await owner_db.execute(text("UPDATE public.analysis_jobs SET status = 'RECEIVED' WHERE id = :jid;"), {"jid": job_id})
+                await owner_db.execute(
+                    text("SELECT set_config('app.current_organization_id', :oid, true);"), {"oid": str(r[0])}
+                )
+                await owner_db.execute(
+                    text("DELETE FROM public.analysis_jobs WHERE status = 'RECEIVED' AND id != :jid;"), {"jid": job_id}
+                )
+            await owner_db.execute(
+                text("SELECT set_config('app.current_organization_id', :oid, true);"), {"oid": str(org_id)}
+            )
+            await owner_db.execute(
+                text("UPDATE public.analysis_jobs SET status = 'RECEIVED' WHERE id = :jid;"), {"jid": job_id}
+            )
             await owner_db.commit()
-
-
-
 
         async with ApiSession() as db_api:
             await db_api.execute(text(f"SET app.current_organization_id = '{org_id}';"))
-
 
             context = ExecutionContext(
                 organization_id=org_id,
@@ -203,7 +206,9 @@ async def test_ai_orchestrator_full_e2e_positive_flow():
 
             claimed1 = await claim_next_analysis_job(db_api, "worker-e2e-1")
             assert claimed1 is not None
-            completed_job = await engine.execute_job(claimed1.job_id, claimed1.claim_token, "worker-e2e-1", request_classification=DataClassification.PUBLIC)
+            completed_job = await engine.execute_job(
+                claimed1.job_id, claimed1.claim_token, "worker-e2e-1", request_classification=DataClassification.PUBLIC
+            )
             assert completed_job.status == "COMPLETED"
 
         # 6. Verify Full Lifecycle in PostgreSQL DB (9 Tables)
@@ -211,21 +216,27 @@ async def test_ai_orchestrator_full_e2e_positive_flow():
             await db_verify.execute(text(f"SET LOCAL app.current_organization_id = '{org_id}';"))
 
             # 1. analysis_jobs
-            res_job = await db_verify.execute(text(f"SELECT status, locked_by FROM analysis_jobs WHERE id = '{job_id}';"))
+            res_job = await db_verify.execute(
+                text(f"SELECT status, locked_by FROM analysis_jobs WHERE id = '{job_id}';")
+            )
             job_row = res_job.fetchone()
             assert job_row is not None
             assert job_row.status == "COMPLETED"
             assert job_row.locked_by == "worker-e2e-1"
 
             # 2. analysis_attempts
-            res_att = await db_verify.execute(text(f"SELECT status, attempt_number FROM analysis_attempts WHERE analysis_job_id = '{job_id}';"))
+            res_att = await db_verify.execute(
+                text(f"SELECT status, attempt_number FROM analysis_attempts WHERE analysis_job_id = '{job_id}';")
+            )
             att_row = res_att.fetchone()
             assert att_row is not None
             assert att_row.status == "COMPLETED"
             assert att_row.attempt_number == 1
 
             # 3. analysis_plans
-            res_plan = await db_verify.execute(text(f"SELECT plan_json FROM analysis_plans WHERE analysis_job_id = '{job_id}';"))
+            res_plan = await db_verify.execute(
+                text(f"SELECT plan_json FROM analysis_plans WHERE analysis_job_id = '{job_id}';")
+            )
             plan_row = res_plan.fetchone()
             assert plan_row is not None
             assert "ordered_steps" in plan_row.plan_json
@@ -330,18 +341,22 @@ async def test_ai_orchestrator_strictly_confidential_policy_deny_flow():
         async with OwnerSession() as owner_db:
             org_rows = await owner_db.execute(text("SELECT id FROM public.organizations;"))
             for r in org_rows.fetchall():
-                await owner_db.execute(text("SELECT set_config('app.current_organization_id', :oid, true);"), {"oid": str(r[0])})
-                await owner_db.execute(text("DELETE FROM public.analysis_jobs WHERE status = 'RECEIVED' AND id != :jid;"), {"jid": job_id})
-            await owner_db.execute(text("SELECT set_config('app.current_organization_id', :oid, true);"), {"oid": str(org_id)})
-            await owner_db.execute(text("UPDATE public.analysis_jobs SET status = 'RECEIVED' WHERE id = :jid;"), {"jid": job_id})
+                await owner_db.execute(
+                    text("SELECT set_config('app.current_organization_id', :oid, true);"), {"oid": str(r[0])}
+                )
+                await owner_db.execute(
+                    text("DELETE FROM public.analysis_jobs WHERE status = 'RECEIVED' AND id != :jid;"), {"jid": job_id}
+                )
+            await owner_db.execute(
+                text("SELECT set_config('app.current_organization_id', :oid, true);"), {"oid": str(org_id)}
+            )
+            await owner_db.execute(
+                text("UPDATE public.analysis_jobs SET status = 'RECEIVED' WHERE id = :jid;"), {"jid": job_id}
+            )
             await owner_db.commit()
-
-
-
 
         async with ApiSession() as db_api:
             await db_api.execute(text(f"SET app.current_organization_id = '{org_id}';"))
-
 
             context = ExecutionContext(
                 organization_id=org_id,
@@ -358,7 +373,12 @@ async def test_ai_orchestrator_strictly_confidential_policy_deny_flow():
             claimed2 = await claim_next_analysis_job(db_api, "worker-e2e-2")
             assert claimed2 is not None
 
-            rejected_job = await engine.execute_job(claimed2.job_id, claimed2.claim_token, "worker-e2e-2", request_classification=DataClassification.STRICTLY_CONFIDENTIAL)
+            rejected_job = await engine.execute_job(
+                claimed2.job_id,
+                claimed2.claim_token,
+                "worker-e2e-2",
+                request_classification=DataClassification.STRICTLY_CONFIDENTIAL,
+            )
             assert rejected_job.status == "REJECTED_BY_POLICY"
 
         # Verify 0 snapshots written
@@ -380,7 +400,6 @@ async def test_ai_orchestrator_strictly_confidential_policy_deny_flow():
             await db_clean.execute(text(f"DELETE FROM users WHERE id = '{user_id}';"))
             await db_clean.execute(text(f"DELETE FROM organizations WHERE id = '{org_id}';"))
             await db_clean.commit()
-
 
 
 @pytest.mark.asyncio
@@ -623,7 +642,9 @@ async def test_live_anthropic_acceptance():
 
         claimed3 = await claim_next_analysis_job(db_api, "worker-e2e-3")
         assert claimed3 is not None
-        completed_job = await engine.execute_job(claimed3.job_id, claimed3.claim_token, "worker-e2e-3", request_classification=DataClassification.PUBLIC)
+        completed_job = await engine.execute_job(
+            claimed3.job_id, claimed3.claim_token, "worker-e2e-3", request_classification=DataClassification.PUBLIC
+        )
         assert completed_job.status == "COMPLETED"
 
     async with OwnerSession() as db_verify:

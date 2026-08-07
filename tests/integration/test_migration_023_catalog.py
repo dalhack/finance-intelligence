@@ -28,7 +28,6 @@ async def test_migration_023_catalog_and_security():
             "031_analysis_job_claim_authority",
         ]
 
-
         # 2. Verify RLS & FORCE RLS attributes on analysis_clarifications
         rls_res = await db_owner.execute(
             text("SELECT relrowsecurity, relforcerowsecurity FROM pg_class WHERE relname = 'analysis_clarifications';")

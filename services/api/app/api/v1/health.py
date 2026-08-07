@@ -54,7 +54,6 @@ async def readiness_check(
             "030_reconcile_application_role_catalog",
             "031_analysis_job_claim_authority",
         ]:
-
             response.status_code = status.HTTP_503_SERVICE_UNAVAILABLE
 
             return {"status": "fail", "timestamp": datetime.now(UTC).isoformat()}

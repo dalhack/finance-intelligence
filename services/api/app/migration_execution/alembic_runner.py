@@ -14,7 +14,13 @@ from app.migration_execution.compatibility.revision_024 import (
 )
 from app.migration_execution.config import MigrationExecutionConfig
 from app.migration_execution.redaction import redact_text, safe_close_connector
-from google.cloud.sql.connector import Connector, IPTypes
+
+try:
+    from google.cloud.sql.connector import Connector, IPTypes
+except ImportError:
+    Connector = None  # type: ignore[assignment,misc]
+    IPTypes = None  # type: ignore[assignment,misc]
+
 from sqlalchemy import create_engine, text
 from sqlalchemy.engine import Connection, Engine
 
@@ -96,6 +102,8 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
     lock_acquired = False
 
     try:
+        if Connector is None or IPTypes is None:
+            raise MigrationRunnerError("cloud-sql-python-connector is required to run Cloud SQL migrations.")
         connector = Connector()
 
         def getconn():

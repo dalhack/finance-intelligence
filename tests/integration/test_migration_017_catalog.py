@@ -38,7 +38,6 @@ async def test_migration_017_catalog_and_immutability():
             "031_analysis_job_claim_authority",
         ]
 
-
         # 2. Verify RLS & FORCE RLS attributes
         for table_name in ("comparison_runs", "result_datasets"):
             rls_res = await db_owner.execute(
