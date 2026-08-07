@@ -17,7 +17,7 @@ class FactReviewController
 
     try {
       final items = await _repository.getCandidateQueue();
-      if (_generationToken != currentToken) return;
+      if (!mounted || _generationToken != currentToken) return;
 
       if (items.isEmpty) {
         state = UiState.empty(requestToken: currentToken);
@@ -25,7 +25,7 @@ class FactReviewController
         state = UiState.success(data: items, requestToken: currentToken);
       }
     } catch (e) {
-      if (_generationToken != currentToken) return;
+      if (!mounted || _generationToken != currentToken) return;
       state = UiState.failure(
         exception: e is AppException
             ? e
@@ -46,8 +46,10 @@ class FactReviewController
           candidateId: candidateId,
           notes: notes,
           targetReportingBasis: targetReportingBasis);
+      if (!mounted || _generationToken != currentToken) return;
       await loadCandidates();
     } catch (e) {
+      if (!mounted || _generationToken != currentToken) return;
       state = UiState.failure(
         exception: e is AppException
             ? e
@@ -64,8 +66,10 @@ class FactReviewController
     try {
       await _repository.rejectCandidate(
           candidateId: candidateId, reason: reason);
+      if (!mounted || _generationToken != currentToken) return;
       await loadCandidates();
     } catch (e) {
+      if (!mounted || _generationToken != currentToken) return;
       state = UiState.failure(
         exception: e is AppException
             ? e
@@ -90,8 +94,10 @@ class FactReviewController
         notes: notes,
         targetReportingBasis: targetReportingBasis,
       );
+      if (!mounted || _generationToken != currentToken) return;
       await loadCandidates();
     } catch (e) {
+      if (!mounted || _generationToken != currentToken) return;
       state = UiState.failure(
         exception: e is AppException
             ? e
