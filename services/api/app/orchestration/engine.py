@@ -54,7 +54,7 @@ class AnalysisOrchestratorEngine:
         self.event_engine = AnalysisEventEngine(db_session, context.organization_id)
 
     async def _assert_fenced_ownership(self, job_id: UUID, claim_token: UUID, worker_id: str) -> None:
-        """Assert claim_token and worker_id ownership on analysis_job in current tenant transaction."""
+        """Assert claim_token and worker_id ownership on analysis_job with FOR UPDATE row lock."""
         await self.db.execute(
             text("SELECT set_config('app.current_organization_id', :org_id, true);"),
             {"org_id": str(self.context.organization_id)},
@@ -69,7 +69,8 @@ class AnalysisOrchestratorEngine:
                     'RECEIVED', 'UNDERSTANDING_REQUEST', 'PLANNING', 'POLICY_CHECK',
                     'RETRIEVING_INTERNAL_SOURCES', 'VALIDATING_SOURCES', 'EXECUTING_TOOLS',
                     'RECONCILING_RESULTS', 'GENERATING_STRUCTURED_RESULT', 'QUALITY_GATE'
-                  );
+                  )
+                FOR UPDATE;
             """),
             {"jid": job_id, "tok": claim_token, "w": worker_id},
         )
@@ -407,8 +408,29 @@ class AnalysisOrchestratorEngine:
             # 8. ATOMIC SNAPSHOT COMMIT -> State: COMPLETED
             await self._assert_fenced_ownership(job_id, claim_token, worker_id)
             AnalysisStateMachine.validate_transition(AnalysisJobStatus(job.status), AnalysisJobStatus.COMPLETED)
+
+            now_completed = datetime.now(UTC)
+            upd_comp = await self.db.execute(
+                text("""
+                    UPDATE public.analysis_jobs
+                    SET status = 'COMPLETED',
+                        lease_expires_at = NULL,
+                        updated_at = :now
+                    WHERE id = :jid
+                      AND claim_token = :tok
+                      AND locked_by = :w
+                    RETURNING id;
+                """),
+                {"jid": job_id, "tok": claim_token, "w": worker_id, "now": now_completed},
+            )
+            if not upd_comp.fetchone():
+                raise ClaimOwnershipLostException(
+                    f"CLAIM_OWNERSHIP_LOST: Fenced COMPLETED update affected 0 rows for job {job_id}."
+                )
+
             job.status = AnalysisJobStatus.COMPLETED.value
             job.lease_expires_at = None
+            job.updated_at = now_completed
             attempt.status = "COMPLETED"
 
             snapshot = FinalResultSnapshot(
@@ -417,10 +439,9 @@ class AnalysisOrchestratorEngine:
                 organization_id=self.context.organization_id,
                 schema_version="1.0.0",
                 result_json={"narrative": narrative, "dataset": dataset_summary},
-                created_at=datetime.now(UTC),
+                created_at=now_completed,
             )
             self.db.add(snapshot)
-            job.updated_at = datetime.now(UTC)
             await self.event_engine.emit_event(
                 job_id,
                 "analysis.completed",
@@ -440,27 +461,44 @@ class AnalysisOrchestratorEngine:
             # Model B Failure Transaction: Re-verify claim token ownership before persisting failure
             try:
                 await self._assert_fenced_ownership(job_id, claim_token, worker_id)
+                now_failed = datetime.now(UTC)
+                upd_fail = await self.db.execute(
+                    text("""
+                        UPDATE public.analysis_jobs
+                        SET status = 'FAILED',
+                            lease_expires_at = NULL,
+                            updated_at = :now
+                        WHERE id = :jid
+                          AND claim_token = :tok
+                          AND locked_by = :w
+                          AND status NOT IN ('COMPLETED', 'REJECTED_BY_POLICY')
+                        RETURNING id;
+                    """),
+                    {"jid": job_id, "tok": claim_token, "w": worker_id, "now": now_failed},
+                )
+                if not upd_fail.fetchone():
+                    raise ClaimOwnershipLostException("CLAIM_OWNERSHIP_LOST: Fenced FAILED update affected 0 rows.")
+
                 job_fail = await self.db.get(AnalysisJob, job_id)
-                if job_fail and job_fail.status not in ("COMPLETED", "REJECTED_BY_POLICY"):
+                if job_fail:
                     job_fail.status = AnalysisJobStatus.FAILED.value
                     job_fail.lease_expires_at = None
-                    job_fail.updated_at = datetime.now(UTC)
+                    job_fail.updated_at = now_failed
 
-                    # Update attempt status if available
-                    att_fail = await self.db.get(AnalysisAttempt, attempt_id)
-                    event_att_id = attempt_id if att_fail else None
-                    if att_fail:
-                        att_fail.status = "FAILED"
+                att_fail = await self.db.get(AnalysisAttempt, attempt_id)
+                event_att_id = attempt_id if att_fail else None
+                if att_fail:
+                    att_fail.status = "FAILED"
 
-                    safe_err_code = getattr(exc, "code", "ENGINE_EXECUTION_FAILED")
-                    safe_msg = getattr(exc, "message", "Analysis job execution failed.")
-                    await self.event_engine.emit_event(
-                        job_id,
-                        "analysis.failed",
-                        {"error_code": str(safe_err_code), "message": str(safe_msg)},
-                        event_att_id,
-                    )
-                    await self.db.commit()
+                safe_err_code = getattr(exc, "code", "ENGINE_EXECUTION_FAILED")
+                safe_msg = getattr(exc, "message", "Analysis job execution failed.")
+                await self.event_engine.emit_event(
+                    job_id,
+                    "analysis.failed",
+                    {"error_code": str(safe_err_code), "message": str(safe_msg)},
+                    event_att_id,
+                )
+                await self.db.commit()
             except ClaimOwnershipLostException:
                 await self.db.rollback()
                 # Ownership was lost; suppress failure persistence so new owner is not affected

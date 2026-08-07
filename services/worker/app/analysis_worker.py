@@ -8,7 +8,7 @@ from uuid import UUID
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from services.api.app.db.session import WorkerSessionLocal
+from services.api.app.db.session import ApiSessionLocal
 from services.api.app.orchestration.engine import AnalysisOrchestratorEngine
 from services.api.app.orchestration.exceptions import ClaimOwnershipLostException
 from services.api.app.orchestration.tools.base import ExecutionContext
@@ -26,7 +26,7 @@ class ClaimedAnalysisJob:
 
 
 async def claim_next_analysis_job(session: AsyncSession, worker_id: str) -> ClaimedAnalysisJob | None:
-    """Execute claim_next_analysis_job procedure via db_api_user/worker role in a short transaction."""
+    """Execute claim_next_analysis_job procedure via db_api_user role in a short transaction."""
     res = await session.execute(
         text("SELECT job_id, organization_id, claim_token FROM public.claim_next_analysis_job(:w);"),
         {"w": worker_id},
@@ -42,7 +42,7 @@ async def claim_next_analysis_job(session: AsyncSession, worker_id: str) -> Clai
 
 
 async def recover_next_stale_analysis_job(session: AsyncSession, worker_id: str) -> ClaimedAnalysisJob | None:
-    """Execute recover_next_stale_analysis_job procedure via db_api_user/worker role in a short transaction."""
+    """Execute recover_next_stale_analysis_job procedure via db_api_user role in a short transaction."""
     res = await session.execute(
         text("SELECT job_id, organization_id, claim_token FROM public.recover_next_stale_analysis_job(:w);"),
         {"w": worker_id},
@@ -73,9 +73,15 @@ async def renew_analysis_job_lease(
 
 
 class AnalysisWorker:
-    def __init__(self, worker_id: str = WORKER_ID, heartbeat_interval: float = 60.0):
+    def __init__(
+        self,
+        worker_id: str = WORKER_ID,
+        heartbeat_interval: float = 60.0,
+        session_factory=ApiSessionLocal,
+    ):
         self.worker_id = worker_id
         self.heartbeat_interval = heartbeat_interval
+        self.session_factory = session_factory
 
     async def _lease_heartbeat_loop(
         self,
@@ -89,15 +95,21 @@ class AnalysisWorker:
                 await asyncio.sleep(self.heartbeat_interval)
                 if engine_task.done():
                     break
-                async with WorkerSessionLocal() as hb_session:
-                    renewed = await renew_analysis_job_lease(
-                        hb_session, job_id, claim_token, self.worker_id
-                    )
-                    await hb_session.commit()
+
+                renewed = False
+                try:
+                    async with self.session_factory() as hb_session:
+                        renewed = await renew_analysis_job_lease(
+                            hb_session, job_id, claim_token, self.worker_id
+                        )
+                        await hb_session.commit()
+                except Exception as ex:
+                    logger.error(f"HEARTBEAT_LEASE_RENEWAL_EXCEPTION for job {job_id}: {ex}")
+                    renewed = False
 
                 if not renewed:
                     logger.warning(
-                        f"HEARTBEAT_OWNERSHIP_LOST for job {job_id}. Cancelling engine processing task."
+                        f"HEARTBEAT_OWNERSHIP_LOST_OR_EXCEPTION for job {job_id}. Cancelling engine task fail-closed."
                     )
                     engine_task.cancel()
                     break
@@ -121,7 +133,7 @@ class AnalysisWorker:
         )
 
         async def _run_engine():
-            async with WorkerSessionLocal() as processing_session:
+            async with self.session_factory() as processing_session:
                 engine = AnalysisOrchestratorEngine(processing_session, context)
                 return await engine.execute_job(job_id, claim_token, self.worker_id)
 
@@ -157,13 +169,13 @@ class AnalysisWorker:
         claimed: ClaimedAnalysisJob | None = None
 
         # 1. Try fresh claim in a short transaction
-        async with WorkerSessionLocal() as claim_session:
+        async with self.session_factory() as claim_session:
             claimed = await claim_next_analysis_job(claim_session, self.worker_id)
             await claim_session.commit()
 
         # 2. If no fresh job, try safe stale recovery in a short transaction
         if not claimed:
-            async with WorkerSessionLocal() as claim_session:
+            async with self.session_factory() as claim_session:
                 claimed = await recover_next_stale_analysis_job(claim_session, self.worker_id)
                 await claim_session.commit()
 
