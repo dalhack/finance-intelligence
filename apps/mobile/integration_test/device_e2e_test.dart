@@ -10,9 +10,12 @@ Future<void> pumpUntilFound(
   Duration timeout = const Duration(seconds: 30),
   Duration step = const Duration(milliseconds: 100),
 }) async {
-  final stopwatch = Stopwatch()..start();
-  while (stopwatch.elapsed < timeout) {
+  final maxIterations = (timeout.inMilliseconds / step.inMilliseconds).ceil();
+  var virtualElapsed = Duration.zero;
+
+  for (var iteration = 1; iteration <= maxIterations; iteration++) {
     await tester.pump(step);
+    virtualElapsed += step;
 
     final exception = tester.takeException();
     if (exception != null) {
@@ -25,7 +28,7 @@ Future<void> pumpUntilFound(
   }
 
   fail(
-    'BOUNDED_WAIT_TIMEOUT in phase "$phase": Target widget $finder not found within ${timeout.inSeconds}s (elapsed: ${stopwatch.elapsedMilliseconds}ms)',
+    'BOUNDED_WAIT_TIMEOUT in phase "$phase": Target widget $finder not found after $maxIterations iterations (${virtualElapsed.inSeconds}s virtual time)',
   );
 }
 
