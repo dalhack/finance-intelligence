@@ -1,6 +1,8 @@
 name: Finance Intelligence CI Pipeline
 
 on:
+  push:
+  pull_request:
   workflow_dispatch:
     inputs:
       validation_scope:

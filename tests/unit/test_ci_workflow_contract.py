@@ -13,14 +13,15 @@ PROVISION_SCRIPT_PATH = REPO_ROOT / "scripts" / "provision_ci_roles.py"
 def validate_workflow_semantics(raw_content: str) -> None:
     """Enforces strict behavioral and safety contracts on workflow YAML content."""
 
-    # 1. Reject push or pull_request triggers in top-level 'on:' block
+    # 1. Enforce push, pull_request, and workflow_dispatch triggers in top-level 'on:' block
     on_match = re.search(r"on:\s*\n((?:\s+.*\n)+)", raw_content)
     assert on_match, "Could not find 'on:' block in ci.yml!"
     on_block = on_match.group(1)
 
-    assert "push:" not in on_block, "CRITICAL: push trigger is forbidden in ci.yml!"
-    assert "pull_request:" not in on_block, "CRITICAL: pull_request trigger is forbidden in ci.yml!"
+    assert "push:" in on_block, "CRITICAL: push trigger must be present in ci.yml!"
+    assert "pull_request:" in on_block, "CRITICAL: pull_request trigger must be present in ci.yml!"
     assert "workflow_dispatch:" in on_block, "CRITICAL: workflow_dispatch must be present!"
+    assert "pull_request_target:" not in on_block, "CRITICAL: pull_request_target is forbidden!"
 
     # 2. Reject echo placeholders, hardcoded skips=0, and duplicated inline CREATE ROLE statements
     forbidden_patterns = [
