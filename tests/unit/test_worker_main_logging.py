@@ -102,6 +102,7 @@ async def test_real_run_worker_loop_log_redaction_all_worker_modules(monkeypatch
             pass
 
     monkeypatch.setattr("services.worker.app.main.WorkerSessionLocal", lambda: MockWorkerSessionContextManager())
+    monkeypatch.setattr("services.api.app.db.session.WorkerSessionLocal", lambda: MockWorkerSessionContextManager())
 
     # Mock LocalStorageAdapter
     mock_adapter = MagicMock()

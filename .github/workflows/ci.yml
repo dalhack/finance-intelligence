@@ -368,6 +368,14 @@ jobs:
           echo "--- DISK SPACE SUMMARY ---"
           df -h /
           echo "=== END DIAGNOSTIC CONTEXT ==="
+      - name: Upload Redacted Failure Diagnostic Context Artifacts
+        if: failure() || cancelled()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-preflight-diagnostic-logs
+          path: |
+            apps/mobile/flutter_devices_summary.txt
+
       - name: Simulator Teardown & Cleanup
         if: always()
         timeout-minutes: 3

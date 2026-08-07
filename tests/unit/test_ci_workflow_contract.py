@@ -255,3 +255,21 @@ def test_validate_migration_lock_workflow_contract():
 
     assert "if: always()" in content
     assert "docker volume rm -f" in content
+
+
+def test_workflow_split_and_live_acceptance_contract():
+    """V6 Scanner verifying Push CI has no live secret dependencies and live-acceptance.yml is workflow_dispatch only."""
+    ci_content = CI_YML_PATH.read_text(encoding="utf-8")
+    assert "secrets.ANTHROPIC_API_KEY" not in ci_content, (
+        "CRITICAL: Push CI (ci.yml) must NOT depend on ANTHROPIC_API_KEY!"
+    )
+
+    live_wf_path = REPO_ROOT / ".github" / "workflows" / "live-acceptance.yml"
+    assert live_wf_path.exists(), "live-acceptance.yml must exist!"
+    live_content = live_wf_path.read_text(encoding="utf-8")
+
+    assert "workflow_dispatch:" in live_content
+    assert "push:" not in live_content
+    assert "pull_request:" not in live_content
+    assert "secrets.ANTHROPIC_API_KEY" in live_content
+    assert "claude-3-haiku-20240307" in live_content

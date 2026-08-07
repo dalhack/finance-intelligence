@@ -65,35 +65,52 @@ def is_command_allowed(cmd_args: list[str]) -> bool:
 
 
 def terminate_process_group(pgid: int, grace_period_sec: float = 5.0) -> None:
-    """Terminates entire process group cleanly with SIGTERM, falling back to SIGKILL."""
+    """Terminates entire process group cleanly with SIGTERM, falling back to SIGKILL and direct PID kill."""
     sys.stderr.write(f"[WATCHDOG SIGTERM] Event={EVENT_WATCHDOG_TERMINATING} PGID={pgid}\n")
     sys.stderr.flush()
+
     try:
         os.killpg(pgid, signal.SIGTERM)
     except ProcessLookupError:
         return
     except OSError as e:
         sys.stderr.write(f"[WATCHDOG WARNING] SIGTERM error for pgid {pgid}: {e}\n")
+        try:
+            os.kill(pgid, signal.SIGTERM)
+        except (ProcessLookupError, OSError):
+            pass
 
     start_time = time.time()
     while time.time() - start_time < grace_period_sec:
         try:
-            # Check if process group is still alive
             os.killpg(pgid, 0)
             time.sleep(0.05)
         except ProcessLookupError:
             return
         except OSError:
-            break
+            try:
+                os.kill(pgid, 0)
+                time.sleep(0.05)
+            except (ProcessLookupError, OSError):
+                return
 
     try:
         sys.stderr.write(f"[WATCHDOG SIGKILL] Event={EVENT_WATCHDOG_KILLED} PGID={pgid}\n")
         sys.stderr.flush()
         os.killpg(pgid, signal.SIGKILL)
     except ProcessLookupError:
-        pass
+        return
     except OSError as e:
         sys.stderr.write(f"[WATCHDOG WARNING] SIGKILL error for pgid {pgid}: {e}\n")
+        try:
+            os.kill(pgid, signal.SIGKILL)
+        except ProcessLookupError:
+            return
+        except OSError as kill_err:
+            sys.stderr.write(
+                f"CRITICAL FAIL-CLOSED [KILL_FAILED]: Could not terminate process group or PID {pgid}: {kill_err}\n"
+            )
+            raise RuntimeError(f"KILL_FAILED: Could not terminate process group or PID {pgid}") from kill_err
 
 
 def run_watchdog(

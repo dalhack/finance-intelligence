@@ -6,6 +6,7 @@ import hashlib
 import json
 import os
 import sys
+import tempfile
 import uuid
 from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
@@ -90,7 +91,7 @@ class AtomicExecutionLedger:
 
     def __init__(self, authorization_id: str):
         self.authorization_id = authorization_id
-        self.ledger_path = f"/private/tmp/fi-e2e-ledger-{authorization_id}.json"
+        self.ledger_path = os.path.join(tempfile.gettempdir(), f"fi-e2e-ledger-{authorization_id}.json")
 
     def create_exclusive(self, command_hash: str, target_head: str, device_id: str) -> dict[str, Any]:
         """Atomically create ledger file with mode 0600. Fails if ledger already exists."""
@@ -159,7 +160,8 @@ def check_credential_presence(credential_env_file: str | None = None) -> bool:
         return True
 
     # Check safe tmp environment file
-    env_file = credential_env_file or "/private/tmp/fi-anthropic-e2e.env"
+    env_file = credential_env_file or os.path.join(tempfile.gettempdir(), "fi-anthropic-e2e.env")
+
     if os.path.isfile(env_file):
         try:
             with open(env_file, encoding="utf-8") as f:
@@ -179,7 +181,9 @@ def build_flutter_argv(
     fixture_file_path: str = "",
 ) -> list[str]:
     """Construct exact Flutter test command argument list with 7 unique --dart-define parameters."""
-    eff_fixture_path = fixture_file_path or f"/private/tmp/fi-fixture-{manifest.run_namespace}.pdf"
+    eff_fixture_path = fixture_file_path or os.path.join(
+        tempfile.gettempdir(), f"fi-fixture-{manifest.run_namespace}.pdf"
+    )
     return [
         "flutter",
         "test",
@@ -289,7 +293,7 @@ def run_harness_execute(
     created_fixture_by_harness = False
     eff_fixture_path = fixture_file_path
     if not eff_fixture_path:
-        eff_fixture_path = f"/private/tmp/fi-fixture-{manifest.run_namespace}.pdf"
+        eff_fixture_path = os.path.join(tempfile.gettempdir(), f"fi-fixture-{manifest.run_namespace}.pdf")
         if not os.path.exists(eff_fixture_path):
             fd = os.open(eff_fixture_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
             with os.fdopen(fd, "w") as f:
@@ -318,7 +322,8 @@ def run_harness_execute(
     ledger.create_exclusive(cmd_hash, target_head, device_id)
 
     # Evidence directory setup
-    evidence_dir = f"/private/tmp/fi-r5-{authorization_id}"
+    evidence_dir = os.path.join(tempfile.gettempdir(), f"fi-r5-{authorization_id}")
+
     os.makedirs(evidence_dir, mode=0o700, exist_ok=True)
 
     execution_result = "NOT_STARTED"

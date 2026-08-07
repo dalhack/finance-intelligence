@@ -134,10 +134,11 @@ def test_command_hash_and_define_parity():
     assert len(h1) == 64
 
 
-def test_harness_fixture_file_creation_and_cleanup():
+def test_harness_fixture_file_creation_and_cleanup(monkeypatch):
     """Verify run_harness_execute creates ephemeral 0600 fixture file if missing and cleans it up on both pass and fail paths."""
     from scripts.run_local_ios_e2e import run_harness_execute
 
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-ant-api03-test_mock_key_for_unit_harness_testing_12345")
     auth_id = f"test-fix-clean-{uuid.uuid4().hex[:8]}"
     created_fixture_path = None
 
@@ -145,6 +146,7 @@ def test_harness_fixture_file_creation_and_cleanup():
         nonlocal created_fixture_path
         define_map = dict(d.replace("--dart-define=", "").split("=", 1) for d in argv if d.startswith("--dart-define="))
         created_fixture_path = define_map["FI_E2E_FIXTURE_FILE_PATH"]
+
         assert os.path.exists(created_fixture_path)
         # Verify 0600 mode
         st = os.stat(created_fixture_path)
@@ -198,10 +200,11 @@ def test_harness_dry_run_mode():
     assert "command_sha256" in plan
 
 
-def test_harness_execute_pipeline_success():
+def test_harness_execute_pipeline_success(monkeypatch):
     """Verify run_harness_execute runs full lifecycle: ledger reserve -> seed -> runner -> cleanup -> ledger finalize."""
     from scripts.run_local_ios_e2e import run_harness_execute
 
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-ant-api03-test_mock_key_for_unit_harness_testing_12345")
     auth_id = f"test-exec-{uuid.uuid4().hex[:8]}"
     events = []
 
@@ -242,10 +245,11 @@ def test_harness_execute_pipeline_success():
     os.remove(ledger_path)
 
 
-def test_harness_execute_pipeline_failure_runs_cleanup():
+def test_harness_execute_pipeline_failure_runs_cleanup(monkeypatch):
     """Verify run_harness_execute runs cleanup in finally block even when runner fails."""
     from scripts.run_local_ios_e2e import run_harness_execute
 
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-ant-api03-test_mock_key_for_unit_harness_testing_12345")
     auth_id = f"test-fail-{uuid.uuid4().hex[:8]}"
     events = []
 

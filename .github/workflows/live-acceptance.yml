@@ -1,0 +1,108 @@
+name: Live Acceptance & iOS Device E2E Pipeline
+
+on:
+  workflow_dispatch:
+
+jobs:
+  live-anthropic-acceptance:
+    name: Live Anthropic API Acceptance
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install locked dependencies
+        run: pip install -r requirements.lock
+      - name: Run Single Cheap Live Anthropic Request Check
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          python -c "
+          import os, sys
+          key = os.environ.get('ANTHROPIC_API_KEY')
+          if not key:
+              print('CRITICAL FAIL-CLOSED: ANTHROPIC_API_KEY secret is required for live acceptance!')
+              sys.exit(1)
+          from anthropic import Anthropic
+          client = Anthropic(api_key=key)
+          resp = client.messages.create(model='claude-3-haiku-20240307', max_tokens=10, messages=[{'role': 'user', 'content': 'ping'}])
+          assert resp.content[0].text
+          print('[LIVE_ACCEPTANCE] SUCCESS: Received response from Claude 3 Haiku')
+          "
+
+  live-ios-device-e2e:
+    name: Live iOS Simulator Device E2E
+    runs-on: macos-14
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          flutter-version: '3.44.8'
+      - name: Check iOS Toolchain & Xcode
+        run: |
+          flutter doctor -v
+          xcodebuild -version
+      - name: Build iOS Simulator Bundle
+        working-directory: apps/mobile
+        run: |
+          flutter pub get
+          flutter build ios --simulator --no-codesign
+      - name: Create Dedicated Simulator Device & Persist UDID
+        timeout-minutes: 2
+        run: |
+          SIM_UDID=$(xcrun simctl create "CI_Live_Runner_${{ github.run_id }}_${{ github.run_attempt }}" "com.apple.CoreSimulator.SimDeviceType.iPhone-15")
+          echo "Created Dedicated Simulator UDID: $SIM_UDID"
+          echo "SIMULATOR_UDID=$SIM_UDID" >> "$GITHUB_ENV"
+      - name: Boot Dedicated Simulator
+        timeout-minutes: 5
+        run: |
+          xcrun simctl boot "$SIMULATOR_UDID"
+          xcrun simctl bootstatus "$SIMULATOR_UDID" -b
+      - name: Run Device E2E with Process Watchdog
+        working-directory: apps/mobile
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        timeout-minutes: 15
+        run: |
+          python ../../scripts/run_e2e_watchdog.py --timeout-seconds 900 --heartbeat-seconds 30 flutter test integration_test/device_e2e_test.dart -d "$SIMULATOR_UDID"
+      - name: Collect & Upload Diagnostic Context
+        if: failure() || cancelled()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-e2e-diagnostic-logs
+          path: |
+            apps/mobile/flutter_devices_summary.txt
+            /tmp/fi-r5-*
+      - name: Simulator Teardown & Cleanup
+        if: always()
+        timeout-minutes: 3
+        run: |
+          if [ -n "$SIMULATOR_UDID" ]; then
+            xcrun simctl shutdown "$SIMULATOR_UDID" || true
+            xcrun simctl delete "$SIMULATOR_UDID" || true
+          fi
+
+  live-gate-summary:
+    name: Live Quality Gate Summary
+    if: always()
+    needs:
+      - live-anthropic-acceptance
+      - live-ios-device-e2e
+    runs-on: ubuntu-latest
+    steps:
+      - name: Quality Gate Status Enforcement
+        run: |
+          for RES in "${{ needs.live-anthropic-acceptance.result }}" \
+                     "${{ needs.live-ios-device-e2e.result }}"; do
+            if [[ "$RES" != "success" ]]; then
+              echo "CRITICAL FAIL-CLOSED: Live acceptance job result is '$RES'!"
+              exit 1
+            fi
+          done
+          echo "LIVE ACCEPTANCE QUALITY GATE PASSED CLEANLY!"
