@@ -6,7 +6,13 @@ import re
 from app.migration_execution.cloudsql_admin import create_user_if_missing
 from app.migration_execution.config import MigrationExecutionConfig
 from app.migration_execution.redaction import redact_text, safe_close_connector
-from google.cloud.sql.connector import Connector, IPTypes
+
+try:
+    from google.cloud.sql.connector import Connector, IPTypes
+except ImportError:
+    Connector = None  # type: ignore[assignment,misc]
+    IPTypes = None  # type: ignore[assignment,misc]
+
 from sqlalchemy import create_engine, text
 from sqlalchemy.engine import Engine
 
@@ -27,6 +33,8 @@ def get_cloudsql_engine(
     autocommit: bool = False,
 ) -> tuple[Engine, Connector]:
     """Creates a SQLAlchemy engine connected to Cloud SQL via Private IP Connector."""
+    if Connector is None or IPTypes is None:
+        raise ProvisioningError("cloud-sql-python-connector is required for Cloud SQL engine provisioning.")
     connector = Connector()
 
     def getconn():

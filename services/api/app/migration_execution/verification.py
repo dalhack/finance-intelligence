@@ -4,7 +4,13 @@ import logging
 
 from app.migration_execution.config import MigrationExecutionConfig
 from app.migration_execution.redaction import redact_text, safe_close_connector
-from google.cloud.sql.connector import Connector, IPTypes
+
+try:
+    from google.cloud.sql.connector import Connector, IPTypes
+except ImportError:
+    Connector = None  # type: ignore[assignment,misc]
+    IPTypes = None  # type: ignore[assignment,misc]
+
 from sqlalchemy import create_engine, text
 from sqlalchemy.engine import Engine
 
@@ -44,6 +50,8 @@ def run_security_verification(config: MigrationExecutionConfig) -> None:
     engine: Engine | None = None
 
     try:
+        if Connector is None or IPTypes is None:
+            raise VerificationError("cloud-sql-python-connector is required for Cloud SQL security verification.")
         connector = Connector()
 
         def getconn():

@@ -284,3 +284,38 @@ def test_workflow_validate_migration_lock_volume_lifecycle_scanner():
     assert 'docker volume rm -f "${VALIDATION_VOLUME}"' in content
     assert "Validation volume still exists after cleanup!" in content
     assert "docker volume prune" not in content
+
+
+def test_cloud_sql_optional_import_boundary_and_fail_closed_contract(monkeypatch):
+    import app.migration_entrypoint as entrypoint
+    from app.migration_execution import alembic_runner, provisioning, verification
+    from app.migration_execution.alembic_runner import MigrationRunnerError, run_alembic_migrations
+    from app.migration_execution.config import MigrationExecutionConfig
+    from app.migration_execution.provisioning import ProvisioningError, get_cloudsql_engine
+    from app.migration_execution.verification import VerificationError, run_security_verification
+
+    assert entrypoint is not None
+
+    config = MigrationExecutionConfig(
+        project_id="finance-intel-staging-8f2a",
+        instance_name="fi-staging-db",
+        region="europe-west1",
+        target_database="finance_intelligence_staging",
+        expected_head="031_analysis_job_claim_authority",
+        bootstrap_password="test_password",
+        api_password="test_password",
+        worker_password="test_password",
+    )
+
+    monkeypatch.setattr(alembic_runner, "Connector", None)
+    monkeypatch.setattr(provisioning, "Connector", None)
+    monkeypatch.setattr(verification, "Connector", None)
+
+    with pytest.raises(MigrationRunnerError, match="cloud-sql-python-connector"):
+        run_alembic_migrations(config)
+
+    with pytest.raises(ProvisioningError, match="cloud-sql-python-connector"):
+        get_cloudsql_engine(config, "user", "pass")
+
+    with pytest.raises(VerificationError, match="cloud-sql-python-connector"):
+        run_security_verification(config)
