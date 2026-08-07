@@ -277,3 +277,19 @@ def test_automatic_ios_e2e_and_ci_contract():
 
     # 4. Final gate summary enforcement
     assert "needs.ios-build-and-simulator-e2e.result" in content
+
+
+def test_device_e2e_settle_contract():
+    """Scanner verifying device_e2e_test.dart contains zero pumpAndSettle and uses deterministic pumpUntilFound."""
+    device_test_path = REPO_ROOT / "apps" / "mobile" / "integration_test" / "device_e2e_test.dart"
+    assert device_test_path.exists(), "device_e2e_test.dart must exist!"
+
+    content = device_test_path.read_text(encoding="utf-8")
+    assert "pumpAndSettle" not in content, "CRITICAL: device_e2e_test.dart must NOT contain unbounded pumpAndSettle()!"
+    assert "pumpUntilFound" in content, "CRITICAL: device_e2e_test.dart must use deterministic pumpUntilFound helper!"
+    assert "takeException()" in content, (
+        "CRITICAL: pumpUntilFound must check tester.takeException() for immediate fail-closed app exception!"
+    )
+    assert "BOUNDED_WAIT_TIMEOUT" in content, (
+        "CRITICAL: pumpUntilFound must fail closed with BOUNDED_WAIT_TIMEOUT upon timeout!"
+    )
