@@ -347,5 +347,5 @@ def test_historical_migrations_001_through_030_checksums_unmodified():
     """Verifies that none of the historical migration files 001-030 have been modified."""
     versions_dir = Path(__file__).resolve().parents[2] / "alembic" / "versions"
     assert versions_dir.is_dir()
-    files = list(versions_dir.glob("*.py"))
+    files = [f for f in versions_dir.glob("*.py") if int(f.name.split("_")[0]) <= 30]
     assert len(files) == 30
