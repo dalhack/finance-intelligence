@@ -1,3 +1,6 @@
+@Tags(['local_backend_integration'])
+library;
+
 import 'dart:async';
 import 'dart:io';
 
@@ -84,11 +87,12 @@ void main() {
         'Full Real Local E2E Upload -> Finalize -> Ingestion -> Analysis -> SSE Pipeline',
         () async {
       if (!isBackendOnline) {
-        expect(isBackendOnline, isFalse,
-            reason:
-                'LOCAL_BACKEND_SSE_INTEGRATION_GATE = UNVERIFIED (Local FastAPI backend on $backendBaseUrl is offline)');
-        return;
+        fail(
+          'FAIL_CLOSED: Local FastAPI backend on $backendBaseUrl is OFFLINE. '
+          'Real HTTP contract test requires a live running backend process.',
+        );
       }
+
 
 
       // 1. Create Upload Session

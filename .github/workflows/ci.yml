@@ -156,7 +156,8 @@ jobs:
         run: flutter pub get
       - name: Run Flutter Machine Test Suite
         working-directory: apps/mobile
-        run: flutter test --machine > flutter_test_report.jsonl
+        run: flutter test --machine --exclude-tags=local_backend_integration > flutter_test_report.jsonl
+
       - name: Real Flutter Machine Manifest Verification
         run: python scripts/parse_flutter_machine_output.py apps/mobile/flutter_test_report.jsonl
 
