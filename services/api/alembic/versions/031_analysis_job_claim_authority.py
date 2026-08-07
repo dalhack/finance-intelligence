@@ -32,26 +32,7 @@ def upgrade() -> None:
         CHECK (recovery_count BETWEEN 0 AND 1);
     """)
 
-    # 2. RLS policies allowing db_owner SECURITY DEFINER claim procedures unscoped table access
-    op.execute("""
-        CREATE POLICY analysis_jobs_owner_claim_policy
-        ON public.analysis_jobs
-        FOR ALL
-        TO db_owner
-        USING (true)
-        WITH CHECK (true);
-    """)
-
-    op.execute("""
-        CREATE POLICY analysis_attempts_owner_claim_policy
-        ON public.analysis_attempts
-        FOR ALL
-        TO db_owner
-        USING (true)
-        WITH CHECK (true);
-    """)
-
-    # 3. Partial indexes for Fresh Claim and Stale Recovery
+    # 2. Partial indexes for Fresh Claim and Stale Recovery
     op.execute("""
         CREATE INDEX idx_analysis_jobs_fresh
         ON public.analysis_jobs (created_at ASC, id ASC)
@@ -72,8 +53,187 @@ def upgrade() -> None:
         AND claim_token IS NOT NULL;
     """)
 
-    # 3. Function: claim_next_analysis_job (Fresh Claims Only)
+    # 3. Dedicated NOLOGIN function-owner role provision
     op.execute("""
+        DO $$
+        BEGIN
+            IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_analysis_claim_owner') THEN
+                CREATE ROLE db_analysis_claim_owner NOLOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT NOREPLICATION NOBYPASSRLS;
+            END IF;
+            EXECUTE format('GRANT db_analysis_claim_owner TO %I', CURRENT_USER);
+        END $$;
+    """)
+
+    op.execute("GRANT USAGE, CREATE ON SCHEMA public TO db_analysis_claim_owner;")
+
+    # Minimal Column-Level Grants for db_analysis_claim_owner
+    op.execute("""
+        GRANT SELECT (id, organization_id, status, claim_token, locked_by, lease_expires_at, recovery_count, created_at)
+        ON public.analysis_jobs TO db_analysis_claim_owner;
+
+        GRANT UPDATE (status, locked_by, claim_token, locked_at, lease_expires_at, recovery_count, updated_at)
+        ON public.analysis_jobs TO db_analysis_claim_owner;
+
+        GRANT SELECT (id, analysis_job_id, organization_id, status, attempt_number, created_at)
+        ON public.analysis_attempts TO db_analysis_claim_owner;
+
+        GRANT UPDATE (status)
+        ON public.analysis_attempts TO db_analysis_claim_owner;
+    """)
+
+    # 4. Narrow RLS Policies ONLY for db_analysis_claim_owner role
+    op.execute("""
+        CREATE POLICY analysis_jobs_claim_owner_select_policy
+        ON public.analysis_jobs
+        FOR SELECT
+        TO db_analysis_claim_owner
+        USING (
+          (status = 'RECEIVED' AND claim_token IS NULL)
+          OR (
+            status IN (
+              'RECEIVED',
+              'UNDERSTANDING_REQUEST',
+              'PLANNING',
+              'POLICY_CHECK',
+              'RETRIEVING_INTERNAL_SOURCES',
+              'VALIDATING_SOURCES'
+            )
+            AND claim_token IS NOT NULL
+            AND lease_expires_at IS NOT NULL
+            AND lease_expires_at < pg_catalog.now()
+            AND recovery_count = 0
+          )
+          OR (
+            status IN (
+              'RECEIVED',
+              'UNDERSTANDING_REQUEST',
+              'PLANNING',
+              'POLICY_CHECK',
+              'RETRIEVING_INTERNAL_SOURCES',
+              'VALIDATING_SOURCES',
+              'EXECUTING_TOOLS',
+              'RECONCILING_RESULTS',
+              'GENERATING_STRUCTURED_RESULT',
+              'QUALITY_GATE'
+            )
+            AND claim_token IS NOT NULL
+          )
+        );
+    """)
+
+    op.execute("""
+        CREATE POLICY analysis_jobs_claim_owner_update_policy
+        ON public.analysis_jobs
+        FOR UPDATE
+        TO db_analysis_claim_owner
+        USING (
+          (status = 'RECEIVED' AND claim_token IS NULL)
+          OR (
+            status IN (
+              'RECEIVED',
+              'UNDERSTANDING_REQUEST',
+              'PLANNING',
+              'POLICY_CHECK',
+              'RETRIEVING_INTERNAL_SOURCES',
+              'VALIDATING_SOURCES'
+            )
+            AND claim_token IS NOT NULL
+            AND lease_expires_at IS NOT NULL
+            AND lease_expires_at < pg_catalog.now()
+            AND recovery_count = 0
+          )
+          OR (
+            status IN (
+              'RECEIVED',
+              'UNDERSTANDING_REQUEST',
+              'PLANNING',
+              'POLICY_CHECK',
+              'RETRIEVING_INTERNAL_SOURCES',
+              'VALIDATING_SOURCES',
+              'EXECUTING_TOOLS',
+              'RECONCILING_RESULTS',
+              'GENERATING_STRUCTURED_RESULT',
+              'QUALITY_GATE'
+            )
+            AND claim_token IS NOT NULL
+          )
+        )
+        WITH CHECK (
+          status IN (
+            'RECEIVED',
+            'UNDERSTANDING_REQUEST',
+            'PLANNING',
+            'POLICY_CHECK',
+            'RETRIEVING_INTERNAL_SOURCES',
+            'VALIDATING_SOURCES',
+            'EXECUTING_TOOLS',
+            'RECONCILING_RESULTS',
+            'GENERATING_STRUCTURED_RESULT',
+            'QUALITY_GATE'
+          )
+          AND claim_token IS NOT NULL
+          AND recovery_count BETWEEN 0 AND 1
+        );
+    """)
+
+    op.execute("""
+        CREATE POLICY analysis_attempts_claim_owner_select_policy
+        ON public.analysis_attempts
+        FOR SELECT
+        TO db_analysis_claim_owner
+        USING (
+            status IN ('RUNNING', 'ABANDONED')
+            AND EXISTS (
+                SELECT 1 FROM public.analysis_jobs aj
+                WHERE aj.id = analysis_attempts.analysis_job_id
+                  AND aj.claim_token IS NOT NULL
+                  AND aj.lease_expires_at IS NOT NULL
+                  AND aj.lease_expires_at < pg_catalog.now()
+                  AND aj.recovery_count = 0
+                  AND aj.status IN (
+                    'RECEIVED',
+                    'UNDERSTANDING_REQUEST',
+                    'PLANNING',
+                    'POLICY_CHECK',
+                    'RETRIEVING_INTERNAL_SOURCES',
+                    'VALIDATING_SOURCES'
+                  )
+            )
+        );
+
+        CREATE POLICY analysis_attempts_claim_owner_update_policy
+        ON public.analysis_attempts
+        FOR UPDATE
+        TO db_analysis_claim_owner
+        USING (
+            status = 'RUNNING'
+            AND EXISTS (
+                SELECT 1 FROM public.analysis_jobs aj
+                WHERE aj.id = analysis_attempts.analysis_job_id
+                  AND aj.claim_token IS NOT NULL
+                  AND aj.lease_expires_at IS NOT NULL
+                  AND aj.lease_expires_at < pg_catalog.now()
+                  AND aj.recovery_count = 0
+                  AND aj.status IN (
+                    'RECEIVED',
+                    'UNDERSTANDING_REQUEST',
+                    'PLANNING',
+                    'POLICY_CHECK',
+                    'RETRIEVING_INTERNAL_SOURCES',
+                    'VALIDATING_SOURCES'
+                  )
+            )
+        )
+        WITH CHECK (status = 'ABANDONED');
+    """)
+
+    # 5. Functions Creation & Ownership Assignment to db_analysis_claim_owner
+    op.execute("""
+        DO $$
+        BEGIN
+            EXECUTE format('GRANT db_analysis_claim_owner TO %I', CURRENT_USER);
+        END $$;
+
         CREATE OR REPLACE FUNCTION public.claim_next_analysis_job(
             p_worker_id text
         )
@@ -124,10 +284,7 @@ def upgrade() -> None:
             END IF;
         END;
         $$;
-    """)
 
-    # 4. Function: recover_next_stale_analysis_job (Stale Crash Recovery Only)
-    op.execute("""
         CREATE OR REPLACE FUNCTION public.recover_next_stale_analysis_job(
             p_worker_id text
         )
@@ -191,10 +348,7 @@ def upgrade() -> None:
             END IF;
         END;
         $$;
-    """)
 
-    # 5. Function: renew_analysis_job_lease (Heartbeat)
-    op.execute("""
         CREATE OR REPLACE FUNCTION public.renew_analysis_job_lease(
             p_job_id uuid,
             p_claim_token uuid,
@@ -241,39 +395,57 @@ def upgrade() -> None:
             RETURN v_updated > 0;
         END;
         $$;
-    """)
 
-    # 6. Privileges (Least-Privilege)
-    op.execute("""
-        ALTER FUNCTION public.claim_next_analysis_job(text) OWNER TO db_owner;
-        REVOKE ALL ON FUNCTION public.claim_next_analysis_job(text) FROM PUBLIC;
+        ALTER FUNCTION public.claim_next_analysis_job(text) OWNER TO db_analysis_claim_owner;
+        ALTER FUNCTION public.recover_next_stale_analysis_job(text) OWNER TO db_analysis_claim_owner;
+        ALTER FUNCTION public.renew_analysis_job_lease(uuid, uuid, text) OWNER TO db_analysis_claim_owner;
+
+        REVOKE EXECUTE ON FUNCTION public.claim_next_analysis_job(text) FROM PUBLIC;
         GRANT EXECUTE ON FUNCTION public.claim_next_analysis_job(text) TO db_api_user;
 
-        ALTER FUNCTION public.recover_next_stale_analysis_job(text) OWNER TO db_owner;
-        REVOKE ALL ON FUNCTION public.recover_next_stale_analysis_job(text) FROM PUBLIC;
+        REVOKE EXECUTE ON FUNCTION public.recover_next_stale_analysis_job(text) FROM PUBLIC;
         GRANT EXECUTE ON FUNCTION public.recover_next_stale_analysis_job(text) TO db_api_user;
 
-        ALTER FUNCTION public.renew_analysis_job_lease(uuid, uuid, text) OWNER TO db_owner;
-        REVOKE ALL ON FUNCTION public.renew_analysis_job_lease(uuid, uuid, text) FROM PUBLIC;
+        REVOKE EXECUTE ON FUNCTION public.renew_analysis_job_lease(uuid, uuid, text) FROM PUBLIC;
         GRANT EXECUTE ON FUNCTION public.renew_analysis_job_lease(uuid, uuid, text) TO db_api_user;
+
+        DO $$
+        BEGIN
+            EXECUTE format('REVOKE db_analysis_claim_owner FROM %I', CURRENT_USER);
+        END $$;
     """)
 
 
 def downgrade() -> None:
     # Downgrade in exact reverse order
-    op.execute("REVOKE EXECUTE ON FUNCTION public.renew_analysis_job_lease(uuid, uuid, text) FROM db_api_user;")
-    op.execute("REVOKE EXECUTE ON FUNCTION public.recover_next_stale_analysis_job(text) FROM db_api_user;")
-    op.execute("REVOKE EXECUTE ON FUNCTION public.claim_next_analysis_job(text) FROM db_api_user;")
-
     op.execute("DROP FUNCTION IF EXISTS public.renew_analysis_job_lease(uuid, uuid, text);")
     op.execute("DROP FUNCTION IF EXISTS public.recover_next_stale_analysis_job(text);")
     op.execute("DROP FUNCTION IF EXISTS public.claim_next_analysis_job(text);")
 
-    op.execute("DROP POLICY IF EXISTS analysis_attempts_owner_claim_policy ON public.analysis_attempts;")
-    op.execute("DROP POLICY IF EXISTS analysis_jobs_owner_claim_policy ON public.analysis_jobs;")
+    op.execute("DROP POLICY IF EXISTS analysis_attempts_claim_owner_update_policy ON public.analysis_attempts;")
+    op.execute("DROP POLICY IF EXISTS analysis_attempts_claim_owner_select_policy ON public.analysis_attempts;")
+    op.execute("DROP POLICY IF EXISTS analysis_jobs_claim_owner_update_policy ON public.analysis_jobs;")
+    op.execute("DROP POLICY IF EXISTS analysis_jobs_claim_owner_select_policy ON public.analysis_jobs;")
+
     op.execute("DROP INDEX IF EXISTS public.idx_analysis_jobs_stale;")
     op.execute("DROP INDEX IF EXISTS public.idx_analysis_jobs_fresh;")
 
     op.execute("ALTER TABLE public.analysis_jobs DROP CONSTRAINT IF EXISTS chk_analysis_jobs_recovery_count;")
     op.execute("ALTER TABLE public.analysis_jobs DROP COLUMN IF EXISTS recovery_count;")
     op.execute("ALTER TABLE public.analysis_jobs DROP COLUMN IF EXISTS claim_token;")
+
+    op.execute("""
+        DO $$
+        BEGIN
+            IF EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_analysis_claim_owner') THEN
+                EXECUTE format('GRANT db_analysis_claim_owner TO %I', CURRENT_USER);
+                DROP OWNED BY db_analysis_claim_owner CASCADE;
+                EXECUTE format('REVOKE db_analysis_claim_owner FROM %I', CURRENT_USER);
+                BEGIN
+                    DROP ROLE db_analysis_claim_owner;
+                EXCEPTION WHEN dependent_objects_still_exist THEN
+                    NULL;
+                END;
+            END IF;
+        END $$;
+    """)
