@@ -150,3 +150,79 @@ def test_harness_dry_run_mode():
     assert plan["flutter_tests_executed_count"] == 0
     assert "command_argv" in plan
     assert "command_sha256" in plan
+
+
+def test_harness_execute_pipeline_success():
+    """Verify run_harness_execute runs full lifecycle: ledger reserve -> seed -> runner -> cleanup -> ledger finalize."""
+    from scripts.run_local_ios_e2e import run_harness_execute
+
+    auth_id = f"test-exec-{uuid.uuid4().hex[:8]}"
+    events = []
+
+    def mock_seed(manifest):
+        events.append("SEED")
+
+    def mock_service_launcher():
+        events.append("SERVICES_STARTED")
+
+    def mock_runner(argv):
+        events.append("RUNNER_EXECUTED")
+        return 0
+
+    def mock_cleanup(manifest):
+        events.append("CLEANUP")
+
+    res = run_harness_execute(
+        authorization_id=auth_id,
+        device_id="device-sim-999",
+        runner_fn=mock_runner,
+        seed_fn=mock_seed,
+        cleanup_fn=mock_cleanup,
+        service_launcher_fn=mock_service_launcher,
+    )
+
+    assert res["status"] == "EXECUTION_SUCCESS"
+    assert res["execution_result"] == "PASSED"
+    assert res["cleanup_status"] == "COMPLETE"
+    assert events == ["SEED", "SERVICES_STARTED", "RUNNER_EXECUTED", "CLEANUP"]
+
+    # Verify ledger file is in CLEANUP_COMPLETE state
+    ledger_path = res["ledger_path"]
+    assert os.path.exists(ledger_path)
+    with open(ledger_path) as f:
+        data = json.load(f)
+    assert data["state"] == "CLEANUP_COMPLETE"
+    assert data["execution_count"] == 1
+    os.remove(ledger_path)
+
+
+def test_harness_execute_pipeline_failure_runs_cleanup():
+    """Verify run_harness_execute runs cleanup in finally block even when runner fails."""
+    from scripts.run_local_ios_e2e import run_harness_execute
+
+    auth_id = f"test-fail-{uuid.uuid4().hex[:8]}"
+    events = []
+
+    def mock_runner(argv):
+        events.append("RUNNER_FAILED")
+        return 1
+
+    def mock_cleanup(manifest):
+        events.append("CLEANUP")
+
+    res = run_harness_execute(
+        authorization_id=auth_id,
+        device_id="device-sim-999",
+        runner_fn=mock_runner,
+        cleanup_fn=mock_cleanup,
+    )
+
+    assert res["status"] == "EXECUTION_FAILED"
+    assert res["execution_result"] == "FAILED"
+    assert res["cleanup_status"] == "COMPLETE"
+    assert events == ["RUNNER_FAILED", "CLEANUP"]
+
+    ledger_path = res["ledger_path"]
+    if os.path.exists(ledger_path):
+        os.remove(ledger_path)
+

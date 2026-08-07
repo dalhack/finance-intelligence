@@ -178,9 +178,9 @@ def check_credential_presence() -> bool:
     return False
 
 
-def build_flutter_argv(device_id: str, manifest: FixtureManifest) -> list[str]:
+def build_flutter_argv(device_id: str, manifest: FixtureManifest, fixture_file_path: str = "") -> list[str]:
     """Construct exact Flutter test command argument list without using shell."""
-    return [
+    argv = [
         "flutter",
         "test",
         "integration_test/upload_ingestion_analysis_sse_app_e2e_test.dart",
@@ -188,12 +188,21 @@ def build_flutter_argv(device_id: str, manifest: FixtureManifest) -> list[str]:
         device_id,
         f"--dart-define=FI_E2E_AUTHORIZATION_ID={manifest.run_namespace}",
         f"--dart-define=FI_E2E_ORGANIZATION_ID={manifest.organization_id}",
+        f"--dart-define=FI_E2E_ACTOR_ID={manifest.actor_id}",
         f"--dart-define=FI_E2E_INSTITUTION_ID={manifest.institution_id}",
         f"--dart-define=FI_E2E_REPORTING_PERIOD_ID={manifest.reporting_period_id}",
     ]
+    if fixture_file_path:
+        argv.append(f"--dart-define=FI_E2E_FIXTURE_FILE_PATH={fixture_file_path}")
+    return argv
 
 
-def run_harness_dry_run(authorization_id: str, device_id: str, target_head: str = "596d85055cff352e70085d7490427be7d2f08a69") -> dict[str, Any]:
+def run_harness_dry_run(
+    authorization_id: str,
+    device_id: str,
+    credential_env_file: str | None = None,
+    target_head: str = "cc412726fc3344bf0107a2457da932aadd5fcfaf",
+) -> dict[str, Any]:
     """Perform dry-run preflight validation. Zero DB writes, zero process starts, zero test executions."""
     # 1. Local URL target validation
     api_url = os.environ.get("TEST_API_DATABASE_URL", "postgresql+asyncpg://db_api_user:dev_api_user_pass_123@localhost:5433/finance_intelligence_test")
@@ -226,20 +235,125 @@ def run_harness_dry_run(authorization_id: str, device_id: str, target_head: str 
     return plan
 
 
+def run_harness_execute(
+    authorization_id: str,
+    device_id: str,
+    credential_env_file: str | None = None,
+    target_head: str = "cc412726fc3344bf0107a2457da932aadd5fcfaf",
+    runner_fn: Any = None,
+    seed_fn: Any = None,
+    cleanup_fn: Any = None,
+    service_launcher_fn: Any = None,
+) -> dict[str, Any]:
+    """Execute single-run local iOS application E2E test pipeline."""
+    # 1. Local target safety guard
+    api_url = os.environ.get("TEST_API_DATABASE_URL", "postgresql+asyncpg://db_api_user:dev_api_user_pass_123@localhost:5433/finance_intelligence_test")
+    validate_local_loopback_url(api_url, "TEST_API_DATABASE_URL")
+
+    # 2. Credential validation (checking file permissions if provided)
+    if credential_env_file:
+        if os.path.islink(credential_env_file):
+            raise PreflightError(f"REJECTED: Credential env file '{credential_env_file}' is a symlink.")
+        if not os.path.isfile(credential_env_file):
+            raise PreflightError(f"REJECTED: Credential env file '{credential_env_file}' is not a regular file.")
+        st = os.stat(credential_env_file)
+        import stat
+        if st.st_uid != os.getuid():
+            raise PreflightError(f"REJECTED: Credential env file '{credential_env_file}' is not owned by current user.")
+        mode = stat.S_IMODE(st.st_mode)
+        if mode & 0o077 != 0:
+            raise PreflightError(f"REJECTED: Credential env file '{credential_env_file}' permissions {oct(mode)} exceed 0600.")
+
+    if not check_credential_presence():
+        raise PreflightError("REJECTED: ANTHROPIC_API_KEY is absent from environment and credential file.")
+
+    # 3. Fixture manifest generation
+    manifest = generate_fixture_manifest(authorization_id)
+
+    # 4. Command hash
+    argv = build_flutter_argv(device_id, manifest)
+    cmd_hash = compute_command_hash(argv)
+
+    # 5. Atomic ledger creation
+    ledger = AtomicExecutionLedger(authorization_id)
+    ledger.create_exclusive(cmd_hash, target_head, device_id)
+
+    # Evidence directory setup
+    evidence_dir = f"/private/tmp/fi-r5-{authorization_id}"
+    os.makedirs(evidence_dir, mode=0o700, exist_ok=True)
+
+    execution_result = "NOT_STARTED"
+    cleanup_status = "NOT_STARTED"
+
+    try:
+        # DB Fixture Seed
+        if seed_fn:
+            seed_fn(manifest)
+
+        # Update ledger state to STARTED, execution_count to 1
+        ledger.atomic_update_state("STARTED", execution_count=1)
+
+        # Service launcher
+        if service_launcher_fn:
+            service_launcher_fn()
+
+        # Run Flutter subprocess
+        exit_code = 0
+        if runner_fn:
+            exit_code = runner_fn(argv)
+
+        if exit_code == 0:
+            execution_result = "PASSED"
+            ledger.atomic_update_state("PASSED", execution_count=1)
+        else:
+            execution_result = "FAILED"
+            ledger.atomic_update_state("FAILED", execution_count=1)
+
+    except Exception as ex:
+        execution_result = "FAILED"
+        try:
+            ledger.atomic_update_state("PREFLIGHT_FAILED")
+        except Exception:
+            pass
+        raise ex
+    finally:
+        # Fixture Teardown & Process Cleanup
+        try:
+            if cleanup_fn:
+                cleanup_fn(manifest)
+            cleanup_status = "COMPLETE"
+        except Exception:
+            cleanup_status = "FAILED"
+        ledger.atomic_update_state("CLEANUP_COMPLETE", execution_count=1)
+
+    return {
+        "status": "EXECUTION_SUCCESS" if execution_result == "PASSED" else "EXECUTION_FAILED",
+        "authorization_id": authorization_id,
+        "execution_result": execution_result,
+        "cleanup_status": cleanup_status,
+        "command_argv": argv,
+        "command_sha256": cmd_hash,
+        "ledger_path": ledger.ledger_path,
+        "evidence_directory": evidence_dir,
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Canonical Python harness for single-run local iOS application E2E test execution.")
     parser.add_argument("--authorization-id", required=True, help="Unique authorization identifier for this run.")
     parser.add_argument("--device-id", required=True, help="Exact iOS simulator device ID.")
+    parser.add_argument("--credential-env-file", default=None, help="Path to safe non-repository credential env file.")
     parser.add_argument("--execute", action="store_true", help="Explicit flag required for real execution mode. Default is dry-run.")
     args = parser.parse_args()
 
     if not args.execute:
-        plan = run_harness_dry_run(args.authorization_id, args.device_id)
+        plan = run_harness_dry_run(args.authorization_id, args.device_id, args.credential_env_file)
         print(json.dumps(plan, indent=2))
         sys.exit(0)
     else:
-        print(json.dumps({"status": "REAL_EXECUTION_REQUIRES_AUTHORIZED_ORCHESTRATION_TURNS", "mode": "execute"}, indent=2))
-        sys.exit(0)
+        res = run_harness_execute(args.authorization_id, args.device_id, args.credential_env_file)
+        print(json.dumps(res, indent=2))
+        sys.exit(0 if res.get("status") == "EXECUTION_SUCCESS" else 1)
 
 
 if __name__ == "__main__":

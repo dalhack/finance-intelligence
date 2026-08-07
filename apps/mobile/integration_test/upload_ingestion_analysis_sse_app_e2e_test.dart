@@ -1,22 +1,28 @@
-import 'dart:async';
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
 import 'package:finance_intelligence/app/app.dart';
-import 'package:finance_intelligence/core/config/app_config.dart';
 import 'package:finance_intelligence/core/models/wire_models.dart';
 import 'package:finance_intelligence/features/analysis/controllers/analysis_controller.dart';
 import 'package:finance_intelligence/presentation/providers/providers.dart';
+import 'package:finance_intelligence/presentation/state/async_value_state.dart';
+import 'package:finance_intelligence/presentation/state/upload_controller.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group('Real Application Entry Path E2E Test Node (Yol A)', () {
-    const backendBaseUrl = 'http://127.0.0.1:8000';
+    const backendBaseUrl = String.fromEnvironment('FI_E2E_API_BASE_URL', defaultValue: 'http://127.0.0.1:8000');
+    const e2eAuthId = String.fromEnvironment('FI_E2E_AUTHORIZATION_ID', defaultValue: '');
+    const e2eOrgId = String.fromEnvironment('FI_E2E_ORGANIZATION_ID', defaultValue: '');
+    const e2eActorId = String.fromEnvironment('FI_E2E_ACTOR_ID', defaultValue: '');
+    const e2eInstId = String.fromEnvironment('FI_E2E_INSTITUTION_ID', defaultValue: '');
+    const e2ePeriodId = String.fromEnvironment('FI_E2E_REPORTING_PERIOD_ID', defaultValue: '');
+    const e2eFixtureFilePath = String.fromEnvironment('FI_E2E_FIXTURE_FILE_PATH', defaultValue: '');
+
     const allowedHosts = ['127.0.0.1', 'localhost', '::1'];
 
     late File tempFile;
@@ -28,6 +34,15 @@ void main() {
         throw StateError(
           'FAIL_CLOSED: Non-loopback backend host "${uri.host}" is prohibited for application E2E integration tests.',
         );
+      }
+
+      // If e2eAuthId is provided via harness, validate that all required defines are non-empty
+      if (e2eAuthId.isNotEmpty) {
+        if (e2eOrgId.isEmpty || e2eActorId.isEmpty || e2eInstId.isEmpty || e2ePeriodId.isEmpty) {
+          throw StateError(
+            'FAIL_CLOSED: Missing required FI_E2E_* dart defines when FI_E2E_AUTHORIZATION_ID is set.',
+          );
+        }
       }
 
       // Check backend health
@@ -44,16 +59,20 @@ void main() {
         isBackendOnline = false;
       }
 
-      final dir = Directory.systemTemp.createTempSync('app_e2e_test_');
-      tempFile = File('${dir.path}/test_financial_report_2025.pdf');
-      await tempFile.writeAsString(
-        '%PDF-1.4\n1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n'
-        '2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n'
-        '3 0 obj\n<< /Type /Page /Parent 2 0 R /Resources <<>> /Contents 4 0 R >>\nendobj\n'
-        '4 0 obj\n<< /Length 55 >>\nstream\nBT /F1 12 Tf 72 712 Td (Garanti 2025 Q4 Financial Report) Tj ET\nendstream\nendobj\n'
-        'xref\n0 5\n0000000000 65535 f \n0000000009 00000 n \n0000000062 00000 n \n0000000125 00000 n \n0000000208 00000 n \n'
-        'trailer\n<< /Size 5 /Root 1 0 R >>\nstartxref\n313\n%%EOF\n',
-      );
+      if (e2eFixtureFilePath.isNotEmpty && await File(e2eFixtureFilePath).exists()) {
+        tempFile = File(e2eFixtureFilePath);
+      } else {
+        final dir = Directory.systemTemp.createTempSync('app_e2e_test_');
+        tempFile = File('${dir.path}/test_financial_report_2025.pdf');
+        await tempFile.writeAsString(
+          '%PDF-1.4\n1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n'
+          '2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n'
+          '3 0 obj\n<< /Type /Page /Parent 2 0 R /Resources <<>> /Contents 4 0 R >>\nendobj\n'
+          '4 0 obj\n<< /Length 55 >>\nstream\nBT /F1 12 Tf 72 712 Td (Garanti 2025 Q4 Financial Report) Tj ET\nendstream\nendobj\n'
+          'xref\n0 5\n0000000000 65535 f \n0000000009 00000 n \n0000000062 00000 n \n0000000125 00000 n \n0000000208 00000 n \n'
+          'trailer\n<< /Size 5 /Root 1 0 R >>\nstartxref\n313\n%%EOF\n',
+        );
+      }
     });
 
     tearDownAll(() async {
@@ -98,16 +117,17 @@ void main() {
       expect(finalizeJob.documentId, isNotEmpty);
 
       // 3. Poll Ingestion Job Status via Production Controller until PROCESSED_SUCCESS
-      final pollingNotifier =
-          container.read(ingestionStatusPollingControllerProvider.notifier);
-      pollingNotifier.startPolling(finalizeJob.jobId);
+      final pollingNotifier = container.read(
+          ingestionStatusPollingControllerProvider(finalizeJob.jobId).notifier);
+      pollingNotifier.startPolling(jobId: finalizeJob.jobId);
 
       int pollAttempts = 0;
       UiState<IngestionJob> pollState;
       do {
         await Future.delayed(const Duration(milliseconds: 500));
         await tester.pump();
-        pollState = container.read(ingestionStatusPollingControllerProvider);
+        pollState = container.read(
+            ingestionStatusPollingControllerProvider(finalizeJob.jobId));
         pollAttempts++;
       } while (pollState.data?.isTerminal != true && pollAttempts < 20);
 
