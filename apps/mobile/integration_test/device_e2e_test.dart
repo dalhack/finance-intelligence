@@ -11,7 +11,8 @@ void main() {
         'Executes full synthetic UI flow without external network access',
         (WidgetTester tester) async {
       app.main();
-      await tester.pumpAndSettle();
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 500));
 
       // Verify Dashboard Screen renders genuine production title
       expect(find.text('Finance Intelligence'), findsOneWidget);
@@ -22,3 +23,4 @@ void main() {
     });
   });
 }
+
