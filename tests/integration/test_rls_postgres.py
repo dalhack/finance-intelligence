@@ -49,7 +49,9 @@ async def test_migration_applies_cleanly():
         "028_remove_organization_only_actor_lookup",
         "029_analysis_authorization_policy",
         "030_reconcile_application_role_catalog",
+        "031_analysis_job_claim_authority",
     ]
+
 
 
 @pytest.mark.asyncio

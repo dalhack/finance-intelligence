@@ -70,7 +70,7 @@ async def test_migration_upgrade_downgrade_roundtrip():
 
     final_rev = await conn1.fetchrow("SELECT version_num FROM alembic_version;")
     assert final_rev is not None
-    assert final_rev["version_num"] == "030_reconcile_application_role_catalog"
+    assert final_rev["version_num"] == "031_analysis_job_claim_authority"
 
     total_perms_030 = await conn1.fetchval("SELECT COUNT(*) FROM public.permissions;")
     assert total_perms_030 == 17
@@ -89,30 +89,26 @@ async def test_migration_upgrade_downgrade_roundtrip():
     assert analyst_perms_030 == 15
     await conn1.close()
 
-    # 3. Roundtrip downgrade 030 -> 029
-    run_alembic_cmd("downgrade", "029_analysis_authorization_policy")
+    # 3. Roundtrip downgrade 031 -> 030
+    run_alembic_cmd("downgrade", "030_reconcile_application_role_catalog")
 
     conn2 = await asyncpg.connect(RAW_ROUNDTRIP_URL)
     downgrade_rev = await conn2.fetchrow("SELECT version_num FROM alembic_version;")
     assert downgrade_rev is not None
-    assert downgrade_rev["version_num"] == "029_analysis_authorization_policy"
+    assert downgrade_rev["version_num"] == "030_reconcile_application_role_catalog"
 
     admin_count_029 = await conn2.fetchval("SELECT COUNT(*) FROM public.roles WHERE name = 'ADMIN';")
-    assert admin_count_029 == 1
-
-    admin_perms_029 = await conn2.fetchval(
-        "SELECT COUNT(*) FROM public.role_permissions rp JOIN public.roles r ON r.id = rp.role_id WHERE r.name = 'ADMIN';"
-    )
-    assert admin_perms_029 == 0
+    assert admin_count_029 == 0
     await conn2.close()
 
-    # 4. Re-upgrade 029 -> 030
+    # 4. Re-upgrade 030 -> 031
     run_alembic_cmd("upgrade", "head")
 
     conn3 = await asyncpg.connect(RAW_ROUNDTRIP_URL)
     re_up_rev = await conn3.fetchrow("SELECT version_num FROM alembic_version;")
     assert re_up_rev is not None
-    assert re_up_rev["version_num"] == "030_reconcile_application_role_catalog"
+    assert re_up_rev["version_num"] == "031_analysis_job_claim_authority"
+
 
     admin_count_re_up = await conn3.fetchval("SELECT COUNT(*) FROM public.roles WHERE name = 'ADMIN';")
     assert admin_count_re_up == 0
