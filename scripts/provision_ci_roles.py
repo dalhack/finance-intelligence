@@ -139,7 +139,7 @@ async def provision_ci_roles(dsn: str, allow_local: bool = False) -> None:
             else:
                 await conn.execute(f"ALTER ROLE {role_name} WITH LOGIN PASSWORD {quoted_pass};")
 
-        # 5. Schema ACL Hardening: Revoke PUBLIC access and grant explicit USAGE to canonical runtime roles
+        # 5. Schema ACL Hardening: Revoke PUBLIC access and grant explicit USAGE/DML to canonical runtime roles
         schema_acl_sql = """
         DO $$
         BEGIN
@@ -149,23 +149,34 @@ async def provision_ci_roles(dsn: str, allow_local: bool = False) -> None:
             END IF;
             IF EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_owner') THEN
                 GRANT USAGE ON SCHEMA public TO db_owner;
+                GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO db_owner;
+                ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT ALL PRIVILEGES ON TABLES TO db_owner;
             END IF;
             IF EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_bootstrap') THEN
                 GRANT USAGE ON SCHEMA public TO db_bootstrap;
+                GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO db_bootstrap;
+                ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO db_bootstrap;
             END IF;
             IF EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_api_user') THEN
                 GRANT USAGE ON SCHEMA public TO db_api_user;
+                GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO db_api_user;
+                ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO db_api_user;
             END IF;
             IF EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_ingestion_worker') THEN
                 GRANT USAGE ON SCHEMA public TO db_ingestion_worker;
+                GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO db_ingestion_worker;
+                ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO db_ingestion_worker;
             END IF;
             IF EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_maintenance_worker') THEN
                 GRANT USAGE ON SCHEMA public TO db_maintenance_worker;
+                GRANT SELECT, INSERT, UPDATE, DELETE ON ALL TABLES IN SCHEMA public TO db_maintenance_worker;
+                ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO db_maintenance_worker;
             END IF;
         END
         $$;
         """
         await conn.execute(schema_acl_sql)
+
 
         # 6. Database Catalog Verification & Security Assertions
         app_user_info = await conn.fetchrow(

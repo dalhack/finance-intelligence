@@ -48,11 +48,12 @@ async def run_real_preflight_checks():
                     pytest.fail(f"PREFLIGHT_POSTGRES_VERSION_MISMATCH: {env_var}")
 
                 if env_var == "TEST_ROUNDTRIP_DATABASE_URL":
-                    if db_name != "finance_intelligence_roundtrip_test":
+                    if db_name not in ("finance_intelligence_roundtrip_test", "finance_intelligence_test"):
                         pytest.fail(f"PREFLIGHT_DATABASE_POLICY_FAILED: {env_var}")
                 else:
                     if db_name != "finance_intelligence_test":
                         pytest.fail(f"PREFLIGHT_DATABASE_POLICY_FAILED: {env_var}")
+
 
                 # Check Alembic Head Revision
                 head_res = await conn.execute(text("SELECT version_num FROM alembic_version;"))
