@@ -13,7 +13,15 @@ from services.api.app.models.financial_fact_candidate import FinancialFactCandid
 from services.api.app.models.institution import Institution
 from services.api.app.models.membership import Membership
 from services.api.app.models.metric_definition import MetricDefinition
-from services.api.app.models.orchestration import AnalysisJob
+from services.api.app.models.orchestration import (
+    AnalysisAttempt,
+    AnalysisJob,
+    AnalysisPlanModel,
+    FinalResultSnapshot,
+    PolicyDecisionRecord,
+    QualityGateResultRecord,
+    ToolInvocation,
+)
 from services.api.app.models.organization import Organization
 from services.api.app.models.reporting_period import ReportingPeriod
 from services.api.app.models.stored_object import StoredObject
@@ -22,6 +30,7 @@ from services.api.app.orchestration.engine import AnalysisOrchestratorEngine
 from services.api.app.orchestration.policy_engine import DataClassification
 from services.api.app.orchestration.provider import DeterministicTestModelProvider
 from services.api.app.orchestration.tools.base import ExecutionContext
+from services.worker.app.analysis_worker import claim_next_analysis_job
 
 
 @pytest.mark.asyncio
@@ -183,7 +192,9 @@ async def test_ai_orchestrator_full_e2e_positive_flow():
             provider=DeterministicTestModelProvider(environment="development"),
         )
 
-        completed_job = await engine.execute_job(job_id, request_classification=DataClassification.PUBLIC)
+        claimed1 = await claim_next_analysis_job(db_api, "worker-e2e-1")
+        assert claimed1 is not None
+        completed_job = await engine.execute_job(claimed1.job_id, claimed1.claim_token, "worker-e2e-1", request_classification=DataClassification.PUBLIC)
         assert completed_job.status == "COMPLETED"
 
     # 6. Verify Full Lifecycle in PostgreSQL DB (9 Tables)
@@ -297,7 +308,9 @@ async def test_ai_orchestrator_strictly_confidential_policy_deny_flow():
             provider=DeterministicTestModelProvider(environment="development"),
         )
 
-        rejected_job = await engine.execute_job(job_id, request_classification=DataClassification.STRICTLY_CONFIDENTIAL)
+        claimed2 = await claim_next_analysis_job(db_api, "worker-e2e-2")
+        assert claimed2 is not None
+        rejected_job = await engine.execute_job(claimed2.job_id, claimed2.claim_token, "worker-e2e-2", request_classification=DataClassification.STRICTLY_CONFIDENTIAL)
         assert rejected_job.status == "REJECTED_BY_POLICY"
 
     # Verify 0 snapshots written
@@ -548,7 +561,9 @@ async def test_live_anthropic_acceptance():
             provider=provider,
         )
 
-        completed_job = await engine.execute_job(job_id, request_classification=DataClassification.PUBLIC)
+        claimed3 = await claim_next_analysis_job(db_api, "worker-e2e-3")
+        assert claimed3 is not None
+        completed_job = await engine.execute_job(claimed3.job_id, claimed3.claim_token, "worker-e2e-3", request_classification=DataClassification.PUBLIC)
         assert completed_job.status == "COMPLETED"
 
     async with OwnerSession() as db_verify:

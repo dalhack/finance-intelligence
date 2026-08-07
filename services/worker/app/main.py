@@ -10,6 +10,7 @@ from sqlalchemy import select
 
 from services.api.app.db.session import WorkerSessionLocal
 from services.api.app.models.ingestion_job import IngestionJob
+from services.worker.app.analysis_worker import AnalysisWorker
 from services.worker.app.command_envelope import IngestionCommandEnvelope
 from services.worker.app.ingestion_worker import IngestionWorker, WorkerOutcomeStatus
 
@@ -17,6 +18,7 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("finance_intelligence_worker")
 
 WORKER_ID = f"worker-node-{uuid.uuid4().hex[:8]}"
+analysis_worker = AnalysisWorker(worker_id=WORKER_ID)
 
 
 async def fetch_and_sign_next_envelope(session) -> IngestionCommandEnvelope | None:
@@ -68,15 +70,24 @@ async def run_worker_loop(run_once: bool = False, poll_interval: float = 1.0, ma
 
     while not shutdown_requested:
         try:
+            # Poll analysis worker for pending analysis jobs
+            analysis_processed = await analysis_worker.run_once()
+            if analysis_processed:
+                processed_count += 1
+                current_backoff = poll_interval
+
             async with WorkerSessionLocal() as session:
                 worker = IngestionWorker(session)
                 envelope = await fetch_and_sign_next_envelope(session)
                 if not envelope:
                     if run_once:
+                        if analysis_processed:
+                            break
                         logger.info("WORKER_NO_QUEUED_JOBS_FOUND")
                         break
-                    await asyncio.sleep(current_backoff)
-                    current_backoff = min(current_backoff * 1.5, max_backoff)
+                    if not analysis_processed:
+                        await asyncio.sleep(current_backoff)
+                        current_backoff = min(current_backoff * 1.5, max_backoff)
                     continue
 
                 outcome = await worker.claim_and_process_envelope(envelope, WORKER_ID)
@@ -91,10 +102,12 @@ async def run_worker_loop(run_once: bool = False, poll_interval: float = 1.0, ma
                         break
                 else:
                     if run_once:
-                        logger.info("WORKER_NO_QUEUED_JOBS_FOUND")
+                        if not analysis_processed:
+                            logger.info("WORKER_NO_QUEUED_JOBS_FOUND")
                         break
-                    await asyncio.sleep(current_backoff)
-                    current_backoff = min(current_backoff * 1.5, max_backoff)
+                    if not analysis_processed:
+                        await asyncio.sleep(current_backoff)
+                        current_backoff = min(current_backoff * 1.5, max_backoff)
 
         except asyncio.CancelledError:
             logger.info("WORKER_LOOP_CANCELLED")

@@ -20,6 +20,7 @@ from services.api.app.orchestration.budget import JobBudgetTracker
 from services.api.app.orchestration.circuit_breaker import ProviderCircuitBreaker
 from services.api.app.orchestration.event_engine import AnalysisEventEngine
 from services.api.app.orchestration.exceptions import (
+    ClaimOwnershipLostException,
     OrchestrationException,
 )
 from services.api.app.orchestration.policy_engine import DataClassification, PolicyDecision, PolicyEngine
@@ -52,9 +53,36 @@ class AnalysisOrchestratorEngine:
         self.circuit_breaker = circuit_breaker or ProviderCircuitBreaker(provider_alias="anthropic")
         self.event_engine = AnalysisEventEngine(db_session, context.organization_id)
 
+    async def _assert_fenced_ownership(self, job_id: UUID, claim_token: UUID, worker_id: str) -> None:
+        """Assert claim_token and worker_id ownership on analysis_job in current tenant transaction."""
+        await self.db.execute(
+            text("SELECT set_config('app.current_organization_id', :org_id, true);"),
+            {"org_id": str(self.context.organization_id)},
+        )
+        res = await self.db.execute(
+            text("""
+                SELECT id FROM public.analysis_jobs
+                WHERE id = :jid
+                  AND claim_token = :tok
+                  AND locked_by = :w
+                  AND status IN (
+                    'RECEIVED', 'UNDERSTANDING_REQUEST', 'PLANNING', 'POLICY_CHECK',
+                    'RETRIEVING_INTERNAL_SOURCES', 'VALIDATING_SOURCES', 'EXECUTING_TOOLS',
+                    'RECONCILING_RESULTS', 'GENERATING_STRUCTURED_RESULT', 'QUALITY_GATE'
+                  );
+            """),
+            {"jid": job_id, "tok": claim_token, "w": worker_id},
+        )
+        if not res.fetchone():
+            raise ClaimOwnershipLostException(
+                f"CLAIM_OWNERSHIP_LOST: Worker {worker_id} lost claim token or lease expired for job {job_id}."
+            )
+
     async def execute_job(
         self,
         job_id: UUID,
+        claim_token: UUID,
+        worker_id: str,
         request_classification: DataClassification = DataClassification.PUBLIC,
     ) -> AnalysisJob:
         now = datetime.now(UTC)
@@ -65,12 +93,17 @@ class AnalysisOrchestratorEngine:
             {"org_id": str(self.context.organization_id)},
         )
 
+        # Assert Fencing Primitive
+        await self._assert_fenced_ownership(job_id, claim_token, worker_id)
+
         # 1. Lock AnalysisJob using SELECT ... FOR UPDATE
         stmt = (
             select(AnalysisJob)
             .where(
                 AnalysisJob.id == job_id,
                 AnalysisJob.organization_id == self.context.organization_id,
+                AnalysisJob.claim_token == claim_token,
+                AnalysisJob.locked_by == worker_id,
             )
             .with_for_update()
         )
@@ -78,12 +111,7 @@ class AnalysisOrchestratorEngine:
         job = res.scalar_one_or_none()
 
         if not job:
-            raise OrchestrationException("ANALYSIS_NOT_FOUND", f"Job {job_id} not found or tenant context mismatch.")
-
-        # Concurrency & Lease Lock
-        job.locked_by = f"worker-{self.context.user_id.hex[:6]}"
-        job.locked_at = now
-        await self.db.flush()
+            raise ClaimOwnershipLostException("CLAIM_OWNERSHIP_LOST: Job not found or claim token mismatch.")
 
         # Initialize Attempt
         attempt_stmt = select(AnalysisAttempt).where(AnalysisAttempt.analysis_job_id == job_id)
@@ -106,11 +134,13 @@ class AnalysisOrchestratorEngine:
         budget = JobBudgetTracker()
 
         try:
+            await self._assert_fenced_ownership(job_id, claim_token, worker_id)
             await self.event_engine.emit_event(
                 job_id, "analysis.accepted", {"status": "RECEIVED", "job_id": str(job_id)}, attempt_id
             )
 
             # 2. State: UNDERSTANDING_REQUEST
+            await self._assert_fenced_ownership(job_id, claim_token, worker_id)
             AnalysisStateMachine.validate_transition(
                 AnalysisJobStatus(job.status), AnalysisJobStatus.UNDERSTANDING_REQUEST
             )
@@ -134,6 +164,7 @@ class AnalysisOrchestratorEngine:
             self.circuit_breaker.check_allow_execution()
 
             # 3. State: PLANNING
+            await self._assert_fenced_ownership(job_id, claim_token, worker_id)
             AnalysisStateMachine.validate_transition(AnalysisJobStatus(job.status), AnalysisJobStatus.PLANNING)
             job.status = AnalysisJobStatus.PLANNING.value
             job.updated_at = now
@@ -185,6 +216,7 @@ class AnalysisOrchestratorEngine:
             await self.db.flush()
 
             # 4. State: POLICY_CHECK
+            await self._assert_fenced_ownership(job_id, claim_token, worker_id)
             AnalysisStateMachine.validate_transition(AnalysisJobStatus(job.status), AnalysisJobStatus.POLICY_CHECK)
             job.status = AnalysisJobStatus.POLICY_CHECK.value
             job.updated_at = now
@@ -210,7 +242,9 @@ class AnalysisOrchestratorEngine:
 
             if decision == PolicyDecision.DENY:
                 # Immediate policy rejection (0 tool invocations, 0 provider invocations)
+                await self._assert_fenced_ownership(job_id, claim_token, worker_id)
                 job.status = AnalysisJobStatus.REJECTED_BY_POLICY.value
+                job.lease_expires_at = None
                 attempt.status = "REJECTED_BY_POLICY"
                 job.updated_at = now
                 await self.event_engine.emit_event(
@@ -223,6 +257,7 @@ class AnalysisOrchestratorEngine:
                 return job
 
             # 5. State: EXECUTING_TOOLS
+            await self._assert_fenced_ownership(job_id, claim_token, worker_id)
             AnalysisStateMachine.validate_transition(
                 AnalysisJobStatus(job.status), AnalysisJobStatus.RETRIEVING_INTERNAL_SOURCES
             )
@@ -261,6 +296,7 @@ class AnalysisOrchestratorEngine:
                     tool_res = await tool_inst.execute(self.context, step.tool_arguments, self.db)
                     exec_ms = int((datetime.now(UTC) - start_time).total_seconds() * 1000)
 
+                    await self._assert_fenced_ownership(job_id, claim_token, worker_id)
                     tool_inv = ToolInvocation(
                         id=uuid4(),
                         analysis_job_id=job_id,
@@ -288,6 +324,7 @@ class AnalysisOrchestratorEngine:
                 tool_outputs.append(tool_res)
 
             # 6. State: RECONCILING_RESULTS -> GENERATING_STRUCTURED_RESULT
+            await self._assert_fenced_ownership(job_id, claim_token, worker_id)
             AnalysisStateMachine.validate_transition(
                 AnalysisJobStatus(job.status), AnalysisJobStatus.RECONCILING_RESULTS
             )
@@ -348,6 +385,7 @@ class AnalysisOrchestratorEngine:
             }
 
             # 7. State: QUALITY_GATE
+            await self._assert_fenced_ownership(job_id, claim_token, worker_id)
             AnalysisStateMachine.validate_transition(AnalysisJobStatus(job.status), AnalysisJobStatus.QUALITY_GATE)
             job.status = AnalysisJobStatus.QUALITY_GATE.value
             await self.db.flush()
@@ -367,8 +405,10 @@ class AnalysisOrchestratorEngine:
             await self.db.flush()
 
             # 8. ATOMIC SNAPSHOT COMMIT -> State: COMPLETED
+            await self._assert_fenced_ownership(job_id, claim_token, worker_id)
             AnalysisStateMachine.validate_transition(AnalysisJobStatus(job.status), AnalysisJobStatus.COMPLETED)
             job.status = AnalysisJobStatus.COMPLETED.value
+            job.lease_expires_at = None
             attempt.status = "COMPLETED"
 
             snapshot = FinalResultSnapshot(
@@ -391,17 +431,39 @@ class AnalysisOrchestratorEngine:
 
             return job
 
-        except Exception:
+        except ClaimOwnershipLostException:
+            await self.db.rollback()
+            raise
+        except Exception as exc:
             await self.db.rollback()
 
-            # Persist failure terminal state with restored RLS context
-            await self.db.execute(
-                text("SELECT set_config('app.current_organization_id', :org_id, true);"),
-                {"org_id": str(self.context.organization_id)},
-            )
-            job_fail = await self.db.get(AnalysisJob, job_id)
-            if job_fail and job_fail.status not in ("COMPLETED", "REJECTED_BY_POLICY"):
-                job_fail.status = AnalysisJobStatus.FAILED.value
-                job_fail.updated_at = datetime.now(UTC)
-            await self.db.commit()
+            # Model B Failure Transaction: Re-verify claim token ownership before persisting failure
+            try:
+                await self._assert_fenced_ownership(job_id, claim_token, worker_id)
+                job_fail = await self.db.get(AnalysisJob, job_id)
+                if job_fail and job_fail.status not in ("COMPLETED", "REJECTED_BY_POLICY"):
+                    job_fail.status = AnalysisJobStatus.FAILED.value
+                    job_fail.lease_expires_at = None
+                    job_fail.updated_at = datetime.now(UTC)
+
+                    # Update attempt status if available
+                    att_fail = await self.db.get(AnalysisAttempt, attempt_id)
+                    event_att_id = attempt_id if att_fail else None
+                    if att_fail:
+                        att_fail.status = "FAILED"
+
+                    safe_err_code = getattr(exc, "code", "ENGINE_EXECUTION_FAILED")
+                    safe_msg = getattr(exc, "message", "Analysis job execution failed.")
+                    await self.event_engine.emit_event(
+                        job_id,
+                        "analysis.failed",
+                        {"error_code": str(safe_err_code), "message": str(safe_msg)},
+                        event_att_id,
+                    )
+                    await self.db.commit()
+            except ClaimOwnershipLostException:
+                await self.db.rollback()
+                # Ownership was lost; suppress failure persistence so new owner is not affected
+                pass
+
             raise

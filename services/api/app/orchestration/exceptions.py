@@ -62,3 +62,8 @@ class UnsupportedNumericClaimException(OrchestrationException):
 class QualityGateFailedException(OrchestrationException):
     def __init__(self, message: str = "Analysis job failed quality gate verification."):
         super().__init__("QUALITY_GATE_FAILED", message)
+
+
+class ClaimOwnershipLostException(OrchestrationException):
+    def __init__(self, message: str = "Worker lost claim ownership token or lease expired."):
+        super().__init__("CLAIM_OWNERSHIP_LOST", message)
