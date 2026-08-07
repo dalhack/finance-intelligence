@@ -52,7 +52,9 @@ async def readiness_check(
             "028_remove_organization_only_actor_lookup",
             "029_analysis_authorization_policy",
             "030_reconcile_application_role_catalog",
+            "031_analysis_job_claim_authority",
         ]:
+
             response.status_code = status.HTTP_503_SERVICE_UNAVAILABLE
 
             return {"status": "fail", "timestamp": datetime.now(UTC).isoformat()}

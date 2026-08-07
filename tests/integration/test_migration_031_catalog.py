@@ -123,15 +123,19 @@ async def test_migration_031_catalog_and_security():
             "VALUES (:uid, :sub, 'firebase', 'Test User 031', 'ACTIVE', now(), now());"
         ), {"uid": user_id, "sub": f"firebase_sub_{uuid.uuid4().hex[:12]}"})
 
-        await owner_db.execute(text("DELETE FROM public.analysis_jobs WHERE status = 'RECEIVED';"))
         await owner_db.execute(text("SELECT set_config('app.current_organization_id', :oid, true);"), {"oid": str(org_id)})
+
         await owner_db.execute(text(
             "INSERT INTO public.analysis_jobs (id, organization_id, user_id, status, request_prompt, created_at, updated_at) "
-            "VALUES (:jid, :oid, :uid, 'RECEIVED', 'What is net debt 031?', now(), now());"
+            "VALUES (:jid, :oid, :uid, 'NEEDS_CLARIFICATION', 'What is net debt 031?', now(), now());"
         ), {"jid": job_id, "oid": org_id, "uid": user_id})
         await owner_db.commit()
 
+
+
+    unrel_job_id = None
     try:
+
         # 7. Valid Worker ID 1-char & 100-char testing + Fresh Claim
         async with ApiSession() as api_db:
             # Valid 1-char worker ID
@@ -144,8 +148,16 @@ async def test_migration_031_catalog_and_security():
             assert w100_res.scalar() is False
             await api_db.rollback()
 
-            # Fresh Claim Test
+            # Fresh Claim Test: update status to RECEIVED right before claiming and delete leftover RECEIVED jobs
+            async with OwnerSession() as owner_db:
+                await owner_db.execute(text("SELECT set_config('app.current_organization_id', :oid, true);"), {"oid": str(org_id)})
+                await owner_db.execute(text("DELETE FROM public.analysis_jobs WHERE status = 'RECEIVED' AND id != :jid;"), {"jid": job_id})
+                await owner_db.execute(text("UPDATE public.analysis_jobs SET status = 'RECEIVED' WHERE id = :jid;"), {"jid": job_id})
+                await owner_db.commit()
+
             claim_res = await api_db.execute(text("SELECT job_id, organization_id, claim_token FROM public.claim_next_analysis_job('worker-031-a');"))
+
+
             claim_row = claim_res.fetchone()
             assert claim_row is not None
             assert claim_row.job_id == job_id
@@ -261,8 +273,13 @@ async def test_migration_031_catalog_and_security():
         # Clean up test rows using OwnerSession
         async with OwnerSession() as owner_db:
             await owner_db.execute(text("SELECT set_config('app.current_organization_id', :oid, true);"), {"oid": str(org_id)})
-            await owner_db.execute(text("DELETE FROM public.analysis_attempts WHERE analysis_job_id IN (:jid, :ujid);"), {"jid": job_id, "ujid": unrel_job_id})
-            await owner_db.execute(text("DELETE FROM public.analysis_jobs WHERE id IN (:jid, :ujid);"), {"jid": job_id, "ujid": unrel_job_id})
+            if unrel_job_id:
+                await owner_db.execute(text("DELETE FROM public.analysis_attempts WHERE analysis_job_id IN (:jid, :ujid);"), {"jid": job_id, "ujid": unrel_job_id})
+                await owner_db.execute(text("DELETE FROM public.analysis_jobs WHERE id IN (:jid, :ujid);"), {"jid": job_id, "ujid": unrel_job_id})
+            else:
+                await owner_db.execute(text("DELETE FROM public.analysis_attempts WHERE analysis_job_id = :jid;"), {"jid": job_id})
+                await owner_db.execute(text("DELETE FROM public.analysis_jobs WHERE id = :jid;"), {"jid": job_id})
             await owner_db.execute(text("DELETE FROM public.users WHERE id = :uid;"), {"uid": user_id})
             await owner_db.execute(text("DELETE FROM public.organizations WHERE id = :oid;"), {"oid": org_id})
             await owner_db.commit()
+
