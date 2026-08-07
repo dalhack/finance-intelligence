@@ -15,19 +15,13 @@ from typing import Any
 class LocalTargetSafetyError(Exception):
     """Raised when target database or API URL violates local loopback containment."""
 
-    pass
-
 
 class LedgerError(Exception):
     """Raised when ledger creation or state transition fails or violates single-run limits."""
 
-    pass
-
 
 class PreflightError(Exception):
     """Raised when preflight environment or simulator checks fail."""
-
-    pass
 
 
 ALLOWED_LOOPBACK_HOSTS = {"127.0.0.1", "localhost", "::1"}
@@ -159,21 +153,20 @@ def redact_sensitive_text(text: str) -> str:
     return redacted
 
 
-def check_credential_presence() -> bool:
-    """Check boolean presence of ANTHROPIC_API_KEY without logging its value."""
-    key = os.environ.get("ANTHROPIC_API_KEY")
-    if key and key.strip():
+def check_credential_presence(credential_env_file: str | None = None) -> bool:
+    """Check if ANTHROPIC_API_KEY is available in environment or credential file without logging value."""
+    if os.environ.get("ANTHROPIC_API_KEY"):
         return True
 
     # Check safe tmp environment file
-    env_file = "/private/tmp/fi-anthropic-e2e.env"
-    if os.path.exists(env_file):
+    env_file = credential_env_file or "/private/tmp/fi-anthropic-e2e.env"
+    if os.path.isfile(env_file):
         try:
-            with open(env_file) as f:
+            with open(env_file, encoding="utf-8") as f:
                 content = f.read()
                 if "ANTHROPIC_API_KEY=" in content:
                     return True
-        except Exception:
+        except OSError:
             pass
     return False
 
@@ -212,12 +205,15 @@ def run_harness_dry_run(
 ) -> dict[str, Any]:
     """Perform dry-run preflight validation. Zero DB writes, zero process starts, zero test executions."""
     # 1. Local URL target validation
-    api_url = os.environ.get("TEST_API_DATABASE_URL", "postgresql+asyncpg://db_api_user:dev_api_user_pass_123@localhost:5433/finance_intelligence_test")
+    api_url = os.environ.get(
+        "TEST_API_DATABASE_URL",
+        "postgresql+asyncpg://db_api_user:dev_api_user_pass_123@localhost:5433/finance_intelligence_test",
+    )
     validate_local_loopback_url(api_url, "TEST_API_DATABASE_URL")
     validate_local_loopback_url(api_base_url, "FI_E2E_API_BASE_URL")
 
     # 2. Credential boolean check
-    cred_ok = check_credential_presence()
+    cred_ok = check_credential_presence(credential_env_file)
 
     # 3. Fixture manifest generation
     manifest = generate_fixture_manifest(authorization_id)
@@ -237,7 +233,7 @@ def run_harness_dry_run(
         "command_argv": argv,
         "command_sha256": cmd_hash,
         "emitted_define_count": 7,
-        "unique_define_count": len(set(arg for arg in argv if arg.startswith("--dart-define="))),
+        "unique_define_count": len({arg for arg in argv if arg.startswith("--dart-define=")}),
         "db_writes_count": 0,
         "processes_started_count": 0,
         "flutter_tests_executed_count": 0,
@@ -259,7 +255,10 @@ def run_harness_execute(
 ) -> dict[str, Any]:
     """Execute single-run local iOS application E2E test pipeline."""
     # 1. Local target safety guard
-    api_url = os.environ.get("TEST_API_DATABASE_URL", "postgresql+asyncpg://db_api_user:dev_api_user_pass_123@localhost:5433/finance_intelligence_test")
+    api_url = os.environ.get(
+        "TEST_API_DATABASE_URL",
+        "postgresql+asyncpg://db_api_user:dev_api_user_pass_123@localhost:5433/finance_intelligence_test",
+    )
     validate_local_loopback_url(api_url, "TEST_API_DATABASE_URL")
     validate_local_loopback_url(api_base_url, "FI_E2E_API_BASE_URL")
 
@@ -271,13 +270,16 @@ def run_harness_execute(
             raise PreflightError(f"REJECTED: Credential env file '{credential_env_file}' is not a regular file.")
         st = os.stat(credential_env_file)
         import stat
+
         if st.st_uid != os.getuid():
             raise PreflightError(f"REJECTED: Credential env file '{credential_env_file}' is not owned by current user.")
         mode = stat.S_IMODE(st.st_mode)
         if mode & 0o077 != 0:
-            raise PreflightError(f"REJECTED: Credential env file '{credential_env_file}' permissions {oct(mode)} exceed 0600.")
+            raise PreflightError(
+                f"REJECTED: Credential env file '{credential_env_file}' permissions {oct(mode)} exceed 0600."
+            )
 
-    if not check_credential_presence():
+    if not check_credential_presence(credential_env_file):
         raise PreflightError("REJECTED: ANTHROPIC_API_KEY is absent from environment and credential file.")
 
     # 3. Fixture manifest generation
@@ -302,9 +304,14 @@ def run_harness_execute(
             created_fixture_by_harness = True
 
     # 4. Command hash
-    argv = build_flutter_argv(device_id, manifest, authorization_id=authorization_id, api_base_url=api_base_url, fixture_file_path=eff_fixture_path)
+    argv = build_flutter_argv(
+        device_id,
+        manifest,
+        authorization_id=authorization_id,
+        api_base_url=api_base_url,
+        fixture_file_path=eff_fixture_path,
+    )
     cmd_hash = compute_command_hash(argv)
-
 
     # 5. Atomic ledger creation
     ledger = AtomicExecutionLedger(authorization_id)
@@ -341,13 +348,13 @@ def run_harness_execute(
             execution_result = "FAILED"
             ledger.atomic_update_state("FAILED", execution_count=1)
 
-    except Exception as ex:
+    except Exception:
         execution_result = "FAILED"
         try:
             ledger.atomic_update_state("PREFLIGHT_FAILED")
-        except Exception:
+        except OSError:
             pass
-        raise ex
+        raise
     finally:
         # Fixture Teardown & Process Cleanup & Temporary Fixture Removal
         try:
@@ -356,7 +363,7 @@ def run_harness_execute(
             if created_fixture_by_harness and os.path.exists(eff_fixture_path):
                 os.remove(eff_fixture_path)
             cleanup_status = "COMPLETE"
-        except Exception:
+        except OSError:
             cleanup_status = "FAILED"
         ledger.atomic_update_state("CLEANUP_COMPLETE", execution_count=1)
 
@@ -368,19 +375,22 @@ def run_harness_execute(
         "command_argv": argv,
         "command_sha256": cmd_hash,
         "emitted_define_count": 7,
-        "unique_define_count": len(set(arg for arg in argv if arg.startswith("--dart-define="))),
+        "unique_define_count": len({arg for arg in argv if arg.startswith("--dart-define=")}),
         "ledger_path": ledger.ledger_path,
         "evidence_directory": evidence_dir,
     }
 
 
-
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Canonical Python harness for single-run local iOS application E2E test execution.")
+    parser = argparse.ArgumentParser(
+        description="Canonical Python harness for single-run local iOS application E2E test execution."
+    )
     parser.add_argument("--authorization-id", required=True, help="Unique authorization identifier for this run.")
     parser.add_argument("--device-id", required=True, help="Exact iOS simulator device ID.")
     parser.add_argument("--credential-env-file", default=None, help="Path to safe non-repository credential env file.")
-    parser.add_argument("--execute", action="store_true", help="Explicit flag required for real execution mode. Default is dry-run.")
+    parser.add_argument(
+        "--execute", action="store_true", help="Explicit flag required for real execution mode. Default is dry-run."
+    )
     args = parser.parse_args()
 
     if not args.execute:

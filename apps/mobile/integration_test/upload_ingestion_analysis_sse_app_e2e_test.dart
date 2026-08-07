@@ -15,13 +15,20 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   group('Real Application Entry Path E2E Test Node (Yol A)', () {
-    const backendBaseUrl = String.fromEnvironment('FI_E2E_API_BASE_URL', defaultValue: 'http://127.0.0.1:8000');
-    const e2eAuthId = String.fromEnvironment('FI_E2E_AUTHORIZATION_ID', defaultValue: '');
-    const e2eOrgId = String.fromEnvironment('FI_E2E_ORGANIZATION_ID', defaultValue: '');
-    const e2eActorId = String.fromEnvironment('FI_E2E_ACTOR_ID', defaultValue: '');
-    const e2eInstId = String.fromEnvironment('FI_E2E_INSTITUTION_ID', defaultValue: '');
-    const e2ePeriodId = String.fromEnvironment('FI_E2E_REPORTING_PERIOD_ID', defaultValue: '');
-    const e2eFixtureFilePath = String.fromEnvironment('FI_E2E_FIXTURE_FILE_PATH', defaultValue: '');
+    const backendBaseUrl = String.fromEnvironment('FI_E2E_API_BASE_URL',
+        defaultValue: 'http://127.0.0.1:8000');
+    const e2eAuthId =
+        String.fromEnvironment('FI_E2E_AUTHORIZATION_ID', defaultValue: '');
+    const e2eOrgId =
+        String.fromEnvironment('FI_E2E_ORGANIZATION_ID', defaultValue: '');
+    const e2eActorId =
+        String.fromEnvironment('FI_E2E_ACTOR_ID', defaultValue: '');
+    const e2eInstId =
+        String.fromEnvironment('FI_E2E_INSTITUTION_ID', defaultValue: '');
+    const e2ePeriodId =
+        String.fromEnvironment('FI_E2E_REPORTING_PERIOD_ID', defaultValue: '');
+    const e2eFixtureFilePath =
+        String.fromEnvironment('FI_E2E_FIXTURE_FILE_PATH', defaultValue: '');
 
     const allowedHosts = ['127.0.0.1', 'localhost', '::1'];
 
@@ -38,7 +45,10 @@ void main() {
 
       // If e2eAuthId is provided via harness, validate that all required defines are non-empty
       if (e2eAuthId.isNotEmpty) {
-        if (e2eOrgId.isEmpty || e2eActorId.isEmpty || e2eInstId.isEmpty || e2ePeriodId.isEmpty) {
+        if (e2eOrgId.isEmpty ||
+            e2eActorId.isEmpty ||
+            e2eInstId.isEmpty ||
+            e2ePeriodId.isEmpty) {
           throw StateError(
             'FAIL_CLOSED: Missing required FI_E2E_* dart defines when FI_E2E_AUTHORIZATION_ID is set.',
           );
@@ -59,7 +69,8 @@ void main() {
         isBackendOnline = false;
       }
 
-      if (e2eFixtureFilePath.isNotEmpty && await File(e2eFixtureFilePath).exists()) {
+      if (e2eFixtureFilePath.isNotEmpty &&
+          await File(e2eFixtureFilePath).exists()) {
         tempFile = File(e2eFixtureFilePath);
       } else {
         final dir = Directory.systemTemp.createTempSync('app_e2e_test_');
@@ -126,8 +137,8 @@ void main() {
       do {
         await Future.delayed(const Duration(milliseconds: 500));
         await tester.pump();
-        pollState = container.read(
-            ingestionStatusPollingControllerProvider(finalizeJob.jobId));
+        pollState = container
+            .read(ingestionStatusPollingControllerProvider(finalizeJob.jobId));
         pollAttempts++;
       } while (pollState.data?.isTerminal != true && pollAttempts < 20);
 
