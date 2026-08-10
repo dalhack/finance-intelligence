@@ -221,9 +221,25 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
                 verify_revision_024_postconditions(connection)
                 ensure_clean_transaction(connection, "024 postcondition check exit")
 
-            # PHASE 3: Standard Alembic Upgrade 024 -> 030 (if < expected_head)
+            # PHASE 3: Standard Alembic Upgrade 024 -> 031 (if < expected_head)
             if current_rev != config.expected_head:
                 ensure_clean_transaction(connection, "Phase 3 entry")
+
+                # RESET ROLE to restore session_user identity ('db_bootstrap') prior to Alembic upgrade.
+                # Revision 026 requires ALTER DEFAULT PRIVILEGES FOR ROLE db_bootstrap, which requires
+                # current_user to be member of db_bootstrap (or current_user == db_bootstrap).
+                logger.info("[MIGRATION_RUNNER] Resetting active role to session_user ('db_bootstrap') for Phase 3...")
+                connection.execute(text("RESET ROLE;"))
+
+                sess_user, curr_user = connection.execute(text("SELECT session_user, current_user;")).fetchone()  # type: ignore[union-attr]
+                logger.info(
+                    f"[MIGRATION_RUNNER] Phase 3 Session context: session_user='{sess_user}', current_user='{curr_user}'"
+                )
+                if curr_user != "db_bootstrap":
+                    raise MigrationRunnerError(
+                        f"Phase 3 session reset failed! Expected current_user 'db_bootstrap', got '{curr_user}'."
+                    )
+
                 logger.info(f"[MIGRATION_RUNNER] Phase 3: Executing Alembic upgrade to '{config.expected_head}'...")
                 command.upgrade(alembic_cfg, config.expected_head)
                 ensure_clean_transaction(connection, "Phase 3 exit")
