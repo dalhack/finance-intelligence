@@ -158,6 +158,15 @@ def collect_pre_termination_diagnostics(
 ) -> dict[str, str | bool | int]:
     """Collects machine-readable, redacted, and time-bounded liveness diagnostics before killing child process group."""
     start = time.time()
+    effective_timeout = min(diagnostic_timeout_sec, 20.0)
+    deadline = start + effective_timeout
+
+    def remaining_cmd_timeout(max_cmd_sec: float) -> float:
+        rem = deadline - time.time()
+        if rem <= 0:
+            raise TimeoutError("Diagnostic monotonic deadline exceeded")
+        return min(max_cmd_sec, rem)
+
     results: dict[str, str | bool | int] = {
         "runner_installed": False,
         "runner_pid_present": False,
@@ -171,7 +180,7 @@ def collect_pre_termination_diagnostics(
     }
 
     sys.stderr.write(
-        f"[WATCHDOG DIAGNOSTIC] Event={EVENT_PRE_TERMINATION_DIAGNOSTIC_STARTED} RootPID={pid} PGID={pgid} Phase={current_phase} Timeout={diagnostic_timeout_sec}s\n"
+        f"[WATCHDOG DIAGNOSTIC] Event={EVENT_PRE_TERMINATION_DIAGNOSTIC_STARTED} RootPID={pid} PGID={pgid} Phase={current_phase} Timeout={effective_timeout}s\n"
     )
     sys.stderr.flush()
 
@@ -179,15 +188,18 @@ def collect_pre_termination_diagnostics(
         # 1. Child Process Tree Inspection (COMM only, NO ARGV or ENV!)
         if sys.platform != "win32":
             try:
+                ps_timeout = remaining_cmd_timeout(3.0)
                 ps_res = subprocess.run(
                     ["ps", "-o", "pid,ppid,pgid,state,comm", "-g", str(pgid)],
                     capture_output=True,
                     text=True,
-                    timeout=3.0,
+                    timeout=ps_timeout,
                     check=False,
                 )
                 if ps_res.returncode == 0:
                     lines = [l.strip() for l in ps_res.stdout.splitlines() if l.strip()][1:]
+                    if len(lines) > 10:
+                        results["diagnostic_truncated"] = True
                     procs_summary = "; ".join(redact_and_truncate_line(l, 80) for l in lines[:10])
                     sys.stderr.write(
                         f"[WATCHDOG DIAGNOSTIC] Event={EVENT_CHILD_PROCESS_STATE} RootPID={pid} PGID={pgid} Count={len(lines)} Procs='{procs_summary}'\n"
@@ -208,11 +220,12 @@ def collect_pre_termination_diagnostics(
         # 2. Simulator App Container & Status Check
         if simulator_udid and UDID_REGEX.match(simulator_udid) and sys.platform == "darwin":
             try:
+                apps_timeout = remaining_cmd_timeout(4.0)
                 apps_res = subprocess.run(
                     ["xcrun", "simctl", "listapps", simulator_udid],
                     capture_output=True,
                     text=True,
-                    timeout=4.0,
+                    timeout=apps_timeout,
                     check=False,
                 )
                 if apps_res.returncode == 0 and bundle_id in apps_res.stdout:
@@ -228,11 +241,12 @@ def collect_pre_termination_diagnostics(
         # 3. VM Service Port Listener Inspection
         if sys.platform != "win32":
             try:
+                lsof_timeout = remaining_cmd_timeout(3.0)
                 lsof_res = subprocess.run(
                     ["lsof", "-iTCP", "-sTCP:LISTEN", "-P", "-n"],
                     capture_output=True,
                     text=True,
-                    timeout=3.0,
+                    timeout=lsof_timeout,
                     check=False,
                 )
                 if lsof_res.returncode == 0:
@@ -256,6 +270,7 @@ def collect_pre_termination_diagnostics(
         # 4. Bounded Simulator Log Summary
         if simulator_udid and UDID_REGEX.match(simulator_udid) and sys.platform == "darwin":
             try:
+                log_timeout = remaining_cmd_timeout(5.0)
                 log_cmd = [
                     "xcrun",
                     "simctl",
@@ -270,16 +285,19 @@ def collect_pre_termination_diagnostics(
                     "--style",
                     "compact",
                 ]
-                log_res = subprocess.run(log_cmd, capture_output=True, text=True, timeout=5.0, check=False)
+                log_res = subprocess.run(log_cmd, capture_output=True, text=True, timeout=log_timeout, check=False)
                 if log_res.returncode == 0:
-                    log_lines = [l.strip() for l in log_res.stdout.splitlines() if l.strip()][-20:]
+                    raw_lines = [l.strip() for l in log_res.stdout.splitlines() if l.strip()]
+                    if len(raw_lines) > 20:
+                        results["diagnostic_truncated"] = True
+                    log_lines = raw_lines[-20:]
                     log_lower = "\n".join(log_lines).lower()
                     results["crash_signature_present"] = any(
                         k in log_lower for k in ("crash", "abort", "dyld", "entitlement", "exception", "terminated")
                     )
                     last_log_line = redact_and_truncate_line(log_lines[-1], 100) if log_lines else "NONE"
                     sys.stderr.write(
-                        f"[WATCHDOG DIAGNOSTIC] Event={EVENT_SIMULATOR_LOG_SUMMARY} UDID={simulator_udid} CrashPresent={results['crash_signature_present']} Lines={len(log_lines)} LastLine='{last_log_line}'\n"
+                        f"[WATCHDOG DIAGNOSTIC] Event={EVENT_SIMULATOR_LOG_SUMMARY} UDID={simulator_udid} CrashPresent={results['crash_signature_present']} Lines={len(log_lines)} LastLine='{last_log_line}' Truncated={results['diagnostic_truncated']}\n"
                     )
                     sys.stderr.flush()
             except Exception as le:  # noqa: BLE001
