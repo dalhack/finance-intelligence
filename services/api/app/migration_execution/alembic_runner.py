@@ -231,7 +231,10 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
                 logger.info("[MIGRATION_RUNNER] Resetting active role to session_user ('db_bootstrap') for Phase 3...")
                 connection.execute(text("RESET ROLE;"))
 
-                sess_user, curr_user = connection.execute(text("SELECT session_user, current_user;")).fetchone()  # type: ignore[union-attr]
+                user_row = connection.execute(text("SELECT session_user, current_user;")).fetchone()
+                if not user_row:
+                    raise MigrationRunnerError("Phase 3 session reset failed: unable to query session context.")
+                sess_user, curr_user = str(user_row[0]), str(user_row[1])
                 logger.info(
                     f"[MIGRATION_RUNNER] Phase 3 Session context: session_user='{sess_user}', current_user='{curr_user}'"
                 )
