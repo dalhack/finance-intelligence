@@ -323,3 +323,94 @@ def test_known_revisions_parity_with_active_graph():
     assert "030_reconcile_application_role_catalog" in KNOWN_REVISIONS
     assert "031_analysis_job_claim_authority" in KNOWN_REVISIONS
     assert "026_model_routing_policy_catalog" not in KNOWN_REVISIONS
+
+
+def test_db_bootstrap_schema_public_grant_in_phase3():
+    """Verifies that Phase 3 executes GRANT USAGE, CREATE ON SCHEMA public TO db_bootstrap after RESET ROLE."""
+    from unittest.mock import MagicMock
+
+    from app.migration_execution.alembic_runner import run_alembic_migrations
+    from app.migration_execution.config import MigrationExecutionConfig
+
+    mock_conn = MagicMock()
+    mock_conn.closed = False
+    mock_conn.invalidated = False
+    mock_conn.in_transaction.return_value = False
+
+    # Simulate get_safe_current_revision
+    def mock_execute(statement, *args, **kwargs):
+        sql = str(statement)
+        res = MagicMock()
+        if "session_user, current_user, pg_backend_pid" in sql:
+            res.fetchone.return_value = ("db_bootstrap", "db_owner", 1234)
+        elif "SELECT session_user, current_user;" in sql:
+            res.fetchone.return_value = ("db_bootstrap", "db_bootstrap")
+        elif "claim_next_maintenance_job" in sql:
+            res.fetchone.return_value = (
+                "db_owner",
+                True,
+                "search_path",
+                "p_worker_id text, p_claim_token uuid, p_allowed_job_codes text[]",
+            )
+        elif "to_regclass" in sql:
+            res.scalar.return_value = "public.table"
+        elif any(
+            k in sql
+            for k in ("has_database_privilege", "has_schema_privilege", "has_table_privilege", "has_function_privilege")
+        ):
+            res.scalar.return_value = True
+            res.fetchone.return_value = (True,)
+        elif any(k in sql for k in ("pg_class", "pg_policy", "pg_tables", "pg_indexes", "pg_roles", "pg_proc")):
+            res.fetchone.return_value = ("db_owner", "PERMISSIVE", True, "public")
+            res.scalar.return_value = 1
+        elif "SELECT count(*) FROM pg_locks" in sql:
+            res.scalar.return_value = 1
+        elif "SELECT pg_advisory_unlock" in sql:
+            res.fetchone.return_value = (True,)
+        elif "SELECT pg_backend_pid()" in sql:
+            res.scalar.return_value = 1234
+            res.fetchone.return_value = (1234,)
+        elif "SELECT version_num FROM alembic_version" in sql:
+            res.fetchone.return_value = ("024_maintenance_scheduler_and_operational_resilience",)
+            res.scalar.return_value = "024_maintenance_scheduler_and_operational_resilience"
+        else:
+            res.fetchone.return_value = None
+            res.scalar.return_value = None
+        return res
+
+    mock_conn.execute.side_effect = mock_execute
+
+    mock_engine = MagicMock()
+    mock_engine.connect.return_value.__enter__.return_value = mock_conn
+
+    cfg = MigrationExecutionConfig(
+        project_id="test-proj",
+        instance_name="test-inst",
+        region="test-reg",
+        target_database="test_db",
+        expected_head="031_analysis_job_claim_authority",
+        bootstrap_password="secret_pass",
+    )
+
+    from unittest.mock import patch
+
+    with (
+        patch("app.migration_execution.alembic_runner.Connector"),
+        patch("app.migration_execution.alembic_runner.create_engine", return_value=mock_engine),
+        patch("app.migration_execution.alembic_runner.verify_revision_024_postconditions"),
+        patch("alembic.command.upgrade"),
+        patch(
+            "app.migration_execution.alembic_runner.get_safe_current_revision",
+            side_effect=[
+                "024_maintenance_scheduler_and_operational_resilience",
+                "031_analysis_job_claim_authority",
+                "031_analysis_job_claim_authority",
+                "031_analysis_job_claim_authority",
+            ],
+        ),
+    ):
+        run_alembic_migrations(cfg)
+
+    # Verify that RESET ROLE and GRANT USAGE, CREATE ON SCHEMA public TO db_bootstrap were executed
+    executed_sqls = [str(call_args[0][0]) for call_args in mock_conn.execute.call_args_list]
+    assert any("GRANT USAGE, CREATE ON SCHEMA public TO db_bootstrap" in s for s in executed_sqls)

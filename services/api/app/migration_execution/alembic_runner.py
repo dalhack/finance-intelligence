@@ -264,6 +264,7 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
                 # current_user to be member of db_bootstrap (or current_user == db_bootstrap).
                 logger.info("[MIGRATION_RUNNER] Resetting active role to session_user ('db_bootstrap') for Phase 3...")
                 connection.execute(text("RESET ROLE;"))
+                connection.execute(text("GRANT USAGE, CREATE ON SCHEMA public TO db_bootstrap;"))
 
                 user_row = connection.execute(text("SELECT session_user, current_user;")).fetchone()
                 if not user_row:

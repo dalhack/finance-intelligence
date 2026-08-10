@@ -115,6 +115,8 @@ def main() -> NoReturn:
     except Exception as e:  # noqa: BLE001
         redacted_err = redact_text(str(e))
         logger.error(f"[MIGRATION_ENTRYPOINT] Subcommand '{args.subcommand}' failed: {redacted_err}")
+        sys.stderr.flush()
+        sys.stdout.flush()
         sys.exit(1)
 
 
