@@ -73,7 +73,10 @@ def test_rollback_before_unlock_on_failure(mock_config):
     mock_conn.closed = False
     mock_conn.invalidated = False
     in_trans = {"active": False}
-    mock_conn.execute.side_effect = lambda *a, **kw: in_trans.update({"active": True}) or MagicMock(fetchone=lambda: ("db_bootstrap", "db_owner", 12345), scalar=lambda: 12345)
+    mock_conn.execute.side_effect = lambda *a, **kw: (
+        in_trans.update({"active": True})
+        or MagicMock(fetchone=lambda: ("db_bootstrap", "db_owner", 12345), scalar=lambda: 12345)
+    )
     mock_conn.commit.side_effect = lambda: in_trans.update({"active": False})
     mock_conn.rollback.side_effect = lambda: in_trans.update({"active": False})
     mock_conn.in_transaction.side_effect = lambda: in_trans["active"]
