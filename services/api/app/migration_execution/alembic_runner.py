@@ -62,6 +62,7 @@ KNOWN_REVISIONS = {
     "028_analysis_clarification_integrity_constraints",
     "029_ai_execution_audit_lineage",
     "030_reconcile_application_role_catalog",
+    "031_analysis_job_claim_authority",
 }
 
 

@@ -19,7 +19,7 @@ def mock_config():
         instance_name="fi-staging-db",
         region="europe-west1",
         target_database="finance_intelligence_staging",
-        expected_head="030_reconcile_application_role_catalog",
+        expected_head="031_analysis_job_claim_authority",
         bootstrap_password="test_bootstrap_password",
     )
 
@@ -72,7 +72,11 @@ def test_rollback_before_unlock_on_failure(mock_config):
     mock_conn = MagicMock()
     mock_conn.closed = False
     mock_conn.invalidated = False
-    mock_conn.in_transaction.return_value = True
+    in_trans = {"active": False}
+    mock_conn.execute.side_effect = lambda *a, **kw: in_trans.update({"active": True}) or MagicMock(fetchone=lambda: ("db_bootstrap", "db_owner", 12345), scalar=lambda: 12345)
+    mock_conn.commit.side_effect = lambda: in_trans.update({"active": False})
+    mock_conn.rollback.side_effect = lambda: in_trans.update({"active": False})
+    mock_conn.in_transaction.side_effect = lambda: in_trans["active"]
 
     # Setup connection queries:
     # 1. SET ROLE db_owner
@@ -92,11 +96,17 @@ def test_rollback_before_unlock_on_failure(mock_config):
 
     mock_engine.connect.return_value.__enter__.return_value = mock_conn
 
+    def fail_upgrade(*a, **kw):
+        in_trans["active"] = True
+        raise RuntimeError("Phase 1 DDL error")
+
+    mock_conn.commit.side_effect = lambda: setattr(mock_conn.in_transaction, "return_value", False)
+
     with (
         patch("app.migration_execution.alembic_runner.Connector", return_value=mock_connector_cls),
         patch("app.migration_execution.alembic_runner.create_engine", return_value=mock_engine),
         patch("app.migration_execution.alembic_runner.get_safe_current_revision", return_value=None),
-        patch("app.migration_execution.alembic_runner.command.upgrade", side_effect=RuntimeError("Phase 1 DDL error")),
+        patch("app.migration_execution.alembic_runner.command.upgrade", side_effect=fail_upgrade),
     ):
         with pytest.raises(MigrationRunnerError, match="Migration execution failed: Phase 1 DDL error") as exc_info:
             run_alembic_migrations(mock_config)
@@ -133,7 +143,7 @@ def test_unlock_false_fails_closed(mock_config):
         patch("app.migration_execution.alembic_runner.create_engine", return_value=mock_engine),
         patch(
             "app.migration_execution.alembic_runner.get_safe_current_revision",
-            return_value="030_reconcile_application_role_catalog",
+            return_value="031_analysis_job_claim_authority",
         ),
         patch("app.migration_execution.alembic_runner.verify_revision_024_postconditions"),
         pytest.raises(MigrationRunnerError, match="unlock returned false or failed"),

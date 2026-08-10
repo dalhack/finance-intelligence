@@ -319,3 +319,82 @@ def test_cloud_sql_optional_import_boundary_and_fail_closed_contract(monkeypatch
 
     with pytest.raises(VerificationError, match="cloud-sql-python-connector"):
         run_security_verification(config)
+
+
+def test_migration_config_head_031_accepted_t1():
+    """T1 — Current head 031_analysis_job_claim_authority is accepted by MigrationExecutionConfig."""
+    from unittest.mock import patch
+
+    from app.migration_execution.config import ALLOWED_MIGRATION_HEAD, MigrationExecutionConfig
+
+    assert ALLOWED_MIGRATION_HEAD == "031_analysis_job_claim_authority"
+    with patch.dict(
+        "os.environ",
+        {
+            "EXPECTED_MIGRATION_HEAD": "031_analysis_job_claim_authority",
+            "INITIAL_ADMIN_PASSWORD": "adm",
+            "BOOTSTRAP_PASSWORD": "boot",
+        },
+    ):
+        cfg = MigrationExecutionConfig.from_env("provision-database")
+        assert cfg.expected_head == "031_analysis_job_claim_authority"
+
+
+def test_migration_config_previous_head_030_rejected_t2():
+    """T2 — Previous head 030_reconcile_application_role_catalog is rejected fail-closed."""
+    from unittest.mock import patch
+
+    from app.migration_execution.config import MigrationConfigError, MigrationExecutionConfig
+
+    with (
+        patch.dict("os.environ", {"EXPECTED_MIGRATION_HEAD": "030_reconcile_application_role_catalog"}),
+        pytest.raises(MigrationConfigError, match="Invalid EXPECTED_MIGRATION_HEAD"),
+    ):
+        MigrationExecutionConfig.from_env("verify")
+
+
+def test_migration_config_unknown_head_rejected_t3():
+    """T3 — Unknown head is rejected fail-closed."""
+    from unittest.mock import patch
+
+    from app.migration_execution.config import MigrationConfigError, MigrationExecutionConfig
+
+    with (
+        patch.dict("os.environ", {"EXPECTED_MIGRATION_HEAD": "999_unknown"}),
+        pytest.raises(MigrationConfigError, match="Invalid EXPECTED_MIGRATION_HEAD"),
+    ):
+        MigrationExecutionConfig.from_env("verify")
+
+
+def test_migration_config_default_head_t4():
+    """T4 — Empty/missing EXPECTED_MIGRATION_HEAD defaults to 031_analysis_job_claim_authority."""
+    import os
+    from unittest.mock import patch
+
+    from app.migration_execution.config import MigrationExecutionConfig
+
+    with patch.dict("os.environ", {"BOOTSTRAP_PASSWORD": "boot"}, clear=False):
+        os.environ.pop("EXPECTED_MIGRATION_HEAD", None)
+        cfg = MigrationExecutionConfig.from_env("verify")
+        assert cfg.expected_head == "031_analysis_job_claim_authority"
+
+
+def test_migration_config_validation_before_side_effect_t5():
+    """T5 — Invalid head fails in from_env before database or connector calls occur."""
+    from unittest.mock import patch
+
+    from app.migration_execution.config import MigrationConfigError, MigrationExecutionConfig
+
+    with patch.dict("os.environ", {"EXPECTED_MIGRATION_HEAD": "invalid_head"}), pytest.raises(MigrationConfigError):
+        MigrationExecutionConfig.from_env("verify")
+
+
+def test_alembic_graph_single_head_t6_t7():
+    """T6 & T7 — Verify Alembic script graph produces exact single head 031_analysis_job_claim_authority."""
+    from alembic.script import ScriptDirectory
+
+    alembic_dir = API_DIR / "alembic"
+    script = ScriptDirectory(str(alembic_dir))
+    heads = script.get_heads()
+    assert len(heads) == 1
+    assert heads[0] == "031_analysis_job_claim_authority"
