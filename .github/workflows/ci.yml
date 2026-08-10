@@ -15,7 +15,7 @@ on:
           - all
 
 env:
-  PYTHONPATH: .
+  PYTHONPATH: .:services/api
 
 jobs:
   boundary-and-secret:

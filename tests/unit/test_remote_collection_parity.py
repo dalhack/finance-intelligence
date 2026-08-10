@@ -1,6 +1,11 @@
 """Contract test verifying test collection parity between remote CI and local test roots."""
 
+import sys
 from pathlib import Path
+
+API_DIR = Path(__file__).resolve().parents[2] / "services" / "api"
+if str(API_DIR) not in sys.path:
+    sys.path.insert(0, str(API_DIR))
 
 # Re-export critical least-privilege remediation unit tests to guarantee execution under pytest tests/unit
 from services.api.tests.unit.test_migration_runner_remediation import (

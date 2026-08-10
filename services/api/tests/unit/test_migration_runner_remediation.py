@@ -1,9 +1,13 @@
 """Unit tests for remediated lock-scoped phased Alembic state machine runner."""
 
+import sys
 from pathlib import Path
-from unittest.mock import MagicMock, patch
 
-API_DIR = Path(__file__).resolve().parent.parent.parent
+API_DIR = Path(__file__).resolve().parents[2]
+if str(API_DIR) not in sys.path:
+    sys.path.insert(0, str(API_DIR))
+
+from unittest.mock import MagicMock, patch
 
 import pytest
 from app.migration_execution.alembic_runner import (
