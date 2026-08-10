@@ -46,6 +46,7 @@ EVENT_VM_SERVICE_PORT_STATE = "IOS_E2E_VM_SERVICE_PORT_STATE"
 EVENT_SIMULATOR_LOG_SUMMARY = "IOS_E2E_SIMULATOR_LOG_SUMMARY"
 EVENT_PRE_TERMINATION_DIAGNOSTIC_COMPLETED = "IOS_E2E_PRE_TERMINATION_DIAGNOSTIC_COMPLETED"
 EVENT_PRE_TERMINATION_DIAGNOSTIC_FAILED = "IOS_E2E_PRE_TERMINATION_DIAGNOSTIC_FAILED"
+EVENT_CORESIMULATOR_UNRESPONSIVE = "IOS_E2E_CORESIMULATOR_UNRESPONSIVE"
 
 # Input Validation Regexes
 UDID_REGEX = re.compile(r"^[A-F0-9]{8}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{12}$", re.IGNORECASE)
@@ -184,6 +185,9 @@ def collect_pre_termination_diagnostics(
     )
     sys.stderr.flush()
 
+    child_pids: set[int] = set()
+    runner_app_pids: set[int] = set()
+
     try:
         # 1. Child Process Tree Inspection (COMM only, NO ARGV or ENV!)
         if sys.platform != "win32":
@@ -207,10 +211,13 @@ def collect_pre_termination_diagnostics(
                     sys.stderr.flush()
 
                     for line in lines:
-                        if "Runner" in line:
-                            results["runner_pid_present"] = True
-                            parts = line.split()
-                            if len(parts) >= 4:
+                        parts = line.split()
+                        if len(parts) >= 4 and parts[0].isdigit():
+                            curr_p = int(parts[0])
+                            child_pids.add(curr_p)
+                            if "Runner" in line:
+                                runner_app_pids.add(curr_p)
+                                results["runner_pid_present"] = True
                                 results["runner_process_state"] = parts[3]
                                 if "Z" not in parts[3]:
                                     results["runner_alive"] = True
@@ -218,6 +225,7 @@ def collect_pre_termination_diagnostics(
                 sys.stderr.write(f"[WATCHDOG DIAGNOSTIC] Process tree check failed: {pe}\n")
 
         # 2. Simulator App Container & Status Check
+        installed_status = "UNKNOWN"
         if simulator_udid and UDID_REGEX.match(simulator_udid) and sys.platform == "darwin":
             try:
                 apps_timeout = remaining_cmd_timeout(4.0)
@@ -228,17 +236,34 @@ def collect_pre_termination_diagnostics(
                     timeout=apps_timeout,
                     check=False,
                 )
-                if apps_res.returncode == 0 and bundle_id in apps_res.stdout:
-                    results["runner_installed"] = True
-
+                if apps_res.returncode == 0:
+                    if bundle_id in apps_res.stdout:
+                        results["runner_installed"] = True
+                        installed_status = "TRUE"
+                    else:
+                        installed_status = "FALSE"
+                else:
+                    installed_status = "ERROR"
+            except subprocess.TimeoutExpired:
+                installed_status = "TIMEOUT"
                 sys.stderr.write(
-                    f"[WATCHDOG DIAGNOSTIC] Event={EVENT_RUNNER_APP_STATE} UDID={simulator_udid} BundleID={bundle_id} Installed={results['runner_installed']} Alive={results['runner_alive']} State={results['runner_process_state']}\n"
+                    f"[WATCHDOG DIAGNOSTIC] Event={EVENT_CORESIMULATOR_UNRESPONSIVE} UDID={simulator_udid} Command=simctl_listapps Timeout=4.0s\n"
                 )
-                sys.stderr.flush()
             except Exception as ae:  # noqa: BLE001
+                installed_status = "ERROR"
                 sys.stderr.write(f"[WATCHDOG DIAGNOSTIC] App state check failed: {ae}\n")
 
-        # 3. VM Service Port Listener Inspection
+            sys.stderr.write(
+                f"[WATCHDOG DIAGNOSTIC] Event={EVENT_RUNNER_APP_STATE} UDID={simulator_udid} BundleID={bundle_id} Installed={installed_status} Alive={results['runner_alive']} State={results['runner_process_state']}\n"
+            )
+            sys.stderr.flush()
+
+        # 3. VM Service Port Listener Inspection with Correlated PID Check
+        listener_detected = False
+        listener_correlated = False
+        listener_pid = 0
+        listener_class = "UNKNOWN"
+
         if sys.platform != "win32":
             try:
                 lsof_timeout = remaining_cmd_timeout(3.0)
@@ -251,17 +276,35 @@ def collect_pre_termination_diagnostics(
                 )
                 if lsof_res.returncode == 0:
                     for l in lsof_res.stdout.splitlines():
-                        if any(k in l for k in ("Runner", "flutter", "dart")) and (
+                        if any(k in l for k in ("Runner", "flutter", "dart", "iproxy")) and (
                             "127.0.0.1" in l or "localhost" in l or "*:" in l or "::1" in l
                         ):
-                            results["vm_service_listener_present"] = True
                             parts = l.split()
                             if len(parts) >= 2 and parts[1].isdigit():
-                                results["vm_service_listener_pid"] = int(parts[1])
-                            break
+                                l_pid = int(parts[1])
+                                proc_name = parts[0]
+                                listener_detected = True
+                                listener_pid = l_pid
+
+                                if l_pid in runner_app_pids or "Runner" in proc_name:
+                                    listener_correlated = True
+                                    listener_class = "RUNNER_APP"
+                                    results["vm_service_listener_present"] = True
+                                    results["vm_service_listener_pid"] = l_pid
+                                    break
+                                elif l_pid in child_pids:
+                                    listener_correlated = True
+                                    listener_class = "CHILD_PROCESS"
+                                    results["vm_service_listener_present"] = True
+                                    results["vm_service_listener_pid"] = l_pid
+                                    break
+                                elif "flutter" in proc_name or "dart" in proc_name:
+                                    listener_class = "FLUTTER_CLI"
+                                else:
+                                    listener_class = "UNRELATED"
 
                 sys.stderr.write(
-                    f"[WATCHDOG DIAGNOSTIC] Event={EVENT_VM_SERVICE_PORT_STATE} ListenerPresent={results['vm_service_listener_present']} ListenerPID={results['vm_service_listener_pid']}\n"
+                    f"[WATCHDOG DIAGNOSTIC] Event={EVENT_VM_SERVICE_PORT_STATE} ListenerDetected={listener_detected} ListenerCorrelated={listener_correlated} ListenerPID={listener_pid} Class={listener_class} ListenerPresent={results['vm_service_listener_present']}\n"
                 )
                 sys.stderr.flush()
             except Exception as ve:  # noqa: BLE001
@@ -300,6 +343,10 @@ def collect_pre_termination_diagnostics(
                         f"[WATCHDOG DIAGNOSTIC] Event={EVENT_SIMULATOR_LOG_SUMMARY} UDID={simulator_udid} CrashPresent={results['crash_signature_present']} Lines={len(log_lines)} LastLine='{last_log_line}' Truncated={results['diagnostic_truncated']}\n"
                     )
                     sys.stderr.flush()
+            except subprocess.TimeoutExpired:
+                sys.stderr.write(
+                    f"[WATCHDOG DIAGNOSTIC] Event={EVENT_CORESIMULATOR_UNRESPONSIVE} UDID={simulator_udid} Command=simctl_log_show Timeout=5.0s\n"
+                )
             except Exception as le:  # noqa: BLE001
                 sys.stderr.write(f"[WATCHDOG DIAGNOSTIC] Simulator log check failed: {le}\n")
 

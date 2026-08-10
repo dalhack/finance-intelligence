@@ -298,4 +298,76 @@ def test_watchdog_pre_termination_diagnostics(capsys):
     assert EVENT_PRE_TERMINATION_DIAGNOSTIC_STARTED in captured.err
     assert EVENT_PRE_TERMINATION_DIAGNOSTIC_COMPLETED in captured.err
     assert isinstance(res["diagnostic_duration_ms"], int)
+
+
+def test_watchdog_unrelated_listener_pid_not_correlated(capsys):
+    """Verifies that an unrelated listener PID (e.g. host flutter CLI) does NOT set vm_service_listener_present to True."""
+    from unittest.mock import MagicMock, patch
+
+    from scripts.run_e2e_watchdog import (
+        EVENT_VM_SERVICE_PORT_STATE,
+        collect_pre_termination_diagnostics,
+    )
+
+    fake_ps_out = "  PID  PPID  PGID STATE COMM\n10001 10000 10001 S s  python3"
+    fake_lsof_out = "flutter 19459 runner 8u IPv4 127.0.0.1:54321 (LISTEN)"
+
+    def mock_run(cmd, *args, **kwargs):
+        res = MagicMock()
+        res.returncode = 0
+        if cmd[0] == "ps":
+            res.stdout = fake_ps_out
+        elif cmd[0] == "lsof":
+            res.stdout = fake_lsof_out
+        else:
+            res.stdout = ""
+        return res
+
+    with patch("subprocess.run", side_effect=mock_run):
+        res = collect_pre_termination_diagnostics(
+            pid=10001,
+            pgid=10001,
+            diagnostic_timeout_sec=5.0,
+        )
+
+    assert res["vm_service_listener_present"] is False
+    captured = capsys.readouterr()
+    assert EVENT_VM_SERVICE_PORT_STATE in captured.err
+    assert "ListenerCorrelated=False" in captured.err
+    assert "Class=FLUTTER_CLI" in captured.err
+
+
+def test_watchdog_coresimulator_timeout_event(capsys):
+    """Verifies that simctl listapps timeout emits IOS_E2E_CORESIMULATOR_UNRESPONSIVE and sets Installed=TIMEOUT."""
+    import subprocess
+    from unittest.mock import MagicMock, patch
+
+    from scripts.run_e2e_watchdog import (
+        EVENT_CORESIMULATOR_UNRESPONSIVE,
+        EVENT_RUNNER_APP_STATE,
+        collect_pre_termination_diagnostics,
+    )
+
+    def mock_run(cmd, *args, **kwargs):
+        if cmd[:3] == ["xcrun", "simctl", "listapps"]:
+            raise subprocess.TimeoutExpired(cmd=cmd, timeout=4.0)
+        res = MagicMock()
+        res.returncode = 0
+        res.stdout = ""
+        return res
+
+    with patch("subprocess.run", side_effect=mock_run):
+        res = collect_pre_termination_diagnostics(
+            pid=10001,
+            pgid=10001,
+            simulator_udid="12345678-1234-1234-1234-1234567890AB",
+            diagnostic_timeout_sec=5.0,
+        )
+
+    assert res["runner_installed"] is False
+    captured = capsys.readouterr()
+    assert EVENT_CORESIMULATOR_UNRESPONSIVE in captured.err
+    assert EVENT_RUNNER_APP_STATE in captured.err
+    assert "Installed=TIMEOUT" in captured.err
+
     assert res["diagnostic_duration_ms"] >= 0
