@@ -40,6 +40,7 @@ EVENT_PHASE_CHANGED = "IOS_E2E_PHASE_CHANGED"
 # Phase Constants
 PHASE_DEPENDENCY_RESOLUTION = "IOS_E2E_PHASE_DEPENDENCY_RESOLUTION"
 PHASE_XCODE_BUILD = "IOS_E2E_PHASE_XCODE_BUILD"
+PHASE_POST_XCODE_BUILD_WAIT = "IOS_E2E_PHASE_POST_XCODE_BUILD_WAIT"
 PHASE_APP_LAUNCH = "IOS_E2E_PHASE_APP_LAUNCH"
 PHASE_TEST_DRIVER_CONNECT = "IOS_E2E_PHASE_TEST_DRIVER_CONNECT"
 PHASE_TEST_BODY = "IOS_E2E_PHASE_TEST_BODY"
@@ -71,10 +72,10 @@ def infer_phase_from_output(line: str, current_phase: str) -> str:
     if any(k in lower for k in ("pub get", "cocoapods", "running pod install")):
         return PHASE_DEPENDENCY_RESOLUTION
     if any(k in lower for k in ("xcode build done", "built build/ios/iphonesimulator")):
-        return PHASE_APP_LAUNCH
+        return PHASE_POST_XCODE_BUILD_WAIT
     if any(k in lower for k in ("xcode build", "xcodebuild", "building runner.app")):
         return PHASE_XCODE_BUILD
-    if any(k in lower for k in ("installing", "launching")):
+    if any(k in lower for k in ("installing", "launching", "simctl install", "simctl launch")):
         return PHASE_APP_LAUNCH
     if any(
         k in lower

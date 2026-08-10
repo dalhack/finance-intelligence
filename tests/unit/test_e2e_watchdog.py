@@ -202,14 +202,20 @@ def test_watchdog_process_still_alive_raises_runtime_error():
 
 def test_watchdog_phase_and_timing_diagnostic_output(capsys):
     """T8: Verifies phase transition and timing fields in diagnostic timeout output."""
-    from scripts.run_e2e_watchdog import PHASE_APP_LAUNCH
+    from scripts.run_e2e_watchdog import PHASE_APP_LAUNCH, PHASE_POST_XCODE_BUILD_WAIT
 
     assert infer_phase_from_output("Building Runner.app with Xcode", "UNKNOWN") == PHASE_XCODE_BUILD
-    assert infer_phase_from_output("Xcode build done. 58.2s", PHASE_XCODE_BUILD) == PHASE_APP_LAUNCH
+    assert infer_phase_from_output("Xcode build done. 58.2s", PHASE_XCODE_BUILD) == PHASE_POST_XCODE_BUILD_WAIT
+    assert (
+        infer_phase_from_output("xcrun simctl install 1234 Runner.app", PHASE_POST_XCODE_BUILD_WAIT) == PHASE_APP_LAUNCH
+    )
     assert (
         infer_phase_from_output("Connecting to VM Service at http://127.0.0.1", "UNKNOWN") == PHASE_TEST_DRIVER_CONNECT
     )
     assert infer_phase_from_output("Running test: login_flow_test", "UNKNOWN") == PHASE_TEST_BODY
+    assert (
+        infer_phase_from_output("Unrecognized output line", PHASE_POST_XCODE_BUILD_WAIT) == PHASE_POST_XCODE_BUILD_WAIT
+    )
 
     cmd = (
         "import time, sys\n"

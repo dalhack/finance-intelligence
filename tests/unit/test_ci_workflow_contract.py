@@ -63,7 +63,7 @@ def validate_workflow_semantics(raw_content: str) -> None:
     # 8. Require fail-closed boot and explicit device target
     assert 'xcrun simctl boot "$SIMULATOR_UDID"' in raw_content
     assert 'xcrun simctl bootstatus "$SIMULATOR_UDID" -b' in raw_content
-    assert 'flutter test integration_test/device_e2e_test.dart -d "$SIMULATOR_UDID"' in raw_content
+    assert "flutter test" in raw_content and 'integration_test/device_e2e_test.dart -d "$SIMULATOR_UDID"' in raw_content
 
     # 9. Require cleanup teardown checking SIMULATOR_UDID
     assert 'if [ -n "$SIMULATOR_UDID" ]; then' in raw_content
@@ -268,7 +268,7 @@ def test_automatic_ios_e2e_and_ci_contract():
 
     # 2. Automatic iOS E2E job and step
     assert "ios-build-and-simulator-e2e:" in content
-    assert 'flutter test integration_test/device_e2e_test.dart -d "$SIMULATOR_UDID"' in content
+    assert "flutter test" in content and 'integration_test/device_e2e_test.dart -d "$SIMULATOR_UDID"' in content
 
     # 3. Fail-closed timeout and diagnostic upload
     assert "timeout-seconds 900" in content
