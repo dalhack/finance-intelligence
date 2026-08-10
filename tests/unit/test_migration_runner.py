@@ -398,3 +398,68 @@ def test_alembic_graph_single_head_t6_t7():
     heads = script.get_heads()
     assert len(heads) == 1
     assert heads[0] == "031_analysis_job_claim_authority"
+
+
+def test_get_valid_graph_revisions_remote_collected():
+    """Verifies get_valid_graph_revisions extracts all 31 active revisions directly from Alembic ScriptDirectory."""
+    from alembic.config import Config
+    from app.migration_execution.alembic_runner import get_valid_graph_revisions
+
+    ini_path = str(API_DIR / "alembic.ini")
+    cfg = Config(ini_path)
+    cfg.set_main_option("script_location", str(API_DIR / "alembic"))
+
+    revs = get_valid_graph_revisions(cfg, expected_head="031_analysis_job_claim_authority")
+    assert len(revs) == 31
+    assert "026_public_schema_acl_hardening" in revs
+    assert "031_analysis_job_claim_authority" in revs
+    assert "026_model_routing_policy_catalog" not in revs
+
+
+def test_get_valid_graph_revisions_multiple_heads_remote_collected():
+    """Verifies get_valid_graph_revisions raises MigrationRunnerError when multiple heads exist."""
+    from unittest.mock import MagicMock, patch
+
+    from alembic.config import Config
+    from app.migration_execution.alembic_runner import (
+        MigrationRunnerError,
+        get_valid_graph_revisions,
+    )
+
+    ini_path = str(API_DIR / "alembic.ini")
+    cfg = Config(ini_path)
+    cfg.set_main_option("script_location", str(API_DIR / "alembic"))
+
+    with patch("app.migration_execution.alembic_runner.ScriptDirectory") as mock_sd_cls:
+        mock_sd = MagicMock()
+        mock_sd.get_heads.return_value = ["031_head_a", "031_head_b"]
+        mock_sd_cls.from_config.return_value = mock_sd
+
+        with pytest.raises(MigrationRunnerError, match="Multiple migration heads detected"):
+            get_valid_graph_revisions(cfg)
+
+
+def test_get_safe_current_revision_unknown_revision_remote_collected():
+    """Verifies get_safe_current_revision rejects unknown/stale revisions against valid graph revisions set."""
+    from unittest.mock import MagicMock, patch
+
+    from app.migration_execution.alembic_runner import (
+        MigrationRunnerError,
+        get_safe_current_revision,
+    )
+
+    mock_conn = MagicMock()
+    mock_conn.in_transaction.return_value = False
+    valid_revisions = {
+        "024_maintenance_scheduler_and_operational_resilience",
+        "026_public_schema_acl_hardening",
+        "031_analysis_job_claim_authority",
+    }
+
+    with patch("app.migration_execution.alembic_runner.MigrationContext") as mock_context_cls:
+        mock_context = MagicMock()
+        mock_context.get_current_revision.return_value = "026_model_routing_policy_catalog"
+        mock_context_cls.configure.return_value = mock_context
+
+        with pytest.raises(MigrationRunnerError, match="Unknown or invalid migration revision detected"):
+            get_safe_current_revision(mock_conn, valid_revisions)
