@@ -70,13 +70,22 @@ def infer_phase_from_output(line: str, current_phase: str) -> str:
     lower = line.lower()
     if any(k in lower for k in ("pub get", "cocoapods", "running pod install")):
         return PHASE_DEPENDENCY_RESOLUTION
+    if any(k in lower for k in ("xcode build done", "built build/ios/iphonesimulator")):
+        return PHASE_APP_LAUNCH
     if any(k in lower for k in ("xcode build", "xcodebuild", "building runner.app")):
         return PHASE_XCODE_BUILD
-    if any(k in lower for k in ("installing", "launching", "runner.app")):
+    if any(k in lower for k in ("installing", "launching")):
         return PHASE_APP_LAUNCH
     if any(
         k in lower
-        for k in ("connecting to vm service", "test_driver", "observatory", "flutter driver", "connecting to")
+        for k in (
+            "connecting to vm service",
+            "test_driver",
+            "observatory",
+            "flutter driver",
+            "connecting to",
+            "synced ",
+        )
     ):
         return PHASE_TEST_DRIVER_CONNECT
     if any(k in lower for k in ("all tests passed", "test case", "assertion", "running test", "00:")):
