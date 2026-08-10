@@ -75,7 +75,7 @@ def upgrade() -> None:
                 GRANT EXECUTE ON ALL FUNCTIONS IN SCHEMA public TO db_owner;
             END IF;
             IF EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_bootstrap') THEN
-                GRANT USAGE, CREATE ON SCHEMA public TO db_bootstrap;
+                GRANT USAGE ON SCHEMA public TO db_bootstrap;
             END IF;
             IF EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_api_user') THEN
                 GRANT USAGE ON SCHEMA public TO db_api_user;

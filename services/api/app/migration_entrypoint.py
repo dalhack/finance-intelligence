@@ -38,6 +38,14 @@ if not logger.handlers:
     logger.addHandler(stderr_handler)
 
 
+def _safe_exit(exit_code: int) -> NoReturn:
+    """Flushes all logging handlers, standard streams, and shuts down logging before exit."""
+    logging.shutdown()
+    sys.stdout.flush()
+    sys.stderr.flush()
+    sys.exit(exit_code)
+
+
 def run_preflight() -> int:
     """Validates runtime configuration and project identity in a read-only manner."""
     logger.info("[MIGRATION_PREFLIGHT] Validating runtime configuration...")
@@ -72,12 +80,12 @@ def main() -> NoReturn:
     if not args.subcommand:
         parser.print_help()
         logger.error("\nERROR: No subcommand provided. Executing without subcommand is forbidden.")
-        sys.exit(1)
+        _safe_exit(1)
 
     try:
         if args.subcommand == "preflight":
             exit_code = run_preflight()
-            sys.exit(exit_code)
+            _safe_exit(exit_code)
 
         config = MigrationExecutionConfig.from_env(args.subcommand)
         logger.info(f"[MIGRATION_ENTRYPOINT] Dispatching subcommand '{args.subcommand}' with config: {config}")
@@ -91,33 +99,31 @@ def main() -> NoReturn:
                 password=config.initial_admin_password,
             )
             logger.info("[MIGRATION_ENTRYPOINT] SUCCESS: Subcommand 'bootstrap-password' completed.")
-            sys.exit(0)
+            _safe_exit(0)
 
         elif args.subcommand == "provision-database":
             provision_application_database(config)
             logger.info("[MIGRATION_ENTRYPOINT] SUCCESS: Subcommand 'provision-database' completed.")
-            sys.exit(0)
+            _safe_exit(0)
 
         elif args.subcommand == "migrate":
             run_alembic_migrations(config)
             logger.info("[MIGRATION_ENTRYPOINT] SUCCESS: Subcommand 'migrate' completed.")
-            sys.exit(0)
+            _safe_exit(0)
 
         elif args.subcommand == "verify":
             run_security_verification(config)
             logger.info("[MIGRATION_ENTRYPOINT] SUCCESS: Subcommand 'verify' completed.")
-            sys.exit(0)
+            _safe_exit(0)
 
         else:
             logger.error(f"[MIGRATION_ENTRYPOINT] Unknown subcommand: '{args.subcommand}'")
-            sys.exit(1)
+            _safe_exit(1)
 
     except Exception as e:  # noqa: BLE001
         redacted_err = redact_text(str(e))
         logger.error(f"[MIGRATION_ENTRYPOINT] Subcommand '{args.subcommand}' failed: {redacted_err}")
-        sys.stderr.flush()
-        sys.stdout.flush()
-        sys.exit(1)
+        _safe_exit(1)
 
 
 if __name__ == "__main__":

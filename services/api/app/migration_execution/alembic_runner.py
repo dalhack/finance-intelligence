@@ -259,34 +259,99 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
             if current_rev != config.expected_head:
                 ensure_clean_transaction(connection, "Phase 3 entry")
 
-                # RESET ROLE to restore session_user identity ('db_bootstrap') prior to Alembic upgrade.
-                # Revision 026 requires ALTER DEFAULT PRIVILEGES FOR ROLE db_bootstrap, which requires
-                # current_user to be member of db_bootstrap (or current_user == db_bootstrap).
-                logger.info("[MIGRATION_RUNNER] Resetting active role to session_user ('db_bootstrap') for Phase 3...")
-                connection.execute(text("RESET ROLE;"))
-                connection.execute(text("GRANT USAGE, CREATE ON SCHEMA public TO db_bootstrap;"))
-
-                user_row = connection.execute(text("SELECT session_user, current_user;")).fetchone()
-                if not user_row:
-                    raise MigrationRunnerError("Phase 3 session reset failed: unable to query session context.")
-                sess_user, curr_user = str(user_row[0]), str(user_row[1])
-                logger.info(
-                    f"[MIGRATION_RUNNER] Phase 3 Session context: session_user='{sess_user}', current_user='{curr_user}'"
+                # Step 1: Audit pre-migration db_bootstrap schema privileges in db_owner context
+                bootstrap_create_before = bool(
+                    connection.execute(
+                        text("SELECT has_schema_privilege('db_bootstrap', 'public', 'CREATE');")
+                    ).scalar()
                 )
-                if curr_user != "db_bootstrap":
-                    raise MigrationRunnerError(
-                        f"Phase 3 session reset failed! Expected current_user 'db_bootstrap', got '{curr_user}'."
+                bootstrap_usage_before = bool(
+                    connection.execute(text("SELECT has_schema_privilege('db_bootstrap', 'public', 'USAGE');")).scalar()
+                )
+                logger.info(
+                    f"[MIGRATION_RUNNER] Pre-Phase 3 Privilege Audit: db_bootstrap USAGE={bootstrap_usage_before}, CREATE={bootstrap_create_before}"
+                )
+
+                temporary_grant_applied = False
+                if not bootstrap_create_before:
+                    logger.info(
+                        "[MIGRATION_RUNNER] Granting bounded temporary CREATE ON SCHEMA public to db_bootstrap for Phase 3..."
                     )
+                    connection.execute(text("GRANT CREATE ON SCHEMA public TO db_bootstrap;"))
+                    temporary_grant_applied = True
+                    ensure_clean_transaction(connection, "Temporary privilege grant")
 
-                logger.info(f"[MIGRATION_RUNNER] Phase 3: Executing Alembic upgrade to '{config.expected_head}'...")
-                command.upgrade(alembic_cfg, config.expected_head)
-                ensure_clean_transaction(connection, "Phase 3 exit")
+                cleanup_verified = False
+                try:
+                    # RESET ROLE to restore session_user identity ('db_bootstrap') prior to Alembic upgrade.
+                    # Revision 026 requires ALTER DEFAULT PRIVILEGES FOR ROLE db_bootstrap, which requires
+                    # current_user to be member of db_bootstrap (or current_user == db_bootstrap).
+                    logger.info(
+                        "[MIGRATION_RUNNER] Resetting active role to session_user ('db_bootstrap') for Phase 3..."
+                    )
+                    connection.execute(text("RESET ROLE;"))
 
-                applied_head = get_safe_current_revision(connection, valid_revisions)
-                logger.info(f"[MIGRATION_RUNNER] Phase 3 committed. Revision verified at '{applied_head}'.")
-                if applied_head != config.expected_head:
+                    user_row = connection.execute(text("SELECT session_user, current_user;")).fetchone()
+                    if not user_row:
+                        raise MigrationRunnerError("Phase 3 session reset failed: unable to query session context.")
+                    sess_user, curr_user = str(user_row[0]), str(user_row[1])
+                    logger.info(
+                        f"[MIGRATION_RUNNER] Phase 3 Session context: session_user='{sess_user}', current_user='{curr_user}'"
+                    )
+                    if curr_user != "db_bootstrap":
+                        raise MigrationRunnerError(
+                            f"Phase 3 session reset failed! Expected current_user 'db_bootstrap', got '{curr_user}'."
+                        )
+
+                    logger.info(f"[MIGRATION_RUNNER] Phase 3: Executing Alembic upgrade to '{config.expected_head}'...")
+                    command.upgrade(alembic_cfg, config.expected_head)
+                    ensure_clean_transaction(connection, "Phase 3 exit")
+
+                    applied_head = get_safe_current_revision(connection, valid_revisions)
+                    logger.info(f"[MIGRATION_RUNNER] Phase 3 committed. Revision verified at '{applied_head}'.")
+                    if applied_head != config.expected_head:
+                        raise MigrationRunnerError(
+                            f"Phase 3 verification failed! Expected '{config.expected_head}', got '{applied_head}'."
+                        )
+                finally:
+                    # Fail-closed temporary privilege cleanup and audit block
+                    if connection and not connection.closed and not connection.invalidated:
+                        try:
+                            if connection.in_transaction():
+                                connection.rollback()
+
+                            connection.execute(text("SET ROLE db_owner;"))
+                            if temporary_grant_applied:
+                                logger.info(
+                                    "[MIGRATION_RUNNER] Temporary privilege cleanup: Revoking CREATE ON SCHEMA public FROM db_bootstrap..."
+                                )
+                                connection.execute(text("REVOKE CREATE ON SCHEMA public FROM db_bootstrap;"))
+
+                            bootstrap_create_after = bool(
+                                connection.execute(
+                                    text("SELECT has_schema_privilege('db_bootstrap', 'public', 'CREATE');")
+                                ).scalar()
+                            )
+                            logger.info(
+                                f"[MIGRATION_RUNNER] Post-Phase 3 Privilege Audit: db_bootstrap CREATE={bootstrap_create_after} (expected {bootstrap_create_before})"
+                            )
+
+                            if bootstrap_create_after != bootstrap_create_before:
+                                raise MigrationRunnerError(
+                                    f"Privilege parity audit failure! Expected CREATE={bootstrap_create_before}, got {bootstrap_create_after}"
+                                )
+
+                            cleanup_verified = True
+                        except Exception as cleanup_ex:
+                            logger.error(f"[MIGRATION_RUNNER] Temporary privilege cleanup failed: {cleanup_ex}")
+                            if temporary_grant_applied and not cleanup_verified:
+                                raise MigrationRunnerError(
+                                    f"Temporary privilege cleanup failed: {cleanup_ex}"
+                                ) from cleanup_ex
+
+                if temporary_grant_applied and not cleanup_verified:
                     raise MigrationRunnerError(
-                        f"Phase 3 verification failed! Expected '{config.expected_head}', got '{applied_head}'."
+                        "Privilege cleanup verification failed: temporary CREATE privilege could not be revoked."
                     )
             else:
                 logger.info(

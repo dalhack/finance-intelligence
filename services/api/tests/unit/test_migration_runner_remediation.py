@@ -325,9 +325,9 @@ def test_known_revisions_parity_with_active_graph():
     assert "026_model_routing_policy_catalog" not in KNOWN_REVISIONS
 
 
-def test_db_bootstrap_schema_public_grant_in_phase3():
-    """Verifies that Phase 3 executes GRANT USAGE, CREATE ON SCHEMA public TO db_bootstrap after RESET ROLE."""
-    from unittest.mock import MagicMock
+def test_least_privilege_temporary_grant_and_revoke_success():
+    """Verifies temporary GRANT CREATE is executed when CREATE is missing and REVOKE CREATE is executed in finally."""
+    from unittest.mock import MagicMock, patch
 
     from app.migration_execution.alembic_runner import run_alembic_migrations
     from app.migration_execution.config import MigrationExecutionConfig
@@ -337,32 +337,21 @@ def test_db_bootstrap_schema_public_grant_in_phase3():
     mock_conn.invalidated = False
     mock_conn.in_transaction.return_value = False
 
-    # Simulate get_safe_current_revision
+    executed_sqls = []
+
     def mock_execute(statement, *args, **kwargs):
         sql = str(statement)
+        executed_sqls.append(sql)
         res = MagicMock()
         if "session_user, current_user, pg_backend_pid" in sql:
             res.fetchone.return_value = ("db_bootstrap", "db_owner", 1234)
         elif "SELECT session_user, current_user;" in sql:
             res.fetchone.return_value = ("db_bootstrap", "db_bootstrap")
-        elif "claim_next_maintenance_job" in sql:
-            res.fetchone.return_value = (
-                "db_owner",
-                True,
-                "search_path",
-                "p_worker_id text, p_claim_token uuid, p_allowed_job_codes text[]",
-            )
-        elif "to_regclass" in sql:
-            res.scalar.return_value = "public.table"
-        elif any(
-            k in sql
-            for k in ("has_database_privilege", "has_schema_privilege", "has_table_privilege", "has_function_privilege")
-        ):
+        elif "has_schema_privilege('db_bootstrap', 'public', 'CREATE')" in sql:
+            # First audit returns False (needs grant), cleanup audit returns False (revoke succeeded)
+            res.scalar.return_value = False
+        elif "has_schema_privilege('db_bootstrap', 'public', 'USAGE')" in sql:
             res.scalar.return_value = True
-            res.fetchone.return_value = (True,)
-        elif any(k in sql for k in ("pg_class", "pg_policy", "pg_tables", "pg_indexes", "pg_roles", "pg_proc")):
-            res.fetchone.return_value = ("db_owner", "PERMISSIVE", True, "public")
-            res.scalar.return_value = 1
         elif "SELECT count(*) FROM pg_locks" in sql:
             res.scalar.return_value = 1
         elif "SELECT pg_advisory_unlock" in sql:
@@ -370,16 +359,12 @@ def test_db_bootstrap_schema_public_grant_in_phase3():
         elif "SELECT pg_backend_pid()" in sql:
             res.scalar.return_value = 1234
             res.fetchone.return_value = (1234,)
-        elif "SELECT version_num FROM alembic_version" in sql:
-            res.fetchone.return_value = ("024_maintenance_scheduler_and_operational_resilience",)
-            res.scalar.return_value = "024_maintenance_scheduler_and_operational_resilience"
         else:
             res.fetchone.return_value = None
             res.scalar.return_value = None
         return res
 
     mock_conn.execute.side_effect = mock_execute
-
     mock_engine = MagicMock()
     mock_engine.connect.return_value.__enter__.return_value = mock_conn
 
@@ -391,8 +376,6 @@ def test_db_bootstrap_schema_public_grant_in_phase3():
         expected_head="031_analysis_job_claim_authority",
         bootstrap_password="secret_pass",
     )
-
-    from unittest.mock import patch
 
     with (
         patch("app.migration_execution.alembic_runner.Connector"),
@@ -411,6 +394,176 @@ def test_db_bootstrap_schema_public_grant_in_phase3():
     ):
         run_alembic_migrations(cfg)
 
-    # Verify that RESET ROLE and GRANT USAGE, CREATE ON SCHEMA public TO db_bootstrap were executed
-    executed_sqls = [str(call_args[0][0]) for call_args in mock_conn.execute.call_args_list]
-    assert any("GRANT USAGE, CREATE ON SCHEMA public TO db_bootstrap" in s for s in executed_sqls)
+    assert any("GRANT CREATE ON SCHEMA public TO db_bootstrap" in s for s in executed_sqls)
+    assert any("REVOKE CREATE ON SCHEMA public FROM db_bootstrap" in s for s in executed_sqls)
+
+
+def test_least_privilege_no_grant_if_create_already_exists():
+    """Verifies GRANT CREATE is NOT executed if db_bootstrap already has CREATE privilege."""
+    from unittest.mock import MagicMock, patch
+
+    from app.migration_execution.alembic_runner import run_alembic_migrations
+    from app.migration_execution.config import MigrationExecutionConfig
+
+    mock_conn = MagicMock()
+    mock_conn.closed = False
+    mock_conn.invalidated = False
+    mock_conn.in_transaction.return_value = False
+
+    executed_sqls = []
+
+    def mock_execute(statement, *args, **kwargs):
+        sql = str(statement)
+        executed_sqls.append(sql)
+        res = MagicMock()
+        if "session_user, current_user, pg_backend_pid" in sql:
+            res.fetchone.return_value = ("db_bootstrap", "db_owner", 1234)
+        elif "SELECT session_user, current_user;" in sql:
+            res.fetchone.return_value = ("db_bootstrap", "db_bootstrap")
+        elif (
+            "has_schema_privilege('db_bootstrap', 'public', 'CREATE')" in sql
+            or "has_schema_privilege('db_bootstrap', 'public', 'USAGE')" in sql
+        ):
+            res.scalar.return_value = True
+        elif "SELECT count(*) FROM pg_locks" in sql:
+            res.scalar.return_value = 1
+        elif "SELECT pg_advisory_unlock" in sql:
+            res.fetchone.return_value = (True,)
+        elif "SELECT pg_backend_pid()" in sql:
+            res.scalar.return_value = 1234
+            res.fetchone.return_value = (1234,)
+        else:
+            res.fetchone.return_value = None
+            res.scalar.return_value = None
+        return res
+
+    mock_conn.execute.side_effect = mock_execute
+    mock_engine = MagicMock()
+    mock_engine.connect.return_value.__enter__.return_value = mock_conn
+
+    cfg = MigrationExecutionConfig(
+        project_id="test-proj",
+        instance_name="test-inst",
+        region="test-reg",
+        target_database="test_db",
+        expected_head="031_analysis_job_claim_authority",
+        bootstrap_password="secret_pass",
+    )
+
+    with (
+        patch("app.migration_execution.alembic_runner.Connector"),
+        patch("app.migration_execution.alembic_runner.create_engine", return_value=mock_engine),
+        patch("app.migration_execution.alembic_runner.verify_revision_024_postconditions"),
+        patch("alembic.command.upgrade"),
+        patch(
+            "app.migration_execution.alembic_runner.get_safe_current_revision",
+            side_effect=[
+                "024_maintenance_scheduler_and_operational_resilience",
+                "031_analysis_job_claim_authority",
+                "031_analysis_job_claim_authority",
+                "031_analysis_job_claim_authority",
+            ],
+        ),
+    ):
+        run_alembic_migrations(cfg)
+
+    assert not any("GRANT CREATE ON SCHEMA public TO db_bootstrap" in s for s in executed_sqls)
+    assert not any("REVOKE CREATE ON SCHEMA public FROM db_bootstrap" in s for s in executed_sqls)
+
+
+def test_least_privilege_revoke_on_migration_failure():
+    """Verifies REVOKE CREATE is executed in finally block even when Alembic upgrade fails."""
+    from unittest.mock import MagicMock, patch
+
+    import pytest
+    from app.migration_execution.alembic_runner import MigrationRunnerError, run_alembic_migrations
+    from app.migration_execution.config import MigrationExecutionConfig
+
+    mock_conn = MagicMock()
+    mock_conn.closed = False
+    mock_conn.invalidated = False
+    mock_conn.in_transaction.return_value = False
+
+    executed_sqls = []
+
+    def mock_execute(statement, *args, **kwargs):
+        sql = str(statement)
+        executed_sqls.append(sql)
+        res = MagicMock()
+        if "session_user, current_user, pg_backend_pid" in sql:
+            res.fetchone.return_value = ("db_bootstrap", "db_owner", 1234)
+        elif "SELECT session_user, current_user;" in sql:
+            res.fetchone.return_value = ("db_bootstrap", "db_bootstrap")
+        elif "has_schema_privilege('db_bootstrap', 'public', 'CREATE')" in sql:
+            res.scalar.return_value = False
+        elif "SELECT count(*) FROM pg_locks" in sql:
+            res.scalar.return_value = 1
+        elif "SELECT pg_advisory_unlock" in sql:
+            res.fetchone.return_value = (True,)
+        elif "SELECT pg_backend_pid()" in sql:
+            res.scalar.return_value = 1234
+            res.fetchone.return_value = (1234,)
+        else:
+            res.fetchone.return_value = None
+            res.scalar.return_value = None
+        return res
+
+    mock_conn.execute.side_effect = mock_execute
+    mock_engine = MagicMock()
+    mock_engine.connect.return_value.__enter__.return_value = mock_conn
+
+    cfg = MigrationExecutionConfig(
+        project_id="test-proj",
+        instance_name="test-inst",
+        region="test-reg",
+        target_database="test_db",
+        expected_head="031_analysis_job_claim_authority",
+        bootstrap_password="secret_pass",
+    )
+
+    with (
+        patch("app.migration_execution.alembic_runner.Connector"),
+        patch("app.migration_execution.alembic_runner.create_engine", return_value=mock_engine),
+        patch("app.migration_execution.alembic_runner.verify_revision_024_postconditions"),
+        patch("alembic.command.upgrade", side_effect=RuntimeError("Injected migration failure")),
+        patch(
+            "app.migration_execution.alembic_runner.get_safe_current_revision",
+            return_value="024_maintenance_scheduler_and_operational_resilience",
+        ),
+        pytest.raises(MigrationRunnerError, match="Injected migration failure"),
+    ):
+        run_alembic_migrations(cfg)
+
+    assert any("GRANT CREATE ON SCHEMA public TO db_bootstrap" in s for s in executed_sqls)
+    assert any("REVOKE CREATE ON SCHEMA public FROM db_bootstrap" in s for s in executed_sqls)
+
+
+def test_historical_migration_026_unmodified():
+    """Verifies that 026_public_schema_acl_hardening.py does NOT grant persistent CREATE to db_bootstrap."""
+    from pathlib import Path
+
+    m26_path = Path(__file__).parents[2] / "alembic" / "versions" / "026_public_schema_acl_hardening.py"
+    content = m26_path.read_text(encoding="utf-8")
+
+    assert "GRANT USAGE, CREATE ON SCHEMA public TO db_bootstrap;" not in content
+    assert "GRANT USAGE ON SCHEMA public TO db_bootstrap;" in content
+
+
+def test_logging_exit_path_flushes_all_streams():
+    """Verifies _safe_exit flushes logging handlers and stdio streams before calling sys.exit."""
+    from unittest.mock import patch
+
+    from app.migration_entrypoint import _safe_exit
+
+    with (
+        patch("logging.shutdown") as mock_log_shutdown,
+        patch("sys.stdout.flush") as mock_stdout_flush,
+        patch("sys.stderr.flush") as mock_stderr_flush,
+        patch("sys.exit") as mock_exit,
+    ):
+        _safe_exit(1)
+
+        mock_log_shutdown.assert_called_once()
+        mock_stdout_flush.assert_called_once()
+        mock_stderr_flush.assert_called_once()
+        mock_exit.assert_called_once_with(1)
