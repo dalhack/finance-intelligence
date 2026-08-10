@@ -273,3 +273,53 @@ def test_t6_t7_t8_t9_t10_remediation_invariants():
     script = ScriptDirectory(str(alembic_dir))
     heads = script.get_heads()
     assert heads == ["031_analysis_job_claim_authority"]
+
+
+def test_get_valid_graph_revisions_success():
+    """Verifies that get_valid_graph_revisions extracts all 31 revisions from Alembic ScriptDirectory graph."""
+    from alembic.config import Config
+    from app.migration_execution.alembic_runner import get_valid_graph_revisions
+
+    ini_path = str(API_DIR / "alembic.ini")
+    cfg = Config(ini_path)
+    cfg.set_main_option("script_location", str(API_DIR / "alembic"))
+
+    revs = get_valid_graph_revisions(cfg, expected_head="031_analysis_job_claim_authority")
+    assert len(revs) == 31
+    assert "026_public_schema_acl_hardening" in revs
+    assert "031_analysis_job_claim_authority" in revs
+    assert "026_model_routing_policy_catalog" not in revs
+
+
+def test_get_valid_graph_revisions_multiple_heads_fails_closed():
+    """Verifies that get_valid_graph_revisions raises MigrationRunnerError if multiple heads exist in graph."""
+    from alembic.config import Config
+    from app.migration_execution.alembic_runner import (
+        MigrationRunnerError,
+        get_valid_graph_revisions,
+    )
+
+    ini_path = str(API_DIR / "alembic.ini")
+    cfg = Config(ini_path)
+    cfg.set_main_option("script_location", str(API_DIR / "alembic"))
+
+    with patch("app.migration_execution.alembic_runner.ScriptDirectory") as mock_sd_cls:
+        mock_sd = MagicMock()
+        mock_sd.get_heads.return_value = ["031_head_a", "031_head_b"]
+        mock_sd_cls.from_config.return_value = mock_sd
+
+        with pytest.raises(MigrationRunnerError, match="Multiple migration heads detected"):
+            get_valid_graph_revisions(cfg)
+
+
+def test_known_revisions_parity_with_active_graph():
+    """Verifies that KNOWN_REVISIONS contains all active graph revisions and excludes stale/draft names."""
+    from app.migration_execution.alembic_runner import KNOWN_REVISIONS
+
+    assert "026_public_schema_acl_hardening" in KNOWN_REVISIONS
+    assert "027_auth_context_lookup_security_plane" in KNOWN_REVISIONS
+    assert "028_remove_organization_only_actor_lookup" in KNOWN_REVISIONS
+    assert "029_analysis_authorization_policy" in KNOWN_REVISIONS
+    assert "030_reconcile_application_role_catalog" in KNOWN_REVISIONS
+    assert "031_analysis_job_claim_authority" in KNOWN_REVISIONS
+    assert "026_model_routing_policy_catalog" not in KNOWN_REVISIONS

@@ -30,22 +30,24 @@ MIGRATION_ADVISORY_LOCK_ID = 849204918239
 MIGRATION_ADVISORY_LOCK_CLASSID = 197
 MIGRATION_ADVISORY_LOCK_OBJID = 3096360927
 
+from alembic.script import ScriptDirectory
+
 KNOWN_REVISIONS = {
     None,
-    "001_initial_tenant_schema_and_rls",
+    "001_initial_schema_and_rls",
     "002_document_ingestion_schema",
     "003_role_separation",
     "004_revoke_app_user",
-    "005_worker_claim_and_guarded_downgrade",
-    "006_status_mapping_and_claim_tokens",
-    "007_drop_legacy_claim_overload",
-    "008_financial_facts_and_command_envelope",
-    "009_command_envelope_and_fact_integrity",
-    "010_fact_revision_and_active_uniqueness",
-    "011_calculation_engine_schema",
-    "012_calculation_correctness_and_unrounded_result",
-    "013_calculation_checksum_and_lineage_hardening",
-    "014_calculation_identity_and_evidence_integrity",
+    "005_worker_claim_downgrade",
+    "006_claim_tokens",
+    "007_drop_legacy_overload",
+    "008_facts_and_envelope",
+    "009_facts_integrity",
+    "010_fact_revision_uniqueness",
+    "011_calculation_engine",
+    "012_calc_correctness",
+    "013_calc_checksum_lineage",
+    "014_calc_identity_evidence",
     "015_sec_context_calc_integrity",
     "016_traceability_integrity_repair",
     "017_comparison_dataset",
@@ -57,10 +59,10 @@ KNOWN_REVISIONS = {
     "023_analysis_clarification_workflow",
     "024_maintenance_scheduler_and_operational_resilience",
     "025_distributed_provider_circuit_breaker",
-    "026_model_routing_policy_catalog",
-    "027_orchestration_lease_fencing",
-    "028_analysis_clarification_integrity_constraints",
-    "029_ai_execution_audit_lineage",
+    "026_public_schema_acl_hardening",
+    "027_auth_context_lookup_security_plane",
+    "028_remove_organization_only_actor_lookup",
+    "029_analysis_authorization_policy",
     "030_reconcile_application_role_catalog",
     "031_analysis_job_claim_authority",
 }
@@ -70,15 +72,45 @@ class MigrationRunnerError(Exception):
     """Raised when Alembic migration execution fails or boundary is violated."""
 
 
-def get_safe_current_revision(connection: Connection) -> str | None:
+def get_valid_graph_revisions(alembic_cfg: Config, expected_head: str | None = None) -> set[str]:
+    """Dynamically derives canonical set of valid migration revisions directly from Alembic ScriptDirectory graph with fail-closed validation."""
+    try:
+        script_dir = ScriptDirectory.from_config(alembic_cfg)
+        heads = script_dir.get_heads()
+        if len(heads) != 1:
+            raise MigrationRunnerError(f"Multiple migration heads detected in repository graph: {heads}")
+
+        graph_head = heads[0]
+        if expected_head and graph_head != expected_head:
+            raise MigrationRunnerError(
+                f"Repository migration graph head '{graph_head}' does not match expected_head '{expected_head}'"
+            )
+
+        revisions = {sc.revision for sc in script_dir.walk_revisions()}
+        if not revisions:
+            raise MigrationRunnerError("No migration revisions discovered in repository graph")
+
+        return revisions
+    except MigrationRunnerError:
+        raise
+    except Exception as e:
+        raise MigrationRunnerError(f"Failed to derive migration revision graph: {e}") from e
+
+
+def get_safe_current_revision(
+    connection: Connection,
+    valid_revisions: set[str] | None = None,
+) -> str | None:
     """Safely inspects current database revision using Alembic MigrationContext without aborting PostgreSQL transaction if version table is absent."""
     context = MigrationContext.configure(connection)
     current_rev = context.get_current_revision()
     if connection.in_transaction():
         connection.commit()
 
-    if current_rev not in KNOWN_REVISIONS:
-        raise MigrationRunnerError(f"Unknown or invalid migration revision detected: '{current_rev}'")
+    if current_rev is not None:
+        target_revisions = valid_revisions if valid_revisions is not None else KNOWN_REVISIONS
+        if current_rev not in target_revisions:
+            raise MigrationRunnerError(f"Unknown or invalid migration revision detected: '{current_rev}'")
 
     return current_rev
 
@@ -177,8 +209,10 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
             alembic_cfg = Config(ini_path)
             alembic_cfg.attributes["connection"] = connection
 
+            valid_revisions = get_valid_graph_revisions(alembic_cfg, config.expected_head)
+
             # Detect current revision safely
-            current_rev = get_safe_current_revision(connection)
+            current_rev = get_safe_current_revision(connection, valid_revisions)
             logger.info(f"[MIGRATION_RUNNER] Detected current database revision: '{current_rev}'")
 
             # PHASE 1: Standard Alembic Upgrade 001 -> 023 (if pristine or < 023)
@@ -190,7 +224,7 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
                 command.upgrade(alembic_cfg, "023_analysis_clarification_workflow")
                 ensure_clean_transaction(connection, "Phase 1 exit")
 
-                current_rev = get_safe_current_revision(connection)
+                current_rev = get_safe_current_revision(connection, valid_revisions)
                 logger.info(f"[MIGRATION_RUNNER] Phase 1 committed. Revision verified at '{current_rev}'.")
                 if current_rev != "023_analysis_clarification_workflow":
                     raise MigrationRunnerError(
@@ -206,7 +240,7 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
                 execute_compatibility_bridge(connection, expected_database=config.target_database)
                 ensure_clean_transaction(connection, "Phase 2 exit")
 
-                current_rev = get_safe_current_revision(connection)
+                current_rev = get_safe_current_revision(connection, valid_revisions)
                 logger.info(f"[MIGRATION_RUNNER] Phase 2 committed. Revision verified at '{current_rev}'.")
                 if current_rev != "024_maintenance_scheduler_and_operational_resilience":
                     raise MigrationRunnerError(
@@ -247,7 +281,7 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
                 command.upgrade(alembic_cfg, config.expected_head)
                 ensure_clean_transaction(connection, "Phase 3 exit")
 
-                applied_head = get_safe_current_revision(connection)
+                applied_head = get_safe_current_revision(connection, valid_revisions)
                 logger.info(f"[MIGRATION_RUNNER] Phase 3 committed. Revision verified at '{applied_head}'.")
                 if applied_head != config.expected_head:
                     raise MigrationRunnerError(
@@ -259,7 +293,7 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
                 )
 
             # Final Head Assertion and Lock Release
-            final_head = get_safe_current_revision(connection)
+            final_head = get_safe_current_revision(connection, valid_revisions)
             if final_head != config.expected_head:
                 raise MigrationRunnerError(
                     f"Final migration head mismatch! Expected '{config.expected_head}', got '{final_head}'."
