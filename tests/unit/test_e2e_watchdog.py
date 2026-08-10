@@ -226,9 +226,17 @@ def test_watchdog_phase_and_timing_diagnostic_output(capsys):
         infer_phase_from_output("xcrun simctl install 1234 Runner.app", PHASE_POST_XCODE_BUILD_WAIT) == PHASE_APP_LAUNCH
     )
     assert (
+        infer_phase_from_output("Waiting for VM Service port to be available...", PHASE_APP_LAUNCH)
+        == PHASE_TEST_DRIVER_CONNECT
+    )
+    assert (
         infer_phase_from_output("Connecting to VM Service at http://127.0.0.1", "UNKNOWN") == PHASE_TEST_DRIVER_CONNECT
     )
-    assert infer_phase_from_output("Running test: login_flow_test", "UNKNOWN") == PHASE_TEST_BODY
+    assert (
+        infer_phase_from_output("Testing environment configuration line", PHASE_TEST_DRIVER_CONNECT)
+        == PHASE_TEST_DRIVER_CONNECT
+    )
+    assert infer_phase_from_output("00:00 +0: device_e2e_test", PHASE_TEST_DRIVER_CONNECT) == PHASE_TEST_BODY
     assert (
         infer_phase_from_output("Unrecognized output line", PHASE_POST_XCODE_BUILD_WAIT) == PHASE_POST_XCODE_BUILD_WAIT
     )

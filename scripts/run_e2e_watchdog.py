@@ -36,6 +36,7 @@ EVENT_PID_FALLBACK_FAILED = "IOS_E2E_PID_FALLBACK_FAILED"
 EVENT_PROCESS_EXIT_CONFIRMED = "IOS_E2E_PROCESS_EXIT_CONFIRMED"
 EVENT_PROCESS_STILL_ALIVE = "IOS_E2E_PROCESS_STILL_ALIVE"
 EVENT_PHASE_CHANGED = "IOS_E2E_PHASE_CHANGED"
+EVENT_VM_SERVICE_CONNECT_TIMEOUT = "IOS_E2E_VM_SERVICE_CONNECT_TIMEOUT"
 
 # Phase Constants
 PHASE_DEPENDENCY_RESOLUTION = "IOS_E2E_PHASE_DEPENDENCY_RESOLUTION"
@@ -105,6 +106,8 @@ def infer_phase_from_output(line: str, current_phase: str) -> str:
     elif any(
         k in lower
         for k in (
+            "waiting for vm service port",
+            "waiting for vm service",
             "connecting to vm service",
             "test_driver",
             "observatory",
@@ -114,7 +117,16 @@ def infer_phase_from_output(line: str, current_phase: str) -> str:
         )
     ):
         inferred = PHASE_TEST_DRIVER_CONNECT
-    elif any(k in lower for k in ("all tests passed", "test case", "assertion", "running test", "00:")):
+    elif any(
+        k in lower
+        for k in (
+            "all tests passed",
+            "test case '",
+            "running test:",
+            "00:00 +0:",
+            "00:01 +0:",
+        )
+    ):
         inferred = PHASE_TEST_BODY
 
     # Enforce monotonic phase progression
