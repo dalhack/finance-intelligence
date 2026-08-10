@@ -30,14 +30,30 @@ from scripts.run_e2e_watchdog import (
 
 
 def test_watchdog_log_redaction():
-    """T9: Verifies sensitive tokens and passwords are redacted from log lines."""
-    raw_auth = "AUTHORIZATION: basic dXNlcjpwYXNz"
-    raw_bearer = "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
-    raw_pass = "DATABASE_URL=postgresql://user:secret_pass_123@localhost/db"
+    """T9: Verifies sensitive tokens, URLs, ANSI sequences, and length bounds are enforced."""
+    from scripts.run_e2e_watchdog import redact_and_truncate_line
 
-    assert redact_line(raw_auth) == "AUTHORIZATION: basic [REDACTED]"
-    assert redact_line(raw_bearer) == "bearer [REDACTED]"
-    assert "secret_pass_123" not in redact_line(raw_pass)
+    secret = "TEST_SECRET"
+
+    raw_auth = f"Authorization: Bearer {secret}"
+    raw_ws = f"wss://127.0.0.1/ws?authToken={secret}"
+    raw_db = f"postgresql://user:{secret}@host/db"
+    raw_ansi = f"\x1b[31mError with secret={secret}\x1b[0m"
+    long_line = "A" * 200
+
+    redacted_auth = redact_line(raw_auth)
+    redacted_ws = redact_line(raw_ws)
+    redacted_db = redact_line(raw_db)
+    redacted_ansi = redact_line(raw_ansi)
+    truncated = redact_and_truncate_line(long_line, max_length=120)
+
+    assert secret not in redacted_auth
+    assert secret not in redacted_ws
+    assert secret not in redacted_db
+    assert secret not in redacted_ansi
+    assert "\x1b" not in redacted_ansi
+    assert len(truncated) <= 120
+    assert truncated.endswith("...")
 
 
 def test_watchdog_command_allowlist():
@@ -216,6 +232,7 @@ def test_watchdog_phase_and_timing_diagnostic_output(capsys):
     assert (
         infer_phase_from_output("Unrecognized output line", PHASE_POST_XCODE_BUILD_WAIT) == PHASE_POST_XCODE_BUILD_WAIT
     )
+    assert infer_phase_from_output("Building Runner.app with Xcode", PHASE_APP_LAUNCH) == PHASE_APP_LAUNCH
 
     cmd = (
         "import time, sys\n"

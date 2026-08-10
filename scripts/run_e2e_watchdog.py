@@ -47,10 +47,24 @@ PHASE_TEST_BODY = "IOS_E2E_PHASE_TEST_BODY"
 PHASE_COMPLETED = "IOS_E2E_PHASE_COMPLETED"
 PHASE_UNKNOWN = "IOS_E2E_PHASE_UNKNOWN"
 
+PHASE_RANK: dict[str, int] = {
+    PHASE_UNKNOWN: 0,
+    PHASE_DEPENDENCY_RESOLUTION: 1,
+    PHASE_XCODE_BUILD: 2,
+    PHASE_POST_XCODE_BUILD_WAIT: 3,
+    PHASE_APP_LAUNCH: 4,
+    PHASE_TEST_DRIVER_CONNECT: 5,
+    PHASE_TEST_BODY: 6,
+    PHASE_COMPLETED: 7,
+}
+
 # Redaction patterns for security
+ANSI_ESCAPE_REGEX = re.compile(r"\x1B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])")
+
 REDACTION_PATTERNS = [
     (re.compile(r"(AUTHORIZATION:\s*basic\s+)[^\s\n]+", re.IGNORECASE), r"\1[REDACTED]"),
     (re.compile(r"(bearer\s+)[a-zA-Z0-9\-\._~\+\/]+=*", re.IGNORECASE), r"\1[REDACTED]"),
+    (re.compile(r"([?&](?:authToken|token|auth|key|secret|password)=)[^&\s]+", re.IGNORECASE), r"\1[REDACTED]"),
     (re.compile(r"(password[=:]\s*)[^\s\n&;]+", re.IGNORECASE), r"\1[REDACTED]"),
     (re.compile(r"(secret[=:]\s*)[^\s\n&;]+", re.IGNORECASE), r"\1[REDACTED]"),
     (re.compile(r"(token[=:]\s*)[^\s\n&;]+", re.IGNORECASE), r"\1[REDACTED]"),
@@ -60,24 +74,35 @@ REDACTION_PATTERNS = [
 
 def redact_line(line: str) -> str:
     """Sanitizes sensitive tokens, passwords, and authorization headers from log line."""
-    cleaned = line
+    cleaned = ANSI_ESCAPE_REGEX.sub("", line)
     for pattern, replacement in REDACTION_PATTERNS:
         cleaned = pattern.sub(replacement, cleaned)
     return cleaned
 
 
+def redact_and_truncate_line(line: str, max_length: int = 120) -> str:
+    """Redacts, normalizes control characters, and bounds maximum line length for LastLine output."""
+    cleaned = redact_line(line)
+    normalized = re.sub(r"[\r\n\t]+", " ", cleaned).strip()
+    if len(normalized) > max_length:
+        return normalized[: max_length - 3] + "..."
+    return normalized
+
+
 def infer_phase_from_output(line: str, current_phase: str) -> str:
-    """Infers current execution phase based on child stdout/stderr line."""
+    """Infers current execution phase monotonically based on child stdout/stderr line."""
     lower = line.lower()
+    inferred = current_phase
+
     if any(k in lower for k in ("pub get", "cocoapods", "running pod install")):
-        return PHASE_DEPENDENCY_RESOLUTION
-    if any(k in lower for k in ("xcode build done", "built build/ios/iphonesimulator")):
-        return PHASE_POST_XCODE_BUILD_WAIT
-    if any(k in lower for k in ("xcode build", "xcodebuild", "building runner.app")):
-        return PHASE_XCODE_BUILD
-    if any(k in lower for k in ("installing", "launching", "simctl install", "simctl launch")):
-        return PHASE_APP_LAUNCH
-    if any(
+        inferred = PHASE_DEPENDENCY_RESOLUTION
+    elif any(k in lower for k in ("xcode build done", "built build/ios/iphonesimulator")):
+        inferred = PHASE_POST_XCODE_BUILD_WAIT
+    elif any(k in lower for k in ("xcode build", "xcodebuild", "building runner.app")):
+        inferred = PHASE_XCODE_BUILD
+    elif any(k in lower for k in ("installing", "launching", "simctl install", "simctl launch")):
+        inferred = PHASE_APP_LAUNCH
+    elif any(
         k in lower
         for k in (
             "connecting to vm service",
@@ -88,9 +113,13 @@ def infer_phase_from_output(line: str, current_phase: str) -> str:
             "synced ",
         )
     ):
-        return PHASE_TEST_DRIVER_CONNECT
-    if any(k in lower for k in ("all tests passed", "test case", "assertion", "running test", "00:")):
-        return PHASE_TEST_BODY
+        inferred = PHASE_TEST_DRIVER_CONNECT
+    elif any(k in lower for k in ("all tests passed", "test case", "assertion", "running test", "00:")):
+        inferred = PHASE_TEST_BODY
+
+    # Enforce monotonic phase progression
+    if PHASE_RANK.get(inferred, 0) > PHASE_RANK.get(current_phase, 0):
+        return inferred
     return current_phase
 
 
@@ -358,8 +387,13 @@ def run_watchdog(
             # Periodic heartbeat check (HEARTBEAT DOES NOT RESET last_child_output_time!)
             if now - last_heartbeat_time >= heartbeat_interval_seconds:
                 silence_duration = int(now - last_child_output_time)
+                redacted_last_line = (
+                    redact_and_truncate_line(last_child_output_line, max_length=120)
+                    if last_child_output_line
+                    else "NONE"
+                )
                 sys.stdout.write(
-                    f"[WATCHDOG HEARTBEAT] Event={EVENT_WATCHDOG_HEARTBEAT} Elapsed={int(elapsed)}s Silence={silence_duration}s Phase={current_phase} Status=RUNNING PGID={pgid}\n"
+                    f"[WATCHDOG HEARTBEAT] Event={EVENT_WATCHDOG_HEARTBEAT} Elapsed={int(elapsed)}s Silence={silence_duration}s Phase={current_phase} LastLine='{redacted_last_line}' Status=RUNNING PGID={pgid}\n"
                 )
                 sys.stdout.flush()
                 last_heartbeat_time = now
