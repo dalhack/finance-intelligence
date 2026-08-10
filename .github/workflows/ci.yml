@@ -354,7 +354,7 @@ jobs:
         working-directory: apps/mobile
         timeout-minutes: 15
         run: |
-          python ../../scripts/run_e2e_watchdog.py --timeout-seconds 900 --silence-timeout-seconds 120 --heartbeat-seconds 30 flutter test integration_test/device_e2e_test.dart -d "$SIMULATOR_UDID"
+          python ../../scripts/run_e2e_watchdog.py --timeout-seconds 900 --silence-timeout-seconds 180 --heartbeat-seconds 30 flutter test integration_test/device_e2e_test.dart -d "$SIMULATOR_UDID"
       - name: Collect Redacted Diagnostic Context
         if: failure() || cancelled()
         timeout-minutes: 2

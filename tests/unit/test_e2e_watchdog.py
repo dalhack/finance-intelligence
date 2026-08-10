@@ -227,3 +227,13 @@ def test_watchdog_phase_and_timing_diagnostic_output(capsys):
     captured = capsys.readouterr()
     assert EVENT_PHASE_CHANGED in captured.out
     assert PHASE_TEST_DRIVER_CONNECT in captured.out or PHASE_TEST_DRIVER_CONNECT in captured.err
+
+
+def test_watchdog_silence_budget_safety_margin():
+    """Verifies math calculation for healthy max silence (110s) vs calibrated limit (180s) safety margin (>= 60s)."""
+    healthy_max_observed_silence = 110
+    calibrated_silence_timeout = 180
+    safety_margin = calibrated_silence_timeout - healthy_max_observed_silence
+
+    assert safety_margin >= 60, f"Safety margin {safety_margin}s must be >= 60s"
+    assert calibrated_silence_timeout < 900

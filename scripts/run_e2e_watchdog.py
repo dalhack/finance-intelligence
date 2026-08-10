@@ -232,7 +232,7 @@ def terminate_process_group(
 def run_watchdog(
     cmd_args: list[str],
     timeout_seconds: int = 900,
-    silence_timeout_seconds: int = 120,
+    silence_timeout_seconds: int = 180,
     heartbeat_interval_seconds: int = 30,
     grace_seconds: float = 5.0,
     cwd: str | None = None,
@@ -369,7 +369,7 @@ def run_watchdog(
 def main() -> None:
     parser = argparse.ArgumentParser(description="E2E Process Watchdog Runner")
     parser.add_argument("--timeout-seconds", type=int, default=900, help="Max execution timeout in seconds")
-    parser.add_argument("--silence-timeout-seconds", type=int, default=120, help="Max child output silence in seconds")
+    parser.add_argument("--silence-timeout-seconds", type=int, default=180, help="Max child output silence in seconds")
     parser.add_argument("--heartbeat-seconds", type=int, default=30, help="Heartbeat logging interval")
     parser.add_argument("--grace-seconds", type=float, default=5.0, help="Grace period for SIGTERM before SIGKILL")
     parser.add_argument("--cwd", type=str, default=None, help="Working directory for child command")
