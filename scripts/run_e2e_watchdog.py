@@ -38,6 +38,19 @@ EVENT_PROCESS_STILL_ALIVE = "IOS_E2E_PROCESS_STILL_ALIVE"
 EVENT_PHASE_CHANGED = "IOS_E2E_PHASE_CHANGED"
 EVENT_VM_SERVICE_CONNECT_TIMEOUT = "IOS_E2E_VM_SERVICE_CONNECT_TIMEOUT"
 
+# Pre-Termination Diagnostic Event Codes
+EVENT_PRE_TERMINATION_DIAGNOSTIC_STARTED = "IOS_E2E_PRE_TERMINATION_DIAGNOSTIC_STARTED"
+EVENT_CHILD_PROCESS_STATE = "IOS_E2E_CHILD_PROCESS_STATE"
+EVENT_RUNNER_APP_STATE = "IOS_E2E_RUNNER_APP_STATE"
+EVENT_VM_SERVICE_PORT_STATE = "IOS_E2E_VM_SERVICE_PORT_STATE"
+EVENT_SIMULATOR_LOG_SUMMARY = "IOS_E2E_SIMULATOR_LOG_SUMMARY"
+EVENT_PRE_TERMINATION_DIAGNOSTIC_COMPLETED = "IOS_E2E_PRE_TERMINATION_DIAGNOSTIC_COMPLETED"
+EVENT_PRE_TERMINATION_DIAGNOSTIC_FAILED = "IOS_E2E_PRE_TERMINATION_DIAGNOSTIC_FAILED"
+
+# Input Validation Regexes
+UDID_REGEX = re.compile(r"^[A-F0-9]{8}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{4}-[A-F0-9]{12}$", re.IGNORECASE)
+BUNDLE_ID_REGEX = re.compile(r"^[a-zA-Z0-9\.\-]+$")
+
 # Phase Constants
 PHASE_DEPENDENCY_RESOLUTION = "IOS_E2E_PHASE_DEPENDENCY_RESOLUTION"
 PHASE_XCODE_BUILD = "IOS_E2E_PHASE_XCODE_BUILD"
@@ -133,6 +146,157 @@ def infer_phase_from_output(line: str, current_phase: str) -> str:
     if PHASE_RANK.get(inferred, 0) > PHASE_RANK.get(current_phase, 0):
         return inferred
     return current_phase
+
+
+def collect_pre_termination_diagnostics(
+    pid: int,
+    pgid: int,
+    simulator_udid: str | None = None,
+    bundle_id: str = "com.dalhack.financeintelligence",
+    current_phase: str = PHASE_UNKNOWN,
+    diagnostic_timeout_sec: float = 20.0,
+) -> dict[str, str | bool | int]:
+    """Collects machine-readable, redacted, and time-bounded liveness diagnostics before killing child process group."""
+    start = time.time()
+    results: dict[str, str | bool | int] = {
+        "runner_installed": False,
+        "runner_pid_present": False,
+        "runner_alive": False,
+        "runner_process_state": "UNKNOWN",
+        "vm_service_listener_present": False,
+        "vm_service_listener_pid": 0,
+        "crash_signature_present": False,
+        "diagnostic_truncated": False,
+        "diagnostic_duration_ms": 0,
+    }
+
+    sys.stderr.write(
+        f"[WATCHDOG DIAGNOSTIC] Event={EVENT_PRE_TERMINATION_DIAGNOSTIC_STARTED} RootPID={pid} PGID={pgid} Phase={current_phase} Timeout={diagnostic_timeout_sec}s\n"
+    )
+    sys.stderr.flush()
+
+    try:
+        # 1. Child Process Tree Inspection (COMM only, NO ARGV or ENV!)
+        if sys.platform != "win32":
+            try:
+                ps_res = subprocess.run(
+                    ["ps", "-o", "pid,ppid,pgid,state,comm", "-g", str(pgid)],
+                    capture_output=True,
+                    text=True,
+                    timeout=3.0,
+                    check=False,
+                )
+                if ps_res.returncode == 0:
+                    lines = [l.strip() for l in ps_res.stdout.splitlines() if l.strip()][1:]
+                    procs_summary = "; ".join(redact_and_truncate_line(l, 80) for l in lines[:10])
+                    sys.stderr.write(
+                        f"[WATCHDOG DIAGNOSTIC] Event={EVENT_CHILD_PROCESS_STATE} RootPID={pid} PGID={pgid} Count={len(lines)} Procs='{procs_summary}'\n"
+                    )
+                    sys.stderr.flush()
+
+                    for line in lines:
+                        if "Runner" in line:
+                            results["runner_pid_present"] = True
+                            parts = line.split()
+                            if len(parts) >= 4:
+                                results["runner_process_state"] = parts[3]
+                                if "Z" not in parts[3]:
+                                    results["runner_alive"] = True
+            except Exception as pe:  # noqa: BLE001
+                sys.stderr.write(f"[WATCHDOG DIAGNOSTIC] Process tree check failed: {pe}\n")
+
+        # 2. Simulator App Container & Status Check
+        if simulator_udid and UDID_REGEX.match(simulator_udid) and sys.platform == "darwin":
+            try:
+                apps_res = subprocess.run(
+                    ["xcrun", "simctl", "listapps", simulator_udid],
+                    capture_output=True,
+                    text=True,
+                    timeout=4.0,
+                    check=False,
+                )
+                if apps_res.returncode == 0 and bundle_id in apps_res.stdout:
+                    results["runner_installed"] = True
+
+                sys.stderr.write(
+                    f"[WATCHDOG DIAGNOSTIC] Event={EVENT_RUNNER_APP_STATE} UDID={simulator_udid} BundleID={bundle_id} Installed={results['runner_installed']} Alive={results['runner_alive']} State={results['runner_process_state']}\n"
+                )
+                sys.stderr.flush()
+            except Exception as ae:  # noqa: BLE001
+                sys.stderr.write(f"[WATCHDOG DIAGNOSTIC] App state check failed: {ae}\n")
+
+        # 3. VM Service Port Listener Inspection
+        if sys.platform != "win32":
+            try:
+                lsof_res = subprocess.run(
+                    ["lsof", "-iTCP", "-sTCP:LISTEN", "-P", "-n"],
+                    capture_output=True,
+                    text=True,
+                    timeout=3.0,
+                    check=False,
+                )
+                if lsof_res.returncode == 0:
+                    for l in lsof_res.stdout.splitlines():
+                        if any(k in l for k in ("Runner", "flutter", "dart")) and (
+                            "127.0.0.1" in l or "localhost" in l or "*:" in l or "::1" in l
+                        ):
+                            results["vm_service_listener_present"] = True
+                            parts = l.split()
+                            if len(parts) >= 2 and parts[1].isdigit():
+                                results["vm_service_listener_pid"] = int(parts[1])
+                            break
+
+                sys.stderr.write(
+                    f"[WATCHDOG DIAGNOSTIC] Event={EVENT_VM_SERVICE_PORT_STATE} ListenerPresent={results['vm_service_listener_present']} ListenerPID={results['vm_service_listener_pid']}\n"
+                )
+                sys.stderr.flush()
+            except Exception as ve:  # noqa: BLE001
+                sys.stderr.write(f"[WATCHDOG DIAGNOSTIC] VM Service listener check failed: {ve}\n")
+
+        # 4. Bounded Simulator Log Summary
+        if simulator_udid and UDID_REGEX.match(simulator_udid) and sys.platform == "darwin":
+            try:
+                log_cmd = [
+                    "xcrun",
+                    "simctl",
+                    "spawn",
+                    simulator_udid,
+                    "log",
+                    "show",
+                    "--predicate",
+                    'process == "Runner" or message contains "VM Service" or message contains "Observatory"',
+                    "--last",
+                    "180s",
+                    "--style",
+                    "compact",
+                ]
+                log_res = subprocess.run(log_cmd, capture_output=True, text=True, timeout=5.0, check=False)
+                if log_res.returncode == 0:
+                    log_lines = [l.strip() for l in log_res.stdout.splitlines() if l.strip()][-20:]
+                    log_lower = "\n".join(log_lines).lower()
+                    results["crash_signature_present"] = any(
+                        k in log_lower for k in ("crash", "abort", "dyld", "entitlement", "exception", "terminated")
+                    )
+                    last_log_line = redact_and_truncate_line(log_lines[-1], 100) if log_lines else "NONE"
+                    sys.stderr.write(
+                        f"[WATCHDOG DIAGNOSTIC] Event={EVENT_SIMULATOR_LOG_SUMMARY} UDID={simulator_udid} CrashPresent={results['crash_signature_present']} Lines={len(log_lines)} LastLine='{last_log_line}'\n"
+                    )
+                    sys.stderr.flush()
+            except Exception as le:  # noqa: BLE001
+                sys.stderr.write(f"[WATCHDOG DIAGNOSTIC] Simulator log check failed: {le}\n")
+
+    except Exception as e:  # noqa: BLE001
+        sys.stderr.write(f"[WATCHDOG DIAGNOSTIC] Event={EVENT_PRE_TERMINATION_DIAGNOSTIC_FAILED} Error='{e}'\n")
+        sys.stderr.flush()
+
+    duration_ms = int((time.time() - start) * 1000)
+    results["diagnostic_duration_ms"] = duration_ms
+    sys.stderr.write(
+        f"[WATCHDOG DIAGNOSTIC] Event={EVENT_PRE_TERMINATION_DIAGNOSTIC_COMPLETED} Duration={duration_ms}ms\n"
+    )
+    sys.stderr.flush()
+
+    return results
 
 
 def is_command_allowed(cmd_args: list[str]) -> bool:
@@ -288,6 +452,8 @@ def run_watchdog(
     grace_seconds: float = 5.0,
     cwd: str | None = None,
     env: dict | None = None,
+    simulator_udid: str | None = None,
+    bundle_id: str = "com.dalhack.financeintelligence",
 ) -> int:
     """Runs command in isolated process group with live log redaction, phase tracking, and silence watchdog."""
     if timeout_seconds <= 0:
@@ -340,6 +506,13 @@ def run_watchdog(
                     f"\nCRITICAL FAIL-CLOSED [{EVENT_WATCHDOG_TIMEOUT}]: Execution exceeded {timeout_seconds}s timeout boundary! Phase={current_phase} Elapsed={int(elapsed)}s PID={proc.pid} PGID={pgid}\n"
                 )
                 sys.stderr.flush()
+                collect_pre_termination_diagnostics(
+                    pid=proc.pid,
+                    pgid=pgid,
+                    simulator_udid=simulator_udid,
+                    bundle_id=bundle_id,
+                    current_phase=current_phase,
+                )
                 terminate_process_group(pgid, pid=proc.pid, grace_period_sec=grace_seconds, proc=proc)
                 return 124
 
@@ -349,6 +522,13 @@ def run_watchdog(
                     f"\nCRITICAL FAIL-CLOSED [{EVENT_WATCHDOG_SILENCE_TIMEOUT}]: Child process produced no output for {int(child_silence)}s (boundary {silence_timeout_seconds}s exceeded)! Phase={current_phase} Elapsed={int(elapsed)}s PID={proc.pid} PGID={pgid} LastChildOutput='{last_child_output_line}'\n"
                 )
                 sys.stderr.flush()
+                collect_pre_termination_diagnostics(
+                    pid=proc.pid,
+                    pgid=pgid,
+                    simulator_udid=simulator_udid,
+                    bundle_id=bundle_id,
+                    current_phase=current_phase,
+                )
                 terminate_process_group(pgid, pid=proc.pid, grace_period_sec=grace_seconds, proc=proc)
                 return 1
 
@@ -429,6 +609,13 @@ def main() -> None:
     parser.add_argument("--heartbeat-seconds", type=int, default=30, help="Heartbeat logging interval")
     parser.add_argument("--grace-seconds", type=float, default=5.0, help="Grace period for SIGTERM before SIGKILL")
     parser.add_argument("--cwd", type=str, default=None, help="Working directory for child command")
+    parser.add_argument("--simulator-udid", type=str, default=None, help="Target iOS Simulator UDID for diagnostics")
+    parser.add_argument(
+        "--bundle-id",
+        type=str,
+        default="com.dalhack.financeintelligence",
+        help="Target iOS App Bundle Identifier",
+    )
     parser.add_argument("cmd", nargs=argparse.REMAINDER, help="Target command to execute")
 
     args = parser.parse_args()
@@ -448,6 +635,8 @@ def main() -> None:
         heartbeat_interval_seconds=args.heartbeat_seconds,
         grace_seconds=args.grace_seconds,
         cwd=args.cwd,
+        simulator_udid=args.simulator_udid,
+        bundle_id=args.bundle_id,
     )
     sys.exit(code)
 

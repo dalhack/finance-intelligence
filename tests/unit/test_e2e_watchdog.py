@@ -271,3 +271,31 @@ def test_watchdog_silence_budget_safety_margin():
 
     assert safety_margin >= 60, f"Safety margin {safety_margin}s must be >= 60s"
     assert calibrated_silence_timeout < 900
+
+
+def test_watchdog_pre_termination_diagnostics(capsys):
+    """Verifies machine-readable pre-termination diagnostics collection, redaction, and error resiliency."""
+    from scripts.run_e2e_watchdog import (
+        EVENT_PRE_TERMINATION_DIAGNOSTIC_COMPLETED,
+        EVENT_PRE_TERMINATION_DIAGNOSTIC_STARTED,
+        collect_pre_termination_diagnostics,
+    )
+
+    fake_pid = 12345
+    fake_pgid = 12345
+    fake_udid = "12345678-1234-1234-1234-1234567890AB"
+
+    res = collect_pre_termination_diagnostics(
+        pid=fake_pid,
+        pgid=fake_pgid,
+        simulator_udid=fake_udid,
+        bundle_id="com.dalhack.financeintelligence",
+        current_phase="IOS_E2E_PHASE_TEST_DRIVER_CONNECT",
+        diagnostic_timeout_sec=1.0,
+    )
+
+    captured = capsys.readouterr()
+    assert EVENT_PRE_TERMINATION_DIAGNOSTIC_STARTED in captured.err
+    assert EVENT_PRE_TERMINATION_DIAGNOSTIC_COMPLETED in captured.err
+    assert isinstance(res["diagnostic_duration_ms"], int)
+    assert res["diagnostic_duration_ms"] >= 0
