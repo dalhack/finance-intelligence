@@ -1,5 +1,7 @@
 """Unit tests for app.migration_execution.role_security module."""
 
+from unittest.mock import MagicMock
+
 import pytest
 from app.migration_execution.role_security import (
     EXPECTED_ADMIN_SESSION_USER,
@@ -38,20 +40,20 @@ def test_contract_drift_zero():
     assert EXPECTED_POSTCONDITION_CONTRACT.rolreplication is False
 
 
-def test_role_hardening_session_user_non_postgres_rejected(mocker):
+def test_role_hardening_session_user_non_postgres_rejected():
     """Verify hardening fails closed if session_user is not 'postgres'."""
-    mock_conn = mocker.MagicMock()
+    mock_conn = MagicMock()
     mock_conn.in_transaction.return_value = False
 
     def mock_execute(statement, params=None):
         sql = str(statement).strip()
-        result = mocker.MagicMock()
+        result = MagicMock()
         if "session_user" in sql:
             result.scalar.return_value = "db_bootstrap"  # Non-postgres session_user
         return result
 
     mock_conn.execute.side_effect = mock_execute
-    mock_engine = mocker.MagicMock()
+    mock_engine = MagicMock()
     mock_engine.connect.return_value.__enter__.return_value = mock_conn
     mock_conn.execution_options.return_value = mock_conn
 
@@ -59,14 +61,14 @@ def test_role_hardening_session_user_non_postgres_rejected(mocker):
         harden_application_login_roles(mock_engine)
 
 
-def test_role_hardening_missing_target_role_fails_closed(mocker):
+def test_role_hardening_missing_target_role_fails_closed():
     """Verify hardening fails closed if a target role is missing from pg_roles."""
-    mock_conn = mocker.MagicMock()
+    mock_conn = MagicMock()
     mock_conn.in_transaction.return_value = False
 
     def mock_execute(statement, params=None):
         sql = str(statement).strip()
-        result = mocker.MagicMock()
+        result = MagicMock()
         if "session_user" in sql:
             result.scalar.return_value = EXPECTED_ADMIN_SESSION_USER
         elif "SELECT rolname" in sql:
@@ -78,7 +80,7 @@ def test_role_hardening_missing_target_role_fails_closed(mocker):
         return result
 
     mock_conn.execute.side_effect = mock_execute
-    mock_engine = mocker.MagicMock()
+    mock_engine = MagicMock()
     mock_engine.connect.return_value.__enter__.return_value = mock_conn
     mock_conn.execution_options.return_value = mock_conn
 
@@ -86,14 +88,14 @@ def test_role_hardening_missing_target_role_fails_closed(mocker):
         harden_application_login_roles(mock_engine)
 
 
-def test_role_hardening_precondition_unsafe_superuser_rejected(mocker):
+def test_role_hardening_precondition_unsafe_superuser_rejected():
     """Verify hardening fails closed in precondition check if any target role is SUPERUSER."""
-    mock_conn = mocker.MagicMock()
+    mock_conn = MagicMock()
     mock_conn.in_transaction.return_value = False
 
     def mock_execute(statement, params=None):
         sql = str(statement).strip()
-        result = mocker.MagicMock()
+        result = MagicMock()
         if "session_user" in sql:
             result.scalar.return_value = EXPECTED_ADMIN_SESSION_USER
         elif "SELECT rolname" in sql:
@@ -106,7 +108,7 @@ def test_role_hardening_precondition_unsafe_superuser_rejected(mocker):
         return result
 
     mock_conn.execute.side_effect = mock_execute
-    mock_engine = mocker.MagicMock()
+    mock_engine = MagicMock()
     mock_engine.connect.return_value.__enter__.return_value = mock_conn
     mock_conn.execution_options.return_value = mock_conn
 
