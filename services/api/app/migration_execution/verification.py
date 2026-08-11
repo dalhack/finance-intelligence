@@ -246,13 +246,51 @@ def run_security_verification(config: MigrationExecutionConfig) -> None:
                     WHERE conname = 'check_roles_name_uppercase' AND conrelid = 'roles'::regclass;
                 """)
             ).fetchone()
-            logger.info(f"[VERIFICATION Gate 11/11] Uppercase role name constraint: {'PASS' if res else 'FAIL'}")
+            logger.info(f"[VERIFICATION Gate 11/12] Uppercase role name constraint: {'PASS' if res else 'FAIL'}")
             if not res:
                 raise VerificationError(
                     "Gate 11 Failed: Constraint 'check_roles_name_uppercase' missing on roles table."
                 )
 
-        logger.info("[VERIFICATION] SUCCESS: All 11 post-migration security verification gates PASSED cleanly.")
+            # Gate 12: Role Membership Attribute Audit (db_analysis_claim_owner -> db_owner admin_option=False, no reverse grant)
+            attr_res = conn.execute(
+                text("""
+                    SELECT m.admin_option
+                    FROM pg_auth_members m
+                    JOIN pg_roles r_granted ON m.roleid = r_granted.oid
+                    JOIN pg_roles r_member ON m.member = r_member.oid
+                    WHERE r_granted.rolname = 'db_analysis_claim_owner' AND r_member.rolname = 'db_owner';
+                """)
+            ).fetchone()
+
+            if not attr_res:
+                raise VerificationError(
+                    "Gate 12 Failed: Mandatory membership 'db_owner' in 'db_analysis_claim_owner' is missing!"
+                )
+
+            admin_opt = bool(attr_res[0])
+            if admin_opt:
+                raise VerificationError(
+                    "Gate 12 Failed: Prohibited 'admin_option=True' detected on 'db_analysis_claim_owner -> db_owner' grant!"
+                )
+
+            reverse_res = conn.execute(
+                text("""
+                    SELECT 1 FROM pg_auth_members m
+                    JOIN pg_roles r_granted ON m.roleid = r_granted.oid
+                    JOIN pg_roles r_member ON m.member = r_member.oid
+                    WHERE r_granted.rolname = 'db_owner' AND r_member.rolname = 'db_analysis_claim_owner';
+                """)
+            ).fetchone()
+
+            if reverse_res:
+                raise VerificationError(
+                    "Gate 12 Failed: Prohibited reverse membership 'db_owner -> db_analysis_claim_owner' detected!"
+                )
+
+            logger.info("[VERIFICATION Gate 12/12] Role membership attribute audit (admin_option=False, reverse_grant=absent): PASS")
+
+        logger.info("[VERIFICATION] SUCCESS: All 12 post-migration security verification gates PASSED cleanly.")
 
     except Exception as e:
         logger.error(f"[VERIFICATION] Verification failed: {redact_text(str(e))}")

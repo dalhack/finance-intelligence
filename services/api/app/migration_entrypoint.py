@@ -18,6 +18,7 @@ from app.migration_execution.redaction import redact_text
 
 # Backward-compatible alias for existing test imports
 redact_sensitive_string = redact_text
+from app.migration_execution.role_remediation import reconcile_role_membership_attributes
 from app.migration_execution.verification import run_security_verification
 
 # Configure logger with stdout for INFO and stderr for ERROR
@@ -113,6 +114,13 @@ def main() -> NoReturn:
         elif args.subcommand == "verify":
             run_security_verification(config)
             logger.info("[MIGRATION_ENTRYPOINT] SUCCESS: Subcommand 'verify' completed.")
+            _safe_exit(0)
+
+        elif args.subcommand == "reconcile-role-membership-attributes":
+            reconcile_role_membership_attributes(config)
+            logger.info(
+                "[MIGRATION_ENTRYPOINT] SUCCESS: Subcommand 'reconcile-role-membership-attributes' completed."
+            )
             _safe_exit(0)
 
         else:

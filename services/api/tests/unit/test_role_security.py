@@ -114,3 +114,55 @@ def test_role_hardening_precondition_unsafe_superuser_rejected():
 
     with pytest.raises(RoleHardeningError, match="Precondition failed!"):
         harden_application_login_roles(mock_engine)
+
+
+def test_reconcile_role_membership_attributes_success_and_no_op(monkeypatch):
+    """Verify reconcile_role_membership_attributes revokes ADMIN OPTION and handles no-op safely."""
+    from app.migration_execution.config import MigrationExecutionConfig
+    from app.migration_execution.role_remediation import reconcile_role_membership_attributes
+
+    config = MigrationExecutionConfig(
+        project_id="test-project",
+        region="europe-west1",
+        instance_name="test-instance",
+        target_database="test_db",
+        bootstrap_password="test-bootstrap-pass",
+        initial_admin_password="test-admin-pass",
+        expected_head="031_analysis_job_claim_authority",
+    )
+
+    mock_conn = MagicMock()
+    mock_begin = MagicMock()
+    mock_conn.begin.return_value.__enter__.return_value = mock_begin
+
+    queries = []
+
+    def mock_execute(statement, params=None):
+        sql = str(statement).strip()
+        queries.append(sql)
+        res = MagicMock()
+        if "REVOKE ADMIN OPTION" in sql:
+            return res
+        if "WHERE r_granted.rolname = 'db_analysis_claim_owner' AND r_member.rolname = 'db_owner'" in sql:
+            # First query before: admin_option = True; Second query after: admin_option = False
+            if any("REVOKE ADMIN OPTION" in q for q in queries):
+                res.fetchone.return_value = (False,)
+            else:
+                res.fetchone.return_value = (True,)
+        elif "WHERE r_granted.rolname = 'db_owner' AND r_member.rolname = 'db_analysis_claim_owner'" in sql:
+            res.scalar.return_value = None  # No reverse grant
+        return res
+
+    mock_conn.execute.side_effect = mock_execute
+    mock_engine = MagicMock()
+    mock_engine.connect.return_value.__enter__.return_value = mock_conn
+
+    monkeypatch.setattr(
+        "app.migration_execution.role_remediation.get_cloudsql_engine",
+        lambda cfg, user, password, database, autocommit: (mock_engine, MagicMock()),
+    )
+
+    reconcile_role_membership_attributes(config)
+
+    assert any("REVOKE ADMIN OPTION FOR db_analysis_claim_owner FROM db_owner" in q for q in queries)
+

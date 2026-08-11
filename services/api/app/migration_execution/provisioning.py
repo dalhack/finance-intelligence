@@ -167,11 +167,11 @@ def provision_application_database(config: MigrationExecutionConfig) -> None:
             logger.info("[PROVISIONING] Granting 'db_owner' membership to 'db_bootstrap'...")
             conn.execute(text("GRANT db_owner TO db_bootstrap;"))
 
-            # Grant db_analysis_claim_owner membership to db_owner (with ADMIN OPTION) and db_bootstrap
+            # Grant db_analysis_claim_owner membership to db_owner and db_bootstrap
             logger.info(
                 "[PROVISIONING] Granting 'db_analysis_claim_owner' membership to 'db_owner' and 'db_bootstrap'..."
             )
-            conn.execute(text("GRANT db_analysis_claim_owner TO db_owner WITH ADMIN OPTION;"))
+            conn.execute(text("GRANT db_analysis_claim_owner TO db_owner;"))
             conn.execute(text("GRANT db_analysis_claim_owner TO db_bootstrap;"))
 
             # Check if target database exists
