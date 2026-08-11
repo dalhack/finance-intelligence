@@ -74,6 +74,10 @@ def main() -> NoReturn:
     subparsers.add_parser("provision-database", help="Provision application target database and roles")
     subparsers.add_parser("migrate", help="Execute Alembic migrations to head")
     subparsers.add_parser("verify", help="Verify schema ACLs and RLS policies post-migration")
+    subparsers.add_parser(
+        "reconcile-role-membership-attributes",
+        help="Reconcile role membership attributes",
+    )
 
     args = parser.parse_args()
 

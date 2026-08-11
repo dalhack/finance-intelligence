@@ -87,10 +87,10 @@ class MigrationExecutionConfig:
         if subcommand == "bootstrap-password":
             if not initial_admin_password:
                 raise MigrationConfigError("Missing required environment variable: INITIAL_ADMIN_PASSWORD")
-        elif subcommand == "provision-database":
+        elif subcommand in ("provision-database", "reconcile-role-membership-attributes"):
             if not initial_admin_password:
                 raise MigrationConfigError("Missing required environment variable: INITIAL_ADMIN_PASSWORD")
-            if not bootstrap_password:
+            if subcommand == "provision-database" and not bootstrap_password:
                 raise MigrationConfigError("Missing required environment variable: BOOTSTRAP_PASSWORD")
         elif subcommand in ("migrate", "verify") and not bootstrap_password:
             raise MigrationConfigError("Missing required environment variable: BOOTSTRAP_PASSWORD")
