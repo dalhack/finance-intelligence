@@ -259,14 +259,20 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
             if current_rev != config.expected_head:
                 ensure_clean_transaction(connection, "Phase 3 entry")
 
-                # Step 1: Audit pre-migration db_bootstrap schema privileges in db_owner context
+                # Step 1: Audit pre-migration db_bootstrap schema privileges in db_owner context (direct grantee check)
                 bootstrap_create_before = bool(
                     connection.execute(
-                        text("SELECT has_schema_privilege('db_bootstrap', 'public', 'CREATE');")
+                        text(
+                            "SELECT EXISTS (SELECT 1 FROM information_schema.schema_privileges WHERE grantee = 'db_bootstrap' AND schema_name = 'public' AND privilege_type = 'CREATE');"
+                        )
                     ).scalar()
                 )
                 bootstrap_usage_before = bool(
-                    connection.execute(text("SELECT has_schema_privilege('db_bootstrap', 'public', 'USAGE');")).scalar()
+                    connection.execute(
+                        text(
+                            "SELECT EXISTS (SELECT 1 FROM information_schema.schema_privileges WHERE grantee = 'db_bootstrap' AND schema_name = 'public' AND privilege_type = 'USAGE');"
+                        )
+                    ).scalar()
                 )
                 logger.info(
                     f"[MIGRATION_RUNNER] Pre-Phase 3 Privilege Audit: db_bootstrap USAGE={bootstrap_usage_before}, CREATE={bootstrap_create_before}"
@@ -329,7 +335,9 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
 
                             bootstrap_create_after = bool(
                                 connection.execute(
-                                    text("SELECT has_schema_privilege('db_bootstrap', 'public', 'CREATE');")
+                                    text(
+                                        "SELECT EXISTS (SELECT 1 FROM information_schema.schema_privileges WHERE grantee = 'db_bootstrap' AND schema_name = 'public' AND privilege_type = 'CREATE');"
+                                    )
                                 ).scalar()
                             )
                             logger.info(
