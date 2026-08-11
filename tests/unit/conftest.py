@@ -1,4 +1,11 @@
 import os
+import sys
+from pathlib import Path
+
+# Ensure services/api is at position 0 in sys.path so app modules are canonically loaded
+API_DIR = Path(__file__).resolve().parent.parent / "services" / "api"
+if str(API_DIR) not in sys.path:
+    sys.path.insert(0, str(API_DIR))
 
 # STAGE B: Unit Dead-Port Guard
 # Unconditionally pin all canonical unit database environment variables to dead-port 127.0.0.1:1
