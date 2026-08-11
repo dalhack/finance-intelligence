@@ -118,9 +118,7 @@ def main() -> NoReturn:
 
         elif args.subcommand == "reconcile-role-membership-attributes":
             reconcile_role_membership_attributes(config)
-            logger.info(
-                "[MIGRATION_ENTRYPOINT] SUCCESS: Subcommand 'reconcile-role-membership-attributes' completed."
-            )
+            logger.info("[MIGRATION_ENTRYPOINT] SUCCESS: Subcommand 'reconcile-role-membership-attributes' completed.")
             _safe_exit(0)
 
         else:

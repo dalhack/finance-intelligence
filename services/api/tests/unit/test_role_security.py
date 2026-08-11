@@ -165,4 +165,3 @@ def test_reconcile_role_membership_attributes_success_and_no_op(monkeypatch):
     reconcile_role_membership_attributes(config)
 
     assert any("REVOKE ADMIN OPTION FOR db_analysis_claim_owner FROM db_owner" in q for q in queries)
-

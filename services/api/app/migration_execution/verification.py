@@ -288,7 +288,9 @@ def run_security_verification(config: MigrationExecutionConfig) -> None:
                     "Gate 12 Failed: Prohibited reverse membership 'db_owner -> db_analysis_claim_owner' detected!"
                 )
 
-            logger.info("[VERIFICATION Gate 12/12] Role membership attribute audit (admin_option=False, reverse_grant=absent): PASS")
+            logger.info(
+                "[VERIFICATION Gate 12/12] Role membership attribute audit (admin_option=False, reverse_grant=absent): PASS"
+            )
 
         logger.info("[VERIFICATION] SUCCESS: All 12 post-migration security verification gates PASSED cleanly.")
 
