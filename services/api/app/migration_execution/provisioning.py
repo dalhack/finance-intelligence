@@ -123,9 +123,10 @@ def provision_application_database(config: MigrationExecutionConfig) -> None:
             autocommit=True,
         )
 
-        # 1. Idempotently create NOLOGIN owner and legacy roles
+        # 1. Idempotently create NOLOGIN owner and application roles
         create_role_if_missing_sql(sys_engine, "db_owner", is_login=False)
         create_role_if_missing_sql(sys_engine, "db_app_user", is_login=False)
+        create_role_if_missing_sql(sys_engine, "db_analysis_claim_owner", is_login=False)
 
         # 2. Idempotently create or update LOGIN roles via Cloud SQL Admin API ONLY
         login_roles = {
@@ -165,6 +166,13 @@ def provision_application_database(config: MigrationExecutionConfig) -> None:
             # Grant db_owner membership to db_bootstrap
             logger.info("[PROVISIONING] Granting 'db_owner' membership to 'db_bootstrap'...")
             conn.execute(text("GRANT db_owner TO db_bootstrap;"))
+
+            # Grant db_analysis_claim_owner membership to db_owner and db_bootstrap
+            logger.info(
+                "[PROVISIONING] Granting 'db_analysis_claim_owner' membership to 'db_owner' and 'db_bootstrap'..."
+            )
+            conn.execute(text("GRANT db_analysis_claim_owner TO db_owner;"))
+            conn.execute(text("GRANT db_analysis_claim_owner TO db_bootstrap;"))
 
             # Check if target database exists
             res = conn.execute(
