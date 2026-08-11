@@ -61,8 +61,16 @@ jobs:
       - name: Run Python Unit Suite with JUnit XML Output
         run: pytest tests/unit services/api/tests/unit --junitxml=pytest-unit-report.xml
       - name: Real Zero-Skip XML Machine Verification
+        if: always()
         run: |
           python -c "import xml.etree.ElementTree as ET; tree = ET.parse('pytest-unit-report.xml'); root = tree.getroot(); suite = root if root.tag == 'testsuite' else root.find('testsuite'); skips = int(suite.attrib.get('skipped', 0)); fails = int(suite.attrib.get('failures', 0)) + int(suite.attrib.get('errors', 0)); total = int(suite.attrib.get('tests', 0)); print(f'Pytest Unit Results: total={total}, passed={total-skips-fails}, skipped={skips}, failed={fails}'); assert total > 0, 'No unit tests executed!'; assert skips == 0, f'CRITICAL: {skips} skipped tests found!'; assert fails == 0, f'CRITICAL: {fails} failed tests found!'"
+      - name: Upload Pytest Unit XML Report Artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-unit-report
+          path: pytest-unit-report.xml
+          if-no-files-found: ignore
 
   backend-foundation-gate:
     name: PostgreSQL Integration Suite
