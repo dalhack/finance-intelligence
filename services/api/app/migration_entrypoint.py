@@ -27,7 +27,6 @@ logger.setLevel(logging.INFO)
 if not logger.handlers:
     stdout_handler = logging.StreamHandler(sys.stdout)
     stdout_handler.setLevel(logging.INFO)
-    stdout_handler.addFilter(lambda record: record.levelno < logging.ERROR)
     stdout_handler.setFormatter(logging.Formatter("%(message)s"))
 
     stderr_handler = logging.StreamHandler(sys.stderr)
