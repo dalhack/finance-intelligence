@@ -1,11 +1,31 @@
 import os
 import sys
 from pathlib import Path
+from unittest.mock import MagicMock, patch
+
+import pytest
 
 # Ensure services/api is at position 0 in sys.path so app modules are canonically loaded
 API_DIR = Path(__file__).resolve().parent.parent / "services" / "api"
 if str(API_DIR) not in sys.path:
     sys.path.insert(0, str(API_DIR))
+
+
+@pytest.fixture(autouse=True)
+def mock_cloudsql_global_unit_isolation():
+    """Global autouse fixture mocking Connector and IPTypes across all migration execution modules for 100% unit isolation."""
+    mock_ip = MagicMock()
+    mock_ip.PUBLIC = "PUBLIC"
+    with (
+        patch("app.migration_execution.alembic_runner.Connector", MagicMock()),
+        patch("app.migration_execution.alembic_runner.IPTypes", mock_ip),
+        patch("app.migration_execution.provisioning.Connector", MagicMock()),
+        patch("app.migration_execution.provisioning.IPTypes", mock_ip),
+        patch("app.migration_execution.verification.Connector", MagicMock()),
+        patch("app.migration_execution.verification.IPTypes", mock_ip),
+    ):
+        yield
+
 
 # STAGE B: Unit Dead-Port Guard
 # Unconditionally pin all canonical unit database environment variables to dead-port 127.0.0.1:1
