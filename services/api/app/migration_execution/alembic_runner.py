@@ -351,12 +351,11 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
 
                             cleanup_verified = True
                         except Exception as cleanup_ex:
-                            logger.error(f"[MIGRATION_RUNNER] Temporary privilege cleanup failed: {cleanup_ex}")
+                            logger.exception("[MIGRATION_RUNNER] Temporary privilege cleanup failed:")
                             if temporary_grant_applied and not cleanup_verified:
                                 raise MigrationRunnerError(
                                     f"Temporary privilege cleanup failed: {cleanup_ex}"
                                 ) from cleanup_ex
-
                 if temporary_grant_applied and not cleanup_verified:
                     raise MigrationRunnerError(
                         "Privilege cleanup verification failed: temporary CREATE privilege could not be revoked."
@@ -400,7 +399,7 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
             )
 
     except Exception as e:
-        logger.error(f"[MIGRATION_RUNNER] Migration failed: {redact_text(str(e))}")
+        logger.exception("[MIGRATION_RUNNER] Migration failed:")
 
         # Cleanup on failure: rollback aborted transaction before attempting unlock
         if lock_acquired and "connection" in locals() and connection and not connection.closed:
