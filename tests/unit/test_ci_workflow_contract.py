@@ -110,20 +110,16 @@ def test_gitignore_containment_and_repository_completeness():
     assert main_dart.exists(), "apps/mobile/lib/main.dart missing!"
     assert storage_adapter.exists(), "services/api/app/storage/local_adapter.py missing!"
 
-    # Verify git status / ls-files sees them as tracked or staged (not ignored)
+    # Verify git check-ignore sees them as tracked (not ignored)
     proc1 = subprocess.run(
-        ["git", "status", "--porcelain", str(main_dart)], capture_output=True, text=True, cwd=REPO_ROOT, check=False
+        ["git", "check-ignore", "-q", str(main_dart)], capture_output=True, cwd=REPO_ROOT, check=False
     )
-    assert "!?" not in proc1.stdout, "apps/mobile/lib/main.dart is ignored by git!"
+    assert proc1.returncode != 0, "apps/mobile/lib/main.dart is ignored by git!"
 
     proc2 = subprocess.run(
-        ["git", "status", "--porcelain", str(storage_adapter)],
-        capture_output=True,
-        text=True,
-        cwd=REPO_ROOT,
-        check=False,
+        ["git", "check-ignore", "-q", str(storage_adapter)], capture_output=True, cwd=REPO_ROOT, check=False
     )
-    assert "!?" not in proc2.stdout, "services/api/app/storage/local_adapter.py is ignored by git!"
+    assert proc2.returncode != 0, "services/api/app/storage/local_adapter.py is ignored by git!"
 
 
 def test_ci_workflow_structure_and_env_contract():
