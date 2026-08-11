@@ -278,14 +278,12 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
                     f"[MIGRATION_RUNNER] Pre-Phase 3 Privilege Audit: db_bootstrap USAGE={bootstrap_usage_before}, CREATE={bootstrap_create_before}"
                 )
 
-                temporary_grant_applied = False
-                if not bootstrap_create_before:
-                    logger.info(
-                        "[MIGRATION_RUNNER] Granting bounded temporary CREATE ON SCHEMA public to db_bootstrap for Phase 3..."
-                    )
-                    connection.execute(text("GRANT CREATE ON SCHEMA public TO db_bootstrap;"))
-                    temporary_grant_applied = True
-                    ensure_clean_transaction(connection, "Temporary privilege grant")
+                logger.info(
+                    "[MIGRATION_RUNNER] Granting bounded temporary CREATE ON SCHEMA public to db_bootstrap for Phase 3..."
+                )
+                connection.execute(text("GRANT CREATE ON SCHEMA public TO db_bootstrap;"))
+                temporary_grant_applied = True
+                ensure_clean_transaction(connection, "Temporary privilege grant")
 
                 cleanup_verified = False
                 try:

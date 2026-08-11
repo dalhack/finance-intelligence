@@ -203,6 +203,9 @@ def test_t1_t2_t3_reset_role_called_before_phase3_alembic(mock_config):
             mock_result.scalar.return_value = "024_maintenance_scheduler_and_operational_resilience"
             mock_result.fetchone.return_value = ("024_maintenance_scheduler_and_operational_resilience",)
             return mock_result
+        if "privilege_type = 'CREATE'" in sql_str:
+            mock_result.scalar.return_value = False
+            return mock_result
         if "RESET ROLE" in sql_str:
             return mock_result
         if "SELECT session_user, current_user;" in sql_str:
@@ -252,6 +255,9 @@ def test_t4_t5_session_user_current_user_mismatch_raises_fail_closed(mock_config
         mock_result = MagicMock()
         if "SELECT session_user, current_user, pg_backend_pid()" in sql_str:
             mock_result.fetchone.return_value = ("db_bootstrap", "db_owner", 1234)
+            return mock_result
+        if "privilege_type = 'CREATE'" in sql_str:
+            mock_result.scalar.return_value = False
             return mock_result
         if "SELECT count(*) FROM pg_locks" in sql_str:
             mock_result.scalar.return_value = 1
@@ -414,8 +420,8 @@ def test_least_privilege_temporary_grant_and_revoke_success():
     assert any("REVOKE CREATE ON SCHEMA public FROM db_bootstrap" in s for s in executed_sqls)
 
 
-def test_least_privilege_no_grant_if_create_already_exists():
-    """Verifies GRANT CREATE is NOT executed if db_bootstrap already has CREATE privilege."""
+def test_least_privilege_always_grants_and_revokes_temporary_create_for_phase3():
+    """Verifies GRANT CREATE and REVOKE CREATE are executed for Phase 3 DDL containment."""
     from unittest.mock import MagicMock, patch
 
     from app.migration_execution.alembic_runner import run_alembic_migrations
@@ -436,6 +442,11 @@ def test_least_privilege_no_grant_if_create_already_exists():
             res.fetchone.return_value = ("db_bootstrap", "db_owner", 1234)
         elif "SELECT session_user, current_user;" in sql:
             res.fetchone.return_value = ("db_bootstrap", "db_bootstrap")
+        elif "REVOKE CREATE ON SCHEMA public FROM db_bootstrap" in sql:
+            res.scalar.return_value = None
+        elif "privilege_type = 'CREATE'" in sql:
+            # Audit after REVOKE returns False for Revision 026+
+            res.scalar.return_value = False
         elif (
             "has_schema_privilege('db_bootstrap', 'public', 'CREATE')" in sql
             or "has_schema_privilege('db_bootstrap', 'public', 'USAGE')" in sql
@@ -485,8 +496,8 @@ def test_least_privilege_no_grant_if_create_already_exists():
     ):
         run_alembic_migrations(cfg)
 
-    assert not any("GRANT CREATE ON SCHEMA public TO db_bootstrap" in s for s in executed_sqls)
-    assert not any("REVOKE CREATE ON SCHEMA public FROM db_bootstrap" in s for s in executed_sqls)
+    assert any("GRANT CREATE ON SCHEMA public TO db_bootstrap" in s for s in executed_sqls)
+    assert any("REVOKE CREATE ON SCHEMA public FROM db_bootstrap" in s for s in executed_sqls)
 
 
 def test_least_privilege_revoke_on_migration_failure():
