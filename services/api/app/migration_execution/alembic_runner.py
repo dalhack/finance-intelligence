@@ -259,6 +259,21 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
             if current_rev != config.expected_head:
                 ensure_clean_transaction(connection, "Phase 3 entry")
 
+                # Step 0: Pre-provision NOLOGIN roles requiring CREATEROLE in db_owner context prior to RESET ROLE
+                connection.execute(
+                    text(
+                        "DO $$ BEGIN "
+                        "IF NOT EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_analysis_claim_owner') THEN "
+                        "  CREATE ROLE db_analysis_claim_owner NOLOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOINHERIT NOREPLICATION NOBYPASSRLS; "
+                        "END IF; "
+                        "IF EXISTS (SELECT FROM pg_roles WHERE rolname = 'db_bootstrap') THEN "
+                        "  GRANT db_analysis_claim_owner TO db_bootstrap; "
+                        "END IF; "
+                        "END $$;"
+                    )
+                )
+                ensure_clean_transaction(connection, "Pre-provision claim owner role")
+
                 # Step 1: Audit pre-migration db_bootstrap schema privileges in db_owner context (direct grantee check via pg_namespace/aclexplode)
                 bootstrap_create_before = bool(
                     connection.execute(
