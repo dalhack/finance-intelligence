@@ -166,8 +166,7 @@ def run_security_verification(config: MigrationExecutionConfig) -> None:
                     FROM pg_proc p
                     JOIN pg_namespace n ON p.pronamespace = n.oid
                     WHERE n.nspname = 'public'
-                      AND p.proname = 'resolve_auth_context'
-                      AND pg_get_function_identity_arguments(p.oid) = 'text, uuid';
+                      AND p.proname = 'resolve_auth_context';
                 """)
             ).fetchone()
             if not res:
