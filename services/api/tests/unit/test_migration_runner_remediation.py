@@ -440,6 +440,7 @@ def test_least_privilege_no_grant_if_create_already_exists():
             "has_schema_privilege('db_bootstrap', 'public', 'CREATE')" in sql
             or "has_schema_privilege('db_bootstrap', 'public', 'USAGE')" in sql
             or "information_schema.schema_privileges" in sql
+            or "pg_namespace" in sql
         ):
             res.scalar.return_value = True
         elif "SELECT count(*) FROM pg_locks" in sql:

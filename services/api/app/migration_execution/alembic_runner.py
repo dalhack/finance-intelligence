@@ -259,18 +259,18 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
             if current_rev != config.expected_head:
                 ensure_clean_transaction(connection, "Phase 3 entry")
 
-                # Step 1: Audit pre-migration db_bootstrap schema privileges in db_owner context (direct grantee check)
+                # Step 1: Audit pre-migration db_bootstrap schema privileges in db_owner context (direct grantee check via pg_namespace/aclexplode)
                 bootstrap_create_before = bool(
                     connection.execute(
                         text(
-                            "SELECT EXISTS (SELECT 1 FROM information_schema.schema_privileges WHERE grantee = 'db_bootstrap' AND schema_name = 'public' AND privilege_type = 'CREATE');"
+                            "SELECT EXISTS (SELECT 1 FROM pg_namespace n, aclexplode(n.nspacl) a WHERE n.nspname = 'public' AND a.grantee = (SELECT oid FROM pg_roles WHERE rolname = 'db_bootstrap') AND a.privilege_type = 'CREATE');"
                         )
                     ).scalar()
                 )
                 bootstrap_usage_before = bool(
                     connection.execute(
                         text(
-                            "SELECT EXISTS (SELECT 1 FROM information_schema.schema_privileges WHERE grantee = 'db_bootstrap' AND schema_name = 'public' AND privilege_type = 'USAGE');"
+                            "SELECT EXISTS (SELECT 1 FROM pg_namespace n, aclexplode(n.nspacl) a WHERE n.nspname = 'public' AND a.grantee = (SELECT oid FROM pg_roles WHERE rolname = 'db_bootstrap') AND a.privilege_type = 'USAGE');"
                         )
                     ).scalar()
                 )
@@ -336,7 +336,7 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
                             bootstrap_create_after = bool(
                                 connection.execute(
                                     text(
-                                        "SELECT EXISTS (SELECT 1 FROM information_schema.schema_privileges WHERE grantee = 'db_bootstrap' AND schema_name = 'public' AND privilege_type = 'CREATE');"
+                                        "SELECT EXISTS (SELECT 1 FROM pg_namespace n, aclexplode(n.nspacl) a WHERE n.nspname = 'public' AND a.grantee = (SELECT oid FROM pg_roles WHERE rolname = 'db_bootstrap') AND a.privilege_type = 'CREATE');"
                                     )
                                 ).scalar()
                             )
