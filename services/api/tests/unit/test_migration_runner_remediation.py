@@ -19,6 +19,18 @@ from app.migration_execution.alembic_runner import (
 from app.migration_execution.config import MigrationExecutionConfig
 
 
+@pytest.fixture(autouse=True)
+def mock_cloudsql_units():
+    """Mocks Connector and IPTypes on alembic_runner for complete unit isolation."""
+    mock_ip = MagicMock()
+    mock_ip.PUBLIC = "PUBLIC"
+    with (
+        patch("app.migration_execution.alembic_runner.Connector", MagicMock()),
+        patch("app.migration_execution.alembic_runner.IPTypes", mock_ip),
+    ):
+        yield
+
+
 @pytest.fixture
 def mock_config():
     return MigrationExecutionConfig(
