@@ -120,7 +120,13 @@ def main() -> NoReturn:
             _safe_exit(1)
 
     except Exception as e:
+        import traceback
+
         redacted_err = redact_text(str(e))
+        sys.stderr.write(f"[ENTRYPOINT_ERROR_EXACT] {redacted_err}\n")
+        traceback.print_exc()
+        sys.stdout.flush()
+        sys.stderr.flush()
         logger.exception(f"[MIGRATION_ENTRYPOINT] Subcommand '{args.subcommand}' failed: {redacted_err}")
         _safe_exit(1)
 

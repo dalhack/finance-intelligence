@@ -409,6 +409,13 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
             )
 
     except Exception as e:
+        import sys
+        import traceback
+
+        sys.stderr.write(f"[MIGRATION_RUNNER_ERROR_EXACT] {e}\n")
+        traceback.print_exc()
+        sys.stdout.flush()
+        sys.stderr.flush()
         logger.exception("[MIGRATION_RUNNER] Migration failed:")
 
         # Cleanup on failure: rollback aborted transaction before attempting unlock
