@@ -337,8 +337,9 @@ def test_watchdog_unrelated_listener_pid_not_correlated(capsys):
     assert "Class=FLUTTER_CLI" in captured.err
 
 
-def test_watchdog_coresimulator_timeout_event(capsys):
+def test_watchdog_coresimulator_timeout_event(capsys, monkeypatch):
     """Verifies that simctl listapps timeout emits IOS_E2E_CORESIMULATOR_UNRESPONSIVE and sets Installed=TIMEOUT."""
+    monkeypatch.setattr(sys, "platform", "darwin")
     import subprocess
     from unittest.mock import MagicMock, patch
 

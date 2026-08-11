@@ -87,18 +87,22 @@ def test_list_instance_users(mock_auth, mock_api):
     )
 
 
+@patch("app.migration_execution.cloudsql_admin._get_authenticated_session")
 @patch("app.migration_execution.cloudsql_admin.update_user_password")
 @patch("app.migration_execution.cloudsql_admin._make_api_request")
 @patch("app.migration_execution.cloudsql_admin.list_instance_users")
-def test_create_user_if_missing_when_present_skips_password_update(mock_list, mock_api, mock_update):
+def test_create_user_if_missing_when_present_skips_password_update(mock_list, mock_api, mock_update, mock_auth):
+    mock_auth.return_value = ("fake_token", MagicMock())
     mock_list.return_value = [{"name": "db_bootstrap"}]
     create_user_if_missing("finance-intel-staging-8f2a", "fi-staging-db", "db_bootstrap", "pwd_123")
     mock_update.assert_not_called()
     mock_api.assert_not_called()
 
 
+@patch("app.migration_execution.cloudsql_admin._get_authenticated_session")
 @patch("app.migration_execution.cloudsql_admin.list_instance_users")
-def test_create_user_if_missing_existing_user_logs_safe_skip(mock_list, caplog):
+def test_create_user_if_missing_existing_user_logs_safe_skip(mock_list, mock_auth, caplog):
+    mock_auth.return_value = ("fake_token", MagicMock())
     mock_list.return_value = [{"name": "db_bootstrap"}]
     with caplog.at_level("INFO"):
         create_user_if_missing("finance-intel-staging-8f2a", "fi-staging-db", "db_bootstrap", "pwd_123")
