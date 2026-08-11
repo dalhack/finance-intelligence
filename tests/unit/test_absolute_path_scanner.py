@@ -19,9 +19,11 @@ def test_no_developer_absolute_paths_in_tracked_code():
         and ".venv" not in p.parts
         and ".git" not in p.parts
         and "build" not in p.parts
+        and ".pytest_cache" not in p.parts
         and ".dart_tool" not in p.parts
         and "ephemeral" not in p.parts
         and "flutter_export_environment.sh" not in p.name
+        and not p.name.startswith("pytest-unit-report")
     ]
 
     offending_files = []
