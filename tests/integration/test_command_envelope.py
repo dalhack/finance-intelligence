@@ -4,12 +4,12 @@ from uuid import uuid4
 
 import asyncpg
 import pytest
+from app.db.session import ApiSessionLocal, WorkerSessionLocal
+from app.models.document import Document
+from app.models.document_version import DocumentVersion
+from app.models.ingestion_job import IngestionJob
+from app.models.stored_object import StoredObject
 
-from services.api.app.db.session import ApiSessionLocal, WorkerSessionLocal
-from services.api.app.models.document import Document
-from services.api.app.models.document_version import DocumentVersion
-from services.api.app.models.ingestion_job import IngestionJob
-from services.api.app.models.stored_object import StoredObject
 from services.worker.app.command_envelope import IngestionCommandEnvelope, InvalidCommandEnvelopeError
 from services.worker.app.ingestion_worker import IngestionWorker, WorkerOutcomeStatus
 

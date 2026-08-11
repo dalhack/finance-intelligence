@@ -8,11 +8,10 @@ from datetime import UTC, datetime
 from enum import Enum
 from uuid import UUID, uuid4
 
+from app.db.session import MaintenanceSessionLocal
+from app.services.clarification_service import ClarificationService
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
-
-from services.api.app.db.session import MaintenanceSessionLocal
-from services.api.app.services.clarification_service import ClarificationService
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("finance_intelligence_maintenance_worker")

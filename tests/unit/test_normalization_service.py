@@ -1,8 +1,7 @@
 from decimal import Decimal
 
 import pytest
-
-from services.api.app.services.normalization_service import NormalizationService
+from app.services.normalization_service import NormalizationService
 
 
 def test_parse_tr_locale_number():

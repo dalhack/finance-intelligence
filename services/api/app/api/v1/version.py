@@ -1,7 +1,6 @@
+from app.core.config import settings
+from app.schemas.common import VersionResponseDTO
 from fastapi import APIRouter
-
-from services.api.app.core.config import settings
-from services.api.app.schemas.common import VersionResponseDTO
 
 router = APIRouter()
 

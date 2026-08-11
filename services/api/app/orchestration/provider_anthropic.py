@@ -4,12 +4,12 @@ from decimal import Decimal
 from typing import Any
 from uuid import uuid4
 
-from services.api.app.orchestration.config import (
+from app.orchestration.config import (
     ModelConfig,
     ModelRegistry,
     ProviderSecretMissingException,
 )
-from services.api.app.orchestration.provider import (
+from app.orchestration.provider import (
     ModelCapabilities,
     ModelResponse,
     TokenUsage,

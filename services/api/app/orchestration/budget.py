@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from decimal import Decimal
 
-from services.api.app.orchestration.exceptions import AnalysisBudgetExceededException
+from app.orchestration.exceptions import AnalysisBudgetExceededException
 
 
 @dataclass

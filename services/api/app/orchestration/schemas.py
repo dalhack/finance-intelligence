@@ -1,9 +1,8 @@
 from typing import Any, Literal
 from uuid import UUID
 
+from app.orchestration.exceptions import AnalysisPlanInvalidException
 from pydantic import BaseModel, ConfigDict, Field, model_validator
-
-from services.api.app.orchestration.exceptions import AnalysisPlanInvalidException
 
 FORBIDDEN_KEYWORD_PATTERNS = {
     "organization_id",

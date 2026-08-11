@@ -1,13 +1,12 @@
 from typing import Any, Literal
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, Field
-
-from services.api.app.schemas.result_dataset import (
+from app.schemas.result_dataset import (
     ChartSpecDTO,
     ResultDatasetDTO,
     TableSpecDTO,
 )
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class SemanticMeasureSelectorDTO(BaseModel):

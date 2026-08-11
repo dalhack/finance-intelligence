@@ -3,10 +3,9 @@ import json
 from typing import Any
 from uuid import UUID
 
+from app.models.orchestration import ToolInvocation
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-
-from services.api.app.models.orchestration import ToolInvocation
 
 
 class ToolArgumentChecksumMismatchException(Exception):

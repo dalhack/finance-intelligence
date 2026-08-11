@@ -3,19 +3,18 @@ from unittest.mock import MagicMock
 from uuid import uuid4
 
 import pytest
-
-from services.api.app.calculations.base import to_working_fraction
-from services.api.app.calculations.formulas.growth_rate import GrowthRateFormula
-from services.api.app.calculations.formulas.loan_to_deposit import LoanToDepositRatioFormula
-from services.api.app.calculations.formulas.npl_ratio import NplRatioFormula
-from services.api.app.calculations.formulas.return_on_assets import ReturnOnAssetsFormula
-from services.api.app.calculations.registry import (
+from app.calculations.base import to_working_fraction
+from app.calculations.formulas.growth_rate import GrowthRateFormula
+from app.calculations.formulas.loan_to_deposit import LoanToDepositRatioFormula
+from app.calculations.formulas.npl_ratio import NplRatioFormula
+from app.calculations.formulas.return_on_assets import ReturnOnAssetsFormula
+from app.calculations.registry import (
     FormulaRegistry,
     compute_formula_spec_checksum,
     compute_implementation_checksum,
     is_valid_sha256_hex,
 )
-from services.api.app.services.calculation_service import (
+from app.services.calculation_service import (
     compute_canonical_idempotency_hash,
     compute_request_fingerprint,
 )

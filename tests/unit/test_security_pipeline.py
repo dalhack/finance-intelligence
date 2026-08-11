@@ -1,8 +1,7 @@
 import os
 
 import pytest
-
-from services.api.app.core.security_pipeline import (
+from app.core.security_pipeline import (
     SecurityPipelineException,
     sanitize_filename,
     validate_file_security,

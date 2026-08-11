@@ -1,7 +1,6 @@
 import pytest
+from app.core.config import Settings
 from pydantic import ValidationError
-
-from services.api.app.core.config import Settings
 
 PROD_SALT = "prod-salt-1234567890123456789012345678"
 VALID_API_URL = "postgresql+asyncpg://db_api_user:mock_prod_pass_123@10.0.0.5:5432/prod_db"

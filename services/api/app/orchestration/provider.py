@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from decimal import Decimal
 from typing import Any, Protocol
 
-from services.api.app.orchestration.exceptions import (
+from app.orchestration.exceptions import (
     ModelFailoverProhibitedException,
     ModelProviderNotConfiguredException,
 )

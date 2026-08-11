@@ -2,17 +2,16 @@ import os
 from logging.config import fileConfig
 
 from alembic import context
-from sqlalchemy import create_engine
-
-from services.api.app.core.config import settings
-from services.api.app.db.base import Base
+from app.core.config import settings
+from app.db.base import Base
 
 # Import all models to register with Base metadata
-from services.api.app.models.audit_event import AuditEvent  # noqa: F401
-from services.api.app.models.membership import Membership  # noqa: F401
-from services.api.app.models.organization import Organization  # noqa: F401
-from services.api.app.models.role import MembershipRole, Role  # noqa: F401
-from services.api.app.models.user import User  # noqa: F401
+from app.models.audit_event import AuditEvent  # noqa: F401
+from app.models.membership import Membership  # noqa: F401
+from app.models.organization import Organization  # noqa: F401
+from app.models.role import MembershipRole, Role  # noqa: F401
+from app.models.user import User  # noqa: F401
+from sqlalchemy import create_engine
 
 config = context.config
 

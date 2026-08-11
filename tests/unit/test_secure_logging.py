@@ -4,12 +4,12 @@ from unittest.mock import MagicMock
 from uuid import uuid4
 
 import pytest
+from app.core.logging import PseudonymizingFormatter, redact_sensitive_text
+from app.models.document_version import DocumentVersion
+from app.models.ingestion_job import IngestionJob
+from app.models.stored_object import StoredObject
+from app.parsers.registry import parser_registry
 
-from services.api.app.core.logging import PseudonymizingFormatter, redact_sensitive_text
-from services.api.app.models.document_version import DocumentVersion
-from services.api.app.models.ingestion_job import IngestionJob
-from services.api.app.models.stored_object import StoredObject
-from services.api.app.parsers.registry import parser_registry
 from services.worker.app.ingestion_worker import ClaimedJob, IngestionWorker, WorkerOutcomeStatus
 
 

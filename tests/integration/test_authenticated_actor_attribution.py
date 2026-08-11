@@ -4,19 +4,18 @@ from pathlib import Path
 from uuid import uuid4
 
 import pytest
+from app.db.session import get_db_session
+from app.dependencies import get_execution_context
+from app.main import app
+from app.middleware.execution_context import ExecutionContext
+from app.models.membership import Membership
+from app.models.orchestration import AnalysisJob
+from app.models.organization import Organization
+from app.models.user import User
+from app.services.clarification_service import ClarificationService
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
-
-from services.api.app.db.session import get_db_session
-from services.api.app.dependencies import get_execution_context
-from services.api.app.main import app
-from services.api.app.middleware.execution_context import ExecutionContext
-from services.api.app.models.membership import Membership
-from services.api.app.models.orchestration import AnalysisJob
-from services.api.app.models.organization import Organization
-from services.api.app.models.user import User
-from services.api.app.services.clarification_service import ClarificationService
 
 
 @pytest.mark.asyncio

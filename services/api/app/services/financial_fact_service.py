@@ -2,16 +2,15 @@ import hashlib
 from datetime import UTC, datetime
 from uuid import UUID
 
+from app.models.candidate_evidence import CandidateEvidence
+from app.models.document_version import DocumentVersion
+from app.models.fact_review_decision import FactReviewDecision
+from app.models.financial_fact import FinancialFact
+from app.models.financial_fact_candidate import FinancialFactCandidate
+from app.models.metric_definition import MetricDefinition
+from app.services.audit_service import AuditService
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-
-from services.api.app.models.candidate_evidence import CandidateEvidence
-from services.api.app.models.document_version import DocumentVersion
-from services.api.app.models.fact_review_decision import FactReviewDecision
-from services.api.app.models.financial_fact import FinancialFact
-from services.api.app.models.financial_fact_candidate import FinancialFactCandidate
-from services.api.app.models.metric_definition import MetricDefinition
-from services.api.app.services.audit_service import AuditService
 
 
 class FinancialFactService:

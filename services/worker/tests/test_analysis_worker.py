@@ -3,16 +3,16 @@ import uuid
 from datetime import UTC, datetime
 
 import pytest
+from app.models.institution import Institution
+from app.models.orchestration import AnalysisJob
+from app.models.reporting_period import ReportingPeriod
+from app.orchestration.engine import AnalysisOrchestratorEngine
+from app.orchestration.exceptions import ClaimOwnershipLostException
+from app.orchestration.provider import DeterministicTestModelProvider
+from app.orchestration.tools.base import ExecutionContext
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
-from services.api.app.models.institution import Institution
-from services.api.app.models.orchestration import AnalysisJob
-from services.api.app.models.reporting_period import ReportingPeriod
-from services.api.app.orchestration.engine import AnalysisOrchestratorEngine
-from services.api.app.orchestration.exceptions import ClaimOwnershipLostException
-from services.api.app.orchestration.provider import DeterministicTestModelProvider
-from services.api.app.orchestration.tools.base import ExecutionContext
 from services.worker.app.analysis_worker import (
     AnalysisWorker,
     claim_next_analysis_job,

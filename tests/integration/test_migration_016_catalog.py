@@ -3,10 +3,9 @@ from uuid import uuid4
 
 import asyncpg
 import pytest
+from app.models.organization import Organization
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
-
-from services.api.app.models.organization import Organization
 
 
 @pytest.mark.asyncio

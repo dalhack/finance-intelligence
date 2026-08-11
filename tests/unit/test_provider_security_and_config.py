@@ -1,9 +1,8 @@
 import pytest
-
-from services.api.app.orchestration.payload_builder import ProviderPayloadBuilder
-from services.api.app.orchestration.policy_engine import DataClassification
-from services.api.app.orchestration.provider_config import ProviderRuntimeConfig
-from services.api.app.orchestration.secret_resolver import (
+from app.orchestration.payload_builder import ProviderPayloadBuilder
+from app.orchestration.policy_engine import DataClassification
+from app.orchestration.provider_config import ProviderRuntimeConfig
+from app.orchestration.secret_resolver import (
     DeterministicTestSecretResolver,
     EnvironmentSecretResolver,
 )

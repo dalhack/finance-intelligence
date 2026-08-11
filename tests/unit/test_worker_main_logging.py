@@ -5,10 +5,10 @@ from unittest.mock import AsyncMock, MagicMock
 from uuid import uuid4
 
 import pytest
+from app.models.document_version import DocumentVersion
+from app.models.ingestion_job import IngestionJob
+from app.models.stored_object import StoredObject
 
-from services.api.app.models.document_version import DocumentVersion
-from services.api.app.models.ingestion_job import IngestionJob
-from services.api.app.models.stored_object import StoredObject
 from services.worker.app.main import WORKER_ID, run_worker_loop
 
 
@@ -102,8 +102,8 @@ async def test_real_run_worker_loop_log_redaction_all_worker_modules(monkeypatch
             pass
 
     monkeypatch.setattr("services.worker.app.main.WorkerSessionLocal", lambda: MockWorkerSessionContextManager())
-    monkeypatch.setattr("services.api.app.db.session.WorkerSessionLocal", lambda: MockWorkerSessionContextManager())
-    monkeypatch.setattr("services.api.app.db.session.ApiSessionLocal", lambda: MockWorkerSessionContextManager())
+    monkeypatch.setattr("app.db.session.WorkerSessionLocal", lambda: MockWorkerSessionContextManager())
+    monkeypatch.setattr("app.db.session.ApiSessionLocal", lambda: MockWorkerSessionContextManager())
     monkeypatch.setattr(
         "services.worker.app.main.analysis_worker.session_factory", lambda: MockWorkerSessionContextManager()
     )

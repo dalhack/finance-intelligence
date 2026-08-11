@@ -2,14 +2,13 @@ import os
 from uuid import uuid4
 
 import pytest
+from app.main import app
+from app.models.membership import Membership
+from app.models.organization import Organization
+from app.models.user import User
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
-
-from services.api.app.main import app
-from services.api.app.models.membership import Membership
-from services.api.app.models.organization import Organization
-from services.api.app.models.user import User
 
 
 @pytest.mark.asyncio

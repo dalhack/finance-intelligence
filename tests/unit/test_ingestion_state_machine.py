@@ -2,10 +2,9 @@ from unittest.mock import AsyncMock, MagicMock
 from uuid import uuid4
 
 import pytest
-
-from services.api.app.models.ingestion_job import IngestionJob
-from services.api.app.models.upload_session import UploadSession
-from services.api.app.services.state_machine import InvalidStateTransitionException, StateMachineService
+from app.models.ingestion_job import IngestionJob
+from app.models.upload_session import UploadSession
+from app.services.state_machine import InvalidStateTransitionException, StateMachineService
 
 
 @pytest.mark.unit

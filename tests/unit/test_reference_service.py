@@ -2,9 +2,8 @@ from unittest.mock import AsyncMock, MagicMock
 from uuid import uuid4
 
 import pytest
-
-from services.api.app.models.stored_object import StoredObject
-from services.api.app.services.reference_service import ReferenceService
+from app.models.stored_object import StoredObject
+from app.services.reference_service import ReferenceService
 
 
 @pytest.mark.unit

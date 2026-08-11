@@ -1,8 +1,8 @@
-from services.api.app.core.errors import BaseAPIException
-from services.api.app.parsers.base import DocumentParserPort
-from services.api.app.parsers.csv_parser import CsvParser
-from services.api.app.parsers.pdf_parser import PdfParser
-from services.api.app.parsers.xlsx_parser import XlsxParser
+from app.core.errors import BaseAPIException
+from app.parsers.base import DocumentParserPort
+from app.parsers.csv_parser import CsvParser
+from app.parsers.pdf_parser import PdfParser
+from app.parsers.xlsx_parser import XlsxParser
 
 
 class ParserNotFoundException(BaseAPIException):

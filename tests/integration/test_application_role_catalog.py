@@ -2,15 +2,14 @@ import os
 from uuid import uuid4
 
 import pytest
+from app.db.session import get_db_session
+from app.dependencies import get_execution_context
+from app.main import app
+from app.middleware.execution_context import ExecutionContext
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy import text
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
-
-from services.api.app.db.session import get_db_session
-from services.api.app.dependencies import get_execution_context
-from services.api.app.main import app
-from services.api.app.middleware.execution_context import ExecutionContext
 
 
 @pytest.mark.asyncio

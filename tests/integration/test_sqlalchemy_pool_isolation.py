@@ -2,11 +2,10 @@ import os
 from uuid import uuid4
 
 import pytest
+from app.db.session import ApiSessionLocal
+from app.db.tenant_context import tenant_transaction_context
+from app.models.document import Document
 from sqlalchemy import text
-
-from services.api.app.db.session import ApiSessionLocal
-from services.api.app.db.tenant_context import tenant_transaction_context
-from services.api.app.models.document import Document
 
 API_USER_URL = os.environ.get("TEST_API_DATABASE_URL")
 

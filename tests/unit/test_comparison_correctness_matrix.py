@@ -2,15 +2,14 @@ from decimal import Decimal
 from uuid import uuid4
 
 import pytest
-from pydantic import ValidationError
-
-from services.api.app.schemas.comparison import ComparisonRequestDTO, SemanticMeasureSelectorDTO
-from services.api.app.schemas.result_dataset import (
+from app.schemas.comparison import ComparisonRequestDTO, SemanticMeasureSelectorDTO
+from app.schemas.result_dataset import (
     ChartSeriesDTO,
     ChartSpecDTO,
     DataQualitySummaryDTO,
 )
-from services.api.app.services.comparison_service import ComparisonService
+from app.services.comparison_service import ComparisonService
+from pydantic import ValidationError
 
 
 def test_reporting_basis_solo_and_consolidated():

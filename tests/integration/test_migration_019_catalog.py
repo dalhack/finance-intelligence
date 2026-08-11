@@ -2,12 +2,11 @@ import os
 from uuid import uuid4
 
 import pytest
+from app.models.comparison_run import ComparisonRun
+from app.models.organization import Organization
+from app.models.result_dataset_model import ResultDatasetModel
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
-
-from services.api.app.models.comparison_run import ComparisonRun
-from services.api.app.models.organization import Organization
-from services.api.app.models.result_dataset_model import ResultDatasetModel
 
 
 @pytest.mark.asyncio

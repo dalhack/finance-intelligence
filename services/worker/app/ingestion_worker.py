@@ -5,20 +5,19 @@ from datetime import UTC, datetime
 from enum import Enum
 from uuid import UUID, uuid4
 
+from app.models.document_chunk import DocumentChunk
+from app.models.document_page import DocumentPage
+from app.models.document_version import DocumentVersion
+from app.models.extraction_result import ExtractionResult, ExtractionWarning
+from app.models.ingestion_job import IngestionAttempt, IngestionJob
+from app.models.stored_object import StoredObject
+from app.parsers.registry import parser_registry
+from app.services.audit_service import AuditService
+from app.services.state_machine import StateMachineService
+from app.storage.local_adapter import LocalStorageAdapter
 from sqlalchemy import select, text
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
-
-from services.api.app.models.document_chunk import DocumentChunk
-from services.api.app.models.document_page import DocumentPage
-from services.api.app.models.document_version import DocumentVersion
-from services.api.app.models.extraction_result import ExtractionResult, ExtractionWarning
-from services.api.app.models.ingestion_job import IngestionAttempt, IngestionJob
-from services.api.app.models.stored_object import StoredObject
-from services.api.app.parsers.registry import parser_registry
-from services.api.app.services.audit_service import AuditService
-from services.api.app.services.state_machine import StateMachineService
-from services.api.app.storage.local_adapter import LocalStorageAdapter
 
 logger = logging.getLogger("finance_intelligence_worker")
 
@@ -54,7 +53,8 @@ class WorkerOutcomeStatus(str, Enum):
     REJECTED = "REJECTED"
 
 
-from services.api.app.models.ingestion_command_log import IngestionCommandLog
+from app.models.ingestion_command_log import IngestionCommandLog
+
 from services.worker.app.command_envelope import IngestionCommandEnvelope, InvalidCommandEnvelopeError
 
 

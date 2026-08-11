@@ -7,10 +7,9 @@ from typing import Any
 
 import chardet
 import filetype
+from app.core.errors import BaseAPIException
 from pypdf import PdfReader
 from pypdf.errors import PyPdfError
-
-from services.api.app.core.errors import BaseAPIException
 
 MAX_PDF_SIZE_BYTES = 25 * 1024 * 1024  # 25 MB
 MAX_XLSX_SIZE_BYTES = 15 * 1024 * 1024  # 15 MB

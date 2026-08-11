@@ -1,6 +1,6 @@
 """Verification Script for Safe Alembic Migration Round-Trip & Boundary Enforcement.
 
-Enforces irreversible migration boundary rules from services.api.app.core.migration_policy
+Enforces irreversible migration boundary rules from app.core.migration_policy
 and executes the safe roundtrip (head 026 -> safe boundary 023 -> head 026).
 """
 
@@ -13,7 +13,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
-from services.api.app.core.migration_policy import (
+from app.core.migration_policy import (
     get_minimum_safe_downgrade_target,
     validate_downgrade_target,
 )

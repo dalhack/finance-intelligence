@@ -1,6 +1,6 @@
 from datetime import date
 
-from services.api.app.api.v1.facts import (
+from app.api.v1.facts import (
     ApproveCandidateRequestDTO,
     InstitutionCreateDTO,
     RejectCandidateRequestDTO,

@@ -2,11 +2,10 @@ from datetime import datetime
 from decimal import Decimal
 from uuid import UUID, uuid4
 
+from app.db.base import Base
 from sqlalchemy import DateTime, Integer, Numeric, String, func
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column, synonym
-
-from services.api.app.db.base import Base
 
 
 class Calculation(Base):

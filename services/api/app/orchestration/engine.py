@@ -2,11 +2,8 @@ import json
 from datetime import UTC, datetime
 from uuid import UUID, uuid4
 
-from sqlalchemy import select, text
-from sqlalchemy.ext.asyncio import AsyncSession
-
-from services.api.app.models.institution import Institution
-from services.api.app.models.orchestration import (
+from app.models.institution import Institution
+from app.models.orchestration import (
     AnalysisAttempt,
     AnalysisJob,
     AnalysisPlanModel,
@@ -15,23 +12,25 @@ from services.api.app.models.orchestration import (
     QualityGateResultRecord,
     ToolInvocation,
 )
-from services.api.app.models.reporting_period import ReportingPeriod
-from services.api.app.orchestration.budget import JobBudgetTracker
-from services.api.app.orchestration.circuit_breaker import ProviderCircuitBreaker
-from services.api.app.orchestration.event_engine import AnalysisEventEngine
-from services.api.app.orchestration.exceptions import (
+from app.models.reporting_period import ReportingPeriod
+from app.orchestration.budget import JobBudgetTracker
+from app.orchestration.circuit_breaker import ProviderCircuitBreaker
+from app.orchestration.event_engine import AnalysisEventEngine
+from app.orchestration.exceptions import (
     ClaimOwnershipLostException,
     OrchestrationException,
 )
-from services.api.app.orchestration.policy_engine import DataClassification, PolicyDecision, PolicyEngine
-from services.api.app.orchestration.provider import ModelProvider
-from services.api.app.orchestration.provider_anthropic import AnthropicProviderAdapter
-from services.api.app.orchestration.quality_gate import QualityGateEngine
-from services.api.app.orchestration.schemas import AnalysisPlan, NormalizedRequest, PlanStep
-from services.api.app.orchestration.state_machine import AnalysisJobStatus, AnalysisStateMachine
-from services.api.app.orchestration.tool_dedup import ToolDeduplicationManager
-from services.api.app.orchestration.tools.base import ExecutionContext
-from services.api.app.orchestration.tools.registry import ToolRegistry
+from app.orchestration.policy_engine import DataClassification, PolicyDecision, PolicyEngine
+from app.orchestration.provider import ModelProvider
+from app.orchestration.provider_anthropic import AnthropicProviderAdapter
+from app.orchestration.quality_gate import QualityGateEngine
+from app.orchestration.schemas import AnalysisPlan, NormalizedRequest, PlanStep
+from app.orchestration.state_machine import AnalysisJobStatus, AnalysisStateMachine
+from app.orchestration.tool_dedup import ToolDeduplicationManager
+from app.orchestration.tools.base import ExecutionContext
+from app.orchestration.tools.registry import ToolRegistry
+from sqlalchemy import select, text
+from sqlalchemy.ext.asyncio import AsyncSession
 
 
 class AnalysisOrchestratorEngine:

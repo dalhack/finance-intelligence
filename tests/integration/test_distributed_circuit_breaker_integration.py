@@ -1,12 +1,11 @@
 import os
 
 import pytest
+from app.core.config import DEFAULT_DEV_MIGRATION_URL
+from app.db.session import ApiSessionLocal
+from app.orchestration.circuit_breaker import DistributedCircuitBreaker
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import create_async_engine
-
-from services.api.app.core.config import DEFAULT_DEV_MIGRATION_URL
-from services.api.app.db.session import ApiSessionLocal
-from services.api.app.orchestration.circuit_breaker import DistributedCircuitBreaker
 
 owner_url = os.environ.get("TEST_OWNER_DATABASE_URL", DEFAULT_DEV_MIGRATION_URL)
 owner_engine = create_async_engine(owner_url)

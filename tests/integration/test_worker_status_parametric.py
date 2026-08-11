@@ -5,18 +5,18 @@ from uuid import uuid4
 
 import asyncpg
 import pytest
+from app.db.session import ApiSessionLocal, WorkerSessionLocal
 from app.db.tenant_context import tenant_transaction_context
+from app.models.audit_event import AuditEvent
+from app.models.document import Document
+from app.models.document_version import DocumentVersion
+from app.models.ingestion_job import IngestionAttempt, IngestionJob
+from app.models.stored_object import StoredObject
+from app.parsers.base import CanonicalExtractionOutput, ExtractionWarningItem
+from app.parsers.registry import parser_registry
+from app.storage.local_adapter import LocalStorageAdapter
 from sqlalchemy import select
 
-from services.api.app.db.session import ApiSessionLocal, WorkerSessionLocal
-from services.api.app.models.audit_event import AuditEvent
-from services.api.app.models.document import Document
-from services.api.app.models.document_version import DocumentVersion
-from services.api.app.models.ingestion_job import IngestionAttempt, IngestionJob
-from services.api.app.models.stored_object import StoredObject
-from services.api.app.parsers.base import CanonicalExtractionOutput, ExtractionWarningItem
-from services.api.app.parsers.registry import parser_registry
-from services.api.app.storage.local_adapter import LocalStorageAdapter
 from services.worker.app.ingestion_worker import IngestionWorker, WorkerOutcomeStatus
 
 OWNER_URL = os.environ.get(

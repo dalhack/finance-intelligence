@@ -1,6 +1,6 @@
 from enum import Enum
 
-from services.api.app.orchestration.exceptions import OrchestrationException
+from app.orchestration.exceptions import OrchestrationException
 
 
 class AnalysisJobStatus(str, Enum):

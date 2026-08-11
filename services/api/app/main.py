@@ -1,8 +1,4 @@
-from fastapi import FastAPI
-from fastapi.exceptions import RequestValidationError
-from fastapi.middleware.cors import CORSMiddleware
-
-from services.api.app.api.v1 import (
+from app.api.v1 import (
     calculations,
     comparisons,
     dev_session,
@@ -14,15 +10,18 @@ from services.api.app.api.v1 import (
     organizations,
     version,
 )
-from services.api.app.core.config import settings
-from services.api.app.core.errors import BaseAPIException
-from services.api.app.middleware.error_handler import (
+from app.core.config import settings
+from app.core.errors import BaseAPIException
+from app.middleware.error_handler import (
     custom_api_exception_handler,
     unhandled_exception_handler,
     validation_exception_handler,
 )
-from services.api.app.middleware.execution_context import RequestContextMiddleware
-from services.api.app.routers import analyses
+from app.middleware.execution_context import RequestContextMiddleware
+from app.routers import analyses
+from fastapi import FastAPI
+from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(
     title=settings.PROJECT_NAME,

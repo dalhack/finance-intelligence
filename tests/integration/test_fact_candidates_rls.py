@@ -5,21 +5,20 @@ from uuid import uuid4
 
 import asyncpg
 import pytest
+from app.db.session import ApiSessionLocal, WorkerSessionLocal
+from app.models.candidate_evidence import CandidateEvidence
+from app.models.document import Document
+from app.models.document_version import DocumentVersion
+from app.models.financial_fact import FinancialFact
+from app.models.financial_fact_candidate import FinancialFactCandidate
+from app.models.institution import Institution
+from app.models.metric_definition import MetricDefinition
+from app.models.reporting_period import ReportingPeriod
+from app.models.stored_object import StoredObject
+from app.services.fact_candidate_service import FactCandidateService
+from app.services.financial_fact_service import FinancialFactService
 from sqlalchemy import select, text
 from sqlalchemy.exc import IntegrityError
-
-from services.api.app.db.session import ApiSessionLocal, WorkerSessionLocal
-from services.api.app.models.candidate_evidence import CandidateEvidence
-from services.api.app.models.document import Document
-from services.api.app.models.document_version import DocumentVersion
-from services.api.app.models.financial_fact import FinancialFact
-from services.api.app.models.financial_fact_candidate import FinancialFactCandidate
-from services.api.app.models.institution import Institution
-from services.api.app.models.metric_definition import MetricDefinition
-from services.api.app.models.reporting_period import ReportingPeriod
-from services.api.app.models.stored_object import StoredObject
-from services.api.app.services.fact_candidate_service import FactCandidateService
-from services.api.app.services.financial_fact_service import FinancialFactService
 
 OWNER_URL = os.environ.get(
     "TEST_OWNER_DATABASE_URL",

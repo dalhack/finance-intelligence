@@ -3,11 +3,10 @@ import os
 import zipfile
 
 import pytest
-
-from services.api.app.core.config import settings
-from services.api.app.parsers.csv_parser import CsvParser
-from services.api.app.parsers.pdf_parser import PdfParser
-from services.api.app.parsers.xlsx_parser import XlsxParser
+from app.core.config import settings
+from app.parsers.csv_parser import CsvParser
+from app.parsers.pdf_parser import PdfParser
+from app.parsers.xlsx_parser import XlsxParser
 
 GOLDEN_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "fixtures", "golden"))
 

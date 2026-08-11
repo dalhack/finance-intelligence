@@ -1,8 +1,7 @@
 from uuid import UUID
 
 import pytest
-
-from services.api.app.services.calculation_service import compute_request_fingerprint
+from app.services.calculation_service import compute_request_fingerprint
 
 
 @pytest.mark.unit

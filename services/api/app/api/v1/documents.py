@@ -3,26 +3,22 @@ from datetime import UTC, datetime, timedelta
 from typing import Annotated
 from uuid import UUID, uuid4
 
-from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile, status
-from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
-
-from services.api.app.core.security_pipeline import (
+from app.core.security_pipeline import (
     MAX_PDF_SIZE_BYTES,
     MAX_XLSX_SIZE_BYTES,
     SecurityPipelineException,
     sanitize_filename,
     validate_file_security,
 )
-from services.api.app.db.session import get_db_session
-from services.api.app.dependencies import require_permission
-from services.api.app.middleware.execution_context import ExecutionContext
-from services.api.app.models.document import Document
-from services.api.app.models.document_version import DocumentVersion
-from services.api.app.models.extraction_result import ExtractionResult, ExtractionWarning
-from services.api.app.models.ingestion_job import IngestionJob
-from services.api.app.models.upload_session import UploadSession
-from services.api.app.schemas.document import (
+from app.db.session import get_db_session
+from app.dependencies import require_permission
+from app.middleware.execution_context import ExecutionContext
+from app.models.document import Document
+from app.models.document_version import DocumentVersion
+from app.models.extraction_result import ExtractionResult, ExtractionWarning
+from app.models.ingestion_job import IngestionJob
+from app.models.upload_session import UploadSession
+from app.schemas.document import (
     DocumentResponse,
     DocumentVersionResponse,
     IngestionStatusResponse,
@@ -30,10 +26,13 @@ from services.api.app.schemas.document import (
     UploadInitiateResponse,
     WarningResponse,
 )
-from services.api.app.services.audit_service import AuditService
-from services.api.app.services.reference_service import ReferenceService
-from services.api.app.services.state_machine import StateMachineService
-from services.api.app.storage.local_adapter import LocalStorageAdapter
+from app.services.audit_service import AuditService
+from app.services.reference_service import ReferenceService
+from app.services.state_machine import StateMachineService
+from app.storage.local_adapter import LocalStorageAdapter
+from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile, status
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 router = APIRouter()
 

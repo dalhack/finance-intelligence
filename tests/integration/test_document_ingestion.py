@@ -4,13 +4,13 @@ from uuid import uuid4
 import asyncpg
 import httpx
 import pytest
+from app.db.session import get_db_session
 from app.db.tenant_context import tenant_transaction_context
+from app.dependencies import DEV_SYNTHETIC_ORG_ID, DEV_SYNTHETIC_USER_ID, get_execution_context
+from app.main import app
+from app.middleware.execution_context import ExecutionContext
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
-from services.api.app.db.session import get_db_session
-from services.api.app.dependencies import DEV_SYNTHETIC_ORG_ID, DEV_SYNTHETIC_USER_ID, get_execution_context
-from services.api.app.main import app
-from services.api.app.middleware.execution_context import ExecutionContext
 from services.worker.app.ingestion_worker import IngestionWorker, WorkerOutcomeStatus
 
 RAW_OWNER_URL = os.environ.get("TEST_OWNER_DATABASE_URL")

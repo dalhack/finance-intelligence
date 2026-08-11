@@ -1,11 +1,10 @@
 from uuid import uuid4
 
 import pytest
+from app.core.config import settings
+from app.core.logging import PseudonymizingFormatter
+from app.middleware.execution_context import ExecutionContext
 from pydantic import ValidationError
-
-from services.api.app.core.config import settings
-from services.api.app.core.logging import PseudonymizingFormatter
-from services.api.app.middleware.execution_context import ExecutionContext
 
 
 @pytest.mark.unit

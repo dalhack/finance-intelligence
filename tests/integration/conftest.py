@@ -101,7 +101,7 @@ async def verify_integration_test_environment():
 async def cleanup_engine_pools():
     """Dispose pooled connections between async test executions to prevent cross-test loop contamination."""
     yield
-    from services.api.app.db.session import api_engine, bootstrap_engine, worker_engine
+    from app.db.session import api_engine, bootstrap_engine, worker_engine
 
     await api_engine.dispose()
     await worker_engine.dispose()

@@ -1,10 +1,9 @@
 import os
 
 import pytest
-
-from services.api.app.parsers.csv_parser import CsvParser
-from services.api.app.parsers.pdf_parser import PdfParser
-from services.api.app.parsers.xlsx_parser import XlsxParser
+from app.parsers.csv_parser import CsvParser
+from app.parsers.pdf_parser import PdfParser
+from app.parsers.xlsx_parser import XlsxParser
 
 GOLDEN_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "fixtures", "golden"))
 

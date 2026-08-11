@@ -6,10 +6,10 @@ import sys
 import uuid
 from datetime import UTC, datetime, timedelta
 
+from app.db.session import WorkerSessionLocal
+from app.models.ingestion_job import IngestionJob
 from sqlalchemy import select
 
-from services.api.app.db.session import WorkerSessionLocal
-from services.api.app.models.ingestion_job import IngestionJob
 from services.worker.app.analysis_worker import AnalysisWorker
 from services.worker.app.command_envelope import IngestionCommandEnvelope
 from services.worker.app.ingestion_worker import IngestionWorker, WorkerOutcomeStatus

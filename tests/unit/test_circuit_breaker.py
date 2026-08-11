@@ -1,6 +1,5 @@
 import pytest
-
-from services.api.app.orchestration.circuit_breaker import (
+from app.orchestration.circuit_breaker import (
     CircuitState,
     ModelProviderUnavailableException,
     ProviderCircuitBreaker,

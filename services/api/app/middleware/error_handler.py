@@ -1,12 +1,11 @@
 import logging
 from typing import Any
 
+from app.core.config import settings
+from app.core.errors import BaseAPIException
 from fastapi import Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
-
-from services.api.app.core.config import settings
-from services.api.app.core.errors import BaseAPIException
 
 logger = logging.getLogger("finance_intelligence")
 

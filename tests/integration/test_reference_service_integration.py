@@ -3,11 +3,10 @@ from uuid import uuid4
 
 import asyncpg
 import pytest
+from app.core.errors import BaseAPIException
 from app.db.tenant_context import tenant_transaction_context
+from app.services.reference_service import ReferenceService
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
-
-from services.api.app.core.errors import BaseAPIException
-from services.api.app.services.reference_service import ReferenceService
 
 RAW_OWNER_URL = os.environ.get("TEST_OWNER_DATABASE_URL")
 RAW_API_USER_URL = os.environ.get("TEST_API_DATABASE_URL")

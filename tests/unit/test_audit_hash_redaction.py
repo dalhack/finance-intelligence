@@ -17,8 +17,8 @@ def test_audit_event_redacts_sensitive_hashes_and_uuids():
         "status": "COMPLETED",
     }
 
-    from services.api.app.models.audit_event import AuditEvent
-    from services.api.app.services.audit_service import sanitize_payload_recursive
+    from app.models.audit_event import AuditEvent
+    from app.services.audit_service import sanitize_payload_recursive
 
     event = AuditEvent(
         id=target_id,

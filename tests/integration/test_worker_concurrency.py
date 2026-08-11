@@ -5,16 +5,16 @@ from uuid import uuid4
 import asyncpg
 import pytest
 from app.db.tenant_context import tenant_transaction_context
+from app.models.document import Document
+from app.models.document_chunk import DocumentChunk
+from app.models.document_page import DocumentPage
+from app.models.document_version import DocumentVersion
+from app.models.extraction_result import ExtractionResult
+from app.models.ingestion_job import IngestionAttempt, IngestionJob
+from app.models.stored_object import StoredObject
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
-from services.api.app.models.document import Document
-from services.api.app.models.document_chunk import DocumentChunk
-from services.api.app.models.document_page import DocumentPage
-from services.api.app.models.document_version import DocumentVersion
-from services.api.app.models.extraction_result import ExtractionResult
-from services.api.app.models.ingestion_job import IngestionAttempt, IngestionJob
-from services.api.app.models.stored_object import StoredObject
 from services.worker.app.ingestion_worker import IngestionWorker
 
 RAW_OWNER_URL = os.environ.get("TEST_OWNER_DATABASE_URL")
@@ -62,9 +62,7 @@ async def test_worker_concurrency_strict_invariants():
         with open(csv_path, "rb") as f:  # noqa: ASYNC230
             csv_bytes = f.read()
 
-        adapter = __import__(
-            "services.api.app.storage.local_adapter", fromlist=["LocalStorageAdapter"]
-        ).LocalStorageAdapter()
+        adapter = __import__("app.storage.local_adapter", fromlist=["LocalStorageAdapter"]).LocalStorageAdapter()
         opaque_key = f"{org_id}/{job_id}.bin"
         await adapter.put_object(str(org_id), opaque_key, __import__("io").BytesIO(csv_bytes))
 

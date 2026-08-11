@@ -1,4 +1,4 @@
-from services.api.app.orchestration.tool_dedup import ToolDeduplicationManager
+from app.orchestration.tool_dedup import ToolDeduplicationManager
 
 
 def test_tool_arguments_checksum_determinism():

@@ -2,17 +2,16 @@ from decimal import Decimal
 from uuid import uuid4
 
 import pytest
-from pydantic import ValidationError
-
-from services.api.app.calculations.semantic_measure_registry import SemanticMeasureRegistry
-from services.api.app.schemas.comparison import ComparisonRequestDTO
-from services.api.app.schemas.result_dataset import (
+from app.calculations.semantic_measure_registry import SemanticMeasureRegistry
+from app.schemas.comparison import ComparisonRequestDTO
+from app.schemas.result_dataset import (
     ChartSpecDTO,
     DatasetRowCellDTO,
     PaginationDTO,
     TableColumnDTO,
     TableSpecDTO,
 )
+from pydantic import ValidationError
 
 
 def test_comparison_request_extra_fields_rejection():

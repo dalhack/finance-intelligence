@@ -2,9 +2,8 @@ import hashlib
 from typing import Any
 from uuid import UUID
 
+from app.models.audit_event import AuditEvent
 from sqlalchemy.ext.asyncio import AsyncSession
-
-from services.api.app.models.audit_event import AuditEvent
 
 SENSITIVE_KEYS = {
     "filename",

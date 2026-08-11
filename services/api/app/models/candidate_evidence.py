@@ -2,12 +2,11 @@ from datetime import datetime
 from typing import Any
 from uuid import UUID, uuid4
 
+from app.db.base import Base
 from sqlalchemy import DateTime, Integer, Text, func
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column
-
-from services.api.app.db.base import Base
 
 
 class CandidateEvidence(Base):

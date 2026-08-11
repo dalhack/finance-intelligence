@@ -1,9 +1,8 @@
 from decimal import Decimal
 from typing import ClassVar
 
+from app.core.config import settings
 from pydantic import BaseModel, Field
-
-from services.api.app.core.config import settings
 
 
 class ModelCapabilities(BaseModel):

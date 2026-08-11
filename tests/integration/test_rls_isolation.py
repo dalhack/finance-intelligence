@@ -1,6 +1,5 @@
 import pytest
-
-from services.api.app.db.tenant_context import tenant_transaction_context
+from app.db.tenant_context import tenant_transaction_context
 
 
 @pytest.mark.integration

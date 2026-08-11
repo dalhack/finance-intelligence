@@ -2,12 +2,12 @@ import hashlib
 import json
 from typing import Any, ClassVar
 
-from services.api.app.calculations.base import BaseFormula
-from services.api.app.calculations.formulas.growth_rate import GrowthRateFormula
-from services.api.app.calculations.formulas.loan_to_deposit import LoanToDepositRatioFormula
-from services.api.app.calculations.formulas.npl_ratio import NplRatioFormula
-from services.api.app.calculations.formulas.return_on_assets import ReturnOnAssetsFormula
-from services.api.app.calculations.formulas.return_on_equity import ReturnOnEquityFormula
+from app.calculations.base import BaseFormula
+from app.calculations.formulas.growth_rate import GrowthRateFormula
+from app.calculations.formulas.loan_to_deposit import LoanToDepositRatioFormula
+from app.calculations.formulas.npl_ratio import NplRatioFormula
+from app.calculations.formulas.return_on_assets import ReturnOnAssetsFormula
+from app.calculations.formulas.return_on_equity import ReturnOnEquityFormula
 
 
 def is_valid_sha256_hex(val: Any) -> bool:

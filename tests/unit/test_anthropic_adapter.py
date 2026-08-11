@@ -1,11 +1,10 @@
 import pytest
-
-from services.api.app.orchestration.config import (
+from app.orchestration.config import (
     ModelConfigurationInvalidException,
     ModelRegistry,
     ProviderSecretMissingException,
 )
-from services.api.app.orchestration.provider_anthropic import (
+from app.orchestration.provider_anthropic import (
     AnthropicProviderAdapter,
     ModelMaxTokensExceededException,
     ModelRefusalException,

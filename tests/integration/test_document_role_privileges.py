@@ -4,15 +4,14 @@ from uuid import uuid4
 
 import asyncpg
 import pytest
+from app.db.session import ApiSessionLocal, WorkerSessionLocal
+from app.models.document import Document
+from app.models.document_chunk import DocumentChunk
+from app.models.document_version import DocumentVersion
+from app.models.extraction_result import ExtractionResult
+from app.models.stored_object import StoredObject
+from app.models.upload_session import UploadSession
 from sqlalchemy import text
-
-from services.api.app.db.session import ApiSessionLocal, WorkerSessionLocal
-from services.api.app.models.document import Document
-from services.api.app.models.document_chunk import DocumentChunk
-from services.api.app.models.document_version import DocumentVersion
-from services.api.app.models.extraction_result import ExtractionResult
-from services.api.app.models.stored_object import StoredObject
-from services.api.app.models.upload_session import UploadSession
 
 RAW_OWNER_URL = os.environ.get("TEST_OWNER_DATABASE_URL")
 RAW_BOOTSTRAP_URL = os.environ.get("TEST_BOOTSTRAP_DATABASE_URL")

@@ -1,7 +1,6 @@
 import pytest
-
-from services.api.app.core.config import Settings
-from services.api.app.core.security import FirebaseIdentityVerifier, get_or_create_firebase_app
+from app.core.config import Settings
+from app.core.security import FirebaseIdentityVerifier, get_or_create_firebase_app
 
 
 def test_staging_missing_firebase_project_id_fails_closed():

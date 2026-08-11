@@ -2,10 +2,9 @@ import os
 
 import httpx
 import pytest
+from app.db.session import get_system_db_session
+from app.main import app
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
-
-from services.api.app.db.session import get_system_db_session
-from services.api.app.main import app
 
 API_USER_URL = os.environ.get("TEST_API_DATABASE_URL")
 

@@ -1,6 +1,5 @@
 import pytest
-
-from services.api.app.storage.local_adapter import LocalStorageAdapter, PathTraversalException
+from app.storage.local_adapter import LocalStorageAdapter, PathTraversalException
 
 
 @pytest.mark.unit

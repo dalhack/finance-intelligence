@@ -1,7 +1,7 @@
 import re
 from typing import Any
 
-from services.api.app.orchestration.exceptions import UnsupportedNumericClaimException
+from app.orchestration.exceptions import UnsupportedNumericClaimException
 
 # Patterns for text tokens that should NOT be verified as financial claims (false-positive prevention)
 EXCLUDED_NON_CLAIM_PATTERNS = [

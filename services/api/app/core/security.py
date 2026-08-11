@@ -1,12 +1,11 @@
 from typing import Protocol
 
-from pydantic import BaseModel
-
-from services.api.app.core.config import settings
-from services.api.app.core.errors import (
+from app.core.config import settings
+from app.core.errors import (
     DevelopmentAuthDisabledException,
     InvalidCredentialsException,
 )
+from pydantic import BaseModel
 
 
 class AuthenticatedIdentity(BaseModel):

@@ -1,8 +1,7 @@
+from app.core.config import settings
+from app.core.errors import DevelopmentAuthDisabledException
 from fastapi import APIRouter
 from pydantic import BaseModel
-
-from services.api.app.core.config import settings
-from services.api.app.core.errors import DevelopmentAuthDisabledException
 
 router = APIRouter()
 

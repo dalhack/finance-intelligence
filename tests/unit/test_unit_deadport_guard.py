@@ -1,6 +1,6 @@
 import os
 
-from services.api.app.core.config import settings
+from app.core.config import settings
 
 
 def test_unit_deadport_guard_configuration_and_isolation():

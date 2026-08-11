@@ -9,7 +9,7 @@ import pytest
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(REPO_ROOT))
 
-from services.api.app.core.migration_policy import (
+from app.core.migration_policy import (
     validate_downgrade_target,
 )
 

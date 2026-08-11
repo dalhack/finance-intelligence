@@ -1,6 +1,5 @@
 import pytest
-
-from services.api.app.core.security_pipeline import SecurityPipelineException, validate_file_security
+from app.core.security_pipeline import SecurityPipelineException, validate_file_security
 
 
 @pytest.mark.unit

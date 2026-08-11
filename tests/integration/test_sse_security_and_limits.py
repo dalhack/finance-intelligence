@@ -2,8 +2,7 @@ from uuid import uuid4
 
 import httpx
 import pytest
-
-from services.api.app.main import app
+from app.main import app
 
 
 @pytest.mark.asyncio

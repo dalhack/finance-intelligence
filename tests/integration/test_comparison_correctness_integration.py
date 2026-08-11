@@ -5,22 +5,21 @@ from uuid import uuid4
 
 import pytest
 from app.db.tenant_context import tenant_transaction_context
+from app.models.candidate_evidence import CandidateEvidence
+from app.models.document import Document
+from app.models.document_version import DocumentVersion
+from app.models.financial_fact import FinancialFact
+from app.models.financial_fact_candidate import FinancialFactCandidate
+from app.models.institution import Institution
+from app.models.metric_definition import MetricDefinition
+from app.models.organization import Organization
+from app.models.reporting_period import ReportingPeriod
+from app.models.stored_object import StoredObject
+from app.models.user import User
+from app.schemas.comparison import ComparisonRequestDTO, SemanticMeasureSelectorDTO
+from app.services.comparison_service import ComparisonService
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
-
-from services.api.app.models.candidate_evidence import CandidateEvidence
-from services.api.app.models.document import Document
-from services.api.app.models.document_version import DocumentVersion
-from services.api.app.models.financial_fact import FinancialFact
-from services.api.app.models.financial_fact_candidate import FinancialFactCandidate
-from services.api.app.models.institution import Institution
-from services.api.app.models.metric_definition import MetricDefinition
-from services.api.app.models.organization import Organization
-from services.api.app.models.reporting_period import ReportingPeriod
-from services.api.app.models.stored_object import StoredObject
-from services.api.app.models.user import User
-from services.api.app.schemas.comparison import ComparisonRequestDTO, SemanticMeasureSelectorDTO
-from services.api.app.services.comparison_service import ComparisonService
 
 
 @pytest.mark.asyncio

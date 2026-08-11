@@ -2,21 +2,20 @@ from datetime import UTC, datetime
 from typing import Any, ClassVar
 from uuid import UUID, uuid4
 
+from app.models.candidate_evidence import CandidateEvidence
+from app.models.document import Document
+from app.models.document_chunk import DocumentChunk
+from app.models.document_version import DocumentVersion
+from app.models.financial_fact import FinancialFact
+from app.models.orchestration import AnalysisJob, FinalResultSnapshot
+from app.orchestration.exceptions import ToolInputInvalidException, ToolNotAllowedException
+from app.orchestration.injection_boundary import PromptInjectionBoundary
+from app.orchestration.tools.base import ExecutionContext, validate_tool_arguments
+from app.schemas.comparison import ComparisonRequestDTO
+from app.services.calculation_service import CalculationService
+from app.services.comparison_service import ComparisonService
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-
-from services.api.app.models.candidate_evidence import CandidateEvidence
-from services.api.app.models.document import Document
-from services.api.app.models.document_chunk import DocumentChunk
-from services.api.app.models.document_version import DocumentVersion
-from services.api.app.models.financial_fact import FinancialFact
-from services.api.app.models.orchestration import AnalysisJob, FinalResultSnapshot
-from services.api.app.orchestration.exceptions import ToolInputInvalidException, ToolNotAllowedException
-from services.api.app.orchestration.injection_boundary import PromptInjectionBoundary
-from services.api.app.orchestration.tools.base import ExecutionContext, validate_tool_arguments
-from services.api.app.schemas.comparison import ComparisonRequestDTO
-from services.api.app.services.calculation_service import CalculationService
-from services.api.app.services.comparison_service import ComparisonService
 
 
 class SearchInternalDocumentsTool:

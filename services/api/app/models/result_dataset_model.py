@@ -2,15 +2,14 @@ from datetime import UTC, datetime
 from typing import TYPE_CHECKING, Any
 from uuid import UUID
 
+from app.db.base import Base
 from sqlalchemy import DateTime, ForeignKey, ForeignKeyConstraint, String
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from services.api.app.db.base import Base
-
 if TYPE_CHECKING:
-    from services.api.app.models.comparison_run import ComparisonRun
+    from app.models.comparison_run import ComparisonRun
 
 
 class ResultDatasetModel(Base):

@@ -1,6 +1,6 @@
 import inspect
 
-from services.api.app.orchestration.tools.registry import (
+from app.orchestration.tools.registry import (
     ToolRegistry,
 )
 

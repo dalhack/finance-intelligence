@@ -1,6 +1,6 @@
 import ast
 
-from services.api.app.orchestration.state_machine import TERMINAL_STATES, AnalysisJobStatus
+from app.orchestration.state_machine import TERMINAL_STATES, AnalysisJobStatus
 
 
 def test_state_machine_canonical_enum_invariants():

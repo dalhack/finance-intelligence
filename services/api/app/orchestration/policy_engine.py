@@ -1,6 +1,6 @@
 from enum import Enum
 
-from services.api.app.orchestration.exceptions import PolicyDeniedException
+from app.orchestration.exceptions import PolicyDeniedException
 
 
 class DataClassification(str, Enum):

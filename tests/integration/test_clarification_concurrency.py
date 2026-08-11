@@ -3,14 +3,13 @@ from datetime import UTC, datetime
 from uuid import uuid4
 
 import pytest
+from app.models.institution import Institution
+from app.models.orchestration import AnalysisJob
+from app.models.organization import Organization
+from app.models.user import User
+from app.services.clarification_service import ClarificationService
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
-
-from services.api.app.models.institution import Institution
-from services.api.app.models.orchestration import AnalysisJob
-from services.api.app.models.organization import Organization
-from services.api.app.models.user import User
-from services.api.app.services.clarification_service import ClarificationService
 
 
 @pytest.mark.asyncio

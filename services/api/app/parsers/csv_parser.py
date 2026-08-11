@@ -2,9 +2,8 @@ import csv
 import io
 
 import chardet
-
-from services.api.app.core.config import settings
-from services.api.app.parsers.base import (
+from app.core.config import settings
+from app.parsers.base import (
     CanonicalExtractionOutput,
     DocumentParserPort,
     ExtractionWarningItem,

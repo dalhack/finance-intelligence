@@ -2,20 +2,19 @@ from datetime import date, datetime
 from decimal import Decimal
 from uuid import UUID
 
+from app.db.session import get_db_session
+from app.dependencies import require_permission
+from app.middleware.execution_context import ExecutionContext
+from app.models.financial_fact import FinancialFact
+from app.models.financial_fact_candidate import FinancialFactCandidate
+from app.models.institution import Institution
+from app.models.metric_definition import MetricDefinition
+from app.models.reporting_period import ReportingPeriod
+from app.services.financial_fact_service import FinancialFactService
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from pydantic import BaseModel, ConfigDict, Field
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-
-from services.api.app.db.session import get_db_session
-from services.api.app.dependencies import require_permission
-from services.api.app.middleware.execution_context import ExecutionContext
-from services.api.app.models.financial_fact import FinancialFact
-from services.api.app.models.financial_fact_candidate import FinancialFactCandidate
-from services.api.app.models.institution import Institution
-from services.api.app.models.metric_definition import MetricDefinition
-from services.api.app.models.reporting_period import ReportingPeriod
-from services.api.app.services.financial_fact_service import FinancialFactService
 
 router = APIRouter()
 

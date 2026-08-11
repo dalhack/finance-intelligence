@@ -1,4 +1,4 @@
-from services.api.app.models.metric_definition import MetricDefinition
+from app.models.metric_definition import MetricDefinition
 
 EXPECTED_METRICS = [
     "TOTAL_ASSETS",

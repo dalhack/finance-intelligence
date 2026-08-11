@@ -4,15 +4,15 @@ from uuid import uuid4
 
 import asyncpg
 import pytest
+from app.db.session import ApiSessionLocal, WorkerSessionLocal
 from app.db.tenant_context import tenant_transaction_context
+from app.models.document import Document
+from app.models.document_version import DocumentVersion
+from app.models.ingestion_job import IngestionAttempt, IngestionJob
+from app.models.stored_object import StoredObject
+from app.storage.local_adapter import LocalStorageAdapter
 from sqlalchemy import select
 
-from services.api.app.db.session import ApiSessionLocal, WorkerSessionLocal
-from services.api.app.models.document import Document
-from services.api.app.models.document_version import DocumentVersion
-from services.api.app.models.ingestion_job import IngestionAttempt, IngestionJob
-from services.api.app.models.stored_object import StoredObject
-from services.api.app.storage.local_adapter import LocalStorageAdapter
 from services.worker.app.ingestion_worker import IngestionWorker
 
 OWNER_URL = os.environ.get(
@@ -24,7 +24,7 @@ OWNER_URL = os.environ.get(
 @pytest.mark.asyncio
 async def test_worker_status_mapping_rejected(monkeypatch):
     """Verify that parser status REJECTED is deterministically mapped across attempt, job, and document version."""
-    from services.api.app.core.config import settings
+    from app.core.config import settings
 
     monkeypatch.setattr(settings, "MAX_ZIP_ENTRIES", 1)
 

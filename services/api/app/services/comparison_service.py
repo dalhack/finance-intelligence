@@ -4,35 +4,32 @@ from math import ceil
 from typing import Literal
 from uuid import UUID, uuid4
 
-from sqlalchemy import select, text
-from sqlalchemy.ext.asyncio import AsyncSession
-
-from services.api.app.calculations.registry import FormulaRegistry
-from services.api.app.calculations.semantic_measure_registry import (
+from app.calculations.registry import FormulaRegistry
+from app.calculations.semantic_measure_registry import (
     SemanticMeasureDefinition,
     SemanticMeasureRegistry,
 )
-from services.api.app.models.calculation import Calculation
-from services.api.app.models.calculation_attempt import CalculationAttempt
-from services.api.app.models.calculation_evidence import CalculationEvidence
-from services.api.app.models.calculation_input import CalculationInput
-from services.api.app.models.calculation_reconciliation import CalculationReconciliation
-from services.api.app.models.candidate_evidence import CandidateEvidence
-from services.api.app.models.comparison_run import ComparisonRun
-from services.api.app.models.document import Document
-from services.api.app.models.document_version import DocumentVersion
-from services.api.app.models.financial_fact import FinancialFact
-from services.api.app.models.financial_fact_candidate import FinancialFactCandidate
-from services.api.app.models.institution import Institution
-from services.api.app.models.reporting_period import ReportingPeriod
-from services.api.app.models.result_dataset_model import ResultDatasetModel
-from services.api.app.schemas.comparison import (
+from app.models.calculation import Calculation
+from app.models.calculation_attempt import CalculationAttempt
+from app.models.calculation_evidence import CalculationEvidence
+from app.models.calculation_input import CalculationInput
+from app.models.calculation_reconciliation import CalculationReconciliation
+from app.models.candidate_evidence import CandidateEvidence
+from app.models.comparison_run import ComparisonRun
+from app.models.document import Document
+from app.models.document_version import DocumentVersion
+from app.models.financial_fact import FinancialFact
+from app.models.financial_fact_candidate import FinancialFactCandidate
+from app.models.institution import Institution
+from app.models.reporting_period import ReportingPeriod
+from app.models.result_dataset_model import ResultDatasetModel
+from app.schemas.comparison import (
     ComparisonFiltersDTO,
     ComparisonRequestDTO,
     ComparisonResponseDTO,
     EvidenceDetailDTO,
 )
-from services.api.app.schemas.result_dataset import (
+from app.schemas.result_dataset import (
     ChartSeriesDTO,
     ChartSeriesItemDTO,
     ChartSpecDTO,
@@ -48,7 +45,9 @@ from services.api.app.schemas.result_dataset import (
     TableRowDTO,
     TableSpecDTO,
 )
-from services.api.app.services.audit_service import AuditService
+from app.services.audit_service import AuditService
+from sqlalchemy import select, text
+from sqlalchemy.ext.asyncio import AsyncSession
 
 
 class ComparisonService:

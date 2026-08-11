@@ -3,25 +3,25 @@ from datetime import UTC, date, datetime
 from uuid import uuid4
 
 import pytest
+from app.models.document import Document
+from app.models.document_version import DocumentVersion
+from app.models.financial_fact import FinancialFact
+from app.models.financial_fact_candidate import FinancialFactCandidate
+from app.models.institution import Institution
+from app.models.membership import Membership
+from app.models.metric_definition import MetricDefinition
+from app.models.orchestration import AnalysisJob
+from app.models.organization import Organization
+from app.models.reporting_period import ReportingPeriod
+from app.models.stored_object import StoredObject
+from app.models.user import User
+from app.orchestration.engine import AnalysisOrchestratorEngine
+from app.orchestration.policy_engine import DataClassification
+from app.orchestration.provider import DeterministicTestModelProvider
+from app.orchestration.tools.base import ExecutionContext
 from sqlalchemy import select, text
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
-from services.api.app.models.document import Document
-from services.api.app.models.document_version import DocumentVersion
-from services.api.app.models.financial_fact import FinancialFact
-from services.api.app.models.financial_fact_candidate import FinancialFactCandidate
-from services.api.app.models.institution import Institution
-from services.api.app.models.membership import Membership
-from services.api.app.models.metric_definition import MetricDefinition
-from services.api.app.models.orchestration import AnalysisJob
-from services.api.app.models.organization import Organization
-from services.api.app.models.reporting_period import ReportingPeriod
-from services.api.app.models.stored_object import StoredObject
-from services.api.app.models.user import User
-from services.api.app.orchestration.engine import AnalysisOrchestratorEngine
-from services.api.app.orchestration.policy_engine import DataClassification
-from services.api.app.orchestration.provider import DeterministicTestModelProvider
-from services.api.app.orchestration.tools.base import ExecutionContext
 from services.worker.app.analysis_worker import claim_next_analysis_job
 
 
@@ -626,7 +626,7 @@ async def test_live_anthropic_acceptance():
             role="OWNER",
             permissions={"analyses:read", "analyses:run", "analyses:clarifications:respond", "analyses:cancel"},
         )
-        from services.api.app.orchestration.provider_anthropic import AnthropicProviderAdapter
+        from app.orchestration.provider_anthropic import AnthropicProviderAdapter
 
         provider = AnthropicProviderAdapter(
             application_model_alias="finance_analysis_balanced",

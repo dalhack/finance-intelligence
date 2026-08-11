@@ -3,13 +3,12 @@ import re
 from uuid import UUID
 
 import pytest
-
-from services.api.app.calculations.registry import (
+from app.calculations.registry import (
     FormulaRegistry,
     compute_formula_spec_checksum,
     compute_implementation_checksum,
 )
-from services.api.app.services.calculation_service import (
+from app.services.calculation_service import (
     compute_request_fingerprint,
 )
 

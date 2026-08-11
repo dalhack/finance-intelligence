@@ -3,23 +3,22 @@ import json
 from datetime import UTC, datetime, timedelta
 from uuid import UUID, uuid4
 
-from fastapi import HTTPException, status
-from sqlalchemy import select
-from sqlalchemy.ext.asyncio import AsyncSession
-
-from services.api.app.models.document import Document
-from services.api.app.models.institution import Institution
-from services.api.app.models.orchestration import (
+from app.models.document import Document
+from app.models.institution import Institution
+from app.models.orchestration import (
     AnalysisAttempt,
     AnalysisClarification,
     AnalysisJob,
     AnalysisPlanModel,
 )
-from services.api.app.models.reporting_period import ReportingPeriod
-from services.api.app.orchestration.event_engine import AnalysisEventEngine
-from services.api.app.orchestration.state_machine import TERMINAL_STATES, AnalysisJobStatus, AnalysisStateMachine
-from services.api.app.schemas.clarification import validate_clarification_response
-from services.api.app.services.audit_service import AuditService
+from app.models.reporting_period import ReportingPeriod
+from app.orchestration.event_engine import AnalysisEventEngine
+from app.orchestration.state_machine import TERMINAL_STATES, AnalysisJobStatus, AnalysisStateMachine
+from app.schemas.clarification import validate_clarification_response
+from app.services.audit_service import AuditService
+from fastapi import HTTPException, status
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 
 class ClarificationService:

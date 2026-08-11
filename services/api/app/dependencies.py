@@ -1,19 +1,18 @@
 import uuid
 from uuid import UUID
 
-from fastapi import Depends, Header, HTTPException, status
-
-from services.api.app.core.config import settings
-from services.api.app.core.errors import (
+from app.core.config import settings
+from app.core.errors import (
     InvalidCredentialsException,
     MembershipRequiredException,
 )
-from services.api.app.core.security import (
+from app.core.security import (
     DevelopmentAppAttestationVerifier,
     DevelopmentIdentityVerifier,
     FirebaseIdentityVerifier,
 )
-from services.api.app.middleware.execution_context import ExecutionContext
+from app.middleware.execution_context import ExecutionContext
+from fastapi import Depends, Header, HTTPException, status
 
 # Dev auth instance
 dev_identity_verifier = DevelopmentIdentityVerifier()
@@ -29,9 +28,8 @@ async def resolve_auth_context_from_db(
     firebase_uid: str, organization_id: UUID
 ) -> tuple[UUID, UUID, list[str], list[str]] | None:
     """Pre-tenant auth lookup DB execution plane using db_api_user via resolve_auth_context SECURITY DEFINER function."""
+    from app.db.session import ApiSessionLocal
     from sqlalchemy import text
-
-    from services.api.app.db.session import ApiSessionLocal
 
     try:
         async with ApiSessionLocal() as session:

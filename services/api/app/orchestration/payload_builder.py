@@ -1,7 +1,7 @@
 import json
 from typing import Any, ClassVar
 
-from services.api.app.orchestration.policy_engine import DataClassification
+from app.orchestration.policy_engine import DataClassification
 
 
 class ProviderPayloadBuilder:

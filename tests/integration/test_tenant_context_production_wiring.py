@@ -5,15 +5,14 @@ from typing import Annotated
 from uuid import UUID, uuid4
 
 import pytest
+from app.api.v1 import documents
+from app.db.session import api_engine, get_db_session
+from app.db.tenant_context import tenant_transaction_context
+from app.dependencies import get_execution_context
 from fastapi import Depends, FastAPI
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy import event, text
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
-
-from services.api.app.api.v1 import documents
-from services.api.app.db.session import api_engine, get_db_session
-from services.api.app.db.tenant_context import tenant_transaction_context
-from services.api.app.dependencies import get_execution_context
 
 API_USER_URL = os.environ.get("TEST_API_DATABASE_URL")
 OWNER_URL = os.environ.get("TEST_OWNER_DATABASE_URL")

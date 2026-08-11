@@ -4,15 +4,14 @@ from decimal import Decimal
 from typing import Any
 from uuid import UUID, uuid4
 
+from app.models.candidate_evidence import CandidateEvidence
+from app.models.financial_fact_candidate import FinancialFactCandidate
+from app.models.metric_alias import MetricAlias
+from app.models.metric_definition import MetricDefinition
+from app.services.audit_service import AuditService
+from app.services.normalization_service import NormalizationService
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
-
-from services.api.app.models.candidate_evidence import CandidateEvidence
-from services.api.app.models.financial_fact_candidate import FinancialFactCandidate
-from services.api.app.models.metric_alias import MetricAlias
-from services.api.app.models.metric_definition import MetricDefinition
-from services.api.app.services.audit_service import AuditService
-from services.api.app.services.normalization_service import NormalizationService
 
 
 class FactCandidateService:

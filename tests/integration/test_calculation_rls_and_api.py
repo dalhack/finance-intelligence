@@ -4,30 +4,29 @@ from decimal import Decimal
 from uuid import UUID, uuid4
 
 import pytest
-from app.db.tenant_context import tenant_transaction_context
-from sqlalchemy import select, text
-from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
-
-from services.api.app.calculations.registry import (
+from app.calculations.registry import (
     compute_formula_spec_checksum,
     compute_implementation_checksum,
 )
-from services.api.app.models.calculation import Calculation
-from services.api.app.models.calculation_attempt import CalculationAttempt
-from services.api.app.models.calculation_input import CalculationInput
-from services.api.app.models.calculation_request import CalculationRequest
-from services.api.app.models.candidate_evidence import CandidateEvidence
-from services.api.app.models.document import Document
-from services.api.app.models.document_version import DocumentVersion
-from services.api.app.models.financial_fact import FinancialFact
-from services.api.app.models.financial_fact_candidate import FinancialFactCandidate
-from services.api.app.models.formula_definition import FormulaDefinition
-from services.api.app.models.institution import Institution
-from services.api.app.models.organization import Organization
-from services.api.app.models.reporting_period import ReportingPeriod
-from services.api.app.models.stored_object import StoredObject
-from services.api.app.models.user import User
-from services.api.app.services.calculation_service import CalculationService
+from app.db.tenant_context import tenant_transaction_context
+from app.models.calculation import Calculation
+from app.models.calculation_attempt import CalculationAttempt
+from app.models.calculation_input import CalculationInput
+from app.models.calculation_request import CalculationRequest
+from app.models.candidate_evidence import CandidateEvidence
+from app.models.document import Document
+from app.models.document_version import DocumentVersion
+from app.models.financial_fact import FinancialFact
+from app.models.financial_fact_candidate import FinancialFactCandidate
+from app.models.formula_definition import FormulaDefinition
+from app.models.institution import Institution
+from app.models.organization import Organization
+from app.models.reporting_period import ReportingPeriod
+from app.models.stored_object import StoredObject
+from app.models.user import User
+from app.services.calculation_service import CalculationService
+from sqlalchemy import select, text
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 OWNER_URL = os.environ.get("TEST_OWNER_DATABASE_URL")
 API_USER_URL = os.environ.get("TEST_API_DATABASE_URL")
@@ -84,7 +83,7 @@ async def test_calculation_service_end_to_end_and_reconciliation(db_owner_sessio
     await db_owner_session.commit()
 
     # Seed FormulaDefinition if not present
-    from services.api.app.calculations.formulas.loan_to_deposit import LoanToDepositRatioFormula
+    from app.calculations.formulas.loan_to_deposit import LoanToDepositRatioFormula
 
     f_cls = LoanToDepositRatioFormula
     spec_cs = compute_formula_spec_checksum(f_cls)

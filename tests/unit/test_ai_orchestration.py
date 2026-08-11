@@ -1,10 +1,8 @@
 from decimal import Decimal
 
 import pytest
-from pydantic import ValidationError
-
-from services.api.app.orchestration.budget import JobBudgetTracker
-from services.api.app.orchestration.exceptions import (
+from app.orchestration.budget import JobBudgetTracker
+from app.orchestration.exceptions import (
     AnalysisBudgetExceededException,
     AnalysisPlanInvalidException,
     ModelFailoverProhibitedException,
@@ -16,15 +14,16 @@ from services.api.app.orchestration.exceptions import (
     ToolNotAllowedException,
     UnsupportedNumericClaimException,
 )
-from services.api.app.orchestration.injection_boundary import PromptInjectionBoundary
-from services.api.app.orchestration.policy_engine import DataClassification, PolicyDecision, PolicyEngine
-from services.api.app.orchestration.prompt_registry import PromptTemplateRegistry
-from services.api.app.orchestration.provider import DeterministicTestModelProvider, ProductionProvider
-from services.api.app.orchestration.quality_gate import NumericClaimVerifier
-from services.api.app.orchestration.schemas import NormalizedRequest, PlanStep
-from services.api.app.orchestration.state_machine import AnalysisJobStatus, AnalysisStateMachine
-from services.api.app.orchestration.tools.base import validate_tool_arguments
-from services.api.app.orchestration.tools.registry import ToolRegistry
+from app.orchestration.injection_boundary import PromptInjectionBoundary
+from app.orchestration.policy_engine import DataClassification, PolicyDecision, PolicyEngine
+from app.orchestration.prompt_registry import PromptTemplateRegistry
+from app.orchestration.provider import DeterministicTestModelProvider, ProductionProvider
+from app.orchestration.quality_gate import NumericClaimVerifier
+from app.orchestration.schemas import NormalizedRequest, PlanStep
+from app.orchestration.state_machine import AnalysisJobStatus, AnalysisStateMachine
+from app.orchestration.tools.base import validate_tool_arguments
+from app.orchestration.tools.registry import ToolRegistry
+from pydantic import ValidationError
 
 
 def test_provider_abstraction_production_fail_closed():

@@ -1,6 +1,6 @@
 import inspect
 
-from services.api.app.orchestration import engine, policy_engine, provider, state_machine
+from app.orchestration import engine, policy_engine, provider, state_machine
 
 
 def test_orchestration_code_has_no_secret_or_raw_prompt_leakage():

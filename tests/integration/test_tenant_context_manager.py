@@ -2,10 +2,9 @@ import os
 from uuid import uuid4
 
 import pytest
+from app.db.tenant_context import tenant_transaction_context
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
-
-from services.api.app.db.tenant_context import tenant_transaction_context
 
 API_USER_URL = os.environ.get("TEST_API_DATABASE_URL")
 

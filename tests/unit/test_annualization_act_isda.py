@@ -2,8 +2,7 @@ from datetime import date
 from decimal import Decimal
 
 import pytest
-
-from services.api.app.services.calculation_service import CalculationService
+from app.services.calculation_service import CalculationService
 
 
 @pytest.mark.unit

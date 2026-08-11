@@ -2,12 +2,12 @@ import os
 import uuid
 
 import pytest
+from app.core.config import DEFAULT_DEV_MIGRATION_URL
+from app.db.session import MaintenanceSessionLocal
 from app.db.tenant_context import tenant_transaction_context
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import create_async_engine
 
-from services.api.app.core.config import DEFAULT_DEV_MIGRATION_URL
-from services.api.app.db.session import MaintenanceSessionLocal
 from services.worker.app.maintenance_worker import (
     run_maintenance_worker_loop,
     update_worker_heartbeat,
@@ -76,7 +76,7 @@ async def test_maintenance_worker_concurrency_and_fencing():
 @pytest.mark.asyncio
 async def test_maintenance_worker_loop_run_once():
     """Verify run_maintenance_worker_loop run_once=True execution."""
-    from services.api.app.db.session import maintenance_engine
+    from app.db.session import maintenance_engine
 
     await maintenance_engine.dispose()
 

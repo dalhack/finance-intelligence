@@ -9,9 +9,8 @@ Also verifies Security Definer ownership, prosecdef, search_path, and ACLs for c
 import asyncio
 import sys
 
+from app.db.session import ApiSessionLocal, BootstrapSessionLocal, WorkerSessionLocal
 from sqlalchemy import text
-
-from services.api.app.db.session import ApiSessionLocal, BootstrapSessionLocal, WorkerSessionLocal
 
 
 async def verify_session_roles() -> None:

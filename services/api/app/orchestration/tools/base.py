@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import Any, Protocol
 from uuid import UUID
 
-from services.api.app.orchestration.exceptions import ToolInputInvalidException
+from app.orchestration.exceptions import ToolInputInvalidException
 
 FORBIDDEN_MODEL_INPUT_KEYS = {
     "organization_id",

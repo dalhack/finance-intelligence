@@ -3,10 +3,9 @@ from datetime import UTC, datetime
 from typing import Any
 from uuid import UUID, uuid4
 
+from app.models.orchestration import AnalysisEvent
 from sqlalchemy import select, text
 from sqlalchemy.ext.asyncio import AsyncSession
-
-from services.api.app.models.orchestration import AnalysisEvent
 
 
 class CrossTenantEventAccessException(Exception):

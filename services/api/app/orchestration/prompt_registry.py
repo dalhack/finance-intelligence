@@ -2,7 +2,7 @@ import hashlib
 from dataclasses import dataclass
 from typing import ClassVar
 
-from services.api.app.orchestration.exceptions import PromptTemplateIntegrityFailedException
+from app.orchestration.exceptions import PromptTemplateIntegrityFailedException
 
 
 @dataclass(frozen=True)

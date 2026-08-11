@@ -2,14 +2,13 @@ import zipfile
 from io import BytesIO
 
 import openpyxl
-from openpyxl.utils.exceptions import InvalidFileException
-
-from services.api.app.core.config import settings
-from services.api.app.parsers.base import (
+from app.core.config import settings
+from app.parsers.base import (
     CanonicalExtractionOutput,
     DocumentParserPort,
     ExtractionWarningItem,
 )
+from openpyxl.utils.exceptions import InvalidFileException
 
 FORMULA_PREFIXES = ("=", "+", "-", "@", "\t", "\r")
 
