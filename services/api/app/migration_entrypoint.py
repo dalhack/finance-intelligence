@@ -120,9 +120,9 @@ def main() -> NoReturn:
             logger.error(f"[MIGRATION_ENTRYPOINT] Unknown subcommand: '{args.subcommand}'")
             _safe_exit(1)
 
-    except Exception as e:  # noqa: BLE001
+    except Exception as e:
         redacted_err = redact_text(str(e))
-        logger.error(f"[MIGRATION_ENTRYPOINT] Subcommand '{args.subcommand}' failed: {redacted_err}")
+        logger.exception(f"[MIGRATION_ENTRYPOINT] Subcommand '{args.subcommand}' failed: {redacted_err}")
         _safe_exit(1)
 
 

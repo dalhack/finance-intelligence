@@ -340,13 +340,25 @@ def run_alembic_migrations(config: MigrationExecutionConfig) -> None:
                                     )
                                 ).scalar()
                             )
-                            logger.info(
-                                f"[MIGRATION_RUNNER] Post-Phase 3 Privilege Audit: db_bootstrap CREATE={bootstrap_create_after} (expected {bootstrap_create_before})"
+                            # Revision 026 intentionally hardens public schema ACLs by revoking CREATE privilege from PUBLIC/db_bootstrap.
+                            # When upgrading across Revision 026, expected_create_after MUST be False.
+                            expected_create_after = (
+                                False
+                                if (
+                                    current_rev is not None
+                                    and current_rev < "026_public_schema_acl_hardening"
+                                    and config.expected_head >= "026_public_schema_acl_hardening"
+                                )
+                                else bootstrap_create_before
                             )
 
-                            if bootstrap_create_after != bootstrap_create_before:
+                            logger.info(
+                                f"[MIGRATION_RUNNER] Post-Phase 3 Privilege Audit: db_bootstrap CREATE={bootstrap_create_after} (expected {expected_create_after})"
+                            )
+
+                            if bootstrap_create_after != expected_create_after:
                                 raise MigrationRunnerError(
-                                    f"Privilege parity audit failure! Expected CREATE={bootstrap_create_before}, got {bootstrap_create_after}"
+                                    f"Privilege parity audit failure! Expected CREATE={expected_create_after}, got {bootstrap_create_after}"
                                 )
 
                             cleanup_verified = True
