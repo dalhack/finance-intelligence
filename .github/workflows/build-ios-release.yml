@@ -11,14 +11,14 @@ on:
 jobs:
   build-ios-signed-release:
     name: Build & Export Signed iOS IPA Package
-    runs-on: macos-15
+    runs-on: macos-26
     timeout-minutes: 45
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Check iOS Toolchain & Xcode 16 SDK Version
+      - name: Check iOS Toolchain & Xcode 26 SDK Version
         run: |
           xcodebuild -version
           XCODE_VER=$(xcodebuild -version | head -n 1 | awk '{print $2}')
@@ -29,15 +29,15 @@ jobs:
           XCODE_MAJOR=$(echo "$XCODE_VER" | cut -d. -f1)
           SDK_MAJOR=$(echo "$SDK_VER" | cut -d. -f1)
           
-          if [ "$XCODE_MAJOR" -lt 16 ]; then
-            echo "CRITICAL FAIL-CLOSED: Xcode major version ($XCODE_MAJOR) is less than required 16!"
+          if [ "$XCODE_MAJOR" -lt 26 ]; then
+            echo "CRITICAL FAIL-CLOSED: Xcode major version ($XCODE_MAJOR) is less than required 26!"
             exit 1
           fi
-          if [ "$SDK_MAJOR" -lt 18 ]; then
-            echo "CRITICAL FAIL-CLOSED: iPhoneOS SDK major version ($SDK_MAJOR) is less than required 18!"
+          if [ "$SDK_MAJOR" -lt 26 ]; then
+            echo "CRITICAL FAIL-CLOSED: iPhoneOS SDK major version ($SDK_MAJOR) is less than required 26!"
             exit 1
           fi
-          echo "Xcode 16 / iOS 18 SDK preflight PASSED."
+          echo "Xcode 26 / iOS 26 SDK preflight PASSED."
 
       - name: Preflight Canonical SHA & Identity Validation
         run: |
