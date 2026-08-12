@@ -45,8 +45,8 @@ def test_flutter_app_config_contract() -> None:
 def test_ios_privacy_usage_descriptions_contract() -> None:
     plist_path = REPO_ROOT / "apps" / "mobile" / "ios" / "Runner" / "Info.plist"
     content = plist_path.read_text(encoding="utf-8")
-    tree = ET.ElementTree(ET.fromstring(content))
-    root = tree.getroot()
+    root = ET.fromstring(content)
+    assert root is not None
     dict_elem = root.find("dict")
     assert dict_elem is not None
 
