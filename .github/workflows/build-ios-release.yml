@@ -104,10 +104,7 @@ jobs:
             -configuration Release \
             -archivePath build/ios/archive/Runner.xcarchive \
             archive \
-            CODE_SIGN_STYLE=Manual \
-            DEVELOPMENT_TEAM=D7FNNBFRUV \
-            CODE_SIGN_IDENTITY="Apple Distribution" \
-            PROVISIONING_PROFILE_SPECIFIER="$PROVISIONING_PROFILE_UUID"
+            PROVISIONING_PROFILE_UUID="$PROVISIONING_PROFILE_UUID"
 
           mkdir -p build/ios/ipa
           xcodebuild -exportArchive \
