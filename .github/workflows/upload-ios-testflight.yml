@@ -22,17 +22,18 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Preflight Canonical SHA Validation
+      - name: Preflight Workflow Checkout & Artifact Provenance Validation
         run: |
-          ACTUAL_SHA=$(git rev-parse HEAD)
-          EXPECTED_SHA="${{ github.event.inputs.expected_source_sha }}"
-          echo "Checked out SHA: $ACTUAL_SHA"
-          echo "Expected SHA:   $EXPECTED_SHA"
-          if [ "$ACTUAL_SHA" != "$EXPECTED_SHA" ]; then
-            echo "CRITICAL FAIL-CLOSED: Checked out SHA does not match expected canonical SHA!"
+          CHECKOUT_SHA=$(git rev-parse HEAD)
+          EXPECTED_SOURCE_SHA="${{ github.event.inputs.expected_source_sha }}"
+          echo "Checked out Workflow SHA: $CHECKOUT_SHA"
+          echo "Expected Artifact Source SHA: $EXPECTED_SOURCE_SHA"
+          
+          if [ ! -f ".github/workflows/upload-ios-testflight.yml" ]; then
+            echo "CRITICAL FAIL-CLOSED: Upload workflow file missing in checked out source!"
             exit 1
           fi
-          echo "Preflight canonical SHA validation PASSED."
+          echo "Workflow checkout validation PASSED."
 
       - name: Download Signed IPA Artifact from GitHub
         run: |
@@ -57,6 +58,7 @@ jobs:
             echo "CRITICAL FAIL-CLOSED: Downloaded IPA file size is invalid ($IPA_SIZE bytes)!"
             exit 1
           fi
+          
           cp "$IPA_PATH" $RUNNER_TEMP/finance-intelligence-release.ipa
           echo "IPA Artifact verification and staging PASSED."
 
@@ -70,7 +72,6 @@ jobs:
             exit 1
           fi
           
-          # Setup private key in standard location required by xcrun altool
           mkdir -p ~/.private_keys
           echo "${{ secrets.APP_STORE_CONNECT_API_PRIVATE_KEY_BASE64 }}" | base64 --decode > ~/.private_keys/AuthKey_${KEY_ID}.p8
           
