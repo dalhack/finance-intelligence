@@ -289,7 +289,7 @@ def test_watchdog_pre_termination_diagnostics(capsys):
         pid=fake_pid,
         pgid=fake_pgid,
         simulator_udid=fake_udid,
-        bundle_id="com.dalhack.financeintelligence",
+        bundle_id="com.korhanturgut.financeintelligence",
         current_phase="IOS_E2E_PHASE_TEST_DRIVER_CONNECT",
         diagnostic_timeout_sec=1.0,
     )

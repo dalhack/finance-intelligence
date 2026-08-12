@@ -153,7 +153,7 @@ def collect_pre_termination_diagnostics(
     pid: int,
     pgid: int,
     simulator_udid: str | None = None,
-    bundle_id: str = "com.dalhack.financeintelligence",
+    bundle_id: str = "com.korhanturgut.financeintelligence",
     current_phase: str = PHASE_UNKNOWN,
     diagnostic_timeout_sec: float = 20.0,
 ) -> dict[str, str | bool | int]:
@@ -518,7 +518,7 @@ def run_watchdog(
     cwd: str | None = None,
     env: dict | None = None,
     simulator_udid: str | None = None,
-    bundle_id: str = "com.dalhack.financeintelligence",
+    bundle_id: str = "com.korhanturgut.financeintelligence",
 ) -> int:
     """Runs command in isolated process group with live log redaction, phase tracking, and silence watchdog."""
     if timeout_seconds <= 0:
@@ -678,7 +678,7 @@ def main() -> None:
     parser.add_argument(
         "--bundle-id",
         type=str,
-        default="com.dalhack.financeintelligence",
+        default="com.korhanturgut.financeintelligence",
         help="Target iOS App Bundle Identifier",
     )
     parser.add_argument("cmd", nargs=argparse.REMAINDER, help="Target command to execute")
