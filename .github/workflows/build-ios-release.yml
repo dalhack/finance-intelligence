@@ -6,7 +6,7 @@ on:
       expected_commit_sha:
         description: 'Expected canonical commit SHA for preflight identity validation'
         required: true
-        default: 'c34ab492d6bba438c15bc19e783e164ec65257d1'
+        default: '2d444028975a0c772b5cf08a24d3286205206c14'
 
 jobs:
   build-ios-signed-release:
@@ -73,24 +73,32 @@ jobs:
 
           PROFILING_DIR="$HOME/Library/MobileDevice/Provisioning Profiles"
           mkdir -p "$PROFILING_DIR"
-          PROFILE_PATH="$RUNNER_TEMP/profile.mobileprovision"
+          PROFILE_PATH=$RUNNER_TEMP/profile.mobileprovision
           echo "${{ secrets.IOS_PROVISIONING_PROFILE_BASE64 }}" | base64 --decode > "$PROFILE_PATH"
 
-          PROFILE_UUID=$(security cms -D -i "$PROFILE_PATH" 2>/dev/null | grep -aA1 UUID | grep string | sed -e 's/.*<string>//' -e 's/<\/string>.*//' || true)
-          if [ -z "$PROFILE_UUID" ]; then
-            PROFILE_UUID=$(grep -aA1 UUID "$PROFILE_PATH" | grep string | sed -e 's/.*<string>//' -e 's/<\/string>.*//' || true)
+          PROFILE_NAME=$(security cms -D -i "$PROFILE_PATH" 2>/dev/null | grep -aA1 "<key>Name</key>" | grep string | sed -e 's/.*<string>//' -e 's/<\/string>.*//' || true)
+          if [ -z "$PROFILE_NAME" ]; then
+            PROFILE_NAME=$(grep -aA1 "<key>Name</key>" "$PROFILE_PATH" 2>/dev/null | grep string | sed -e 's/.*<string>//' -e 's/<\/string>.*//' || true)
           fi
 
+          PROFILE_UUID=$(security cms -D -i "$PROFILE_PATH" 2>/dev/null | grep -aA1 "<key>UUID</key>" | grep string | sed -e 's/.*<string>//' -e 's/<\/string>.*//' || true)
           if [ -z "$PROFILE_UUID" ]; then
-            echo "CRITICAL FAIL-CLOSED: Provisioning Profile UUID could not be extracted!"
+            PROFILE_UUID=$(grep -aA1 "<key>UUID</key>" "$PROFILE_PATH" 2>/dev/null | grep string | sed -e 's/.*<string>//' -e 's/<\/string>.*//' || true)
+          fi
+
+          if [ -z "$PROFILE_NAME" ] || [ -z "$PROFILE_UUID" ]; then
+            echo "CRITICAL FAIL-CLOSED: Provisioning Profile Name or UUID could not be extracted!"
             exit 1
           fi
+
+          echo "$PROFILE_NAME" > $RUNNER_TEMP/profile_name.txt
+          echo "$PROFILE_UUID" > $RUNNER_TEMP/profile_uuid.txt
 
           cp "$PROFILE_PATH" "$PROFILING_DIR/$PROFILE_UUID.mobileprovision"
           echo "PROVISIONING_PROFILE_UUID=$PROFILE_UUID" >> $GITHUB_ENV
           echo "DISTRIBUTION_CERT_IMPORTED=true" >> $GITHUB_ENV
           echo "APP_STORE_PROFILE_INSTALLED=true" >> $GITHUB_ENV
-          echo "Profile installed successfully with UUID verification."
+          echo "Profile imported successfully with non-disclosed runtime UUID mapping."
 
       - name: Build & Export Signed iOS App Store IPA Package
         run: |
@@ -106,10 +114,35 @@ jobs:
             archive \
             PROVISIONING_PROFILE_UUID="$PROVISIONING_PROFILE_UUID"
 
+          RUNTIME_PROFILE_NAME=$(cat $RUNNER_TEMP/profile_name.txt)
+          RUNTIME_PLIST="$RUNNER_TEMP/RuntimeExportOptions.plist"
+
+          cat <<EOF > "$RUNTIME_PLIST"
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+          	<key>method</key>
+          	<string>app-store-connect</string>
+          	<key>teamID</key>
+          	<string>D7FNNBFRUV</string>
+          	<key>signingStyle</key>
+          	<string>manual</string>
+          	<key>provisioningProfiles</key>
+          	<dict>
+          		<key>com.korhanturgut.financeintelligence</key>
+          		<string>${RUNTIME_PROFILE_NAME}</string>
+          	</dict>
+          	<key>uploadSymbols</key>
+          	<true/>
+          </dict>
+          </plist>
+          EOF
+
           mkdir -p build/ios/ipa
           xcodebuild -exportArchive \
             -archivePath build/ios/archive/Runner.xcarchive \
-            -exportOptionsPlist ios/ExportOptions.plist \
+            -exportOptionsPlist "$RUNTIME_PLIST" \
             -exportPath build/ios/ipa
 
       - name: Verify Signed IPA Artifact
@@ -141,6 +174,6 @@ jobs:
           if [ -f "$KEYCHAIN_PATH" ]; then
             security delete-keychain "$KEYCHAIN_PATH" || true
           fi
-          rm -rf $RUNNER_TEMP/*.p12 $RUNNER_TEMP/*.mobileprovision
+          rm -rf $RUNNER_TEMP/*.p12 $RUNNER_TEMP/*.mobileprovision $RUNNER_TEMP/*.plist $RUNNER_TEMP/*.txt
           rm -rf "$HOME/Library/MobileDevice/Provisioning Profiles"/*
-          echo "Temporary signing assets and keychains cleaned up successfully."
+          echo "Temporary signing assets, keychains, and runtime export plists cleaned up successfully."
