@@ -22,7 +22,7 @@ class AppConfig {
   );
 
   static const production = AppConfig(
-    apiBaseUrl: 'https://api.finance-intelligence.internal/v1',
+    apiBaseUrl: 'https://finapi.korhanturgut.com/v1',
     environment: 'production',
     requestTimeoutMs: 30000,
     enableDevAuth: false,

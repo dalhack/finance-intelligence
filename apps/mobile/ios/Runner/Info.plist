@@ -66,5 +66,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>Finance Intelligence, fiş ve faturaları taramak için kameranızı kullanır. / Finance Intelligence uses your camera to scan receipts and financial documents.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Finance Intelligence, belge ve fatura görsellerini yüklemek için fotoğraf kütüphanenize erişir. / Finance Intelligence accesses your photo library to upload document and receipt images.</string>
 </dict>
 </plist>
