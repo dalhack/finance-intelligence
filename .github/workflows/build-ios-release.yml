@@ -6,7 +6,7 @@ on:
       expected_commit_sha:
         description: 'Expected canonical commit SHA for preflight identity validation'
         required: true
-        default: '0a969efed396ff546933871944d095403e83568f'
+        default: 'c34ab492d6bba438c15bc19e783e164ec65257d1'
 
 jobs:
   build-ios-signed-release:
@@ -75,14 +75,45 @@ jobs:
           mkdir -p "$PROFILING_DIR"
           PROFILE_PATH="$RUNNER_TEMP/profile.mobileprovision"
           echo "${{ secrets.IOS_PROVISIONING_PROFILE_BASE64 }}" | base64 --decode > "$PROFILE_PATH"
-          PROFILE_UUID=$(grep -aA1 UUID "$PROFILE_PATH" | grep string | sed -e 's/.*<string>//' -e 's/<\/string>.*//' || echo "release_profile")
-          cp "$PROFILE_PATH" "$PROFILING_DIR/$PROFILE_UUID.mobileprovision"
-          echo "Imported Provisioning Profile UUID: $PROFILE_UUID"
 
-      - name: Build Signed iOS App Store IPA Package
+          PROFILE_UUID=$(security cms -D -i "$PROFILE_PATH" 2>/dev/null | grep -aA1 UUID | grep string | sed -e 's/.*<string>//' -e 's/<\/string>.*//' || true)
+          if [ -z "$PROFILE_UUID" ]; then
+            PROFILE_UUID=$(grep -aA1 UUID "$PROFILE_PATH" | grep string | sed -e 's/.*<string>//' -e 's/<\/string>.*//' || true)
+          fi
+
+          if [ -z "$PROFILE_UUID" ]; then
+            echo "CRITICAL FAIL-CLOSED: Provisioning Profile UUID could not be extracted!"
+            exit 1
+          fi
+
+          cp "$PROFILE_PATH" "$PROFILING_DIR/$PROFILE_UUID.mobileprovision"
+          echo "PROVISIONING_PROFILE_UUID=$PROFILE_UUID" >> $GITHUB_ENV
+          echo "DISTRIBUTION_CERT_IMPORTED=true" >> $GITHUB_ENV
+          echo "APP_STORE_PROFILE_INSTALLED=true" >> $GITHUB_ENV
+          echo "Profile installed successfully with UUID verification."
+
+      - name: Build & Export Signed iOS App Store IPA Package
         run: |
           cd apps/mobile
-          flutter build ipa --release --export-options-plist=ios/ExportOptions.plist --build-number=1 --build-name=1.0.0
+
+          flutter build ios --release --no-codesign --build-number=1 --build-name=1.0.0
+
+          mkdir -p build/ios/archive
+          xcodebuild -workspace ios/Runner.xcworkspace \
+            -scheme Runner \
+            -configuration Release \
+            -archivePath build/ios/archive/Runner.xcarchive \
+            archive \
+            CODE_SIGN_STYLE=Manual \
+            DEVELOPMENT_TEAM=D7FNNBFRUV \
+            CODE_SIGN_IDENTITY="Apple Distribution" \
+            PROVISIONING_PROFILE_SPECIFIER="$PROVISIONING_PROFILE_UUID"
+
+          mkdir -p build/ios/ipa
+          xcodebuild -exportArchive \
+            -archivePath build/ios/archive/Runner.xcarchive \
+            -exportOptionsPlist ios/ExportOptions.plist \
+            -exportPath build/ios/ipa
 
       - name: Verify Signed IPA Artifact
         run: |
