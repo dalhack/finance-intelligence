@@ -53,3 +53,24 @@ def test_ios_privacy_usage_descriptions_contract() -> None:
     keys = [elem.text for elem in dict_elem.findall("key")]
     assert "NSCameraUsageDescription" in keys, "Missing NSCameraUsageDescription in Info.plist"
     assert "NSPhotoLibraryUsageDescription" in keys, "Missing NSPhotoLibraryUsageDescription in Info.plist"
+
+
+def test_ios_export_compliance_contract() -> None:
+    plist_path = REPO_ROOT / "apps" / "mobile" / "ios" / "Runner" / "Info.plist"
+    content = plist_path.read_text(encoding="utf-8")
+    root = ET.fromstring(content)
+    assert root is not None
+    dict_elem = root.find("dict")
+    assert dict_elem is not None
+
+    children = list(dict_elem)
+    key_idx = -1
+    for i, child in enumerate(children):
+        if child.tag == "key" and child.text == "ITSAppUsesNonExemptEncryption":
+            key_idx = i
+            break
+
+    assert key_idx != -1, "ITSAppUsesNonExemptEncryption key missing in Info.plist"
+    assert key_idx + 1 < len(children), "ITSAppUsesNonExemptEncryption value element missing"
+    value_elem = children[key_idx + 1]
+    assert value_elem.tag == "false", "ITSAppUsesNonExemptEncryption must be <false/>"
