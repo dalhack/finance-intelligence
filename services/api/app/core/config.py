@@ -89,6 +89,10 @@ class Settings(BaseSettings):
         default=DEFAULT_DEV_SALT, description="Salt used for log pseudonymization"
     )
 
+    # Object Storage Config ('local' for development, 'gcs' for staging/production)
+    STORAGE_BACKEND: str = Field(default="local")
+    STORAGE_BUCKET: str | None = Field(default=None, description="GCS bucket name when STORAGE_BACKEND=gcs")
+
     # Firebase / App Check Config
     FIREBASE_PROJECT_ID: str | None = None
     ENFORCE_APP_CHECK: bool = Field(default=True)

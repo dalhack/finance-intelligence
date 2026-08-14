@@ -29,7 +29,7 @@ from app.schemas.document import (
 from app.services.audit_service import AuditService
 from app.services.reference_service import ReferenceService
 from app.services.state_machine import StateMachineService
-from app.storage.local_adapter import LocalStorageAdapter
+from app.storage.factory import get_storage_adapter
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -91,7 +91,7 @@ async def initiate_and_stream_upload(
     opaque_key = f"{org_id}/{session_id}.bin"
     expires_at = datetime.now(UTC) + timedelta(hours=24)
 
-    adapter = LocalStorageAdapter()
+    adapter = get_storage_adapter()
     temp_path = adapter.begin_temporary_write(str(org_id), opaque_key)
 
     # TRUE BOUNDED STREAMING (No BytesIO RAM buffers)
@@ -205,7 +205,7 @@ async def finalize_upload(
     if not session.temporary_object_key:
         raise HTTPException(status_code=400, detail="Upload session has no associated temporary object.")
 
-    adapter = LocalStorageAdapter()
+    adapter = get_storage_adapter()
 
     # Streamed Bounded Hash & Size Verification (No full file read into RAM)
     recalculated_hash, file_size = await adapter.compute_hash_and_size(str(org_id), session.temporary_object_key)
