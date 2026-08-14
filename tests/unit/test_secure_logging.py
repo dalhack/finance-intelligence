@@ -122,7 +122,7 @@ async def test_real_worker_exception_log_capture_redaction(monkeypatch):
     # Mock storage adapter get_object
     mock_adapter = MagicMock()
     mock_adapter.get_object = AsyncMock(return_value=io.BytesIO(b"col1,col2\nval1,val2"))
-    monkeypatch.setattr("services.worker.app.ingestion_worker.LocalStorageAdapter", lambda: mock_adapter)
+    monkeypatch.setattr("services.worker.app.ingestion_worker.get_storage_adapter", lambda: mock_adapter)
 
     claimed_job = ClaimedJob(
         job_id=mock_job.id,

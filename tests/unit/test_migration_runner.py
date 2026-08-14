@@ -390,18 +390,18 @@ def test_migration_config_validation_before_side_effect_t5():
 
 
 def test_alembic_graph_single_head_t6_t7():
-    """T6 & T7 — Verify Alembic script graph produces exact single head 031_analysis_job_claim_authority."""
+    """T6 & T7 — Verify Alembic script graph produces exact single head 033_worker_queue_visibility."""
     from alembic.script import ScriptDirectory
 
     alembic_dir = API_DIR / "alembic"
     script = ScriptDirectory(str(alembic_dir))
     heads = script.get_heads()
     assert len(heads) == 1
-    assert heads[0] == "031_analysis_job_claim_authority"
+    assert heads[0] == "033_worker_queue_visibility"
 
 
 def test_get_valid_graph_revisions_remote_collected():
-    """Verifies get_valid_graph_revisions extracts all 31 active revisions directly from Alembic ScriptDirectory."""
+    """Verifies get_valid_graph_revisions extracts all 33 active revisions directly from Alembic ScriptDirectory."""
     from alembic.config import Config
     from app.migration_execution.alembic_runner import get_valid_graph_revisions
 
@@ -409,10 +409,11 @@ def test_get_valid_graph_revisions_remote_collected():
     cfg = Config(ini_path)
     cfg.set_main_option("script_location", str(API_DIR / "alembic"))
 
-    revs = get_valid_graph_revisions(cfg, expected_head="031_analysis_job_claim_authority")
-    assert len(revs) == 31
+    revs = get_valid_graph_revisions(cfg, expected_head="033_worker_queue_visibility")
+    assert len(revs) == 33
     assert "026_public_schema_acl_hardening" in revs
-    assert "031_analysis_job_claim_authority" in revs
+    assert "032_bootstrap_self_onboarding" in revs
+    assert "033_worker_queue_visibility" in revs
     assert "026_model_routing_policy_catalog" not in revs
 
 

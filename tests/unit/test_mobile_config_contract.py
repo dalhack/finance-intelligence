@@ -37,8 +37,8 @@ def test_android_release_signing_contract() -> None:
 def test_flutter_app_config_contract() -> None:
     config_path = REPO_ROOT / "apps" / "mobile" / "lib" / "core" / "config" / "app_config.dart"
     content = config_path.read_text(encoding="utf-8")
-    assert "https://finapi.korhanturgut.com/v1" in content, (
-        "Authoritative Production API Base URL 'https://finapi.korhanturgut.com/v1' missing in app_config.dart"
+    assert "https://finance-api-523958262212.us-central1.run.app/api/v1" in content, (
+        "Authoritative Staging API Base URL 'https://finance-api-523958262212.us-central1.run.app/api/v1' missing in app_config.dart"
     )
 
 

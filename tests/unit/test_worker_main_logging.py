@@ -111,7 +111,7 @@ async def test_real_run_worker_loop_log_redaction_all_worker_modules(monkeypatch
     # Mock LocalStorageAdapter
     mock_adapter = MagicMock()
     mock_adapter.get_object = AsyncMock(return_value=io.BytesIO(b"col1,col2\nval1,val2"))
-    monkeypatch.setattr("services.worker.app.ingestion_worker.LocalStorageAdapter", lambda: mock_adapter)
+    monkeypatch.setattr("services.worker.app.ingestion_worker.get_storage_adapter", lambda: mock_adapter)
 
     # Execute actual worker loop with run_once=True
     processed = await run_worker_loop(run_once=True)
