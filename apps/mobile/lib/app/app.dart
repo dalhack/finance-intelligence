@@ -111,7 +111,8 @@ class _OrganizationGateState extends State<_OrganizationGate> {
                   children: [
                     const Icon(Icons.cloud_off, size: 48),
                     const SizedBox(height: 16),
-                    const Text('Hesap hazırlanamadı. Bağlantınızı kontrol edin.'),
+                    const Text(
+                        'Hesap hazırlanamadı. Bağlantınızı kontrol edin.'),
                     const SizedBox(height: 16),
                     FilledButton(
                       onPressed: () => setState(() {
