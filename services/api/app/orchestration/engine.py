@@ -25,6 +25,7 @@ from app.orchestration.policy_engine import DataClassification, PolicyDecision, 
 from app.orchestration.provider import ModelProvider
 from app.orchestration.provider_anthropic import AnthropicProviderAdapter
 from app.orchestration.quality_gate import QualityGateEngine
+from app.orchestration.request_normalizer import AnalysisRequestNormalizer
 from app.orchestration.schemas import AnalysisPlan, NormalizedRequest, PlanStep
 from app.orchestration.state_machine import AnalysisJobStatus, AnalysisStateMachine
 from app.orchestration.tool_dedup import ToolDeduplicationManager
@@ -154,11 +155,40 @@ class AnalysisOrchestratorEngine:
                 job_id, "analysis.state_changed", {"from_state": "RECEIVED", "to_state": job.status}, attempt_id
             )
 
-            # Parse NormalizedRequest
-            norm_req = NormalizedRequest(
+            # Dynamic AI Request Normalization & Tenant Entity Matching
+            normalizer = AnalysisRequestNormalizer()
+            norm_outcome = await normalizer.normalize_request(
+                prompt=job.request_prompt or "Analiz yapınız.",
+                organization_id=self.context.organization_id,
+                db_session=self.db,
+            )
+
+            if norm_outcome.status == "NEEDS_CLARIFICATION":
+                await self._assert_fenced_ownership(job_id, claim_token, worker_id)
+                from app.services.clarification_service import ClarificationService
+
+                clar_service = ClarificationService(
+                    db=self.db,
+                    organization_id=self.context.organization_id,
+                    user_id=job.user_id,
+                )
+                await clar_service.require_clarification(
+                    analysis_job_id=job_id,
+                    clarification_code=norm_outcome.clarification_code or "UNSUPPORTED_REQUEST_SCOPE",
+                    prompt_key=norm_outcome.clarification_prompt_key or "NORMALIZATION_CLARIFICATION",
+                    question=norm_outcome.clarification_question or "Lütfen analiz parametrelerini seçiniz.",
+                    allowed_response_schema=norm_outcome.allowed_response_schema or {},
+                    attempt_number=attempt_number,
+                )
+                attempt.status = "NEEDS_CLARIFICATION"
+                job.lease_expires_at = None
+                await self.db.commit()
+                return job
+
+            norm_req = norm_outcome.normalized_request or NormalizedRequest(
                 intent="CROSS_INSTITUTION_COMPARISON",
-                requested_institutions=["inst-garan", "inst-akbnk"],
-                requested_periods=["period-2025-q4"],
+                requested_institutions=["Garanti BBVA", "Akbank"],
+                requested_periods=["2025-Q4"],
                 requested_semantic_measures=["TOTAL_ASSETS"],
             )
             job.normalized_request = norm_req.model_dump(mode="json")
@@ -176,20 +206,24 @@ class AnalysisOrchestratorEngine:
                 job_id, "analysis.plan_ready", {"step_count": 1, "tools_planned": ["compare_institutions"]}, attempt_id
             )
 
-            # Resolve active institutions and periods for tenant
-            inst_stmt = (
-                select(Institution.id).where(Institution.organization_id == self.context.organization_id).limit(5)
-            )
-            inst_rows = (await self.db.execute(inst_stmt)).scalars().all()
-            period_stmt = (
-                select(ReportingPeriod.id)
-                .where(ReportingPeriod.organization_id == self.context.organization_id)
-                .limit(5)
-            )
-            period_rows = (await self.db.execute(period_stmt)).scalars().all()
+            # Resolve matched active institutions and periods for tenant
+            inst_ids = norm_outcome.matched_institution_ids or []
+            period_ids = norm_outcome.matched_period_ids or []
 
-            inst_ids = [str(i) for i in inst_rows] or ["11111111-1111-1111-1111-111111111111"]
-            period_ids = [str(p) for p in period_rows] or ["22222222-2222-2222-2222-222222222222"]
+            if not inst_ids or not period_ids:
+                inst_stmt = (
+                    select(Institution.id).where(Institution.organization_id == self.context.organization_id).limit(5)
+                )
+                inst_rows = (await self.db.execute(inst_stmt)).scalars().all()
+                period_stmt = (
+                    select(ReportingPeriod.id)
+                    .where(ReportingPeriod.organization_id == self.context.organization_id)
+                    .limit(5)
+                )
+                period_rows = (await self.db.execute(period_stmt)).scalars().all()
+
+                inst_ids = [str(i) for i in inst_rows] or ["11111111-1111-1111-1111-111111111111"]
+                period_ids = [str(p) for p in period_rows] or ["22222222-2222-2222-2222-222222222222"]
 
             plan = AnalysisPlan(
                 plan_version="1.0.0",
@@ -201,7 +235,11 @@ class AnalysisOrchestratorEngine:
                         tool_arguments={
                             "institution_ids": inst_ids,
                             "reporting_period_ids": period_ids,
-                            "semantic_measures": [{"semantic_measure_code": "TOTAL_ASSETS"}],
+                            "semantic_measures": [
+                                {"semantic_measure_code": code} for code in norm_req.requested_semantic_measures
+                            ]
+                            if norm_req.requested_semantic_measures
+                            else [{"semantic_measure_code": "TOTAL_ASSETS"}],
                         },
                     )
                 ],
