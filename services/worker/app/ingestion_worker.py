@@ -14,7 +14,7 @@ from app.models.stored_object import StoredObject
 from app.parsers.registry import parser_registry
 from app.services.audit_service import AuditService
 from app.services.state_machine import StateMachineService
-from app.storage.local_adapter import LocalStorageAdapter
+from app.storage.factory import get_storage_adapter
 from sqlalchemy import select, text
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -248,7 +248,7 @@ class IngestionWorker:
             )
             stored_obj = stored_obj_res.scalar_one()
 
-            adapter = LocalStorageAdapter()
+            adapter = get_storage_adapter()
             file_stream = await adapter.get_object(str(claimed_job.organization_id), stored_obj.opaque_object_key)
             file_bytes = file_stream.read()
 

@@ -4,11 +4,8 @@ import os
 import signal
 import sys
 import uuid
-from datetime import UTC, datetime, timedelta
 
 from app.db.session import WorkerSessionLocal
-from app.models.ingestion_job import IngestionJob
-from sqlalchemy import select
 
 from services.worker.app.analysis_worker import AnalysisWorker
 from services.worker.app.command_envelope import IngestionCommandEnvelope
@@ -27,16 +24,12 @@ async def fetch_and_sign_next_envelope(session) -> IngestionCommandEnvelope | No
     if not secret:
         return None
 
-    stale_threshold = datetime.now(UTC) - timedelta(minutes=15)
-    stmt = (
-        select(IngestionJob.id)
-        .where(
-            (IngestionJob.status == "QUEUED")
-            | ((IngestionJob.status == "PARSING") & (IngestionJob.locked_at < stale_threshold))
-        )
-        .limit(1)
-    )
-    res = await session.execute(stmt)
+    # RLS scopes db_ingestion_worker to a single tenant GUC; the global queue
+    # poll goes through the SECURITY DEFINER helper (see migration 033),
+    # mirroring the claim_ingestion_job pattern.
+    from sqlalchemy import text
+
+    res = await session.execute(text("SELECT public.fetch_next_queued_ingestion_job(15);"))
     row = res.fetchone()
     if not row or not row[0]:
         return None
