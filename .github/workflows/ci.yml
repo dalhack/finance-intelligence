@@ -338,7 +338,7 @@ jobs:
           test "$SIZE" -gt 0
           shasum -a 256 build/ios/iphonesimulator/Runner.app/Runner build/ios/iphonesimulator/Runner.app/Info.plist
       - name: Create Dedicated Simulator Device & Persist UDID
-        timeout-minutes: 2
+        timeout-minutes: 1
         run: |
           xcrun simctl list runtimes
           SIM_UDID=$(xcrun simctl create "CI_Runner_${{ github.run_id }}_${{ github.run_attempt }}" "com.apple.CoreSimulator.SimDeviceType.iPhone-15")
@@ -347,7 +347,7 @@ jobs:
           echo "SIMULATOR_UDID=$SIM_UDID" >> "$GITHUB_ENV"
 
       - name: Boot Dedicated Simulator
-        timeout-minutes: 5
+        timeout-minutes: 4
         run: |
           echo "Booting dedicated simulator $SIMULATOR_UDID..."
           xcrun simctl boot "$SIMULATOR_UDID"
@@ -355,7 +355,7 @@ jobs:
 
 
       - name: Verify Flutter Device Visibility
-        timeout-minutes: 2
+        timeout-minutes: 5
         run: |
           echo "Checking device visibility for exact UDID $SIMULATOR_UDID..."
           flutter devices > flutter_devices_summary.txt
@@ -368,7 +368,7 @@ jobs:
           python ../../scripts/run_e2e_watchdog.py --timeout-seconds 900 --silence-timeout-seconds 180 --heartbeat-seconds 30 --simulator-udid "$SIMULATOR_UDID" --bundle-id "com.korhanturgut.financeintelligence" flutter test -v integration_test/device_e2e_test.dart -d "$SIMULATOR_UDID"
       - name: Collect Redacted Diagnostic Context
         if: failure() || cancelled()
-        timeout-minutes: 2
+        timeout-minutes: 1
         run: |
           echo "=== REDACTED DIAGNOSTIC CONTEXT ==="
           echo "Target Simulator UDID: $SIMULATOR_UDID"
