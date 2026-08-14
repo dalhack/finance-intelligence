@@ -2,6 +2,7 @@ import json
 from datetime import UTC, datetime
 from uuid import UUID, uuid4
 
+from app.core.config import settings
 from app.models.institution import Institution
 from app.models.orchestration import (
     AnalysisAttempt,
@@ -45,9 +46,11 @@ class AnalysisOrchestratorEngine:
     ):
         self.db = db_session
         self.context = context
+        # Real transport requires a configured API key; environments without one
+        # (unit tests, local dev without credentials) fall back to the fake transport.
         self.provider = provider or AnthropicProviderAdapter(
             application_model_alias="finance_analysis_balanced",
-            use_fake_transport=True,
+            use_fake_transport=not settings.ANTHROPIC_API_KEY,
         )
         self.circuit_breaker = circuit_breaker or ProviderCircuitBreaker(provider_alias="anthropic")
         self.event_engine = AnalysisEventEngine(db_session, context.organization_id)
