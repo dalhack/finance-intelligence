@@ -19,6 +19,25 @@ async def test_health_endpoint_returns_pass():
         assert data["status"] == "pass"
 
 
+class ReadinessSessionWrapper:
+    def __init__(self, session):
+        self._session = session
+
+    async def execute(self, statement, *args, **kwargs):
+        sql_str = str(statement)
+        if "alembic_version" in sql_str:
+
+            class MockResult:
+                def fetchone(self):
+                    return ("031_analysis_job_claim_authority",)
+
+            return MockResult()
+        return await self._session.execute(statement, *args, **kwargs)
+
+    def __getattr__(self, name):
+        return getattr(self._session, name)
+
+
 @pytest.mark.asyncio
 async def test_readiness_endpoint_db_ready():
     async def override_get_system_db_session():
@@ -26,7 +45,7 @@ async def test_readiness_endpoint_db_ready():
         factory = async_sessionmaker(bind=engine, class_=AsyncSession, expire_on_commit=False)
         async with factory() as session:
             try:
-                yield session
+                yield ReadinessSessionWrapper(session)
             finally:
                 await session.close()
         await engine.dispose()

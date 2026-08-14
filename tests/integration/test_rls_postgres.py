@@ -50,6 +50,8 @@ async def test_migration_applies_cleanly():
         "029_analysis_authorization_policy",
         "030_reconcile_application_role_catalog",
         "031_analysis_job_claim_authority",
+        "032_bootstrap_self_onboarding",
+        "033_worker_queue_visibility",
     ]
 
 

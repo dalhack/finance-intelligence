@@ -32,6 +32,8 @@ async def test_migration_016_catalog_and_security_grants():
             "029_analysis_authorization_policy",
             "030_reconcile_application_role_catalog",
             "031_analysis_job_claim_authority",
+            "032_bootstrap_self_onboarding",
+            "033_worker_queue_visibility",
         ]
 
         # 2. Verify Security Definer Function ACL Grants (No Direct EXECUTE for db_api_user / PUBLIC)

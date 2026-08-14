@@ -27,6 +27,8 @@ async def test_migration_022_catalog_and_immutability():
             "029_analysis_authorization_policy",
             "030_reconcile_application_role_catalog",
             "031_analysis_job_claim_authority",
+            "032_bootstrap_self_onboarding",
+            "033_worker_queue_visibility",
         ]
 
         # 2. Verify RLS & FORCE RLS attributes on analysis_events
