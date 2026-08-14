@@ -126,19 +126,6 @@ class AnalysisRequestNormalizer:
                 ) and inst not in matched_institutions:
                     matched_institutions.append(inst)
 
-        # If still no institutions matched, default to tenant institutions if available, otherwise clarify
-        if not matched_institutions and tenant_institutions:
-            matched_institutions = list(tenant_institutions[:2])
-
-        if not matched_institutions:
-            return NormalizationOutcome(
-                status="NEEDS_CLARIFICATION",
-                clarification_code=ClarificationCode.INSTITUTION_REQUIRED.value,
-                clarification_prompt_key="NO_TENANT_INSTITUTION_FOUND",
-                clarification_question="İstemi karşılayacak aktif kurum bulunamadı. Lütfen analiz edilecek kurumu seçiniz.",
-                allowed_response_schema={"type": "object", "properties": {"institution_id": {"type": "string"}}},
-            )
-
         # 4. Match extracted periods against tenant DB records
         matched_periods: list[ReportingPeriod] = []
         for req_per in extracted.requested_periods:
@@ -161,17 +148,33 @@ class AnalysisRequestNormalizer:
                 ) and per not in matched_periods:
                     matched_periods.append(per)
 
-        if not matched_periods and tenant_periods:
-            matched_periods = list(tenant_periods[:1])
+        # Fail-closed checks for missing institutions or periods in tenant DB
+        if not matched_institutions:
+            if tenant_institutions:
+                matched_institutions = list(tenant_institutions[:2])
+            else:
+                return NormalizationOutcome(
+                    status="NEEDS_CLARIFICATION",
+                    clarification_code=ClarificationCode.INSTITUTION_REQUIRED.value,
+                    clarification_prompt_key="NO_TENANT_INSTITUTION_FOUND",
+                    clarification_question="İstemi karşılayacak aktif kurum bulunamadı. Lütfen analiz edilecek kurumu seçiniz.",
+                    allowed_response_schema={"type": "object", "properties": {"institution_id": {"type": "string"}}},
+                )
 
         if not matched_periods:
-            return NormalizationOutcome(
-                status="NEEDS_CLARIFICATION",
-                clarification_code=ClarificationCode.REPORTING_PERIOD_REQUIRED.value,
-                clarification_prompt_key="NO_TENANT_PERIOD_FOUND",
-                clarification_question="İstemi karşılayacak raporlama dönemi bulunamadı. Lütfen analiz dönemini seçiniz.",
-                allowed_response_schema={"type": "object", "properties": {"period_id": {"type": "string"}}},
-            )
+            if tenant_periods:
+                matched_periods = list(tenant_periods[:1])
+            else:
+                return NormalizationOutcome(
+                    status="NEEDS_CLARIFICATION",
+                    clarification_code=ClarificationCode.REPORTING_PERIOD_REQUIRED.value,
+                    clarification_prompt_key="NO_TENANT_PERIOD_FOUND",
+                    clarification_question="İstemi karşılayacak raporlama dönemi bulunamadı. Lütfen analiz dönemini seçiniz.",
+                    allowed_response_schema={"type": "object", "properties": {"period_id": {"type": "string"}}},
+                )
+
+        inst_names = [getattr(i, "canonical_name", getattr(i, "display_name", "Bank")) for i in matched_institutions]
+        period_keys = [getattr(p, "comparison_key", getattr(p, "label", "2025-Q4")) for p in matched_periods]
 
         # 5. Build NormalizedRequest
         intent_val = (
@@ -190,10 +193,8 @@ class AnalysisRequestNormalizer:
 
         norm_req = NormalizedRequest(
             intent=intent_val,
-            requested_institutions=[
-                getattr(i, "canonical_name", getattr(i, "display_name", "Bank")) for i in matched_institutions
-            ],
-            requested_periods=[getattr(p, "comparison_key", getattr(p, "label", "2025-Q4")) for p in matched_periods],
+            requested_institutions=inst_names,
+            requested_periods=period_keys,
             requested_semantic_measures=measures,
             reporting_basis="SOLO" if extracted.reporting_basis.upper() != "CONSOLIDATED" else "CONSOLIDATED",
             needs_clarification=False,

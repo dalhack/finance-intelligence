@@ -155,6 +155,37 @@ class AnalysisOrchestratorEngine:
                 job_id, "analysis.state_changed", {"from_state": "RECEIVED", "to_state": job.status}, attempt_id
             )
 
+            # Pre-evaluate Policy Engine before model invocation / normalization
+            pre_decision = PolicyEngine.evaluate_model_transmission(
+                classification=request_classification,
+                provider_alias="anthropic",
+            )
+            if pre_decision == PolicyDecision.DENY:
+                await self._assert_fenced_ownership(job_id, claim_token, worker_id)
+                policy_rec = PolicyDecisionRecord(
+                    id=uuid4(),
+                    analysis_job_id=job_id,
+                    organization_id=self.context.organization_id,
+                    policy_version="1.0.0",
+                    decision=pre_decision.value,
+                    reason_code="DATA_CLASSIFICATION_CHECK",
+                    classification=request_classification.value,
+                    created_at=now,
+                )
+                self.db.add(policy_rec)
+                job.status = AnalysisJobStatus.REJECTED_BY_POLICY.value
+                job.lease_expires_at = None
+                attempt.status = "REJECTED_BY_POLICY"
+                job.updated_at = now
+                await self.event_engine.emit_event(
+                    job_id,
+                    "analysis.failed",
+                    {"error_code": "POLICY_DENIED", "message": "Policy denied execution."},
+                    attempt_id,
+                )
+                await self.db.commit()
+                return job
+
             # Dynamic AI Request Normalization & Tenant Entity Matching
             normalizer = AnalysisRequestNormalizer()
             norm_outcome = await normalizer.normalize_request(
