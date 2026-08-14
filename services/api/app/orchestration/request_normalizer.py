@@ -98,16 +98,20 @@ class AnalysisRequestNormalizer:
             # Fallback to direct heuristic extraction if fast model fails or returns unstructured text
             extracted = self._heuristic_fallback_extraction(prompt)
 
-        # 3. Match extracted institutions against tenant DB records (case-insensitive name, code, ticker)
+        # 3. Match extracted institutions against tenant DB records
         matched_institutions: list[Institution] = []
         for req_inst in extracted.requested_institutions:
             clean_name = req_inst.strip().lower()
             for inst in tenant_institutions:
                 names = [
-                    (inst.name or "").lower(),
-                    (inst.code or "").lower(),
-                    (inst.ticker or "").lower(),
+                    getattr(inst, "canonical_name", "").lower(),
+                    getattr(inst, "display_name", "").lower(),
+                    getattr(inst, "regulatory_identifier", "").lower()
+                    if getattr(inst, "regulatory_identifier", None)
+                    else "",
                 ]
+                aliases = [a.lower() for a in getattr(inst, "aliases", []) if isinstance(a, str)]
+                names.extend(aliases)
                 if any(clean_name in n or n in clean_name for n in names if n) and inst not in matched_institutions:
                     matched_institutions.append(inst)
 
@@ -115,9 +119,10 @@ class AnalysisRequestNormalizer:
         if not matched_institutions:
             prompt_lower = prompt.lower()
             for inst in tenant_institutions:
+                cname = getattr(inst, "canonical_name", "").lower()
+                dname = getattr(inst, "display_name", "").lower()
                 if (
-                    (inst.name and inst.name.lower() in prompt_lower)
-                    or (inst.code and inst.code.lower() in prompt_lower)
+                    (cname and cname in prompt_lower) or (dname and dname in prompt_lower)
                 ) and inst not in matched_institutions:
                     matched_institutions.append(inst)
 
@@ -134,20 +139,26 @@ class AnalysisRequestNormalizer:
                 allowed_response_schema={"type": "object", "properties": {"institution_id": {"type": "string"}}},
             )
 
-        # 4. Match extracted periods against tenant DB records (case-insensitive period_code)
+        # 4. Match extracted periods against tenant DB records
         matched_periods: list[ReportingPeriod] = []
         for req_per in extracted.requested_periods:
             clean_per = req_per.strip().lower()
             for per in tenant_periods:
+                p_label = getattr(per, "label", "").lower()
+                p_key = getattr(per, "comparison_key", "").lower()
                 if (
-                    clean_per in (per.period_code or "").lower() or (per.period_code or "").lower() in clean_per
+                    clean_per in p_label or p_label in clean_per or clean_per in p_key or p_key in clean_per
                 ) and per not in matched_periods:
                     matched_periods.append(per)
 
         if not matched_periods:
             prompt_lower = prompt.lower()
             for per in tenant_periods:
-                if per.period_code and per.period_code.lower() in prompt_lower and per not in matched_periods:
+                p_label = getattr(per, "label", "").lower()
+                p_key = getattr(per, "comparison_key", "").lower()
+                if (
+                    (p_label and p_label in prompt_lower) or (p_key and p_key in prompt_lower)
+                ) and per not in matched_periods:
                     matched_periods.append(per)
 
         if not matched_periods and tenant_periods:
@@ -179,8 +190,10 @@ class AnalysisRequestNormalizer:
 
         norm_req = NormalizedRequest(
             intent=intent_val,
-            requested_institutions=[i.name or i.code for i in matched_institutions],
-            requested_periods=[p.period_code for p in matched_periods],
+            requested_institutions=[
+                getattr(i, "canonical_name", getattr(i, "display_name", "Bank")) for i in matched_institutions
+            ],
+            requested_periods=[getattr(p, "comparison_key", getattr(p, "label", "2025-Q4")) for p in matched_periods],
             requested_semantic_measures=measures,
             reporting_basis="SOLO" if extracted.reporting_basis.upper() != "CONSOLIDATED" else "CONSOLIDATED",
             needs_clarification=False,

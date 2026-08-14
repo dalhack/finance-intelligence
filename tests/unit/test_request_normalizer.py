@@ -15,19 +15,22 @@ async def test_valid_unambiguous_request_normalizes():
     org_id = uuid4()
     inst1 = MagicMock(spec=Institution)
     inst1.id = uuid4()
-    inst1.name = "Garanti BBVA"
-    inst1.code = "GARAN"
-    inst1.ticker = "GARAN.IS"
+    inst1.canonical_name = "Garanti BBVA"
+    inst1.display_name = "Türkiye Garanti Bankası A.Ş."
+    inst1.regulatory_identifier = "GARAN"
+    inst1.aliases = ["garanti", "garan"]
 
     inst2 = MagicMock(spec=Institution)
     inst2.id = uuid4()
-    inst2.name = "Akbank"
-    inst2.code = "AKBNK"
-    inst2.ticker = "AKBNK.IS"
+    inst2.canonical_name = "Akbank"
+    inst2.display_name = "Akbank T.A.Ş."
+    inst2.regulatory_identifier = "AKBNK"
+    inst2.aliases = ["akbank", "akbnk"]
 
     period1 = MagicMock(spec=ReportingPeriod)
     period1.id = uuid4()
-    period1.period_code = "2025-Q4"
+    period1.label = "2025 Q4"
+    period1.comparison_key = "2025-Q4"
 
     mock_db = MagicMock()
 
@@ -80,13 +83,15 @@ async def test_institution_matches_by_name_code_or_ticker():
     org_id = uuid4()
     inst1 = MagicMock(spec=Institution)
     inst1.id = uuid4()
-    inst1.name = "Türkiye Garanti Bankası A.Ş."
-    inst1.code = "GARAN"
-    inst1.ticker = "GARAN.IS"
+    inst1.canonical_name = "Garanti BBVA"
+    inst1.display_name = "Türkiye Garanti Bankası A.Ş."
+    inst1.regulatory_identifier = "GARAN"
+    inst1.aliases = ["garan.is", "garan"]
 
     period1 = MagicMock(spec=ReportingPeriod)
     period1.id = uuid4()
-    period1.period_code = "2025-Q4"
+    period1.label = "2025 Q4"
+    period1.comparison_key = "2025-Q4"
 
     mock_db = MagicMock()
 
@@ -131,13 +136,15 @@ async def test_period_matches_by_period_code():
     org_id = uuid4()
     inst1 = MagicMock(spec=Institution)
     inst1.id = uuid4()
-    inst1.name = "Garanti BBVA"
-    inst1.code = "GARAN"
-    inst1.ticker = "GARAN.IS"
+    inst1.canonical_name = "Garanti BBVA"
+    inst1.display_name = "Garanti Bankası"
+    inst1.regulatory_identifier = "GARAN"
+    inst1.aliases = []
 
     period1 = MagicMock(spec=ReportingPeriod)
     period1.id = uuid4()
-    period1.period_code = "2025-Q4"
+    period1.label = "2025 Q4"
+    period1.comparison_key = "2025-Q4"
 
     mock_db = MagicMock()
 
