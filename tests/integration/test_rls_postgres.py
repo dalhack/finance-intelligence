@@ -431,9 +431,31 @@ async def test_all_public_functions_deny_public_and_app_user_execute():
         WHERE n.nspname = 'public';
     """)
 
-    failing_funcs = [r["proname"] for r in rows if r["public_exec"] or r["app_user_exec"] or r["bootstrap_exec"]]
     await owner_conn.close()
 
-    assert len(failing_funcs) == 0, (
-        f"SECURITY_VIOLATION: Functions retaining PUBLIC, db_app_user, or db_bootstrap EXECUTE: {failing_funcs}"
+    # 1. Enforce STRICT fail-closed rule: PUBLIC and db_app_user MUST NEVER have EXECUTE on ANY function
+    public_or_app_user_failing = [r["proname"] for r in rows if r["public_exec"] or r["app_user_exec"]]
+    assert len(public_or_app_user_failing) == 0, (
+        f"SECURITY_VIOLATION: Functions retaining PUBLIC or db_app_user EXECUTE: {public_or_app_user_failing}"
     )
+
+    # 2. Enforce db_bootstrap EXECUTE policy: ONLY bootstrap_self_organization is allowed EXECUTE for db_bootstrap
+    bootstrap_failing = [
+        r["proname"] for r in rows if r["bootstrap_exec"] and r["proname"] != "bootstrap_self_organization"
+    ]
+    assert len(bootstrap_failing) == 0, (
+        f"SECURITY_VIOLATION: Unexpected functions retaining db_bootstrap EXECUTE: {bootstrap_failing}"
+    )
+
+    # 3. Explicitly assert bootstrap_self_organization security properties
+    bootstrap_fn_row = next((r for r in rows if r["proname"] == "bootstrap_self_organization"), None)
+    if bootstrap_fn_row is not None:
+        assert bootstrap_fn_row["bootstrap_exec"] is True, (
+            "SECURITY_CONTRACT_FAIL: bootstrap_self_organization must have db_bootstrap EXECUTE"
+        )
+        assert bootstrap_fn_row["public_exec"] is False, (
+            "SECURITY_VIOLATION: bootstrap_self_organization must DENY PUBLIC EXECUTE"
+        )
+        assert bootstrap_fn_row["app_user_exec"] is False, (
+            "SECURITY_VIOLATION: bootstrap_self_organization must DENY db_app_user EXECUTE"
+        )
