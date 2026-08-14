@@ -106,7 +106,7 @@ async def run_worker_loop(run_once: bool = False, poll_interval: float = 1.0, ma
             logger.info("WORKER_LOOP_CANCELLED")
             break
         except Exception:
-            logger.error("WORKER_LOOP_EXCEPTION_ENCOUNTERED")
+            logger.exception("WORKER_LOOP_EXCEPTION_ENCOUNTERED")
 
             if run_once:
                 raise

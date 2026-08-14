@@ -136,3 +136,51 @@ async def test_real_run_worker_loop_log_redaction_all_worker_modules(monkeypatch
     uuid_pattern = re.compile(r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}", re.IGNORECASE)
     matches = uuid_pattern.findall(log_output)
     assert len(matches) == 0, f"Raw UUIDs found in worker loop logs: {matches}"
+
+
+@pytest.mark.unit
+@pytest.mark.asyncio
+async def test_worker_loop_exception_logging_captures_traceback(monkeypatch):
+    """Verify unexpected worker loop exceptions call logger.exception and capture traceback without killing daemon loop when run_once=False."""
+    log_stream = io.StringIO()
+    stream_handler = logging.StreamHandler(log_stream)
+
+    worker_logger = logging.getLogger("finance_intelligence_worker")
+    worker_logger.addHandler(stream_handler)
+    worker_logger.setLevel(logging.INFO)
+
+    call_count = 0
+
+    async def mock_analysis_failing():
+        nonlocal call_count
+        call_count += 1
+        if call_count == 1:
+            raise RuntimeError("UNEXPECTED_SIMULATED_WORKER_FAILURE")
+        return False
+
+    monkeypatch.setattr("services.worker.app.main.analysis_worker.run_once", mock_analysis_failing)
+    monkeypatch.setattr("services.worker.app.main.asyncio.sleep", AsyncMock(return_value=None))
+
+    # Mock WorkerSessionLocal
+    class MockWorkerSessionContextManager:
+        async def __aenter__(self):
+            m = MagicMock()
+            m.execute = AsyncMock(side_effect=RuntimeError("UNEXPECTED_DB_FAILURE"))
+            return m
+
+        async def __aexit__(self, exc_type, exc_val, exc_tb):
+            pass
+
+    monkeypatch.setattr("services.worker.app.main.WorkerSessionLocal", lambda: MockWorkerSessionContextManager())
+    monkeypatch.setenv("INGESTION_HMAC_SECRET", "test_hmac_secret_32_bytes_long_1234")
+
+    # Run loop with run_once=True to verify exception re-raised for run_once=True
+    with pytest.raises(RuntimeError, match="UNEXPECTED_SIMULATED_WORKER_FAILURE"):
+        await run_worker_loop(run_once=True)
+
+    log_output = log_stream.getvalue()
+    worker_logger.removeHandler(stream_handler)
+
+    assert "WORKER_LOOP_EXCEPTION_ENCOUNTERED" in log_output
+    assert "Traceback (most recent call last)" in log_output
+    assert "UNEXPECTED_SIMULATED_WORKER_FAILURE" in log_output
