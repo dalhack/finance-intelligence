@@ -343,6 +343,7 @@ def test_known_revisions_parity_with_active_graph():
     assert "028_remove_organization_only_actor_lookup" in KNOWN_REVISIONS
     assert "029_analysis_authorization_policy" in KNOWN_REVISIONS
     assert "030_reconcile_application_role_catalog" in KNOWN_REVISIONS
+    assert "032_bootstrap_self_onboarding" in KNOWN_REVISIONS
     assert "033_worker_queue_visibility" in KNOWN_REVISIONS
     assert "026_model_routing_policy_catalog" not in KNOWN_REVISIONS
 
