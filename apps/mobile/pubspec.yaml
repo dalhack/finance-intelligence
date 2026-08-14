@@ -33,6 +33,8 @@ dependencies:
 
   # Native Financial Chart Rendering
   fl_chart: ^0.69.0
+  firebase_core: ^4.13.0
+  firebase_auth: ^6.5.7
 
 dev_dependencies:
   flutter_test:

@@ -22,7 +22,9 @@ class AppConfig {
   );
 
   static const production = AppConfig(
-    apiBaseUrl: 'https://finapi.korhanturgut.com/v1',
+    // TODO: switch back to https://finapi.korhanturgut.com/api/v1 once the
+    // Cloud Run domain-mapping certificate is issued (rate-limited 2026-08-13).
+    apiBaseUrl: 'https://finance-api-523958262212.us-central1.run.app/api/v1',
     environment: 'production',
     requestTimeoutMs: 30000,
     enableDevAuth: false,

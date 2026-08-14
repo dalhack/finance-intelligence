@@ -1,9 +1,11 @@
+import 'package:flutter/foundation.dart' show kReleaseMode;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/config/app_config.dart';
 import '../../core/models/wire_models.dart';
 import '../../core/network/dio_client_factory.dart';
 import '../../core/security/dev_security_adapters.dart';
+import '../../core/security/firebase_security_adapters.dart';
 import '../../data/api/api_client.dart';
 import '../../data/repositories/comparison_repository.dart';
 import '../../data/repositories/document_repository.dart';
@@ -32,7 +34,7 @@ final analysisResumeStoreProvider = Provider<AnalysisResumeStore>((ref) {
 });
 
 final appConfigProvider = Provider<AppConfig>((ref) {
-  return AppConfig.development;
+  return kReleaseMode ? AppConfig.production : AppConfig.development;
 });
 
 final identityTokenProvider = Provider((ref) {
@@ -40,7 +42,7 @@ final identityTokenProvider = Provider((ref) {
   if (config.environment == 'development') {
     return DevelopmentIdentityTokenProvider(config: config);
   }
-  return ProductionFirebasePlaceholderTokenProvider(config: config);
+  return FirebaseIdentityTokenProvider();
 });
 
 final appAttestationTokenProvider = Provider((ref) {
@@ -48,7 +50,7 @@ final appAttestationTokenProvider = Provider((ref) {
   if (config.environment == 'development') {
     return DevelopmentAttestationTokenProvider(config: config);
   }
-  return ProductionFirebasePlaceholderAttestationProvider(config: config);
+  return NoopAttestationTokenProvider();
 });
 
 final dioClientProvider = Provider((ref) {

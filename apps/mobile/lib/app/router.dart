@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'navigation_shell.dart';
 
 class AppRouter {
+  static Widget buildShell() => const NavigationShell();
+
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/':

@@ -5,6 +5,7 @@ import '../security/identity_token_provider.dart';
 import 'interceptors/app_check_interceptor.dart';
 import 'interceptors/auth_interceptor.dart';
 import 'interceptors/logging_interceptor.dart';
+import 'interceptors/organization_interceptor.dart';
 import 'interceptors/retry_interceptor.dart';
 
 class DioClientFactory {
@@ -31,6 +32,7 @@ class DioClientFactory {
     // Deterministic Interceptor Chain
     dio.interceptors.addAll([
       AuthInterceptor(identityTokenProvider: identityTokenProvider),
+      OrganizationInterceptor(),
       AppCheckInterceptor(
           appAttestationTokenProvider: appAttestationTokenProvider),
       RetryInterceptor(dio: dio),
