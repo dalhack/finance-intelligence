@@ -95,7 +95,9 @@ class Settings(BaseSettings):
 
     # Firebase / App Check Config
     FIREBASE_PROJECT_ID: str | None = None
-    ENFORCE_APP_CHECK: bool = Field(default=True)
+    ENFORCE_APP_CHECK: bool = Field(default=False)
+    APP_CHECK_AUDIT_MODE: bool = Field(default=True)
+    STRICT_APP_CHECK_ENFORCEMENT: bool = Field(default=False)
 
     # Anthropic Model Configuration Settings
     ANTHROPIC_BALANCED_MODEL_ID: str | None = Field(

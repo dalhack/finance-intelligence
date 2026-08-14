@@ -41,11 +41,46 @@ class DevelopmentIdentityVerifier:
         )
 
 
+import logging
+
+logger = logging.getLogger("finance_intelligence_security")
+
+
 class DevelopmentAppAttestationVerifier:
     async def verify_attestation(self, attestation_token: str) -> bool:
         if not settings.is_development:
             return False
         return bool(attestation_token and attestation_token != "invalid")
+
+
+class FirebaseAppCheckVerifier:
+    def __init__(self, expected_project_id: str | None = None):
+        pid = expected_project_id or settings.FIREBASE_PROJECT_ID or "finance-intel-staging-8f2a"
+        self.expected_project_id = pid
+        try:
+            self.app = get_or_create_firebase_app(self.expected_project_id)
+        except Exception:  # noqa: BLE001
+            self.app = None
+
+    async def verify_token(self, token: str | None) -> bool:
+        """Verify Firebase App Check token in audit mode. Does not emit secrets or strict rejections."""
+        if not token:
+            logger.info("APP_CHECK_AUDIT_EVENT: token_status=missing")
+            return not settings.STRICT_APP_CHECK_ENFORCEMENT
+
+        if getattr(self, "app", None) is None:
+            logger.info("APP_CHECK_AUDIT_EVENT: token_status=app_not_configured")
+            return not settings.STRICT_APP_CHECK_ENFORCEMENT
+
+        try:
+            from firebase_admin import app_check
+
+            app_check.verify_token(token, app=self.app)
+            logger.info("APP_CHECK_AUDIT_EVENT: token_status=valid")
+            return True
+        except Exception:  # noqa: BLE001
+            logger.info("APP_CHECK_AUDIT_EVENT: token_status=invalid_token")
+            return not settings.STRICT_APP_CHECK_ENFORCEMENT
 
 
 import threading

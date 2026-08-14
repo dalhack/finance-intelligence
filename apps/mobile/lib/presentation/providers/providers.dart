@@ -50,7 +50,7 @@ final appAttestationTokenProvider = Provider((ref) {
   if (config.environment == 'development') {
     return DevelopmentAttestationTokenProvider(config: config);
   }
-  return NoopAttestationTokenProvider();
+  return FirebaseAppAttestTokenProvider();
 });
 
 final dioClientProvider = Provider((ref) {

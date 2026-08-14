@@ -127,6 +127,12 @@ async def get_execution_context(
     verifier = FirebaseIdentityVerifier()
     identity = await verifier.verify_token(token)
 
+    # App Check Verification / Audit Logging (Audit Mode First)
+    from app.core.security import FirebaseAppCheckVerifier
+
+    app_check_verifier = FirebaseAppCheckVerifier()
+    await app_check_verifier.verify_token(x_firebase_appcheck)
+
     resolved = await resolve_auth_context_from_db(identity.external_subject, requested_org_uuid)
     if not resolved:
         raise MembershipRequiredException("Active organization membership is required to access target resource.")

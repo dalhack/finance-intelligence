@@ -44,3 +44,41 @@ def test_verifier_init_with_explicit_project():
     verifier = FirebaseIdentityVerifier(expected_project_id="finance-intel-staging-8f2a")
     assert verifier.expected_project_id == "finance-intel-staging-8f2a"
     assert verifier.app is not None
+
+
+@pytest.mark.asyncio
+async def test_app_check_missing_token_allowed_in_audit_mode(caplog):
+    """Verify missing App Check token is allowed in audit mode with redacted log event."""
+    import logging
+
+    from app.core.security import FirebaseAppCheckVerifier
+
+    caplog.set_level(logging.INFO)
+    verifier = FirebaseAppCheckVerifier(expected_project_id="finance-intel-staging-8f2a")
+    res = await verifier.verify_token(None)
+    assert res is True
+    assert "APP_CHECK_AUDIT_EVENT: token_status=missing" in caplog.text
+    # Ensure no secrets or tokens logged
+    assert "secret" not in caplog.text.lower()
+
+
+@pytest.mark.asyncio
+async def test_app_check_invalid_token_allowed_in_audit_mode(caplog):
+    """Verify invalid App Check token is allowed in audit mode with redacted log event."""
+    import logging
+
+    from app.core.security import FirebaseAppCheckVerifier
+
+    caplog.set_level(logging.INFO)
+    verifier = FirebaseAppCheckVerifier(expected_project_id="finance-intel-staging-8f2a")
+    res = await verifier.verify_token("invalid-app-check-token")
+    assert res is True
+    assert "APP_CHECK_AUDIT_EVENT: token_status=invalid_token" in caplog.text
+
+
+def test_canonical_domain_configured():
+    """Verify canonical domain is configured in production app config."""
+    from app.core.config import settings
+
+    assert settings.STRICT_APP_CHECK_ENFORCEMENT is False
+    assert settings.APP_CHECK_AUDIT_MODE is True

@@ -150,28 +150,40 @@ class AnalysisRequestNormalizer:
 
         # Fail-closed checks for missing institutions or periods in tenant DB
         if not matched_institutions:
-            if tenant_institutions:
-                matched_institutions = list(tenant_institutions[:2])
-            else:
-                return NormalizationOutcome(
-                    status="NEEDS_CLARIFICATION",
-                    clarification_code=ClarificationCode.INSTITUTION_REQUIRED.value,
-                    clarification_prompt_key="NO_TENANT_INSTITUTION_FOUND",
-                    clarification_question="İstemi karşılayacak aktif kurum bulunamadı. Lütfen analiz edilecek kurumu seçiniz.",
-                    allowed_response_schema={"type": "object", "properties": {"institution_id": {"type": "string"}}},
-                )
+            tenant_inst_ids = [str(i.id) for i in tenant_institutions]
+            return NormalizationOutcome(
+                status="NEEDS_CLARIFICATION",
+                clarification_code=ClarificationCode.INSTITUTION_REQUIRED.value,
+                clarification_prompt_key="NO_TENANT_INSTITUTION_FOUND",
+                clarification_question="İstemi karşılayacak aktif kurum bulunamadı. Lütfen analiz edilecek kurumu seçiniz.",
+                allowed_response_schema={
+                    "type": "object",
+                    "properties": {
+                        "institution_id": {
+                            "type": "string",
+                            "enum": tenant_inst_ids,
+                        }
+                    },
+                },
+            )
 
         if not matched_periods:
-            if tenant_periods:
-                matched_periods = list(tenant_periods[:1])
-            else:
-                return NormalizationOutcome(
-                    status="NEEDS_CLARIFICATION",
-                    clarification_code=ClarificationCode.REPORTING_PERIOD_REQUIRED.value,
-                    clarification_prompt_key="NO_TENANT_PERIOD_FOUND",
-                    clarification_question="İstemi karşılayacak raporlama dönemi bulunamadı. Lütfen analiz dönemini seçiniz.",
-                    allowed_response_schema={"type": "object", "properties": {"period_id": {"type": "string"}}},
-                )
+            tenant_period_ids = [str(p.id) for p in tenant_periods]
+            return NormalizationOutcome(
+                status="NEEDS_CLARIFICATION",
+                clarification_code=ClarificationCode.REPORTING_PERIOD_REQUIRED.value,
+                clarification_prompt_key="NO_TENANT_PERIOD_FOUND",
+                clarification_question="İstemi karşılayacak raporlama dönemi bulunamadı. Lütfen analiz dönemini seçiniz.",
+                allowed_response_schema={
+                    "type": "object",
+                    "properties": {
+                        "period_id": {
+                            "type": "string",
+                            "enum": tenant_period_ids,
+                        }
+                    },
+                },
+            )
 
         inst_names = [getattr(i, "canonical_name", getattr(i, "display_name", "Bank")) for i in matched_institutions]
         period_keys = [getattr(p, "comparison_key", getattr(p, "label", "2025-Q4")) for p in matched_periods]
@@ -222,7 +234,7 @@ class AnalysisRequestNormalizer:
 
         return ExtractedRequestEntities(
             intent="CROSS_INSTITUTION_COMPARISON" if len(insts) > 1 else "SINGLE_PERIOD_ANALYSIS",
-            requested_institutions=insts or ["Garanti BBVA", "Akbank"],
-            requested_periods=periods or ["2025-Q4"],
+            requested_institutions=insts,
+            requested_periods=periods,
             requested_semantic_measures=["TOTAL_ASSETS"],
         )
