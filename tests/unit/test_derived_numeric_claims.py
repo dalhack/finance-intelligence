@@ -1,4 +1,5 @@
 from uuid import uuid4
+
 import pytest
 from app.orchestration.exceptions import UnsupportedNumericClaimException
 from app.orchestration.quality_gate import NumericClaimVerifier
@@ -56,6 +57,69 @@ def test_verified_percentage_change_accepted():
     NumericClaimVerifier.verify_narrative_numeric_claims(narrative, SAMPLE_DATASET)
 
 
+def test_verified_share_of_two_fact_total_fact_a_accepted():
+    narrative = "Garanti BBVA payı %55,31 (veya %55,3) olarak gerçekleşti."
+    NumericClaimVerifier.verify_narrative_numeric_claims(narrative, SAMPLE_DATASET)
+
+
+def test_verified_share_of_two_fact_total_fact_b_accepted():
+    narrative = "Akbank payı %44,69 (veya %44,7) seviyesindedir."
+    NumericClaimVerifier.verify_narrative_numeric_claims(narrative, SAMPLE_DATASET)
+
+
+def test_share_result_rejected_for_mismatched_currency_unit_basis():
+    dataset = {
+        "organization_id": ORG_ID_A,
+        "facts": [
+            {
+                "fact_id": str(uuid4()),
+                "value": 200000000.0,
+                "currency": "USD",
+                "unit": "CURRENCY",
+                "reporting_basis": "SOLO",
+            },
+            {
+                "fact_id": str(uuid4()),
+                "value": 100000000.0,
+                "currency": "EUR",
+                "unit": "CURRENCY",
+                "reporting_basis": "SOLO",
+            },
+        ],
+    }
+    narrative = "Pay %66,67 oldu."
+    with pytest.raises(UnsupportedNumericClaimException):
+        NumericClaimVerifier.verify_narrative_numeric_claims(narrative, dataset)
+
+
+def test_share_result_rejected_for_zero_denominator():
+    dataset = {
+        "organization_id": ORG_ID_A,
+        "facts": [
+            {"fact_id": str(uuid4()), "value": 0.0, "currency": "TRY", "unit": "CURRENCY", "reporting_basis": "SOLO"},
+            {"fact_id": str(uuid4()), "value": 0.0, "currency": "TRY", "unit": "CURRENCY", "reporting_basis": "SOLO"},
+        ],
+    }
+    narrative = "Pay %50,0 oldu."
+    with pytest.raises(UnsupportedNumericClaimException):
+        NumericClaimVerifier.verify_narrative_numeric_claims(narrative, dataset)
+
+
+def test_three_unique_fact_references_rejected():
+    dataset = {
+        "organization_id": ORG_ID_A,
+        "facts": [
+            {"fact_id": str(uuid4()), "value": 100.0, "currency": "TRY", "unit": "CURRENCY", "reporting_basis": "SOLO"},
+            {"fact_id": str(uuid4()), "value": 200.0, "currency": "TRY", "unit": "CURRENCY", "reporting_basis": "SOLO"},
+            {"fact_id": str(uuid4()), "value": 300.0, "currency": "TRY", "unit": "CURRENCY", "reporting_basis": "SOLO"},
+        ],
+    }
+    # 3 unique facts total = 600. 100/600 = 16.67%.
+    narrative = "Üçlü pay %16,67 olarak hesaplandı."
+    with pytest.raises(UnsupportedNumericClaimException):
+        NumericClaimVerifier.verify_narrative_numeric_claims(narrative, dataset)
+
+
 def test_wrong_operand_rejected():
     narrative = "Fark ₺999.000.000.000 olarak yanlış hesaplandı."
     with pytest.raises(UnsupportedNumericClaimException):
@@ -96,14 +160,14 @@ def test_currency_unit_basis_mismatch_rejected():
             {
                 "fact_id": str(uuid4()),
                 "value": 200000000.0,
-                "currency": "USD",  # USD
+                "currency": "USD",
                 "unit": "CURRENCY",
                 "reporting_basis": "SOLO",
             },
             {
                 "fact_id": str(uuid4()),
                 "value": 150000000.0,
-                "currency": "EUR",  # EUR
+                "currency": "EUR",
                 "unit": "CURRENCY",
                 "reporting_basis": "SOLO",
             },
@@ -118,7 +182,13 @@ def test_zero_denominator_rejected():
     dataset = {
         "organization_id": ORG_ID_A,
         "facts": [
-            {"fact_id": str(uuid4()), "value": 100000.0, "currency": "TRY", "unit": "CURRENCY", "reporting_basis": "SOLO"},
+            {
+                "fact_id": str(uuid4()),
+                "value": 100000.0,
+                "currency": "TRY",
+                "unit": "CURRENCY",
+                "reporting_basis": "SOLO",
+            },
             {"fact_id": str(uuid4()), "value": 0.0, "currency": "TRY", "unit": "CURRENCY", "reporting_basis": "SOLO"},
         ],
     }

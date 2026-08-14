@@ -56,9 +56,7 @@ class NumericClaimVerifier:
                 clean = clean.replace(",", "")
         elif "." in clean:
             parts = clean.split(".")
-            if len(parts) > 2:
-                clean = clean.replace(".", "")
-            elif len(parts) == 2 and len(parts[1]) == 3 and len(parts[0]) <= 3:
+            if len(parts) > 2 or (len(parts) == 2 and len(parts[1]) == 3 and len(parts[0]) <= 3):
                 clean = clean.replace(".", "")
 
         try:
@@ -68,7 +66,7 @@ class NumericClaimVerifier:
 
     @classmethod
     def compute_deterministic_derivations(cls, dataset_json: dict[str, Any]) -> tuple[set[str], set[float]]:
-        """Compute all allowed deterministic derivations (add, subtract, ratio, percentage_change) and formatted direct facts from dataset_json under tenant isolation."""
+        """Compute all allowed deterministic derivations (add, subtract, ratio, percentage_change, share_of_two_fact_total) and formatted direct facts from dataset_json under tenant isolation."""
         derived_tokens: set[str] = set()
         derived_floats: set[float] = set()
         facts = dataset_json.get("facts", [])
@@ -108,7 +106,7 @@ class NumericClaimVerifier:
                 except (ValueError, TypeError):
                     continue
 
-                # Dimension / Currency / Unit / Basis matching for add, subtract, percentage_change
+                # Dimension / Currency / Unit / Basis matching for add, subtract, percentage_change, share_of_two_fact_total
                 curr1, curr2 = f1.get("currency", "TRY"), f2.get("currency", "TRY")
                 unit1, unit2 = f1.get("unit", "CURRENCY"), f2.get("unit", "CURRENCY")
                 basis1, basis2 = f1.get("reporting_basis", "SOLO"), f2.get("reporting_basis", "SOLO")
@@ -138,6 +136,11 @@ class NumericClaimVerifier:
                     cls._add_number_representations(pct_change, derived_tokens, derived_floats)
                     cls._add_number_representations(abs(pct_change), derived_tokens, derived_floats)
 
+                # 5. SHARE_OF_TWO_FACT_TOTAL: same context and same metric required, denominator (v1 + v2) != 0 required
+                if same_context and metric1 == metric2 and (v1 + v2) != 0:
+                    share_val = (v1 / (v1 + v2)) * 100.0
+                    cls._add_number_representations(share_val, derived_tokens, derived_floats)
+
         return derived_tokens, derived_floats
 
     @classmethod
@@ -148,7 +151,7 @@ class NumericClaimVerifier:
         floats_set.add(round(abs_val, 4))
         floats_set.add(round(abs_val, 1))
 
-        int_val = int(round(abs_val))
+        int_val = round(abs_val)
         tokens_set.add(str(int_val))
         tokens_set.add(f"{int_val:,}".replace(",", "."))
         tokens_set.add(f"{abs_val:.2f}")
@@ -185,14 +188,21 @@ class NumericClaimVerifier:
                 continue
 
             clean_num = num_str.replace(",", "").replace("%", "")
-            
+
             # Check match against raw_text_flat, derived_tokens, or derived_floats
             is_verified = (
                 clean_num in raw_text_flat
                 or num_str in raw_text_flat
                 or clean_num in derived_tokens
                 or num_str in derived_tokens
-                or (parsed_val is not None and round(parsed_val, 2) in derived_floats)
+                or (
+                    parsed_val is not None
+                    and (
+                        round(parsed_val, 2) in derived_floats
+                        or round(parsed_val, 1) in derived_floats
+                        or round(parsed_val, 4) in derived_floats
+                    )
+                )
             )
 
             if not is_verified:
@@ -229,4 +239,3 @@ class QualityGateEngine:
             )
 
         return results
-
