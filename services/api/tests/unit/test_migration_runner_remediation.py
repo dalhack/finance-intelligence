@@ -38,7 +38,7 @@ def mock_config():
         instance_name="fi-staging-db",
         region="europe-west1",
         target_database="finance_intelligence_staging",
-        expected_head="031_analysis_job_claim_authority",
+        expected_head="033_worker_queue_visibility",
         bootstrap_password="test_bootstrap_password",
     )
 
@@ -165,7 +165,7 @@ def test_unlock_false_fails_closed(mock_config):
         patch("app.migration_execution.alembic_runner.create_engine", return_value=mock_engine),
         patch(
             "app.migration_execution.alembic_runner.get_safe_current_revision",
-            return_value="031_analysis_job_claim_authority",
+            return_value="033_worker_queue_visibility",
         ),
         patch("app.migration_execution.alembic_runner.verify_revision_024_postconditions"),
         pytest.raises(MigrationRunnerError, match="unlock returned false or failed"),
@@ -228,8 +228,8 @@ def test_t1_t2_t3_reset_role_called_before_phase3_alembic(mock_config):
             "app.migration_execution.alembic_runner.get_safe_current_revision",
             side_effect=[
                 "024_maintenance_scheduler_and_operational_resilience",
-                "031_analysis_job_claim_authority",
-                "031_analysis_job_claim_authority",
+                "033_worker_queue_visibility",
+                "033_worker_queue_visibility",
             ],
         ),
         patch("app.migration_execution.alembic_runner.verify_revision_024_postconditions"),
@@ -239,7 +239,7 @@ def test_t1_t2_t3_reset_role_called_before_phase3_alembic(mock_config):
         executed_sqls = [str(call_args[0][0]) for call_args in mock_conn.execute.call_args_list]
         assert any("RESET ROLE;" in s for s in executed_sqls)
         assert mock_upgrade.called
-        mock_upgrade.assert_called_once_with(ANY, "031_analysis_job_claim_authority")
+        mock_upgrade.assert_called_once_with(ANY, "033_worker_queue_visibility")
 
 
 def test_t4_t5_session_user_current_user_mismatch_raises_fail_closed(mock_config):
@@ -294,7 +294,7 @@ def test_t6_t7_t8_t9_t10_remediation_invariants():
     alembic_dir = API_DIR / "alembic"
     script = ScriptDirectory(str(alembic_dir))
     heads = script.get_heads()
-    assert heads == ["031_analysis_job_claim_authority"]
+    assert heads == ["033_worker_queue_visibility"]
 
 
 def test_get_valid_graph_revisions_success():
@@ -306,10 +306,10 @@ def test_get_valid_graph_revisions_success():
     cfg = Config(ini_path)
     cfg.set_main_option("script_location", str(API_DIR / "alembic"))
 
-    revs = get_valid_graph_revisions(cfg, expected_head="031_analysis_job_claim_authority")
-    assert len(revs) == 31
+    revs = get_valid_graph_revisions(cfg, expected_head="033_worker_queue_visibility")
+    assert len(revs) == 33
     assert "026_public_schema_acl_hardening" in revs
-    assert "031_analysis_job_claim_authority" in revs
+    assert "033_worker_queue_visibility" in revs
     assert "026_model_routing_policy_catalog" not in revs
 
 
@@ -343,7 +343,7 @@ def test_known_revisions_parity_with_active_graph():
     assert "028_remove_organization_only_actor_lookup" in KNOWN_REVISIONS
     assert "029_analysis_authorization_policy" in KNOWN_REVISIONS
     assert "030_reconcile_application_role_catalog" in KNOWN_REVISIONS
-    assert "031_analysis_job_claim_authority" in KNOWN_REVISIONS
+    assert "033_worker_queue_visibility" in KNOWN_REVISIONS
     assert "026_model_routing_policy_catalog" not in KNOWN_REVISIONS
 
 
@@ -395,7 +395,7 @@ def test_least_privilege_temporary_grant_and_revoke_success():
         instance_name="test-inst",
         region="test-reg",
         target_database="test_db",
-        expected_head="031_analysis_job_claim_authority",
+        expected_head="033_worker_queue_visibility",
         bootstrap_password="secret_pass",
     )
 
@@ -408,9 +408,9 @@ def test_least_privilege_temporary_grant_and_revoke_success():
             "app.migration_execution.alembic_runner.get_safe_current_revision",
             side_effect=[
                 "024_maintenance_scheduler_and_operational_resilience",
-                "031_analysis_job_claim_authority",
-                "031_analysis_job_claim_authority",
-                "031_analysis_job_claim_authority",
+                "033_worker_queue_visibility",
+                "033_worker_queue_visibility",
+                "033_worker_queue_visibility",
             ],
         ),
     ):
@@ -475,7 +475,7 @@ def test_least_privilege_always_grants_and_revokes_temporary_create_for_phase3()
         instance_name="test-inst",
         region="test-reg",
         target_database="test_db",
-        expected_head="031_analysis_job_claim_authority",
+        expected_head="033_worker_queue_visibility",
         bootstrap_password="secret_pass",
     )
 
@@ -488,9 +488,9 @@ def test_least_privilege_always_grants_and_revokes_temporary_create_for_phase3()
             "app.migration_execution.alembic_runner.get_safe_current_revision",
             side_effect=[
                 "024_maintenance_scheduler_and_operational_resilience",
-                "031_analysis_job_claim_authority",
-                "031_analysis_job_claim_authority",
-                "031_analysis_job_claim_authority",
+                "033_worker_queue_visibility",
+                "033_worker_queue_visibility",
+                "033_worker_queue_visibility",
             ],
         ),
     ):
@@ -546,7 +546,7 @@ def test_least_privilege_revoke_on_migration_failure():
         instance_name="test-inst",
         region="test-reg",
         target_database="test_db",
-        expected_head="031_analysis_job_claim_authority",
+        expected_head="033_worker_queue_visibility",
         bootstrap_password="secret_pass",
     )
 

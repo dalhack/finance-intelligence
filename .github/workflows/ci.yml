@@ -319,6 +319,9 @@ jobs:
         run: |
           flutter doctor -v
           xcodebuild -version
+      - name: Preflight iOS SourcePackages Directory
+        working-directory: apps/mobile
+        run: mkdir -p build/ios/SourcePackages
       - name: Build iOS Simulator Bundle
         working-directory: apps/mobile
         run: |
