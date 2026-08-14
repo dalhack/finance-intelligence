@@ -102,14 +102,14 @@ def test_currency_unit_basis_mismatch_rejected():
             },
             {
                 "fact_id": str(uuid4()),
-                "value": 100000000.0,
+                "value": 150000000.0,
                 "currency": "EUR",  # EUR
                 "unit": "CURRENCY",
                 "reporting_basis": "SOLO",
             },
         ],
     }
-    narrative = "Fark 100.000.000 oldu."
+    narrative = "Fark 50.000.000 oldu."
     with pytest.raises(UnsupportedNumericClaimException):
         NumericClaimVerifier.verify_narrative_numeric_claims(narrative, dataset)
 

@@ -68,7 +68,7 @@ class NumericClaimVerifier:
 
     @classmethod
     def compute_deterministic_derivations(cls, dataset_json: dict[str, Any]) -> tuple[set[str], set[float]]:
-        """Compute all allowed deterministic derivations (add, subtract, ratio, percentage_change) from verified facts in dataset_json under tenant isolation."""
+        """Compute all allowed deterministic derivations (add, subtract, ratio, percentage_change) and formatted direct facts from dataset_json under tenant isolation."""
         derived_tokens: set[str] = set()
         derived_floats: set[float] = set()
         facts = dataset_json.get("facts", [])
@@ -76,6 +76,17 @@ class NumericClaimVerifier:
             return derived_tokens, derived_floats
 
         org_id = dataset_json.get("organization_id")
+
+        # Process single direct facts for formatted string representations (e.g. 2.450.000.000.000) under tenant isolation
+        for f in facts:
+            f_org = str(f.get("organization_id", org_id)) if f.get("organization_id") else str(org_id)
+            if org_id and f_org != str(org_id):
+                continue
+            try:
+                v = float(str(f.get("value", 0)))
+                cls._add_number_representations(v, derived_tokens, derived_floats)
+            except (ValueError, TypeError):
+                pass
 
         for i in range(len(facts)):
             for j in range(len(facts)):
