@@ -175,8 +175,9 @@ class _UploadBottomSheetState extends ConsumerState<UploadBottomSheet> {
             onChanged: isUploading
                 ? null
                 : (val) {
-                    if (val != null)
+                    if (val != null) {
                       setState(() => _selectedClassification = val);
+                    }
                   },
           ),
           const SizedBox(height: SemanticTokens.spacingLg),
