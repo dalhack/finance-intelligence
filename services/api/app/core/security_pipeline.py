@@ -130,11 +130,20 @@ def validate_file_security(
         try:
             reader = PdfReader(BytesIO(file_bytes))
             if reader.is_encrypted:
-                raise SecurityPipelineException(
-                    code="ENCRYPTED_DOCUMENT",
-                    message="Password-protected or encrypted PDFs are not supported.",
-                    status_code=422,
-                )
+                # Regulatory filings are routinely published with
+                # permission-only encryption and an EMPTY user password: they
+                # open and extract normally. Reject only documents that cannot
+                # be opened without a real password.
+                try:
+                    opens_without_password = bool(reader.decrypt(""))
+                except PyPdfError:
+                    opens_without_password = False
+                if not opens_without_password:
+                    raise SecurityPipelineException(
+                        code="ENCRYPTED_DOCUMENT",
+                        message="Password-protected or encrypted PDFs are not supported.",
+                        status_code=422,
+                    )
         except PyPdfError as err:
             raise SecurityPipelineException(
                 code="MALFORMED_DOCUMENT",

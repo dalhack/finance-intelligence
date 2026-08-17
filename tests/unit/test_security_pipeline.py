@@ -76,3 +76,39 @@ def test_truncated_pdf_prefix_is_reported_as_malformed():
     with pytest.raises(SecurityPipelineException) as exc:
         validate_file_security(truncated, "sample_financial.pdf", "application/pdf")
     assert exc.value.code == "MALFORMED_DOCUMENT"
+
+
+@pytest.mark.unit
+def test_permission_only_encrypted_pdf_is_accepted():
+    """Bank and regulator filings ship with permission-only encryption and an
+    empty user password. They open and extract normally, so rejecting them on
+    `is_encrypted` alone blocks the product's primary document source."""
+    from io import BytesIO
+
+    from pypdf import PdfWriter
+
+    writer = PdfWriter()
+    writer.add_blank_page(width=595, height=842)
+    writer.encrypt(user_password="", owner_password="restricted-owner-pw")
+    buffer = BytesIO()
+    writer.write(buffer)
+
+    result = validate_file_security(buffer.getvalue(), "solo_filing.pdf", "application/pdf")
+    assert result["detected_mime"] == "application/pdf"
+
+
+@pytest.mark.unit
+def test_pdf_requiring_a_real_password_is_still_rejected():
+    from io import BytesIO
+
+    from pypdf import PdfWriter
+
+    writer = PdfWriter()
+    writer.add_blank_page(width=595, height=842)
+    writer.encrypt(user_password="needs-a-password", owner_password="owner-pw")
+    buffer = BytesIO()
+    writer.write(buffer)
+
+    with pytest.raises(SecurityPipelineException) as exc:
+        validate_file_security(buffer.getvalue(), "locked.pdf", "application/pdf")
+    assert exc.value.code == "ENCRYPTED_DOCUMENT"
