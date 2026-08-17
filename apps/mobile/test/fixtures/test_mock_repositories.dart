@@ -9,6 +9,21 @@ class TestMockDocumentRepository implements DocumentRepository {
   Future<List<DocumentItem>> getDocuments() async => const [];
 
   @override
+  Future<UploadSession> uploadSingleMultipart({
+    required File file,
+    void Function(int sentBytes, int totalBytes)? onProgress,
+    CancelToken? cancelToken,
+  }) async =>
+      const UploadSession(
+        uploadSessionId: 'sess-test-1',
+        organizationId: 'org-test-1',
+        documentId: 'doc-test-1',
+        documentVersionId: 'ver-test-1',
+        status: 'FINALIZED',
+        expectedSizeBytes: 1024,
+      );
+
+  @override
   Future<UploadSession> createUploadSession({required File file}) async =>
       throw UnimplementedError();
 

@@ -85,38 +85,32 @@ class UploadLifecycleController extends StateNotifier<UploadState> {
     state = state.copyWith(status: UploadStatus.selecting);
 
     try {
-      final session = await _repository.createUploadSession(file: file);
-      if (_isDisposed) return;
-
       _cancelToken = CancelToken();
+      final totalLen = await file.length();
+
       state = state.copyWith(
         status: UploadStatus.uploading,
-        session: session,
         sentBytes: 0,
-        totalBytes: await file.length(),
+        totalBytes: totalLen,
       );
 
-      await _repository.uploadFileStreamed(
-        uploadSessionId: session.uploadSessionId,
+      final session = await _repository.uploadSingleMultipart(
         file: file,
         onProgress: (sent, total) {
           if (!_isDisposed && state.status == UploadStatus.uploading) {
-            state = state.copyWith(sentBytes: sent, totalBytes: total);
+            state = state.copyWith(sentBytes: sent, totalBytes: total > 0 ? total : totalLen);
           }
         },
         cancelToken: _cancelToken,
       );
 
       if (_isDisposed) return;
-      state = state.copyWith(status: UploadStatus.uploaded);
-
-      // Finalize
-      state = state.copyWith(status: UploadStatus.finalizing);
-      final job = await _repository.finalizeUpload(
-          uploadSessionId: session.uploadSessionId);
-
-      if (_isDisposed) return;
-      state = state.copyWith(status: UploadStatus.queued, job: job);
+      state = state.copyWith(
+        status: UploadStatus.uploaded,
+        session: session,
+        sentBytes: totalLen,
+        totalBytes: totalLen,
+      );
     } on AppException catch (e) {
       if (_isDisposed) return;
       state = state.copyWith(status: UploadStatus.failed, exception: e);
@@ -130,7 +124,7 @@ class UploadLifecycleController extends StateNotifier<UploadState> {
         status: UploadStatus.failed,
         exception: UnknownException(
           code: 'UPLOAD_FAILED',
-          message: e.toString(),
+          message: 'Belge yüklenirken bir sorun oluştu. Lütfen tekrar deneyin.',
           requestId: 'unknown',
         ),
       );

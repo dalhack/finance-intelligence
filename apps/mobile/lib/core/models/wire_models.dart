@@ -627,20 +627,21 @@ class AnalysisDomainEventModel {
 class AnalysisCreateRequestModel {
   final String userQuery;
   final List<String>? selectedDocumentIds;
-  final String idempotencyKey;
+  final String? idempotencyKey;
 
   const AnalysisCreateRequestModel({
     required this.userQuery,
     this.selectedDocumentIds,
-    required this.idempotencyKey,
+    this.idempotencyKey,
   });
 
   Map<String, dynamic> toJson() {
     return {
       'prompt': userQuery,
-      if (selectedDocumentIds != null)
+      if (selectedDocumentIds != null && selectedDocumentIds!.isNotEmpty)
         'selected_document_ids': selectedDocumentIds,
-      'idempotency_key': idempotencyKey,
+      if (idempotencyKey != null && idempotencyKey!.isNotEmpty)
+        'idempotency_key': idempotencyKey,
     };
   }
 }

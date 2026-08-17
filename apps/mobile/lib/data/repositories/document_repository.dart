@@ -6,6 +6,11 @@ import '../api/api_client.dart';
 
 abstract class DocumentRepository {
   Future<List<DocumentItem>> getDocuments();
+  Future<UploadSession> uploadSingleMultipart({
+    required File file,
+    void Function(int sentBytes, int totalBytes)? onProgress,
+    CancelToken? cancelToken,
+  });
   Future<UploadSession> createUploadSession({required File file});
   Future<void> uploadFileStreamed({
     required String uploadSessionId,
@@ -28,6 +33,41 @@ class RemoteDocumentRepository implements DocumentRepository {
   @override
   Future<List<DocumentItem>> getDocuments() async {
     return await apiClient.getDocuments();
+  }
+
+  @override
+  Future<UploadSession> uploadSingleMultipart({
+    required File file,
+    void Function(int sentBytes, int totalBytes)? onProgress,
+    CancelToken? cancelToken,
+  }) async {
+    final path = file.path;
+    final ext = path.split('.').last.toLowerCase();
+    if (!allowedExtensions.contains(ext)) {
+      throw const ValidationException(
+        code: 'INVALID_FILE_EXTENSION',
+        message:
+            'Desteklenmeyen dosya uzantısı. Yalnızca PDF, XLSX ve CSV yüklenebilir.',
+        requestId: 'client_validation',
+      );
+    }
+
+    final len = await file.length();
+    if (len > maxFileSizeBytes) {
+      throw const ValidationException(
+        code: 'FILE_SIZE_EXCEEDED',
+        message: 'Dosya boyutu 50MB sınırını aşamaz.',
+        requestId: 'client_validation',
+      );
+    }
+
+    final filename = path.split('/').last;
+    return await apiClient.uploadDocumentMultipart(
+      file: file,
+      displayName: filename,
+      onSendProgress: onProgress,
+      cancelToken: cancelToken,
+    );
   }
 
   @override

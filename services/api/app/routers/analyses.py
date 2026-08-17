@@ -6,6 +6,7 @@ from uuid import UUID, uuid4
 from app.db.session import get_db_session
 from app.dependencies import require_permission
 from app.middleware.execution_context import ExecutionContext
+from app.models.document import Document
 from app.models.orchestration import AnalysisJob
 from app.orchestration.event_engine import AnalysisEventEngine
 from app.orchestration.state_machine import AnalysisJobStatus, AnalysisStateMachine
@@ -27,6 +28,8 @@ router = APIRouter(prefix="/analyses", tags=["Analyses"])
 class AnalysisCreateRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
     prompt: str = Field(min_length=3, max_length=2000)
+    idempotency_key: str | None = Field(default=None, max_length=128)
+    selected_document_ids: list[UUID] | None = Field(default=None)
 
 
 class AnalysisJobDTO(BaseModel):
@@ -51,11 +54,13 @@ async def create_analysis(
     user_id = ctx.authenticated_user_id
     await db.execute(text("SELECT set_config('app.current_organization_id', :org_id, true);"), {"org_id": str(org_id)})
 
-    if x_idempotency_key:
+    effective_idempotency_key = req.idempotency_key or x_idempotency_key
+
+    if effective_idempotency_key:
         existing_res = await db.execute(
             select(AnalysisJob).where(
                 AnalysisJob.organization_id == org_id,
-                AnalysisJob.idempotency_key == x_idempotency_key,
+                AnalysisJob.idempotency_key == effective_idempotency_key,
             )
         )
         existing_job = existing_res.scalar_one_or_none()
@@ -71,6 +76,24 @@ async def create_analysis(
                 updated_at=existing_job.updated_at,
             )
 
+    normalized_req: dict[str, Any] = {}
+    if req.selected_document_ids:
+        dedup_doc_ids = list(dict.fromkeys(req.selected_document_ids))
+        valid_docs_res = await db.execute(
+            select(Document).where(
+                Document.organization_id == org_id,
+                Document.id.in_(dedup_doc_ids),
+                Document.status == "ACTIVE",
+            )
+        )
+        valid_docs = valid_docs_res.scalars().all()
+        if len(valid_docs) != len(dedup_doc_ids):
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="One or more selected documents are invalid, unauthorized, or deleted.",
+            )
+        normalized_req["DOCUMENT_SCOPE"] = [str(doc_id) for doc_id in dedup_doc_ids]
+
     now = datetime.now(UTC)
     job = AnalysisJob(
         id=uuid4(),
@@ -78,8 +101,8 @@ async def create_analysis(
         user_id=user_id,
         status=AnalysisJobStatus.RECEIVED.value,
         request_prompt=req.prompt,
-        normalized_request={},
-        idempotency_key=x_idempotency_key,
+        normalized_request=normalized_req,
+        idempotency_key=effective_idempotency_key,
         created_at=now,
         updated_at=now,
     )

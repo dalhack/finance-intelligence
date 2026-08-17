@@ -11,7 +11,7 @@ class RealE2EMockApiClient implements FinanceIntelligenceApiClient {
   @override
   Future<AnalysisJobModel> createAnalysis({
     required String prompt,
-    required String idempotencyKey,
+    String? idempotencyKey,
     List<String>? selectedDocumentIds,
   }) async {
     return AnalysisJobModel(

@@ -16,6 +16,21 @@ class ControllerMockDocumentRepo implements DocumentRepository {
   Future<List<DocumentItem>> getDocuments() async => itemsToReturn;
 
   @override
+  Future<UploadSession> uploadSingleMultipart({
+    required dynamic file,
+    void Function(int p1, int p2)? onProgress,
+    dynamic cancelToken,
+  }) async =>
+      const UploadSession(
+        uploadSessionId: 'sess-1',
+        organizationId: 'org-1',
+        documentId: 'doc-1',
+        documentVersionId: 'ver-1',
+        status: 'FINALIZED',
+        expectedSizeBytes: 100,
+      );
+
+  @override
   Future<UploadSession> createUploadSession({required dynamic file}) async =>
       throw UnimplementedError();
 

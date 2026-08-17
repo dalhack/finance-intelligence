@@ -26,6 +26,34 @@ class FinanceIntelligenceApiClient {
     });
   }
 
+  Future<UploadSession> uploadDocumentMultipart({
+    required File file,
+    required String displayName,
+    String classification = 'CONFIDENTIAL',
+    ProgressCallback? onSendProgress,
+    CancelToken? cancelToken,
+  }) async {
+    return _safeCall(() async {
+      final fileName = displayName.isNotEmpty ? displayName : file.path.split('/').last;
+      final formData = FormData.fromMap({
+        'display_name': fileName,
+        'classification': classification,
+        'file': await MultipartFile.fromFile(
+          file.path,
+          filename: fileName,
+        ),
+      });
+
+      final res = await _dio.post(
+        '/documents/uploads',
+        data: formData,
+        onSendProgress: onSendProgress,
+        cancelToken: cancelToken,
+      );
+      return UploadSession.fromJson(res.data as Map<String, dynamic>);
+    });
+  }
+
   Future<UploadSession> createUploadSession({
     required String filename,
     required int expectedSizeBytes,
@@ -195,7 +223,7 @@ class FinanceIntelligenceApiClient {
 
   Future<AnalysisJobModel> createAnalysis({
     required String prompt,
-    required String idempotencyKey,
+    String? idempotencyKey,
     List<String>? selectedDocumentIds,
   }) async {
     return _safeCall(() async {

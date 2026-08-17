@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../app/theme/semantic_tokens.dart';
 import '../../../presentation/providers/providers.dart';
+import '../../../presentation/state/upload_controller.dart';
 
 class UploadBottomSheet extends ConsumerStatefulWidget {
   const UploadBottomSheet({super.key});
@@ -15,9 +16,8 @@ class UploadBottomSheet extends ConsumerStatefulWidget {
 class _UploadBottomSheetState extends ConsumerState<UploadBottomSheet> {
   File? _selectedFile;
   String _selectedClassification = 'CONFIDENTIAL';
-  bool _isUploading = false;
-  double _uploadProgress = 0.0;
   String? _errorMessage;
+  bool _isNonRetryable = false;
 
   static const List<String> classifications = [
     'PUBLIC',
@@ -40,6 +40,7 @@ class _UploadBottomSheetState extends ConsumerState<UploadBottomSheet> {
       if (len > 50 * 1024 * 1024) {
         setState(() {
           _errorMessage = 'Dosya boyutu 50MB sınırını aşamaz.';
+          _isNonRetryable = true;
         });
         return;
       }
@@ -47,6 +48,7 @@ class _UploadBottomSheetState extends ConsumerState<UploadBottomSheet> {
       setState(() {
         _selectedFile = file;
         _errorMessage = null;
+        _isNonRetryable = false;
       });
     }
   }
@@ -55,15 +57,27 @@ class _UploadBottomSheetState extends ConsumerState<UploadBottomSheet> {
     if (_selectedFile == null) return;
 
     setState(() {
-      _isUploading = true;
-      _uploadProgress = 0.1;
       _errorMessage = null;
+      _isNonRetryable = false;
     });
 
     try {
       await ref
           .read(uploadLifecycleControllerProvider.notifier)
           .startUploadAndFinalize(_selectedFile!);
+
+      final uploadState = ref.read(uploadLifecycleControllerProvider);
+      if (uploadState.status == UploadStatus.failed) {
+        final exc = uploadState.exception;
+        final isNonRetryable = exc != null && exc.code == 'INVALID_FILE_EXTENSION' ||
+            exc?.code == 'FILE_SIZE_EXCEEDED' ||
+            exc?.code == 'UNSUPPORTED_FILE_TYPE';
+        setState(() {
+          _errorMessage = exc?.message ?? 'Yükleme sırasında bir hata oluştu.';
+          _isNonRetryable = isNonRetryable;
+        });
+        return;
+      }
 
       if (mounted) {
         Navigator.pop(context);
@@ -78,8 +92,8 @@ class _UploadBottomSheetState extends ConsumerState<UploadBottomSheet> {
     } catch (e) {
       if (mounted) {
         setState(() {
-          _isUploading = false;
-          _errorMessage = e.toString();
+          _errorMessage = 'Belge yüklenirken bir sorun oluştu. Lütfen tekrar deneyin.';
+          _isNonRetryable = false;
         });
       }
     }
@@ -87,6 +101,11 @@ class _UploadBottomSheetState extends ConsumerState<UploadBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final uploadState = ref.watch(uploadLifecycleControllerProvider);
+    final isUploading = uploadState.status == UploadStatus.uploading ||
+        uploadState.status == UploadStatus.selecting;
+    final progress = uploadState.progressFraction;
+
     return Padding(
       padding: EdgeInsets.only(
         left: SemanticTokens.spacingMd,
@@ -112,14 +131,32 @@ class _UploadBottomSheetState extends ConsumerState<UploadBottomSheet> {
           const Divider(),
           if (_errorMessage != null)
             Container(
-              padding: const EdgeInsets.all(8.0),
-              margin: const EdgeInsets.only(bottom: 8.0),
-              color: SemanticTokens.errorRedLight.withValues(alpha: 0.1),
-              child: Text(_errorMessage!,
-                  style: const TextStyle(color: SemanticTokens.errorRedLight)),
+              padding: const EdgeInsets.all(12.0),
+              margin: const EdgeInsets.only(bottom: 12.0),
+              decoration: BoxDecoration(
+                color: SemanticTokens.errorRedLight.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(8.0),
+                border: Border.all(color: SemanticTokens.errorRedLight),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(_errorMessage!,
+                      style: const TextStyle(
+                          color: SemanticTokens.errorRedLight,
+                          fontWeight: FontWeight.w600)),
+                  if (_isNonRetryable) ...[
+                    const SizedBox(height: 6),
+                    const Text(
+                      'Bu dosya yüklenemez. Lütfen uygun format ve boyutta başka bir dosya seçin.',
+                      style: TextStyle(fontSize: 12, color: Colors.black87),
+                    ),
+                  ],
+                ],
+              ),
             ),
           ElevatedButton.icon(
-            onPressed: _isUploading ? null : _pickFile,
+            onPressed: isUploading ? null : _pickFile,
             icon: const Icon(Icons.folder_open),
             label: Text(_selectedFile == null
                 ? 'PDF / XLSX / CSV Seç'
@@ -133,22 +170,40 @@ class _UploadBottomSheetState extends ConsumerState<UploadBottomSheet> {
             items: classifications
                 .map((c) => DropdownMenuItem(value: c, child: Text(c)))
                 .toList(),
-            onChanged: (val) {
-              if (val != null) setState(() => _selectedClassification = val);
-            },
+            onChanged: isUploading
+                ? null
+                : (val) {
+                    if (val != null) setState(() => _selectedClassification = val);
+                  },
           ),
           const SizedBox(height: SemanticTokens.spacingLg),
-          if (_isUploading) ...[
-            LinearProgressIndicator(value: _uploadProgress),
+          if (isUploading) ...[
+            LinearProgressIndicator(value: progress > 0 ? progress : null),
             const SizedBox(height: 8),
-            Text('Yükleniyor... %${(_uploadProgress * 100).toInt()}',
+            Text('Yükleniyor... %${(progress * 100).toInt()}',
                 textAlign: TextAlign.center),
             const SizedBox(height: SemanticTokens.spacingMd),
           ],
-          ElevatedButton(
-            onPressed:
-                (_selectedFile != null && !_isUploading) ? _startUpload : null,
-            child: const Text('Yüklemeyi Başlat & Sonlandır'),
+          Row(
+            children: [
+              if (_errorMessage != null && !_isNonRetryable && !isUploading) ...[
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: _startUpload,
+                    child: const Text('Yeniden Dene'),
+                  ),
+                ),
+                const SizedBox(width: 8),
+              ],
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: (_selectedFile != null && !isUploading)
+                      ? _startUpload
+                      : null,
+                  child: const Text('Yüklemeyi Başlat'),
+                ),
+              ),
+            ],
           ),
         ],
       ),
