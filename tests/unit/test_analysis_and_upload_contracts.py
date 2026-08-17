@@ -110,7 +110,8 @@ async def test_analysis_create_selected_document_ids_unauthorized_fails_closed(m
                 },
             )
             assert response.status_code == status.HTTP_404_NOT_FOUND
-            assert "unauthorized, or deleted" in response.json()["detail"]
+            assert "error" in response.json()
+            assert "unauthorized, or deleted" in response.json()["error"]["message"]
     finally:
         app.dependency_overrides.clear()
 
@@ -160,3 +161,62 @@ async def test_analysis_create_idempotency_deduplication(mock_exec_context, mock
     finally:
         app.dependency_overrides.clear()
 
+
+@pytest.mark.asyncio
+async def test_backend_http_exception_error_envelope_formatting():
+    from fastapi import HTTPException
+    from starlette.requests import Request
+    from app.middleware.error_handler import http_exception_handler
+
+    scope = {
+        "type": "http",
+        "method": "GET",
+        "path": "/api/v1/documents",
+        "headers": [],
+    }
+    req = Request(scope)
+    req.state.request_id = "req-test-401"
+
+    exc = HTTPException(
+        status_code=401,
+        detail="Authentication credentials were not provided.",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    res = await http_exception_handler(req, exc)
+    assert res.status_code == 401
+    assert res.headers.get("WWW-Authenticate") == "Bearer"
+
+    import json
+    data = json.loads(res.body.decode("utf-8"))
+    assert "error" in data
+    assert data["error"]["code"] == "UNAUTHENTICATED"
+    assert data["error"]["requestId"] == "req-test-401"
+    assert data["error"]["retryable"] is False
+
+
+@pytest.mark.asyncio
+async def test_backend_http_exception_raw_secret_detail_redaction():
+    from fastapi import HTTPException
+    from starlette.requests import Request
+    from app.middleware.error_handler import http_exception_handler
+
+    scope = {
+        "type": "http",
+        "method": "POST",
+        "path": "/api/v1/documents/uploads",
+        "headers": [],
+    }
+    req = Request(scope)
+    req.state.request_id = "req-test-secret"
+
+    exc = HTTPException(
+        status_code=400,
+        detail="Invalid token provided: secret_key_12345 in SQL traceback",
+    )
+    res = await http_exception_handler(req, exc)
+    import json
+    data = json.loads(res.body.decode("utf-8"))
+    assert "error" in data
+    assert data["error"]["code"] == "BAD_REQUEST"
+    assert "secret_key_12345" not in data["error"]["message"]
+    assert "sql" not in data["error"]["message"].lower()
