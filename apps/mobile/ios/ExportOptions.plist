@@ -4,6 +4,13 @@
 <dict>
 	<key>method</key>
 	<string>app-store-connect</string>
+	<key>signingStyle</key>
+	<string>manual</string>
+	<key>provisioningProfiles</key>
+	<dict>
+		<key>com.korhanturgut.financeintelligence</key>
+		<string>FinanceIntelligence_AppStore</string>
+	</dict>
 	<key>teamID</key>
 	<string>D7FNNBFRUV</string>
 	<key>uploadSymbols</key>
