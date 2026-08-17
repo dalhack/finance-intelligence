@@ -69,9 +69,10 @@ class _UploadBottomSheetState extends ConsumerState<UploadBottomSheet> {
       final uploadState = ref.read(uploadLifecycleControllerProvider);
       if (uploadState.status == UploadStatus.failed) {
         final exc = uploadState.exception;
-        final isNonRetryable = exc != null && exc.code == 'INVALID_FILE_EXTENSION' ||
-            exc?.code == 'FILE_SIZE_EXCEEDED' ||
-            exc?.code == 'UNSUPPORTED_FILE_TYPE';
+        final isNonRetryable =
+            exc != null && exc.code == 'INVALID_FILE_EXTENSION' ||
+                exc?.code == 'FILE_SIZE_EXCEEDED' ||
+                exc?.code == 'UNSUPPORTED_FILE_TYPE';
         setState(() {
           _errorMessage = exc?.message ?? 'Yükleme sırasında bir hata oluştu.';
           _isNonRetryable = isNonRetryable;
@@ -92,7 +93,8 @@ class _UploadBottomSheetState extends ConsumerState<UploadBottomSheet> {
     } catch (e) {
       if (mounted) {
         setState(() {
-          _errorMessage = 'Belge yüklenirken bir sorun oluştu. Lütfen tekrar deneyin.';
+          _errorMessage =
+              'Belge yüklenirken bir sorun oluştu. Lütfen tekrar deneyin.';
           _isNonRetryable = false;
         });
       }
@@ -173,7 +175,8 @@ class _UploadBottomSheetState extends ConsumerState<UploadBottomSheet> {
             onChanged: isUploading
                 ? null
                 : (val) {
-                    if (val != null) setState(() => _selectedClassification = val);
+                    if (val != null)
+                      setState(() => _selectedClassification = val);
                   },
           ),
           const SizedBox(height: SemanticTokens.spacingLg),
@@ -186,7 +189,9 @@ class _UploadBottomSheetState extends ConsumerState<UploadBottomSheet> {
           ],
           Row(
             children: [
-              if (_errorMessage != null && !_isNonRetryable && !isUploading) ...[
+              if (_errorMessage != null &&
+                  !_isNonRetryable &&
+                  !isUploading) ...[
                 Expanded(
                   child: OutlinedButton(
                     onPressed: _startUpload,

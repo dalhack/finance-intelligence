@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart' show kReleaseMode;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../core/config/app_config.dart';
@@ -11,10 +10,18 @@ import 'router.dart';
 import 'theme/app_theme.dart';
 
 class FinanceIntelligenceApp extends StatelessWidget {
-  const FinanceIntelligenceApp({super.key});
+  /// Active configuration; defaults to the `APP_ENV` selection so existing
+  /// callers (integration tests) keep working without a parameter.
+  final AppConfig? config;
+
+  const FinanceIntelligenceApp({super.key, this.config});
 
   @override
   Widget build(BuildContext context) {
+    final active = config ?? AppConfig.resolve();
+    // Any environment with real identity (staging, production) is gated behind
+    // Firebase sign-in, regardless of build mode.
+    final requiresAuth = !active.enableDevAuth;
     return ProviderScope(
       child: MaterialApp(
         title: 'Finance Intelligence',
@@ -23,18 +30,20 @@ class FinanceIntelligenceApp extends StatelessWidget {
         themeMode: ThemeMode.system,
         debugShowCheckedModeBanner: false,
         onGenerateRoute: AppRouter.generateRoute,
-        home: kReleaseMode ? const _AuthGate() : null,
-        initialRoute: kReleaseMode ? null : '/',
+        home: requiresAuth ? _AuthGate(config: active) : null,
+        initialRoute: requiresAuth ? null : '/',
       ),
     );
   }
 }
 
-/// Release builds require a signed-in Firebase user and a provisioned
-/// organization before the app shell is shown; development builds keep the
-/// synthetic dev-session flow.
+/// Environments with real identity require a signed-in Firebase user and a
+/// provisioned organization before the app shell is shown; development builds
+/// keep the synthetic dev-session flow.
 class _AuthGate extends StatelessWidget {
-  const _AuthGate();
+  final AppConfig config;
+
+  const _AuthGate({required this.config});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +57,7 @@ class _AuthGate extends StatelessWidget {
           OrgContext.organizationId = null;
           return const SignInScreen();
         }
-        return _OrganizationGate(user: snapshot.data!);
+        return _OrganizationGate(user: snapshot.data!, config: config);
       },
     );
   }
@@ -58,7 +67,8 @@ class _AuthGate extends StatelessWidget {
 /// stores it in OrgContext, then shows the app shell.
 class _OrganizationGate extends StatefulWidget {
   final User user;
-  const _OrganizationGate({required this.user});
+  final AppConfig config;
+  const _OrganizationGate({required this.user, required this.config});
 
   @override
   State<_OrganizationGate> createState() => _OrganizationGateState();
@@ -75,7 +85,7 @@ class _OrganizationGateState extends State<_OrganizationGate> {
 
   Future<void> _ensureOrganization() async {
     if (OrgContext.organizationId != null) return;
-    final config = AppConfig.production;
+    final config = widget.config;
     final token =
         await FirebaseIdentityTokenProvider().getIdToken(forceRefresh: false);
     final dio = Dio(BaseOptions(

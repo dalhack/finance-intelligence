@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart' show kReleaseMode;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/config/app_config.dart';
@@ -33,13 +32,17 @@ final analysisResumeStoreProvider = Provider<AnalysisResumeStore>((ref) {
   return SharedPreferencesAnalysisResumeStore(prefs);
 });
 
+/// Active configuration, selected by the `APP_ENV` dart-define and validated
+/// fail-closed at read time (see [AppConfig.resolve]).
 final appConfigProvider = Provider<AppConfig>((ref) {
-  return kReleaseMode ? AppConfig.production : AppConfig.development;
+  final config = AppConfig.resolve();
+  config.validateConfig();
+  return config;
 });
 
 final identityTokenProvider = Provider((ref) {
   final config = ref.watch(appConfigProvider);
-  if (config.environment == 'development') {
+  if (config.enableDevAuth) {
     return DevelopmentIdentityTokenProvider(config: config);
   }
   return FirebaseIdentityTokenProvider();
@@ -47,7 +50,7 @@ final identityTokenProvider = Provider((ref) {
 
 final appAttestationTokenProvider = Provider((ref) {
   final config = ref.watch(appConfigProvider);
-  if (config.environment == 'development') {
+  if (config.enableDevAuth) {
     return DevelopmentAttestationTokenProvider(config: config);
   }
   return FirebaseAppAttestTokenProvider();

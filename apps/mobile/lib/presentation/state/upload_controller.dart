@@ -98,7 +98,8 @@ class UploadLifecycleController extends StateNotifier<UploadState> {
         file: file,
         onProgress: (sent, total) {
           if (!_isDisposed && state.status == UploadStatus.uploading) {
-            state = state.copyWith(sentBytes: sent, totalBytes: total > 0 ? total : totalLen);
+            state = state.copyWith(
+                sentBytes: sent, totalBytes: total > 0 ? total : totalLen);
           }
         },
         cancelToken: _cancelToken,

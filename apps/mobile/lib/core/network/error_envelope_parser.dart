@@ -13,7 +13,8 @@ class ErrorEnvelopeParser {
           final code = errMap['code']?.toString() ?? 'UNKNOWN_ERROR';
           final message =
               errMap['message']?.toString() ?? 'Beklenmeyen bir hata oluştu.';
-          final requestId = errMap['requestId']?.toString() ?? fallbackRequestId;
+          final requestId =
+              errMap['requestId']?.toString() ?? fallbackRequestId;
           final retryable = errMap['retryable'] as bool? ?? false;
           final details = (errMap['details'] as List<dynamic>?) ?? const [];
 
@@ -71,7 +72,8 @@ class ErrorEnvelopeParser {
         if (statusCode == 415) {
           return ValidationException(
             code: 'UNSUPPORTED_FILE_TYPE',
-            message: 'Yüklenen dosya türü desteklenmiyor. Yalnızca PDF, XLSX ve CSV yüklenebilir.',
+            message:
+                'Yüklenen dosya türü desteklenmiyor. Yalnızca PDF, XLSX ve CSV yüklenebilir.',
             requestId: fallbackRequestId,
             statusCode: statusCode,
           );

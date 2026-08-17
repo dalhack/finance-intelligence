@@ -34,7 +34,8 @@ class FinanceIntelligenceApiClient {
     CancelToken? cancelToken,
   }) async {
     return _safeCall(() async {
-      final fileName = displayName.isNotEmpty ? displayName : file.path.split('/').last;
+      final fileName =
+          displayName.isNotEmpty ? displayName : file.path.split('/').last;
       final formData = FormData.fromMap({
         'display_name': fileName,
         'classification': classification,
@@ -315,12 +316,60 @@ class FinanceIntelligenceApiClient {
     });
   }
 
+  /// Classifies transport-level failures (no HTTP response was ever produced)
+  /// so they are not mislabelled as an unexpected server response. Messages are
+  /// fixed strings: no URL, header, token, identity or raw driver detail is
+  /// ever surfaced to the UI.
+  static AppException? mapTransportException(
+    DioExceptionType type,
+    bool hasResponse,
+    String requestId,
+  ) {
+    switch (type) {
+      case DioExceptionType.connectionTimeout:
+      case DioExceptionType.sendTimeout:
+      case DioExceptionType.receiveTimeout:
+      case DioExceptionType.transformTimeout:
+        return TimeoutException(
+          code: 'NETWORK_TIMEOUT',
+          message: 'Sunucu zamanında yanıt vermedi. Lütfen tekrar deneyin.',
+          requestId: requestId,
+        );
+      case DioExceptionType.connectionError:
+      case DioExceptionType.badCertificate:
+        return NetworkException(
+          code: 'NETWORK_UNAVAILABLE',
+          message:
+              'Sunucuya bağlanılamadı. İnternet bağlantınızı kontrol edip tekrar deneyin.',
+          requestId: requestId,
+        );
+      case DioExceptionType.unknown:
+        if (!hasResponse) {
+          return NetworkException(
+            code: 'NETWORK_UNAVAILABLE',
+            message:
+                'Sunucuya bağlanılamadı. İnternet bağlantınızı kontrol edip tekrar deneyin.',
+            requestId: requestId,
+          );
+        }
+        return null;
+      case DioExceptionType.badResponse:
+      case DioExceptionType.cancel:
+        return null;
+    }
+  }
+
   Future<T> _safeCall<T>(Future<T> Function() call) async {
     try {
       return await call();
     } on DioException catch (e) {
       final fallbackId =
           e.requestOptions.headers['X-Request-ID']?.toString() ?? 'unknown';
+      final transportError =
+          mapTransportException(e.type, e.response != null, fallbackId);
+      if (transportError != null) {
+        throw transportError;
+      }
       throw ErrorEnvelopeParser.parse(
         responseBody: e.response?.data,
         statusCode: e.response?.statusCode,
