@@ -45,6 +45,26 @@ def sanitize_filename(filename: str) -> str:
     return sanitized or "unnamed_document"
 
 
+SECURITY_HEADER_SAMPLE_BYTES = 65536
+
+# Formats whose structural integrity cannot be judged from a leading prefix:
+# a PDF cross-reference table and an OOXML/ZIP central directory both live at
+# the END of the file, so a bounded sample always parses as truncated.
+WHOLE_OBJECT_VALIDATION_EXTENSIONS = (".pdf", ".xlsx")
+
+
+def security_validation_read_size(declared_filename: str, object_size_bytes: int) -> int:
+    """Bytes that must be read from storage before calling [validate_file_security].
+
+    Returns the full object size for structure-validated formats and a bounded
+    header sample for everything else.
+    """
+    sanitized_name = sanitize_filename(declared_filename).lower()
+    if sanitized_name.endswith(WHOLE_OBJECT_VALIDATION_EXTENSIONS):
+        return max(object_size_bytes, 1)
+    return SECURITY_HEADER_SAMPLE_BYTES
+
+
 def validate_file_security(
     file_bytes: bytes,
     declared_filename: str,

@@ -8,6 +8,7 @@ from app.core.security_pipeline import (
     MAX_XLSX_SIZE_BYTES,
     SecurityPipelineException,
     sanitize_filename,
+    security_validation_read_size,
     validate_file_security,
 )
 from app.db.session import get_db_session
@@ -225,8 +226,11 @@ async def finalize_upload(
             status_code=400,
         )
 
-    # Read sample header bytes for MIME reconciliation
-    sample_bytes = await adapter.read_sample_bytes(str(org_id), session.temporary_object_key, 65536)
+    # Read the bytes the security pipeline needs: a bounded header sample for
+    # header-only formats, the whole object for PDF/XLSX whose structure index
+    # sits at the end of the file.
+    validation_read_size = security_validation_read_size(session.sanitized_filename, file_size)
+    sample_bytes = await adapter.read_sample_bytes(str(org_id), session.temporary_object_key, validation_read_size)
     sec_result = validate_file_security(sample_bytes, session.sanitized_filename, session.declared_mime_type)
     detected_mime = sec_result["detected_mime"]
 
