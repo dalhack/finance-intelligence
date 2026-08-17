@@ -72,5 +72,7 @@
 	<string>Finance Intelligence, fiş ve faturaları taramak için kameranızı kullanır. / Finance Intelligence uses your camera to scan receipts and financial documents.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Finance Intelligence, belge ve fatura görsellerini yüklemek için fotoğraf kütüphanenize erişir. / Finance Intelligence accesses your photo library to upload document and receipt images.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Finance Intelligence, belge veya fotoğraf seçimi için kullanılan bileşenlerin konum bilgisine erişim isteğini gösterebilmesi nedeniyle bu izni talep edebilir. Uygulama konumunuzu finansal analiz amacıyla toplamaz, saklamaz veya paylaşmaz. / Finance Intelligence may show location permission prompts if photo picker components request location metadata. The app does not collect, store, or share your location for financial analysis.</string>
 </dict>
 </plist>
