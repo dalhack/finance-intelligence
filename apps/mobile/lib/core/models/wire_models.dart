@@ -96,8 +96,12 @@ class UploadSession {
 
   factory UploadSession.fromJson(Map<String, dynamic> json) {
     return UploadSession(
-      uploadSessionId:
-          json['upload_session_id']?.toString() ?? json['id']?.toString() ?? '',
+      // The API returns `session_id` (UploadInitiateResponse); the older keys
+      // are kept as fallbacks so both upload protocols parse correctly.
+      uploadSessionId: json['session_id']?.toString() ??
+          json['upload_session_id']?.toString() ??
+          json['id']?.toString() ??
+          '',
       organizationId: json['organization_id']?.toString() ?? '',
       documentId: json['document_id']?.toString() ?? '',
       documentVersionId: json['document_version_id']?.toString() ?? '',

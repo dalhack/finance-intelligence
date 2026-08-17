@@ -112,6 +112,26 @@ class UploadLifecycleController extends StateNotifier<UploadState> {
         sentBytes: totalLen,
         totalBytes: totalLen,
       );
+
+      // The document row, its version and the ingestion job are only created
+      // when the upload session is finalized. Without this step the file
+      // reaches storage but never appears in the document list.
+      if (session.uploadSessionId.isEmpty) {
+        throw const ValidationException(
+          code: 'UPLOAD_SESSION_ID_MISSING',
+          message:
+              'Yükleme tamamlanamadı: sunucu bir oturum kimliği döndürmedi.',
+          requestId: 'client_validation',
+        );
+      }
+
+      state = state.copyWith(status: UploadStatus.finalizing);
+      final job = await _repository.finalizeUpload(
+        uploadSessionId: session.uploadSessionId,
+      );
+
+      if (_isDisposed) return;
+      state = state.copyWith(status: UploadStatus.queued, job: job);
     } on AppException catch (e) {
       if (_isDisposed) return;
       state = state.copyWith(status: UploadStatus.failed, exception: e);

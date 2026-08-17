@@ -28,7 +28,12 @@ class _DocumentManagementScreenState
       context: context,
       isScrollControlled: true,
       builder: (_) => const UploadBottomSheet(),
-    );
+    ).whenComplete(() {
+      // Refresh so a freshly finalized document appears with its real
+      // ingestion state instead of requiring a manual pull-to-refresh.
+      if (!mounted) return;
+      ref.read(documentListControllerProvider.notifier).loadDocuments();
+    });
   }
 
   @override
