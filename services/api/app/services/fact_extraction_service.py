@@ -331,6 +331,7 @@ class FactExtractionService:
                 source_location=chunk.get("source_lineage") or {},
                 extraction_method="LLM_ASSISTED",
                 evidence_snippet=f"{fact.raw_label} | {fact.raw_value}"[:500],
+                metric_code=fact.metric_code,
             )
             llm_created += 1
 

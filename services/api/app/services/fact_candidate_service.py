@@ -62,6 +62,7 @@ class FactCandidateService:
         source_location: dict[str, Any] | None = None,
         extraction_method: str = "PARSER_TABLE",
         evidence_snippet: str | None = None,
+        metric_code: str | None = None,
     ) -> FinancialFactCandidate:
         """Extract and normalize candidate cell without automatically creating verified facts."""
         warning_codes: list[str] = []
@@ -84,9 +85,19 @@ class FactCandidateService:
         if existing_cand:
             return existing_cand
 
-        # 2. Metric Matching
-        metric_def = await FactCandidateService.match_metric_alias(db, organization_id, raw_label)
-        suggested_code = metric_def.metric_code if metric_def else None
+        # 2. Metric Matching. A caller that already resolved the metric (the
+        # model-assisted reader picks from the canonical enum) passes it in;
+        # otherwise the raw label is matched against the dictionary. Dropping a
+        # resolved code here would leave the reviewer with an unlabelled figure.
+        metric_def = None
+        suggested_code = None
+        if metric_code:
+            metric_res = await db.execute(select(MetricDefinition).where(MetricDefinition.metric_code == metric_code))
+            metric_def = metric_res.scalar_one_or_none()
+            suggested_code = metric_def.metric_code if metric_def else None
+        if metric_def is None:
+            metric_def = await FactCandidateService.match_metric_alias(db, organization_id, raw_label)
+            suggested_code = metric_def.metric_code if metric_def else None
 
         # 3. Number Normalization
         parse_res = NormalizationService.parse_financial_decimal(raw_value)

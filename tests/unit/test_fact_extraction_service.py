@@ -86,3 +86,22 @@ async def test_extraction_skips_when_reference_data_is_absent():
 
     assert summary.candidates_created == 0
     assert summary.context.institution_code == "VAKBN"
+
+
+@pytest.mark.unit
+def test_extracted_fact_carries_the_metric_code_the_model_selected():
+    """The model picks from the canonical metric enum. If that code is dropped
+    on the way into the candidate, the reviewer is shown an unlabelled figure."""
+    import inspect
+
+    from app.services.fact_candidate_service import FactCandidateService
+
+    signature = inspect.signature(FactCandidateService.create_candidate)
+    assert "metric_code" in signature.parameters, (
+        "create_candidate must accept a resolved metric code so a model-selected metric is not silently discarded"
+    )
+
+    source = inspect.getsource(FactExtractionService.extract_candidates)
+    assert "metric_code=fact.metric_code" in source, (
+        "the model-assisted path must pass the resolved metric code through"
+    )
