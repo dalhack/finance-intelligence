@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../app/theme/semantic_tokens.dart';
 import '../../../presentation/providers/providers.dart';
+import 'review_error_messages.dart';
 
 class CandidateDetailBottomSheet extends ConsumerStatefulWidget {
   final Map<String, dynamic> candidate;
@@ -50,7 +51,7 @@ class _CandidateDetailBottomSheetState
       setState(() => _isSubmitting = false);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-            content: Text('Onaylama Hatası: $e'),
+            content: Text(reviewDecisionErrorMessage(e)),
             backgroundColor: SemanticTokens.errorRedLight),
       );
     }
@@ -102,7 +103,7 @@ class _CandidateDetailBottomSheetState
       setState(() => _isSubmitting = false);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-            content: Text('Reddetme Hatası: $e'),
+            content: Text(reviewDecisionErrorMessage(e)),
             backgroundColor: SemanticTokens.errorRedLight),
       );
     }

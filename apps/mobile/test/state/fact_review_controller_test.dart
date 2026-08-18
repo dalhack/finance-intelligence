@@ -176,7 +176,10 @@ void main() {
         controller.approveCandidate(candidateId: 'cand-1'),
         throwsA(isA<AppException>()),
       );
-      expect(controller.state.exception?.code, 'PERMISSION_DENIED');
+      // The queue is still valid, so it must survive a refused decision
+      // rather than being replaced by an error page.
+      expect(controller.state.exception, isNull);
+      expect(controller.state.data, isNotNull);
     });
 
     test('reject rethrows', () async {

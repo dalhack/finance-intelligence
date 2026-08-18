@@ -53,11 +53,12 @@ class FactReviewController
           ? e
           : UnknownException(
               code: 'UNKNOWN', message: e.toString(), requestId: 'req-local');
+      // The queue itself is still valid, so it stays on screen: replacing it
+      // with an error page hid every remaining candidate behind one refused
+      // decision. Reloading also clears a card the server has already
+      // reviewed, which is the usual reason a decision is refused.
       if (mounted && _generationToken == currentToken) {
-        state = UiState.failure(
-          exception: failure,
-          requestToken: currentToken,
-        );
+        await loadCandidates();
       }
       // A review decision that did not reach the server must never read as
       // done. Swallowing this told the reviewer their approval succeeded while
@@ -79,11 +80,12 @@ class FactReviewController
           ? e
           : UnknownException(
               code: 'UNKNOWN', message: e.toString(), requestId: 'req-local');
+      // The queue itself is still valid, so it stays on screen: replacing it
+      // with an error page hid every remaining candidate behind one refused
+      // decision. Reloading also clears a card the server has already
+      // reviewed, which is the usual reason a decision is refused.
       if (mounted && _generationToken == currentToken) {
-        state = UiState.failure(
-          exception: failure,
-          requestToken: currentToken,
-        );
+        await loadCandidates();
       }
       // A review decision that did not reach the server must never read as
       // done. Swallowing this told the reviewer their approval succeeded while
@@ -113,11 +115,12 @@ class FactReviewController
           ? e
           : UnknownException(
               code: 'UNKNOWN', message: e.toString(), requestId: 'req-local');
+      // The queue itself is still valid, so it stays on screen: replacing it
+      // with an error page hid every remaining candidate behind one refused
+      // decision. Reloading also clears a card the server has already
+      // reviewed, which is the usual reason a decision is refused.
       if (mounted && _generationToken == currentToken) {
-        state = UiState.failure(
-          exception: failure,
-          requestToken: currentToken,
-        );
+        await loadCandidates();
       }
       // A review decision that did not reach the server must never read as
       // done. Swallowing this told the reviewer their approval succeeded while
