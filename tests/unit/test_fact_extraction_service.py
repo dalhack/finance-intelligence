@@ -1,4 +1,5 @@
 from datetime import date
+from uuid import uuid4
 
 import pytest
 from app.services.fact_extraction_service import FactExtractionService
@@ -50,3 +51,38 @@ def test_candidate_ceiling_is_defined():
     from app.services.fact_extraction_service import MAX_CANDIDATES_PER_VERSION
 
     assert 0 < MAX_CANDIDATES_PER_VERSION <= 500
+
+
+@pytest.mark.unit
+@pytest.mark.asyncio
+async def test_extraction_skips_when_reference_data_is_absent():
+    """The worker role may only read institutions and periods. When the API has
+    not provisioned them, extraction must return empty instead of attempting a
+    write it is not allowed to make."""
+
+    class LookupOnlySession:
+        async def execute(self, *_args, **_kwargs):
+            raise AssertionError("extraction must not query beyond the lookups it is given")
+
+    async def _absent(*_args, **_kwargs):
+        return None
+
+    monkey = FactExtractionService
+    original_inst, original_period = monkey.find_institution, monkey.find_reporting_period
+    monkey.find_institution = staticmethod(_absent)  # type: ignore[method-assign]
+    monkey.find_reporting_period = staticmethod(_absent)  # type: ignore[method-assign]
+    try:
+        summary = await FactExtractionService.extract_candidates(
+            db=LookupOnlySession(),
+            organization_id=uuid4(),
+            document_id=uuid4(),
+            document_version_id=uuid4(),
+            display_name="Solo_VAKBN_31.03.2026__TR.pdf",
+            chunks=[{"chunk_type": "TABLE", "content": "Toplam Aktifler | 1.000", "source_lineage": {}}],
+        )
+    finally:
+        monkey.find_institution = original_inst  # type: ignore[method-assign]
+        monkey.find_reporting_period = original_period  # type: ignore[method-assign]
+
+    assert summary.candidates_created == 0
+    assert summary.context.institution_code == "VAKBN"

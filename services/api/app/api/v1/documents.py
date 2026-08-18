@@ -28,6 +28,7 @@ from app.schemas.document import (
     WarningResponse,
 )
 from app.services.audit_service import AuditService
+from app.services.fact_extraction_service import FactExtractionService
 from app.services.reference_service import ReferenceService
 from app.services.state_machine import StateMachineService
 from app.storage.factory import get_storage_adapter
@@ -321,6 +322,11 @@ async def finalize_upload(
             actor_id=user_id,
             payload={"job_id": str(job.id)},
         )
+
+        # Provision the institution and reporting period this filing refers to.
+        # Creating reference data needs privileges the ingestion worker does not
+        # have, so it happens here; extraction later reads what was provisioned.
+        await FactExtractionService.ensure_reference_data(db, org_id, session.sanitized_filename)
 
         await db.commit()
 

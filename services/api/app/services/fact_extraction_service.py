@@ -112,15 +112,24 @@ class FactExtractionService:
         )
 
     @staticmethod
-    async def resolve_institution(db: AsyncSession, organization_id: UUID, institution_code: str) -> Institution:
-        """Return the tenant's institution for this code, creating it if new."""
+    async def find_institution(db: AsyncSession, organization_id: UUID, institution_code: str) -> Institution | None:
+        """Look up the tenant's institution for this code without creating it."""
         existing = await db.execute(
             select(Institution).where(
                 Institution.organization_id == organization_id,
                 Institution.canonical_name.ilike(institution_code),
             )
         )
-        found = existing.scalar_one_or_none()
+        return existing.scalar_one_or_none()
+
+    @staticmethod
+    async def resolve_institution(db: AsyncSession, organization_id: UUID, institution_code: str) -> Institution:
+        """Return the tenant's institution for this code, creating it if new.
+
+        Reference data is owned by the API role; the ingestion worker may only
+        read it, so this must not be called from the worker.
+        """
+        found = await FactExtractionService.find_institution(db, organization_id, institution_code)
         if found:
             return found
 
@@ -138,18 +147,31 @@ class FactExtractionService:
         return institution
 
     @staticmethod
-    async def resolve_reporting_period(db: AsyncSession, organization_id: UUID, period_end: date) -> ReportingPeriod:
-        """Return the quarterly period ending on this date, creating it if new."""
+    async def find_reporting_period(
+        db: AsyncSession, organization_id: UUID, period_end: date
+    ) -> ReportingPeriod | None:
+        """Look up the quarterly period ending on this date without creating it."""
         quarter = (period_end.month - 1) // 3 + 1
         comparison_key = NormalizationService.generate_comparison_key("QUARTER", period_end.year, quarter)
-
         existing = await db.execute(
             select(ReportingPeriod).where(
                 ReportingPeriod.organization_id == organization_id,
                 ReportingPeriod.comparison_key == comparison_key,
             )
         )
-        found = existing.scalar_one_or_none()
+        return existing.scalar_one_or_none()
+
+    @staticmethod
+    async def resolve_reporting_period(db: AsyncSession, organization_id: UUID, period_end: date) -> ReportingPeriod:
+        """Return the quarterly period ending on this date, creating it if new.
+
+        Reference data is owned by the API role; the ingestion worker may only
+        read it, so this must not be called from the worker.
+        """
+        quarter = (period_end.month - 1) // 3 + 1
+        comparison_key = NormalizationService.generate_comparison_key("QUARTER", period_end.year, quarter)
+
+        found = await FactExtractionService.find_reporting_period(db, organization_id, period_end)
         if found:
             return found
 
@@ -167,6 +189,22 @@ class FactExtractionService:
         db.add(period)
         await db.flush()
         return period
+
+    @staticmethod
+    async def ensure_reference_data(db: AsyncSession, organization_id: UUID, display_name: str) -> DocumentContext:
+        """Provision the institution and period a filing refers to.
+
+        Called from the API when an upload is finalized, because creating
+        reference data requires privileges the ingestion worker deliberately
+        does not have. Extraction later reads what this provisioned.
+        """
+        context = FactExtractionService.parse_document_context(display_name)
+        if context.institution_code is None or context.period_end is None:
+            return context
+
+        await FactExtractionService.resolve_institution(db, organization_id, context.institution_code)
+        await FactExtractionService.resolve_reporting_period(db, organization_id, context.period_end)
+        return context
 
     @staticmethod
     def iter_table_rows(chunk_content: str) -> list[tuple[str, str]]:
@@ -216,8 +254,12 @@ class FactExtractionService:
         if context.institution_code is None or context.period_end is None:
             return ExtractionSummary(0, 0, 0, context)
 
-        institution = await FactExtractionService.resolve_institution(db, organization_id, context.institution_code)
-        period = await FactExtractionService.resolve_reporting_period(db, organization_id, context.period_end)
+        # Reference data is provisioned by the API when the upload is finalized;
+        # the worker role may only read it.
+        institution = await FactExtractionService.find_institution(db, organization_id, context.institution_code)
+        period = await FactExtractionService.find_reporting_period(db, organization_id, context.period_end)
+        if institution is None or period is None:
+            return ExtractionSummary(0, 0, 0, context)
 
         rows_considered = 0
         matched_labels = 0
