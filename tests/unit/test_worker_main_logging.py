@@ -1,10 +1,12 @@
 import io
 import logging
 import re
+from types import SimpleNamespace
 from unittest.mock import AsyncMock, MagicMock
 from uuid import uuid4
 
 import pytest
+from app.models.document import Document
 from app.models.document_version import DocumentVersion
 from app.models.ingestion_job import IngestionJob
 from app.models.stored_object import StoredObject
@@ -87,7 +89,12 @@ async def test_real_run_worker_loop_log_redaction_all_worker_modules(monkeypatch
         res.scalars.return_value.all.return_value = []
         return res
 
+    mock_document = MagicMock(spec=Document)
+    mock_document.id = uuid4()
+    mock_document.display_name = "Solo_TESTBANK_31.03.2026__TR.pdf"
+
     mock_db = MagicMock()
+    mock_db.get = AsyncMock(return_value=mock_document)
     mock_db.execute = mock_execute
     mock_db.flush = AsyncMock(return_value=None)
     mock_db.commit = AsyncMock(return_value=None)
@@ -102,6 +109,14 @@ async def test_real_run_worker_loop_log_redaction_all_worker_modules(monkeypatch
             pass
 
     monkeypatch.setattr("services.worker.app.main.WorkerSessionLocal", lambda: MockWorkerSessionContextManager())
+    # Candidate extraction has its own unit coverage; isolate it here so this
+    # test keeps asserting only what it is about: redaction of worker logs.
+    monkeypatch.setattr(
+        "services.worker.app.ingestion_worker.FactExtractionService.extract_candidates",
+        AsyncMock(
+            return_value=SimpleNamespace(candidates_created=0, rows_considered=0, matched_labels=0, context=None)
+        ),
+    )
     monkeypatch.setattr("app.db.session.WorkerSessionLocal", lambda: MockWorkerSessionContextManager())
     monkeypatch.setattr("app.db.session.ApiSessionLocal", lambda: MockWorkerSessionContextManager())
     monkeypatch.setattr(

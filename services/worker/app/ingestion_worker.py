@@ -5,6 +5,7 @@ from datetime import UTC, datetime
 from enum import Enum
 from uuid import UUID, uuid4
 
+from app.models.document import Document
 from app.models.document_chunk import DocumentChunk
 from app.models.document_page import DocumentPage
 from app.models.document_version import DocumentVersion
@@ -13,6 +14,7 @@ from app.models.ingestion_job import IngestionAttempt, IngestionJob
 from app.models.stored_object import StoredObject
 from app.parsers.registry import parser_registry
 from app.services.audit_service import AuditService
+from app.services.fact_extraction_service import FactExtractionService
 from app.services.state_machine import StateMachineService
 from app.storage.factory import get_storage_adapter
 from sqlalchemy import select, text
@@ -316,6 +318,29 @@ class IngestionWorker:
                     lineage_ref=w.lineage_ref,
                 )
                 self.db.add(ew)
+
+            # Turn recognised table rows into review candidates. Parsing alone
+            # only yields chunks; without this step the review queue stays empty
+            # and no value can ever reach the fact store.
+            if output.status in ("COMPLETED", "COMPLETED_WITH_WARNINGS"):
+                document = await self.db.get(Document, version.document_id)
+                if document is not None:
+                    summary = await FactExtractionService.extract_candidates(
+                        db=self.db,
+                        organization_id=claimed_job.organization_id,
+                        document_id=document.id,
+                        document_version_id=version.id,
+                        display_name=document.display_name,
+                        chunks=output.chunks,
+                    )
+                    logger.info(
+                        "FACT_CANDIDATES_EXTRACTED",
+                        extra={
+                            "candidates_created": summary.candidates_created,
+                            "matched_labels": summary.matched_labels,
+                            "rows_considered": summary.rows_considered,
+                        },
+                    )
 
             attempt.status = target_status
             attempt.completed_at = datetime.now(UTC)
