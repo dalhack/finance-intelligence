@@ -231,7 +231,6 @@ class FactExtractionService:
         return await FactCandidateService.match_metric_alias(db, organization_id, label)
 
     @staticmethod
-    @staticmethod
     def _evidence_location(
         chunk: dict[str, Any],
         raw_value: str,
@@ -254,6 +253,7 @@ class FactExtractionService:
             lineage["bounding_box"] = bbox
         return lineage
 
+    @staticmethod
     async def extract_candidates(
         db: AsyncSession,
         organization_id: UUID,
@@ -323,8 +323,13 @@ class FactExtractionService:
 
         # Nothing was recognised deterministically: read the document with the
         # model, keeping only figures it can point to in the source text.
-        metric_rows = await db.execute(select(MetricDefinition.metric_code))
-        metric_codes = [code for (code,) in metric_rows.all()]
+        metric_rows = await db.execute(
+            select(MetricDefinition.metric_code, MetricDefinition.canonical_name).where(
+                MetricDefinition.status == "ACTIVE"
+            )
+        )
+        metric_names = {code: name for code, name in metric_rows.all()}
+        metric_codes = list(metric_names)
         context_hint = (
             f"{context.institution_code} · period ending {context.period_end} · basis {context.reporting_basis}"
         )
@@ -334,6 +339,7 @@ class FactExtractionService:
             metric_codes=metric_codes,
             context_hint=context_hint,
             period_end=context.period_end,
+            metric_names=metric_names,
         )
 
         llm_created = 0

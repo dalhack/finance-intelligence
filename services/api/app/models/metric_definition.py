@@ -2,7 +2,7 @@ from datetime import date, datetime
 from uuid import UUID, uuid4
 
 from app.db.base import Base
-from sqlalchemy import Date, DateTime, String, Text, func
+from sqlalchemy import Date, DateTime, Integer, String, Text, func
 from sqlalchemy.dialects.postgresql import UUID as PG_UUID
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -21,6 +21,12 @@ class MetricDefinition(Base):
     aggregation_behavior: Mapped[str] = mapped_column(String(50), nullable=False, default="POINT_IN_TIME")
     formula_type: Mapped[str] = mapped_column(String(50), nullable=False, default="SOURCE_REPORTED")
     formula_version: Mapped[str] = mapped_column(String(50), nullable=False, default="1.0.0")
+    # Where the metric sits in a statement, and the line it rolls up into.
+    # A breakdown question ("this bank's liability composition") is answered by
+    # reading a parent's children in display order.
+    parent_metric_code: Mapped[str | None] = mapped_column(String(100), nullable=True)
+    statement_section: Mapped[str] = mapped_column(String(50), nullable=False, default="UNCLASSIFIED")
+    display_order: Mapped[int] = mapped_column(Integer, nullable=False, default=1000)
     numerator_metric_code: Mapped[str | None] = mapped_column(String(100), nullable=True)
     denominator_metric_code: Mapped[str | None] = mapped_column(String(100), nullable=True)
     valid_from: Mapped[date] = mapped_column(Date, nullable=False, server_default=func.current_date())

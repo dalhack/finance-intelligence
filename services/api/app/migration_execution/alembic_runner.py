@@ -68,6 +68,7 @@ KNOWN_REVISIONS = {
     "032_bootstrap_self_onboarding",
     "033_worker_queue_visibility",
     "034_grant_candidate_review_permissions",
+    "035_metric_hierarchy_and_statement_lines",
 }
 
 

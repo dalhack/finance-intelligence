@@ -154,12 +154,26 @@ def _normalise_for_matching(text: str) -> str:
     return re.sub(r"[\s ]", "", text).replace("−", "-")
 
 
-def build_extraction_tool(metric_codes: list[str]) -> dict[str, Any]:
-    """Tool schema constraining the model to canonical metrics and verbatim values."""
+def build_extraction_tool(
+    metric_codes: list[str],
+    metric_names: dict[str, str] | None = None,
+) -> dict[str, Any]:
+    """Tool schema constraining the model to canonical metrics and verbatim values.
+
+    Each code is described by the statement line it stands for. Codes alone
+    force the model to guess which Turkish caption a code means, and a filing
+    labels the same line differently from one publisher to the next; naming the
+    line is what lets a caption be matched to the right code.
+    """
+    legend = ""
+    if metric_names:
+        described = [f"{code} = {metric_names[code]}" for code in metric_codes if code in metric_names]
+        if described:
+            legend = " Each code stands for this statement line: " + "; ".join(described) + "."
     return {
         "name": "report_financial_figures",
         "description": (
-            "Report financial figures that appear verbatim in the provided excerpts. Omit anything uncertain."
+            "Report financial figures that appear verbatim in the provided excerpts. Omit anything uncertain." + legend
         ),
         "input_schema": {
             "type": "object",
@@ -317,6 +331,7 @@ class LlmFactExtractionService:
         context_hint: str,
         period_end: date | None = None,
         max_output_tokens: int = 4096,
+        metric_names: dict[str, str] | None = None,
     ) -> LlmExtractionResult:
         """Read figures out of the chunks, keeping only verifiable ones."""
         result = LlmExtractionResult()
@@ -324,7 +339,7 @@ class LlmFactExtractionService:
         if not allowed:
             return result
 
-        tool = build_extraction_tool(sorted(allowed))
+        tool = build_extraction_tool(sorted(allowed), metric_names)
 
         for batch in LlmFactExtractionService.build_batches(chunks):
             request = {
