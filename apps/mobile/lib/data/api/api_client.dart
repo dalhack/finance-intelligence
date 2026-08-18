@@ -164,7 +164,7 @@ class FinanceIntelligenceApiClient {
 
   Future<List<Map<String, dynamic>>> getCandidateFacts() async {
     return _safeCall(() async {
-      final res = await _dio.get('/facts/candidates');
+      final res = await _dio.get('/fact-candidates');
       return (res.data as List<dynamic>)
           .map((e) => e as Map<String, dynamic>)
           .toList();
@@ -178,7 +178,7 @@ class FinanceIntelligenceApiClient {
   }) async {
     return _safeCall(() async {
       final res = await _dio.post(
-        '/facts/candidates/$candidateId/approve',
+        '/fact-candidates/$candidateId/approve',
         data: {
           if (notes != null) 'notes': notes,
           if (targetReportingBasis != null)
@@ -195,8 +195,8 @@ class FinanceIntelligenceApiClient {
   }) async {
     return _safeCall(() async {
       final res = await _dio.post(
-        '/facts/candidates/$candidateId/reject',
-        data: {'reason': reason},
+        '/fact-candidates/$candidateId/reject',
+        data: {'reason_code': reason},
       );
       return res.data as Map<String, dynamic>;
     });
@@ -210,7 +210,7 @@ class FinanceIntelligenceApiClient {
   }) async {
     return _safeCall(() async {
       final res = await _dio.post(
-        '/facts/candidates/$candidateId/approve-revision',
+        '/fact-candidates/$candidateId/approve-as-revision',
         data: {
           'expected_existing_fact_id': expectedExistingFactId,
           if (notes != null) 'notes': notes,
