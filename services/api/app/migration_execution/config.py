@@ -13,7 +13,7 @@ ALLOWED_PROJECT_ID = "finance-intel-staging-8f2a"
 ALLOWED_INSTANCE_NAME = "fi-staging-db"
 ALLOWED_REGION = "europe-west1"
 ALLOWED_TARGET_DATABASE = "finance_intelligence_staging"
-ALLOWED_MIGRATION_HEAD = "035_metric_hierarchy_and_statement_lines"
+ALLOWED_MIGRATION_HEAD = "036_analysis_plane_tenant_isolation_fail_closed"
 
 
 @dataclass(frozen=True)

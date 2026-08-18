@@ -69,6 +69,7 @@ KNOWN_REVISIONS = {
     "033_worker_queue_visibility",
     "034_grant_candidate_review_permissions",
     "035_metric_hierarchy_and_statement_lines",
+    "036_analysis_plane_tenant_isolation_fail_closed",
 }
 
 

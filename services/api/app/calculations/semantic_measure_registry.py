@@ -128,3 +128,77 @@ class SemanticMeasureRegistry:
     @classmethod
     def list_all(cls) -> list[SemanticMeasureDefinition]:
         return list(cls._DEFINITIONS.values())
+
+
+# Statement lines a filing reports directly. Each is measurable as itself: the
+# value is read from the document, never derived, so the definitions are
+# identical apart from their name. They are generated rather than written out
+# so that a line added to the metric catalog cannot be silently missing here —
+# which is what made a question about paid-in capital fail with
+# SEMANTIC_MEASURE_MAPPING_UNAVAILABLE after the request was understood
+# correctly.
+_SOURCE_REPORTED_LINES: tuple[tuple[str, str], ...] = (
+    ("CASH_AND_CENTRAL_BANK", "Cash and Central Bank"),
+    ("BANKS_RECEIVABLES", "Banks"),
+    ("SECURITIES_PORTFOLIO", "Securities Portfolio"),
+    ("SUBSIDIARIES_AND_ASSOCIATES", "Subsidiaries and Associates"),
+    ("TANGIBLE_ASSETS", "Tangible Assets"),
+    ("INTANGIBLE_ASSETS", "Intangible Assets"),
+    ("OTHER_ASSETS", "Other Assets"),
+    ("TOTAL_LIABILITIES", "Total Liabilities"),
+    ("FUNDS_BORROWED", "Funds Borrowed"),
+    ("MONEY_MARKET_FUNDING", "Money Market Funding"),
+    ("SECURITIES_ISSUED", "Securities Issued"),
+    ("LEASE_LIABILITIES", "Lease Liabilities"),
+    ("PROVISIONS", "Provisions"),
+    ("SUBORDINATED_DEBT", "Subordinated Debt"),
+    ("OTHER_LIABILITIES", "Other Liabilities"),
+    ("PAID_IN_CAPITAL", "Paid-in Capital"),
+    ("CAPITAL_RESERVES", "Capital Reserves"),
+    ("PROFIT_RESERVES", "Profit Reserves"),
+    ("RETAINED_EARNINGS", "Retained Earnings"),
+    ("INTEREST_INCOME", "Interest Income"),
+    ("INTEREST_EXPENSE", "Interest Expense"),
+    ("NET_INTEREST_INCOME", "Net Interest Income"),
+    ("NET_FEE_COMMISSION_INCOME", "Net Fee and Commission Income"),
+    ("TRADING_INCOME", "Trading Income"),
+    ("OPERATING_EXPENSES", "Operating Expenses"),
+    ("EXPECTED_CREDIT_LOSS", "Expected Credit Loss"),
+    ("PROFIT_BEFORE_TAX", "Profit Before Tax"),
+    ("TAX_EXPENSE", "Tax Expense"),
+)
+
+for _code, _display_name in _SOURCE_REPORTED_LINES:
+    SemanticMeasureRegistry._DEFINITIONS.setdefault(
+        _code,
+        SemanticMeasureDefinition(
+            semantic_measure_code=_code,
+            display_name=_display_name,
+            reported_metric_code=_code,
+            derived_formula_code=None,
+            result_unit="CURRENCY",
+            currency_semantics="REQUIRED",
+            scale_semantics="ALLOWED",
+        ),
+    )
+
+# Ratios a bank publishes rather than the engine deriving them. Capital
+# adequacy needs risk-weighted assets and net interest margin needs average
+# earning assets — neither is in the fact store — so the published percentage
+# is the honest source.
+for _code, _display_name in (
+    ("CAPITAL_ADEQUACY_RATIO", "Capital Adequacy Ratio"),
+    ("NET_INTEREST_MARGIN", "Net Interest Margin"),
+):
+    SemanticMeasureRegistry._DEFINITIONS.setdefault(
+        _code,
+        SemanticMeasureDefinition(
+            semantic_measure_code=_code,
+            display_name=_display_name,
+            reported_metric_code=_code,
+            derived_formula_code=None,
+            result_unit="PERCENT",
+            currency_semantics="PROHIBITED",
+            scale_semantics="NONE",
+        ),
+    )

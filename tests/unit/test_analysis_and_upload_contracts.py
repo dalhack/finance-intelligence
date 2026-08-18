@@ -1,14 +1,14 @@
 import json
 from pathlib import Path
 from uuid import uuid4
+
 import pytest
+from app.db.session import get_db_session
+from app.dependencies import get_execution_context
+from app.main import app
+from app.middleware.execution_context import ExecutionContext
 from fastapi import status
 from httpx import ASGITransport, AsyncClient
-
-from app.dependencies import get_execution_context
-from app.db.session import get_db_session
-from app.middleware.execution_context import ExecutionContext
-from app.main import app
 
 REPO_ROOT = Path(__file__).resolve().parent.parent.parent
 
@@ -124,8 +124,9 @@ async def test_analysis_create_idempotency_deduplication(mock_exec_context, mock
         "idempotency_key": idempotency_key,
     }
 
+    from datetime import UTC, datetime
+
     from app.models.orchestration import AnalysisJob
-    from datetime import datetime, UTC
     existing_job = AnalysisJob(
         id=uuid4(),
         organization_id=mock_exec_context.active_organization_id,
@@ -164,9 +165,9 @@ async def test_analysis_create_idempotency_deduplication(mock_exec_context, mock
 
 @pytest.mark.asyncio
 async def test_backend_http_exception_error_envelope_formatting():
+    from app.middleware.error_handler import http_exception_handler
     from fastapi import HTTPException
     from starlette.requests import Request
-    from app.middleware.error_handler import http_exception_handler
 
     scope = {
         "type": "http",
@@ -196,9 +197,9 @@ async def test_backend_http_exception_error_envelope_formatting():
 
 @pytest.mark.asyncio
 async def test_backend_http_exception_raw_secret_detail_redaction():
+    from app.middleware.error_handler import http_exception_handler
     from fastapi import HTTPException
     from starlette.requests import Request
-    from app.middleware.error_handler import http_exception_handler
 
     scope = {
         "type": "http",

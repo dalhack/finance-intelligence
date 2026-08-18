@@ -5,7 +5,10 @@ from typing import Any
 from uuid import UUID
 
 from app.models.institution import Institution
+from app.models.metric_definition import MetricDefinition
 from app.models.reporting_period import ReportingPeriod
+from app.orchestration.metric_resolution import resolve_metric_codes
+from app.orchestration.period_expression import text_matches_period
 from app.orchestration.provider import ModelProvider
 from app.orchestration.provider_anthropic import AnthropicProviderAdapter
 from app.orchestration.schemas import NormalizedRequest
@@ -148,6 +151,18 @@ class AnalysisRequestNormalizer:
                 ) and per not in matched_periods:
                     matched_periods.append(per)
 
+        # A period is stored as `2026/Q1`, but nobody asks for it that way.
+        # Comparing the wording and the record on what they mean is what lets
+        # "2026 birinci çeyrek" or "31.03.2026" reach the right period instead
+        # of being bounced back as an unanswerable request.
+        if not matched_periods:
+            for candidate_text in [*extracted.requested_periods, prompt]:
+                for per in tenant_periods:
+                    if per not in matched_periods and text_matches_period(candidate_text, per):
+                        matched_periods.append(per)
+                if matched_periods:
+                    break
+
         # Fail-closed checks for missing institutions or periods in tenant DB
         if not matched_institutions:
             tenant_inst_ids = [str(i.id) for i in tenant_institutions]
@@ -201,7 +216,20 @@ class AnalysisRequestNormalizer:
             else "CROSS_INSTITUTION_COMPARISON"
         )
 
-        measures = extracted.requested_semantic_measures or ["TOTAL_ASSETS"]
+        # The model often returns no metric at all. Falling straight through to
+        # total assets answered a question nobody asked, with no warning that
+        # the requested line had been substituted, so the prompt is resolved
+        # against the canonical catalog before any default applies.
+        measures = extracted.requested_semantic_measures
+        if not measures:
+            catalog_res = await db_session.execute(
+                select(MetricDefinition.metric_code, MetricDefinition.canonical_name).where(
+                    MetricDefinition.status == "ACTIVE"
+                )
+            )
+            measures = resolve_metric_codes(prompt, list(catalog_res.all()))
+        if not measures:
+            measures = ["TOTAL_ASSETS"]
 
         norm_req = NormalizedRequest(
             intent=intent_val,
@@ -220,21 +248,19 @@ class AnalysisRequestNormalizer:
         )
 
     def _heuristic_fallback_extraction(self, prompt: str) -> ExtractedRequestEntities:
-        """Safe heuristic extraction when fast model structured parse fails."""
-        prompt_upper = prompt.upper()
-        insts = []
-        if "GARANTİ" in prompt_upper or "GARAN" in prompt_upper:
-            insts.append("Garanti BBVA")
-        if "AKBANK" in prompt_upper or "AKBNK" in prompt_upper:
-            insts.append("Akbank")
+        """Extraction used when the fast model's output cannot be parsed.
 
-        periods = []
-        if "2025" in prompt_upper or "Q4" in prompt_upper:
-            periods.append("2025-Q4")
-
+        It deliberately claims nothing. Naming institutions and a metric here
+        put words into the request that the prompt never contained: a question
+        about paid-in capital reached the planner asking for total assets, and
+        the analysis then reported missing data for a line nobody asked about.
+        The normaliser matches institutions and periods against the tenant's
+        own records and the metric against the canonical catalog, so returning
+        nothing lets those resolve the request instead of a guess.
+        """
         return ExtractedRequestEntities(
-            intent="CROSS_INSTITUTION_COMPARISON" if len(insts) > 1 else "SINGLE_PERIOD_ANALYSIS",
-            requested_institutions=insts,
-            requested_periods=periods,
-            requested_semantic_measures=["TOTAL_ASSETS"],
+            intent="SINGLE_PERIOD_ANALYSIS",
+            requested_institutions=[],
+            requested_periods=[],
+            requested_semantic_measures=[],
         )

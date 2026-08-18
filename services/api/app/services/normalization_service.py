@@ -1,7 +1,7 @@
 import re
 from datetime import date
 from decimal import Decimal, InvalidOperation
-from typing import NamedTuple
+from typing import ClassVar, NamedTuple
 
 SCALE_FACTORS: dict[str, Decimal] = {
     "ONE": Decimal(1),
@@ -125,10 +125,27 @@ class NormalizationService:
         factor = SCALE_FACTORS[sc_upper]
         return parsed_val * factor
 
+    # A filing writes the Turkish lira as TL or ₺; the fact store and every
+    # comparison speak ISO 4217. Storing what the document printed made a
+    # verified fact unusable — the comparison rejected it as CURRENCY_MISMATCH
+    # against TRY — so the spelling is reconciled here, at the one place a
+    # currency becomes canonical.
+    CURRENCY_ALIASES: ClassVar[dict[str, str]] = {
+        "TL": "TRY",
+        "₺": "TRY",
+        "TRL": "TRY",
+        "$": "USD",
+        "US$": "USD",
+        "USD$": "USD",
+        "€": "EUR",
+        "£": "GBP",
+    }
+
     @staticmethod
     def normalize_currency(currency: str) -> str:
         """Validate and return normalized uppercase currency code."""
         cur_upper = currency.upper().strip() if currency else ""
+        cur_upper = NormalizationService.CURRENCY_ALIASES.get(cur_upper, cur_upper)
         if cur_upper not in VALID_CURRENCIES:
             raise ValueError(f"UNSUPPORTED_CURRENCY: Invalid or unknown currency '{currency}'")
         return cur_upper
