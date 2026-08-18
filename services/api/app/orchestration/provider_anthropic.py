@@ -15,6 +15,7 @@ from app.orchestration.provider import (
     TokenUsage,
     ToolCallRequest,
 )
+from app.orchestration.transient_retry import call_with_transient_retry
 
 
 class ModelMaxTokensExceededException(Exception):
@@ -101,7 +102,12 @@ class AnthropicProviderAdapter:
         if tools:
             kwargs["tools"] = tools
 
-        response = await client.messages.create(**kwargs)
+        # A 529 Overloaded means "not now", not "never"; failing the analysis
+        # on it told the user their sound question had failed.
+        response = await call_with_transient_retry(
+            lambda: client.messages.create(**kwargs),
+            description=f"anthropic {model_name}",
+        )
 
         content_text = ""
         tool_calls = []
