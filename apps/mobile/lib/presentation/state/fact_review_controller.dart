@@ -49,14 +49,20 @@ class FactReviewController
       if (!mounted || _generationToken != currentToken) return;
       await loadCandidates();
     } catch (e) {
-      if (!mounted || _generationToken != currentToken) return;
-      state = UiState.failure(
-        exception: e is AppException
-            ? e
-            : UnknownException(
-                code: 'UNKNOWN', message: e.toString(), requestId: 'req-local'),
-        requestToken: currentToken,
-      );
+      final failure = e is AppException
+          ? e
+          : UnknownException(
+              code: 'UNKNOWN', message: e.toString(), requestId: 'req-local');
+      if (mounted && _generationToken == currentToken) {
+        state = UiState.failure(
+          exception: failure,
+          requestToken: currentToken,
+        );
+      }
+      // A review decision that did not reach the server must never read as
+      // done. Swallowing this told the reviewer their approval succeeded while
+      // nothing had been written.
+      throw failure;
     }
   }
 
@@ -69,14 +75,20 @@ class FactReviewController
       if (!mounted || _generationToken != currentToken) return;
       await loadCandidates();
     } catch (e) {
-      if (!mounted || _generationToken != currentToken) return;
-      state = UiState.failure(
-        exception: e is AppException
-            ? e
-            : UnknownException(
-                code: 'UNKNOWN', message: e.toString(), requestId: 'req-local'),
-        requestToken: currentToken,
-      );
+      final failure = e is AppException
+          ? e
+          : UnknownException(
+              code: 'UNKNOWN', message: e.toString(), requestId: 'req-local');
+      if (mounted && _generationToken == currentToken) {
+        state = UiState.failure(
+          exception: failure,
+          requestToken: currentToken,
+        );
+      }
+      // A review decision that did not reach the server must never read as
+      // done. Swallowing this told the reviewer their approval succeeded while
+      // nothing had been written.
+      throw failure;
     }
   }
 
@@ -97,14 +109,20 @@ class FactReviewController
       if (!mounted || _generationToken != currentToken) return;
       await loadCandidates();
     } catch (e) {
-      if (!mounted || _generationToken != currentToken) return;
-      state = UiState.failure(
-        exception: e is AppException
-            ? e
-            : UnknownException(
-                code: 'UNKNOWN', message: e.toString(), requestId: 'req-local'),
-        requestToken: currentToken,
-      );
+      final failure = e is AppException
+          ? e
+          : UnknownException(
+              code: 'UNKNOWN', message: e.toString(), requestId: 'req-local');
+      if (mounted && _generationToken == currentToken) {
+        state = UiState.failure(
+          exception: failure,
+          requestToken: currentToken,
+        );
+      }
+      // A review decision that did not reach the server must never read as
+      // done. Swallowing this told the reviewer their approval succeeded while
+      // nothing had been written.
+      throw failure;
     }
   }
 }

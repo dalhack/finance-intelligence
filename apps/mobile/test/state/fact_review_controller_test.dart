@@ -23,18 +23,24 @@ class MockFactReviewRepository implements FactReviewRepository {
     return itemsToReturn;
   }
 
+  Object? writeErrorToThrow;
+
   @override
   Future<void> approveCandidate({
     required String candidateId,
     String? notes,
     String? targetReportingBasis,
-  }) async {}
+  }) async {
+    if (writeErrorToThrow != null) throw writeErrorToThrow!;
+  }
 
   @override
   Future<void> rejectCandidate({
     required String candidateId,
     required String reason,
-  }) async {}
+  }) async {
+    if (writeErrorToThrow != null) throw writeErrorToThrow!;
+  }
 
   @override
   Future<void> approveCandidateRevision({
@@ -42,7 +48,9 @@ class MockFactReviewRepository implements FactReviewRepository {
     required String expectedExistingFactId,
     String? notes,
     String? targetReportingBasis,
-  }) async {}
+  }) async {
+    if (writeErrorToThrow != null) throw writeErrorToThrow!;
+  }
 }
 
 void main() {
@@ -142,6 +150,54 @@ void main() {
 
       // State remains from second request
       expect(controller.state.data!.first['id'], equals('cand-2'));
+    });
+  });
+
+  group('A failed review decision must reach the caller', () {
+    late MockFactReviewRepository repository;
+    late FactReviewController controller;
+
+    setUp(() {
+      repository = MockFactReviewRepository();
+      controller = FactReviewController(repository);
+      repository.writeErrorToThrow = AuthorizationException(
+        code: 'PERMISSION_DENIED',
+        message: 'Permission is required to perform this action.',
+        requestId: 'req-1',
+      );
+    });
+
+    tearDown(() => controller.dispose());
+
+    test('approve rethrows so the screen cannot report success', () async {
+      // Swallowing this is what told a reviewer their approval had been saved
+      // while the server had written nothing.
+      await expectLater(
+        controller.approveCandidate(candidateId: 'cand-1'),
+        throwsA(isA<AppException>()),
+      );
+      expect(controller.state.exception?.code, 'PERMISSION_DENIED');
+    });
+
+    test('reject rethrows', () async {
+      await expectLater(
+        controller.rejectCandidate(candidateId: 'cand-1', reason: 'WRONG'),
+        throwsA(isA<AppException>()),
+      );
+    });
+
+    test('revision approval rethrows', () async {
+      await expectLater(
+        controller.approveCandidateRevision(
+            candidateId: 'cand-1', expectedExistingFactId: 'fact-1'),
+        throwsA(isA<AppException>()),
+      );
+    });
+
+    test('a successful approval does not throw', () async {
+      repository.writeErrorToThrow = null;
+      await controller.approveCandidate(candidateId: 'cand-1');
+      expect(controller.state.exception, isNull);
     });
   });
 }
