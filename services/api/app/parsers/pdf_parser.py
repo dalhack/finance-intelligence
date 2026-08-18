@@ -1,3 +1,4 @@
+import gc
 from io import BytesIO
 
 import pdfplumber
@@ -7,6 +8,12 @@ from app.parsers.base import (
     DocumentParserPort,
     ExtractionWarningItem,
 )
+
+# pdfplumber retains the parsed objects of every page it has opened, so walking
+# a large filing in one pass grows the resident set past the worker's memory
+# limit and the process is OOM-killed mid-ingestion. Pages are therefore opened
+# in bounded batches and each page's cache is released as soon as it is read.
+PAGE_BATCH_SIZE = 10
 
 
 class PdfParser(DocumentParserPort):
@@ -27,87 +34,102 @@ class PdfParser(DocumentParserPort):
 
         with pdfplumber.open(BytesIO(file_bytes)) as pdf:
             total_pages = len(pdf.pages)
-            if total_pages > max_pages:
-                warnings.append(
-                    ExtractionWarningItem(
-                        warning_code="RESOURCE_LIMIT_EXCEEDED",
-                        warning_message=f"PDF page count ({total_pages}) exceeds safety limit ({max_pages}).",
-                        lineage_ref={"format": "pdf", "total_pages": total_pages},
-                    )
+
+        if total_pages > max_pages:
+            warnings.append(
+                ExtractionWarningItem(
+                    warning_code="RESOURCE_LIMIT_EXCEEDED",
+                    warning_message=f"PDF page count ({total_pages}) exceeds safety limit ({max_pages}).",
+                    lineage_ref={"format": "pdf", "total_pages": total_pages},
                 )
+            )
 
-            for p_idx, page in enumerate(pdf.pages, start=1):
-                if p_idx > max_pages:
-                    break
+        page_limit = min(total_pages, max_pages)
+        stop_reading = False
 
-                raw_text = page.extract_text() or ""
-                total_text_length += len(raw_text.strip())
+        for batch_start in range(1, page_limit + 1, PAGE_BATCH_SIZE):
+            if stop_reading:
+                break
 
-                pages_output.append(
-                    {
-                        "page_number": p_idx,
-                        "width_px": int(page.width),
-                        "height_px": int(page.height),
-                        "text_layer_present": len(raw_text.strip()) > 0,
-                        "raw_page_text": raw_text,
-                    }
-                )
+            batch_pages = list(range(batch_start, min(batch_start + PAGE_BATCH_SIZE - 1, page_limit) + 1))
+            with pdfplumber.open(BytesIO(file_bytes), pages=batch_pages) as pdf:
+                for offset, page in enumerate(pdf.pages):
+                    p_idx = batch_pages[offset]
+                    try:
+                        raw_text = page.extract_text() or ""
+                        total_text_length += len(raw_text.strip())
 
-                if raw_text.strip():
-                    chunk_index += 1
-                    chunks_output.append(
-                        {
-                            "chunk_index": chunk_index,
-                            "chunk_type": "TEXT",
-                            "content": raw_text.strip(),
-                            "source_lineage": {
-                                "format": "pdf",
+                        pages_output.append(
+                            {
                                 "page_number": p_idx,
-                                "bbox": [0.0, 0.0, float(page.width), float(page.height)],
-                            },
-                        }
-                    )
-
-                if total_text_length > max_chars:
-                    warnings.append(
-                        ExtractionWarningItem(
-                            warning_code="RESOURCE_LIMIT_EXCEEDED",
-                            warning_message=f"PDF text character count exceeds limit of {max_chars}.",
-                            lineage_ref={"format": "pdf", "page_number": p_idx},
+                                "width_px": int(page.width),
+                                "height_px": int(page.height),
+                                "text_layer_present": len(raw_text.strip()) > 0,
+                                "raw_page_text": raw_text,
+                            }
                         )
-                    )
-                    break
 
-                # Extract Candidate Tables
-                tables = page.extract_tables()
-                for t_idx, table in enumerate(tables):
-                    if table:
-                        total_tables += 1
-                        if total_tables > max_tables:
+                        if raw_text.strip():
+                            chunk_index += 1
+                            chunks_output.append(
+                                {
+                                    "chunk_index": chunk_index,
+                                    "chunk_type": "TEXT",
+                                    "content": raw_text.strip(),
+                                    "source_lineage": {
+                                        "format": "pdf",
+                                        "page_number": p_idx,
+                                        "bbox": [0.0, 0.0, float(page.width), float(page.height)],
+                                    },
+                                }
+                            )
+
+                        if total_text_length > max_chars:
                             warnings.append(
                                 ExtractionWarningItem(
                                     warning_code="RESOURCE_LIMIT_EXCEEDED",
-                                    warning_message=f"PDF table count exceeds limit of {max_tables}.",
+                                    warning_message=f"PDF text character count exceeds limit of {max_chars}.",
                                     lineage_ref={"format": "pdf", "page_number": p_idx},
                                 )
                             )
+                            stop_reading = True
                             break
 
-                        chunk_index += 1
-                        table_content = "\n".join([" | ".join([cell or "" for cell in row]) for row in table])
-                        chunks_output.append(
-                            {
-                                "chunk_index": chunk_index,
-                                "chunk_type": "TABLE",
-                                "content": table_content,
-                                "source_lineage": {
-                                    "format": "pdf",
-                                    "page_number": p_idx,
-                                    "table_index": t_idx,
-                                    "rows_count": len(table),
-                                },
-                            }
-                        )
+                        # Extract Candidate Tables
+                        tables = page.extract_tables()
+                        for t_idx, table in enumerate(tables):
+                            if table:
+                                total_tables += 1
+                                if total_tables > max_tables:
+                                    warnings.append(
+                                        ExtractionWarningItem(
+                                            warning_code="RESOURCE_LIMIT_EXCEEDED",
+                                            warning_message=f"PDF table count exceeds limit of {max_tables}.",
+                                            lineage_ref={"format": "pdf", "page_number": p_idx},
+                                        )
+                                    )
+                                    break
+
+                                chunk_index += 1
+                                table_content = "\n".join([" | ".join([cell or "" for cell in row]) for row in table])
+                                chunks_output.append(
+                                    {
+                                        "chunk_index": chunk_index,
+                                        "chunk_type": "TABLE",
+                                        "content": table_content,
+                                        "source_lineage": {
+                                            "format": "pdf",
+                                            "page_number": p_idx,
+                                            "table_index": t_idx,
+                                            "rows_count": len(table),
+                                        },
+                                    }
+                                )
+                    finally:
+                        # Release the page's parsed objects immediately.
+                        page.flush_cache()
+
+            gc.collect()
 
         # Scanned / Image-Only PDF check
         text_layer_present = total_text_length > 0

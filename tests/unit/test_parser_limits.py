@@ -1,12 +1,14 @@
 import io
 import os
 import zipfile
+from io import BytesIO
 
 import pytest
 from app.core.config import settings
 from app.parsers.csv_parser import CsvParser
 from app.parsers.pdf_parser import PdfParser
 from app.parsers.xlsx_parser import XlsxParser
+from pypdf import PdfWriter
 
 GOLDEN_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "fixtures", "golden"))
 
@@ -188,3 +190,49 @@ def test_xlsx_parser_corrupt_container():
     out = parser.parse(b"NOT_A_ZIP_CONTAINER", "corrupt.xlsx")
     assert out.status == "FAILED"
     assert any(w.warning_code == "MALFORMED_DOCUMENT" for w in out.warnings)
+
+
+@pytest.mark.unit
+def test_pdf_pages_are_read_in_bounded_batches_and_caches_released():
+    """Reading a large filing in a single pass keeps every parsed page in
+    memory and the worker is OOM-killed mid-ingestion. Pages must be opened in
+    bounded batches, and each page's cache released as soon as it is read."""
+    import pdfplumber as _pdfplumber
+    from app.parsers import pdf_parser as pdf_parser_module
+
+    writer = PdfWriter()
+    for _ in range(25):
+        writer.add_blank_page(width=595, height=842)
+    buffer = BytesIO()
+    writer.write(buffer)
+    pdf_bytes = buffer.getvalue()
+
+    open_calls: list[object] = []
+    flushed: list[int] = []
+    real_open = _pdfplumber.open
+
+    def spy_open(*args, **kwargs):
+        open_calls.append(kwargs.get("pages"))
+        result = real_open(*args, **kwargs)
+        for page in result.pages:
+            original_flush = page.flush_cache
+
+            def counting_flush(_orig=original_flush):
+                flushed.append(1)
+                return _orig()
+
+            page.flush_cache = counting_flush  # type: ignore[method-assign]
+        return result
+
+    pdf_parser_module.pdfplumber.open = spy_open
+    try:
+        pdf_parser_module.PdfParser().parse(pdf_bytes, "batched.pdf")
+    finally:
+        pdf_parser_module.pdfplumber.open = real_open
+
+    batched_calls = [pages for pages in open_calls if pages is not None]
+    assert batched_calls, "pages must be opened in explicit batches"
+    assert all(len(pages) <= pdf_parser_module.PAGE_BATCH_SIZE for pages in batched_calls)
+    # 25 pages at a batch size of 10 must not be read in a single pass.
+    assert len(batched_calls) >= 3
+    assert sum(flushed) == 25, "every page cache must be released after reading"
