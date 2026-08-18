@@ -15,6 +15,7 @@ from app.models.ingestion_job import IngestionAttempt, IngestionJob
 from app.models.stored_object import StoredObject
 from app.orchestration.provider_anthropic import AnthropicProviderAdapter
 from app.parsers.registry import parser_registry
+from app.parsers.value_locator import PdfValueLocator
 from app.services.audit_service import AuditService
 from app.services.fact_extraction_service import FactExtractionService
 from app.services.state_machine import StateMachineService
@@ -349,6 +350,11 @@ class IngestionWorker:
                         display_name=document.display_name,
                         chunks=output.chunks,
                         provider=_build_extraction_provider(),
+                        value_locator=(
+                            PdfValueLocator(file_bytes)
+                            if "pdf" in (stored_obj.detected_mime_type or "").lower()
+                            else None
+                        ),
                     )
                     logger.info(
                         "FACT_CANDIDATES_EXTRACTED",

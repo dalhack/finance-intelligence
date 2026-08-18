@@ -231,6 +231,29 @@ class FactExtractionService:
         return await FactCandidateService.match_metric_alias(db, organization_id, label)
 
     @staticmethod
+    @staticmethod
+    def _evidence_location(
+        chunk: dict[str, Any],
+        raw_value: str,
+        value_locator: Any | None,
+    ) -> dict[str, Any]:
+        """Chunk lineage, carrying the value's own rectangle when it can be found.
+
+        Approval refuses PDF evidence without coordinates, because a fact that
+        cannot be pointed at in the source is not verifiable. The chunk only
+        knows which page it came from, so the figure is located on that page
+        here. When it cannot be found the lineage is returned unchanged and the
+        candidate stays reviewable but unapprovable, which is the honest state.
+        """
+        lineage = dict(chunk.get("source_lineage") or {})
+        if value_locator is None:
+            return lineage
+
+        bbox = value_locator.locate(lineage.get("page_number") or lineage.get("page"), raw_value)
+        if bbox:
+            lineage["bounding_box"] = bbox
+        return lineage
+
     async def extract_candidates(
         db: AsyncSession,
         organization_id: UUID,
@@ -239,6 +262,7 @@ class FactExtractionService:
         display_name: str,
         chunks: list[dict[str, Any]],
         provider: Any | None = None,
+        value_locator: Any | None = None,
     ) -> ExtractionSummary:
         """Create review candidates for the figures found in a parsed document.
 
@@ -288,7 +312,7 @@ class FactExtractionService:
                     source_document_id=document_id,
                     source_document_version_id=document_version_id,
                     detected_reporting_basis=context.reporting_basis,
-                    source_location=chunk.get("source_lineage") or {},
+                    source_location=FactExtractionService._evidence_location(chunk, raw_value, value_locator),
                     extraction_method="PARSER_TABLE",
                     evidence_snippet=f"{label} | {raw_value}"[:500],
                 )
@@ -329,7 +353,7 @@ class FactExtractionService:
                 raw_currency=fact.currency or "TRY",
                 raw_scale=fact.scale or "ONE",
                 detected_reporting_basis=context.reporting_basis,
-                source_location=chunk.get("source_lineage") or {},
+                source_location=FactExtractionService._evidence_location(chunk, fact.raw_value, value_locator),
                 extraction_method="LLM_ASSISTED",
                 evidence_snippet=f"{fact.raw_label} | {fact.raw_value}"[:500],
                 metric_code=fact.metric_code,
