@@ -18,6 +18,7 @@ from app.models.institution import Institution
 from app.models.metric_definition import MetricDefinition
 from app.models.reporting_period import ReportingPeriod
 from app.services.fact_candidate_service import FactCandidateService
+from app.services.llm_fact_extraction_service import LlmFactExtractionService
 from app.services.normalization_service import NormalizationService
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -64,6 +65,10 @@ class ExtractionSummary:
     rows_considered: int
     matched_labels: int
     context: DocumentContext
+    llm_batches_sent: int = 0
+    llm_facts_proposed: int = 0
+    llm_facts_rejected: int = 0
+    llm_candidates_created: int = 0
 
 
 class FactExtractionService:
@@ -195,12 +200,17 @@ class FactExtractionService:
         document_version_id: UUID,
         display_name: str,
         chunks: list[dict[str, Any]],
+        provider: Any | None = None,
     ) -> ExtractionSummary:
-        """Create review candidates for table rows matching the metric dictionary.
+        """Create review candidates for the figures found in a parsed document.
 
-        Only rows whose label resolves to a canonical metric are recorded: a
-        filing contains hundreds of note rows, and admitting them all would bury
-        the reviewer instead of helping them.
+        Rows are first read deterministically: a table line whose label resolves
+        to a canonical metric becomes a candidate, and note rows are ignored so
+        they do not bury the reviewer. Publishers that draw tables without ruling
+        lines defeat that pass entirely — their figures arrive as free text — so
+        when it finds nothing and a model provider is available, the document is
+        re-read by the model (see [LlmFactExtractionService]). Either way the
+        result is a candidate awaiting human review.
         """
         context = FactExtractionService.parse_document_context(display_name)
         if context.institution_code is None or context.period_end is None:
@@ -242,4 +252,53 @@ class FactExtractionService:
                 )
                 created += 1
 
-        return ExtractionSummary(created, rows_considered, matched_labels, context)
+        if created > 0 or provider is None:
+            return ExtractionSummary(created, rows_considered, matched_labels, context)
+
+        # Nothing was recognised deterministically: read the document with the
+        # model, keeping only figures it can point to in the source text.
+        metric_rows = await db.execute(select(MetricDefinition.metric_code))
+        metric_codes = [code for (code,) in metric_rows.all()]
+        context_hint = (
+            f"{context.institution_code} · period ending {context.period_end} · basis {context.reporting_basis}"
+        )
+        llm_result = await LlmFactExtractionService.extract(
+            provider=provider,
+            chunks=chunks,
+            metric_codes=metric_codes,
+            context_hint=context_hint,
+        )
+
+        llm_created = 0
+        for fact in llm_result.facts:
+            if llm_created >= MAX_CANDIDATES_PER_VERSION:
+                break
+            chunk = chunks[fact.chunk_index] if 0 <= fact.chunk_index < len(chunks) else {}
+            await FactCandidateService.create_candidate(
+                db=db,
+                organization_id=organization_id,
+                institution_id=institution.id,
+                reporting_period_id=period.id,
+                raw_label=fact.raw_label,
+                raw_value=fact.raw_value,
+                source_document_id=document_id,
+                source_document_version_id=document_version_id,
+                raw_currency=fact.currency or "TRY",
+                raw_scale=fact.scale or "ONE",
+                detected_reporting_basis=context.reporting_basis,
+                source_location=chunk.get("source_lineage") or {},
+                extraction_method="LLM_ASSISTED",
+                evidence_snippet=f"{fact.raw_label} | {fact.raw_value}"[:500],
+            )
+            llm_created += 1
+
+        return ExtractionSummary(
+            candidates_created=created + llm_created,
+            rows_considered=rows_considered,
+            matched_labels=matched_labels,
+            context=context,
+            llm_batches_sent=llm_result.batches_sent,
+            llm_facts_proposed=llm_result.facts_proposed,
+            llm_facts_rejected=llm_result.facts_rejected_unverified + llm_result.facts_rejected_unknown_metric,
+            llm_candidates_created=llm_created,
+        )

@@ -5,6 +5,7 @@ from datetime import UTC, datetime
 from enum import Enum
 from uuid import UUID, uuid4
 
+from app.core.config import settings
 from app.models.document import Document
 from app.models.document_chunk import DocumentChunk
 from app.models.document_page import DocumentPage
@@ -12,6 +13,7 @@ from app.models.document_version import DocumentVersion
 from app.models.extraction_result import ExtractionResult, ExtractionWarning
 from app.models.ingestion_job import IngestionAttempt, IngestionJob
 from app.models.stored_object import StoredObject
+from app.orchestration.provider_anthropic import AnthropicProviderAdapter
 from app.parsers.registry import parser_registry
 from app.services.audit_service import AuditService
 from app.services.fact_extraction_service import FactExtractionService
@@ -75,6 +77,20 @@ class WorkerProcessOutcome:
     outcome_status: WorkerOutcomeStatus
     job_id: UUID | None = None
     error_code: str | None = None
+
+
+def _build_extraction_provider() -> AnthropicProviderAdapter | None:
+    """Fast-model reader for filings whose tables defeat deterministic parsing.
+
+    Returns None when the feature is disabled or no key is configured, in which
+    case ingestion keeps working with deterministic extraction alone.
+    """
+    if not settings.ENABLE_LLM_FACT_EXTRACTION or not settings.ANTHROPIC_API_KEY:
+        return None
+    return AnthropicProviderAdapter(
+        application_model_alias="finance_analysis_fast",
+        environment=settings.ENVIRONMENT,
+    )
 
 
 class IngestionWorker:
@@ -332,6 +348,7 @@ class IngestionWorker:
                         document_version_id=version.id,
                         display_name=document.display_name,
                         chunks=output.chunks,
+                        provider=_build_extraction_provider(),
                     )
                     logger.info(
                         "FACT_CANDIDATES_EXTRACTED",

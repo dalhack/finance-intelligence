@@ -109,6 +109,10 @@ class Settings(BaseSettings):
     ANTHROPIC_API_KEY: str | None = Field(default=None, description="Anthropic API Key or Secret Reference")
     ANTHROPIC_TIMEOUT_SECONDS: float = Field(default=30.0)
     ANTHROPIC_MAX_OUTPUT_TOKENS: int = Field(default=4096)
+    ENABLE_LLM_FACT_EXTRACTION: bool = Field(
+        default=True,
+        description="Read filings with the fast model when deterministic table parsing finds nothing",
+    )
     ANTHROPIC_PROMPT_CACHE_ENABLED: bool = Field(default=True)
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
