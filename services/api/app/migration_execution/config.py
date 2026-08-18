@@ -13,7 +13,7 @@ ALLOWED_PROJECT_ID = "finance-intel-staging-8f2a"
 ALLOWED_INSTANCE_NAME = "fi-staging-db"
 ALLOWED_REGION = "europe-west1"
 ALLOWED_TARGET_DATABASE = "finance_intelligence_staging"
-ALLOWED_MIGRATION_HEAD = "031_analysis_job_claim_authority"
+ALLOWED_MIGRATION_HEAD = "034_grant_candidate_review_permissions"
 
 
 @dataclass(frozen=True)

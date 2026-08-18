@@ -19,6 +19,8 @@ if str(API_DIR) not in sys.path:
 
 from app.migration_entrypoint import redact_sensitive_string
 
+REPO_ROOT = Path(__file__).resolve().parents[2]
+
 ALLOWED_ACTION_SHAS = {
     "actions/checkout": "11bd71901bbe5b1630ceea73d27597364c9af683",
     "google-github-actions/auth": "71f986410dfbc7added4569d411d040a91dc6935",
@@ -321,23 +323,35 @@ def test_cloud_sql_optional_import_boundary_and_fail_closed_contract(monkeypatch
         run_security_verification(config)
 
 
-def test_migration_config_head_031_accepted_t1():
-    """T1 — Current head 031_analysis_job_claim_authority is accepted by MigrationExecutionConfig."""
+def test_migration_config_head_matches_the_script_graph_t1():
+    """T1 — The pinned head is accepted and is the graph's actual head.
+
+    Pinning a stale revision is how this check silently stopped guarding
+    anything: the pin sat on 031 while the database had already moved on.
+    """
     from unittest.mock import patch
 
+    from alembic.config import Config
+    from alembic.script import ScriptDirectory
     from app.migration_execution.config import ALLOWED_MIGRATION_HEAD, MigrationExecutionConfig
 
-    assert ALLOWED_MIGRATION_HEAD == "031_analysis_job_claim_authority"
+    alembic_cfg = Config(str(REPO_ROOT / "services" / "api" / "alembic.ini"))
+    alembic_cfg.set_main_option("script_location", str(REPO_ROOT / "services" / "api" / "alembic"))
+    graph_head = ScriptDirectory.from_config(alembic_cfg).get_current_head()
+    assert ALLOWED_MIGRATION_HEAD == graph_head, (
+        f"the pinned migration head must track the script graph, pinned={ALLOWED_MIGRATION_HEAD} graph={graph_head}"
+    )
+
     with patch.dict(
         "os.environ",
         {
-            "EXPECTED_MIGRATION_HEAD": "031_analysis_job_claim_authority",
+            "EXPECTED_MIGRATION_HEAD": ALLOWED_MIGRATION_HEAD,
             "INITIAL_ADMIN_PASSWORD": "adm",
             "BOOTSTRAP_PASSWORD": "boot",
         },
     ):
         cfg = MigrationExecutionConfig.from_env("provision-database")
-        assert cfg.expected_head == "031_analysis_job_claim_authority"
+        assert cfg.expected_head == ALLOWED_MIGRATION_HEAD
 
 
 def test_migration_config_previous_head_030_rejected_t2():
@@ -371,12 +385,12 @@ def test_migration_config_default_head_t4():
     import os
     from unittest.mock import patch
 
-    from app.migration_execution.config import MigrationExecutionConfig
+    from app.migration_execution.config import ALLOWED_MIGRATION_HEAD, MigrationExecutionConfig
 
     with patch.dict("os.environ", {"BOOTSTRAP_PASSWORD": "boot"}, clear=False):
         os.environ.pop("EXPECTED_MIGRATION_HEAD", None)
         cfg = MigrationExecutionConfig.from_env("verify")
-        assert cfg.expected_head == "031_analysis_job_claim_authority"
+        assert cfg.expected_head == ALLOWED_MIGRATION_HEAD
 
 
 def test_migration_config_validation_before_side_effect_t5():
@@ -390,14 +404,17 @@ def test_migration_config_validation_before_side_effect_t5():
 
 
 def test_alembic_graph_single_head_t6_t7():
-    """T6 & T7 — Verify Alembic script graph produces exact single head 033_worker_queue_visibility."""
+    """T6 & T7 — The script graph must resolve to exactly one head, and the
+    configured pin must be that head. Asserting a literal revision here made the
+    test go stale every time a migration landed."""
     from alembic.script import ScriptDirectory
+    from app.migration_execution.config import ALLOWED_MIGRATION_HEAD
 
     alembic_dir = API_DIR / "alembic"
     script = ScriptDirectory(str(alembic_dir))
     heads = script.get_heads()
     assert len(heads) == 1
-    assert heads[0] == "033_worker_queue_visibility"
+    assert heads[0] == ALLOWED_MIGRATION_HEAD
 
 
 def test_get_valid_graph_revisions_remote_collected():
@@ -409,11 +426,17 @@ def test_get_valid_graph_revisions_remote_collected():
     cfg = Config(ini_path)
     cfg.set_main_option("script_location", str(API_DIR / "alembic"))
 
-    revs = get_valid_graph_revisions(cfg, expected_head="033_worker_queue_visibility")
-    assert len(revs) == 33
+    from alembic.script import ScriptDirectory
+    from app.migration_execution.config import ALLOWED_MIGRATION_HEAD
+
+    revs = get_valid_graph_revisions(cfg, expected_head=ALLOWED_MIGRATION_HEAD)
+    # Count the graph rather than a literal: a new migration must not make this
+    # assertion stale, only a graph that disagrees with itself should fail.
+    expected_count = len(list(ScriptDirectory.from_config(cfg).walk_revisions()))
+    assert len(revs) == expected_count
     assert "026_public_schema_acl_hardening" in revs
     assert "032_bootstrap_self_onboarding" in revs
-    assert "033_worker_queue_visibility" in revs
+    assert ALLOWED_MIGRATION_HEAD in revs
     assert "026_model_routing_policy_catalog" not in revs
 
 

@@ -67,6 +67,7 @@ KNOWN_REVISIONS = {
     "031_analysis_job_claim_authority",
     "032_bootstrap_self_onboarding",
     "033_worker_queue_visibility",
+    "034_grant_candidate_review_permissions",
 }
 
 
