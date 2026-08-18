@@ -116,17 +116,34 @@ class DocumentItem {
   final String organizationId;
   final String displayName;
 
+  /// Ingestion state of the document's latest version, as reported by the API.
+  /// Empty when the version has not been recorded yet.
+  final String ingestionStatus;
+
   const DocumentItem({
     required this.documentId,
     required this.organizationId,
     required this.displayName,
+    this.ingestionStatus = '',
   });
 
+  /// True while the document is still on its way through ingestion, which is
+  /// what tells the UI to keep watching instead of presenting a final state.
+  bool get isProcessing =>
+      ingestionStatus.isEmpty ||
+      const ['QUEUED', 'PENDING', 'CLAIMED', 'PARSING', 'EXTRACTING']
+          .contains(ingestionStatus);
+
   factory DocumentItem.fromJson(Map<String, dynamic> json) {
+    final latestVersion = json['latest_version'];
+    final status = latestVersion is Map<String, dynamic>
+        ? latestVersion['ingestion_status']?.toString() ?? ''
+        : '';
     return DocumentItem(
       documentId: json['id']?.toString() ?? '',
       organizationId: json['organization_id']?.toString() ?? '',
       displayName: json['display_name']?.toString() ?? '',
+      ingestionStatus: status,
     );
   }
 }

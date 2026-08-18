@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../app/theme/semantic_tokens.dart';
 import '../../../presentation/providers/providers.dart';
+import '../../../core/models/wire_models.dart';
 import '../../../presentation/state/async_value_state.dart';
 import 'upload_bottom_sheet.dart';
 
@@ -15,12 +18,65 @@ class DocumentManagementScreen extends ConsumerStatefulWidget {
 
 class _DocumentManagementScreenState
     extends ConsumerState<DocumentManagementScreen> {
+  /// Ingestion runs in the background, so the screen keeps polling while a
+  /// document is still being processed. Without this the user is left guessing
+  /// whether anything is happening.
+  static const _pollInterval = Duration(seconds: 5);
+  static const _maxPolls = 36; // ~3 minutes
+
+  Timer? _poller;
+  int _pollsRemaining = 0;
+  bool _wasProcessing = false;
+
   @override
   void initState() {
     super.initState();
     Future.microtask(() {
       ref.read(documentListControllerProvider.notifier).loadDocuments();
     });
+  }
+
+  @override
+  void dispose() {
+    _poller?.cancel();
+    super.dispose();
+  }
+
+  void _startWatching() {
+    _pollsRemaining = _maxPolls;
+    _poller?.cancel();
+    _poller = Timer.periodic(_pollInterval, (timer) {
+      if (!mounted || _pollsRemaining <= 0) {
+        timer.cancel();
+        return;
+      }
+      _pollsRemaining -= 1;
+      ref
+          .read(documentListControllerProvider.notifier)
+          .loadDocuments(isRefresh: true);
+    });
+  }
+
+  /// Watches the list for the moment ingestion finishes and tells the user,
+  /// pointing them at the review queue where the extracted values land.
+  void _syncWatchState(List<DocumentItem> documents) {
+    final processing = documents.any((doc) => doc.isProcessing);
+
+    if (processing && _poller == null) {
+      _startWatching();
+    } else if (!processing) {
+      _poller?.cancel();
+      _poller = null;
+      if (_wasProcessing && mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+                'Ayrıştırma tamamlandı. Çıkarılan veriler İnceleme sekmesinde.'),
+          ),
+        );
+      }
+    }
+    _wasProcessing = processing;
   }
 
   void _openUploadModal() {
@@ -30,9 +86,10 @@ class _DocumentManagementScreenState
       builder: (_) => const UploadBottomSheet(),
     ).whenComplete(() {
       // Refresh so a freshly finalized document appears with its real
-      // ingestion state instead of requiring a manual pull-to-refresh.
+      // ingestion state, then keep watching until parsing finishes.
       if (!mounted) return;
       ref.read(documentListControllerProvider.notifier).loadDocuments();
+      _startWatching();
     });
   }
 
@@ -124,7 +181,10 @@ class _DocumentManagementScreenState
       );
     }
 
-    final items = uiState.data ?? [];
+    final items = (uiState.data ?? const <DocumentItem>[]).cast<DocumentItem>();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) _syncWatchState(items);
+    });
     if (items.isEmpty) {
       return const Center(
         child: Column(
@@ -154,18 +214,71 @@ class _DocumentManagementScreenState
             ),
             title: Text(doc.displayName,
                 style: const TextStyle(fontWeight: FontWeight.bold)),
-            subtitle: Text('ID: ${doc.documentId}'),
-            trailing: const Chip(
-              label: Text('PROCESSED',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 10,
-                      fontWeight: FontWeight.bold)),
-              backgroundColor: SemanticTokens.verifiedGreenLight,
-            ),
+            subtitle: Text(_statusDescription(doc)),
+            trailing: _StatusChip(status: doc.ingestionStatus),
           ),
         );
       },
+    );
+  }
+}
+
+/// Human wording for where a document currently is in ingestion.
+String _statusDescription(DocumentItem doc) {
+  switch (doc.ingestionStatus) {
+    case '':
+    case 'QUEUED':
+    case 'PENDING':
+    case 'CLAIMED':
+      return 'Sırada bekliyor';
+    case 'PARSING':
+    case 'EXTRACTING':
+      return 'İşleniyor…';
+    case 'COMPLETED':
+      return 'Ayrıştırma tamamlandı';
+    case 'COMPLETED_WITH_WARNINGS':
+      return 'Tamamlandı (uyarılarla)';
+    case 'AWAITING_REVIEW':
+      return 'İnceleme gerekiyor';
+    case 'REJECTED':
+      return 'Reddedildi';
+    case 'FAILED':
+      return 'Ayrıştırma başarısız';
+    default:
+      return doc.ingestionStatus;
+  }
+}
+
+class _StatusChip extends StatelessWidget {
+  final String status;
+
+  const _StatusChip({required this.status});
+
+  @override
+  Widget build(BuildContext context) {
+    final processing = status.isEmpty ||
+        const ['QUEUED', 'PENDING', 'CLAIMED', 'PARSING', 'EXTRACTING']
+            .contains(status);
+    if (processing) {
+      return const SizedBox(
+        width: 18,
+        height: 18,
+        child: CircularProgressIndicator(strokeWidth: 2),
+      );
+    }
+    final failed = status == 'FAILED' || status == 'REJECTED';
+    final needsReview = status == 'AWAITING_REVIEW';
+    return Icon(
+      failed
+          ? Icons.error_outline
+          : needsReview
+              ? Icons.rate_review_outlined
+              : Icons.check_circle,
+      color: failed
+          ? Theme.of(context).colorScheme.error
+          : needsReview
+              ? Colors.orange
+              : SemanticTokens.verifiedGreenLight,
     );
   }
 }
