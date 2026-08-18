@@ -1,6 +1,7 @@
 from types import SimpleNamespace
 
 import pytest
+from app.orchestration.provider import ToolCallRequest
 from app.services.llm_fact_extraction_service import (
     MAX_BATCHES_PER_DOCUMENT,
     LlmExtractionResult,
@@ -118,9 +119,12 @@ async def test_extract_sends_bounded_calls_and_keeps_only_verified_figures():
             calls.append(request)
             return SimpleNamespace(
                 tool_calls=[
-                    SimpleNamespace(
-                        name="report_financial_figures",
-                        arguments={
+                    # The real adapter returns ToolCallRequest; using it here
+                    # keeps the double honest about the provider contract.
+                    ToolCallRequest(
+                        tool_call_id="call-1",
+                        tool_name="report_financial_figures",
+                        arguments_json={
                             "figures": [
                                 {
                                     "metric_code": "TOTAL_ASSETS",

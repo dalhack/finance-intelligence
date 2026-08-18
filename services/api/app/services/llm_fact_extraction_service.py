@@ -198,9 +198,12 @@ class LlmFactExtractionService:
     def _figures_from_response(response: Any) -> list[dict[str, Any]]:
         """Read the tool call payload, tolerating a text-only reply."""
         for call in getattr(response, "tool_calls", None) or []:
-            arguments = getattr(call, "arguments", None)
+            # The provider adapter exposes tool input as `arguments_json`.
+            arguments = getattr(call, "arguments_json", None)
+            if arguments is None:
+                arguments = getattr(call, "arguments", None)
             if arguments is None and isinstance(call, dict):
-                arguments = call.get("arguments")
+                arguments = call.get("arguments_json") or call.get("arguments")
             if isinstance(arguments, str):
                 try:
                     arguments = json.loads(arguments)
