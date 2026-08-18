@@ -304,12 +304,35 @@ async def list_analyses(
     ]
 
 
-@router.get("/{analysis_id}/result")
+class AnalysisResultDTO(BaseModel):
+    """The answer to an analysis request, in the shape the client renders.
+
+    The narrative is written by the model, but every figure comes from the
+    verified result dataset the deterministic engine produced: the table and
+    chart specifications are read from that dataset's stored snapshots, not
+    generated from prose. A client renders these directly and never has to
+    parse numbers out of text.
+    """
+
+    analysis_id: UUID
+    snapshot_id: UUID
+    schema_version: str
+    created_at: datetime
+    request_prompt: str
+    executive_summary: str
+    result_dataset_id: UUID | None = None
+    table_spec: dict[str, Any] | None = None
+    chart_specs: list[dict[str, Any]] = Field(default_factory=list)
+    data_quality_summary: dict[str, Any] | None = None
+    warnings: list[Any] = Field(default_factory=list)
+
+
+@router.get("/{analysis_id}/result", response_model=AnalysisResultDTO)
 async def get_analysis_result(
     analysis_id: UUID,
     ctx: ExecutionContext = Depends(require_permission("analyses:read")),  # noqa: B008
     db: AsyncSession = Depends(get_db_session),  # noqa: B008
-) -> dict[str, Any]:
+) -> AnalysisResultDTO:
     org_res = await db.execute(text("SELECT current_setting('app.current_organization_id', true);"))
     org_str = org_res.scalar()
     if not org_str:
@@ -371,13 +394,44 @@ async def get_analysis_result(
             },
         )
 
-    return {
-        "snapshot_id": str(snapshot_row[0]),
-        "analysis_id": str(analysis_id),
-        "schema_version": snapshot_row[1],
-        "result": snapshot_row[2],
-        "created_at": snapshot_row[3].isoformat(),
-    }
+    result_json = snapshot_row[2] or {}
+    dataset = result_json.get("dataset") or {}
+    dataset_id = dataset.get("result_dataset_id")
+
+    # Pull the rendering contract from the verified dataset rather than asking
+    # the client to rebuild a table from the narrative.
+    table_spec: dict[str, Any] | None = None
+    chart_specs: list[dict[str, Any]] = []
+    quality_summary: dict[str, Any] | None = None
+    warnings: list[Any] = []
+    if dataset_id:
+        ds_res = await db.execute(
+            text(
+                "SELECT table_spec_snapshot, chart_specs_snapshot, data_quality_summary, warnings_snapshot "
+                "FROM result_datasets WHERE id = :ds_id AND organization_id = :org_id;"
+            ),
+            {"ds_id": dataset_id, "org_id": org_id},
+        )
+        ds_row = ds_res.fetchone()
+        if ds_row:
+            table_spec = ds_row[0]
+            chart_specs = ds_row[1] or []
+            quality_summary = ds_row[2]
+            warnings = ds_row[3] or []
+
+    return AnalysisResultDTO(
+        analysis_id=analysis_id,
+        snapshot_id=snapshot_row[0],
+        schema_version=snapshot_row[1],
+        created_at=snapshot_row[3],
+        request_prompt=job.request_prompt,
+        executive_summary=str(result_json.get("narrative") or ""),
+        result_dataset_id=UUID(str(dataset_id)) if dataset_id else None,
+        table_spec=table_spec,
+        chart_specs=chart_specs,
+        data_quality_summary=quality_summary,
+        warnings=warnings,
+    )
 
 
 @router.get("/{analysis_id}/clarification", response_model=AnalysisClarificationDTO)
