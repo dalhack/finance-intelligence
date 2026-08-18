@@ -321,6 +321,10 @@ class AnalysisResultDTO(BaseModel):
     request_prompt: str
     executive_summary: str
     result_dataset_id: UUID | None = None
+    # The verified rows behind the table. A specification alone cannot be drawn:
+    # the client needs the values it refers to, each still carrying its evidence
+    # reference so a figure can be traced back to its source.
+    rows: list[Any] = Field(default_factory=list)
     table_spec: dict[str, Any] | None = None
     chart_specs: list[dict[str, Any]] = Field(default_factory=list)
     data_quality_summary: dict[str, Any] | None = None
@@ -404,10 +408,12 @@ async def get_analysis_result(
     chart_specs: list[dict[str, Any]] = []
     quality_summary: dict[str, Any] | None = None
     warnings: list[Any] = []
+    rows: list[Any] = []
     if dataset_id:
         ds_res = await db.execute(
             text(
-                "SELECT table_spec_snapshot, chart_specs_snapshot, data_quality_summary, warnings_snapshot "
+                "SELECT table_spec_snapshot, chart_specs_snapshot, data_quality_summary, "
+                "warnings_snapshot, rows_snapshot "
                 "FROM result_datasets WHERE id = :ds_id AND organization_id = :org_id;"
             ),
             {"ds_id": dataset_id, "org_id": org_id},
@@ -418,6 +424,7 @@ async def get_analysis_result(
             chart_specs = ds_row[1] or []
             quality_summary = ds_row[2]
             warnings = ds_row[3] or []
+            rows = ds_row[4] or []
 
     return AnalysisResultDTO(
         analysis_id=analysis_id,
@@ -427,6 +434,7 @@ async def get_analysis_result(
         request_prompt=job.request_prompt,
         executive_summary=str(result_json.get("narrative") or ""),
         result_dataset_id=UUID(str(dataset_id)) if dataset_id else None,
+        rows=rows,
         table_spec=table_spec,
         chart_specs=chart_specs,
         data_quality_summary=quality_summary,

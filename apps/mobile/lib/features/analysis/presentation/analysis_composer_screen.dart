@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../presentation/providers/providers.dart';
 import '../controllers/analysis_controller.dart';
-import 'widgets/executive_summary_widget.dart';
+import 'analysis_result_view.dart';
 import 'widgets/progress_timeline_widget.dart';
 
 class AnalysisComposerScreen extends ConsumerStatefulWidget {
@@ -147,11 +147,9 @@ class _AnalysisComposerScreenState
             ],
             if (state.resultSnapshot != null) ...[
               const SizedBox(height: 16),
-              ExecutiveSummaryWidget(
-                summaryText:
-                    state.resultSnapshot!['result']?['summary']?.toString() ??
-                        'Analiz başarıyla tamamlandı.',
-              ),
+              // The server sends a typed result: narrative plus the verified
+              // dataset's table and chart specifications.
+              AnalysisResultView(result: state.resultSnapshot!),
             ],
             if (state.errorMessage != null) ...[
               const SizedBox(height: 16),
