@@ -145,11 +145,21 @@ class NumericClaimVerifier:
 
     @classmethod
     def _add_number_representations(cls, val: float, tokens_set: set[str], floats_set: set[float]) -> None:
-        """Add deterministic representations of float value to tokens_set and floats_set."""
+        """Add deterministic representations of float value to tokens_set and floats_set.
+
+        A figure held in thousands is routinely written in millions or billions.
+        "5.550.109,55 milyon TL" is the same verified number as 5 550 109 551
+        thousand, not a new claim, and refusing it failed an analysis whose
+        every figure came from the dataset. The standard financial scales are
+        therefore accepted in both directions; a number that is not the figure
+        at any of them still fails, which is what the gate is for.
+        """
         abs_val = abs(val)
-        floats_set.add(round(abs_val, 2))
-        floats_set.add(round(abs_val, 4))
-        floats_set.add(round(abs_val, 1))
+        for factor in (1, 1e3, 1e6, 1e9, 1e12):
+            for scaled in (abs_val / factor, abs_val * factor):
+                floats_set.add(round(scaled, 2))
+                floats_set.add(round(scaled, 4))
+                floats_set.add(round(scaled, 1))
 
         int_val = round(abs_val)
         tokens_set.add(str(int_val))
