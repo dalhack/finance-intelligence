@@ -400,8 +400,18 @@ class IngestionWorker:
             )
 
         except Exception as err:  # noqa: BLE001
-            # Safe production logging without raw tracebacks or sensitive data
-            logger.error("Worker processing failed for claimed job")
+            # Safe production logging: the exception type and, for known safe
+            # codes, the code itself. Never the message or a traceback, which
+            # can carry document content, identifiers or connection strings.
+            # Without this an operator only sees "processing failed" and has to
+            # reconstruct the cause from the database.
+            failure_type = type(err).__name__
+            failure_code = getattr(err, "code", None)
+            safe_code = failure_code if failure_code in KNOWN_SAFE_ERROR_CODES else "UNCLASSIFIED"
+            logger.error(
+                "Worker processing failed for claimed job",
+                extra={"failure_type": failure_type, "failure_code": safe_code},
+            )
 
             # 1. Rollback aborted transaction to clear failed state
             await self.db.rollback()

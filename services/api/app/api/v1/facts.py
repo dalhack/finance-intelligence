@@ -5,6 +5,7 @@ from uuid import UUID
 from app.db.session import get_db_session
 from app.dependencies import require_permission
 from app.middleware.execution_context import ExecutionContext
+from app.models.candidate_evidence import CandidateEvidence
 from app.models.financial_fact import FinancialFact
 from app.models.financial_fact_candidate import FinancialFactCandidate
 from app.models.institution import Institution
@@ -107,6 +108,16 @@ class CandidateResponseDTO(BaseModel):
     conflict_detected_at: datetime | None = None
     conflict_reason: str | None = None
     created_at: datetime
+
+    # Human-readable context. A reviewer cannot judge a bare number and an id:
+    # these say which institution, which line item, which period, and where in
+    # the document the value was read from.
+    institution_name: str | None = None
+    metric_label: str | None = None
+    period_label: str | None = None
+    extraction_method: str | None = None
+    evidence_snippet: str | None = None
+    source_page: int | None = None
 
 
 class ApproveCandidateRequestDTO(BaseModel):
@@ -221,6 +232,28 @@ async def list_metric_definitions(
     return res.scalars().all()
 
 
+def _to_candidate_dto(
+    candidate: FinancialFactCandidate,
+    institution_name: str | None,
+    period_label: str | None,
+    metric_label: str | None,
+    evidence_snippet: str | None,
+    source_page: int | None,
+) -> CandidateResponseDTO:
+    """Attach the labels a reviewer needs to the raw candidate row."""
+    dto = CandidateResponseDTO.model_validate(candidate)
+    return dto.model_copy(
+        update={
+            "institution_name": institution_name,
+            "period_label": period_label,
+            "metric_label": metric_label,
+            "extraction_method": candidate.extraction_method,
+            "evidence_snippet": evidence_snippet,
+            "source_page": source_page,
+        }
+    )
+
+
 @router.get("/fact-candidates", response_model=list[CandidateResponseDTO])
 async def list_fact_candidates(
     review_status: str | None = Query(None),
@@ -228,13 +261,35 @@ async def list_fact_candidates(
     ctx: ExecutionContext = Depends(require_permission("facts:candidates:read")),  # noqa: B008
     db: AsyncSession = Depends(get_db_session),  # noqa: B008
 ):
-    stmt = select(FinancialFactCandidate).where(FinancialFactCandidate.organization_id == ctx.active_organization_id)
+    stmt = (
+        select(
+            FinancialFactCandidate,
+            Institution.display_name,
+            ReportingPeriod.label,
+            MetricDefinition.canonical_name,
+            CandidateEvidence.raw_snippet,
+            CandidateEvidence.page_number,
+        )
+        .outerjoin(Institution, Institution.id == FinancialFactCandidate.institution_id)
+        .outerjoin(ReportingPeriod, ReportingPeriod.id == FinancialFactCandidate.reporting_period_id)
+        .outerjoin(
+            MetricDefinition,
+            MetricDefinition.metric_code == FinancialFactCandidate.suggested_metric_code,
+        )
+        .outerjoin(CandidateEvidence, CandidateEvidence.candidate_id == FinancialFactCandidate.id)
+        .where(FinancialFactCandidate.organization_id == ctx.active_organization_id)
+        .order_by(FinancialFactCandidate.created_at.desc())
+    )
     if review_status:
         stmt = stmt.where(FinancialFactCandidate.review_status == review_status)
     if validation_status:
         stmt = stmt.where(FinancialFactCandidate.validation_status == validation_status)
+
     res = await db.execute(stmt)
-    return res.scalars().all()
+    return [
+        _to_candidate_dto(candidate, institution_name, period_label, metric_label, snippet, page)
+        for candidate, institution_name, period_label, metric_label, snippet, page in res.all()
+    ]
 
 
 @router.get("/fact-candidates/{candidate_id}", response_model=CandidateResponseDTO)
