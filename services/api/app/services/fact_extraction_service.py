@@ -309,6 +309,7 @@ class FactExtractionService:
             chunks=chunks,
             metric_codes=metric_codes,
             context_hint=context_hint,
+            period_end=context.period_end,
         )
 
         llm_created = 0
@@ -342,6 +343,10 @@ class FactExtractionService:
             context=context,
             llm_batches_sent=llm_result.batches_sent,
             llm_facts_proposed=llm_result.facts_proposed,
-            llm_facts_rejected=llm_result.facts_rejected_unverified + llm_result.facts_rejected_unknown_metric,
+            llm_facts_rejected=(
+                llm_result.facts_rejected_unverified
+                + llm_result.facts_rejected_unknown_metric
+                + llm_result.facts_rejected_period_mismatch
+            ),
             llm_candidates_created=llm_created,
         )
