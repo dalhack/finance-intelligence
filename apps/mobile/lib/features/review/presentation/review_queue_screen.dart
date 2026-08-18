@@ -176,20 +176,18 @@ class CandidateCardContent extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 8),
-        if (_extractionLabel(cand) != null)
-          Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: Wrap(
-              spacing: 6,
-              runSpacing: 4,
-              children: [
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8),
+          child: Wrap(
+            spacing: 6,
+            runSpacing: 4,
+            children: [
+              if (_extractionLabel(cand) != null)
                 _MiniChip(text: _extractionLabel(cand)!, highlight: true),
-                _MiniChip(
-                    text:
-                        'Güven %${(((cand['confidence_score'] as num?)?.toDouble() ?? (cand['confidence'] as num?)?.toDouble() ?? 0.9) * 100).toInt()}'),
-              ],
-            ),
+              _MiniChip(text: 'Güven %${_confidencePercent(cand)}'),
+            ],
           ),
+        ),
         if (_evidenceLine(cand) != null)
           Container(
             width: double.infinity,
@@ -221,6 +219,15 @@ class CandidateCardContent extends StatelessWidget {
       ],
     );
   }
+}
+
+/// Decimal fields cross the wire as strings, so a numeric cast would throw and
+/// take the whole card down with it.
+int _confidencePercent(Map<String, dynamic> cand) {
+  final raw = cand['confidence_score'] ?? cand['confidence'];
+  final value =
+      raw is num ? raw.toDouble() : double.tryParse(raw?.toString() ?? '');
+  return ((value ?? 0.9) * 100).round();
 }
 
 /// Reviewer-facing wording for a candidate row. The API now sends the resolved

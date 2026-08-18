@@ -19,7 +19,7 @@ void main() {
     'extraction_method': 'LLM_ASSISTED',
     'evidence_snippet': 'Toplam Mevduat | 3.186.259.508',
     'source_page': 7,
-    'confidence_score': 0.9,
+    'confidence_score': '0.900', // decimals arrive as strings
     'review_status': 'PENDING',
   };
 
@@ -50,5 +50,23 @@ void main() {
     // Never the old placeholder wording.
     expect(find.text('Metrik'), findsNothing);
     expect(find.text('Kurum'), findsNothing);
+  });
+
+  testWidgets('survives decimal fields arriving as strings', (tester) async {
+    // Regression: a numeric cast on confidence_score threw during build and the
+    // card rendered as an empty grey block on the device.
+    await tester.pumpWidget(host(const CandidateCardContent(candidate: {
+      'institution_name': 'VakıfBank',
+      'metric_label': 'Toplam Krediler',
+      'period_label': '2026/Q1',
+      'raw_value': '3.186.259.508',
+      'confidence_score': '0.900',
+      'parsed_decimal_value': '3186259508.000000',
+      'review_status': 'PENDING',
+    })));
+
+    expect(tester.takeException(), isNull);
+    expect(find.text('VakıfBank'), findsOneWidget);
+    expect(find.textContaining('Güven %90'), findsOneWidget);
   });
 }
