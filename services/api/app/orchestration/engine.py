@@ -445,15 +445,15 @@ class AnalysisOrchestratorEngine:
 
             # Construct dataset summary from real validated tool output
             first_tool_res = tool_outputs[0] if tool_outputs and isinstance(tool_outputs[0], dict) else {}
-            comparison_id = first_tool_res.get("comparison_id")
-            if not comparison_id:
+            result_dataset = first_tool_res.get("result_dataset") or {}
+            result_dataset_id = result_dataset.get("result_dataset_id")
+            if not result_dataset_id:
                 raise OrchestrationException(
                     "DATASET_NOT_FOUND", "Real tool execution did not yield a valid result dataset."
                 )
 
             dataset_summary = {
-                "result_dataset_id": str(comparison_id),
-                "cells": first_tool_res.get("cells", []),
+                "result_dataset_id": str(result_dataset_id),
             }
 
             # 7. State: QUALITY_GATE
