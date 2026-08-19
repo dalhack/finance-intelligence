@@ -270,8 +270,6 @@ class ComparisonRequest {
         'sort_direction': sortDirection,
         'top_n_scope': topNScope,
         if (topN != null) 'top_n': topN,
-        'page': page,
-        'page_size': pageSize,
       };
 }
 
