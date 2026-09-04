@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useGameStore } from '../game/store';
 import { ActionEngine } from '../game/actionEngine';
+import { DiplomacyEngine } from '../game/diplomacyEngine';
 import './ActionPanel.css';
 
 type MessageType = 'success' | 'error' | 'info';
@@ -175,6 +176,66 @@ export const ActionPanel: React.FC = () => {
     showMessage(result.message, result.success ? 'success' : 'error');
   };
 
+  const handleTradeAgreement = () => {
+    if (!gameState || !currentPlayer) {
+      showMessage('No game state or player', 'error');
+      return;
+    }
+
+    const otherCountries = gameState.countries.filter(c => c.id !== currentPlayer.id);
+    if (otherCountries.length === 0) {
+      showMessage('No other countries available', 'error');
+      return;
+    }
+
+    const targetCountry = otherCountries[0];
+    const relation = currentPlayer.diplomacy.get(targetCountry.id);
+    if (relation && !relation.tradeAgreement) {
+      relation.tradeAgreement = true;
+      showMessage(`Trade agreement established with ${targetCountry.name}`, 'success');
+    } else {
+      showMessage('Cannot establish trade agreement', 'error');
+    }
+  };
+
+  const handleAlliance = () => {
+    if (!gameState || !currentPlayer) {
+      showMessage('No game state or player', 'error');
+      return;
+    }
+
+    const otherCountries = gameState.countries.filter(c => c.id !== currentPlayer.id);
+    if (otherCountries.length === 0) {
+      showMessage('No other countries available', 'error');
+      return;
+    }
+
+    const targetCountry = otherCountries[0];
+    const success = DiplomacyEngine.formAlliance(currentPlayer, targetCountry);
+    if (success) {
+      showMessage(`Alliance formed with ${targetCountry.name}`, 'success');
+    } else {
+      showMessage('Cannot form alliance', 'error');
+    }
+  };
+
+  const handleDeclareWar = () => {
+    if (!gameState || !currentPlayer) {
+      showMessage('No game state or player', 'error');
+      return;
+    }
+
+    const otherCountries = gameState.countries.filter(c => c.id !== currentPlayer.id);
+    if (otherCountries.length === 0) {
+      showMessage('No other countries available', 'error');
+      return;
+    }
+
+    const targetCountry = otherCountries[0];
+    DiplomacyEngine.declareWar(currentPlayer, targetCountry);
+    showMessage(`War declared on ${targetCountry.name}`, 'success');
+  };
+
   const validUnitActions = selectedUnit
     ? ActionEngine.getValidUnitActions(gameState, selectedUnit.id, gameState.currentPlayerCountryId)
     : [];
@@ -290,13 +351,13 @@ export const ActionPanel: React.FC = () => {
       <div className="action-section">
         <h3>Diplomacy</h3>
         <div className="action-buttons">
-          <button className="action-btn diplomacy">
+          <button className="action-btn diplomacy" onClick={handleTradeAgreement}>
             Trade Agreement
           </button>
-          <button className="action-btn diplomacy">
+          <button className="action-btn diplomacy" onClick={handleAlliance}>
             Alliance
           </button>
-          <button className="action-btn diplomacy warning">
+          <button className="action-btn diplomacy warning" onClick={handleDeclareWar}>
             Declare War
           </button>
         </div>
