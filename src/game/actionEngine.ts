@@ -38,8 +38,12 @@ export class ActionEngine {
     const currentPos = unit.position;
     const targetPos = { x: targetX, y: targetY };
 
+    // Calculate map bounds from provinces
+    const maxX = Math.max(...gameState.provinces.map(p => p.position.x), 100);
+    const maxY = Math.max(...gameState.provinces.map(p => p.position.y), 100);
+
     // Check if movement is valid
-    if (!MilitaryEngine.canMove(unit, currentPos, targetPos, 100, 100)) {
+    if (!MilitaryEngine.canMove(unit, currentPos, targetPos, maxX + 1, maxY + 1, gameState.militaryEra)) {
       return { success: false, message: 'Unit cannot move that far' };
     }
 

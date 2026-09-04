@@ -24,14 +24,49 @@ export const ActionPanel: React.FC = () => {
   };
 
   const handleMoveUnit = () => {
-    if (!selectedUnit || !gameState) {
+    if (!selectedUnit || !gameState || !currentPlayer) {
       showMessage('No unit selected', 'error');
       return;
     }
 
-    // Simplified movement to random adjacent location
-    const newX = selectedUnit.position.x + (Math.random() > 0.5 ? 1 : -1);
-    const newY = selectedUnit.position.y + (Math.random() > 0.5 ? 1 : -1);
+    // Find nearby enemy units or unclaimed provinces to move towards
+    const nearbyEnemies = gameState.units.filter(
+      u => u.countryId !== selectedUnit.countryId &&
+      Math.abs(u.position.x - selectedUnit.position.x) <= 5 &&
+      Math.abs(u.position.y - selectedUnit.position.y) <= 5
+    );
+
+    let newX = selectedUnit.position.x;
+    let newY = selectedUnit.position.y;
+
+    if (nearbyEnemies.length > 0) {
+      // Move towards nearest enemy
+      const enemy = nearbyEnemies[0];
+      if (enemy.position.x > selectedUnit.position.x) newX++;
+      else if (enemy.position.x < selectedUnit.position.x) newX--;
+      if (enemy.position.y > selectedUnit.position.y) newY++;
+      else if (enemy.position.y < selectedUnit.position.y) newY--;
+    } else {
+      // Move towards unclaimed provinces or provinces to expand
+      const unclaimedProvinces = gameState.provinces.filter(
+        p => !p.owner ||
+        (p.owner !== currentPlayer.id &&
+         Math.abs(p.position.x - selectedUnit.position.x) <= 5 &&
+         Math.abs(p.position.y - selectedUnit.position.y) <= 5)
+      );
+
+      if (unclaimedProvinces.length > 0) {
+        const target = unclaimedProvinces[0];
+        if (target.position.x > selectedUnit.position.x) newX++;
+        else if (target.position.x < selectedUnit.position.x) newX--;
+        if (target.position.y > selectedUnit.position.y) newY++;
+        else if (target.position.y < selectedUnit.position.y) newY--;
+      } else {
+        // Random movement
+        newX += Math.random() > 0.5 ? 1 : -1;
+        newY += Math.random() > 0.5 ? 1 : -1;
+      }
+    }
 
     const result = executeAction(() =>
       ActionEngine.moveUnit(gameState, selectedUnit.id, newX, newY)
