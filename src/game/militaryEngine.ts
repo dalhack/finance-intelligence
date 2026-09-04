@@ -16,6 +16,13 @@ export class MilitaryEngine {
   }
 
   /**
+   * Get recruitment cost for a unit (Orijinal: 500 per unit)
+   */
+  static getRecruitmentCost(unitTypeId: string, militaryEra: number): number {
+    return 500;
+  }
+
+  /**
    * Check if unit can move to target position
    */
   static canMove(

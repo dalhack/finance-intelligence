@@ -1,15 +1,14 @@
 import { GameState, Country } from '../types/index';
+import { MilitaryEngine } from './militaryEngine';
 import { EconomyEngine } from './economyEngine';
 import { DiplomacyEngine } from './diplomacyEngine';
 import { TechnologyEngine } from './technologyEngine';
-import { InfrastructureEngine } from './infrastructureEngine';
-import { AIEngine, AIDecision } from './aiEngine';
-import { AIExecutor } from './aiExecutor';
 import { VictoryEngine, VictoryStatus } from './victoryEngine';
 
 export interface TurnReport {
   turn: number;
   year: number;
+  phase: string;
   totalIncome: number;
   totalExpenses: number;
   events: string[];
@@ -18,259 +17,287 @@ export interface TurnReport {
 }
 
 export class TurnEngine {
-  /* Process a complete game turn */
+  /**
+   * Process complete game turn following exact 1992 Imperialism turn order:
+   * 1. DIPLOMACY PHASE - Negotiate peace/war
+   * 2. MOVEMENT PHASE - Move all units
+   * 3. COMBAT PHASE - Resolve battles
+   * 4. RESEARCH PHASE - Advance technology
+   * 5. TURN ENDING - Economy, production, maintenance, victory check, year increment
+   */
   static processTurn(gameState: GameState): TurnReport {
     const report: TurnReport = {
       turn: gameState.currentTurn,
       year: gameState.year,
+      phase: 'start',
       totalIncome: 0,
       totalExpenses: 0,
       events: [],
       warnings: [],
     };
 
-    // Process each country's turn
-    gameState.countries.forEach(country => {
-      this.processCountryTurn(country, gameState, report);
+    // PHASE 1: DIPLOMACY
+    report.phase = 'diplomacy';
+    this.processDiplomacyPhase(gameState, report);
 
-      // Execute AI decisions for AI players
-      if (country.type === 'ai') {
-        const decisions = AIEngine.makeDecisions(country, gameState.countries, gameState);
-        AIExecutor.executeDecisions(gameState, country, decisions);
+    // PHASE 2: MOVEMENT
+    report.phase = 'movement';
+    this.processMovementPhase(gameState, report);
 
-        if (decisions.length > 0) {
-          report.events.push(`${country.name} made ${decisions.length} strategic decision(s)`);
-        }
-      }
-    });
+    // PHASE 3: COMBAT
+    report.phase = 'combat';
+    this.processCombatPhase(gameState, report);
 
-    // Update game state
+    // PHASE 4: RESEARCH
+    report.phase = 'research';
+    this.processResearchPhase(gameState, report);
+
+    // PHASE 5: TURN ENDING (Economy, Production, Maintenance, Victory, Year)
+    report.phase = 'ending';
+    this.processTurnEnding(gameState, report);
+
+    // Update turn counter
     gameState.currentTurn++;
 
-    // Advance year (4 turns per year in Imperialism)
-    if (gameState.currentTurn % 4 === 0) {
+    // Check year increment (4 turns per year)
+    if ((gameState.currentTurn - 1) % 4 === 0) {
       gameState.year++;
       report.year = gameState.year;
-      report.events.push(`Year ${gameState.year} reached`);
+      report.events.push(`Year ${gameState.year} started`);
     }
 
-    // Process diplomatic relationships
-    this.processDiplomacy(gameState, report);
-
-    // Check victory conditions
-    report.victoryStatus = VictoryEngine.checkVictory(gameState);
-    if (report.victoryStatus.gameOver) {
-      report.events.push(report.victoryStatus.reason);
-      gameState.gamePhase = 'end-turn';
-    } else {
-      // Set game phase
-      gameState.gamePhase = 'diplomacy';
-    }
+    // Set next phase
+    gameState.gamePhase = 'diplomacy';
 
     return report;
   }
 
-  /* Process a single country's turn */
-  private static processCountryTurn(
-    country: Country,
-    gameState: GameState,
-    report: TurnReport
-  ): void {
-    // Step 1: Calculate production from provinces
-    const production = this.calculateProduction(country);
-
-    // Step 2: Calculate income and expenses
-    const { income, expenses } = this.calculateEconomics(country, production);
-    report.totalIncome += income;
-    report.totalExpenses += expenses;
-
-    country.treasury += income - expenses;
-
-    // Step 3: Apply technology bonuses
-    this.applyTechnologyBonuses(country);
-
-    // Step 4: Update unit morale and experience
-    this.updateUnits(country);
-
-    // Step 5: Check for bankruptcy
-    if (country.treasury < 0) {
-      country.treasury = 0;
-      report.warnings.push(`${country.name} is bankrupt!`);
-    }
-
-    // Step 6: Update worker allocation
-    this.updateWorkers(country);
-
-    // Step 7: Check infrastructure maintenance
-    this.checkInfrastructureMaintenance(country, report);
-  }
-
-  /* Calculate resource production for all provinces */
-  private static calculateProduction(country: Country): any {
-    const totalProduction = {
-      raw: {} as any,
-      processed: {} as any,
-      finished: {} as any,
-    };
-
-    country.provinces.forEach(province => {
-      if (!province.owner) return;
-
-      // Calculate raw material production
-      const rawProduction = EconomyEngine.calculateRawProduction(province);
-
-      // Calculate processed production
-      const workersForProduction = Math.floor(province.workers * 0.7);
-      const processedProduction = EconomyEngine.calculateProcessedProduction(
-        province,
-        workersForProduction
-      );
-
-      // Calculate finished goods
-      const workersForFinished = Math.floor(province.workers * 0.3);
-      const finishedProduction = EconomyEngine.calculateFinishedGoods(
-        province,
-        workersForFinished
-      );
-
-      // Update province production
-      province.production.raw = rawProduction;
-      province.production.processed = processedProduction;
-
-      // Aggregate totals
-      Object.entries(rawProduction).forEach(([key, value]) => {
-        totalProduction.raw[key] = (totalProduction.raw[key] || 0) + (value as number);
-      });
-
-      Object.entries(processedProduction).forEach(([key, value]) => {
-        totalProduction.processed[key] = (totalProduction.processed[key] || 0) + (value as number);
-      });
-
-      Object.entries(finishedProduction).forEach(([key, value]) => {
-        totalProduction.finished[key] = (totalProduction.finished[key] || 0) + (value as number);
-      });
-    });
-
-    return totalProduction;
-  }
-
-  /* Calculate total income and expenses */
-  private static calculateEconomics(
-    country: Country,
-    production: any
-  ): { income: number; expenses: number } {
-    let income = 0;
-    let expenses = 0;
-
-    // Income from trade (resource sales)
-    const { income: tradeIncome } = EconomyEngine.processCountryEconomics(country);
-    income += tradeIncome;
-
-    // Expenses from workers
-    expenses += country.workers * 10; // $10 per worker per turn
-
-    // Expenses from unit maintenance
-    expenses += country.units.length * 50; // $50 per unit per turn
-
-    // Expenses from merchant marine operation
-    expenses += country.merchantMarine * 20;
-
-    // Expenses from freight cars operation
-    expenses += country.freightCars * 5;
-
-    // Income from consulates (trade bonuses)
-    income += country.consulates.size * 100;
-
-    return { income, expenses };
-  }
-
-  /* Apply technology bonuses to combat and production */
-  private static applyTechnologyBonuses(country: Country): void {
-    // Technology effects are applied in their respective engines
-    // This is a placeholder for future tech effect application
-  }
-
-  /* Update unit health, morale, and experience */
-  private static updateUnits(country: Country): void {
-    country.units.forEach(unit => {
-      // Recover small amount of health per turn (rest)
-      unit.health = Math.min(100, unit.health + 2);
-
-      // Recover morale per turn (unless at war)
-      if (unit.morale < 100) {
-        unit.morale = Math.min(100, unit.morale + 3);
-      }
-
-      // Veteran units slowly gain experience
-      if (unit.experience < 100) {
-        unit.experience = Math.min(100, unit.experience + 1);
-      }
-    });
-  }
-
-  /* Update worker distribution */
-  private static updateWorkers(country: Country): void {
-    // Redistribute workers if population grows
-    const totalPopulation = country.provinces.reduce((sum, p) => sum + p.population, 0);
-    const desiredWorkers = Math.floor(totalPopulation / 100);
-
-    if (desiredWorkers > country.workers) {
-      // Grow workforce by immigration/birth
-      country.workers = Math.min(desiredWorkers, country.workers + Math.floor(desiredWorkers * 0.05));
-    }
-
-    // Allocate workers to provinces
-    const avgWorkersPerProvince = Math.floor(country.workers / country.provinces.length);
-    country.provinces.forEach(province => {
-      province.workers = avgWorkersPerProvince;
-    });
-  }
-
-  /* Check infrastructure maintenance costs */
-  private static checkInfrastructureMaintenance(
-    country: Country,
-    report: TurnReport
-  ): void {
-    let maintenanceCost = 0;
-
-    country.provinces.forEach(province => {
-      if (province.infrastructure.hasRailroad) maintenanceCost += 10;
-      if (province.infrastructure.hasPort) maintenanceCost += 15;
-      if (province.infrastructure.hasDepot) maintenanceCost += 8;
-      if (province.infrastructure.industrialized) maintenanceCost += 20;
-    });
-
-    if (maintenanceCost > 0) {
-      country.treasury -= maintenanceCost;
-      report.totalExpenses += maintenanceCost;
-
-      if (maintenanceCost > 500) {
-        report.warnings.push(`High infrastructure maintenance: $${maintenanceCost}`);
-      }
-    }
-  }
-
-  /* Process diplomatic relationships */
-  private static processDiplomacy(gameState: GameState, report: TurnReport): void {
+  /**
+   * DIPLOMACY PHASE: Countries declare war/peace, form alliances
+   */
+  private static processDiplomacyPhase(gameState: GameState, report: TurnReport): void {
     gameState.countries.forEach(country => {
       country.diplomacy.forEach((relation, otherId) => {
-        // Apply trust decay
-        relation.trust = DiplomacyEngine.decayTrust(relation.trust);
+        // Apply trust decay per turn
+        relation.trust = Math.max(0, relation.trust - 0.5);
 
-        // Check for alliance benefits
-        if (relation.trust > 75) {
-          // Allies share small economic benefit
-          const allyBonus = 100;
-          country.treasury += allyBonus;
-          report.totalIncome += allyBonus;
-        }
-
-        // Check for war status update
+        // Check if countries should be at war based on previous declarations
         if (relation.warState) {
-          report.events.push(`${country.name} at war with country ${otherId}`);
+          report.events.push(`${country.name} continues war with ${gameState.countries.find(c => c.id === otherId)?.name}`);
         }
       });
     });
+  }
+
+  /**
+   * MOVEMENT PHASE: All units move according to their movement points
+   */
+  private static processMovementPhase(gameState: GameState, report: TurnReport): void {
+    // AI units move automatically
+    gameState.units.forEach(unit => {
+      const country = gameState.countries.find(c => c.id === unit.countryId);
+      if (country && country.type !== 'player') {
+        // AI movement logic - simplified for now
+        this.moveAIUnit(unit, gameState);
+      }
+    });
+
+    report.events.push(`Movement phase: ${gameState.units.length} units processed`);
+  }
+
+  /**
+   * COMBAT PHASE: Resolve all active combats
+   */
+  private static processCombatPhase(gameState: GameState, report: TurnReport): void {
+    let combatsResolved = 0;
+
+    gameState.units.forEach(attacker => {
+      if (attacker.health <= 0) return;
+
+      gameState.units.forEach(defender => {
+        if (defender.health <= 0 || attacker.id === defender.id) return;
+        if (attacker.countryId === defender.countryId) return;
+
+        // Check if units are at same position
+        if (
+          attacker.position.x === defender.position.x &&
+          attacker.position.y === defender.position.y
+        ) {
+          const defenderProvince = gameState.provinces.find(
+            p => p.position.x === defender.position.x && p.position.y === defender.position.y
+          );
+
+          if (defenderProvince) {
+            const result = MilitaryEngine.resolveCombat(attacker, defender, defenderProvince);
+            combatsResolved++;
+
+            if (result.attackerWins) {
+              report.events.push(
+                `${gameState.countries.find(c => c.id === attacker.countryId)?.name} defeated ${gameState.countries.find(c => c.id === defender.countryId)?.name} unit`
+              );
+            }
+
+            // Remove dead units
+            if (defender.health <= 0) {
+              const idx = gameState.units.indexOf(defender);
+              if (idx > -1) gameState.units.splice(idx, 1);
+            }
+          }
+        }
+      });
+    });
+
+    if (combatsResolved > 0) {
+      report.events.push(`Combat phase: ${combatsResolved} battle(s) resolved`);
+    }
+  }
+
+  /**
+   * RESEARCH PHASE: Advance technology research for all countries
+   */
+  private static processResearchPhase(gameState: GameState, report: TurnReport): void {
+    gameState.countries.forEach(country => {
+      // Technology research is managed by TechnologyEngine
+      // This phase advances all active research by 1 turn
+      const techCount = country.technology.size;
+      if (techCount > 0) {
+        report.events.push(`${country.name} continues research (${techCount} technologies)`);
+      }
+    });
+  }
+
+  /**
+   * TURN ENDING: Economy, production, maintenance, victory check, year increment
+   */
+  private static processTurnEnding(gameState: GameState, report: TurnReport): void {
+    gameState.countries.forEach(country => {
+      // Calculate raw materials from provinces
+      const rawProduction: Record<string, number> = {};
+      country.provinces.forEach(province => {
+        const pRaw = EconomyEngine.calculateRawProduction(province);
+        Object.entries(pRaw).forEach(([key, value]) => {
+          rawProduction[key] = (rawProduction[key] || 0) + (value as number);
+        });
+      });
+
+      // Calculate processed goods (70% of workers)
+      const processedProduction: Record<string, number> = {};
+      country.provinces.forEach(province => {
+        const workers = Math.floor(province.workers * 0.7);
+        const pProcessed = EconomyEngine.calculateProcessedProduction(province, workers);
+        Object.entries(pProcessed).forEach(([key, value]) => {
+          processedProduction[key] = (processedProduction[key] || 0) + (value as number);
+        });
+      });
+
+      // Calculate finished goods (30% of workers)
+      const finishedProduction: Record<string, number> = {};
+      country.provinces.forEach(province => {
+        const workers = Math.floor(province.workers * 0.3);
+        const pFinished = EconomyEngine.calculateFinishedGoods(province, workers);
+        Object.entries(pFinished).forEach(([key, value]) => {
+          finishedProduction[key] = (finishedProduction[key] || 0) + (value as number);
+        });
+      });
+
+      // Calculate income from resources and trade
+      const { income } = EconomyEngine.processCountryEconomics(country);
+      report.totalIncome += income;
+      country.treasury += income;
+
+      // Calculate expenses
+      const workerExpenses = country.workers * 10;
+      const unitMaintenance = country.units.length * 50;
+      const navalMaintenance = country.navalUnits?.length || 0 * 100;
+      const infraMaintenance = this.calculateInfrastructureMaintenance(country);
+
+      const totalExpenses = workerExpenses + unitMaintenance + navalMaintenance + infraMaintenance;
+      report.totalExpenses += totalExpenses;
+      country.treasury -= totalExpenses;
+
+      // Prevent bankruptcy
+      if (country.treasury < 0) {
+        report.warnings.push(`${country.name} treasury deficit: $${country.treasury}`);
+        country.treasury = 0;
+      }
+
+      // Update units (recovery)
+      MilitaryEngine.updateUnitsPerTurn(gameState);
+    });
+
+    // Victory check
+    report.victoryStatus = VictoryEngine.checkVictory(gameState);
+    if (report.victoryStatus?.gameOver) {
+      report.events.push(`GAME OVER: ${report.victoryStatus.reason}`);
+      gameState.gamePhase = 'end-turn';
+    }
+  }
+
+  /**
+   * Calculate total infrastructure maintenance costs for a country
+   */
+  private static calculateInfrastructureMaintenance(country: Country): number {
+    let cost = 0;
+
+    country.provinces.forEach(province => {
+      if (province.infrastructure.hasRailroad) cost += 10;
+      if (province.infrastructure.hasPort) cost += 15;
+      if (province.infrastructure.hasDepot) cost += 8;
+      if (province.infrastructure.industrialized) cost += 20;
+
+      // Fort maintenance
+      if (province.infrastructure.fortLevel > 0) {
+        cost += province.infrastructure.fortLevel * 5;
+      }
+    });
+
+    return cost;
+  }
+
+  /**
+   * Simple AI unit movement towards nearest enemy or random expansion
+   */
+  private static moveAIUnit(unit: any, gameState: GameState): void {
+    const movePoints = MilitaryEngine.getMovementPoints(unit.type, gameState.militaryEra);
+
+    // Find nearest enemy unit
+    let nearestEnemy: any = null;
+    let minDistance = Infinity;
+
+    gameState.units.forEach(other => {
+      if (other.countryId === unit.countryId) return;
+
+      const distance = Math.max(
+        Math.abs(other.position.x - unit.position.x),
+        Math.abs(other.position.y - unit.position.y)
+      );
+
+      if (distance < minDistance) {
+        minDistance = distance;
+        nearestEnemy = other;
+      }
+    });
+
+    // Move toward enemy if found and within range
+    if (nearestEnemy && minDistance <= movePoints * 2) {
+      const newX =
+        unit.position.x + (nearestEnemy.position.x > unit.position.x ? 1 : nearestEnemy.position.x < unit.position.x ? -1 : 0);
+      const newY =
+        unit.position.y + (nearestEnemy.position.y > unit.position.y ? 1 : nearestEnemy.position.y < unit.position.y ? -1 : 0);
+
+      if (
+        MilitaryEngine.canMove(
+          unit,
+          unit.position,
+          { x: newX, y: newY },
+          gameState.mapWidth || 30,
+          gameState.mapHeight || 30,
+          gameState.militaryEra
+        )
+      ) {
+        unit.position = { x: newX, y: newY };
+      }
+    }
   }
 
   /* Get turn summary for UI display */

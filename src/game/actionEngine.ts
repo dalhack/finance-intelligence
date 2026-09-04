@@ -84,7 +84,7 @@ export class ActionEngine {
     }
 
     // Get unit cost
-    const cost = MilitaryEngine.getUnitCost(unitType, gameState.militaryEra);
+    const cost = MilitaryEngine.getRecruitmentCost(unitType, gameState.militaryEra);
     if (country.treasury < cost) {
       return { success: false, message: `Insufficient funds. Need ${cost}, have ${country.treasury}` };
     }
@@ -287,67 +287,36 @@ export class ActionEngine {
       return { success: false, message: 'Cannot attack own units' };
     }
 
-    // Resolve combat
-    const result = MilitaryEngine.determineCombatWinner(attacker, defender, terrain);
+    // Find defender's province for fort bonus
+    const defenderProvince = gameState.provinces.find(
+      p => p.position.x === defender.position.x && p.position.y === defender.position.y
+    );
 
-    // Apply damage
-    if (result.winner === 'attacker') {
-      defender.health = Math.max(0, defender.health - result.attackerDamage);
-      attacker.health = Math.max(0, attacker.health - result.defenderDamage);
-      attacker.experience += 10;
-
-      if (defender.health === 0) {
-        // Remove defeated unit
-        const idx = gameState.units.indexOf(defender);
-        if (idx > -1) gameState.units.splice(idx, 1);
-
-        const country = gameState.countries.find(c => c.id === defender.countryId);
-        if (country) {
-          const unitIdx = country.units.indexOf(defender);
-          if (unitIdx > -1) country.units.splice(unitIdx, 1);
-        }
-
-        return {
-          success: true,
-          message: `${attacker.countryId} defeated ${defender.countryId} unit`,
-          reward: { experience: 20 },
-        };
-      }
-
-      // Apply morale loss
-      const moraleLoss = MilitaryEngine.calculateMoraleLoss(result.defenderDamage / defender.health);
-      defender.morale = Math.max(0, defender.morale - moraleLoss);
-
-      return {
-        success: true,
-        message: `Combat resolved - ${result.winner} wins`,
-      };
-    } else if (result.winner === 'defender') {
-      attacker.health = Math.max(0, attacker.health - result.defenderDamage);
-      defender.health = Math.max(0, defender.health - result.attackerDamage);
-      defender.experience += 10;
-
-      const moraleLoss = MilitaryEngine.calculateMoraleLoss(result.attackerDamage / attacker.health);
-      attacker.morale = Math.max(0, attacker.morale - moraleLoss);
-
-      return {
-        success: true,
-        message: `Combat resolved - ${result.winner} wins`,
-      };
-    } else {
-      attacker.health = Math.max(0, attacker.health - result.defenderDamage);
-      defender.health = Math.max(0, defender.health - result.attackerDamage);
-
-      return {
-        success: true,
-        message: 'Combat resulted in a draw',
-      };
+    if (!defenderProvince) {
+      return { success: false, message: 'Defender province not found' };
     }
-  }
 
-  // Check if unit should retreat
-  static checkRetreat(unit: Unit): boolean {
-    return MilitaryEngine.shouldRetreat(unit.morale, unit.health);
+    // Resolve combat using exact 1992 mechanics
+    const result = MilitaryEngine.resolveCombat(attacker, defender, defenderProvince);
+
+    // Remove defeated unit if dead
+    if (defender.health <= 0) {
+      const idx = gameState.units.indexOf(defender);
+      if (idx > -1) gameState.units.splice(idx, 1);
+
+      const country = gameState.countries.find(c => c.id === defender.countryId);
+      if (country) {
+        const unitIdx = country.units.indexOf(defender);
+        if (unitIdx > -1) country.units.splice(unitIdx, 1);
+      }
+    }
+
+    const outcome = result.attackerWins ? 'attacker' : 'defender';
+    return {
+      success: true,
+      message: `Combat resolved - ${outcome} wins`,
+      reward: { experience: result.experienceToAttacker },
+    };
   }
 
   // Get all valid actions for a unit

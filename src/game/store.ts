@@ -1,7 +1,6 @@
 import { create } from 'zustand';
-import { GameState, Country, Province, Unit, UnitType } from '../types/index';
-import { generateMap } from './mapGenerator';
-import { initializeCountries } from './countryInitializer';
+import { GameState, Country, Province, Unit, UnitType, GameConfig } from '../types/index';
+import { GameInitializer } from './gameInitializer';
 import { EconomyEngine } from './economyEngine';
 import { DiplomacyEngine } from './diplomacyEngine';
 import { TurnEngine, TurnReport } from './turnEngine';
@@ -50,25 +49,22 @@ export const useGameStore = create<GameStore>((set, get) => ({
   startNewGame: (config) => {
     set({ isLoading: true });
     try {
-      const provinces = generateMap(100, 100, 42);
-      const countries = initializeCountries(
-        config.numCountries,
-        provinces,
-        config.difficulty
-      );
-
-      const gameState: GameState = {
-        currentTurn: 1,
-        year: 1815,
-        currentPlayerCountryId: countries[0].id,
-        countries,
-        provinces,
-        units: countries.flatMap(c => c.units),
-        gamePhase: 'diplomacy',
-        selectedUnit: null,
-        selectedProvince: null,
-        militaryEra: 1,
+      const gameConfig: GameConfig = {
+        map: {
+          width: 30,
+          height: 30,
+          seed: Math.floor(Math.random() * 1000000),
+        },
+        numCountries: config.numCountries,
+        difficulty: config.difficulty,
+        gameSpeed: 'normal',
       };
+
+      const gameState = GameInitializer.initializeGame(gameConfig);
+
+      if (!GameInitializer.validateGameState(gameState)) {
+        throw new Error('Game state validation failed');
+      }
 
       set({ gameState, isLoading: false, error: null });
     } catch (error) {

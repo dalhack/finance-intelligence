@@ -109,7 +109,7 @@ export class GameInitializer {
       let portsBuilt = 0;
       const targetPorts = 2 + Math.floor(Math.random() * 2);
 
-      country.provinces.forEach(province => {
+      country.provinces.forEach((province: any) => {
         if (portsBuilt < targetPorts && Math.random() > 0.7) {
           province.infrastructure.hasPort = true;
           portsBuilt++;

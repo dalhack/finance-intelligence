@@ -52,7 +52,7 @@ export enum ProvinceType {
 
 export interface Unit {
   id: string;
-  type: UnitType;
+  type: string; // Unit type ID (e.g., 'minuteman', 'regulars', 'hussars')
   countryId: string;
   position: Coordinates;
   health: number;
