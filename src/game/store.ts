@@ -94,7 +94,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
       const aiDecisions = new Map<string, AIDecision[]>();
       state.gameState.countries.forEach(country => {
         if (country.type === 'ai') {
-          const decisions = AIEngine.makeDecisions(country, state.gameState!.countries, state.gameState);
+          const decisions = AIEngine.makeDecisions(country, state.gameState!.countries, state.gameState!);
           if (decisions.length > 0) {
             aiDecisions.set(country.id, decisions);
           }

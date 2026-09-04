@@ -1,5 +1,4 @@
-import { Country, Province, Unit, UnitType } from '../types/index';
-import { DiplomacyEngine } from './diplomacyEngine';
+import { Country, Province, Unit, UnitType, GameState } from '../types/index';
 import { TechnologyEngine } from './technologyEngine';
 import { InfrastructureEngine, INFRASTRUCTURE_COSTS } from './infrastructureEngine';
 
@@ -10,36 +9,56 @@ export interface AIDecision {
   reason: string;
 }
 
+export interface AIAnalysis {
+  threatLevel: number;
+  economicStrength: number;
+  diplomacyScore: number;
+  militaryPower: number;
+  techProgress: number;
+  expansionPotential: number;
+}
+
 export class AIEngine {
   /* Main AI decision loop for a country */
   static makeDecisions(
     country: Country,
     allCountries: Country[],
-    gameState: any
+    gameState: GameState
   ): AIDecision[] {
     const decisions: AIDecision[] = [];
 
     // Analyze current state
-    const analysis = this.analyzeState(country, allCountries);
+    const analysis = this.analyzeState(country, allCountries, gameState);
 
-    // Make decisions based on analysis
-    if (analysis.threatLevel > 75) {
-      decisions.push(this.makeDefensiveDecision(country, allCountries, analysis));
-    } else if (analysis.economicStrength > 80) {
-      decisions.push(this.makeExpansionDecision(country, allCountries, analysis));
-    } else if (analysis.diplomacyScore > 60) {
-      decisions.push(this.makeDiplomaticDecision(country, allCountries, analysis));
+    // Determine overall strategy based on analysis
+    const strategy = this.determineStrategy(country, analysis);
+
+    // Make decisions based on strategy
+    switch (strategy) {
+      case 'aggressive':
+        if (analysis.militaryPower > 60) {
+          decisions.push(this.makeExpansionDecision(country, allCountries, analysis));
+        }
+        break;
+      case 'defensive':
+        decisions.push(this.makeDefensiveDecision(country, allCountries, analysis));
+        break;
+      case 'economic':
+        decisions.push(this.makeDiplomaticDecision(country, allCountries, analysis));
+        break;
     }
 
     // Always consider technology research
     const techDecision = this.makeResearchDecision(country);
     if (techDecision) decisions.push(techDecision);
 
-    // Consider infrastructure improvements
-    const infraDecision = this.makeInfrastructureDecision(country);
-    if (infraDecision) decisions.push(infraDecision);
+    // Consider infrastructure improvements if economically strong
+    if (analysis.economicStrength > 50) {
+      const infraDecision = this.makeInfrastructureDecision(country);
+      if (infraDecision) decisions.push(infraDecision);
+    }
 
-    // Consider military unit recruitment
+    // Consider military unit recruitment if strategically needed
     const militaryDecision = this.makeMilitaryDecision(country, analysis);
     if (militaryDecision) decisions.push(militaryDecision);
 
@@ -49,43 +68,75 @@ export class AIEngine {
   /* Analyze current game state */
   private static analyzeState(
     country: Country,
-    allCountries: Country[]
-  ): {
-    threatLevel: number;
-    economicStrength: number;
-    diplomacyScore: number;
-    militaryPower: number;
-  } {
+    allCountries: Country[],
+    gameState: GameState
+  ): AIAnalysis {
     // Calculate threat level from enemies
     let threatLevel = 0;
+    let hostileCount = 0;
     country.diplomacy.forEach((relation, otherId) => {
       if (relation.warState) {
         threatLevel += 50;
+        hostileCount++;
       } else if (relation.trust < 30) {
-        threatLevel += 20;
+        threatLevel += 15;
       }
     });
 
-    // Calculate economic strength
-    const economicStrength = Math.min(100, (country.treasury / 50000) * 100);
+    // Calculate economic strength (relative to $100k target)
+    const economicStrength = Math.min(100, (country.treasury / 100000) * 100);
 
     // Calculate diplomacy score (average trust)
     const avgTrust =
       Array.from(country.diplomacy.values()).reduce((sum, r) => sum + r.trust, 0) /
-      country.diplomacy.size;
+      Math.max(1, country.diplomacy.size);
     const diplomacyScore = avgTrust;
 
     // Calculate military power
     const unitCount = country.units.length;
-    const avgHealth = country.units.reduce((sum, u) => sum + u.health, 0) / Math.max(1, unitCount);
-    const militaryPower = (unitCount * (avgHealth / 100)) * 10;
+    const avgHealth = unitCount > 0
+      ? country.units.reduce((sum, u) => sum + u.health, 0) / unitCount
+      : 100;
+    const militaryPower = unitCount > 0 ? (unitCount * (avgHealth / 100)) * 10 : 0;
+
+    // Calculate technology progress towards victory (12 techs needed)
+    const techProgress = Math.min(100, (country.researchedTechnologies.size / 12) * 100);
+
+    // Calculate expansion potential (how many provinces can be conquered)
+    const totalProvinces = gameState.provinces.length;
+    const ownedProvinces = country.provinces.length;
+    const maxPossibleProvinces = Math.ceil(totalProvinces * 0.6);
+    const expansionPotential = Math.min(100, (ownedProvinces / maxPossibleProvinces) * 100);
 
     return {
       threatLevel: Math.min(100, threatLevel),
       economicStrength,
       diplomacyScore,
       militaryPower,
+      techProgress,
+      expansionPotential,
     };
+  }
+
+  /* Determine overall AI strategy based on analysis */
+  private static determineStrategy(country: Country, analysis: AIAnalysis): 'aggressive' | 'defensive' | 'economic' {
+    // If under threat, go defensive
+    if (analysis.threatLevel > 60) {
+      return 'defensive';
+    }
+
+    // If economically strong and room to expand, go aggressive
+    if (analysis.economicStrength > 70 && analysis.expansionPotential < 80) {
+      return 'aggressive';
+    }
+
+    // If far from victory on any path, focus on economy
+    if (analysis.economicStrength < 50 || analysis.techProgress < 30) {
+      return 'economic';
+    }
+
+    // Default to balanced (defensive)
+    return 'defensive';
   }
 
   /* Make defensive decisions when threatened */
@@ -208,16 +259,27 @@ export class AIEngine {
 
   /* Make research decisions */
   private static makeResearchDecision(country: Country): AIDecision | null {
-    const availableTechs = TechnologyEngine.getAvailableTechnologies(new Set());
+    // Check if already researching something
+    if (country.technology.size > 0) {
+      return null; // Continue current research
+    }
+
+    // Get available technologies (not yet researched, prerequisites met)
+    const availableTechs = TechnologyEngine.getAvailableTechnologies(country.researchedTechnologies);
 
     if (availableTechs.length === 0) return null;
 
-    // Prioritize military research if threatened
-    const priorityTech = availableTechs.find(t =>
-      ['musketry', 'horsemanship', 'artillery_tactics'].includes(t.id)
+    // Prioritize based on victory requirements
+    // First, get the 12 victory technologies
+    const victoryTechs = availableTechs.filter(t =>
+      TechnologyEngine.VICTORY_TECHNOLOGIES.includes(t.id)
     );
 
-    const techToResearch = priorityTech || availableTechs[0];
+    // Sort by era (lower era first for progression)
+    const sortedTechs = (victoryTechs.length > 0 ? victoryTechs : availableTechs)
+      .sort((a, b) => a.era - b.era);
+
+    const techToResearch = sortedTechs[0];
 
     return {
       type: 'research',
