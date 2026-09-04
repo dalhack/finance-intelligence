@@ -3,6 +3,7 @@ import { useGameStore } from '@game/store';
 import { GameMap } from '@components/GameMap';
 import { GameUI } from '@components/GameUI';
 import MusicPlayer from '@components/MusicPlayer';
+import ReferenceViewer from '@components/ReferenceViewer';
 import { getMusicManager } from '@game/musicManager';
 import './styles/App.css';
 
@@ -59,6 +60,7 @@ function App() {
       </div>
 
       <MusicPlayer visible={true} />
+      <ReferenceViewer />
     </div>
   );
 }
