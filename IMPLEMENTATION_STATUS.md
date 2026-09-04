@@ -28,68 +28,66 @@
 - [ ] Merchant marine management
 - [ ] Complete production from provinces
 
+### Phase 4: Military System (COMPLETE) ✅
+- [x] Rewritten to use actual military unit data (MILITARY_UNITS from militaryData.ts)
+- [x] Movement system based on unit type (3-11 points per era, exact Quick Reference Card values)
+- [x] Combat resolution with exact 1992 game mechanics:
+  - Strength = Firepower + Morale/100 + Experience*0.5 + FortBonus(Level*20%)
+  - ±10% random factor applied
+  - Damage: 30 to loser / 10 to winner
+  - Morale: +5 winner / -10 loser
+  - Experience: +3 winner / +1 loser (all capped at 100)
+- [x] Unit recruitment system with cost validation ($500 per unit)
+- [x] Experience and morale system with turn recovery
+- [x] Naval combat system
+- [x] Fort/fortification defense bonuses
+
+### Phase 5: Turn Engine (COMPLETE) ✅
+- [x] 5-phase turn order: Diplomacy → Movement → Combat → Research → Ending
+- [x] Diplomacy phase: Trust decay and war state processing
+- [x] Movement phase: AI unit AI movement toward enemies
+- [x] Combat phase: Automatic combat resolution with MilitaryEngine.resolveCombat()
+- [x] Research phase: Technology research advancement
+- [x] Turn ending: Economy calculations, production, maintenance, victory check, year increment
+
 ---
 
 ## In Progress 🔄
-
-### Phase 4: Military System (PARTIAL)
-**Current State**: `militaryEngine.ts` exists with basic damage calculations
-
-**Needs Enhancement**:
-- [ ] Rewrite to use actual military unit data (MILITARY_UNITS from militaryData.ts)
-- [ ] Movement system based on unit type and terrain
-- [ ] Combat resolution with authentic 1992 game mechanics
-- [ ] Unit recruitment system with cost validation
-- [ ] Experience and morale system
-- [ ] Naval combat system
-- [ ] Fort/fortification defense bonuses
 
 ---
 
 ## TODO: High Priority 🔴
 
-### Phase 5: Turn Engine (CRITICAL)
-- [ ] Complete turn processing cycle:
-  1. Diplomacy phase execution
-  2. Movement phase execution  
-  3. Combat resolution
-  4. Production calculations
-  5. Research advancement
-  6. Resource generation
-  7. Economic calculations
-  8. Victory condition checking
-  9. End-turn cleanup
-
-**File**: `turnEngine.ts` (partially exists, needs completion)
-
-### Phase 6: Diplomatic System
-- [ ] Trust gain/loss mechanics
-- [ ] War declaration system
+### Phase 6: Diplomatic System (CRITICAL)
+- [ ] Trust gain/loss mechanics (±2 per year decay, ±10-20 per action)
+- [ ] War declaration system with -50 trust instant penalty
 - [ ] Peace treaty system
-- [ ] Alliance formation/dissolution
-- [ ] Trade consulate system ($800 cost)
-- [ ] Embassy system ($5,000 cost)
-- [ ] Subsidy/tribute mechanics
+- [ ] Alliance formation/dissolution (+20 trust per year, enables military support)
+- [ ] Trade consulate system ($800 cost, +10 trust per year)
+- [ ] Embassy system ($5,000 cost, +15 trust per year)
+- [ ] Subsidy/tribute mechanics (+5 trust per $1000 given)
 - [ ] Minor nation colonization
+- [ ] Boycott system (blocks trade routes during war)
 
 **File**: `diplomacyEngine.ts` (exists, needs enhancement)
 
-### Phase 7: Technology System
+### Phase 7: Technology System (CRITICAL)
 - [ ] Research queue management
-- [ ] Technology prerequisite system
-- [ ] Technology bonus application (combat, production, movement)
-- [ ] Technology cost/time system
-- [ ] Era advancement through technology
-- [ ] Technology unlock of units/buildings
+- [ ] Technology prerequisite system (some techs require others first)
+- [ ] Technology bonus application (combat +%, production +%, movement +)
+- [ ] Technology cost/time system (2-6 turns per technology)
+- [ ] Era advancement through technology research
+- [ ] Technology unlock of units/buildings (e.g., Ironclads unlock naval units)
+- [ ] 12 key technologies for victory condition
 
 **File**: `technologyEngine.ts` (exists, needs enhancement)
 
-### Phase 8: Victory System  
-- [ ] Victory condition tracking (all 4 paths)
-- [ ] Conquest victory: 60% of world provinces
-- [ ] Economic victory: $100,000+ treasury
-- [ ] Technology victory: 12 key technologies
-- [ ] Time victory: reach year 1920
+### Phase 8: Victory System (HIGH PRIORITY)
+- [ ] Victory condition tracking (all 4 paths with progress display)
+- [ ] Conquest victory: 60% of world provinces (progress: current% / 60%)
+- [ ] Economic victory: $100,000+ treasury (progress: current / $100,000)
+- [ ] Technology victory: 12 key technologies (Musketry, Horsemanship, Artillery, Navigation, Ironclads, Industrialization, Railroads, Steam, Mechanization, Advanced Naval, Industrial Dev, Rifles)
+- [ ] Time victory: reach year 1920 (start 1815, progress: years passed / 105)
 - [ ] Victory display and game over screen
 
 **File**: `victoryEngine.ts` (exists, needs enhancement)
@@ -197,33 +195,36 @@
 
 ---
 
-## Critical Path (Next 5 Steps)
+## Critical Path (Next 5 Steps) - UPDATED
 
-1. **Complete Military Engine** (2-3 hours)
-   - Implement unit movement with terrain/era modifiers
-   - Implement combat with firepower/defense calculations
-   - Connect to MILITARY_UNITS data
+✅ 1. **Complete Military Engine** (DONE - 3 hours)
+   - ✅ Unit movement with exact Quick Reference Card values
+   - ✅ Combat with exact 1992 firepower/defense/morale calculations
+   - ✅ Connected to MILITARY_UNITS data
 
-2. **Implement Turn Engine** (2-3 hours)
-   - Create turn processing pipeline
-   - Handle all phases in correct order
-   - Call appropriate engines each phase
+✅ 2. **Implement Turn Engine** (DONE - 3 hours)
+   - ✅ 5-phase turn processing pipeline (diplomacy → movement → combat → research → ending)
+   - ✅ Correct phase order from original game
+   - ✅ Calls all appropriate engines each phase
 
-3. **Enhance Diplomatic Engine** (1-2 hours)
-   - Implement trust mechanics
-   - War/peace declarations
-   - Alliance system
+**NEXT - CRITICAL**
 
-4. **Enhance Technology Engine** (1-2 hours)
-   - Research progression
-   - Technology effects
-   - Era advancement
+3. **Enhance Diplomatic Engine** (1-2 hours) 
+   - Implement trust mechanics with exact gain/loss values
+   - War/peace declarations with diplomatic status changes
+   - Alliance system with bonuses
+   - Trade consulates ($800) and embassies ($5000)
 
-5. **Create Basic UI** (3-4 hours)
-   - Map rendering
-   - Province selection
-   - Action buttons
-   - Status display
+4. **Enhance Victory Engine** (1-2 hours)
+   - All 4 victory paths with progress tracking
+   - Victory condition checking each turn ending
+   - Victory display and game over
+
+5. **Enhance Technology Engine** (1-2 hours)
+   - Research progression with turn advancement
+   - Technology prerequisites and unlocks
+   - Era advancement system
+   - 12 key technologies for tech victory
 
 ---
 
@@ -267,10 +268,11 @@ Need Major Work:
 
 ## Estimated Remaining Work
 
-- **Critical Path (Playable Game)**: ~12 hours
+- **Critical Path (Playable Game)**: ~6-8 hours (down from 12)
 - **Full Implementation**: ~55 hours total
-- **Current Progress**: ~8 hours completed
-- **Remaining**: ~47 hours
+- **Current Progress**: ~14 hours completed (3 phases fully done, 1-2 partial)
+- **Remaining**: ~41 hours
+- **Next Priority**: Diplomacy Engine → Victory Engine → Technology Engine → AI System
 
 ---
 
