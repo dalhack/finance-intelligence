@@ -1,4 +1,4 @@
-import { Province, Coordinates } from '@types/index';
+import { Province, Coordinates, ProvinceType, Resources } from '@types/index';
 
 // Simple seeded random number generator
 class SeededRandom {
@@ -44,13 +44,35 @@ export function generateMap(width: number, height: number, seed: number): Provin
           x: baseX + offsetX,
           y: baseY + offsetY,
         },
+        type: ProvinceType.Hamlet,
         owner: null,
-        resources: {
-          food: rng.range(50, 200),
-          gold: rng.range(20, 100),
-          production: rng.range(30, 150),
-        },
         population: rng.range(5000, 50000),
+        workers: rng.range(20, 80),
+        resources: {
+          coal: rng.range(0, 50),
+          iron: rng.range(0, 40),
+          trees: rng.range(10, 80),
+          sheep: rng.range(5, 60),
+          cotton: rng.range(0, 50),
+          wheat: rng.range(20, 100),
+          fish: rng.range(0, 40),
+          cloth: 0,
+          lumber: 0,
+          steel: 0,
+          shirts: 0,
+          chairs: 0,
+          hammers: 0,
+        },
+        production: {
+          raw: getEmptyResources(),
+          processed: getEmptyResources(),
+        },
+        infrastructure: {
+          hasRailroad: false,
+          hasPort: false,
+          hasDepot: false,
+          industrialized: false,
+        },
         garrisonUnits: [],
       };
 
@@ -75,4 +97,11 @@ function generateProvinceName(rng: SeededRandom): string {
   const adj = ADJECTIVES[rng.range(0, ADJECTIVES.length)];
   const noun = NOUNS[rng.range(0, NOUNS.length)];
   return `${adj} ${noun}`;
+}
+
+function getEmptyResources(): Resources {
+  return {
+    coal: 0, iron: 0, trees: 0, sheep: 0, cotton: 0, wheat: 0, fish: 0,
+    cloth: 0, lumber: 0, steel: 0, shirts: 0, chairs: 0, hammers: 0,
+  };
 }

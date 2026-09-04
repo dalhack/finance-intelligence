@@ -15,6 +15,23 @@ export enum CountryType {
   AI = 'ai',
 }
 
+export enum ResourceType {
+  Coal = 'coal',
+  Iron = 'iron',
+  Trees = 'trees',
+  Sheep = 'sheep',
+  Cotton = 'cotton',
+  Wheat = 'wheat',
+  Fish = 'fish',
+}
+
+export enum ProvinceType {
+  Hamlet = 'hamlet',
+  Village = 'village',
+  Town = 'town',
+  Capital = 'capital',
+}
+
 export interface Unit {
   id: string;
   type: UnitType;
@@ -24,17 +41,43 @@ export interface Unit {
   experience: number;
 }
 
+export interface Resources {
+  coal: number;
+  iron: number;
+  trees: number;
+  sheep: number;
+  cotton: number;
+  wheat: number;
+  fish: number;
+  // Semi-finished goods
+  cloth: number;
+  lumber: number;
+  steel: number;
+  // Finished goods
+  shirts: number;
+  chairs: number;
+  hammers: number;
+}
+
 export interface Province {
   id: string;
   name: string;
   position: Coordinates;
+  type: ProvinceType;
   owner: string | null;
-  resources: {
-    food: number;
-    gold: number;
-    production: number;
-  };
   population: number;
+  workers: number;
+  resources: Resources;
+  production: {
+    raw: Resources; // Raw material production per turn
+    processed: Resources; // Processed goods per turn
+  };
+  infrastructure: {
+    hasRailroad: boolean;
+    hasPort: boolean;
+    hasDepot: boolean;
+    industrialized: boolean;
+  };
   garrisonUnits: Unit[];
 }
 
@@ -45,8 +88,15 @@ export interface Country {
   treasury: number;
   provinces: Province[];
   units: Unit[];
+  workers: number;
   technology: Map<string, number>;
   diplomacy: Map<string, DiplomaticRelation>;
+  // Transport capacity
+  merchantMarine: number;
+  freightCars: number;
+  // Trade
+  tradeAgreements: Map<string, boolean>;
+  consulates: Set<string>;
 }
 
 export interface DiplomaticRelation {
@@ -65,6 +115,7 @@ export interface GameState {
   gamePhase: 'diplomacy' | 'movement' | 'combat' | 'research' | 'end-turn';
   selectedUnit: Unit | null;
   selectedProvince: Province | null;
+  year: number;
 }
 
 export interface MapConfig {

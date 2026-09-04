@@ -75,30 +75,59 @@ export const GameUI: React.FC = () => {
 
       {/* TRANSPORT Screen */}
       {currentScreen === 'transport' && (
-        <div className="ui-panel">
-          <h2>Transport</h2>
-          <div className="info-content">
-            <p>Merchant Marine: 0</p>
-            <p>Freight Cars: 0</p>
-            <p>Capacity Used: 0%</p>
-            <button className="action-btn">View Routes</button>
-            <button className="action-btn">Allocate</button>
+        <>
+          <div className="ui-panel">
+            <h2>Transport</h2>
+            {currentPlayer && (
+              <div className="info-content">
+                <p>Merchant Marine: {currentPlayer.merchantMarine}</p>
+                <p>Freight Cars: {currentPlayer.freightCars}</p>
+                <p>Consulates: {currentPlayer.consulates.size}</p>
+              </div>
+            )}
           </div>
-        </div>
+          <div className="ui-panel">
+            <div className="info-content">
+              <button className="action-btn">View Routes</button>
+              <button className="action-btn">Allocate</button>
+              <button className="action-btn">Build Consulate</button>
+            </div>
+          </div>
+        </>
       )}
 
       {/* INDUSTRY Screen */}
       {currentScreen === 'industry' && (
-        <div className="ui-panel">
-          <h2>Production</h2>
-          <div className="info-content">
-            <p>Workers: 0</p>
-            <p>Raw Materials: 0</p>
-            <p>Production: 0%</p>
-            <button className="action-btn">Allocate</button>
-            <button className="action-btn">Train Workers</button>
+        <>
+          <div className="ui-panel">
+            <h2>Production</h2>
+            {currentPlayer && (
+              <div className="info-content">
+                <p>Workers: {currentPlayer.workers}</p>
+                <p>Productivity: Good</p>
+              </div>
+            )}
           </div>
-        </div>
+          <div className="ui-panel">
+            <h2>Raw Materials</h2>
+            {selectedProvince ? (
+              <div className="info-content">
+                <p>Coal: {selectedProvince.resources.coal}</p>
+                <p>Iron: {selectedProvince.resources.iron}</p>
+                <p>Trees: {selectedProvince.resources.trees}</p>
+                <p>Wheat: {selectedProvince.resources.wheat}</p>
+              </div>
+            ) : (
+              <p className="empty-message">Select province</p>
+            )}
+          </div>
+          <div className="ui-panel">
+            <div className="info-content">
+              <button className="action-btn">Allocate</button>
+              <button className="action-btn">Train Workers</button>
+            </div>
+          </div>
+        </>
       )}
 
       {/* TRADE Screen */}

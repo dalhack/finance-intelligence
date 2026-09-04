@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { GameState, Country, Province, Unit, UnitType } from '@types/index';
 import { generateMap } from './mapGenerator';
 import { initializeCountries } from './countryInitializer';
+import { EconomyEngine } from './economyEngine';
 
 interface GameStore {
   gameState: GameState | null;
@@ -47,6 +48,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
       const gameState: GameState = {
         currentTurn: 1,
+        year: 1815,
         currentPlayerCountryId: countries[0].id,
         countries,
         provinces,
@@ -75,11 +77,31 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
       const updatedGameState = { ...state.gameState };
       updatedGameState.currentTurn++;
-      updatedGameState.gamePhase = 'diplomacy';
 
-      // TODO: AI turn logic
-      // TODO: Province income/production
-      // TODO: Unit upkeep
+      // Advance year (4 turns per year)
+      if (updatedGameState.currentTurn % 4 === 0) {
+        updatedGameState.year++;
+      }
+
+      // Process economics for each country
+      updatedGameState.countries.forEach(country => {
+        // Calculate production
+        country.provinces.forEach(province => {
+          province.production.raw = EconomyEngine.calculateRawProduction(province);
+          province.production.processed = EconomyEngine.calculateProcessedProduction(province, province.workers);
+        });
+
+        // Calculate income and expenses
+        const { income, expenses } = EconomyEngine.processCountryEconomics(country);
+        country.treasury += income - expenses;
+
+        // Prevent bankruptcy (minimum 0)
+        if (country.treasury < 0) {
+          country.treasury = 0;
+        }
+      });
+
+      updatedGameState.gamePhase = 'diplomacy';
 
       return { gameState: updatedGameState };
     });

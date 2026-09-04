@@ -1,4 +1,4 @@
-import { Country, Province, Unit, UnitType, CountryType } from '@types/index';
+import { Country, Province, Unit, UnitType, CountryType, ProvinceType, Resources } from '@types/index';
 
 const COUNTRY_NAMES = [
   'British Empire', 'French Republic', 'Germanic Confederation', 'Russian Empire',
@@ -18,9 +18,9 @@ export function initializeCountries(
   const selectedProvinces = selectRandomProvinces(provinces, numCountries);
 
   const difficultyMods = {
-    easy: { treasury: 5000, unitBonus: 0 },
-    normal: { treasury: 3000, unitBonus: 2 },
-    hard: { treasury: 2000, unitBonus: 4 },
+    easy: { treasury: 8000, workers: 100, unitBonus: 0, merchant: 5, freight: 10 },
+    normal: { treasury: 5000, workers: 80, unitBonus: 2, merchant: 3, freight: 8 },
+    hard: { treasury: 3000, workers: 60, unitBonus: 4, merchant: 2, freight: 6 },
   };
 
   const mod = difficultyMods[difficulty];
@@ -67,8 +67,21 @@ export function initializeCountries(
       }
     }
 
+    // Initialize province
     baseProvince.owner = countryId;
+    baseProvince.type = isPlayer ? ProvinceType.Capital : ProvinceType.Village;
     baseProvince.garrisonUnits = [startingUnits[0]];
+    baseProvince.workers = 30;
+    baseProvince.infrastructure = {
+      hasRailroad: isPlayer, // Player starts with a railroad
+      hasPort: false,
+      hasDepot: isPlayer,
+      industrialized: false,
+    };
+    baseProvince.production = {
+      raw: getEmptyResources(),
+      processed: getEmptyResources(),
+    };
 
     const country: Country = {
       id: countryId,
@@ -77,12 +90,17 @@ export function initializeCountries(
       treasury: isPlayer ? mod.treasury * 1.5 : mod.treasury,
       provinces: [baseProvince],
       units: startingUnits,
+      workers: mod.workers,
       technology: new Map<string, number>([
         ['agriculture', 1],
         ['military', 1],
         ['trade', 1],
       ]),
       diplomacy: new Map<string, any>(),
+      merchantMarine: mod.merchant,
+      freightCars: mod.freight,
+      tradeAgreements: new Map<string, boolean>(),
+      consulates: new Set<string>(),
     };
 
     countries.push(country);
@@ -121,4 +139,11 @@ function selectRandomProvinces(
   }
 
   return selected;
+}
+
+function getEmptyResources(): Resources {
+  return {
+    coal: 0, iron: 0, trees: 0, sheep: 0, cotton: 0, wheat: 0, fish: 0,
+    cloth: 0, lumber: 0, steel: 0, shirts: 0, chairs: 0, hammers: 0,
+  };
 }
