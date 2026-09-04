@@ -1,4 +1,4 @@
-import { Province, Coordinates, ProvinceType, Resources } from '@types/index';
+import { Province, Coordinates, ProvinceType, Resources } from '../types/index';
 
 // Simple seeded random number generator
 class SeededRandom {

@@ -1,4 +1,4 @@
-import { Country, Province, Unit, UnitType, CountryType, ProvinceType, Resources } from '@types/index';
+import { Country, Province, Unit, UnitType, CountryType, ProvinceType, Resources } from '../types/index';
 
 const COUNTRY_NAMES = [
   'British Empire', 'French Republic', 'Germanic Confederation', 'Russian Empire',
@@ -38,6 +38,7 @@ export function initializeCountries(
         countryId,
         position: { ...baseProvince.position },
         health: 100,
+        morale: 100,
         experience: 0,
       },
       {
@@ -46,6 +47,7 @@ export function initializeCountries(
         countryId,
         position: { x: baseProvince.position.x + 1, y: baseProvince.position.y },
         health: 100,
+        morale: 100,
         experience: 0,
       },
     ];
@@ -62,6 +64,7 @@ export function initializeCountries(
             y: baseProvince.position.y + 1,
           },
           health: 100,
+        morale: 100,
           experience: 0,
         });
       }

@@ -1,4 +1,4 @@
-import { Province } from '@types/index';
+import { Province } from '../types/index';
 
 export interface Infrastructure {
   hasRailroad: boolean;

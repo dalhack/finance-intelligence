@@ -1,4 +1,4 @@
-import { Unit, UnitType } from '@types/index';
+import { Unit, UnitType } from '../types/index';
 
 export interface HexCoordinate {
   q: number; // Column

@@ -1,4 +1,4 @@
-import { GameState, Country } from '@types/index';
+import { GameState, Country } from '../types/index';
 import { EconomyEngine } from './economyEngine';
 import { DiplomacyEngine } from './diplomacyEngine';
 import { TechnologyEngine } from './technologyEngine';

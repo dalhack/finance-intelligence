@@ -1,4 +1,4 @@
-import { Country, Province, Unit, UnitType } from '@types/index';
+import { Country, Province, Unit, UnitType } from '../types/index';
 import { DiplomacyEngine } from './diplomacyEngine';
 import { TechnologyEngine } from './technologyEngine';
 import { InfrastructureEngine, INFRASTRUCTURE_COSTS } from './infrastructureEngine';
@@ -234,7 +234,7 @@ export class AIEngine {
   /* Make infrastructure decisions */
   private static makeInfrastructureDecision(country: Country): AIDecision | null {
     // Find province with most production potential
-    let bestProvince: Province | null = null;
+    let bestProvince: Province | undefined;
     let maxPotential = 0;
 
     country.provinces.forEach(province => {

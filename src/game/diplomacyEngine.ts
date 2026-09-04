@@ -1,4 +1,4 @@
-import { Country, CountryType } from '@types/index';
+import { Country, CountryType } from '../types/index';
 
 export interface MinorNation extends Country {
   ruler: string;

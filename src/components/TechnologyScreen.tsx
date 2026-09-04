@@ -16,7 +16,7 @@ export const TechnologyScreen: React.FC<TechnologyScreenProps> = ({
   const [selectedTech, setSelectedTech] = useState<string | null>(null);
 
   const selectedTechData = selectedTech ? TECHNOLOGIES[selectedTech] : null;
-  const canResearch = selectedTechData
+  const canResearch = selectedTechData && selectedTech
     ? TechnologyEngine.canResearch(selectedTech, researchedTechs, treasury)
     : { canResearch: false };
 

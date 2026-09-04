@@ -9,14 +9,14 @@
   "scripts": {
     "dev": "concurrently \"npm run dev:main\" \"npm run dev:renderer\"",
     "dev:main": "tsc --watch --project tsconfig.main.json",
-    "dev:renderer": "react-scripts start",
+    "dev:renderer": "craco start",
     "build": "npm run build:main && npm run build:renderer",
     "build:main": "tsc --project tsconfig.main.json",
-    "build:renderer": "react-scripts build",
+    "build:renderer": "craco build",
     "electron": "electron .",
     "start": "npm run build:main && electron .",
     "dist": "npm run build && electron-builder",
-    "test": "react-scripts test",
+    "test": "craco test",
     "eject": "react-scripts eject"
   },
   "dependencies": {
@@ -27,8 +27,9 @@
     "zustand": "^4.4.0"
   },
   "devDependencies": {
+    "@craco/craco": "^7.1.0",
     "@types/electron": "^1.6.10",
-    "@types/node": "^20.0.0",
+    "@types/node": "^20.19.43",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "concurrently": "^8.0.0",

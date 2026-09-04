@@ -1,4 +1,4 @@
-import { Country, Province, Resources, ProvinceType } from '@types/index';
+import { Country, Province, Resources, ProvinceType } from '../types/index';
 
 const RESOURCE_PRICES = {
   coal: 50,

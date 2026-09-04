@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { GameState, Country, Province, Unit, UnitType } from '@types/index';
+import { GameState, Country, Province, Unit, UnitType } from '../types/index';
 import { generateMap } from './mapGenerator';
 import { initializeCountries } from './countryInitializer';
 import { EconomyEngine } from './economyEngine';
@@ -164,6 +164,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
         countryId,
         position: { x, y },
         health: 100,
+        morale: 100,
         experience: 0,
       };
 

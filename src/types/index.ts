@@ -38,6 +38,7 @@ export interface Unit {
   countryId: string;
   position: Coordinates;
   health: number;
+  morale: number; // 0-100, units retreat when morale depletes
   experience: number;
 }
 

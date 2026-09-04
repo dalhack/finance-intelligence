@@ -66,9 +66,9 @@ export const GameUI: React.FC = () => {
                 <p><strong>{selectedProvince.name}</strong></p>
                 <p>Owner: {selectedProvince.owner || 'Unclaimed'}</p>
                 <p>Pop: {selectedProvince.population}</p>
-                <p>Food: {selectedProvince.resources.food}</p>
-                <p>Gold: {selectedProvince.resources.gold}</p>
-                <p>Prod: {selectedProvince.resources.production}</p>
+                <p>Wheat: {selectedProvince.resources.wheat}</p>
+                <p>Fish: {selectedProvince.resources.fish}</p>
+                <p>Coal: {selectedProvince.resources.coal}</p>
               </div>
             ) : (
               <p className="empty-message">Select province</p>
