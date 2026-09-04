@@ -3,6 +3,7 @@ import { useGameStore } from '@game/store';
 import { BattleScreen } from './BattleScreen';
 import { TechnologyScreen } from './TechnologyScreen';
 import ActionPanel from './ActionPanel';
+import TurnInfo from './TurnInfo';
 import '../styles/GameUI.css';
 
 type ScreenType = 'map' | 'transport' | 'industry' | 'trade' | 'diplomacy' | 'battle' | 'research';
@@ -29,6 +30,9 @@ export const GameUI: React.FC = () => {
 
   return (
     <aside className="game-ui">
+      {/* Turn Info */}
+      <TurnInfo />
+
       {/* Screen Tabs */}
       <div className="ui-panel">
         <div className="phase-buttons">
