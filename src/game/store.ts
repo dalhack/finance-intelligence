@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { GameState, Country, Province, Unit, UnitType, GameConfig } from '../types/index';
 import { GameInitializer } from './gameInitializer';
 import { TurnEngine, TurnReport } from './turnEngine';
-import { ActionEngine, ActionResult } from './actionEngine';
+import { ActionResult } from './actionEngine';
 
 interface GameStore {
   gameState: GameState | null;
