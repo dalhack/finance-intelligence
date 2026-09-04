@@ -160,6 +160,7 @@ export interface DiplomaticRelation {
   trust: number;
   tradeAgreement: boolean;
   warState: boolean;
+  alliance?: boolean;
 }
 
 export interface GameState {

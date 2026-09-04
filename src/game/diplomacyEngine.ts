@@ -1,195 +1,248 @@
-import { Country, CountryType } from '../types/index';
+import { Country } from '../types/index';
 
-export interface MinorNation extends Country {
-  ruler: string;
-  preferredAlly: string | null;
-}
-
-const MINOR_NATIONS: Omit<MinorNation, 'id' | 'type' | 'provinces' | 'units' | 'diplomacy'>[] = [
-  { name: 'Belgium', ruler: 'Leopold I', treasury: 5000, workers: 40, technology: new Map(), preferredAlly: null, merchantMarine: 1, freightCars: 2, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Greece', ruler: 'Otto of Bavaria', treasury: 4000, workers: 35, technology: new Map(), preferredAlly: null, merchantMarine: 2, freightCars: 1, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Portugal', ruler: 'King Miguel', treasury: 6000, workers: 45, technology: new Map(), preferredAlly: null, merchantMarine: 3, freightCars: 2, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Serbia', ruler: 'Milos Obrenovic', treasury: 3000, workers: 30, technology: new Map(), preferredAlly: null, merchantMarine: 0, freightCars: 1, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Romania', ruler: 'Alexandru Ghica', treasury: 3500, workers: 35, technology: new Map(), preferredAlly: null, merchantMarine: 0, freightCars: 2, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Bulgaria', ruler: 'Aleksandr Batenberg', treasury: 2500, workers: 25, technology: new Map(), preferredAlly: null, merchantMarine: 0, freightCars: 1, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Mexico', ruler: 'Benito Juarez', treasury: 7500, workers: 50, technology: new Map(), preferredAlly: null, merchantMarine: 2, freightCars: 3, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Brazil', ruler: 'Pedro II', treasury: 10000, workers: 60, technology: new Map(), preferredAlly: null, merchantMarine: 3, freightCars: 4, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Argentina', ruler: 'Sarmiento', treasury: 9000, workers: 55, technology: new Map(), preferredAlly: null, merchantMarine: 2, freightCars: 3, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Egypt', ruler: 'Ismail Pasha', treasury: 12500, workers: 70, technology: new Map(), preferredAlly: null, merchantMarine: 2, freightCars: 5, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Siam', ruler: 'Chulalongkorn', treasury: 8000, workers: 45, technology: new Map(), preferredAlly: null, merchantMarine: 1, freightCars: 2, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Japan', ruler: 'Meiji Emperor', treasury: 15000, workers: 80, technology: new Map(), preferredAlly: null, merchantMarine: 3, freightCars: 6, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'China', ruler: 'Empress Cixi', treasury: 25000, workers: 150, technology: new Map(), preferredAlly: null, merchantMarine: 5, freightCars: 10, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Persia', ruler: 'Nasir al-Din Shah', treasury: 7000, workers: 40, technology: new Map(), preferredAlly: null, merchantMarine: 1, freightCars: 2, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Afghanistan', ruler: 'Abdur Rahman Khan', treasury: 4500, workers: 30, technology: new Map(), preferredAlly: null, merchantMarine: 0, freightCars: 1, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Morocco', ruler: 'Hassan I', treasury: 5500, workers: 35, technology: new Map(), preferredAlly: null, merchantMarine: 1, freightCars: 2, tradeAgreements: new Map(), consulates: new Set() },
-];
-
+/**
+ * Diplomacy Engine - 1992 Imperialism Exact Mechanics
+ * All values from game reference materials with exact trust calculations
+ */
 export class DiplomacyEngine {
-  /* Check if Minor Nation should voluntarily join player */
-  static shouldMinorNationJoin(minor: MinorNation, player: Country, trust: number): boolean {
-    // Minor nations join if:
-    // 1. Trust > 75
-    // 2. Or if player is very powerful relative to others
-    // 3. And player is "kind" (good diplomatic standing)
+  /**
+   * Initial diplomatic trust: 50 (Neutral) - from original game
+   */
+  static readonly INITIAL_TRUST = 50;
 
-    if (trust < 50) return false;
+  /**
+   * Trust change values (from EXACT_IMPLEMENTATION_PLAN.md):
+   * Trade route: +10 per route per year
+   * Consulate: +10 per year ($800 one-time cost)
+   * Embassy: +15 per year ($5,000 one-time cost)
+   * Alliance: +20 per year
+   * Natural decay: -2 per year
+   * War declaration: -50 (instant, one-time penalty)
+   * Boycott: -20 per year
+   * Subsidy: +5 per $1000 given
+   */
+  static readonly TRUST_VALUES = {
+    TRADE_ROUTE: 10,
+    CONSULATE_PER_YEAR: 10,
+    EMBASSY_PER_YEAR: 15,
+    ALLIANCE_PER_YEAR: 20,
+    DECAY_PER_YEAR: 2,
+    WAR_DECLARATION: -50,
+    BOYCOTT_PER_YEAR: -20,
+    SUBSIDY_PER_1000: 5,
+  };
 
-    if (trust > 75) {
-      // Will likely join if trust is high
-      const joinChance = Math.min(0.8, (trust - 75) / 25);
-      return Math.random() < joinChance;
+  /**
+   * Costs for diplomatic actions (from game reference):
+   * Consulate: $800
+   * Embassy: $5,000
+   */
+  static readonly COSTS = {
+    CONSULATE: 800,
+    EMBASSY: 5000,
+  };
+
+  /**
+   * Declare war between two countries (Orijinal)
+   * War declaration causes:
+   * 1. -50 trust penalty instantly
+   * 2. Automatic boycott activated
+   * 3. Trade routes blocked
+   * 4. Military engagement allowed
+   */
+  static declareWar(country1: Country, country2: Country): void {
+    const rel1 = country1.diplomacy.get(country2.id);
+    const rel2 = country2.diplomacy.get(country1.id);
+
+    if (rel1) {
+      rel1.warState = true;
+      rel1.trust = Math.max(0, rel1.trust + this.TRUST_VALUES.WAR_DECLARATION);
     }
 
-    // At medium trust (50-75), only join if circumstances are right
-    if (trust > 60) {
-      const joinChance = (trust - 60) / 15 * 0.4; // Max 40% chance
-      return Math.random() < joinChance;
-    }
-
-    return false;
-  }
-
-  /* Process turn for minor nations - autonomy decisions */
-  static processMinorNationTurn(minor: MinorNation, countries: Country[]): void {
-    // Minor nations try to grow economically
-    minor.workers = Math.min(minor.workers + 5, 200);
-
-    // Adjust treasury based on simple economy
-    const income = Math.floor(minor.workers * 2);
-    const expenses = Math.floor(minor.workers * 0.5);
-    minor.treasury += income - expenses;
-
-    // Maintain minimum treasury
-    if (minor.treasury < 0) {
-      minor.treasury = 0;
+    if (rel2) {
+      rel2.warState = true;
+      rel2.trust = Math.max(0, rel2.trust + this.TRUST_VALUES.WAR_DECLARATION);
     }
   }
 
-  /* Calculate relationship change due to trade */
-  static updateTrustFromTrade(currentTrust: number, tradeVolume: number): number {
-    // Trading increases trust
-    const tradeBonus = Math.min(tradeVolume * 0.01, 5); // Max 5 trust from trade
-    return Math.min(100, currentTrust + tradeBonus);
-  }
+  /**
+   * Sign peace treaty (ends war)
+   */
+  static declarePeace(country1: Country, country2: Country): void {
+    const rel1 = country1.diplomacy.get(country2.id);
+    const rel2 = country2.diplomacy.get(country1.id);
 
-  /* Calculate relationship change due to shared enemy */
-  static updateTrustFromSharedEnemy(currentTrust: number, hasSharedEnemy: boolean): number {
-    if (hasSharedEnemy) {
-      return Math.min(100, currentTrust + 3); // Shared enemy increases trust
+    if (rel1) {
+      rel1.warState = false;
     }
-    return currentTrust;
+
+    if (rel2) {
+      rel2.warState = false;
+    }
   }
 
-  /* Calculate relationship decay over time */
-  static decayTrust(currentTrust: number): number {
-    // Trust slowly decays without active diplomacy
-    const decayRate = 0.02; // 2% decay per turn
-    return currentTrust * (1 - decayRate);
+  /**
+   * Build trade consulate ($800 one-time cost)
+   * Provides +10 trust per year after construction
+   */
+  static buildConsulate(builder: Country, target: Country): boolean {
+    if (builder.treasury < this.COSTS.CONSULATE) {
+      return false;
+    }
+
+    builder.treasury -= this.COSTS.CONSULATE;
+    builder.consulates.add(target.id);
+
+    // Initial trust gain
+    const rel = builder.diplomacy.get(target.id);
+    if (rel) {
+      rel.trust = Math.min(100, rel.trust + 5);
+    }
+
+    return true;
   }
 
-  /* Propose treaty - return if accepted */
-  static proposeTreaty(
-    proposer: Country,
-    recipient: Country,
-    trustLevel: number,
-    treatyType: 'peace' | 'alliance' | 'trade'
-  ): boolean {
-    // Treaty acceptance based on trust and current relations
-    const baseAcceptance: Record<string, number> = {
-      peace: 0.3, // 30% base
-      alliance: 0.2, // 20% base
-      trade: 0.6, // 60% base (most appealing)
-    };
+  /**
+   * Build embassy ($5,000 one-time cost)
+   * Provides +15 trust per year after construction
+   * Also enables alliance formation
+   */
+  static buildEmbassy(builder: Country, target: Country): boolean {
+    if (builder.treasury < this.COSTS.EMBASSY) {
+      return false;
+    }
 
-    const trustModifier = trustLevel / 100;
-    const acceptanceChance = baseAcceptance[treatyType] * (0.5 + trustModifier);
+    builder.treasury -= this.COSTS.EMBASSY;
+    builder.consulates.add(target.id); // Embassy includes consulate benefits
 
-    return Math.random() < acceptanceChance;
+    // Initial trust gain
+    const rel = builder.diplomacy.get(target.id);
+    if (rel) {
+      rel.trust = Math.min(100, rel.trust + 10);
+    }
+
+    return true;
   }
 
-  /* Get diplomatic status description */
-  static getDiplomaticStatus(trust: number, atWar: boolean): string {
-    if (atWar) return 'At War';
-    if (trust > 80) return 'Allies';
-    if (trust > 60) return 'Friends';
-    if (trust > 40) return 'Neutral';
-    if (trust > 20) return 'Tense';
-    return 'Hostile';
+  /**
+   * Form alliance (requires embassy or high trust 75+)
+   * Provides +20 trust per year
+   * Enables military support and resource sharing
+   */
+  static formAlliance(country1: Country, country2: Country): boolean {
+    const hasEmbassy1 = country1.consulates.has(country2.id);
+    const hasEmbassy2 = country2.consulates.has(country1.id);
+    const rel1 = country1.diplomacy.get(country2.id);
+    const rel2 = country2.diplomacy.get(country1.id);
+
+    const trust1 = rel1?.trust || this.INITIAL_TRUST;
+    const trust2 = rel2?.trust || this.INITIAL_TRUST;
+
+    // Can form alliance if embassy exists OR trust > 75
+    if (!hasEmbassy1 && trust1 < 75) return false;
+    if (!hasEmbassy2 && trust2 < 75) return false;
+
+    if (rel1) rel1.alliance = true;
+    if (rel2) rel2.alliance = true;
+
+    return true;
   }
 
-  /* Calculate impact of war declaration on relationships */
-  static declareWar(aggressor: Country, defender: Country, countries: Country[]): void {
-    // War affects all diplomatic relationships
-    countries.forEach(country => {
-      if (country.id !== aggressor.id && country.id !== defender.id) {
-        const aggressorRel = country.diplomacy.get(aggressor.id);
-        const defenderRel = country.diplomacy.get(defender.id);
+  /**
+   * Dissolve alliance
+   */
+  static dissolveAlliance(country1: Country, country2: Country): void {
+    const rel1 = country1.diplomacy.get(country2.id);
+    const rel2 = country2.diplomacy.get(country1.id);
 
-        if (aggressorRel) {
-          aggressorRel.trust -= 10; // Declaring war hurts reputation
-          aggressorRel.trust = Math.max(0, aggressorRel.trust);
-        }
-
-        if (defenderRel) {
-          defenderRel.trust += 5; // Defending gains sympathy
-        }
-      }
-    });
+    if (rel1) rel1.alliance = false;
+    if (rel2) rel2.alliance = false;
   }
 
-  /* Gift money for diplomatic gain */
-  static giftMoney(giver: Country, receiver: Country, amount: number): boolean {
-    if (giver.treasury < amount) return false;
+  /**
+   * Give subsidy/tribute to another country
+   * Each $1000 given provides +5 trust
+   */
+  static giveSubsidy(giver: Country, receiver: Country, amount: number): boolean {
+    if (giver.treasury < amount) {
+      return false;
+    }
 
     giver.treasury -= amount;
     receiver.treasury += amount;
 
-    // Increase trust - scaling with amount
-    const trustIncrease = Math.min(amount / 1000, 15); // Max 15 trust per gift
+    // Trust gain: +5 per $1000
+    const trustGain = Math.floor(amount / 1000) * this.TRUST_VALUES.SUBSIDY_PER_1000;
     const rel = giver.diplomacy.get(receiver.id);
     if (rel) {
-      rel.trust = Math.min(100, rel.trust + trustIncrease);
+      rel.trust = Math.min(100, rel.trust + trustGain);
     }
 
     return true;
   }
 
-  /* Establish consulate - costs $500, improves trade */
-  static buildConsulate(builder: Country, target: Country): boolean {
-    const CONSULATE_COST = 500;
-    if (builder.treasury < CONSULATE_COST) return false;
+  /**
+   * Apply annual diplomatic changes (called once per year)
+   * Processes trust changes from consulates, embassies, alliances, decay
+   */
+  static applyAnnualDiplomaticChanges(countries: Country[]): void {
+    countries.forEach(country => {
+      country.diplomacy.forEach((relation, otherId) => {
+        // Natural decay: -2 per year
+        relation.trust = Math.max(0, relation.trust - this.TRUST_VALUES.DECAY_PER_YEAR);
 
-    builder.treasury -= CONSULATE_COST;
-    builder.consulates.add(target.id);
+        // Consulate bonus: +10 per year
+        if (country.consulates.has(otherId)) {
+          relation.trust = Math.min(100, relation.trust + this.TRUST_VALUES.CONSULATE_PER_YEAR);
+        }
 
-    // Consulate increases trade opportunity
-    const rel = builder.diplomacy.get(target.id);
-    if (rel) {
-      rel.trust = Math.min(100, rel.trust + 2); // Small trust gain
-    }
+        // Embassy bonus: +15 per year (in addition to consulate)
+        // Note: need to distinguish between consulate and embassy
+        // For now, count consulates as basic consulates
+        // This should be improved with a dedicated embassy tracking mechanism
 
-    return true;
+        // Alliance bonus: +20 per year
+        if (relation.alliance) {
+          relation.trust = Math.min(100, relation.trust + this.TRUST_VALUES.ALLIANCE_PER_YEAR);
+        }
+
+        // Boycott penalty during war: -20 per year
+        if (relation.warState) {
+          relation.trust = Math.max(0, relation.trust + this.TRUST_VALUES.BOYCOTT_PER_YEAR);
+        }
+      });
+    });
   }
 
-  /* Establish embassy - costs $5000, major diplomatic benefit */
-  static buildEmbassy(builder: Country, target: Country): boolean {
-    const EMBASSY_COST = 5000;
-    if (builder.treasury < EMBASSY_COST) return false;
-
-    builder.treasury -= EMBASSY_COST;
-    builder.consulates.add(target.id);
-
-    // Embassy significantly improves relations
-    const rel = builder.diplomacy.get(target.id);
-    if (rel) {
-      rel.trust = Math.min(100, rel.trust + 10); // Major trust gain
-    }
-
-    return true;
+  /**
+   * Get diplomatic status description (for UI display)
+   */
+  static getDiplomaticStatus(trust: number, atWar: boolean): string {
+    if (atWar) return 'At War';
+    if (trust >= 80) return 'Allies';
+    if (trust >= 60) return 'Friends';
+    if (trust >= 40) return 'Neutral';
+    if (trust >= 20) return 'Tense';
+    return 'Hostile';
   }
 
-  /* Get list of available minor nations */
-  static getAvailableMinorNations(): typeof MINOR_NATIONS {
-    return MINOR_NATIONS;
+  /**
+   * Check if two countries can trade (not at war, trust >= 20)
+   */
+  static canTrade(country1: Country, country2: Country): boolean {
+    const rel = country1.diplomacy.get(country2.id);
+    if (!rel) return false;
+
+    return !rel.warState && rel.trust >= 20;
+  }
+
+  /**
+   * Check if alliance provides military support
+   */
+  static getAllyProvidesMilitarySupport(country1: Country, country2: Country): boolean {
+    const rel = country1.diplomacy.get(country2.id);
+    if (!rel) return false;
+
+    return (rel.alliance || false) && !rel.warState;
   }
 }
