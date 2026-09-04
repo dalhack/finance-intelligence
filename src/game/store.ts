@@ -3,6 +3,7 @@ import { GameState, Country, Province, Unit, UnitType } from '@types/index';
 import { generateMap } from './mapGenerator';
 import { initializeCountries } from './countryInitializer';
 import { EconomyEngine } from './economyEngine';
+import { DiplomacyEngine } from './diplomacyEngine';
 
 interface GameStore {
   gameState: GameState | null;
