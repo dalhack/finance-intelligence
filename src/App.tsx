@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useGameStore } from '@game/store';
 import { GameMap } from '@components/GameMap';
 import { GameUI } from '@components/GameUI';
+import MusicPlayer from '@components/MusicPlayer';
+import { getMusicManager } from '@game/musicManager';
 import './styles/App.css';
 
 function App() {
@@ -9,12 +11,25 @@ function App() {
   const startNewGame = useGameStore(s => s.startNewGame);
   const isLoading = useGameStore(s => s.isLoading);
   const error = useGameStore(s => s.error);
+  const musicManager = getMusicManager();
 
   useEffect(() => {
     if (!gameState) {
       startNewGame({ numCountries: 6, difficulty: 'normal' });
+    } else {
+      // Map game phases to music phases
+      const musicPhaseMap: Record<string, 'menu' | 'diplomacy' | 'movement' | 'combat' | 'victory' | 'defeat' | 'ambient'> = {
+        diplomacy: 'diplomacy',
+        movement: 'movement',
+        combat: 'combat',
+        research: 'ambient',
+        'end-turn': 'ambient',
+      };
+
+      const musicPhase = musicPhaseMap[gameState.gamePhase] || 'ambient';
+      musicManager.playPhaseMusic(musicPhase);
     }
-  }, []);
+  }, [gameState?.gamePhase]);
 
   if (isLoading) {
     return <div className="app loading">Starting game...</div>;
@@ -42,6 +57,8 @@ function App() {
         <GameMap />
         <GameUI />
       </div>
+
+      <MusicPlayer visible={true} />
     </div>
   );
 }
