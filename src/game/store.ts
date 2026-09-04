@@ -4,11 +4,15 @@ import { generateMap } from './mapGenerator';
 import { initializeCountries } from './countryInitializer';
 import { EconomyEngine } from './economyEngine';
 import { DiplomacyEngine } from './diplomacyEngine';
+import { TurnEngine, TurnReport } from './turnEngine';
+import { AIEngine, AIDecision } from './aiEngine';
 
 interface GameStore {
   gameState: GameState | null;
   isLoading: boolean;
   error: string | null;
+  lastTurnReport: TurnReport | null;
+  lastAIDecisions: Map<string, AIDecision[]> | null;
 
   // Game initialization
   startNewGame: (config: { numCountries: number; difficulty: 'easy' | 'normal' | 'hard' }) => void;
@@ -36,6 +40,8 @@ export const useGameStore = create<GameStore>((set, get) => ({
   gameState: null,
   isLoading: false,
   error: null,
+  lastTurnReport: null,
+  lastAIDecisions: null,
 
   startNewGame: (config) => {
     set({ isLoading: true });
@@ -76,35 +82,33 @@ export const useGameStore = create<GameStore>((set, get) => ({
     set((state) => {
       if (!state.gameState) return state;
 
-      const updatedGameState = { ...state.gameState };
-      updatedGameState.currentTurn++;
+      const previousBalance = state.gameState.countries.find(
+        c => c.id === state.gameState!.currentPlayerCountryId
+      )?.treasury || 0;
 
-      // Advance year (4 turns per year)
-      if (updatedGameState.currentTurn % 4 === 0) {
-        updatedGameState.year++;
-      }
+      // Use TurnEngine to process the turn
+      const turnReport = TurnEngine.processTurn(state.gameState);
 
-      // Process economics for each country
-      updatedGameState.countries.forEach(country => {
-        // Calculate production
-        country.provinces.forEach(province => {
-          province.production.raw = EconomyEngine.calculateRawProduction(province);
-          province.production.processed = EconomyEngine.calculateProcessedProduction(province, province.workers);
-        });
-
-        // Calculate income and expenses
-        const { income, expenses } = EconomyEngine.processCountryEconomics(country);
-        country.treasury += income - expenses;
-
-        // Prevent bankruptcy (minimum 0)
-        if (country.treasury < 0) {
-          country.treasury = 0;
+      // Get AI decisions from computer players
+      const aiDecisions = new Map<string, AIDecision[]>();
+      state.gameState.countries.forEach(country => {
+        if (country.type === 'ai') {
+          const decisions = AIEngine.makeDecisions(country, state.gameState!.countries, state.gameState);
+          if (decisions.length > 0) {
+            aiDecisions.set(country.id, decisions);
+          }
         }
       });
 
-      updatedGameState.gamePhase = 'diplomacy';
+      const currentBalance = state.gameState.countries.find(
+        c => c.id === state.gameState!.currentPlayerCountryId
+      )?.treasury || 0;
 
-      return { gameState: updatedGameState };
+      return {
+        gameState: { ...state.gameState },
+        lastTurnReport: turnReport,
+        lastAIDecisions: aiDecisions,
+      };
     });
   },
 
