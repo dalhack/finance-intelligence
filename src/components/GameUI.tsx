@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { useGameStore } from '@game/store';
+import { BattleScreen } from './BattleScreen';
+import { TechnologyScreen } from './TechnologyScreen';
 import '../styles/GameUI.css';
 
-type ScreenType = 'map' | 'transport' | 'industry' | 'trade' | 'diplomacy';
+type ScreenType = 'map' | 'transport' | 'industry' | 'trade' | 'diplomacy' | 'battle' | 'research';
 
 export const GameUI: React.FC = () => {
   const gameState = useGameStore(s => s.gameState);
@@ -20,6 +22,8 @@ export const GameUI: React.FC = () => {
     { id: 'industry', label: 'INDUSTRY' },
     { id: 'trade', label: 'TRADE' },
     { id: 'diplomacy', label: 'DIPLOMACY' },
+    { id: 'research', label: 'RESEARCH' },
+    { id: 'battle', label: 'BATTLE' },
   ];
 
   return (
@@ -156,6 +160,26 @@ export const GameUI: React.FC = () => {
             <button className="action-btn">Declare War</button>
           </div>
         </div>
+      )}
+
+      {/* RESEARCH Screen */}
+      {currentScreen === 'research' && currentPlayer && (
+        <TechnologyScreen
+          researchedTechs={new Set()}
+          treasury={currentPlayer.treasury}
+          onResearch={(techId) => console.log('Research:', techId)}
+        />
+      )}
+
+      {/* BATTLE Screen */}
+      {currentScreen === 'battle' && (
+        <BattleScreen
+          side1Units={[]}
+          side2Units={[]}
+          terrain="plain"
+          turn={gameState.currentTurn}
+          onClose={() => setCurrentScreen('map')}
+        />
       )}
 
       {/* Footer */}
