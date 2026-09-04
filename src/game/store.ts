@@ -1,10 +1,7 @@
 import { create } from 'zustand';
 import { GameState, Country, Province, Unit, UnitType, GameConfig } from '../types/index';
 import { GameInitializer } from './gameInitializer';
-import { EconomyEngine } from './economyEngine';
-import { DiplomacyEngine } from './diplomacyEngine';
 import { TurnEngine, TurnReport } from './turnEngine';
-import { AIEngine, AIDecision } from './aiEngine';
 import { ActionEngine, ActionResult } from './actionEngine';
 
 interface GameStore {
@@ -12,7 +9,6 @@ interface GameStore {
   isLoading: boolean;
   error: string | null;
   lastTurnReport: TurnReport | null;
-  lastAIDecisions: Map<string, AIDecision[]> | null;
 
   // Game initialization
   startNewGame: (config: { numCountries: number; difficulty: 'easy' | 'normal' | 'hard' }) => void;
@@ -45,7 +41,6 @@ export const useGameStore = create<GameStore>((set, get) => ({
   isLoading: false,
   error: null,
   lastTurnReport: null,
-  lastAIDecisions: null,
 
   startNewGame: (config) => {
     set({ isLoading: true });
@@ -88,32 +83,11 @@ export const useGameStore = create<GameStore>((set, get) => ({
     set((state) => {
       if (!state.gameState) return state;
 
-      const previousBalance = state.gameState.countries.find(
-        c => c.id === state.gameState!.currentPlayerCountryId
-      )?.treasury || 0;
-
-      // Use TurnEngine to process the turn
       const turnReport = TurnEngine.processTurn(state.gameState);
-
-      // Get AI decisions from computer players
-      const aiDecisions = new Map<string, AIDecision[]>();
-      state.gameState.countries.forEach(country => {
-        if (country.type === 'ai') {
-          const decisions = AIEngine.makeDecisions(country, state.gameState!.countries, state.gameState!);
-          if (decisions.length > 0) {
-            aiDecisions.set(country.id, decisions);
-          }
-        }
-      });
-
-      const currentBalance = state.gameState.countries.find(
-        c => c.id === state.gameState!.currentPlayerCountryId
-      )?.treasury || 0;
 
       return {
         gameState: { ...state.gameState },
         lastTurnReport: turnReport,
-        lastAIDecisions: aiDecisions,
       };
     });
   },

@@ -1,6 +1,6 @@
-import { Country, Province, Unit, UnitType, GameState } from '../types/index';
+import { Country, Province, UnitType, GameState } from '../types/index';
 import { TechnologyEngine } from './technologyEngine';
-import { InfrastructureEngine, INFRASTRUCTURE_COSTS } from './infrastructureEngine';
+import { INFRASTRUCTURE_COSTS } from './infrastructureEngine';
 
 export interface AIDecision {
   type: 'diplomacy' | 'military' | 'economic' | 'infrastructure' | 'research';
@@ -73,11 +73,9 @@ export class AIEngine {
   ): AIAnalysis {
     // Calculate threat level from enemies
     let threatLevel = 0;
-    let hostileCount = 0;
-    country.diplomacy.forEach((relation, otherId) => {
+    country.diplomacy.forEach((relation) => {
       if (relation.warState) {
         threatLevel += 50;
-        hostileCount++;
       } else if (relation.trust < 30) {
         threatLevel += 15;
       }

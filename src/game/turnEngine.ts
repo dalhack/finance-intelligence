@@ -1,9 +1,10 @@
 import { GameState, Country } from '../types/index';
 import { MilitaryEngine } from './militaryEngine';
 import { EconomyEngine } from './economyEngine';
-import { DiplomacyEngine } from './diplomacyEngine';
 import { TechnologyEngine } from './technologyEngine';
 import { VictoryEngine, VictoryStatus } from './victoryEngine';
+import { AIEngine } from './aiEngine';
+import { AIActionExecutor } from './aiActionExecutor';
 
 export interface TurnReport {
   turn: number;
@@ -35,6 +36,10 @@ export class TurnEngine {
       events: [],
       warnings: [],
     };
+
+    // PHASE 0: AI DECISION MAKING & EXECUTION
+    report.phase = 'ai-actions';
+    this.processAIDecisions(gameState, report);
 
     // PHASE 1: DIPLOMACY
     report.phase = 'diplomacy';
@@ -70,6 +75,28 @@ export class TurnEngine {
     gameState.gamePhase = 'diplomacy';
 
     return report;
+  }
+
+  /**
+   * AI DECISION MAKING & EXECUTION: Get AI decisions and execute them
+   */
+  private static processAIDecisions(gameState: GameState, report: TurnReport): void {
+    const aiDecisions = new Map<string, any[]>();
+
+    gameState.countries.forEach(country => {
+      if (country.type === 'ai') {
+        const decisions = AIEngine.makeDecisions(country, gameState.countries, gameState);
+        if (decisions.length > 0) {
+          aiDecisions.set(country.id, decisions);
+        }
+      }
+    });
+
+    if (aiDecisions.size > 0) {
+      const executionResult = AIActionExecutor.executeDecisions(gameState, aiDecisions);
+      report.events.push(`AI actions executed: ${executionResult.success} successful, ${executionResult.failed} failed`);
+      executionResult.messages.forEach(msg => report.events.push(msg));
+    }
   }
 
   /**
