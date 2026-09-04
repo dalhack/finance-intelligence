@@ -17,6 +17,7 @@ interface GameStore {
   // Game initialization
   startNewGame: (config: { numCountries: number; difficulty: 'easy' | 'normal' | 'hard' }) => void;
   loadGame: (saveData: GameState) => void;
+  loadGameState: (gameState: GameState) => void;
 
   // Game state updates
   nextTurn: () => void;
@@ -77,6 +78,10 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
   loadGame: (saveData) => {
     set({ gameState: saveData });
+  },
+
+  loadGameState: (gameState) => {
+    set({ gameState, isLoading: false, error: null });
   },
 
   nextTurn: () => {
