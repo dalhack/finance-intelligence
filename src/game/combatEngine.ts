@@ -20,7 +20,6 @@ export interface Battle {
   terrain: string; // Type of terrain (mountain, plain, forest, etc)
   currentTurn: number;
   victor: string | null; // country id of winner
-  unitStats: Record<UnitType, UnitStats>;
 }
 
 export interface UnitStats {
@@ -33,7 +32,7 @@ export interface UnitStats {
   cost: number;
 }
 
-const UNIT_STATS: Record<UnitType, UnitStats> = {
+const UNIT_STATS: Record<string, UnitStats> = {
   [UnitType.Infantry]: {
     attack: 6,
     defense: 5,

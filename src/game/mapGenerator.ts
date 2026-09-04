@@ -37,6 +37,15 @@ export function generateMap(width: number, height: number, seed: number): Provin
       const offsetX = rng.range(0, cellSize);
       const offsetY = rng.range(0, cellSize);
 
+      const resources = getEmptyResources();
+      resources.coal = rng.range(0, 50);
+      resources.iron = rng.range(0, 40);
+      resources.trees = rng.range(10, 80);
+      resources.sheep = rng.range(5, 60);
+      resources.cotton = rng.range(0, 50);
+      resources.wheat = rng.range(20, 100);
+      resources.fish = rng.range(0, 40);
+
       const province: Province = {
         id: provinceId,
         name: generateProvinceName(rng),
@@ -45,24 +54,11 @@ export function generateMap(width: number, height: number, seed: number): Provin
           y: baseY + offsetY,
         },
         type: ProvinceType.Hamlet,
+        terrain: 'grassland',
         owner: null,
         population: rng.range(5000, 50000),
         workers: rng.range(20, 80),
-        resources: {
-          coal: rng.range(0, 50),
-          iron: rng.range(0, 40),
-          trees: rng.range(10, 80),
-          sheep: rng.range(5, 60),
-          cotton: rng.range(0, 50),
-          wheat: rng.range(20, 100),
-          fish: rng.range(0, 40),
-          cloth: 0,
-          lumber: 0,
-          steel: 0,
-          shirts: 0,
-          chairs: 0,
-          hammers: 0,
-        },
+        resources,
         production: {
           raw: getEmptyResources(),
           processed: getEmptyResources(),
@@ -72,8 +68,10 @@ export function generateMap(width: number, height: number, seed: number): Provin
           hasPort: false,
           hasDepot: false,
           industrialized: false,
+          fortLevel: 0,
         },
         garrisonUnits: [],
+        developmentLevel: 0,
       };
 
       provinces.push(province);
@@ -102,6 +100,8 @@ function generateProvinceName(rng: SeededRandom): string {
 function getEmptyResources(): Resources {
   return {
     coal: 0, iron: 0, trees: 0, sheep: 0, cotton: 0, wheat: 0, fish: 0,
-    cloth: 0, lumber: 0, steel: 0, shirts: 0, chairs: 0, hammers: 0,
+    oil: 0, gold: 0, gems: 0, livestock: 0, wool: 0, fruit: 0, timber: 0, horses: 0, grain: 0,
+    cloth: 0, lumber: 0, steel: 0, paper: 0, fabric: 0, fuel: 0,
+    shirts: 0, chairs: 0, hammers: 0, canned_food: 0, clothing: 0, furniture: 0, hardware: 0, power: 0,
   };
 }

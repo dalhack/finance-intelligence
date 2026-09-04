@@ -1,6 +1,6 @@
 import { Country, Province, Resources, ProvinceType } from '../types/index';
 
-const RESOURCE_PRICES = {
+const RESOURCE_PRICES: Record<string, number> = {
   coal: 50,
   iron: 70,
   trees: 40,
@@ -8,13 +8,37 @@ const RESOURCE_PRICES = {
   cotton: 80,
   wheat: 20,
   fish: 35,
+  oil: 90,
+  gold: 200,
+  gems: 500,
+  livestock: 70,
+  wool: 65,
+  fruit: 40,
+  timber: 45,
+  horses: 150,
+  grain: 25,
   cloth: 120,
   lumber: 90,
   steel: 200,
+  paper: 60,
+  fabric: 130,
+  fuel: 110,
   shirts: 250,
   chairs: 220,
   hammers: 280,
+  canned_food: 180,
+  clothing: 300,
+  furniture: 280,
+  hardware: 400,
+  power: 0,
 };
+
+const getEmptyResources = (): Resources => ({
+  coal: 0, iron: 0, trees: 0, sheep: 0, cotton: 0, wheat: 0, fish: 0,
+  oil: 0, gold: 0, gems: 0, livestock: 0, wool: 0, fruit: 0, timber: 0, horses: 0, grain: 0,
+  cloth: 0, lumber: 0, steel: 0, paper: 0, fabric: 0, fuel: 0,
+  shirts: 0, chairs: 0, hammers: 0, canned_food: 0, clothing: 0, furniture: 0, hardware: 0, power: 0,
+});
 
 const WORKER_COST = 10; // $ per worker per turn
 const UNIT_MAINTENANCE = 50; // $ per unit per turn
@@ -24,10 +48,7 @@ const EMBASSY_COST = 5000; // $ one-time cost
 export class EconomyEngine {
   /* Calculate raw material production for a province */
   static calculateRawProduction(province: Province): Resources {
-    const production: Resources = {
-      coal: 0, iron: 0, trees: 0, sheep: 0, cotton: 0, wheat: 0, fish: 0,
-      cloth: 0, lumber: 0, steel: 0, shirts: 0, chairs: 0, hammers: 0,
-    };
+    const production = getEmptyResources();
 
     if (!province.owner) return production;
 
@@ -46,10 +67,7 @@ export class EconomyEngine {
     province: Province,
     availableWorkers: number
   ): Resources {
-    const production: Resources = {
-      coal: 0, iron: 0, trees: 0, sheep: 0, cotton: 0, wheat: 0, fish: 0,
-      cloth: 0, lumber: 0, steel: 0, shirts: 0, chairs: 0, hammers: 0,
-    };
+    const production = getEmptyResources();
 
     if (!province.owner || availableWorkers === 0) return production;
 
@@ -85,10 +103,7 @@ export class EconomyEngine {
 
   /* Calculate finished goods from processed materials */
   static calculateFinishedGoods(province: Province, workers: number): Resources {
-    const production: Resources = {
-      coal: 0, iron: 0, trees: 0, sheep: 0, cotton: 0, wheat: 0, fish: 0,
-      cloth: 0, lumber: 0, steel: 0, shirts: 0, chairs: 0, hammers: 0,
-    };
+    const production = getEmptyResources();
 
     if (!province.owner || workers === 0) return production;
 
@@ -156,10 +171,7 @@ export class EconomyEngine {
 
   /* Check if resources are wasted (not transported/used) */
   static identifyWastedResources(province: Province): Resources {
-    const wasted: Resources = {
-      coal: 0, iron: 0, trees: 0, sheep: 0, cotton: 0, wheat: 0, fish: 0,
-      cloth: 0, lumber: 0, steel: 0, shirts: 0, chairs: 0, hammers: 0,
-    };
+    const wasted = getEmptyResources();
 
     // Resources are wasted if:
     // 1. Province has no railroad/port connection

@@ -8,6 +8,15 @@ export enum UnitType {
   Cavalry = 'cavalry',
   Artillery = 'artillery',
   Navy = 'navy',
+  // Civilian units
+  Prospector = 'prospector',
+  Engineer = 'engineer',
+  Developer = 'developer',
+  Miner = 'miner',
+  Rancher = 'rancher',
+  Farmer = 'farmer',
+  Forester = 'forester',
+  Driller = 'driller',
 }
 
 export enum CountryType {
@@ -23,6 +32,15 @@ export enum ResourceType {
   Cotton = 'cotton',
   Wheat = 'wheat',
   Fish = 'fish',
+  Oil = 'oil',
+  Gold = 'gold',
+  Gems = 'gems',
+  Livestock = 'livestock',
+  Wool = 'wool',
+  Fruit = 'fruit',
+  Timber = 'timber',
+  Horses = 'horses',
+  Grain = 'grain',
 }
 
 export enum ProvinceType {
@@ -40,9 +58,25 @@ export interface Unit {
   health: number;
   morale: number; // 0-100, units retreat when morale depletes
   experience: number;
+  era?: number; // Military era (1-3)
+}
+
+export interface NavalUnit {
+  id: string;
+  type: string; // e.g., 'frigate', 'ironclad', 'dreadnought'
+  countryId: string;
+  seaZone: number; // Sea zone position
+  health: number;
+  firepower: number;
+  range: number;
+  armor: number;
+  hull: number;
+  speed: number;
+  experience: number;
 }
 
 export interface Resources {
+  // Raw materials
   coal: number;
   iron: number;
   trees: number;
@@ -50,14 +84,31 @@ export interface Resources {
   cotton: number;
   wheat: number;
   fish: number;
+  oil: number;
+  gold: number;
+  gems: number;
+  livestock: number;
+  wool: number;
+  fruit: number;
+  timber: number;
+  horses: number;
+  grain: number;
   // Semi-finished goods
   cloth: number;
   lumber: number;
   steel: number;
+  paper: number;
+  fabric: number;
+  fuel: number;
   // Finished goods
   shirts: number;
   chairs: number;
   hammers: number;
+  canned_food: number;
+  clothing: number;
+  furniture: number;
+  hardware: number;
+  power: number;
 }
 
 export interface Province {
@@ -65,6 +116,7 @@ export interface Province {
   name: string;
   position: Coordinates;
   type: ProvinceType;
+  terrain: string; // Terrain type from TERRAIN_DATA
   owner: string | null;
   population: number;
   workers: number;
@@ -78,8 +130,10 @@ export interface Province {
     hasPort: boolean;
     hasDepot: boolean;
     industrialized: boolean;
+    fortLevel: number; // 0-3
   };
   garrisonUnits: Unit[];
+  developmentLevel: number; // 0-3, for resource production scaling
 }
 
 export interface Country {
@@ -89,6 +143,7 @@ export interface Country {
   treasury: number;
   provinces: Province[];
   units: Unit[];
+  navalUnits?: NavalUnit[];
   workers: number;
   technology: Map<string, number>;
   diplomacy: Map<string, DiplomaticRelation>;
@@ -117,6 +172,7 @@ export interface GameState {
   selectedUnit: Unit | null;
   selectedProvince: Province | null;
   year: number;
+  militaryEra: number; // 1-3, determines available military units
 }
 
 export interface MapConfig {

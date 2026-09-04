@@ -63,6 +63,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
         gamePhase: 'diplomacy',
         selectedUnit: null,
         selectedProvince: null,
+        militaryEra: 1,
       };
 
       set({ gameState, isLoading: false, error: null });

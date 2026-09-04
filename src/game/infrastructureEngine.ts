@@ -12,6 +12,9 @@ const INFRASTRUCTURE_COSTS = {
   port: 6000,
   depot: 3000,
   industrialize: 8000,
+  fort_level_1: 3000,
+  fort_level_2: 5000,
+  fort_level_3: 8000,
 };
 
 const INFRASTRUCTURE_BONUSES = {

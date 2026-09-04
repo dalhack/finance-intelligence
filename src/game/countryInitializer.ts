@@ -80,7 +80,9 @@ export function initializeCountries(
       hasPort: false,
       hasDepot: isPlayer,
       industrialized: false,
+      fortLevel: 0,
     };
+    baseProvince.developmentLevel = 0;
     baseProvince.production = {
       raw: getEmptyResources(),
       processed: getEmptyResources(),
@@ -93,6 +95,7 @@ export function initializeCountries(
       treasury: isPlayer ? mod.treasury * 1.5 : mod.treasury,
       provinces: [baseProvince],
       units: startingUnits,
+      navalUnits: [],
       workers: mod.workers,
       technology: new Map<string, number>([
         ['agriculture', 1],
@@ -146,7 +149,12 @@ function selectRandomProvinces(
 
 function getEmptyResources(): Resources {
   return {
+    // Raw materials
     coal: 0, iron: 0, trees: 0, sheep: 0, cotton: 0, wheat: 0, fish: 0,
-    cloth: 0, lumber: 0, steel: 0, shirts: 0, chairs: 0, hammers: 0,
+    oil: 0, gold: 0, gems: 0, livestock: 0, wool: 0, fruit: 0, timber: 0, horses: 0, grain: 0,
+    // Semi-finished goods
+    cloth: 0, lumber: 0, steel: 0, paper: 0, fabric: 0, fuel: 0,
+    // Finished goods
+    shirts: 0, chairs: 0, hammers: 0, canned_food: 0, clothing: 0, furniture: 0, hardware: 0, power: 0,
   };
 }
