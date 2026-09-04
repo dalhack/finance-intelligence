@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useGameStore } from '@game/store';
+import { ActionEngine } from '@game/actionEngine';
 import { BattleScreen } from './BattleScreen';
 import { TechnologyScreen } from './TechnologyScreen';
 import ActionPanel from './ActionPanel';
@@ -160,11 +161,18 @@ export const GameUI: React.FC = () => {
       )}
 
       {/* RESEARCH Screen */}
-      {currentScreen === 'research' && currentPlayer && (
+      {currentScreen === 'research' && currentPlayer && gameState && (
         <TechnologyScreen
           researchedTechs={currentPlayer.researchedTechnologies}
           treasury={currentPlayer.treasury}
-          onResearch={(techId) => console.log('Research:', techId)}
+          onResearch={(techId) => {
+            const result = ActionEngine.researchTechnology(gameState, currentPlayer.id, techId);
+            if (result.success) {
+              console.log('Research started:', techId);
+            } else {
+              console.error('Research failed:', result.message);
+            }
+          }}
         />
       )}
 
