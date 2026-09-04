@@ -5,6 +5,7 @@ import { TechnologyEngine } from './technologyEngine';
 import { InfrastructureEngine } from './infrastructureEngine';
 import { AIEngine, AIDecision } from './aiEngine';
 import { AIExecutor } from './aiExecutor';
+import { VictoryEngine, VictoryStatus } from './victoryEngine';
 
 export interface TurnReport {
   turn: number;
@@ -13,6 +14,7 @@ export interface TurnReport {
   totalExpenses: number;
   events: string[];
   warnings: string[];
+  victoryStatus?: VictoryStatus;
 }
 
 export class TurnEngine {
@@ -55,8 +57,15 @@ export class TurnEngine {
     // Process diplomatic relationships
     this.processDiplomacy(gameState, report);
 
-    // Set game phase
-    gameState.gamePhase = 'diplomacy';
+    // Check victory conditions
+    report.victoryStatus = VictoryEngine.checkVictory(gameState);
+    if (report.victoryStatus.gameOver) {
+      report.events.push(report.victoryStatus.reason);
+      gameState.gamePhase = 'end-turn';
+    } else {
+      // Set game phase
+      gameState.gamePhase = 'diplomacy';
+    }
 
     return report;
   }
