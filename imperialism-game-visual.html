@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Imperialism 1992 macOS</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Times New Roman', serif;
+            background: #2d1810;
+            color: #daa;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        .wood-frame {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                repeating-linear-gradient(90deg, #5a3a20 0px, #6b4a2a 2px, #4a2a10 4px, #5a3a20 6px),
+                repeating-linear-gradient(0deg, #6b4a2a 0px, #7a5a3a 1px, #5a3a20 2px),
+                linear-gradient(135deg, #8b6a4a 0%, #5a3a20 100%);
+            border: 15px solid;
+            border-color: #8b7355 #3d2415 #3d2415 #8b7355;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.8),
+                        inset 0 0 20px rgba(0,0,0,0.5),
+                        0 0 20px rgba(0,0,0,0.9);
+        }
+
+        .game-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+        }
+
+        .status-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(180deg, #8b6a4a 0%, #6b4a2a 100%);
+            border-bottom: 2px solid #3d2415;
+            display: flex;
+            align-items: center;
+            padding: 0 15px;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+        }
+
+        .season-info { flex: 1; }
+        .treasury-info { margin: 0 30px; }
+        .player-info { margin-right: 15px; }
+
+        .map-area {
+            position: absolute;
+            top: 50px;
+            left: 15px;
+            right: 350px;
+            bottom: 15px;
+            background: #1a5030;
+            border: 3px solid #3d2415;
+            overflow: hidden;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .right-panel {
+            position: absolute;
+            top: 50px;
+            right: 15px;
+            width: 330px;
+            bottom: 15px;
+            background: linear-gradient(90deg, #6b4a2a 0%, #8b6a4a 100%);
+            border: 3px solid #3d2415;
+            display: flex;
+            flex-direction: column;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
+        }
+
+        .panel-header {
+            background: linear-gradient(180deg, #9b7a5a 0%, #7b5a3a 100%);
+            padding: 10px;
+            border-bottom: 2px solid #3d2415;
+            text-align: center;
+            font-weight: bold;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        .panel-content {
+            flex: 1;
+            padding: 12px;
+            overflow-y: auto;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        .stat-line {
+            margin: 8px 0;
+            display: flex;
+            justify-content: space-between;
+            padding: 4px;
+            background: rgba(0,0,0,0.2);
+            border: 1px solid rgba(139, 106, 74, 0.5);
+        }
+
+        .stat-label { color: #d4a574; font-weight: bold; }
+        .stat-value { color: #ffee99; font-weight: bold; }
+
+        .button-row {
+            display: flex;
+            gap: 6px;
+            margin: 10px 0;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 8px;
+            background: linear-gradient(180deg, #9b7a5a 0%, #7b5a3a 100%);
+            border: 2px outset #d4a574;
+            color: #daa;
+            cursor: pointer;
+            font-size: 10px;
+            font-weight: bold;
+            font-family: 'Times New Roman', serif;
+            transition: all 0.1s;
+        }
+
+        .btn:hover {
+            background: linear-gradient(180deg, #ab8a6a 0%, #8b6a4a 100%);
+        }
+
+        .btn:active {
+            border-style: inset;
+        }
+
+        .province-info {
+            background: rgba(0,0,0,0.3);
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #8b6a4a;
+        }
+
+        .info-title {
+            color: #ffee99;
+            font-weight: bold;
+            margin-bottom: 4px;
+            text-decoration: underline;
+        }
+
+        .resources {
+            font-size: 9px;
+            margin-top: 6px;
+        }
+
+        .resource-item {
+            margin: 2px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .minimap {
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            width: 150px;
+            height: 150px;
+            background: #000;
+            border: 2px solid #8b6a4a;
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.8);
+        }
+
+        .minimap-label {
+            position: absolute;
+            top: -20px;
+            right: 0;
+            font-size: 9px;
+            font-weight: bold;
+            color: #d4a574;
+        }
+    </style>
+</head>
+<body>
+    <div class="wood-frame">
+        <div class="game-container">
+            <!-- Status Bar -->
+            <div class="status-bar">
+                <div class="season-info">Fall, 1818</div>
+                <div class="treasury-info">Treasury: $21,143</div>
+                <div class="player-info">Great Britain</div>
+            </div>
+
+            <!-- Map Area -->
+            <div class="map-area">
+                <canvas id="gameMap"></canvas>
+            </div>
+
+            <!-- Right Panel -->
+            <div class="right-panel">
+                <div class="panel-header">GREAT BRITAIN</div>
+                <div class="panel-content">
+                    <div class="stat-line">
+                        <span class="stat-label">Provinces:</span>
+                        <span class="stat-value">9</span>
+                    </div>
+                    <div class="stat-line">
+                        <span class="stat-label">Military:</span>
+                        <span class="stat-value">Excellent</span>
+                    </div>
+                    <div class="stat-line">
+                        <span class="stat-label">Industry:</span>
+                        <span class="stat-value">Awesome</span>
+                    </div>
+                    <div class="stat-line">
+                        <span class="stat-label">Population:</span>
+                        <span class="stat-value">2,543,000</span>
+                    </div>
+                    <div class="stat-line">
+                        <span class="stat-label">Workers:</span>
+                        <span class="stat-value">890</span>
+                    </div>
+
+                    <div class="province-info">
+                        <div class="info-title">Selected: London</div>
+                        <div class="stat-line">
+                            <span class="stat-label">Terrain:</span>
+                            <span class="stat-value">Grassland</span>
+                        </div>
+                        <div class="stat-line">
+                            <span class="stat-label">Terrain:</span>
+                            <span class="stat-value">Develop</span>
+                        </div>
+                        <div class="resources">
+                            <div class="resource-item">
+                                <span>Wheat</span>
+                                <span>245</span>
+                            </div>
+                            <div class="resource-item">
+                                <span>Coal</span>
+                                <span>128</span>
+                            </div>
+                            <div class="resource-item">
+                                <span>Iron</span>
+                                <span>89</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="button-row">
+                        <button class="btn">Build</button>
+                        <button class="btn">Select</button>
+                    </div>
+                    <div class="button-row">
+                        <button class="btn">End Turn</button>
+                    </div>
+                </div>
+
+                <div class="minimap-label">Minimap</div>
+                <canvas class="minimap" id="minimap"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('gameMap');
+        const ctx = canvas.getContext('2d');
+        const minimap = document.getElementById('minimap');
+        const minimapCtx = minimap.getContext('2d');
+
+        // Resize canvas
+        function resizeCanvas() {
+            canvas.width = document.querySelector('.map-area').clientWidth;
+            canvas.height = document.querySelector('.map-area').clientHeight;
+            drawMap();
+        }
+
+        // Tile colors
+        const terrainColors = {
+            grassland: '#3a7a3a',
+            forest: '#1a4a1a',
+            mountain: '#8a8a8a',
+            desert: '#c4a460',
+            ocean: '#1a3a6a',
+            coast: '#3a5a7a'
+        };
+
+        const countries = {
+            'gb': '#cc3333',
+            'france': '#3366cc',
+            'germany': '#33cc33',
+            'spain': '#cccc33',
+            'russia': '#cc33cc'
+        };
+
+        // Generate map data
+        function generateMapData() {
+            const map = [];
+            for (let y = 0; y < 40; y++) {
+                map[y] = [];
+                for (let x = 0; x < 60; x++) {
+                    const rand = Math.random();
+                    let terrain;
+
+                    if (y < 3 || y > 37 || x < 3 || x > 57) {
+                        terrain = 'ocean';
+                    } else if (rand < 0.15) {
+                        terrain = 'mountain';
+                    } else if (rand < 0.3) {
+                        terrain = 'forest';
+                    } else if (rand < 0.5) {
+                        terrain = 'grassland';
+                    } else if (rand < 0.7) {
+                        terrain = 'desert';
+                    } else {
+                        terrain = 'coast';
+                    }
+
+                    map[y][x] = {
+                        terrain: terrain,
+                        owner: null,
+                        units: []
+                    };
+                }
+            }
+
+            // Assign provinces
+            const provinces = [
+                { name: 'London', x: 8, y: 10, owner: 'gb', units: [{type: 'infantry', x: 8, y: 10}] },
+                { name: 'Paris', x: 15, y: 12, owner: 'france', units: [{type: 'cavalry', x: 15, y: 12}] },
+                { name: 'Berlin', x: 22, y: 8, owner: 'germany', units: [{type: 'militia', x: 22, y: 8}] },
+                { name: 'Moscow', x: 35, y: 5, owner: 'russia', units: [] }
+            ];
+
+            provinces.forEach(province => {
+                for (let y = province.y - 2; y <= province.y + 2; y++) {
+                    for (let x = province.x - 2; x <= province.x + 2; x++) {
+                        if (y >= 0 && y < 40 && x >= 0 && x < 60 && map[y][x].terrain !== 'ocean') {
+                            map[y][x].owner = province.owner;
+                            map[y][x].units = province.units;
+                        }
+                    }
+                }
+            });
+
+            return { tiles: map, provinces: provinces };
+        }
+
+        const mapData = generateMapData();
+
+        function drawMap() {
+            const tileWidth = canvas.width / 60;
+            const tileHeight = canvas.height / 40;
+
+            for (let y = 0; y < 40; y++) {
+                for (let x = 0; x < 60; x++) {
+                    const tile = mapData.tiles[y][x];
+
+                    // Draw terrain
+                    ctx.fillStyle = terrainColors[tile.terrain];
+                    ctx.fillRect(x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+
+                    // Draw grid
+                    ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+                    ctx.lineWidth = 0.5;
+                    ctx.strokeRect(x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+
+                    // Draw province borders
+                    if (tile.owner && (x === 0 || mapData.tiles[y][x-1].owner !== tile.owner)) {
+                        ctx.strokeStyle = countries[tile.owner];
+                        ctx.lineWidth = 2;
+                        ctx.beginPath();
+                        ctx.moveTo(x * tileWidth, y * tileHeight);
+                        ctx.lineTo(x * tileWidth, (y + 1) * tileHeight);
+                        ctx.stroke();
+                    }
+
+                    // Draw units
+                    if (tile.units && tile.units.length > 0) {
+                        ctx.fillStyle = countries[tile.owner];
+                        ctx.beginPath();
+                        ctx.arc(x * tileWidth + tileWidth / 2, y * tileHeight + tileHeight / 2, tileWidth / 3, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.strokeStyle = '#fff';
+                        ctx.lineWidth = 1.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function drawMinimap() {
+            const tileWidth = 150 / 60;
+            const tileHeight = 150 / 40;
+
+            for (let y = 0; y < 40; y++) {
+                for (let x = 0; x < 60; x++) {
+                    const tile = mapData.tiles[y][x];
+
+                    if (tile.owner) {
+                        minimapCtx.fillStyle = countries[tile.owner];
+                    } else {
+                        minimapCtx.fillStyle = terrainColors[tile.terrain];
+                    }
+
+                    minimapCtx.fillRect(x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+                }
+            }
+        }
+
+        // Event listeners
+        window.addEventListener('resize', resizeCanvas);
+        canvas.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = Math.floor((e.clientX - rect.left) / (rect.width / 60));
+            const y = Math.floor((e.clientY - rect.top) / (rect.height / 40));
+            console.log(`Clicked: (${x}, ${y})`);
+        });
+
+        // Initialize
+        resizeCanvas();
+        drawMinimap();
+    </script>
+</body>
+</html>
