@@ -18,9 +18,9 @@ export function initializeCountries(
   const selectedProvinces = selectRandomProvinces(provinces, numCountries);
 
   const difficultyMods = {
-    easy: { treasury: 8000, workers: 100, unitBonus: 0, merchant: 5, freight: 10 },
-    normal: { treasury: 5000, workers: 80, unitBonus: 2, merchant: 3, freight: 8 },
-    hard: { treasury: 3000, workers: 60, unitBonus: 4, merchant: 2, freight: 6 },
+    easy: { treasury: 50000, workers: 100, unitBonus: 0, merchant: 5, freight: 10 },
+    normal: { treasury: 30000, workers: 80, unitBonus: 2, merchant: 3, freight: 8 },
+    hard: { treasury: 20000, workers: 60, unitBonus: 4, merchant: 2, freight: 6 },
   };
 
   const mod = difficultyMods[difficulty];

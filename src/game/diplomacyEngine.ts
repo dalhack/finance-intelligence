@@ -6,22 +6,22 @@ export interface MinorNation extends Country {
 }
 
 const MINOR_NATIONS: Omit<MinorNation, 'id' | 'type' | 'provinces' | 'units' | 'diplomacy'>[] = [
-  { name: 'Belgium', ruler: 'Leopold I', treasury: 1000, workers: 40, technology: new Map(), preferredAlly: null, merchantMarine: 1, freightCars: 2, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Greece', ruler: 'Otto of Bavaria', treasury: 800, workers: 35, technology: new Map(), preferredAlly: null, merchantMarine: 2, freightCars: 1, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Portugal', ruler: 'King Miguel', treasury: 1200, workers: 45, technology: new Map(), preferredAlly: null, merchantMarine: 3, freightCars: 2, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Serbia', ruler: 'Milos Obrenovic', treasury: 600, workers: 30, technology: new Map(), preferredAlly: null, merchantMarine: 0, freightCars: 1, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Romania', ruler: 'Alexandru Ghica', treasury: 700, workers: 35, technology: new Map(), preferredAlly: null, merchantMarine: 0, freightCars: 2, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Bulgaria', ruler: 'Aleksandr Batenberg', treasury: 500, workers: 25, technology: new Map(), preferredAlly: null, merchantMarine: 0, freightCars: 1, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Mexico', ruler: 'Benito Juarez', treasury: 1500, workers: 50, technology: new Map(), preferredAlly: null, merchantMarine: 2, freightCars: 3, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Brazil', ruler: 'Pedro II', treasury: 2000, workers: 60, technology: new Map(), preferredAlly: null, merchantMarine: 3, freightCars: 4, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Argentina', ruler: 'Sarmiento', treasury: 1800, workers: 55, technology: new Map(), preferredAlly: null, merchantMarine: 2, freightCars: 3, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Egypt', ruler: 'Ismail Pasha', treasury: 2500, workers: 70, technology: new Map(), preferredAlly: null, merchantMarine: 2, freightCars: 5, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Siam', ruler: 'Chulalongkorn', treasury: 1600, workers: 45, technology: new Map(), preferredAlly: null, merchantMarine: 1, freightCars: 2, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Japan', ruler: 'Meiji Emperor', treasury: 3000, workers: 80, technology: new Map(), preferredAlly: null, merchantMarine: 3, freightCars: 6, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'China', ruler: 'Empress Cixi', treasury: 5000, workers: 150, technology: new Map(), preferredAlly: null, merchantMarine: 5, freightCars: 10, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Persia', ruler: 'Nasir al-Din Shah', treasury: 1400, workers: 40, technology: new Map(), preferredAlly: null, merchantMarine: 1, freightCars: 2, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Afghanistan', ruler: 'Abdur Rahman Khan', treasury: 900, workers: 30, technology: new Map(), preferredAlly: null, merchantMarine: 0, freightCars: 1, tradeAgreements: new Map(), consulates: new Set() },
-  { name: 'Morocco', ruler: 'Hassan I', treasury: 1100, workers: 35, technology: new Map(), preferredAlly: null, merchantMarine: 1, freightCars: 2, tradeAgreements: new Map(), consulates: new Set() },
+  { name: 'Belgium', ruler: 'Leopold I', treasury: 5000, workers: 40, technology: new Map(), preferredAlly: null, merchantMarine: 1, freightCars: 2, tradeAgreements: new Map(), consulates: new Set() },
+  { name: 'Greece', ruler: 'Otto of Bavaria', treasury: 4000, workers: 35, technology: new Map(), preferredAlly: null, merchantMarine: 2, freightCars: 1, tradeAgreements: new Map(), consulates: new Set() },
+  { name: 'Portugal', ruler: 'King Miguel', treasury: 6000, workers: 45, technology: new Map(), preferredAlly: null, merchantMarine: 3, freightCars: 2, tradeAgreements: new Map(), consulates: new Set() },
+  { name: 'Serbia', ruler: 'Milos Obrenovic', treasury: 3000, workers: 30, technology: new Map(), preferredAlly: null, merchantMarine: 0, freightCars: 1, tradeAgreements: new Map(), consulates: new Set() },
+  { name: 'Romania', ruler: 'Alexandru Ghica', treasury: 3500, workers: 35, technology: new Map(), preferredAlly: null, merchantMarine: 0, freightCars: 2, tradeAgreements: new Map(), consulates: new Set() },
+  { name: 'Bulgaria', ruler: 'Aleksandr Batenberg', treasury: 2500, workers: 25, technology: new Map(), preferredAlly: null, merchantMarine: 0, freightCars: 1, tradeAgreements: new Map(), consulates: new Set() },
+  { name: 'Mexico', ruler: 'Benito Juarez', treasury: 7500, workers: 50, technology: new Map(), preferredAlly: null, merchantMarine: 2, freightCars: 3, tradeAgreements: new Map(), consulates: new Set() },
+  { name: 'Brazil', ruler: 'Pedro II', treasury: 10000, workers: 60, technology: new Map(), preferredAlly: null, merchantMarine: 3, freightCars: 4, tradeAgreements: new Map(), consulates: new Set() },
+  { name: 'Argentina', ruler: 'Sarmiento', treasury: 9000, workers: 55, technology: new Map(), preferredAlly: null, merchantMarine: 2, freightCars: 3, tradeAgreements: new Map(), consulates: new Set() },
+  { name: 'Egypt', ruler: 'Ismail Pasha', treasury: 12500, workers: 70, technology: new Map(), preferredAlly: null, merchantMarine: 2, freightCars: 5, tradeAgreements: new Map(), consulates: new Set() },
+  { name: 'Siam', ruler: 'Chulalongkorn', treasury: 8000, workers: 45, technology: new Map(), preferredAlly: null, merchantMarine: 1, freightCars: 2, tradeAgreements: new Map(), consulates: new Set() },
+  { name: 'Japan', ruler: 'Meiji Emperor', treasury: 15000, workers: 80, technology: new Map(), preferredAlly: null, merchantMarine: 3, freightCars: 6, tradeAgreements: new Map(), consulates: new Set() },
+  { name: 'China', ruler: 'Empress Cixi', treasury: 25000, workers: 150, technology: new Map(), preferredAlly: null, merchantMarine: 5, freightCars: 10, tradeAgreements: new Map(), consulates: new Set() },
+  { name: 'Persia', ruler: 'Nasir al-Din Shah', treasury: 7000, workers: 40, technology: new Map(), preferredAlly: null, merchantMarine: 1, freightCars: 2, tradeAgreements: new Map(), consulates: new Set() },
+  { name: 'Afghanistan', ruler: 'Abdur Rahman Khan', treasury: 4500, workers: 30, technology: new Map(), preferredAlly: null, merchantMarine: 0, freightCars: 1, tradeAgreements: new Map(), consulates: new Set() },
+  { name: 'Morocco', ruler: 'Hassan I', treasury: 5500, workers: 35, technology: new Map(), preferredAlly: null, merchantMarine: 1, freightCars: 2, tradeAgreements: new Map(), consulates: new Set() },
 ];
 
 export class DiplomacyEngine {
@@ -144,11 +144,45 @@ export class DiplomacyEngine {
     giver.treasury -= amount;
     receiver.treasury += amount;
 
-    // Increase trust
-    const trustIncrease = Math.min(amount / 100, 10); // Max 10 trust per gift
+    // Increase trust - scaling with amount
+    const trustIncrease = Math.min(amount / 1000, 15); // Max 15 trust per gift
     const rel = giver.diplomacy.get(receiver.id);
     if (rel) {
       rel.trust = Math.min(100, rel.trust + trustIncrease);
+    }
+
+    return true;
+  }
+
+  /* Establish consulate - costs $500, improves trade */
+  static buildConsulate(builder: Country, target: Country): boolean {
+    const CONSULATE_COST = 500;
+    if (builder.treasury < CONSULATE_COST) return false;
+
+    builder.treasury -= CONSULATE_COST;
+    builder.consulates.add(target.id);
+
+    // Consulate increases trade opportunity
+    const rel = builder.diplomacy.get(target.id);
+    if (rel) {
+      rel.trust = Math.min(100, rel.trust + 2); // Small trust gain
+    }
+
+    return true;
+  }
+
+  /* Establish embassy - costs $5000, major diplomatic benefit */
+  static buildEmbassy(builder: Country, target: Country): boolean {
+    const EMBASSY_COST = 5000;
+    if (builder.treasury < EMBASSY_COST) return false;
+
+    builder.treasury -= EMBASSY_COST;
+    builder.consulates.add(target.id);
+
+    // Embassy significantly improves relations
+    const rel = builder.diplomacy.get(target.id);
+    if (rel) {
+      rel.trust = Math.min(100, rel.trust + 10); // Major trust gain
     }
 
     return true;

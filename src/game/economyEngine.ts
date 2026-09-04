@@ -1,24 +1,25 @@
 import { Country, Province, Resources, ProvinceType } from '@types/index';
 
 const RESOURCE_PRICES = {
-  coal: 10,
-  iron: 15,
-  trees: 8,
-  sheep: 12,
-  cotton: 14,
-  wheat: 5,
-  fish: 6,
-  cloth: 25,
-  lumber: 18,
-  steel: 40,
-  shirts: 50,
-  chairs: 45,
-  hammers: 55,
+  coal: 50,
+  iron: 70,
+  trees: 40,
+  sheep: 60,
+  cotton: 80,
+  wheat: 20,
+  fish: 35,
+  cloth: 120,
+  lumber: 90,
+  steel: 200,
+  shirts: 250,
+  chairs: 220,
+  hammers: 280,
 };
 
-const WORKER_COST = 5; // $ per worker per turn
-const UNIT_MAINTENANCE = 25; // $ per unit per turn
+const WORKER_COST = 10; // $ per worker per turn
+const UNIT_MAINTENANCE = 50; // $ per unit per turn
 const CONSULATE_COST = 500; // $ one-time cost
+const EMBASSY_COST = 5000; // $ one-time cost
 
 export class EconomyEngine {
   /* Calculate raw material production for a province */
@@ -52,24 +53,30 @@ export class EconomyEngine {
 
     if (!province.owner || availableWorkers === 0) return production;
 
-    // Allocate workers to production processes
-    const workersPerProcess = Math.floor(availableWorkers / 3);
+    const industrialBonus = province.infrastructure.industrialized ? 1.5 : 1.0;
+    const depotBonus = province.infrastructure.hasDepot ? 1.2 : 1.0;
+    const productionBonus = industrialBonus * depotBonus;
 
-    // Cloth production: sheep/cotton + labor
-    if (province.resources.sheep > 0 || province.resources.cotton > 0) {
-      const clothOutput = Math.min(workersPerProcess * 5, province.resources.sheep + province.resources.cotton);
+    // Allocate workers to production processes
+    const workersPerProcess = Math.floor(availableWorkers / 4);
+
+    // Cloth production: cotton or sheep
+    if (province.resources.cotton > 0 || province.resources.sheep > 0) {
+      const available = Math.min(province.resources.cotton * 2, province.resources.sheep);
+      const clothOutput = Math.floor(Math.min(workersPerProcess * 6, available) * productionBonus);
       production.cloth = clothOutput;
     }
 
-    // Lumber production: trees + labor
+    // Lumber production: trees
     if (province.resources.trees > 0) {
-      const lumberOutput = Math.min(workersPerProcess * 4, province.resources.trees);
+      const lumberOutput = Math.floor(Math.min(workersPerProcess * 5, province.resources.trees) * productionBonus);
       production.lumber = lumberOutput;
     }
 
-    // Steel production: coal + iron + labor
+    // Steel production: coal + iron (1:1 ratio)
     if (province.resources.coal > 0 && province.resources.iron > 0) {
-      const steelOutput = Math.min(workersPerProcess * 3, Math.min(province.resources.coal, province.resources.iron));
+      const available = Math.min(province.resources.coal, province.resources.iron);
+      const steelOutput = Math.floor(Math.min(workersPerProcess * 4, available) * productionBonus);
       production.steel = steelOutput;
     }
 
@@ -85,19 +92,21 @@ export class EconomyEngine {
 
     if (!province.owner || workers === 0) return production;
 
-    // Shirts: cloth + labor
+    const industrialBonus = province.infrastructure.industrialized ? 1.5 : 1.0;
+
+    // Shirts: cloth → shirts (3:2 ratio)
     if (province.resources.cloth > 0) {
-      production.shirts = Math.min(workers * 2, province.resources.cloth);
+      production.shirts = Math.floor(Math.min(Math.floor(workers * 3), province.resources.cloth) * 0.67 * industrialBonus);
     }
 
-    // Chairs: lumber + labor
+    // Chairs: lumber → chairs (2:1 ratio)
     if (province.resources.lumber > 0) {
-      production.chairs = Math.min(workers * 2, province.resources.lumber);
+      production.chairs = Math.floor(Math.min(Math.floor(workers * 2), province.resources.lumber) * 0.5 * industrialBonus);
     }
 
-    // Hammers: steel + labor
+    // Hammers: steel → hammers (1:1 ratio)
     if (province.resources.steel > 0) {
-      production.hammers = Math.min(workers * 2, province.resources.steel);
+      production.hammers = Math.floor(Math.min(Math.floor(workers * 2), province.resources.steel) * industrialBonus);
     }
 
     return production;
