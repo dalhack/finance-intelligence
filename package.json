@@ -1,0 +1,74 @@
+{
+  "name": "imperialism-macos",
+  "version": "0.1.0",
+  "description": "Imperialism strategy game reimplemented for macOS",
+  "main": "dist/main/index.js",
+  "homepage": "./",
+  "author": "Imperialism macOS Team",
+  "license": "GPL-3.0",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:main\" \"npm run dev:renderer\"",
+    "dev:main": "tsc --watch --project tsconfig.main.json",
+    "dev:renderer": "craco start",
+    "build": "npm run build:main && npm run build:renderer",
+    "build:main": "tsc --project tsconfig.main.json",
+    "build:renderer": "craco build",
+    "electron": "electron .",
+    "start": "npm run build:main && electron .",
+    "dist": "npm run build && electron-builder",
+    "test": "craco test",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "electron-is-dev": "^2.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "zustand": "^4.4.0"
+  },
+  "devDependencies": {
+    "@craco/craco": "^7.1.0",
+    "@types/electron": "^1.6.10",
+    "@types/node": "^20.19.43",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "concurrently": "^8.0.0",
+    "electron": "^26.0.0",
+    "electron-builder": "^24.0.0",
+    "typescript": "^5.0.0",
+    "web-vitals": "^2.1.4"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "build": {
+    "appId": "com.imperialism.macos",
+    "productName": "Imperialism",
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "category": "public.app-category.games"
+    }
+  }
+}

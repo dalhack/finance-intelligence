@@ -1,0 +1,283 @@
+.turn-report-screen {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #000080;
+  color: #aaaa00;
+  font-family: 'Courier New', monospace;
+  border: 3px outset #00aa00;
+}
+
+.report-header {
+  background-color: #000055;
+  border-bottom: 2px solid #00aa00;
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.report-header h2 {
+  margin: 0;
+  color: #ffff00;
+  font-size: 16px;
+  flex: 1;
+}
+
+.report-header p {
+  margin: 0;
+  color: #aaaa00;
+  font-size: 12px;
+  flex: 1;
+  text-align: center;
+}
+
+.close-btn {
+  background-color: #aa0000;
+  color: #ffff00;
+  border: 2px outset #ff5555;
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  background-color: #ff5555;
+  border-style: inset;
+}
+
+.report-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.summary-panel,
+.events-panel,
+.warnings-panel,
+.ai-decisions-panel {
+  border: 2px outset #00aa00;
+  background-color: #000055;
+  padding: 10px;
+}
+
+.summary-panel h3,
+.events-panel h3,
+.warnings-panel h3,
+.ai-decisions-panel h3 {
+  margin: 0 0 8px 0;
+  color: #00aa00;
+  font-size: 12px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #00aa00;
+  padding-bottom: 4px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  font-size: 11px;
+  color: #aaaa00;
+}
+
+.events-list,
+.warnings-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.event-item,
+.warning-item {
+  padding: 6px;
+  margin: 4px 0;
+  background-color: #003300;
+  border-left: 3px solid #00aa00;
+  color: #aaaa00;
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+.warning-item {
+  background-color: #330000;
+  border-left-color: #ff5555;
+  color: #ffaa00;
+}
+
+.empty-message {
+  color: #666666;
+  font-size: 10px;
+  font-style: italic;
+  margin: 0;
+  padding: 10px 0;
+}
+
+.ai-decisions-panel {
+  border-color: #aa00aa;
+}
+
+.ai-decisions-panel h3 {
+  color: #aa00aa;
+  border-bottom-color: #aa00aa;
+}
+
+.ai-countries {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ai-country {
+  border: 1px solid #330033;
+  background-color: #1a001a;
+  overflow: hidden;
+}
+
+.country-header {
+  width: 100%;
+  padding: 8px;
+  background-color: #330033;
+  color: #aa00aa;
+  border: none;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.1s;
+}
+
+.country-header:hover {
+  background-color: #550055;
+}
+
+.country-header.expanded {
+  background-color: #550055;
+}
+
+.country-name {
+  flex: 1;
+  font-weight: bold;
+}
+
+.decision-count {
+  color: #aa00aa;
+  font-size: 10px;
+  margin: 0 8px;
+}
+
+.expand-icon {
+  color: #aa00aa;
+  font-size: 10px;
+}
+
+.decisions-list {
+  padding: 8px;
+  background-color: #1a001a;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.decision-item {
+  border: 1px solid #330033;
+  padding: 6px;
+  background-color: #000033;
+  font-size: 10px;
+}
+
+.decision-item.decision-diplomacy {
+  border-left: 3px solid #55aaff;
+}
+
+.decision-item.decision-military {
+  border-left: 3px solid #ff5555;
+}
+
+.decision-item.decision-economic {
+  border-left: 3px solid #55ff55;
+}
+
+.decision-item.decision-infrastructure {
+  border-left: 3px solid #ffff55;
+}
+
+.decision-item.decision-research {
+  border-left: 3px solid #aa00aa;
+}
+
+.decision-header {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 4px;
+  padding-bottom: 4px;
+  border-bottom: 1px dotted #333333;
+}
+
+.decision-type {
+  background-color: #003366;
+  color: #55aaff;
+  padding: 2px 4px;
+  font-size: 9px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.decision-action {
+  color: #aaaa00;
+  flex: 1;
+  font-weight: bold;
+}
+
+.decision-reason {
+  margin: 3px 0;
+  color: #aaaaaa;
+  font-style: italic;
+}
+
+.decision-target {
+  margin: 2px 0;
+  color: #666666;
+  font-size: 9px;
+}
+
+.report-footer {
+  border-top: 2px solid #00aa00;
+  padding: 10px;
+  background-color: #000055;
+  text-align: center;
+}
+
+.continue-btn {
+  padding: 10px 30px;
+  background-color: #00aa00;
+  color: #000000;
+  border: 2px outset #55ff55;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  font-size: 12px;
+  text-transform: uppercase;
+  cursor: pointer;
+  min-width: 150px;
+}
+
+.continue-btn:hover {
+  background-color: #55ff55;
+  border-style: inset;
+}
+
+.continue-btn:active {
+  border-style: inset;
+}

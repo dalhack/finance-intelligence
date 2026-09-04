@@ -1,0 +1,143 @@
+.turn-info-panel {
+  background: #000080;
+  border: 2px solid #00aa00;
+  color: #aaaa00;
+  padding: 12px;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.turn-header {
+  border-bottom: 2px solid #00aa00;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+}
+
+.turn-header h3 {
+  margin: 0;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #ffff00;
+}
+
+.player-info {
+  margin-bottom: 12px;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 4px 0;
+  border-bottom: 1px solid #003300;
+}
+
+.info-row .label {
+  text-align: left;
+  flex: 1;
+}
+
+.info-row .value {
+  text-align: right;
+  flex: 1;
+  font-weight: bold;
+  color: #00ff00;
+}
+
+.info-row .value.treasury {
+  color: #ffff00;
+}
+
+.turn-report {
+  border-top: 2px solid #00aa00;
+  padding-top: 8px;
+  margin-top: 8px;
+}
+
+.turn-report h4 {
+  margin: 0 0 6px 0;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #00aaff;
+  border-bottom: 1px solid #00aa00;
+  padding-bottom: 3px;
+}
+
+.report-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px 0;
+  font-size: 10px;
+}
+
+.report-item span {
+  display: inline;
+}
+
+.report-item .income {
+  color: #00ff00;
+}
+
+.report-item .expense {
+  color: #ff0000;
+}
+
+.events-section,
+.warnings-section {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid #003300;
+}
+
+.events-section h5,
+.warnings-section h5 {
+  margin: 0 0 3px 0;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #00aaff;
+}
+
+.event-item {
+  font-size: 9px;
+  padding: 2px 0;
+  color: #00aa00;
+}
+
+.warning-item {
+  font-size: 9px;
+  padding: 2px 0;
+  color: #ff6600;
+}
+
+/* Scrollbar styling */
+.turn-info-panel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.turn-info-panel::-webkit-scrollbar-track {
+  background: #000080;
+}
+
+.turn-info-panel::-webkit-scrollbar-thumb {
+  background: #00aa00;
+  border-radius: 2px;
+}
+
+.turn-info-panel::-webkit-scrollbar-thumb:hover {
+  background: #00ff00;
+}
+
+@media (max-width: 768px) {
+  .turn-info-panel {
+    font-size: 10px;
+    max-height: 250px;
+  }
+
+  .info-row {
+    padding: 3px 0;
+  }
+}

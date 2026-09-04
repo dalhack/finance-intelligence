@@ -1,0 +1,154 @@
+.battle-screen {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: #000080;
+  color: #aaaa00;
+  font-family: 'Courier New', monospace;
+  border: 3px outset #00aa00;
+}
+
+.battle-header {
+  background-color: #000080;
+  border-bottom: 2px solid #00aa00;
+  padding: 10px;
+  text-align: center;
+}
+
+.battle-header h2 {
+  margin: 0;
+  color: #ffff00;
+  font-size: 16px;
+}
+
+.battle-header p {
+  margin: 5px 0 0 0;
+  color: #aaaa00;
+  font-size: 12px;
+}
+
+.battle-container {
+  display: flex;
+  flex: 1;
+  gap: 10px;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.battle-canvas {
+  flex: 1;
+  background-color: #001100;
+  border: 2px inset #00aa00;
+  cursor: crosshair;
+  image-rendering: pixelated;
+}
+
+.battle-info {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+}
+
+.side {
+  border: 2px outset #00aa00;
+  padding: 8px;
+  background-color: #000055;
+}
+
+.side h3 {
+  margin: 0 0 5px 0;
+  color: #ffff00;
+  font-size: 12px;
+  text-transform: uppercase;
+  border-bottom: 1px solid #00aa00;
+  padding-bottom: 3px;
+}
+
+.side p {
+  margin: 3px 0;
+  color: #aaaa00;
+  font-size: 11px;
+}
+
+.side1 {
+  border-color: #0055ff;
+}
+
+.side1 h3 {
+  color: #55aaff;
+}
+
+.side2 {
+  border-color: #ff5500;
+}
+
+.side2 h3 {
+  color: #ffaa55;
+}
+
+.terrain-bonus {
+  border: 2px outset #00aa00;
+  padding: 8px;
+  background-color: #003300;
+}
+
+.terrain-bonus p {
+  margin: 0;
+  color: #aaaa00;
+  font-size: 11px;
+}
+
+.unit-details {
+  border: 2px outset #ffff00;
+  padding: 8px;
+  background-color: #333300;
+}
+
+.unit-details h4 {
+  margin: 0 0 5px 0;
+  color: #ffff00;
+  font-size: 12px;
+  border-bottom: 1px solid #ffff00;
+  padding-bottom: 3px;
+}
+
+.unit-details p {
+  margin: 2px 0;
+  color: #aaaa00;
+  font-size: 11px;
+}
+
+.unit-details .warning {
+  color: #ff5555;
+  font-weight: bold;
+}
+
+.battle-footer {
+  border-top: 2px solid #00aa00;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  background-color: #000055;
+}
+
+.close-btn {
+  padding: 8px 20px;
+  background-color: #00aa00;
+  color: #000000;
+  border: 2px outset #55ff55;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  cursor: pointer;
+  min-width: 100px;
+}
+
+.close-btn:hover {
+  background-color: #55ff55;
+  border-style: inset;
+}
+
+.close-btn:active {
+  border-style: inset;
+}

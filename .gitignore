@@ -1,76 +1,43 @@
-# Python artifacts
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-.venv/
-env/
-venv/
-ENV/
-build/
-develop-eggs/
+# Dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# Testing
+/coverage
+
+# Production
+/build
+/dist
 dist/
-downloads/
-eggs/
-.eggs/
-/lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-.pytest_cache/
-.ruff_cache/
-.mypy_cache/
 
-# Local Isolated PostgreSQL
-.pgdata_dev/
-
-# Local Storage Buckets (Phase 2 Sandboxed Object Storage Data Directory)
-/storage/
-.storage/
-
-# Flutter / Dart artifacts
-.dart_tool/
-.fvm/
-.pub-cache/
-.pub/
-build/
-apps/mobile/.dart_tool/
-apps/mobile/.pub/
-apps/mobile/build/
-apps/mobile/ios/Flutter/ephemeral/
-apps/mobile/ios/Flutter/Flutter.podspec
-apps/mobile/ios/Flutter/Flutter.framework
-apps/mobile/ios/Flutter/App.framework
-android/.gradle/
-android/local.properties
-*.mode1v3
-*.mode2v3
-*.moved-aside
-*.pbxuser
-*.perspectivev3
-**/doc/api/
-.flutter-plugins
-.flutter-plugins-dependencies
-
-# Firebase / Secrets
-*.pem
-*.key
-*.p12
-*.pfx
-*.db
-*.sqlite
-*.sqlite3
+# Misc
 .env
-.env.production
-.env.staging
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# OS & IDE
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.iml
+
+# Electron
+out/
+*.dmg
+*.exe
+*.zip
+
+# macOS
 .DS_Store
 .DS_Store?
 ._*
@@ -78,6 +45,3 @@ android/local.properties
 .Trashes
 ehthumbs.db
 Thumbs.db
-.idea/
-.vscode/
-*.iml

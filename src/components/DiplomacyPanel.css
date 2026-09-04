@@ -1,0 +1,165 @@
+.diplomacy-panel {
+  background: #000080;
+  border: 2px solid #00aa00;
+  color: #aaaa00;
+  padding: 12px;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.diplomacy-header {
+  border-bottom: 2px solid #00aa00;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+}
+
+.diplomacy-header h3 {
+  margin: 0;
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #ffaa00;
+}
+
+.diplomacy-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.no-diplomacy {
+  text-align: center;
+  color: #00aa00;
+  font-style: italic;
+  padding: 20px 0;
+}
+
+.diplomacy-entry {
+  border: 1px solid #003300;
+  padding: 8px;
+  background: #001144;
+}
+
+.country-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.country-name {
+  font-weight: bold;
+  color: #ffff00;
+  flex: 1;
+}
+
+.status-badge {
+  border: 1px solid;
+  padding: 2px 6px;
+  font-size: 9px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 2px;
+  min-width: 50px;
+  text-align: center;
+}
+
+.trust-bar-container {
+  margin: 6px 0;
+  font-size: 10px;
+}
+
+.trust-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3px;
+  color: #00aaff;
+}
+
+.trust-value {
+  font-weight: bold;
+  color: #ffff00;
+}
+
+.trust-bar {
+  background: #000055;
+  border: 1px solid #00aa00;
+  height: 8px;
+  overflow: hidden;
+}
+
+.trust-fill {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.diplomacy-details {
+  display: flex;
+  gap: 6px;
+  font-size: 9px;
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid #003300;
+}
+
+.agreement-badge {
+  background: #001155;
+  border: 1px solid #00aaff;
+  color: #00aaff;
+  padding: 1px 4px;
+  border-radius: 2px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.unit-count,
+.province-count {
+  color: #00aa00;
+  flex: 1;
+}
+
+/* Scrollbar styling */
+.diplomacy-panel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.diplomacy-panel::-webkit-scrollbar-track {
+  background: #000080;
+}
+
+.diplomacy-panel::-webkit-scrollbar-thumb {
+  background: #00aa00;
+  border-radius: 2px;
+}
+
+.diplomacy-panel::-webkit-scrollbar-thumb:hover {
+  background: #00ff00;
+}
+
+@media (max-width: 768px) {
+  .diplomacy-panel {
+    font-size: 10px;
+    max-height: 300px;
+  }
+
+  .diplomacy-entry {
+    padding: 6px;
+  }
+
+  .country-row {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 4px;
+  }
+
+  .status-badge {
+    margin-top: 3px;
+  }
+
+  .diplomacy-details {
+    flex-direction: column;
+    gap: 3px;
+  }
+}
