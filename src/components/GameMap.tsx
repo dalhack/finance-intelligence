@@ -95,6 +95,21 @@ export const GameMap: React.FC = () => {
         ctx.strokeRect(x - size / 2 - 2, y - size / 2 - 2, size + 4, size + 4);
       }
 
+      // Draw infrastructure indicators
+      if (zoom > 1.0 && province.owner) {
+        let infraText = '';
+        if (province.infrastructure.hasRailroad) infraText += 'R';
+        if (province.infrastructure.hasPort) infraText += 'P';
+        if (province.infrastructure.industrialized) infraText += 'I';
+        if (infraText) {
+          ctx.fillStyle = DOS_PALETTE.cyan;
+          ctx.font = `bold 8px 'MS Sans Serif', Arial, monospace`;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'top';
+          ctx.fillText(infraText, x, y - size / 2 + 2);
+        }
+      }
+
       // Draw province name (if zoom allows)
       if (zoom > 0.8) {
         ctx.fillStyle = DOS_PALETTE.yellow;
@@ -103,6 +118,18 @@ export const GameMap: React.FC = () => {
         ctx.textBaseline = 'middle';
         const shortName = province.name.split(' ')[0].substring(0, 3);
         ctx.fillText(shortName, x, y);
+      }
+
+      // Draw garrison count if zoom in and has units
+      if (zoom > 1.0) {
+        const garrisonCount = province.garrisonUnits.length;
+        if (garrisonCount > 0) {
+          ctx.fillStyle = DOS_PALETTE.lightBrown;
+          ctx.font = `bold 8px 'MS Sans Serif', Arial, monospace`;
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'bottom';
+          ctx.fillText(`[${garrisonCount}]`, x, y + size / 2 - 1);
+        }
       }
     });
 
