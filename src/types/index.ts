@@ -173,6 +173,13 @@ export interface GameState {
   selectedProvince: Province | null;
   year: number;
   militaryEra: number; // 1-3, determines available military units
+
+  // Original Imperialism game state
+  mapWidth?: number;
+  mapHeight?: number;
+  gameOver?: boolean;
+  winner?: string;
+  winCondition?: 'conquest' | 'economic' | 'technology' | 'time';
 }
 
 export interface MapConfig {
