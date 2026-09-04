@@ -3,10 +3,13 @@ import { useGameStore } from '../game/store';
 import { ActionEngine } from '../game/actionEngine';
 import './ActionPanel.css';
 
+type MessageType = 'success' | 'error' | 'info';
+
 export const ActionPanel: React.FC = () => {
   const gameState = useGameStore(s => s.gameState);
+  const executeAction = useGameStore(s => s.executeAction);
   const [message, setMessage] = useState<string>('');
-  const [messageType, setMessageType] = useState<'success' | 'error' | 'info'>('info');
+  const [messageType, setMessageType] = useState<MessageType>('info');
 
   if (!gameState) return null;
 
@@ -14,14 +17,14 @@ export const ActionPanel: React.FC = () => {
   const selectedProvince = gameState.selectedProvince;
   const currentPlayer = gameState.countries.find(c => c.id === gameState.currentPlayerCountryId);
 
-  const showMessage = (msg: string, type: 'success' | 'error' | 'info' = 'info') => {
+  const showMessage = (msg: string, type: MessageType = 'info') => {
     setMessage(msg);
     setMessageType(type);
     setTimeout(() => setMessage(''), 4000);
   };
 
   const handleMoveUnit = () => {
-    if (!selectedUnit) {
+    if (!selectedUnit || !gameState) {
       showMessage('No unit selected', 'error');
       return;
     }
@@ -30,12 +33,14 @@ export const ActionPanel: React.FC = () => {
     const newX = selectedUnit.position.x + (Math.random() > 0.5 ? 1 : -1);
     const newY = selectedUnit.position.y + (Math.random() > 0.5 ? 1 : -1);
 
-    const result = ActionEngine.moveUnit(gameState, selectedUnit.id, newX, newY);
+    const result = executeAction(() =>
+      ActionEngine.moveUnit(gameState, selectedUnit.id, newX, newY)
+    );
     showMessage(result.message, result.success ? 'success' : 'error');
   };
 
   const handleRecruitUnit = () => {
-    if (!selectedProvince || !currentPlayer) {
+    if (!selectedProvince || !currentPlayer || !gameState) {
       showMessage('Select a province first', 'error');
       return;
     }
@@ -45,18 +50,20 @@ export const ActionPanel: React.FC = () => {
       return;
     }
 
-    const result = ActionEngine.recruitUnit(
-      gameState,
-      currentPlayer.id,
-      selectedProvince.id,
-      'infantry'
+    const result = executeAction(() =>
+      ActionEngine.recruitUnit(
+        gameState,
+        currentPlayer.id,
+        selectedProvince.id,
+        'infantry'
+      )
     );
 
     showMessage(result.message, result.success ? 'success' : 'error');
   };
 
   const handleBuildRailroad = () => {
-    if (!selectedProvince || !currentPlayer) {
+    if (!selectedProvince || !currentPlayer || !gameState) {
       showMessage('Select a province first', 'error');
       return;
     }
@@ -66,18 +73,20 @@ export const ActionPanel: React.FC = () => {
       return;
     }
 
-    const result = ActionEngine.buildInfrastructure(
-      gameState,
-      currentPlayer.id,
-      selectedProvince.id,
-      'railroad'
+    const result = executeAction(() =>
+      ActionEngine.buildInfrastructure(
+        gameState,
+        currentPlayer.id,
+        selectedProvince.id,
+        'railroad'
+      )
     );
 
     showMessage(result.message, result.success ? 'success' : 'error');
   };
 
   const handleBuildPort = () => {
-    if (!selectedProvince || !currentPlayer) {
+    if (!selectedProvince || !currentPlayer || !gameState) {
       showMessage('Select a province first', 'error');
       return;
     }
@@ -87,18 +96,20 @@ export const ActionPanel: React.FC = () => {
       return;
     }
 
-    const result = ActionEngine.buildInfrastructure(
-      gameState,
-      currentPlayer.id,
-      selectedProvince.id,
-      'port'
+    const result = executeAction(() =>
+      ActionEngine.buildInfrastructure(
+        gameState,
+        currentPlayer.id,
+        selectedProvince.id,
+        'port'
+      )
     );
 
     showMessage(result.message, result.success ? 'success' : 'error');
   };
 
   const handleIndustrialize = () => {
-    if (!selectedProvince || !currentPlayer) {
+    if (!selectedProvince || !currentPlayer || !gameState) {
       showMessage('Select a province first', 'error');
       return;
     }
@@ -108,20 +119,24 @@ export const ActionPanel: React.FC = () => {
       return;
     }
 
-    const result = ActionEngine.buildInfrastructure(
-      gameState,
-      currentPlayer.id,
-      selectedProvince.id,
-      'industrialize'
+    const result = executeAction(() =>
+      ActionEngine.buildInfrastructure(
+        gameState,
+        currentPlayer.id,
+        selectedProvince.id,
+        'industrialize'
+      )
     );
 
     showMessage(result.message, result.success ? 'success' : 'error');
   };
 
   const handleTechnology = (techId: string) => {
-    if (!currentPlayer) return;
+    if (!currentPlayer || !gameState) return;
 
-    const result = ActionEngine.researchTechnology(gameState, currentPlayer.id, techId);
+    const result = executeAction(() =>
+      ActionEngine.researchTechnology(gameState, currentPlayer.id, techId)
+    );
     showMessage(result.message, result.success ? 'success' : 'error');
   };
 

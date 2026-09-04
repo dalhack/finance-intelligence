@@ -6,6 +6,7 @@ import { EconomyEngine } from './economyEngine';
 import { DiplomacyEngine } from './diplomacyEngine';
 import { TurnEngine, TurnReport } from './turnEngine';
 import { AIEngine, AIDecision } from './aiEngine';
+import { ActionEngine, ActionResult } from './actionEngine';
 
 interface GameStore {
   gameState: GameState | null;
@@ -30,6 +31,9 @@ interface GameStore {
 
   // Country operations
   updateCountryTreasury: (countryId: string, amount: number) => void;
+
+  // Game actions
+  executeAction: (action: () => ActionResult) => ActionResult;
 
   // Helpers
   getCurrentPlayer: () => Country | null;
@@ -204,5 +208,14 @@ export const useGameStore = create<GameStore>((set, get) => ({
     const { gameState } = get();
     if (!gameState) return null;
     return gameState.provinces.find(p => p.position.x === x && p.position.y === y) || null;
+  },
+
+  executeAction: (action) => {
+    const result = action();
+    // Force a state update to trigger re-renders
+    set((state) => ({
+      gameState: state.gameState ? { ...state.gameState } : null,
+    }));
+    return result;
   },
 }));
