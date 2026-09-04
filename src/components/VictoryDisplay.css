@@ -1,0 +1,248 @@
+.victory-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px);
+}
+
+.victory-modal {
+  background: #000080;
+  border: 4px solid #ffff00;
+  color: #aaaa00;
+  padding: 24px;
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 0 20px #ffff00;
+}
+
+.victory-header {
+  text-align: center;
+  border-bottom: 3px solid #ffff00;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+.victory-title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffff00;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px #ffff00;
+}
+
+.victory-content {
+  padding: 12px 0;
+}
+
+.winner-info {
+  text-align: center;
+  background: #001144;
+  border: 2px solid #00aaff;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 2px;
+}
+
+.winner-name {
+  margin: 0;
+  font-size: 24px;
+  color: #00ff00;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.winner-title {
+  margin: 4px 0 0 0;
+  font-size: 14px;
+  color: #00aaff;
+  font-style: italic;
+}
+
+.victory-reason {
+  background: #001155;
+  border-left: 3px solid #ffaa00;
+  padding: 12px;
+  margin-bottom: 12px;
+  font-style: italic;
+}
+
+.victory-reason p {
+  margin: 0;
+  color: #ffaa00;
+  font-size: 13px;
+}
+
+.winner-stats {
+  background: #001100;
+  border: 1px solid #00aa00;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid #003300;
+  font-size: 11px;
+}
+
+.stat-row:last-child {
+  border-bottom: none;
+}
+
+.stat-label {
+  color: #00aa00;
+}
+
+.stat-value {
+  color: #ffff00;
+  font-weight: bold;
+  text-align: right;
+}
+
+.victory-conditions {
+  margin-top: 12px;
+  border-top: 2px solid #ffff00;
+  padding-top: 12px;
+}
+
+.victory-conditions h3 {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: #ffff00;
+  border-bottom: 1px solid #ffff00;
+  padding-bottom: 4px;
+}
+
+.conditions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.condition-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+}
+
+.condition-name {
+  flex: 1;
+  color: #00aaff;
+  min-width: 120px;
+}
+
+.condition-bar {
+  flex: 2;
+  height: 12px;
+  background: #000055;
+  border: 1px solid #00aa00;
+  position: relative;
+  min-width: 100px;
+}
+
+.condition-fill {
+  height: 100%;
+  background: #ff6600;
+  transition: width 0.3s ease;
+}
+
+.condition-fill.completed {
+  background: #00ff00;
+}
+
+.condition-progress {
+  flex: 0 0 35px;
+  text-align: right;
+  color: #ffff00;
+  font-weight: bold;
+}
+
+.victory-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 2px solid #ffff00;
+}
+
+.victory-btn {
+  background: #000080;
+  border: 2px solid #ffff00;
+  color: #ffff00;
+  padding: 8px 20px;
+  cursor: pointer;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.victory-btn:hover {
+  background: #ffff00;
+  color: #000080;
+  box-shadow: 0 0 10px #ffff00;
+}
+
+.victory-btn:active {
+  transform: scale(0.98);
+}
+
+/* Scrollbar styling */
+.victory-modal::-webkit-scrollbar {
+  width: 10px;
+}
+
+.victory-modal::-webkit-scrollbar-track {
+  background: #000055;
+}
+
+.victory-modal::-webkit-scrollbar-thumb {
+  background: #ffff00;
+  border-radius: 2px;
+}
+
+.victory-modal::-webkit-scrollbar-thumb:hover {
+  background: #ffaa00;
+}
+
+@media (max-width: 768px) {
+  .victory-modal {
+    max-width: 90vw;
+    padding: 16px;
+    font-size: 10px;
+  }
+
+  .victory-title {
+    font-size: 20px;
+  }
+
+  .winner-name {
+    font-size: 18px;
+  }
+
+  .condition-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .condition-bar {
+    width: 100%;
+  }
+}

@@ -4,11 +4,13 @@ import { GameMap } from '@components/GameMap';
 import { GameUI } from '@components/GameUI';
 import MusicPlayer from '@components/MusicPlayer';
 import ReferenceViewer from '@components/ReferenceViewer';
+import VictoryDisplay from '@components/VictoryDisplay';
 import { getMusicManager } from '@game/musicManager';
 import './styles/App.css';
 
 function App() {
   const gameState = useGameStore(s => s.gameState);
+  const lastTurnReport = useGameStore(s => s.lastTurnReport);
   const startNewGame = useGameStore(s => s.startNewGame);
   const isLoading = useGameStore(s => s.isLoading);
   const error = useGameStore(s => s.error);
@@ -61,6 +63,7 @@ function App() {
 
       <MusicPlayer visible={true} />
       <ReferenceViewer />
+      <VictoryDisplay victoryStatus={lastTurnReport?.victoryStatus} />
     </div>
   );
 }
