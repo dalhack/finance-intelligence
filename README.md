@@ -1,100 +1,123 @@
-# Finance Intelligence
+# Imperialism - macOS Edition
 
-> **Enterprise Financial Analysis & Reporting Platform**  
-> *Independent Mobile-First Product Backbone (Phase 1 Baseline)*
+A complete reimplementation of the classic Imperialism strategy game for macOS, built with Electron and React.
 
----
+## Project Status
 
-## 📌 Product Overview
+🚀 **Early Development** - Core architecture in place, game mechanics being implemented
 
-**Finance Intelligence** is a multi-tier enterprise financial analysis platform. It allows financial analysts, executives, and auditors to execute natural-language queries over structured banking filings, balance sheets, and regulatory disclosures.
+## Features (Planned)
 
-Key Architectural Guarantees:
-* **Strict Multi-Tenant Isolation**: PostgreSQL Row-Level Security (RLS) policies (`app.current_organization_id`) and `FORCE ROW LEVEL SECURITY` on shared-schema tenant-aware tables.
-* **Deterministic Calculation Engine**: Multi-tier Decimal math in pure Python (`decimal.getcontext().prec = 38`) avoiding binary floating-point representation artifacts.
-* **Granular Lineage**: 6-level cell coordinate mapping from claim to source document page.
-* **Client-Side Native Visualizations**: Type-safe `ChartSpec` JSON schemas bound to a canonical `result_dataset_id`.
+- ✅ Game map generation with provinces
+- ✅ Country initialization and diplomacy framework
+- ✅ Turn-based game loop
+- 🔄 Unit movement and combat system
+- 🔄 Diplomatic relations and trade
+- 🔄 Technology research tree
+- 🔄 Economic simulation
+- 🔄 AI opponents
+- 🔄 Save/load system
+- 🔄 Multiplayer support
 
----
+## Tech Stack
 
-## 📁 Monorepo Structure
+- **Frontend**: React 18 + TypeScript
+- **State Management**: Zustand
+- **Desktop**: Electron (macOS native app)
+- **Build**: Webpack + React Scripts
 
-```text
-finance-intelligence/
-├── .env.example              # Server-only vs public client environment configuration
-├── .gitignore                # Workspace git ignore rules
-├── README.md                 # Master project documentation
-├── Makefile                  # Developer workflow automation tasks
-├── pyproject.toml            # Isolated Python project definition & dependencies
-├── requirements.lock         # Reproducible locked Python dependencies snapshot
-├── apps/
-│   └── mobile/               # Flutter mobile application (iOS / Android scaffold)
-├── services/
-│   ├── api/                  # FastAPI control plane service & Alembic RLS migrations
-│   └── worker/               # Async worker skeleton
-├── packages/
-│   ├── contracts/            # Canonical JSON Schemas & OpenAPI wire contracts
-│   └── financial_domain/     # Pure Python financial calculation domain package
-├── tests/
-│   ├── contract/             # Wire contract validation tests
-│   ├── integration/          # PostgreSQL & RLS tenant isolation tests
-│   └── unit/                 # Unit tests
-├── scripts/                  # Boundary verification & secret scanner utilities
-└── .github/
-    └── workflows/            # GitHub Actions CI workflow skeleton
-```
+## Development
 
----
+### Prerequisites
 
-## 🔒 Dependency Locking & Reproducibility Strategy
+- Node.js 16+ 
+- npm or yarn
 
-Dependencies are managed in `pyproject.toml` and pinned reproducibly in `requirements.lock`.
+### Setup
 
-### Lock Regeneration Command
 ```bash
-# Regenerate requirements.lock from pyproject.toml using pip-compile
-pip install pip-tools
-pip-compile --generate-hashes pyproject.toml -o requirements.lock
+# Install dependencies
+npm install
+
+# Start development (runs both Electron and React dev server)
+npm run dev
+
+# Build production app
+npm run build
+
+# Create macOS distribution
+npm run dist
 ```
 
----
+### Project Structure
 
-## 🛠️ Local Development & Test Setup
-
-### 1. Isolated Local PostgreSQL Instance (Port 5433)
-```bash
-# Initialize local-only development database cluster
-initdb -D .pgdata_dev -A trust -U postgres
-pg_ctl -D .pgdata_dev -l .pgdata_dev/postgres.log -o "-p 5433 -k /tmp" start
-
-# Provision test database and segregated roles
-psql -h localhost -p 5433 -U postgres -c "CREATE DATABASE finance_intelligence_test;"
-psql -h localhost -p 5433 -U postgres -d finance_intelligence_test -c "
-  CREATE ROLE db_owner WITH LOGIN PASSWORD 'dev_owner_pass_123';
-  CREATE ROLE db_bootstrap WITH LOGIN PASSWORD 'dev_bootstrap_pass_123';
-  CREATE ROLE db_app_user WITH LOGIN NOBYPASSRLS PASSWORD 'dev_app_user_pass_123';
-  GRANT ALL PRIVILEGES ON DATABASE finance_intelligence_test TO db_owner;
-  GRANT CONNECT ON DATABASE finance_intelligence_test TO db_bootstrap, db_app_user;
-  GRANT ALL ON SCHEMA public TO db_owner;
-  ALTER SCHEMA public OWNER TO db_owner;
-"
+```
+src/
+├── main/                 # Electron main process
+│   ├── index.ts         # App entry point
+│   └── preload.ts       # Context bridge for security
+├── game/                # Game engine
+│   ├── store.ts         # Zustand game state store
+│   ├── mapGenerator.ts  # Procedural map generation
+│   └── countryInitializer.ts  # Country/faction setup
+├── types/               # TypeScript types
+│   └── index.ts         # Shared game types
+├── components/          # React components
+│   ├── App.tsx
+│   ├── GameMap.tsx      # Canvas-based map renderer
+│   └── GameUI.tsx       # Side panel UI
+├── styles/              # CSS stylesheets
+└── index.tsx           # React root
+public/
+└── index.html          # HTML entry point
 ```
 
-### 2. Set Test Environment Variables
-```bash
-export TEST_API_DATABASE_URL="postgresql+asyncpg://db_api_user:dev_api_user_pass_123@localhost:5433/finance_intelligence_test"
-export TEST_WORKER_DATABASE_URL="postgresql+asyncpg://db_ingestion_worker:dev_worker_pass_123@localhost:5433/finance_intelligence_test"
-export TEST_ROUNDTRIP_DATABASE_URL="postgresql+asyncpg://db_owner:dev_owner_pass_123@localhost:5433/finance_intelligence_roundtrip_test"
-```
+## References
 
-### 3. Run Test Suite
-```bash
-# Run unit, contract, and PostgreSQL RLS integration tests
-pytest tests/
-```
+This implementation is based on research of open-source Imperialism projects:
 
-### 4. Run Boundary & Secret Scanner
-```bash
-# Run boundary scanner & secret auditor
-python scripts/verify_boundary.py
-```
+- **Imperialism Remake** (https://github.com/Trilarion/imperialism-remake) - Most complete Python implementation
+- Original Imperialism game mechanics and design
+
+## Game Mechanics Overview
+
+### Core Systems
+
+**Turn-Based Strategy**: Players and AI take turns managing their empires during diplomatic, movement, combat, and research phases.
+
+**Provinces**: Map is divided into provinces with:
+- Resources (food, gold, production)
+- Population
+- Ownership and garrison units
+- Names generated procedurally
+
+**Countries**: Each faction has:
+- Treasury (gold management)
+- Provinces and territories
+- Military units
+- Technology levels
+- Diplomatic relations with other countries
+
+**Military**: Different unit types with varying capabilities:
+- Infantry, Cavalry, Artillery, Navy
+- Health and experience tracking
+- Movement and combat systems
+
+**Diplomacy**: Complex relations between countries:
+- Trust levels
+- Trade agreements
+- War declarations
+- Alliance systems
+
+## License
+
+GPL-3.0 - This project respects the open-source nature of Imperialism
+
+## Contributing
+
+Contributions welcome! Areas needing work:
+- Combat system implementation
+- AI decision making
+- Diplomatic negotiation UI
+- Save/load functionality
+- Multiplayer networking

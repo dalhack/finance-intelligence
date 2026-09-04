@@ -1,0 +1,12 @@
+.game-map-canvas {
+  flex: 1;
+  background: linear-gradient(135deg, #1a3a2a 0%, #0a1515 100%);
+  cursor: crosshair;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  border-right: 3px solid #444;
+}
+
+.game-map-canvas:hover {
+  filter: brightness(1.05);
+}
