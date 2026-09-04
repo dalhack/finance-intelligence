@@ -4,6 +4,7 @@ import { BattleScreen } from './BattleScreen';
 import { TechnologyScreen } from './TechnologyScreen';
 import ActionPanel from './ActionPanel';
 import TurnInfo from './TurnInfo';
+import DiplomacyPanel from './DiplomacyPanel';
 import '../styles/GameUI.css';
 
 type ScreenType = 'map' | 'transport' | 'industry' | 'trade' | 'diplomacy' | 'battle' | 'research';
@@ -155,16 +156,7 @@ export const GameUI: React.FC = () => {
 
       {/* DIPLOMACY Screen */}
       {currentScreen === 'diplomacy' && (
-        <div className="ui-panel">
-          <h2>Relations</h2>
-          <div className="info-content">
-            <p>Alliances: 0</p>
-            <p>Wars: 0</p>
-            <p>Treaties: 0</p>
-            <button className="action-btn">Negotiate</button>
-            <button className="action-btn">Declare War</button>
-          </div>
-        </div>
+        <DiplomacyPanel />
       )}
 
       {/* RESEARCH Screen */}
