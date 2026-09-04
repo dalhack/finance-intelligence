@@ -1,0 +1,197 @@
+.action-panel {
+  background: #000080;
+  border: 2px solid #00aa00;
+  color: #aaaa00;
+  padding: 12px;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  max-height: 400px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.action-message {
+  padding: 8px;
+  border: 1px solid #00aa00;
+  text-align: center;
+  font-weight: bold;
+  animation: fadeInOut 4s ease-in-out;
+}
+
+.action-message.success {
+  background: #001100;
+  color: #00ff00;
+  border-color: #00ff00;
+}
+
+.action-message.error {
+  background: #110000;
+  color: #ff0000;
+  border-color: #ff0000;
+}
+
+.action-message.info {
+  background: #001144;
+  color: #00aaff;
+  border-color: #00aaff;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0; }
+  10%, 90% { opacity: 1; }
+}
+
+.action-section {
+  border: 1px solid #00aa00;
+  padding: 8px;
+  background: #001144;
+}
+
+.action-section h3 {
+  margin: 0 0 6px 0;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #aaaa00;
+  border-bottom: 1px solid #00aa00;
+  padding-bottom: 3px;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.unit-info,
+.province-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 4px;
+  background: #000080;
+  border: 1px solid #003300;
+  margin-bottom: 4px;
+  font-size: 10px;
+  color: #00aa00;
+}
+
+.unit-info span,
+.province-info span {
+  display: block;
+}
+
+.action-btn {
+  background: transparent;
+  border: 1px solid #00aa00;
+  color: #aaaa00;
+  padding: 6px 8px;
+  cursor: pointer;
+  font-size: 11px;
+  font-family: 'Courier New', monospace;
+  text-align: left;
+  transition: all 0.1s;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.action-btn:hover {
+  background: #00aa00;
+  color: #000080;
+  font-weight: bold;
+}
+
+.action-btn:active {
+  transform: scale(0.98);
+}
+
+.action-btn.attack {
+  border-color: #ff6600;
+  color: #ff6600;
+}
+
+.action-btn.attack:hover {
+  background: #ff6600;
+  color: #000080;
+}
+
+.action-btn.research {
+  border-color: #0099ff;
+  color: #0099ff;
+}
+
+.action-btn.research:hover {
+  background: #0099ff;
+  color: #000080;
+}
+
+.action-btn.diplomacy {
+  border-color: #ffaa00;
+  color: #ffaa00;
+}
+
+.action-btn.diplomacy:hover {
+  background: #ffaa00;
+  color: #000080;
+}
+
+.action-btn.diplomacy.warning {
+  border-color: #ff0000;
+  color: #ff0000;
+}
+
+.action-btn.diplomacy.warning:hover {
+  background: #ff0000;
+  color: #ffffff;
+}
+
+.action-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.empty-action {
+  margin: 0;
+  padding: 4px;
+  font-size: 10px;
+  color: #00aa00;
+  font-style: italic;
+}
+
+.research-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+
+@media (max-width: 768px) {
+  .action-panel {
+    max-height: 600px;
+  }
+
+  .research-buttons {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Scrollbar styling */
+.action-panel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.action-panel::-webkit-scrollbar-track {
+  background: #000080;
+}
+
+.action-panel::-webkit-scrollbar-thumb {
+  background: #00aa00;
+  border-radius: 2px;
+}
+
+.action-panel::-webkit-scrollbar-thumb:hover {
+  background: #00ff00;
+}

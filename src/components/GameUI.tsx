@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useGameStore } from '@game/store';
 import { BattleScreen } from './BattleScreen';
 import { TechnologyScreen } from './TechnologyScreen';
+import ActionPanel from './ActionPanel';
 import '../styles/GameUI.css';
 
 type ScreenType = 'map' | 'transport' | 'industry' | 'trade' | 'diplomacy' | 'battle' | 'research';
@@ -181,6 +182,9 @@ export const GameUI: React.FC = () => {
           onClose={() => setCurrentScreen('map')}
         />
       )}
+
+      {/* Action Panel */}
+      <ActionPanel />
 
       {/* Footer */}
       <div className="ui-panel">
