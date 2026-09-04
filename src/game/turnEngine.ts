@@ -3,6 +3,8 @@ import { EconomyEngine } from './economyEngine';
 import { DiplomacyEngine } from './diplomacyEngine';
 import { TechnologyEngine } from './technologyEngine';
 import { InfrastructureEngine } from './infrastructureEngine';
+import { AIEngine, AIDecision } from './aiEngine';
+import { AIExecutor } from './aiExecutor';
 
 export interface TurnReport {
   turn: number;
@@ -28,6 +30,16 @@ export class TurnEngine {
     // Process each country's turn
     gameState.countries.forEach(country => {
       this.processCountryTurn(country, gameState, report);
+
+      // Execute AI decisions for AI players
+      if (country.type === 'ai') {
+        const decisions = AIEngine.makeDecisions(country, gameState.countries, gameState);
+        AIExecutor.executeDecisions(gameState, country, decisions);
+
+        if (decisions.length > 0) {
+          report.events.push(`${country.name} made ${decisions.length} strategic decision(s)`);
+        }
+      }
     });
 
     // Update game state
