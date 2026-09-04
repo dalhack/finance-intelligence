@@ -1,169 +1,380 @@
+/**
+ * Technology Engine - 1992 Imperialism Exact Mechanics
+ * 12 Key technologies required for victory, exact research times from game reference
+ */
+
 export interface Technology {
   id: string;
   name: string;
   description: string;
-  cost: number; // Gold cost to research
-  era: number; // 1-4 (Industrial era progression)
+  researchTime: number; // Turns to research (from EXACT_IMPLEMENTATION_PLAN.md)
+  era: number; // 1-3 (game progression)
+  level: number; // 1-3 (research level)
   prerequisites: string[]; // Technology IDs required first
+  unlocksUnits?: string[]; // Unit types unlocked by this tech
+  unlocksBuildings?: string[]; // Building types unlocked by this tech
   effects: {
-    unitAttackBonus?: number;
-    unitDefenseBonus?: number;
-    productionBonus?: number;
-    tradeBonus?: number;
+    combatBonus?: number; // Combat effectiveness bonus (+%)
+    productionBonus?: number; // Production bonus (+%)
+    movementBonus?: number; // Movement bonus (+)
+    tradeBonus?: number; // Trade bonus (+%)
   };
 }
 
+/**
+ * 12 Key Technologies for Victory Condition (from EXACT_IMPLEMENTATION_PLAN.md)
+ */
 const TECHNOLOGIES: Record<string, Technology> = {
-  // Era 1 - Initial (1815)
+  // LEVEL 1 - Starting technologies
   'musketry': {
     id: 'musketry',
-    name: 'Advanced Musketry',
-    description: 'Improve infantry combat effectiveness',
-    cost: 2000,
+    name: 'Musketry',
+    description: 'Infantry +10%',
+    researchTime: 2,
     era: 1,
+    level: 1,
     prerequisites: [],
-    effects: { unitAttackBonus: 1 },
+    effects: { combatBonus: 10 },
   },
   'horsemanship': {
     id: 'horsemanship',
     name: 'Horsemanship',
-    description: 'Cavalry mobility and training',
-    cost: 2000,
+    description: 'Cavalry +8%, Movement +1',
+    researchTime: 2,
     era: 1,
+    level: 1,
     prerequisites: [],
-    effects: { unitAttackBonus: 1 },
+    effects: { combatBonus: 8, movementBonus: 1 },
   },
-  'cannon_casting': {
-    id: 'cannon_casting',
-    name: 'Cannon Casting',
-    description: 'Develop artillery units',
-    cost: 3000,
+  'artillery_tactics': {
+    id: 'artillery_tactics',
+    name: 'Artillery Tactics',
+    description: 'Artillery +15%',
+    researchTime: 3,
     era: 1,
+    level: 1,
     prerequisites: [],
-    effects: { unitAttackBonus: 2 },
+    effects: { combatBonus: 15 },
   },
-  'naval_tactics': {
-    id: 'naval_tactics',
-    name: 'Naval Tactics',
-    description: 'Improve naval combat',
-    cost: 2500,
+  'navigation': {
+    id: 'navigation',
+    name: 'Navigation',
+    description: 'Naval trade routes enabled',
+    researchTime: 3,
     era: 1,
+    level: 1,
     prerequisites: [],
-    effects: { unitAttackBonus: 1 },
+    effects: { tradeBonus: 20 },
+  },
+  'ironclads': {
+    id: 'ironclads',
+    name: 'Ironclads',
+    description: 'Naval units unlocked',
+    researchTime: 4,
+    era: 1,
+    level: 1,
+    prerequisites: ['navigation'],
+    unlocksUnits: ['ironclad', 'armored_cruiser'],
+    effects: {},
   },
 
-  // Era 2 - Industrial (1850)
-  'rifling': {
-    id: 'rifling',
-    name: 'Rifled Infantry',
-    description: 'Rifled muskets increase accuracy',
-    cost: 3000,
+  // LEVEL 2 - Industrial era
+  'industrialization': {
+    id: 'industrialization',
+    name: 'Industrialization',
+    description: 'Production +25%',
+    researchTime: 5,
     era: 2,
-    prerequisites: ['musketry'],
-    effects: { unitAttackBonus: 2, unitDefenseBonus: 1 },
-  },
-  'steel_production': {
-    id: 'steel_production',
-    name: 'Steel Production',
-    description: 'Increased steel manufacturing',
-    cost: 4000,
-    era: 2,
+    level: 2,
     prerequisites: [],
-    effects: { productionBonus: 0.2 },
+    effects: { productionBonus: 25 },
   },
-  'railway': {
-    id: 'railway',
-    name: 'Railway Technology',
-    description: 'Build and operate railways for resource transport',
-    cost: 5000,
+  'railroads': {
+    id: 'railroads',
+    name: 'Railroads',
+    description: 'Movement +2, Infrastructure',
+    researchTime: 4,
     era: 2,
-    prerequisites: ['steel_production'],
-    effects: { tradeBonus: 0.3 },
+    level: 2,
+    prerequisites: [],
+    unlocksBuildings: ['railroad', 'rail_depot'],
+    effects: { movementBonus: 2 },
   },
   'steam_power': {
     id: 'steam_power',
     name: 'Steam Power',
-    description: 'Industrial steam engines for factories',
-    cost: 4000,
+    description: 'Naval +?, Production +15%',
+    researchTime: 5,
     era: 2,
-    prerequisites: [],
-    effects: { productionBonus: 0.15 },
+    level: 2,
+    prerequisites: ['railroads'],
+    effects: { productionBonus: 15, combatBonus: 5 },
   },
-  'ironclad_navy': {
-    id: 'ironclad_navy',
-    name: 'Ironclad Navy',
-    description: 'Iron-hulled warships',
-    cost: 5000,
+  'rifle_infantry': {
+    id: 'rifle_infantry',
+    name: 'Rifle Infantry',
+    description: 'Infantry combat +12%',
+    researchTime: 3,
     era: 2,
-    prerequisites: ['naval_tactics', 'steel_production'],
-    effects: { unitAttackBonus: 2, unitDefenseBonus: 3 },
+    level: 2,
+    prerequisites: ['musketry'],
+    unlocksUnits: ['rifle_infantry'],
+    effects: { combatBonus: 12 },
   },
 
-  // Era 3 - Late Industrial (1880)
-  'breech_loading': {
-    id: 'breech_loading',
-    name: 'Breech-Loading Artillery',
-    description: 'Faster-firing artillery pieces',
-    cost: 4000,
+  // LEVEL 3 - Modern era
+  'mechanization': {
+    id: 'mechanization',
+    name: 'Mechanization',
+    description: 'Combat +25%, Movement +2',
+    researchTime: 6,
     era: 3,
-    prerequisites: ['cannon_casting', 'rifling'],
-    effects: { unitAttackBonus: 3 },
-  },
-  'machine_guns': {
-    id: 'machine_guns',
-    name: 'Machine Guns',
-    description: 'Rapid-fire small arms',
-    cost: 4500,
-    era: 3,
-    prerequisites: ['rifling'],
-    effects: { unitDefenseBonus: 3 },
-  },
-  'mass_production': {
-    id: 'mass_production',
-    name: 'Mass Production',
-    description: 'Factory assembly line manufacturing',
-    cost: 5000,
-    era: 3,
+    level: 3,
     prerequisites: ['steam_power'],
-    effects: { productionBonus: 0.25 },
+    unlocksUnits: ['armor', 'mechanized'],
+    effects: { combatBonus: 25, movementBonus: 2 },
   },
-  'dreadnought': {
-    id: 'dreadnought',
-    name: 'Dreadnought Battleships',
-    description: 'Advanced battleship design',
-    cost: 6000,
+  'advanced_naval': {
+    id: 'advanced_naval',
+    name: 'Advanced Naval',
+    description: 'Dreadnought unlocked',
+    researchTime: 4,
     era: 3,
-    prerequisites: ['ironclad_navy'],
-    effects: { unitAttackBonus: 4, unitDefenseBonus: 4 },
+    level: 3,
+    prerequisites: ['steam_power'],
+    unlocksUnits: ['dreadnought'],
+    effects: { combatBonus: 20 },
   },
-
-  // Era 4 - Modern (1900+)
-  'smokeless_powder': {
-    id: 'smokeless_powder',
-    name: 'Smokeless Powder',
-    description: 'Modern ammunition for all units',
-    cost: 5000,
-    era: 4,
-    prerequisites: ['breech_loading', 'machine_guns'],
-    effects: { unitAttackBonus: 4, unitDefenseBonus: 2 },
-  },
-  'logistics': {
-    id: 'logistics',
-    name: 'Supply Logistics',
-    description: 'Improved military supply chains',
-    cost: 4000,
-    era: 4,
-    prerequisites: ['railway'],
-    effects: { tradeBonus: 0.5 },
+  'industrial_dev': {
+    id: 'industrial_dev',
+    name: 'Industrial Development',
+    description: 'Factory bonus +50%',
+    researchTime: 5,
+    era: 3,
+    level: 3,
+    prerequisites: ['industrialization'],
+    unlocksBuildings: ['factory'],
+    effects: { productionBonus: 50 },
   },
 };
 
 export class TechnologyEngine {
-  /* Check if technology can be researched */
+  /**
+   * 12 key technologies required for technology victory (from EXACT_IMPLEMENTATION_PLAN.md)
+   */
+  static readonly VICTORY_TECHNOLOGIES = [
+    'musketry',
+    'horsemanship',
+    'artillery_tactics',
+    'navigation',
+    'ironclads',
+    'industrialization',
+    'railroads',
+    'steam_power',
+    'mechanization',
+    'advanced_naval',
+    'industrial_dev',
+    'rifle_infantry',
+  ];
+
+  /**
+   * Start researching a technology (turn-based system)
+   */
+  static startResearch(
+    countryTechnology: Map<string, number>,
+    technologyId: string,
+    researchedTechs: Set<string>
+  ): { success: boolean; message: string } {
+    const tech = TECHNOLOGIES[technologyId];
+    if (!tech) {
+      return { success: false, message: 'Technology not found' };
+    }
+
+    if (researchedTechs.has(technologyId)) {
+      return { success: false, message: 'Already researched' };
+    }
+
+    // Check prerequisites
+    for (const prereq of tech.prerequisites) {
+      if (!researchedTechs.has(prereq)) {
+        return { success: false, message: `Missing prerequisite: ${TECHNOLOGIES[prereq]?.name}` };
+      }
+    }
+
+    // Start research with 0 progress
+    countryTechnology.set(technologyId, 0);
+    return { success: true, message: `Started researching ${tech.name}` };
+  }
+
+  /**
+   * Advance research progress for all technologies
+   * Called once per turn, increments progress by 1
+   */
+  static advanceResearch(
+    countryTechnology: Map<string, number>,
+    researchedTechs: Set<string>
+  ): string[] {
+    const completedTechs: string[] = [];
+
+    countryTechnology.forEach((progress, techId) => {
+      const tech = TECHNOLOGIES[techId];
+      if (!tech) return;
+
+      // Already completed
+      if (researchedTechs.has(techId)) {
+        return;
+      }
+
+      // Increment progress
+      const newProgress = progress + 1;
+
+      // Check if completed
+      if (newProgress >= tech.researchTime) {
+        countryTechnology.delete(techId);
+        researchedTechs.add(techId);
+        completedTechs.push(techId);
+      } else {
+        countryTechnology.set(techId, newProgress);
+      }
+    });
+
+    return completedTechs;
+  }
+
+  /**
+   * Get current research progress (0 to researchTime)
+   */
+  static getResearchProgress(technologyId: string, countryTechnology: Map<string, number>): number {
+    return countryTechnology.get(technologyId) || 0;
+  }
+
+  /**
+   * Get technology details
+   */
+  static getTechnology(id: string): Technology | null {
+    return TECHNOLOGIES[id] || null;
+  }
+
+  /**
+   * Get technologies by era (for UI display)
+   */
+  static getTechnologiesByEra(era: number): Technology[] {
+    return Object.values(TECHNOLOGIES).filter(t => t.era === era);
+  }
+
+  /**
+   * Get technologies available to research now (prerequisites met)
+   */
+  static getAvailableTechnologies(researchedTechs: Set<string>): Technology[] {
+    return Object.values(TECHNOLOGIES)
+      .filter(t => !researchedTechs.has(t.id))
+      .filter(t => t.prerequisites.every(p => researchedTechs.has(p)));
+  }
+
+  /**
+   * Get total combat bonus from all researched technologies
+   */
+  static getCombatBonus(researchedTechs: Set<string>): number {
+    let bonus = 0;
+
+    researchedTechs.forEach(techId => {
+      const tech = TECHNOLOGIES[techId];
+      if (tech?.effects.combatBonus) {
+        bonus += tech.effects.combatBonus;
+      }
+    });
+
+    return bonus;
+  }
+
+  /**
+   * Get total production bonus from all researched technologies
+   */
+  static getProductionBonus(researchedTechs: Set<string>): number {
+    let bonus = 100; // Base 100%
+
+    researchedTechs.forEach(techId => {
+      const tech = TECHNOLOGIES[techId];
+      if (tech?.effects.productionBonus) {
+        bonus += tech.effects.productionBonus;
+      }
+    });
+
+    return bonus / 100; // Return as multiplier (1.0 = 100%)
+  }
+
+  /**
+   * Get total movement bonus from all researched technologies
+   */
+  static getMovementBonus(researchedTechs: Set<string>): number {
+    let bonus = 0;
+
+    researchedTechs.forEach(techId => {
+      const tech = TECHNOLOGIES[techId];
+      if (tech?.effects.movementBonus) {
+        bonus += tech.effects.movementBonus;
+      }
+    });
+
+    return bonus;
+  }
+
+  /**
+   * Get total trade bonus from all researched technologies
+   */
+  static getTradeBonus(researchedTechs: Set<string>): number {
+    let bonus = 100; // Base 100%
+
+    researchedTechs.forEach(techId => {
+      const tech = TECHNOLOGIES[techId];
+      if (tech?.effects.tradeBonus) {
+        bonus += tech.effects.tradeBonus;
+      }
+    });
+
+    return bonus / 100; // Return as multiplier (1.0 = 100%)
+  }
+
+  /**
+   * Get units unlocked by researched technologies
+   */
+  static getUnlockedUnits(researchedTechs: Set<string>): string[] {
+    const units = new Set<string>();
+
+    researchedTechs.forEach(techId => {
+      const tech = TECHNOLOGIES[techId];
+      if (tech?.unlocksUnits) {
+        tech.unlocksUnits.forEach(unit => units.add(unit));
+      }
+    });
+
+    return Array.from(units);
+  }
+
+  /**
+   * Get buildings unlocked by researched technologies
+   */
+  static getUnlockedBuildings(researchedTechs: Set<string>): string[] {
+    const buildings = new Set<string>();
+
+    researchedTechs.forEach(techId => {
+      const tech = TECHNOLOGIES[techId];
+      if (tech?.unlocksBuildings) {
+        tech.unlocksBuildings.forEach(building => buildings.add(building));
+      }
+    });
+
+    return Array.from(buildings);
+  }
+
+  /**
+   * Check if technology can be researched (for UI validation)
+   * Returns true if prerequisites are met and not already researched
+   */
   static canResearch(
     technologyId: string,
     researchedTechs: Set<string>,
-    treasury: number
+    currentlyResearching?: string
   ): { canResearch: boolean; reason?: string } {
     const tech = TECHNOLOGIES[technologyId];
     if (!tech) {
@@ -174,10 +385,12 @@ export class TechnologyEngine {
       return { canResearch: false, reason: 'Already researched' };
     }
 
-    if (treasury < tech.cost) {
-      return { canResearch: false, reason: `Insufficient funds (need ${tech.cost})` };
+    // Check if already researching something else
+    if (currentlyResearching && currentlyResearching !== technologyId) {
+      return { canResearch: false, reason: 'Already researching another technology' };
     }
 
+    // Check prerequisites
     for (const prereq of tech.prerequisites) {
       if (!researchedTechs.has(prereq)) {
         return { canResearch: false, reason: `Missing prerequisite: ${TECHNOLOGIES[prereq]?.name}` };
@@ -185,57 +398,6 @@ export class TechnologyEngine {
     }
 
     return { canResearch: true };
-  }
-
-  /* Get technology details */
-  static getTechnology(id: string): Technology | null {
-    return TECHNOLOGIES[id] || null;
-  }
-
-  /* Get all technologies in an era */
-  static getTechnologiesByEra(era: number): Technology[] {
-    return Object.values(TECHNOLOGIES).filter(t => t.era === era);
-  }
-
-  /* Get available technologies (can be researched now) */
-  static getAvailableTechnologies(researchedTechs: Set<string>): Technology[] {
-    return Object.values(TECHNOLOGIES)
-      .filter(t => !researchedTechs.has(t.id))
-      .filter(t => t.prerequisites.every(p => researchedTechs.has(p)));
-  }
-
-  /* Get technology effect multiplier */
-  static getEffectMultiplier(
-    effect: keyof Technology['effects'],
-    researchedTechs: Set<string>
-  ): number {
-    let multiplier = 1.0;
-
-    Object.keys(TECHNOLOGIES).forEach(techId => {
-      if (researchedTechs.has(techId)) {
-        const tech = TECHNOLOGIES[techId];
-        if (tech.effects[effect]) {
-          multiplier += tech.effects[effect]!;
-        }
-      }
-    });
-
-    return multiplier;
-  }
-
-  /* Get all prerequisites for a technology (recursive) */
-  static getAllPrerequisites(technologyId: string, resolved = new Set<string>()): Set<string> {
-    const tech = TECHNOLOGIES[technologyId];
-    if (!tech) return resolved;
-
-    for (const prereq of tech.prerequisites) {
-      if (!resolved.has(prereq)) {
-        resolved.add(prereq);
-        this.getAllPrerequisites(prereq, resolved);
-      }
-    }
-
-    return resolved;
   }
 }
 

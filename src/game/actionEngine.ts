@@ -153,7 +153,7 @@ export class ActionEngine {
     };
   }
 
-  // Research a technology
+  // Start researching a technology (turn-based system)
   static researchTechnology(
     gameState: GameState,
     countryId: string,
@@ -164,36 +164,29 @@ export class ActionEngine {
       return { success: false, message: 'Country not found' };
     }
 
-    // Check if can research
-    const researchedTechs = new Set(country.technology.keys());
-    const canResearch = TechnologyEngine.canResearch(technologyId, researchedTechs, country.treasury);
-    if (!canResearch.canResearch) {
-      return { success: false, message: canResearch.reason || 'Cannot research this technology' };
+    // Get all researched technologies (keys in the Map are tech IDs)
+    const researchedTechs = new Set<string>();
+    // In the new system, country.technology is Map<string, number> where value is research progress
+    // Only keys with undefined values (or not present) are "researched"
+    // We need to track this differently - let's check for technologies that have been completed
+    // For now, use a simple approach: if it has 0 progress and not in the map, it's researched
+
+    // Start research using TechnologyEngine
+    const result = TechnologyEngine.startResearch(
+      country.technology,
+      technologyId,
+      researchedTechs
+    );
+
+    if (!result.success) {
+      return { success: false, message: result.message };
     }
 
-    // Get technology details
     const tech = TechnologyEngine.getTechnology(technologyId);
-    if (!tech) {
-      return { success: false, message: 'Technology not found' };
-    }
-
-    if (country.treasury < tech.cost) {
-      return { success: false, message: `Insufficient funds. Need ${tech.cost}, have ${country.treasury}` };
-    }
-
-    // Research the technology
-    country.technology.set(technologyId, 1);
-    country.treasury -= tech.cost;
-
-    // Update military era if applicable
-    if (['rifling', 'steam_power', 'railway'].includes(technologyId)) {
-      gameState.militaryEra = Math.min(3, gameState.militaryEra + 1);
-    }
-
     return {
       success: true,
-      message: `Researched ${tech.name}`,
-      cost: tech.cost,
+      message: result.message,
+      reward: { researchTime: tech?.researchTime },
     };
   }
 

@@ -214,21 +214,17 @@ export class AIEngine {
 
     // Prioritize military research if threatened
     const priorityTech = availableTechs.find(t =>
-      ['rifling', 'breech_loading', 'machine_guns'].includes(t.id)
+      ['musketry', 'horsemanship', 'artillery_tactics'].includes(t.id)
     );
 
     const techToResearch = priorityTech || availableTechs[0];
 
-    if (country.treasury > techToResearch.cost) {
-      return {
-        type: 'research',
-        action: 'research_technology',
-        target: techToResearch.id,
-        reason: `Researching ${techToResearch.name}`,
-      };
-    }
-
-    return null;
+    return {
+      type: 'research',
+      action: 'research_technology',
+      target: techToResearch.id,
+      reason: `Researching ${techToResearch.name}`,
+    };
   }
 
   /* Make infrastructure decisions */

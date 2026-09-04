@@ -17,7 +17,7 @@ export const TechnologyScreen: React.FC<TechnologyScreenProps> = ({
 
   const selectedTechData = selectedTech ? TECHNOLOGIES[selectedTech] : null;
   const canResearch = selectedTechData && selectedTech
-    ? TechnologyEngine.canResearch(selectedTech, researchedTechs, treasury)
+    ? TechnologyEngine.canResearch(selectedTech, researchedTechs)
     : { canResearch: false };
 
   const eras = [1, 2, 3, 4];
@@ -32,7 +32,6 @@ export const TechnologyScreen: React.FC<TechnologyScreenProps> = ({
     <div className="technology-screen">
       <div className="tech-header">
         <h2>RESEARCH & DEVELOPMENT</h2>
-        <p>Treasury: ${treasury}</p>
       </div>
 
       <div className="tech-container">
@@ -46,8 +45,7 @@ export const TechnologyScreen: React.FC<TechnologyScreenProps> = ({
                   const isSelected = selectedTech === tech.id;
                   const canRes = TechnologyEngine.canResearch(
                     tech.id,
-                    researchedTechs,
-                    treasury
+                    researchedTechs
                   );
 
                   return (
@@ -77,8 +75,8 @@ export const TechnologyScreen: React.FC<TechnologyScreenProps> = ({
               <p className="description">{selectedTechData.description}</p>
 
               <div className="cost-block">
-                <span>Cost:</span>
-                <span className="cost-amount">${selectedTechData.cost}</span>
+                <span>Research Time:</span>
+                <span className="cost-amount">{selectedTechData.researchTime} turns</span>
               </div>
 
               {selectedTechData.prerequisites.length > 0 && (
@@ -101,17 +99,17 @@ export const TechnologyScreen: React.FC<TechnologyScreenProps> = ({
               <div className="effects">
                 <h4>Effects:</h4>
                 <ul>
-                  {selectedTechData.effects.unitAttackBonus && (
-                    <li>+{selectedTechData.effects.unitAttackBonus} Unit Attack</li>
-                  )}
-                  {selectedTechData.effects.unitDefenseBonus && (
-                    <li>+{selectedTechData.effects.unitDefenseBonus} Unit Defense</li>
+                  {selectedTechData.effects.combatBonus && (
+                    <li>+{selectedTechData.effects.combatBonus}% Combat</li>
                   )}
                   {selectedTechData.effects.productionBonus && (
-                    <li>+{(selectedTechData.effects.productionBonus * 100).toFixed(0)}% Production</li>
+                    <li>+{selectedTechData.effects.productionBonus}% Production</li>
+                  )}
+                  {selectedTechData.effects.movementBonus && (
+                    <li>+{selectedTechData.effects.movementBonus} Movement</li>
                   )}
                   {selectedTechData.effects.tradeBonus && (
-                    <li>+{(selectedTechData.effects.tradeBonus * 100).toFixed(0)}% Trade</li>
+                    <li>+{selectedTechData.effects.tradeBonus}% Trade</li>
                   )}
                 </ul>
               </div>
@@ -122,7 +120,7 @@ export const TechnologyScreen: React.FC<TechnologyScreenProps> = ({
                 <>
                   {canResearch.canResearch ? (
                     <button className="research-btn" onClick={handleResearch}>
-                      RESEARCH (${selectedTechData.cost})
+                      START RESEARCH
                     </button>
                   ) : (
                     <div className="status blocked-status">
