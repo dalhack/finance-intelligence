@@ -20,6 +20,7 @@ export class GameInitializer {
     // Set up initial technology trees (all empty at game start)
     countries.forEach(country => {
       country.technology = new Map();
+      country.researchedTechnologies = new Set();
     });
 
     // Create initial game state

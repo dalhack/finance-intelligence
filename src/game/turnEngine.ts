@@ -157,11 +157,19 @@ export class TurnEngine {
    */
   private static processResearchPhase(gameState: GameState, report: TurnReport): void {
     gameState.countries.forEach(country => {
-      // Technology research is managed by TechnologyEngine
-      // This phase advances all active research by 1 turn
       const techCount = country.technology.size;
       if (techCount > 0) {
-        report.events.push(`${country.name} continues research (${techCount} technologies)`);
+        // Advance all research by 1 turn
+        const completed = TechnologyEngine.advanceResearch(country.technology, country.researchedTechnologies);
+
+        if (completed.length > 0) {
+          completed.forEach(techId => {
+            const tech = TechnologyEngine.getTechnology(techId);
+            report.events.push(`${country.name} completed research: ${tech?.name}`);
+          });
+        } else {
+          report.events.push(`${country.name} continues research (${techCount} technologies)`);
+        }
       }
     });
   }

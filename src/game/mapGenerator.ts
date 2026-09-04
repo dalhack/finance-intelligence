@@ -218,6 +218,7 @@ function createCountries(numCountries: number): Country[] {
       navalUnits: [],
       workers: 100,
       technology: new Map(),
+      researchedTechnologies: new Set(),
       diplomacy: new Map(),
       merchantMarine: 2,
       freightCars: 5,

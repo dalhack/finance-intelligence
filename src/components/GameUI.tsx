@@ -162,7 +162,7 @@ export const GameUI: React.FC = () => {
       {/* RESEARCH Screen */}
       {currentScreen === 'research' && currentPlayer && (
         <TechnologyScreen
-          researchedTechs={new Set()}
+          researchedTechs={currentPlayer.researchedTechnologies}
           treasury={currentPlayer.treasury}
           onResearch={(techId) => console.log('Research:', techId)}
         />

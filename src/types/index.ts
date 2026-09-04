@@ -146,6 +146,7 @@ export interface Country {
   navalUnits?: NavalUnit[];
   workers: number;
   technology: Map<string, number>;
+  researchedTechnologies: Set<string>;
   diplomacy: Map<string, DiplomaticRelation>;
   // Transport capacity
   merchantMarine: number;

@@ -63,8 +63,8 @@ export class VictoryEngine {
         return;
       }
 
-      // TECHNOLOGY VICTORY: Research 12 unique technologies
-      const techCount = country.technology.size;
+      // TECHNOLOGY VICTORY: Research 12 key victory technologies
+      const techCount = country.researchedTechnologies.size;
       const technologyCondition: VictoryCondition = {
         type: 'technology',
         name: 'Technological Supremacy',
@@ -124,7 +124,7 @@ export class VictoryEngine {
       },
       {
         type: 'Technology',
-        progress: Math.min(100, Math.round((country.technology.size / 12) * 100)),
+        progress: Math.min(100, Math.round((country.researchedTechnologies.size / 12) * 100)),
       },
     ];
   }

@@ -164,18 +164,11 @@ export class ActionEngine {
       return { success: false, message: 'Country not found' };
     }
 
-    // Get all researched technologies (keys in the Map are tech IDs)
-    const researchedTechs = new Set<string>();
-    // In the new system, country.technology is Map<string, number> where value is research progress
-    // Only keys with undefined values (or not present) are "researched"
-    // We need to track this differently - let's check for technologies that have been completed
-    // For now, use a simple approach: if it has 0 progress and not in the map, it's researched
-
     // Start research using TechnologyEngine
     const result = TechnologyEngine.startResearch(
       country.technology,
       technologyId,
-      researchedTechs
+      country.researchedTechnologies
     );
 
     if (!result.success) {

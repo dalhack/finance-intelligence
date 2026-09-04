@@ -102,6 +102,7 @@ export function initializeCountries(
         ['military', 1],
         ['trade', 1],
       ]),
+      researchedTechnologies: new Set<string>(),
       diplomacy: new Map<string, any>(),
       merchantMarine: mod.merchant,
       freightCars: mod.freight,

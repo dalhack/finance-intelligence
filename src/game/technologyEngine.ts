@@ -183,7 +183,8 @@ export class TechnologyEngine {
   static startResearch(
     countryTechnology: Map<string, number>,
     technologyId: string,
-    researchedTechs: Set<string>
+    researchedTechs: Set<string>,
+    prereqOnly: boolean = false
   ): { success: boolean; message: string } {
     const tech = TECHNOLOGIES[technologyId];
     if (!tech) {
