@@ -1,77 +1,146 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useGameStore } from '@game/store';
 import '../styles/GameUI.css';
+
+type ScreenType = 'map' | 'transport' | 'industry' | 'trade' | 'diplomacy';
 
 export const GameUI: React.FC = () => {
   const gameState = useGameStore(s => s.gameState);
   const nextTurn = useGameStore(s => s.nextTurn);
-  const setGamePhase = useGameStore(s => s.setGamePhase);
+  const [currentScreen, setCurrentScreen] = useState<ScreenType>('map');
 
   if (!gameState) return null;
 
   const currentPlayer = gameState.countries.find(c => c.id === gameState.currentPlayerCountryId);
   const selectedProvince = gameState.selectedProvince;
 
-  const phaseOptions = ['diplomacy', 'movement', 'combat', 'research', 'end-turn'] as const;
+  const screens: { id: ScreenType; label: string }[] = [
+    { id: 'map', label: 'MAP' },
+    { id: 'transport', label: 'TRANSPORT' },
+    { id: 'industry', label: 'INDUSTRY' },
+    { id: 'trade', label: 'TRADE' },
+    { id: 'diplomacy', label: 'DIPLOMACY' },
+  ];
 
   return (
     <aside className="game-ui">
+      {/* Screen Tabs */}
       <div className="ui-panel">
-        <h2>Country Info</h2>
-        {currentPlayer && (
-          <div className="info-content">
-            <p><strong>{currentPlayer.name}</strong></p>
-            <p>Treasury: {currentPlayer.treasury} gold</p>
-            <p>Provinces: {currentPlayer.provinces.length}</p>
-            <p>Units: {currentPlayer.units.length}</p>
-          </div>
-        )}
-      </div>
-
-      <div className="ui-panel">
-        <h2>Province Info</h2>
-        {selectedProvince ? (
-          <div className="info-content">
-            <p><strong>{selectedProvince.name}</strong></p>
-            <p>Owner: {selectedProvince.owner ? `Country ${selectedProvince.owner}` : 'Unclaimed'}</p>
-            <p>Population: {selectedProvince.population.toLocaleString()}</p>
-            <p>Food: {selectedProvince.resources.food}</p>
-            <p>Gold: {selectedProvince.resources.gold}</p>
-            <p>Production: {selectedProvince.resources.production}</p>
-          </div>
-        ) : (
-          <p className="empty-message">Click on a province to view details</p>
-        )}
-      </div>
-
-      <div className="ui-panel">
-        <h2>Game Phase</h2>
         <div className="phase-buttons">
-          {phaseOptions.map(phase => (
+          {screens.map(screen => (
             <button
-              key={phase}
-              className={`phase-btn ${gameState.gamePhase === phase ? 'active' : ''}`}
-              onClick={() => setGamePhase(phase)}
+              key={screen.id}
+              className={`phase-btn ${currentScreen === screen.id ? 'active' : ''}`}
+              onClick={() => setCurrentScreen(screen.id)}
             >
-              {phase.charAt(0).toUpperCase() + phase.slice(1).replace('-', ' ')}
+              {screen.label}
             </button>
           ))}
         </div>
       </div>
 
+      {/* MAP Screen */}
+      {currentScreen === 'map' && (
+        <>
+          <div className="ui-panel">
+            <h2>Empire</h2>
+            {currentPlayer && (
+              <div className="info-content">
+                <p><strong>{currentPlayer.name}</strong></p>
+                <p>Treasury: ${currentPlayer.treasury}</p>
+                <p>Provinces: {currentPlayer.provinces.length}</p>
+                <p>Units: {currentPlayer.units.length}</p>
+                <p>Workers: 0</p>
+              </div>
+            )}
+          </div>
+
+          <div className="ui-panel">
+            <h2>Selection</h2>
+            {selectedProvince ? (
+              <div className="info-content">
+                <p><strong>{selectedProvince.name}</strong></p>
+                <p>Owner: {selectedProvince.owner || 'Unclaimed'}</p>
+                <p>Pop: {selectedProvince.population}</p>
+                <p>Food: {selectedProvince.resources.food}</p>
+                <p>Gold: {selectedProvince.resources.gold}</p>
+                <p>Prod: {selectedProvince.resources.production}</p>
+              </div>
+            ) : (
+              <p className="empty-message">Select province</p>
+            )}
+          </div>
+        </>
+      )}
+
+      {/* TRANSPORT Screen */}
+      {currentScreen === 'transport' && (
+        <div className="ui-panel">
+          <h2>Transport</h2>
+          <div className="info-content">
+            <p>Merchant Marine: 0</p>
+            <p>Freight Cars: 0</p>
+            <p>Capacity Used: 0%</p>
+            <button className="action-btn">View Routes</button>
+            <button className="action-btn">Allocate</button>
+          </div>
+        </div>
+      )}
+
+      {/* INDUSTRY Screen */}
+      {currentScreen === 'industry' && (
+        <div className="ui-panel">
+          <h2>Production</h2>
+          <div className="info-content">
+            <p>Workers: 0</p>
+            <p>Raw Materials: 0</p>
+            <p>Production: 0%</p>
+            <button className="action-btn">Allocate</button>
+            <button className="action-btn">Train Workers</button>
+          </div>
+        </div>
+      )}
+
+      {/* TRADE Screen */}
+      {currentScreen === 'trade' && (
+        <div className="ui-panel">
+          <h2>Trade</h2>
+          <div className="info-content">
+            <p>Trade Partners: {gameState.countries.length - 1}</p>
+            <p>Consulates: 0</p>
+            <p>Income: $0</p>
+            <button className="action-btn">Give Orders</button>
+            <button className="action-btn">Consulates</button>
+          </div>
+        </div>
+      )}
+
+      {/* DIPLOMACY Screen */}
+      {currentScreen === 'diplomacy' && (
+        <div className="ui-panel">
+          <h2>Relations</h2>
+          <div className="info-content">
+            <p>Alliances: 0</p>
+            <p>Wars: 0</p>
+            <p>Treaties: 0</p>
+            <button className="action-btn">Negotiate</button>
+            <button className="action-btn">Declare War</button>
+          </div>
+        </div>
+      )}
+
+      {/* Footer */}
       <div className="ui-panel">
         <button className="next-turn-btn" onClick={nextTurn}>
-          Next Turn →
+          END TURN
         </button>
       </div>
 
       <div className="ui-panel">
-        <h2>Actions</h2>
-        <button className="action-btn">Build Unit</button>
-        <button className="action-btn">Build Structure</button>
-        <button className="action-btn">Diplomacy</button>
-        <button className="action-btn">Trade</button>
-        <button className="action-btn">Research</button>
+        <div className="info-content">
+          <p>Turn: {gameState.currentTurn}</p>
+          <p>Era: Industrial</p>
+        </div>
       </div>
     </aside>
   );

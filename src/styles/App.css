@@ -4,14 +4,34 @@
   box-sizing: border-box;
 }
 
+/* 90s DOS/Windows Retro Theme */
+:root {
+  --dos-black: #000000;
+  --dos-blue: #0000aa;
+  --dos-cyan: #00aaaa;
+  --dos-white: #aaaaaa;
+  --dos-gray: #555555;
+  --dos-light-blue: #5555ff;
+  --dos-light-cyan: #55ffff;
+  --dos-light-white: #ffffff;
+
+  /* Imperialism palette */
+  --imp-bg: #000080; /* Dark blue */
+  --imp-border: #00aa00; /* Green borders */
+  --imp-text: #aaaa00; /* Yellow text */
+  --imp-highlight: #ffff55; /* Bright yellow */
+}
+
 .app {
   width: 100vw;
   height: 100vh;
-  background: #1a1a1a;
-  color: #fff;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--imp-bg);
+  color: var(--imp-text);
+  font-family: 'MS Sans Serif', Arial, sans-serif;
+  font-size: 12px;
   display: flex;
   flex-direction: column;
+  border: 2px solid var(--imp-border);
 }
 
 .app.loading,
@@ -19,39 +39,43 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
 }
 
 .app.error {
-  color: #ff6b6b;
+  color: #ff5555;
 }
 
 .game-header {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 15px 30px;
-  border-bottom: 3px solid #764ba2;
+  background: var(--imp-bg);
+  border-bottom: 2px solid var(--imp-border);
+  padding: 8px 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-right: 2px solid var(--imp-border);
 }
 
 .game-header h1 {
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: 2px;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: var(--imp-highlight);
+  text-shadow: 1px 1px 0 #000;
 }
 
 .header-info {
   display: flex;
-  gap: 20px;
-  font-size: 14px;
+  gap: 15px;
+  font-size: 11px;
+  color: var(--imp-text);
 }
 
 .header-info span {
-  background: rgba(255, 255, 255, 0.2);
-  padding: 5px 12px;
-  border-radius: 4px;
+  background: rgba(0, 170, 0, 0.3);
+  padding: 3px 8px;
+  border: 1px solid var(--imp-border);
 }
 
 .game-container {

@@ -2,77 +2,131 @@ import React, { useRef, useEffect, useState } from 'react';
 import { useGameStore } from '@game/store';
 import '../styles/GameMap.css';
 
+/* DOS/Imperialism 1 Color Palette */
+const DOS_PALETTE = {
+  green: '#00aa00',
+  lightGreen: '#55ff55',
+  darkGreen: '#005500',
+  brown: '#aa5500',
+  lightBrown: '#ffaa55',
+  gray: '#555555',
+  lightGray: '#aaaaaa',
+  white: '#ffffff',
+  darkBlue: '#000055',
+  blue: '#0000ff',
+  cyan: '#00aaaa',
+  yellow: '#ffff00',
+};
+
+const COUNTRY_COLORS = [
+  '#aa00aa', // Magenta
+  '#0000aa', // Blue
+  '#00aaaa', // Cyan
+  '#aa5500', // Brown
+  '#aa00aa', // Purple
+  '#005500', // Dark Green
+];
+
 export const GameMap: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const gameState = useGameStore(s => s.gameState);
   const selectProvince = useGameStore(s => s.selectProvince);
   const selectedProvince = gameState?.selectedProvince;
 
-  const [zoom, setZoom] = useState(1);
-  const [panX, setPanX] = useState(0);
-  const [panY, setPanY] = useState(0);
+  const [zoom, setZoom] = useState(1.5);
+  const [panX, setPanX] = useState(50);
+  const [panY, setPanY] = useState(50);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     if (!canvasRef.current || !gameState) return;
 
     const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: false });
     if (!ctx) return;
 
-    // Clear canvas
-    ctx.fillStyle = '#2a5f3f';
+    // Clear with DOS dark green
+    ctx.fillStyle = DOS_PALETTE.darkGreen;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Draw grid lines
+    ctx.strokeStyle = DOS_PALETTE.darkBlue;
+    ctx.lineWidth = 1;
+    for (let i = 0; i < canvas.width; i += 20) {
+      ctx.beginPath();
+      ctx.moveTo(i + panX, 0);
+      ctx.lineTo(i + panX, canvas.height);
+      ctx.stroke();
+    }
+    for (let i = 0; i < canvas.height; i += 20) {
+      ctx.beginPath();
+      ctx.moveTo(0, i + panY);
+      ctx.lineTo(canvas.width, i + panY);
+      ctx.stroke();
+    }
 
     // Draw provinces
     gameState.provinces.forEach(province => {
       const x = province.position.x * zoom + panX;
       const y = province.position.y * zoom + panY;
-      const size = 15 * zoom;
+      const size = 20 * zoom;
 
-      // Color based on owner
+      // Determine province color
+      let fillColor = DOS_PALETTE.gray; // Unclaimed
       if (province.owner) {
-        const country = gameState.countries.find(c => c.id === province.owner);
-        if (country) {
-          ctx.fillStyle = getCountryColor(gameState.countries.indexOf(country));
-        }
-      } else {
-        ctx.fillStyle = '#888888';
+        const countryIdx = gameState.countries.findIndex(c => c.id === province.owner);
+        fillColor = COUNTRY_COLORS[countryIdx % COUNTRY_COLORS.length];
       }
 
+      // Draw province square
+      ctx.fillStyle = fillColor;
       ctx.fillRect(x - size / 2, y - size / 2, size, size);
+
+      // Draw province border
+      ctx.strokeStyle = DOS_PALETTE.lightGray;
+      ctx.lineWidth = 1;
+      ctx.strokeRect(x - size / 2, y - size / 2, size, size);
 
       // Highlight if selected
       if (selectedProvince?.id === province.id) {
-        ctx.strokeStyle = '#ffff00';
-        ctx.lineWidth = 3;
-        ctx.strokeRect(x - size / 2, y - size / 2, size, size);
+        ctx.strokeStyle = DOS_PALETTE.yellow;
+        ctx.lineWidth = 2;
+        ctx.strokeRect(x - size / 2 - 2, y - size / 2 - 2, size + 4, size + 4);
       }
 
-      // Draw border
-      ctx.strokeStyle = '#111111';
-      ctx.lineWidth = 1;
-      ctx.strokeRect(x - size / 2, y - size / 2, size, size);
+      // Draw province name (if zoom allows)
+      if (zoom > 0.8) {
+        ctx.fillStyle = DOS_PALETTE.yellow;
+        ctx.font = `bold 10px 'MS Sans Serif', Arial, monospace`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        const shortName = province.name.split(' ')[0].substring(0, 3);
+        ctx.fillText(shortName, x, y);
+      }
     });
 
     // Draw units
     gameState.units.forEach(unit => {
       const x = unit.position.x * zoom + panX;
       const y = unit.position.y * zoom + panY;
-      const country = gameState.countries.find(c => c.id === unit.countryId);
+      const countryIdx = gameState.countries.findIndex(c => c.id === unit.countryId);
+      const unitColor = COUNTRY_COLORS[countryIdx % COUNTRY_COLORS.length];
 
-      if (country) {
-        ctx.fillStyle = getCountryColor(gameState.countries.indexOf(country));
-        ctx.beginPath();
-        ctx.arc(x, y, 5 * zoom, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.strokeStyle = '#000000';
-        ctx.lineWidth = 2;
-        ctx.stroke();
-      }
+      // Draw unit as small circle with border
+      ctx.fillStyle = unitColor;
+      ctx.beginPath();
+      ctx.arc(x, y, 4 * zoom, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.strokeStyle = DOS_PALETTE.white;
+      ctx.lineWidth = 1;
+      ctx.stroke();
     });
   }, [gameState, zoom, panX, panY, selectedProvince]);
 
   const handleCanvasClick = (e: React.MouseEvent) => {
+    if (isDragging) return;
     if (!canvasRef.current || !gameState) return;
 
     const rect = canvasRef.current.getBoundingClientRect();
@@ -91,9 +145,28 @@ export const GameMap: React.FC = () => {
     }
   };
 
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (e.button === 2 || e.ctrlKey) { // Right click or Ctrl+click for panning
+      setIsDragging(true);
+      setDragStart({ x: e.clientX - panX, y: e.clientY - panY });
+    }
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isDragging) {
+      setPanX(e.clientX - dragStart.x);
+      setPanY(e.clientY - dragStart.y);
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
   const handleWheel = (e: React.WheelEvent) => {
     e.preventDefault();
-    setZoom(z => Math.max(0.5, Math.min(3, z + (e.deltaY > 0 ? -0.1 : 0.1))));
+    const zoomFactor = e.deltaY > 0 ? 0.9 : 1.1;
+    setZoom(z => Math.max(0.5, Math.min(4, z * zoomFactor)));
   };
 
   return (
@@ -102,17 +175,14 @@ export const GameMap: React.FC = () => {
       width={1000}
       height={700}
       onClick={handleCanvasClick}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
       onWheel={handleWheel}
+      onContextMenu={e => e.preventDefault()}
       className="game-map-canvas"
+      title="Left-click: select. Right-click/Ctrl+drag: pan. Wheel: zoom"
     />
   );
 };
-
-function getCountryColor(index: number): string {
-  const colors = [
-    '#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24',
-    '#6c5ce7', '#a29bfe', '#74b9ff', '#81ecec',
-    '#55efc4', '#fd79a8', '#fdcb6e', '#6c7a89',
-  ];
-  return colors[index % colors.length];
-}

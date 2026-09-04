@@ -1,12 +1,15 @@
+/* Imperialism 1 Map Canvas - 90s DOS Style */
 .game-map-canvas {
   flex: 1;
-  background: linear-gradient(135deg, #1a3a2a 0%, #0a1515 100%);
+  background: #002200; /* Dark green map background */
   cursor: crosshair;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
-  border-right: 3px solid #444;
+  border-right: 2px solid #00aa00;
+  border-bottom: 2px solid #00aa00;
+  display: block;
 }
 
-.game-map-canvas:hover {
-  filter: brightness(1.05);
+.game-map-canvas:focus {
+  outline: 2px solid #ffff00;
 }

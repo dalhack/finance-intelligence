@@ -1,148 +1,160 @@
+/* Imperialism 1 UI Panel - 90s DOS Style */
 .game-ui {
-  width: 350px;
-  background: #2a2a2a;
-  border-left: 3px solid #444;
+  width: 300px;
+  background: var(--imp-bg);
+  border-left: 2px solid var(--imp-border);
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 0;
-  padding: 0;
+  padding: 4px;
+  font-size: 11px;
 }
 
 .ui-panel {
-  border-bottom: 2px solid #444;
-  padding: 15px;
+  background: var(--imp-bg);
+  border: 2px solid var(--imp-border);
+  padding: 6px;
+  margin: 2px;
   flex-shrink: 0;
 }
 
 .ui-panel h2 {
-  font-size: 14px;
+  font-size: 11px;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 10px;
-  color: #667eea;
-  font-weight: 600;
+  letter-spacing: 0px;
+  margin-bottom: 4px;
+  color: var(--imp-highlight);
+  font-weight: bold;
+  border-bottom: 1px solid var(--imp-border);
+  padding-bottom: 2px;
 }
 
 .info-content {
-  font-size: 13px;
-  line-height: 1.8;
-  color: #ccc;
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--imp-text);
 }
 
 .info-content p {
-  margin: 5px 0;
+  margin: 2px 0;
 }
 
 .info-content strong {
-  color: #fff;
-  font-weight: 600;
+  color: var(--imp-highlight);
+  font-weight: bold;
 }
 
 .empty-message {
-  font-size: 12px;
-  color: #888;
+  font-size: 10px;
+  color: #666600;
   font-style: italic;
-  margin: 0;
+  margin: 4px 0;
 }
 
 .phase-buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 3px;
 }
 
 .phase-btn {
-  padding: 8px 12px;
-  font-size: 11px;
-  background: #3a3a3a;
-  border: 1px solid #555;
-  color: #bbb;
+  padding: 4px 6px;
+  font-size: 10px;
+  background: var(--imp-bg);
+  border: 2px outset #00aa00;
+  color: var(--imp-text);
   cursor: pointer;
-  border-radius: 3px;
-  transition: all 0.2s;
+  transition: all 0.1s;
   text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  font-weight: bold;
+  letter-spacing: 0px;
+  font-family: 'MS Sans Serif', Arial, monospace;
 }
 
 .phase-btn:hover {
-  background: #444;
-  color: #fff;
-  border-color: #667eea;
+  background: #003300;
+  color: var(--imp-highlight);
+}
+
+.phase-btn:active {
+  border-style: inset;
 }
 
 .phase-btn.active {
-  background: #667eea;
-  color: #fff;
-  border-color: #667eea;
-  box-shadow: 0 0 8px rgba(102, 126, 234, 0.3);
+  background: #00aa00;
+  color: #000080;
+  border-style: inset;
+  font-weight: bold;
 }
 
 .next-turn-btn {
   width: 100%;
-  padding: 12px;
-  font-size: 14px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border: none;
-  color: #fff;
+  padding: 6px;
+  font-size: 11px;
+  background: var(--imp-bg);
+  border: 2px outset var(--imp-border);
+  color: var(--imp-highlight);
   cursor: pointer;
-  border-radius: 4px;
-  font-weight: 700;
-  transition: all 0.3s;
+  font-weight: bold;
+  transition: all 0.1s;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0px;
+  font-family: 'MS Sans Serif', Arial, monospace;
+  margin: 4px 0;
 }
 
 .next-turn-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+  background: #003300;
 }
 
 .next-turn-btn:active {
-  transform: translateY(0);
+  border-style: inset;
+  background: #00aa00;
+  color: #000080;
 }
 
 .action-btn {
   width: 100%;
-  padding: 8px 12px;
-  margin: 4px 0;
-  font-size: 12px;
-  background: #3a3a3a;
-  border: 1px solid #555;
-  color: #bbb;
+  padding: 4px 6px;
+  margin: 2px 0;
+  font-size: 10px;
+  background: var(--imp-bg);
+  border: 2px outset var(--imp-border);
+  color: var(--imp-text);
   cursor: pointer;
-  border-radius: 3px;
-  transition: all 0.2s;
+  transition: all 0.1s;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: bold;
+  font-family: 'MS Sans Serif', Arial, monospace;
 }
 
 .action-btn:hover {
-  background: #444;
-  color: #fff;
-  border-color: #667eea;
+  background: #003300;
+  color: var(--imp-highlight);
 }
 
 .action-btn:active {
-  background: #667eea;
-  color: #fff;
+  border-style: inset;
+  background: #00aa00;
+  color: #000080;
 }
 
-/* Scrollbar styling */
+/* DOS-style scrollbar */
 .game-ui::-webkit-scrollbar {
-  width: 8px;
+  width: 16px;
 }
 
 .game-ui::-webkit-scrollbar-track {
-  background: #2a2a2a;
+  background: var(--imp-bg);
+  border: 2px inset var(--imp-border);
 }
 
 .game-ui::-webkit-scrollbar-thumb {
-  background: #555;
-  border-radius: 4px;
+  background: var(--imp-border);
+  border: 2px outset var(--imp-border);
 }
 
 .game-ui::-webkit-scrollbar-thumb:hover {
-  background: #667eea;
+  background: var(--imp-highlight);
 }
