@@ -1,0 +1,222 @@
+[
+ {
+  "kod": "T.8.3.1",
+  "ad": "Noktalama işaretlerine dikkat ederek sesli ve sessiz okur.",
+  "unite": "Yazım Kuralları ve Noktalama"
+ },
+ {
+  "kod": "T.8.3.2",
+  "ad": "Metni türün özelliklerine uygun biçimde okur.",
+  "unite": "Söz Sanatları ve Metin Türleri"
+ },
+ {
+  "kod": "T.8.3.3",
+  "ad": "Farklı yazı karakterleri ile yazılmış yazıları okur.",
+  "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama"
+ },
+ {
+  "kod": "T.8.3.4",
+  "ad": "Okuma stratejilerini kullanır.",
+  "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce"
+ },
+ {
+  "kod": "T.8.3.5",
+  "ad": "Bağlamdan yararlanarak bilmediği kelime ve kelime gruplarının anlamını tahmin eder.",
+  "unite": "Sözcükte Anlam ve Deyimler"
+ },
+ {
+  "kod": "T.8.3.6",
+  "ad": "Deyim, atasözü ve özdeyişlerin metne katkısını belirler.",
+  "unite": "Sözcükte Anlam ve Deyimler"
+ },
+ {
+  "kod": "T.8.3.7",
+  "ad": "Metindeki söz sanatlarını tespit eder.",
+  "unite": "Söz Sanatları ve Metin Türleri"
+ },
+ {
+  "kod": "T.8.3.8",
+  "ad": "Metindeki anlatım bozukluklarını belirler.",
+  "unite": "Anlatım Bozuklukları"
+ },
+ {
+  "kod": "T.8.3.9",
+  "ad": "Fiilimsilerin cümledeki işlevlerini kavrar.",
+  "unite": "Fiilimsiler"
+ },
+ {
+  "kod": "T.8.3.10",
+  "ad": "Geçiş ve bağlantı ifadelerinin metnin anlamına olan katkısını değerlendirir.",
+  "unite": "Paragraf – Yapı ve Anlatım"
+ },
+ {
+  "kod": "T.8.3.11",
+  "ad": "Metindeki anlatım biçimlerini belirler.",
+  "unite": "Paragraf – Yapı ve Anlatım"
+ },
+ {
+  "kod": "T.8.3.12",
+  "ad": "Görsel ve başlıktan hareketle okuyacağı metnin konusunu tahmin eder.",
+  "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama"
+ },
+ {
+  "kod": "T.8.3.13",
+  "ad": "Okuduklarını özetler.",
+  "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce"
+ },
+ {
+  "kod": "T.8.3.14",
+  "ad": "Metinle ilgili soruları cevaplar.",
+  "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce"
+ },
+ {
+  "kod": "T.8.3.15",
+  "ad": "Metinle ilgili sorular sorar.",
+  "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce"
+ },
+ {
+  "kod": "T.8.3.16",
+  "ad": "Metnin konusunu belirler.",
+  "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce"
+ },
+ {
+  "kod": "T.8.3.17",
+  "ad": "Metnin ana fikrini/ana duygusunu belirler.",
+  "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce"
+ },
+ {
+  "kod": "T.8.3.18",
+  "ad": "Metindeki yardımcı fikirleri belirler.",
+  "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce"
+ },
+ {
+  "kod": "T.8.3.19",
+  "ad": "Metnin içeriğine uygun başlık/başlıklar belirler.",
+  "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce"
+ },
+ {
+  "kod": "T.8.3.20",
+  "ad": "Okuduğu metinlerdeki hikâye unsurlarını belirler.",
+  "unite": "Paragraf – Yapı ve Anlatım"
+ },
+ {
+  "kod": "T.8.3.21",
+  "ad": "Metnin içeriğini yorumlar.",
+  "unite": "Cümlede Anlam"
+ },
+ {
+  "kod": "T.8.3.22",
+  "ad": "Metinde ele alınan sorunlara farklı çözümler üretir.",
+  "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce"
+ },
+ {
+  "kod": "T.8.3.23",
+  "ad": "Metinler arasında karşılaştırma yapar.",
+  "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce"
+ },
+ {
+  "kod": "T.8.3.24",
+  "ad": "Metindeki gerçek ve kurgusal unsurları ayırt eder.",
+  "unite": "Söz Sanatları ve Metin Türleri"
+ },
+ {
+  "kod": "T.8.3.25",
+  "ad": "Okudukları ile ilgili çıkarımlarda bulunur.",
+  "unite": "Cümlede Anlam"
+ },
+ {
+  "kod": "T.8.3.26",
+  "ad": "Metin türlerini ayırt eder.",
+  "unite": "Söz Sanatları ve Metin Türleri"
+ },
+ {
+  "kod": "T.8.3.27",
+  "ad": "Görsellerle ilgili soruları cevaplar.",
+  "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama"
+ },
+ {
+  "kod": "T.8.3.28",
+  "ad": "Metinde önemli noktaların vurgulanış biçimlerini kavrar.",
+  "unite": "Paragraf – Yapı ve Anlatım"
+ },
+ {
+  "kod": "T.8.3.29",
+  "ad": "Medya metinlerini analiz eder.",
+  "unite": "Söz Sanatları ve Metin Türleri"
+ },
+ {
+  "kod": "T.8.3.30",
+  "ad": "Bilgi kaynaklarını etkili bir şekilde kullanır.",
+  "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama"
+ },
+ {
+  "kod": "T.8.3.31",
+  "ad": "Bilgi kaynaklarının güvenilirliğini sorgular.",
+  "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama"
+ },
+ {
+  "kod": "T.8.3.32",
+  "ad": "Grafik, tablo ve çizelgeyle sunulan bilgileri yorumlar.",
+  "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama"
+ },
+ {
+  "kod": "T.8.3.33",
+  "ad": "Edebî eserin yazılı metni ile medya sunumunu karşılaştırır.",
+  "unite": "Söz Sanatları ve Metin Türleri"
+ },
+ {
+  "kod": "T.8.3.34",
+  "ad": "Okuduklarında kullanılan düşünceyi geliştirme yollarını belirler.",
+  "unite": "Paragraf – Yapı ve Anlatım"
+ },
+ {
+  "kod": "T.8.3.35",
+  "ad": "Metindeki iş ve işlem basamaklarını kavrar.",
+  "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama"
+ },
+ {
+  "kod": "T.8.4.5",
+  "ad": "Anlatımı desteklemek için grafik ve tablo kullanır.",
+  "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama"
+ },
+ {
+  "kod": "T.8.4.7",
+  "ad": "Yazılarını zenginleştirmek için atasözleri, deyimler ve özdeyişler kullanır.",
+  "unite": "Sözcükte Anlam ve Deyimler"
+ },
+ {
+  "kod": "T.8.4.9",
+  "ad": "Yazılarında anlatım biçimlerini kullanır.",
+  "unite": "Paragraf – Yapı ve Anlatım"
+ },
+ {
+  "kod": "T.8.4.13",
+  "ad": "Yazdıklarının içeriğine uygun başlık belirler.",
+  "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce"
+ },
+ {
+  "kod": "T.8.4.15",
+  "ad": "Yazılarında uygun geçiş ve bağlantı ifadelerini kullanır.",
+  "unite": "Paragraf – Yapı ve Anlatım"
+ },
+ {
+  "kod": "T.8.4.16",
+  "ad": "Yazdıklarını düzenler.",
+  "unite": "Yazım Kuralları ve Noktalama"
+ },
+ {
+  "kod": "T.8.4.18",
+  "ad": "Cümlenin ögelerini ayırt eder.",
+  "unite": "Cümlenin Ögeleri"
+ },
+ {
+  "kod": "T.8.4.19",
+  "ad": "Cümle türlerini tanır.",
+  "unite": "Cümle Türleri ve Fiilde Çatı"
+ },
+ {
+  "kod": "T.8.4.20",
+  "ad": "Fiillerin çatı özelliklerinin anlama olan katkısını kavrar.",
+  "unite": "Cümle Türleri ve Fiilde Çatı"
+ }
+]

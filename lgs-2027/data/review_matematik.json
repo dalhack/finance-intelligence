@@ -1,0 +1,91 @@
+{
+ "incelenen": 50,
+ "korCozumUyusma": 50,
+ "bulgular": [
+  {
+   "id": "mat-041",
+   "tur": "belirsiz",
+   "ciddiyet": "duzelt",
+   "aciklama": "Metindeki \"tepe noktasından itibaren 100 cm aşağıda\" ifadesi dikey uzaklık olarak da okunabilir; öyle okunursa cevap ≈185,7 cm çıkar ve şıklarda yoktur. Şekil 100 cm'yi ayak üzerinde gösterdiği için anahtar (200) doğru, ancak metin şekille aynı şeyi açıkça söylemeli (100 cm ayak boyunca ölçülüyor).",
+   "duzeltme": {
+    "metin": "Şekildeki A biçimli merdivenin eş uzunluktaki iki ayağının her biri 250 cm'dir. Ayaklar, her bir ayak üzerinde tepe noktasından 100 cm uzaklıktaki noktalardan, zemine paralel 80 cm uzunluğunda bir bağlantı çubuğu ile birbirine bağlanmıştır.<br>Buna göre merdivenin ayakları zeminde birbirinden kaç santimetre uzaktadır?"
+   }
+  },
+  {
+   "id": "mat-008",
+   "tur": "aciklama-hatasi",
+   "ciddiyet": "kucuk",
+   "aciklama": "D şıkkının (M < K < N < L) tuzak açıklaması şıkla uyuşmuyor: N = 0,51 · 10⁻⁴ alınırsa N en küçük olur ve sıralama N < M < K < L çıkar, D değil. D sıralaması L'nin fazla büyük bulunmasıyla (ör. 0,00045 = 4,5 · 10⁻³) oluşur.",
+   "duzeltme": {
+    "tuzaklar": [
+     "Üslere bakılmadan yalnız baştaki sayılar (0,51; 3,2; 4,5; 28) sıralanırsa bu sonuç çıkar.",
+     "",
+     "28 · 10⁻⁵ sayısı 2,8 · 10⁻⁴ yerine 3,2 · 10⁻⁴'ten büyük sanılırsa bu sıralama çıkar.",
+     "0,00045 çevrilirken sıfırlar yanlış sayılıp L = 4,5 · 10⁻³ alınırsa L en büyük sanılır ve bu sıralama çıkar."
+    ]
+   }
+  },
+  {
+   "id": "mat-036",
+   "tur": "aciklama-hatasi",
+   "ciddiyet": "kucuk",
+   "aciklama": "C şıkkının (|BC| < |AC| < |AB|) tuzak açıklaması (\"açı köşesinden çıkan kenarla eşleştirilirse\") bu sıralamayı tek anlamlı üretmiyor. Bu sıralama, C açısı hesaplanmadan en büyük açı sanıldığında (A < B < C) çıkar.",
+   "duzeltme": {
+    "tuzaklar": [
+     "C açısı hesaplanmadan en küçük sanılırsa AB en kısa kenar olarak seçilir.",
+     "Büyük açının karşısında kısa kenar olduğu düşünülürse sıralama ters çevrilir.",
+     "C açısı hesaplanmadan en büyük açı sanılırsa (A < B < C) AB en uzun kenar kabul edilir ve bu sıralama çıkar.",
+     ""
+    ]
+   }
+  },
+  {
+   "id": "mat-044",
+   "tur": "aciklama-hatasi",
+   "ciddiyet": "kucuk",
+   "aciklama": "C şıkkının (3, −2) tuzak açıklaması tutarsız: P \"(3, −2) diye ters okunursa\" y eksenine göre yansıması (−3, −2) olur, şık değil. (3, −2), P(−2, 3)'ün koordinatlarının yer değiştirmesiyle çıkar.",
+   "duzeltme": {
+    "tuzaklar": [
+     "y ekseni yerine x eksenine göre yansıma alınırsa y'nin işareti değişir.",
+     "İki koordinatın da işareti değiştirilirse (orijine göre simetri) bu sonuç çıkar.",
+     "Yansıma almak yerine koordinatların yeri değiştirilirse (−2, 3) → (3, −2) bulunur; yansımada koordinatların sırası değişmez.",
+     ""
+    ]
+   }
+  },
+  {
+   "id": "mat-030",
+   "tur": "ipucu-cevabi-veriyor",
+   "ciddiyet": "kucuk",
+   "aciklama": "ipucu1 \"en fazla\"nın eşitliği kapsadığını ve aşılamayacağını doğrudan söylüyor; bu, sorunun ölçtüğü tek kavramı (≤ işareti) ilk ipucunda veriyor. İpucu soru biçiminde yönlendirmeli.",
+   "duzeltme": {
+    "ipucu1": "Toplam kütle tam 615 kg olursa asansör yine çalışır mı? \"En fazla\" ifadesinin sınır değeri kapsayıp kapsamadığını düşün."
+   }
+  },
+  {
+   "id": "mat-048",
+   "tur": "sekil-tutarsiz",
+   "ciddiyet": "kucuk",
+   "aciklama": "Şekilde \"4 cm\" yarıçap etiketi üst taban çemberinin çizgisiyle çakışıyor (SPEC: yazılar çizimle çakışmasın). Ölçüler ve ölçek doğru; yalnız etiket çemberin dışına, yarıçap çizgisinin sağına alınmalı.",
+   "duzeltme": {
+    "svg": "<svg viewBox='0 0 320 235' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><rect class='mf' x='64' y='84' width='192' height='80'/><circle cx='160' cy='52' r='32'/><circle cx='160' cy='196' r='32'/><line x1='160' y1='52' x2='192' y2='52' stroke-width='1'/><circle cx='160' cy='52' r='2' fill='currentColor'/><text x='198' y='56' text-anchor='start' fill='currentColor' stroke='none' >4 cm</text><text x='58' y='128' text-anchor='end' fill='currentColor' stroke='none' >10 cm</text><text x='160' y='128' text-anchor='middle' fill='currentColor' stroke='none' >etiket</text></svg>"
+   }
+  },
+  {
+   "id": "mat-016",
+   "tur": "sekil-tutarsiz",
+   "ciddiyet": "kucuk",
+   "aciklama": "Sütun grafiğinde eksen aralığı 20; sekiz sütundan dördü (30, 50, 50, 70) iki kılavuz çizgisinin tam ortasında bitiyor ve sütunların üstünde değer yazmıyor. Sütunlar ölçekli ve çözüm doğru (fark 5), ancak öğrenci değerleri tahminle okumak zorunda; 10'luk ara kılavuz çizgileri eklenmesi ya da değerlerin sütun üstüne yazılması önerilir (yapısal SVG değişikliği gerektirdiğinden hazır düzeltme verilmedi).",
+   "duzeltme": {}
+  },
+  {
+   "id": "mat-k-013",
+   "tur": "aciklama-hatasi",
+   "ciddiyet": "kucuk",
+   "aciklama": "Kart arkasındaki \"Tam kare olmayan sayıların karekökleri irrasyoneldir\" ifadesi fazla genel: 6,25 veya 1/4 tam kare (doğal sayı karesi) değildir ama karekökleri rasyoneldir (mat-015 tam da bunu soruyor). Kural \"doğal sayılar\" ile sınırlanmalı.",
+   "duzeltme": {
+    "arka": "İki tam sayının oranı olarak yazılamayan sayıdır. Tam kare olmayan doğal sayıların karekökleri ve π irrasyoneldir."
+   }
+  }
+ ]
+}

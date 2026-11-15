@@ -1,0 +1,1972 @@
+[
+ {
+  "id": "ing-001",
+  "ders": "ingilizce",
+  "unite": "Friendship",
+  "kazanimKod": "E8.1.SI1",
+  "kazanimAd": "Students will be able to interact with reasonable ease in structured situations and short conversations involving accepting and refusing an offer/invitation, apologizing and making simple inquiries.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "<b>Selin:</b> Would you like to come to my birthday party on Saturday?<br><b>Mert:</b> _____ I have to visit my grandparents in Bursa this weekend.<br><b>Selin:</b> Oh, that’s a pity. Maybe next time.<br><br>Which of the following completes the conversation?",
+  "svg": "",
+  "siklar": [
+   "Sure, that sounds fun!",
+   "I’m sorry, but I can’t.",
+   "Yeah, why not?",
+   "I’d love to. What time does it start?"
+  ],
+  "dogru": 1,
+  "ipucu1": "Mert boşluktan sonra bir mazeret söylüyor. Mazeret, daveti kabul edenin mi yoksa reddedenin mi cümlesidir?",
+  "ipucu2": "Selin’in son cümlesine bak: “That’s a pity” (Ne yazık). Bu tepki, Mert’in gelemeyeceğini gösterir.",
+  "cozum": [
+   "Selin bir davet yapıyor: “Would you like to come…?” (Gelmek ister misin?)",
+   "Mert “I have to visit my grandparents” (büyükannemleri ziyaret etmek zorundayım) diyerek mazeret veriyor.",
+   "Selin de “That’s a pity” (Ne yazık) diyor; yani Mert daveti reddetmiş.",
+   "Reddetme kalıbı “I’m sorry, but I can’t” (Üzgünüm ama gelemem). Cevap B."
+  ],
+  "tuzaklar": [
+   "“Sure, that sounds fun” kabul kalıbıdır; davet sorularında ilk akla gelen cevap olduğu için cazip, ama mazeretle çelişir.",
+   "",
+   "“Why not?” içinde “not” var diye ret sanılabilir; aslında “Neden olmasın?” demektir, yani kabuldür.",
+   "“I’d love to” tek başına kabuldür; ret olması için “I’d love to, but…” diye devam etmesi gerekirdi."
+  ],
+  "taktik": "Diyalog tamamlamada boşluğun hem öncesini hem sonrasını oku; sonraki cümle çoğu zaman cevabı ele verir.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Refusing an invitation",
+    "tanim": "Daveti reddetme: “I’m sorry, but I can’t.” / “I’d love to, but…” + mazeret."
+   },
+   {
+    "ad": "Accepting an invitation",
+    "tanim": "Daveti kabul etme: “Sure, that sounds fun!”, “Yeah, why not?”, “I’d love to.”"
+   }
+  ]
+ },
+ {
+  "id": "ing-002",
+  "ders": "ingilizce",
+  "unite": "Friendship",
+  "kazanimKod": "E8.1.R2",
+  "kazanimAd": "Students will be able to understand short and simple invitation letters, cards and e-mails.",
+  "zorluk": 2,
+  "tip": "gorsel",
+  "metin": "Read the invitation card and answer the question.<br><br>Which question does <b>NOT</b> have an answer on the card?",
+  "svg": "<svg viewBox='0 0 320 199'><rect x='6' y='6' width='308' height='187' rx='10' fill='none' stroke='currentColor' stroke-width='1.5'/><text x='160' y='26' text-anchor='middle' font-size='14' font-weight='bold' fill='currentColor'>SLUMBER PARTY!</text><line x1='18' y1='35' x2='302' y2='35' class='ac' stroke='currentColor'/><text x='20' y='55' font-size='12' fill='currentColor'><tspan font-weight='bold'>Host:</tspan> Defne</text><text x='20' y='73' font-size='12' fill='currentColor'><tspan font-weight='bold'>Date:</tspan> Saturday, 14th March</text><text x='20' y='91' font-size='12' fill='currentColor'><tspan font-weight='bold'>Time:</tspan> 7 p.m.</text><text x='20' y='109' font-size='12' fill='currentColor'><tspan font-weight='bold'>Place:</tspan> 12 Lale Street</text><text x='20' y='135' font-size='12' fill='currentColor'>We’ll watch films and eat pizza.</text><text x='20' y='153' font-size='12' fill='currentColor'>Bring your pyjamas and a sleeping bag.</text><text x='20' y='179' font-size='12' fill='currentColor'><tspan font-weight='bold'>RSVP:</tspan> Text Defne by Thursday.</text></svg>",
+  "siklar": [
+   "Who is organizing the party?",
+   "What should the guests bring with them?",
+   "How many people are going to come?",
+   "When should the guests reply?"
+  ],
+  "dogru": 2,
+  "ipucu1": "Her şıktaki soru kelimesinin (who, what, how many, when) karşılığını kartta tek tek ara.",
+  "ipucu2": "“Host” ev sahibi, “RSVP” ise “lütfen cevap verin” demektir. Kartta bir sayı (kişi sayısı) var mı diye bak.",
+  "cozum": [
+   "“Host: Defne” → partiyi Defne düzenliyor. A’nın cevabı var.",
+   "“Bring your pyjamas and a sleeping bag” (pijama ve uyku tulumu getirin) → B’nin cevabı var.",
+   "“RSVP: Text Defne by Thursday” (perşembeye kadar yaz) → D’nin cevabı var.",
+   "Kaç kişinin geleceği kartta yazmıyor. Cevap C."
+  ],
+  "tuzaklar": [
+   "“Host” kelimesini bilmeyen öğrenci, düzenleyenin yazmadığını sanıp bu şıkkı seçebilir.",
+   "“Bring…” cümlesi küçük yazıldığı için gözden kaçabilir; aslında cevabı kartta var.",
+   "",
+   "“RSVP” kısaltması tanınmazsa cevap tarihi yok sanılır; oysa “by Thursday” yazıyor."
+  ],
+  "taktik": "“Cevabı olmayan soru” tipinde her şıkkın cevabını metinde işaretle; işaretleyemediğin şık cevaptır.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Host",
+    "tanim": "Ev sahibi; partiyi/etkinliği düzenleyen kişi."
+   },
+   {
+    "ad": "RSVP",
+    "tanim": "Davetiyelerde “lütfen katılıp katılmayacağınızı bildirin” anlamına gelen not."
+   }
+  ]
+ },
+ {
+  "id": "ing-003",
+  "ders": "ingilizce",
+  "unite": "Friendship",
+  "kazanimKod": "E8.1.R1",
+  "kazanimAd": "Students will be able to understand short and simple texts about friendship.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Hi, I’m Ece. I have two close friends, Zeynep and Irmak. Zeynep is my best buddy because she never tells my secrets to anyone. I can always count on her. Irmak is different. She is very funny and laid-back, but she sometimes forgets our plans. Last week, she didn’t come to the cinema and she didn’t call me. I was angry, but she apologized the next day, and we are fine now.<br><br>According to the text, which of the following is <b>CORRECT</b>?",
+  "svg": "",
+  "siklar": [
+   "Ece thinks Irmak is a relaxed person.",
+   "Zeynep shares Ece’s secrets with other people.",
+   "Irmak phoned Ece before the film started.",
+   "Ece and Irmak aren’t friends anymore."
+  ],
+  "dogru": 0,
+  "ipucu1": "Her şıkta adı geçen kişiyle ilgili cümleyi metinde bul ve karşılaştır.",
+  "ipucu2": "“Laid-back” kelimesinin anlamını düşün: rahat, sakin. Şıklardan biri bunu başka bir kelimeyle söylüyor.",
+  "cozum": [
+   "Metinde “Irmak is very funny and laid-back” deniyor. “Laid-back” = rahat, sakin = “relaxed”.",
+   "Zeynep sırları asla anlatmıyor (“never tells my secrets”); B yanlış.",
+   "Irmak sinemaya gelmedi ve aramadı (“didn’t call me”); C yanlış.",
+   "Irmak özür diledi ve “we are fine now” (şimdi aramız iyi); D yanlış. Cevap A."
+  ],
+  "tuzaklar": [
+   "",
+   "“Secrets” ve “share” kelimeleri metinde geçtiği için doğru sanılabilir; ama metinde “never” var.",
+   "“Call” fiili metinde geçiyor; “didn’t” olumsuzluğu atlanırsa bu şık seçilir.",
+   "“I was angry” cümlesinde okumayı bırakan öğrenci küs kaldıklarını düşünür; son cümle tersini söylüyor."
+  ],
+  "taktik": "Doğru şık genellikle metindeki kelimeyi eş anlamlısıyla verir (laid-back → relaxed). Aynı kelimeyi tekrar eden şıklara dikkatli bak.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "laid-back",
+    "tanim": "Rahat, sakin, kolay telaşlanmayan (= relaxed)."
+   },
+   {
+    "ad": "count on",
+    "tanim": "Birine güvenmek, bel bağlamak: “I can count on her.”"
+   }
+  ]
+ },
+ {
+  "id": "ing-004",
+  "ders": "ingilizce",
+  "unite": "Friendship",
+  "kazanimKod": "E8.1.R2",
+  "kazanimAd": "Students will be able to understand short and simple invitation letters, cards and e-mails.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "Kerem wants to have a picnic at the weekend. He invites four friends. Here are their replies:<br><table class=\"t\"><tr><th>Friend</th><th>Reply</th></tr><tr><td>Ada</td><td>I’d love to, but I’m busy all day on Saturday. Sunday is fine for me.</td></tr><tr><td>Bora</td><td>Sounds great! I’m free all weekend.</td></tr><tr><td>Cem</td><td>I’ve got a match on Sunday morning. Any other time is OK.</td></tr><tr><td>Deniz</td><td>Sure! But I have a course on both mornings, so I can’t come before noon.</td></tr></table><br>Kerem wants <b>ALL</b> of his friends to come. When should he have the picnic?",
+  "svg": "",
+  "siklar": [
+   "On Saturday morning",
+   "On Saturday afternoon",
+   "On Sunday morning",
+   "On Sunday afternoon"
+  ],
+  "dogru": 3,
+  "ipucu1": "Her arkadaşın gelemeyeceği zamanı not al; hiç kimsenin elenmediği zaman cevaptır.",
+  "ipucu2": "Önce Ada’ya bak: cumartesi tüm gün meşgul. Böylece iki şık birden elenir. Kalan iki şıkkı Cem ve Deniz’e göre kontrol et.",
+  "cozum": [
+   "Ada cumartesi tüm gün meşgul (“busy all day on Saturday”) → cumartesi şıkları elenir.",
+   "Cem’in pazar sabahı maçı var (“a match on Sunday morning”) → pazar sabahı elenir.",
+   "Deniz’in iki sabah da kursu var; öğleden önce gelemez (“before noon”) → sabahlar zaten uygun değil.",
+   "Bora her zaman uygun. Herkesin gelebildiği tek zaman pazar öğleden sonra. Cevap D."
+  ],
+  "tuzaklar": [
+   "Bora ve Cem bu saatte uygun olduğu için cazip; ama Ada ve Deniz gelemez.",
+   "Deniz’in “öğleden sonra gelebilirim” demesi bu şıkkı düşündürür; ancak Ada cumartesi tüm gün meşgul.",
+   "Ada’nın “Sunday is fine” cümlesine bakıp durulursa seçilir; Cem’in maçı ve Deniz’in kursu atlanmış olur.",
+   ""
+  ],
+  "taktik": "Çok kişili uygunluk sorularında şıkları tek tek deneme; her kişinin “gelemem” dediği zamanı şıklardan sil.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "before noon",
+    "tanim": "Öğleden önce. “I can’t come before noon” = Öğleden önce gelemem."
+   },
+   {
+    "ad": "I’d love to, but…",
+    "tanim": "Kibarca reddetme kalıbı: “Çok isterdim ama…”"
+   }
+  ]
+ },
+ {
+  "id": "ing-005",
+  "ders": "ingilizce",
+  "unite": "Friendship",
+  "kazanimKod": "E8.1.R2",
+  "kazanimAd": "Students will be able to understand short and simple invitation letters, cards and e-mails.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "<b>To:</b> Onur<br><b>Subject:</b> Your party<br><br>Dear Onur,<br>Thanks a lot for inviting me to your graduation party. It sounds awesome, but I’m afraid I can’t make it. My cousin is getting married on the same day, and we are going to Konya for the wedding. I’m really sorry. Would you like to meet next weekend instead? We can try that new burger place.<br>Best wishes,<br>Tuna<br><br>In his e-mail, Tuna -----.",
+  "svg": "",
+  "siklar": [
+   "accepts the invitation happily",
+   "refuses the invitation without giving a reason",
+   "apologizes and makes another offer",
+   "invites Onur to a wedding in Konya"
+  ],
+  "dogru": 2,
+  "ipucu1": "E-postada üç şey ara: Tuna geliyor mu, neden, ve sonunda ne öneriyor?",
+  "ipucu2": "“I’m afraid I can’t make it” = Maalesef gelemeyeceğim. Ardından gelen “Would you like to…?” cümlesinin işlevini düşün.",
+  "cozum": [
+   "“I’m afraid I can’t make it” → Tuna daveti reddediyor; A yanlış.",
+   "Sebep veriyor: kuzeninin düğünü var; B yanlış.",
+   "“I’m really sorry” ile özür diliyor, “Would you like to meet next weekend instead?” ile yeni bir teklif yapıyor.",
+   "Onur’u düğüne çağırmıyor; D yanlış. Cevap C."
+  ],
+  "tuzaklar": [
+   "“Thanks a lot” ve “It sounds awesome” ifadeleri kabul gibi görünür; devamındaki “but” gözden kaçar.",
+   "Ret kısmı doğru olduğu için cazip; ama Tuna düğünü sebep olarak açıkça yazıyor.",
+   "",
+   "“Wedding” ve “Konya” kelimeleri metinde geçiyor; ancak davet edilen Onur değil, giden Tuna’nın ailesi."
+  ],
+  "taktik": "“But” ve “I’m afraid” gördüğün yerde asıl mesaj başlar; öncesindeki övgüye aldanma.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "I’m afraid I can’t make it",
+    "tanim": "“Maalesef gelemeyeceğim.” Kibar ret kalıbı."
+   },
+   {
+    "ad": "Making an offer",
+    "tanim": "Teklif yapma: “Would you like to…?” / “We can…”"
+   }
+  ]
+ },
+ {
+  "id": "ing-006",
+  "ders": "ingilizce",
+  "unite": "Teen Life",
+  "kazanimKod": "E8.2.SI1",
+  "kazanimAd": "Students will be able to talk about regular activities of teenagers.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "<b>Emre:</b> What do you do in your free time?<br><b>Sude:</b> _____<br><b>Emre:</b> Really? Which bands do you like most?<br><br>Which of the following completes the conversation?",
+  "svg": "",
+  "siklar": [
+   "I usually listen to rock music.",
+   "I never skip breakfast.",
+   "I prefer reading to watching TV.",
+   "I go to the gym twice a week."
+  ],
+  "dogru": 0,
+  "ipucu1": "Emre’nin ikinci sorusundaki anahtar kelimeye bak: “bands”.",
+  "ipucu2": "“Band” müzik grubu demektir. Sude’nin cevabı müzikle ilgili olmalı.",
+  "cozum": [
+   "Emre boş zaman etkinliğini soruyor.",
+   "Sonra “Which bands do you like most?” (En çok hangi grupları seversin?) diyor.",
+   "Demek ki Sude müzikten söz etmiş: “I usually listen to rock music.” Cevap A."
+  ],
+  "tuzaklar": [
+   "",
+   "Günlük rutin anlatan bir cümle olduğu için uygun görünebilir; ama boş zamanla da müzikle de ilgisi yok.",
+   "Boş zaman sorusuna uygun bir cevaptır; fakat Emre’nin “bands” sorusuyla bağlantı kurmaz.",
+   "Boş zaman etkinliği olduğu için cazip; ancak spor salonu cevabından sonra müzik grubu sorulmaz."
+  ],
+  "taktik": "Boşluktan sonraki cümledeki anahtar kelimeyi (burada “bands”) bul; cevap onunla aynı konudan olmalı.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "band",
+    "tanim": "Müzik grubu."
+   },
+   {
+    "ad": "free time",
+    "tanim": "Boş zaman: “What do you do in your free time?”"
+   }
+  ]
+ },
+ {
+  "id": "ing-007",
+  "ders": "ingilizce",
+  "unite": "Teen Life",
+  "kazanimKod": "E8.2.R1",
+  "kazanimAd": "Students will be able to understand short and simple texts about regular activities of teenagers.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "There are 30 students in class 8/B. Each student chose one favourite type of music. The graph shows the results.<br><br>According to the graph, which of the following is <b>NOT</b> correct?",
+  "svg": "<svg viewBox='0 0 320 196'><text x='160' y='16' text-anchor='middle' font-size='13' font-weight='bold' fill='currentColor'>Favourite Music Types (8/B)</text><text x='6' y='30' font-size='12' fill='currentColor'>Students</text><line x1='44' y1='170.0' x2='310' y2='170.0' stroke='currentColor' stroke-width='1.2' opacity='1'/><text x='39' y='174.0' text-anchor='end' font-size='12' fill='currentColor'>0</text><line x1='44' y1='151.7' x2='310' y2='151.7' stroke='currentColor' stroke-width='0.5' opacity='0.35'/><text x='39' y='155.7' text-anchor='end' font-size='12' fill='currentColor'>2</text><line x1='44' y1='133.4' x2='310' y2='133.4' stroke='currentColor' stroke-width='0.5' opacity='0.35'/><text x='39' y='137.4' text-anchor='end' font-size='12' fill='currentColor'>4</text><line x1='44' y1='115.1' x2='310' y2='115.1' stroke='currentColor' stroke-width='0.5' opacity='0.35'/><text x='39' y='119.1' text-anchor='end' font-size='12' fill='currentColor'>6</text><line x1='44' y1='96.9' x2='310' y2='96.9' stroke='currentColor' stroke-width='0.5' opacity='0.35'/><text x='39' y='100.9' text-anchor='end' font-size='12' fill='currentColor'>8</text><line x1='44' y1='78.6' x2='310' y2='78.6' stroke='currentColor' stroke-width='0.5' opacity='0.35'/><text x='39' y='82.6' text-anchor='end' font-size='12' fill='currentColor'>10</text><line x1='44' y1='60.3' x2='310' y2='60.3' stroke='currentColor' stroke-width='0.5' opacity='0.35'/><text x='39' y='64.3' text-anchor='end' font-size='12' fill='currentColor'>12</text><line x1='44' y1='42.0' x2='310' y2='42.0' stroke='currentColor' stroke-width='0.5' opacity='0.35'/><text x='39' y='46.0' text-anchor='end' font-size='12' fill='currentColor'>14</text><line x1='44' y1='38' x2='44' y2='170' stroke='currentColor' stroke-width='1.2'/><rect x='60.6' y='60.3' width='33.2' height='109.7' class='acf' stroke='currentColor'/><text x='77.2' y='187' text-anchor='middle' font-size='12' fill='currentColor'>Pop</text><text x='77.2' y='56.3' text-anchor='middle' font-size='12' font-weight='bold' fill='currentColor'>12</text><rect x='127.1' y='96.9' width='33.2' height='73.1' class='acf' stroke='currentColor'/><text x='143.8' y='187' text-anchor='middle' font-size='12' fill='currentColor'>Rap</text><text x='143.8' y='92.9' text-anchor='middle' font-size='12' font-weight='bold' fill='currentColor'>8</text><rect x='193.6' y='115.1' width='33.2' height='54.9' class='acf' stroke='currentColor'/><text x='210.2' y='187' text-anchor='middle' font-size='12' fill='currentColor'>Rock</text><text x='210.2' y='111.1' text-anchor='middle' font-size='12' font-weight='bold' fill='currentColor'>6</text><rect x='260.1' y='133.4' width='33.2' height='36.6' class='acf' stroke='currentColor'/><text x='276.8' y='187' text-anchor='middle' font-size='12' fill='currentColor'>Classical</text><text x='276.8' y='129.4' text-anchor='middle' font-size='12' font-weight='bold' fill='currentColor'>4</text></svg>",
+  "siklar": [
+   "Pop is the most popular type of music in the class.",
+   "Rap is more popular than rock.",
+   "Classical music is the least popular type.",
+   "Half of the class prefers pop music."
+  ],
+  "dogru": 3,
+  "ipucu1": "Her sütunun sayısını oku. Şıklardaki karşılaştırmaları göz kararı değil, sayılarla kontrol et.",
+  "ipucu2": "Sınıf 30 kişi. Yarısı kaç eder? Bunu pop sütunundaki sayıyla karşılaştır.",
+  "cozum": [
+   "Grafik: Pop 12, Rap 8, Rock 6, Classical 4.",
+   "En yüksek sütun pop → A doğru. Rap (8) > Rock (6) → B doğru. En düşük sütun klasik → C doğru.",
+   "Sınıfın yarısı 15 kişidir; pop sevenler 12 kişi.",
+   "“Half of the class” (sınıfın yarısı) ifadesi yanlış. Cevap D."
+  ],
+  "tuzaklar": [
+   "Soru kökündeki NOT kaçırılırsa ilk doğru cümle işaretlenir.",
+   "“More popular than” karşılaştırması ters okunursa (rock > rap) yanlış sanılır.",
+   "“Least” (en az) ile “most” (en çok) karıştırılırsa bu şık yanlış gibi görünür.",
+   ""
+  ],
+  "taktik": "NOT’lu sorularda soru kökündeki NOT’u daire içine al; üç doğruyu ele, kalan cevaptır.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "the most / the least",
+    "tanim": "En çok / en az. Üstünlük derecesi: “the most popular”, “the least popular”."
+   },
+   {
+    "ad": "half of",
+    "tanim": "…-in yarısı."
+   }
+  ]
+ },
+ {
+  "id": "ing-008",
+  "ders": "ingilizce",
+  "unite": "Teen Life",
+  "kazanimKod": "E8.2.R1",
+  "kazanimAd": "Students will be able to understand short and simple texts about regular activities of teenagers.",
+  "zorluk": 3,
+  "tip": "uzun-metin",
+  "metin": "Arda and Kaan are twins, but their tastes are completely different. Arda is into trendy clothes and spends hours at the shopping centre. Kaan thinks shopping is unbearable; he would rather stay at home and play the guitar. Arda prefers pop music to rock, but Kaan can’t stand pop. They agree on only one thing: both of them are keen on basketball, and they never miss a match of their school team.<br><br>According to the text, which of the following is <b>CORRECT</b>?",
+  "svg": "",
+  "siklar": [
+   "Arda would rather play an instrument than go shopping.",
+   "Kaan thinks pop music is terrific.",
+   "The twins have nothing in common.",
+   "The twins are fond of the same sport."
+  ],
+  "dogru": 3,
+  "ipucu1": "Hangi bilginin Arda’ya, hangisinin Kaan’a ait olduğunu ayır. İsimlerin yeri değiştirilmiş şıklara dikkat et.",
+  "ipucu2": "Son cümleye odaklan: “They agree on only one thing” (Tek bir konuda anlaşıyorlar). O konu ne?",
+  "cozum": [
+   "Alışverişi seven Arda; evde kalıp gitar çalmayı tercih eden Kaan. A’da isimler karışmış.",
+   "Kaan “can’t stand pop” (popa katlanamıyor); “terrific” (harika) bunun tersidir. B yanlış.",
+   "“Both of them are keen on basketball” → ikisi de basketbola düşkün; yani ortak bir yönleri var. C yanlış.",
+   "“Keen on” = “fond of” (düşkün). İkisi de aynı sporu seviyor. Cevap D."
+  ],
+  "tuzaklar": [
+   "Gitar ve alışveriş bilgisi metinde var; ama Kaan’a ait özellik Arda’ya verilmiş.",
+   "“Pop” kelimesi Kaan’la aynı cümlede geçiyor; “can’t stand” bilinmezse olumlu sanılır.",
+   "İlk cümledeki “completely different” ifadesi bu şıkkı destekler gibi görünür; son cümle bunu bozar.",
+   ""
+  ],
+  "taktik": "İki kişinin karşılaştırıldığı metinlerde kenara iki sütun aç (Arda / Kaan) ve özellikleri altına yaz.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "would rather + fiil",
+    "tanim": "Tercih bildirir: “He would rather stay at home.” (Evde kalmayı tercih eder.)"
+   },
+   {
+    "ad": "be keen on / be fond of",
+    "tanim": "Bir şeye düşkün olmak, çok sevmek."
+   }
+  ]
+ },
+ {
+  "id": "ing-009",
+  "ders": "ingilizce",
+  "unite": "Teen Life",
+  "kazanimKod": "E8.2.R1",
+  "kazanimAd": "Students will be able to understand short and simple texts about regular activities of teenagers.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "The table shows how often three teenagers do some activities.<br><table class=\"t\"><tr><th></th><th>Elif</th><th>Baran</th><th>Nil</th></tr><tr><td>go to the cinema</td><td>sometimes</td><td>never</td><td>usually</td></tr><tr><td>play computer games</td><td>never</td><td>always</td><td>rarely</td></tr><tr><td>read comics</td><td>usually</td><td>rarely</td><td>sometimes</td></tr></table><br>According to the table, which of the following is <b>CORRECT</b>?",
+  "svg": "",
+  "siklar": [
+   "Baran goes to the cinema more often than Elif.",
+   "Nil plays computer games more often than Baran.",
+   "Elif reads comics more often than Nil.",
+   "Elif and Baran both play computer games."
+  ],
+  "dogru": 2,
+  "ipucu1": "Sıklık zarflarını çoktan aza doğru sırala: always, usually, sometimes, rarely, never.",
+  "ipucu2": "Her şık için tabloda yalnızca ilgili satıra bak ve iki kişinin zarfını bu sıraya göre karşılaştır.",
+  "cozum": [
+   "Sıralama: always > usually > sometimes > rarely > never.",
+   "Sinema: Baran “never”, Elif “sometimes” → A yanlış.",
+   "Bilgisayar oyunu: Nil “rarely”, Baran “always” → B yanlış; Elif “never” → D yanlış.",
+   "Çizgi roman: Elif “usually”, Nil “sometimes” → Elif daha sık okuyor. Cevap C."
+  ],
+  "tuzaklar": [
+   "Satır ve sütun karıştırılırsa Baran’ın “always” bilgisi sinema satırına taşınır.",
+   "“Rarely” kelimesi (nadiren) sık anlamında sanılırsa bu şık doğru görünür.",
+   "",
+   "Baran’ın “always” oynadığı görülüp Elif’in “never” bilgisi kontrol edilmezse seçilir."
+  ],
+  "taktik": "Tablo sorularında her şık için tek bir satıra parmağını koy; başka satırlara kayma.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "Frequency adverbs",
+    "tanim": "Sıklık zarfları: always (her zaman), usually (genellikle), sometimes (bazen), rarely (nadiren), never (asla)."
+   },
+   {
+    "ad": "more often than",
+    "tanim": "…-den daha sık."
+   }
+  ]
+ },
+ {
+  "id": "ing-010",
+  "ders": "ingilizce",
+  "unite": "In the Kitchen",
+  "kazanimKod": "E8.3.R1",
+  "kazanimAd": "Students will be able to understand the overall meaning of short texts about a process.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "First, peel the potatoes. _____, slice them thinly. After that, fry them in hot oil. Finally, add some salt and serve.<br><br>Which of the following completes the text?",
+  "svg": "",
+  "siklar": [
+   "Finally",
+   "Then",
+   "Because",
+   "But"
+  ],
+  "dogru": 1,
+  "ipucu1": "Metin bir işlemin adımlarını sırayla anlatıyor. Boşluk kaçıncı adımda?",
+  "ipucu2": "İlk adım “First”, üçüncü adım “After that”, son adım “Finally”. İkinci adım için hangi sıralama sözcüğü kalır?",
+  "cozum": [
+   "Adımlar: First (ilk olarak) → ? → After that (ondan sonra) → Finally (son olarak).",
+   "Boşluk ikinci adımda; burada “Then” (sonra) kullanılır.",
+   "“Finally” zaten son adımda var; “Because” sebep, “But” zıtlık bildirir. Cevap B."
+  ],
+  "tuzaklar": [
+   "Sıralama sözcüğü olduğu için cazip; ama “Finally” yalnızca son adımda kullanılır ve metinde zaten var.",
+   "",
+   "Bağlaç olduğu için seçilebilir; ancak burada bir sebep değil, sıradaki adım anlatılıyor.",
+   "Cümle başında sık görülen bir bağlaç; fakat iki adım arasında zıtlık yok."
+  ],
+  "taktik": "Tarif metinlerinde sıra hep aynıdır: First → Then/Next → After that → Finally.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Sequencing words",
+    "tanim": "Sıralama sözcükleri: First, Then/Next, After that, Finally."
+   },
+   {
+    "ad": "peel / slice / fry",
+    "tanim": "Soymak / dilimlemek / kızartmak."
+   }
+  ]
+ },
+ {
+  "id": "ing-011",
+  "ders": "ingilizce",
+  "unite": "In the Kitchen",
+  "kazanimKod": "E8.3.R1",
+  "kazanimAd": "Students will be able to understand the overall meaning of short texts about a process.",
+  "zorluk": 2,
+  "tip": "cok-adimli",
+  "metin": "The steps of an omelette recipe are mixed.<br><br>I. Pour the mixture into a hot pan and cook it for three minutes.<br>II. Break two eggs into a bowl.<br>III. Finally, serve the omelette hot.<br>IV. Whisk the eggs with a fork and add some salt.<br><br>Which is the correct order of the steps?",
+  "svg": "",
+  "siklar": [
+   "II – I – IV – III",
+   "II – IV – I – III",
+   "IV – II – I – III",
+   "I – II – IV – III"
+  ],
+  "dogru": 1,
+  "ipucu1": "Önce ilk ve son adımı bul. “Finally” hangi adımda? Yumurtalar ilk kez hangi cümlede ortaya çıkıyor?",
+  "ipucu2": "I. cümledeki “the mixture” (karışım) sözcüğüne dikkat et: karışım, daha önce hazırlanmış olmalı.",
+  "cozum": [
+   "İlk adım: yumurtaları kâseye kırmak (II). Son adım: “Finally, serve…” (III).",
+   "Yumurtalar kırıldıktan sonra çırpılır ve tuz eklenir (IV).",
+   "Ortaya çıkan karışım (“the mixture”) tavaya dökülür ve pişirilir (I).",
+   "Sıra: II – IV – I – III. Cevap B."
+  ],
+  "tuzaklar": [
+   "İlk ve son adım doğru olduğu için cazip; ama yumurtalar çırpılmadan tavaya dökülmüş olur.",
+   "",
+   "Yumurtalar kırılmadan çırpılamaz; “whisk” (çırpmak) fiilinin anlamı bilinmezse bu sıra seçilir.",
+   "Tavayı ısıtmak ilk iş gibi düşünülür; ancak I. adımda “the mixture” var ve karışım henüz hazır değil."
+  ],
+  "taktik": "Sıralama sorularında önce son adımı (Finally) sabitle, sonra “the/it/them” gibi öncesine gönderme yapan sözcüklerden zincir kur.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "whisk",
+    "tanim": "Çırpmak (yumurta vb.)."
+   },
+   {
+    "ad": "pour",
+    "tanim": "Dökmek: “Pour the mixture into the pan.”"
+   }
+  ]
+ },
+ {
+  "id": "ing-012",
+  "ders": "ingilizce",
+  "unite": "In the Kitchen",
+  "kazanimKod": "E8.3.R2",
+  "kazanimAd": "Students will be able to guess the meaning of unknown words from the text.",
+  "zorluk": 3,
+  "tip": "uzun-metin",
+  "metin": "My grandmother’s tomato soup is famous in our family. She says the secret is patience. After she adds the tomatoes, she lets the soup <u>simmer</u> for forty minutes. The heat is very low, so the soup never boils fast; it just cooks gently with tiny bubbles.<br><br>The underlined word “simmer” means -----.",
+  "svg": "",
+  "siklar": [
+   "to cook slowly on low heat",
+   "to cut into small pieces",
+   "to cook quickly in hot oil",
+   "to mix with a spoon"
+  ],
+  "dogru": 0,
+  "ipucu1": "Bilmediğin kelimenin anlamı çoğu zaman bir sonraki cümlede açıklanır.",
+  "ipucu2": "Şu ipuçlarını birleştir: “patience” (sabır), “forty minutes”, “the heat is very low”, “cooks gently”.",
+  "cozum": [
+   "Altı çizili kelimeden sonraki cümle açıklama yapıyor.",
+   "“The heat is very low” (ateş çok kısık) ve “never boils fast” (hızlı kaynamaz).",
+   "“Cooks gently” = yavaş yavaş pişer; ayrıca kırk dakika sürüyor.",
+   "Öyleyse “simmer” = kısık ateşte yavaşça pişirmek. Cevap A."
+  ],
+  "tuzaklar": [
+   "",
+   "Mutfak fiili (chop/slice gibi) olduğu için akla gelir; ama metinde kesmeyle ilgili ipucu yok.",
+   "Pişirme anlamı doğru hissettirir; fakat metin “low heat” ve “never fast” diyor, yağdan da söz etmiyor.",
+   "Çorba karıştırılır diye düşünülebilir; ancak açıklama cümlesi ısı ve süreden söz ediyor."
+  ],
+  "taktik": "Bilinmeyen kelime sorularında kelimenin kendisine takılma; hemen sonraki cümledeki tanımı şıklarla eşleştir.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Guessing meaning from context",
+    "tanim": "Bilinmeyen kelimenin anlamını çevresindeki ipuçlarından (açıklama, örnek, zıtlık) çıkarmak."
+   },
+   {
+    "ad": "boil",
+    "tanim": "Kaynamak / kaynatmak, haşlamak."
+   }
+  ]
+ },
+ {
+  "id": "ing-013",
+  "ders": "ingilizce",
+  "unite": "In the Kitchen",
+  "kazanimKod": "E8.3.R1",
+  "kazanimAd": "Students will be able to understand the overall meaning of short texts about a process.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "Read the recipe card.<br><table class=\"t\"><tr><th>LEMON COOKIES</th><th></th></tr><tr><td>Ingredients</td><td>2 cups of flour, 1 cup of sugar, 1 egg, 100 g of butter, juice of 1 lemon</td></tr><tr><td>Steps</td><td>First, mix the butter and sugar. Then, add the egg and lemon juice. After that, add the flour and make small balls. Finally, bake them.</td></tr><tr><td>Baking time</td><td>15 minutes</td></tr><tr><td>Serves</td><td>6 people</td></tr></table><br>Which question does <b>NOT</b> have an answer on the card?",
+  "svg": "",
+  "siklar": [
+   "How long does it take to bake the cookies?",
+   "How many people is the recipe for?",
+   "How much sugar do you need?",
+   "Who created the recipe?"
+  ],
+  "dogru": 3,
+  "ipucu1": "Her sorunun cevabını tablonun ilgili satırında ara: süre, kişi sayısı, miktar, kişi.",
+  "ipucu2": "“Baking time”, “Serves” ve “Ingredients” satırları üç soruyu cevaplıyor. Kartta bir kişi adı var mı?",
+  "cozum": [
+   "“Baking time: 15 minutes” → A’nın cevabı var.",
+   "“Serves: 6 people” (6 kişilik) → B’nin cevabı var.",
+   "“1 cup of sugar” (1 bardak şeker) → C’nin cevabı var.",
+   "Tarifi kimin hazırladığı yazmıyor. Cevap D."
+  ],
+  "tuzaklar": [
+   "“How long” ile “baking time” eşleştirilemezse cevabı yok sanılır.",
+   "“Serves” kelimesinin “… kişilik” anlamı bilinmezse bu şık seçilir.",
+   "Malzeme listesi uzun olduğu için şeker miktarı gözden kaçabilir.",
+   ""
+  ],
+  "taktik": "Soru kelimesini türüne çevir (How long → süre, How much → miktar, Who → kişi) ve kartta o türden bilgi ara.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "ingredients",
+    "tanim": "Malzemeler (bir yemeğin içine girenler)."
+   },
+   {
+    "ad": "serves …",
+    "tanim": "“… kişilik” (tariflerde porsiyon bilgisi)."
+   }
+  ]
+ },
+ {
+  "id": "ing-014",
+  "ders": "ingilizce",
+  "unite": "In the Kitchen",
+  "kazanimKod": "E8.3.R1",
+  "kazanimAd": "Students will be able to understand the overall meaning of short texts about a process.",
+  "zorluk": 3,
+  "tip": "uzun-metin",
+  "metin": "Melis explains how she makes her favourite pasta salad:<br><br>“First, I boil the pasta for ten minutes. While it is boiling, I chop the tomatoes and slice the olives. After I drain the pasta, I wait until it gets cold. Then, I put the pasta and the vegetables into a large bowl. Before I pour the olive oil, I add some salt and mint. Finally, I mix everything well.”<br><br>According to the text, which of the following is <b>CORRECT</b>?",
+  "svg": "",
+  "siklar": [
+   "Melis chops the tomatoes after she drains the pasta.",
+   "Melis adds the salt after the olive oil.",
+   "Melis prepares the vegetables while the pasta is cooking.",
+   "Melis mixes the pasta with the vegetables while it is still hot."
+  ],
+  "dogru": 2,
+  "ipucu1": "Zaman bağlaçlarına dikkat et: while (iken), after (…-den sonra), before (…-den önce), until (…-e kadar).",
+  "ipucu2": "“While it is boiling, I chop…” cümlesinde iki iş aynı anda yapılıyor. “Before I pour the olive oil, I add…” cümlesinde hangi iş önce?",
+  "cozum": [
+   "“While it is boiling, I chop the tomatoes and slice the olives” → sebzeler, makarna haşlanırken hazırlanıyor.",
+   "Bu yüzden A yanlış: domates, makarna süzülmeden önce doğranıyor.",
+   "“Before I pour the olive oil, I add some salt” → tuz zeytinyağından önce; B yanlış.",
+   "“I wait until it gets cold” → makarna soğuyunca karıştırılıyor; D yanlış. Cevap C."
+  ],
+  "tuzaklar": [
+   "“Drain” cümlesi “chop” cümlesinden hemen sonra geldiği için sıra karışabilir; “while” atlanmış olur.",
+   "Cümlede önce “olive oil” yazdığı için önce o yapılır sanılır; “before” sırayı tersine çevirir.",
+   "",
+   "“Then I put the pasta and the vegetables…” cümlesi doğru hatırlanır ama öncesindeki “until it gets cold” kaçırılır."
+  ],
+  "taktik": "“Before” ile başlayan cümlede ikinci yazılan iş önce yapılır. Böyle cümlelerin üstüne 1 ve 2 yazarak sırayı işaretle.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "while",
+    "tanim": "…-iken; iki işin aynı anda yapıldığını gösterir."
+   },
+   {
+    "ad": "before / after",
+    "tanim": "…-den önce / …-den sonra. “Before I pour the oil, I add salt” → önce tuz, sonra yağ."
+   }
+  ]
+ },
+ {
+  "id": "ing-015",
+  "ders": "ingilizce",
+  "unite": "On the Phone",
+  "kazanimKod": "E8.4.SI1",
+  "kazanimAd": "Students will be able to make a simple phone call asking and responding to questions.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "<b>Secretary:</b> Good morning, Güneş Dental Clinic.<br><b>Caller:</b> Hello. _____<br><b>Secretary:</b> I’m afraid she is with a patient now. Would you like to leave a message?<br><br>Which of the following completes the conversation?",
+  "svg": "",
+  "siklar": [
+   "May I speak to Dr. Aksoy, please?",
+   "Can I take a message?",
+   "Who’s calling, please?",
+   "Hang on a minute, please."
+  ],
+  "dogru": 0,
+  "ipucu1": "Kliniği arayan kişi telefonda ilk olarak ne ister?",
+  "ipucu2": "Sekreterin cevabına bak: “She is with a patient now” (Şu an hastasıyla). Arayan kişi birini sormuş olmalı.",
+  "cozum": [
+   "Arayan kişi (caller) kliniğe telefon ediyor.",
+   "Sekreter “she is with a patient” diyerek birinin müsait olmadığını söylüyor.",
+   "Demek ki arayan, biriyle görüşmek istemiş: “May I speak to Dr. Aksoy, please?” (Dr. Aksoy ile görüşebilir miyim?) Cevap A."
+  ],
+  "tuzaklar": [
+   "",
+   "Telefon kalıbı olduğu için cazip; ama mesaj almayı arayan değil, sekreter teklif eder.",
+   "“Kim arıyor?” sorusunu telefonu açan kişi sorar; arayan sormaz.",
+   "“Hatta kalın” demektir; bunu da bağlayan kişi (sekreter) söyler."
+  ],
+  "taktik": "Telefon diyaloglarında önce “Bu cümleyi arayan mı, açan mı söyler?” diye sor; şıkların yarısı böyle elenir.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "May I speak to …?",
+    "tanim": "“… ile görüşebilir miyim?” Arayan kişinin kullandığı kibar kalıp."
+   },
+   {
+    "ad": "leave / take a message",
+    "tanim": "Mesaj bırakmak (arayan) / mesaj almak (telefonu açan)."
+   }
+  ]
+ },
+ {
+  "id": "ing-016",
+  "ders": "ingilizce",
+  "unite": "On the Phone",
+  "kazanimKod": "E8.4.R1",
+  "kazanimAd": "Students will be able to understand short and simple texts with related vocabulary.",
+  "zorluk": 2,
+  "tip": "gorsel",
+  "metin": "Read the phone memo.<br><br>According to the memo, which of the following is <b>CORRECT</b>?",
+  "svg": "<svg viewBox='0 0 320 209'><rect x='6' y='6' width='308' height='197' rx='10' fill='none' stroke='currentColor' stroke-width='1.5'/><text x='160' y='26' text-anchor='middle' font-size='14' font-weight='bold' fill='currentColor'>PHONE MEMO</text><line x1='18' y1='35' x2='302' y2='35' class='ac' stroke='currentColor'/><text x='20' y='55' font-size='12' fill='currentColor'><tspan font-weight='bold'>For:</tspan> Mr. Kaya</text><text x='20' y='73' font-size='12' fill='currentColor'><tspan font-weight='bold'>Caller:</tspan> Mrs. Demir</text><text x='20' y='91' font-size='12' fill='currentColor'><tspan font-weight='bold'>Day:</tspan> Monday</text><text x='20' y='109' font-size='12' fill='currentColor'><tspan font-weight='bold'>Time:</tspan> 10.30 a.m.</text><text x='20' y='135' font-size='12' fill='currentColor'><tspan font-weight='bold'>Message:</tspan></text><text x='20' y='153' font-size='12' fill='currentColor'>The meeting is on Wednesday at 2 p.m.,</text><text x='20' y='171' font-size='12' fill='currentColor'>not on Tuesday.</text><text x='20' y='189' font-size='12' fill='currentColor'>Please call her back before 5 p.m. today.</text></svg>",
+  "siklar": [
+   "Mr. Kaya called Mrs. Demir on Monday morning.",
+   "Mr. Kaya should phone Mrs. Demir on Monday.",
+   "The meeting is on Tuesday afternoon.",
+   "Mrs. Demir will call again at 5 p.m."
+  ],
+  "dogru": 1,
+  "ipucu1": "Notta “For” (kime) ve “Caller” (arayan) satırlarını ayır: kim kimi aramış?",
+  "ipucu2": "“Please call her back before 5 p.m. today” cümlesindeki “today” hangi gün? “Day” satırına bak.",
+  "cozum": [
+   "“For: Mr. Kaya” → not Bay Kaya’ya yazılmış. “Caller: Mrs. Demir” → arayan Bayan Demir. A yanlış.",
+   "Toplantı “on Wednesday at 2 p.m., not on Tuesday” → çarşamba; C yanlış.",
+   "“Call her back” = onu geri ara: arayacak olan Bay Kaya; D yanlış.",
+   "“Today” = Monday. Bay Kaya pazartesi günü Bayan Demir’i aramalı. Cevap B."
+  ],
+  "tuzaklar": [
+   "Gün ve saat doğru olduğu için cazip; ama arayan ile aranan yer değiştirmiş.",
+   "",
+   "“Tuesday” kelimesi notta geçiyor; önündeki “not” atlanırsa seçilir.",
+   "“5 p.m.” notta var; ancak geri arayacak kişi Bayan Demir değil, Bay Kaya."
+  ],
+  "taktik": "Telefon notlarında önce “For / Caller (From)” satırlarını işaretle; çeldiriciler çoğunlukla bu iki kişiyi yer değiştirir.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "memo",
+    "tanim": "Kısa not; telefon mesajı notu."
+   },
+   {
+    "ad": "call back",
+    "tanim": "Geri aramak: “Please call her back.”"
+   }
+  ]
+ },
+ {
+  "id": "ing-017",
+  "ders": "ingilizce",
+  "unite": "On the Phone",
+  "kazanimKod": "E8.4.R1",
+  "kazanimAd": "Students will be able to understand short and simple texts with related vocabulary.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "<b>Receptionist:</b> Blue Bay Hotel. How can I help you?<br><b>Mr. Tekin:</b> Hello. I’d like to speak to the manager, please.<br><b>Receptionist:</b> Hold on, please. I’ll put you through.<br><b>Receptionist:</b> <i>(a few seconds later)</i> I’m sorry, his line is busy at the moment. Would you like to hold or call back later?<br><b>Mr. Tekin:</b> I’m in a hurry now. I’ll call back in the afternoon.<br><br>According to the conversation, which of the following is <b>NOT</b> correct?",
+  "svg": "",
+  "siklar": [
+   "Mr. Tekin wants to talk to the manager.",
+   "The receptionist tries to connect Mr. Tekin to the manager.",
+   "Mr. Tekin decides to wait on the line.",
+   "Mr. Tekin can’t talk to the manager at that moment."
+  ],
+  "dogru": 2,
+  "ipucu1": "Her şıkkı diyalogdaki bir cümleyle eşleştir; telefon deyimlerinin (hold, put through, call back) anlamlarını düşün.",
+  "ipucu2": "“Hold” = hatta beklemek, “call back” = geri aramak. Bay Tekin “I’m in a hurry” (acelem var) diyor.",
+  "cozum": [
+   "“I’d like to speak to the manager” → A doğru.",
+   "“I’ll put you through” (Sizi bağlıyorum) → B doğru.",
+   "“His line is busy” (hattı meşgul) → o an görüşemiyor; D doğru.",
+   "Bay Tekin “I’ll call back in the afternoon” diyor; hatta beklemiyor. Yanlış olan C. Cevap C."
+  ],
+  "tuzaklar": [
+   "Soru kökündeki NOT kaçırılırsa diyaloğun ilk bilgisi olan bu şık işaretlenir.",
+   "“Put through” deyimi bilinmezse bu cümle yanlış sanılır.",
+   "",
+   "“Busy” yalnızca “meşgul insan” diye düşünülürse hattın meşgul olduğu anlaşılmaz ve yanlış sanılır."
+  ],
+  "taktik": "Telefon deyimlerini eşleştir: put through = connect (bağlamak), hold on = wait (beklemek), call back = tekrar aramak.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "put someone through",
+    "tanim": "Birini telefonda istediği kişiye bağlamak."
+   },
+   {
+    "ad": "The line is busy.",
+    "tanim": "Hat meşgul. (Kişi o an başka bir görüşmede.)"
+   }
+  ]
+ },
+ {
+  "id": "ing-018",
+  "ders": "ingilizce",
+  "unite": "On the Phone",
+  "kazanimKod": "E8.4.R1",
+  "kazanimAd": "Students will be able to understand short and simple texts with related vocabulary.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "The sentences of a phone conversation are mixed.<br><br>I. Hang on a second, I’ll get her. … I’m sorry, she isn’t in at the moment.<br>II. Hello, this is Cansu. Is Pelin there, please?<br>III. Of course. I’ll tell her as soon as she comes back.<br>IV. Oh, I see. Could you ask her to call me back?<br><br>Which is the correct order of the conversation?",
+  "svg": "",
+  "siklar": [
+   "II – IV – I – III",
+   "I – II – IV – III",
+   "II – I – III – IV",
+   "II – I – IV – III"
+  ],
+  "dogru": 3,
+  "ipucu1": "Konuşmayı kim başlatır? Kendini tanıtan ve birini soran cümleyi bul.",
+  "ipucu2": "“Oh, I see” (Anladım) bir bilgiye verilen tepkidir; “Of course” ise bir ricaya verilen cevaptır. Bunların öncesinde ne olmalı?",
+  "cozum": [
+   "Konuşma, arayanın kendini tanıtmasıyla başlar: II (“This is Cansu. Is Pelin there?”).",
+   "Karşı taraf bakar ve Pelin’in evde olmadığını söyler: I (“she isn’t in”).",
+   "Cansu bunu öğrenince rica eder: IV (“Could you ask her to call me back?”).",
+   "Ricaya cevap gelir: III (“Of course. I’ll tell her…”). Sıra: II – I – IV – III. Cevap D."
+  ],
+  "tuzaklar": [
+   "İlk ve son cümle doğru olduğu için cazip; ama Cansu, Pelin’in evde olmadığını öğrenmeden “Oh, I see” diyemez.",
+   "“Hang on” ile başlamak mümkün görünür; fakat kimse bir şey istemeden “Bekle, çağırayım” denmez.",
+   "İlk iki cümle doğru; ancak “Of course” bir ricadan önce gelmiş olur, rica ise sona kalır.",
+   ""
+  ],
+  "taktik": "Diyalog sıralamada soru–cevap çiftlerini bul (rica → Of course, bilgi → Oh, I see) ve çiftleri bozmayan şıkkı seç.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "hang on",
+    "tanim": "(Telefonda) beklemek: “Hang on a second.”"
+   },
+   {
+    "ad": "She isn’t in.",
+    "tanim": "“Şu an burada/evde değil.”"
+   }
+  ]
+ },
+ {
+  "id": "ing-019",
+  "ders": "ingilizce",
+  "unite": "The Internet",
+  "kazanimKod": "E8.5.SI1",
+  "kazanimAd": "Students will be able to talk about their Internet habits.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "<b>Tolga:</b> _____<br><b>İpek:</b> About two hours a day. I mostly do research for my homework.<br><br>Which of the following completes the conversation?",
+  "svg": "",
+  "siklar": [
+   "How often do you go online?",
+   "What do you use the Internet for?",
+   "How many hours do you spend on the Internet?",
+   "Do you have an Internet connection at home?"
+  ],
+  "dogru": 2,
+  "ipucu1": "İpek’in cevabının ilk kısmına bak: bir süre söylüyor.",
+  "ipucu2": "“About two hours a day” (Günde yaklaşık iki saat) hangi soru kelimesinin cevabı olur: how often, what, how many hours?",
+  "cozum": [
+   "İpek önce süre veriyor: “About two hours a day.”",
+   "Süreyi “How many hours…?” (Kaç saat…?) sorusu sorar.",
+   "“How often” sıklık (every day, twice a week), “What … for” amaç sorar; “Do you…?” sorusuna Yes/No ile cevap verilir. Cevap C."
+  ],
+  "tuzaklar": [
+   "“A day” ifadesi sıklık gibi göründüğü için cazip; ama sıklık cevabı “every day / twice a week” olurdu, burada süre var.",
+   "İpek’in ikinci cümlesi amaç bildirdiği için seçilebilir; fakat cevap süre ile başlıyor.",
+   "",
+   "İnternetle ilgili genel bir soru; ancak cevapta Yes/No yok."
+  ],
+  "taktik": "Soru kelimesi–cevap eşleştir: How often → sıklık, How long/How many hours → süre, What … for → amaç.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "How many hours…?",
+    "tanim": "Süre sorar: “Kaç saat…?”"
+   },
+   {
+    "ad": "How often…?",
+    "tanim": "Sıklık sorar: “Ne sıklıkla…?” (every day, once a week…)"
+   }
+  ]
+ },
+ {
+  "id": "ing-020",
+  "ders": "ingilizce",
+  "unite": "The Internet",
+  "kazanimKod": "E8.5.R2",
+  "kazanimAd": "Students will be able to find specific information about the Internet in various texts.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "25 students in class 8/C answered the question “What do you mostly use the Internet for?”. Each student chose one answer. The graph shows the results.<br><br>According to the graph, which of the following is <b>CORRECT</b>?",
+  "svg": "<svg viewBox='0 0 320 196'><text x='160' y='16' text-anchor='middle' font-size='13' font-weight='bold' fill='currentColor'>Internet Use in 8/C</text><text x='6' y='30' font-size='12' fill='currentColor'>Students</text><line x1='44' y1='170.0' x2='310' y2='170.0' stroke='currentColor' stroke-width='1.2' opacity='1'/><text x='39' y='174.0' text-anchor='end' font-size='12' fill='currentColor'>0</text><line x1='44' y1='144.4' x2='310' y2='144.4' stroke='currentColor' stroke-width='0.5' opacity='0.35'/><text x='39' y='148.4' text-anchor='end' font-size='12' fill='currentColor'>2</text><line x1='44' y1='118.8' x2='310' y2='118.8' stroke='currentColor' stroke-width='0.5' opacity='0.35'/><text x='39' y='122.8' text-anchor='end' font-size='12' fill='currentColor'>4</text><line x1='44' y1='93.2' x2='310' y2='93.2' stroke='currentColor' stroke-width='0.5' opacity='0.35'/><text x='39' y='97.2' text-anchor='end' font-size='12' fill='currentColor'>6</text><line x1='44' y1='67.6' x2='310' y2='67.6' stroke='currentColor' stroke-width='0.5' opacity='0.35'/><text x='39' y='71.6' text-anchor='end' font-size='12' fill='currentColor'>8</text><line x1='44' y1='42.0' x2='310' y2='42.0' stroke='currentColor' stroke-width='0.5' opacity='0.35'/><text x='39' y='46.0' text-anchor='end' font-size='12' fill='currentColor'>10</text><line x1='44' y1='38' x2='44' y2='170' stroke='currentColor' stroke-width='1.2'/><rect x='60.6' y='54.8' width='33.2' height='115.2' class='acf' stroke='currentColor'/><text x='77.2' y='187' text-anchor='middle' font-size='12' fill='currentColor'>Homework</text><text x='77.2' y='50.8' text-anchor='middle' font-size='12' font-weight='bold' fill='currentColor'>9</text><rect x='127.1' y='80.4' width='33.2' height='89.6' class='acf' stroke='currentColor'/><text x='143.8' y='187' text-anchor='middle' font-size='12' fill='currentColor'>Games</text><text x='143.8' y='76.4' text-anchor='middle' font-size='12' font-weight='bold' fill='currentColor'>7</text><rect x='193.6' y='93.2' width='33.2' height='76.8' class='acf' stroke='currentColor'/><text x='210.2' y='187' text-anchor='middle' font-size='12' fill='currentColor'>Chatting</text><text x='210.2' y='89.2' text-anchor='middle' font-size='12' font-weight='bold' fill='currentColor'>6</text><rect x='260.1' y='131.6' width='33.2' height='38.4' class='acf' stroke='currentColor'/><text x='276.8' y='187' text-anchor='middle' font-size='12' fill='currentColor'>Videos</text><text x='276.8' y='127.6' text-anchor='middle' font-size='12' font-weight='bold' fill='currentColor'>3</text></svg>",
+  "siklar": [
+   "Playing games is more popular than doing homework.",
+   "The number of students who chat is twice the number of students who watch videos.",
+   "Watching videos is the most common answer.",
+   "More than half of the students go online for homework."
+  ],
+  "dogru": 1,
+  "ipucu1": "Sütunların değerlerini yaz: Homework, Games, Chatting, Videos.",
+  "ipucu2": "“Twice” iki katı demektir. Chatting ile Videos sütunlarını karşılaştır; “more than half” için 25’in yarısını düşün.",
+  "cozum": [
+   "Grafik: Homework 9, Games 7, Chatting 6, Videos 3.",
+   "Games (7) < Homework (9) → A yanlış. Videos en düşük sütun → C yanlış.",
+   "25’in yarısı 12,5; ödev için 9 kişi → D yanlış.",
+   "Chatting 6, Videos 3; 6 = 2 × 3. “Twice” doğru. Cevap B."
+  ],
+  "tuzaklar": [
+   "İki sütun birbirine yakın olduğu için ters okunabilir.",
+   "",
+   "Video izlemek günlük hayatta çok yaygın olduğu için sayılara bakmadan seçilebilir; grafikte en kısa sütun o.",
+   "Ödev en yüksek sütun olduğu için “yarıdan fazla” sanılır; en yüksek olmak yarıdan fazla olmak demek değildir."
+  ],
+  "taktik": "Grafikte “twice / half / more than half” gibi ifadeler görürsen sayıları yazıp küçük bir işlem yap; göz kararı bırakma.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "twice",
+    "tanim": "İki kez / iki katı."
+   },
+   {
+    "ad": "more than half",
+    "tanim": "Yarıdan fazla."
+   }
+  ]
+ },
+ {
+  "id": "ing-021",
+  "ders": "ingilizce",
+  "unite": "The Internet",
+  "kazanimKod": "E8.5.R1",
+  "kazanimAd": "Students will be able to identify main ideas in short and simple texts about internet habits.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Many people think teenagers only waste time online, but I don’t agree. I use the Internet to learn new things. I watch science videos, practise English with an application and follow a coding course. Of course, I sometimes chat with my friends, but I never spend more than an hour a day online. For me, the Internet is a great teacher when you use it wisely.<br><br>What is the main idea of the text?",
+  "svg": "",
+  "siklar": [
+   "The Internet can be very useful if people use it in the right way.",
+   "Teenagers spend too much time on social media.",
+   "Coding courses are the best way of learning online.",
+   "Chatting with friends online is a waste of time."
+  ],
+  "dogru": 0,
+  "ipucu1": "Ana fikir, metnin tamamını kapsayan düşüncedir; tek bir örnek ana fikir olamaz.",
+  "ipucu2": "İlk cümledeki “but I don’t agree” ile son cümledeki “when you use it wisely” ifadelerini birleştir.",
+  "cozum": [
+   "Yazar, “gençler internette yalnızca zaman kaybeder” fikrine katılmıyor.",
+   "Örnekler veriyor: bilim videoları, İngilizce uygulaması, kodlama kursu.",
+   "Son cümle özetliyor: “The Internet is a great teacher when you use it wisely” (akıllıca kullanılırsa).",
+   "Bu fikri A şıkkı söylüyor: doğru kullanılırsa internet çok yararlıdır. Cevap A."
+  ],
+  "tuzaklar": [
+   "",
+   "Metnin ilk cümlesindeki görüşü yansıtır; ama yazar bu görüşe katılmadığını söylüyor.",
+   "Kodlama kursu metinde geçiyor; fakat yalnızca bir örnek, metnin bütününü kapsamıyor.",
+   "“Chat” ve “waste time” kelimeleri metinde var; ancak yazar sohbet etmeyi kötülemiyor."
+  ],
+  "taktik": "Ana fikir sorularında ilk ve son cümleye bak; “but, for me, in my opinion” gibi ifadeler yazarın asıl düşüncesini verir.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "main idea",
+    "tanim": "Ana fikir: metnin bütününün verdiği mesaj."
+   },
+   {
+    "ad": "wisely",
+    "tanim": "Akıllıca, bilinçli bir şekilde."
+   }
+  ]
+ },
+ {
+  "id": "ing-022",
+  "ders": "ingilizce",
+  "unite": "The Internet",
+  "kazanimKod": "E8.5.R2",
+  "kazanimAd": "Students will be able to find specific information about the Internet in various texts.",
+  "zorluk": 3,
+  "tip": "grafik-tablo",
+  "metin": "The table shows the Internet habits of four teenagers.<br><table class=\"t\"><tr><th>Name</th><th>Time online (a day)</th><th>Mostly uses it for</th><th>Device</th></tr><tr><td>Aylin</td><td>1 hour</td><td>doing research</td><td>laptop</td></tr><tr><td>Burak</td><td>3 hours</td><td>playing online games</td><td>desktop computer</td></tr><tr><td>Ceren</td><td>2 hours</td><td>chatting with friends</td><td>smartphone</td></tr><tr><td>Doruk</td><td>30 minutes</td><td>reading the news</td><td>tablet</td></tr></table><br>According to the table, which of the following is <b>NOT</b> correct?",
+  "svg": "",
+  "siklar": [
+   "Burak spends three times as much time online as Aylin.",
+   "Doruk spends the least time online.",
+   "Ceren goes online to keep in touch with people.",
+   "Aylin and Doruk together spend more time online than Ceren."
+  ],
+  "dogru": 3,
+  "ipucu1": "Süreleri aynı birime çevir: 30 dakika = yarım saat.",
+  "ipucu2": "Aylin ile Doruk’un sürelerini topla ve Ceren’in süresiyle karşılaştır.",
+  "cozum": [
+   "Süreler: Aylin 1 saat, Burak 3 saat, Ceren 2 saat, Doruk 30 dakika.",
+   "3 saat = 3 × 1 saat → A doğru. En az süre 30 dakika (Doruk) → B doğru.",
+   "“Chatting with friends” = “keep in touch” (iletişimde kalmak) → C doğru.",
+   "Aylin + Doruk = 1 saat 30 dakika; Ceren 2 saat. “More” yanlış. Cevap D."
+  ],
+  "tuzaklar": [
+   "“Three times as much” (üç katı) yapısı tanınmazsa yanlış sanılır.",
+   "“30” sayısı 1, 2 ve 3’ten büyük göründüğü için dakika–saat farkı atlanırsa yanlış sanılır.",
+   "“Keep in touch” deyimi bilinmezse tablodaki “chatting” ile eşleştirilemez.",
+   ""
+  ],
+  "taktik": "Tabloda farklı birimler (hour/minutes) varsa önce hepsini aynı birime çevir, sonra karşılaştır.",
+  "hataTipi": "birim",
+  "kavramlar": [
+   {
+    "ad": "keep in touch",
+    "tanim": "İletişimde kalmak, haberleşmek."
+   },
+   {
+    "ad": "three times as much as",
+    "tanim": "…-in üç katı kadar."
+   }
+  ]
+ },
+ {
+  "id": "ing-023",
+  "ders": "ingilizce",
+  "unite": "The Internet",
+  "kazanimKod": "E8.5.R2",
+  "kazanimAd": "Students will be able to find specific information about the Internet in various texts.",
+  "zorluk": 1,
+  "tip": "gorsel",
+  "metin": "Read the poster.<br><br>Which student does <b>NOT</b> follow the rules on the poster?",
+  "svg": "<svg viewBox='0 0 320 183'><rect x='6' y='6' width='308' height='171' rx='10' fill='none' stroke='currentColor' stroke-width='1.5'/><text x='160' y='26' text-anchor='middle' font-size='14' font-weight='bold' fill='currentColor'>SAFE INTERNET RULES</text><line x1='18' y1='35' x2='302' y2='35' class='ac' stroke='currentColor'/><text x='20' y='55' font-size='12' fill='currentColor'>1. Don’t share your password with anyone.</text><text x='20' y='73' font-size='12' fill='currentColor'>2. Don’t accept friend requests</text><text x='20' y='91' font-size='12' fill='currentColor'>    from strangers.</text><text x='20' y='109' font-size='12' fill='currentColor'>3. Tell your parents if someone</text><text x='20' y='127' font-size='12' fill='currentColor'>    bothers you online.</text><text x='20' y='145' font-size='12' fill='currentColor'>4. Log off when you finish using</text><text x='20' y='163' font-size='12' fill='currentColor'>    a shared computer.</text></svg>",
+  "siklar": [
+   "Ali: “Only I know my password.”",
+   "Zehra: “I added a person I’ve never met to my friends list.”",
+   "Kemal: “I told my dad about the rude messages.”",
+   "Lale: “I always sign out at the school library.”"
+  ],
+  "dogru": 1,
+  "ipucu1": "Her öğrencinin cümlesini posterdeki bir kuralla eşleştir.",
+  "ipucu2": "“Stranger” tanımadığın kişi demektir. Hangi öğrenci tanımadığı biriyle ilgili bir şey yapmış?",
+  "cozum": [
+   "Kural 1: Şifreni paylaşma → Ali’nin şifresini yalnızca kendisi biliyor; kurala uyuyor.",
+   "Kural 3: Biri rahatsız ederse ailene söyle → Kemal babasına söylemiş; uyuyor.",
+   "Kural 4: Ortak bilgisayarda oturumu kapat (“log off” = “sign out”) → Lale uyuyor.",
+   "Kural 2: Yabancıların arkadaşlık isteğini kabul etme → Zehra hiç tanışmadığı birini eklemiş. Cevap B."
+  ],
+  "tuzaklar": [
+   "“Password” kelimesi kuralda geçtiği için dikkat çeker; ama Ali şifresini paylaşmıyor.",
+   "",
+   "“Rude messages” olumsuz bir durum gibi görünür; oysa Kemal tam da kuralın söylediğini yapmış.",
+   "“Sign out” ile posterdeki “log off” aynı şey olduğu anlaşılmazsa kuralla ilgisiz sanılır."
+  ],
+  "taktik": "Kural–kişi eşleştirmede olumsuz kelimeye değil, davranışın kurala uyup uymadığına bak.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "log off / sign out",
+    "tanim": "Oturumu kapatmak, çıkış yapmak."
+   },
+   {
+    "ad": "stranger",
+    "tanim": "Yabancı, tanımadığın kişi."
+   }
+  ]
+ },
+ {
+  "id": "ing-024",
+  "ders": "ingilizce",
+  "unite": "Adventures",
+  "kazanimKod": "E8.6.SP1",
+  "kazanimAd": "Students will be able to make comparisons about sports and games by using simple descriptive language.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "I think rafting is _____ than fishing because you have to fight against the fast river all the time.<br><br>Which of the following completes the sentence?",
+  "svg": "",
+  "siklar": [
+   "more challenging",
+   "safer",
+   "more relaxing",
+   "easier"
+  ],
+  "dogru": 0,
+  "ipucu1": "“Because” ile başlayan kısım sebebi veriyor. Hızlı nehirle sürekli mücadele etmek nasıl bir şeydir?",
+  "ipucu2": "“Fight against the fast river” zorluk anlatır. Şıklardan hangisi “daha zorlu” anlamına gelir?",
+  "cozum": [
+   "Cümlede rafting ile balık tutma karşılaştırılıyor.",
+   "Sebep: “you have to fight against the fast river” (hızlı nehre karşı mücadele etmek zorundasın).",
+   "Bu, raftingin daha zorlu olduğunu gösterir: “more challenging”. Cevap A."
+  ],
+  "tuzaklar": [
+   "",
+   "Karşılaştırma kalıbına uyduğu için cazip; ama nehirle mücadele etmek güvenli olmayı açıklamaz.",
+   "“Relaxing” balık tutmaya uygun bir sıfat; cümlede ise raftingin özelliği soruluyor.",
+   "Kısa sıfat kalıbı (-er) doğru; fakat mücadele gerektiren bir spor “daha kolay” olamaz."
+  ],
+  "taktik": "Sıfat seçme sorularında “because”ten sonrasını oku; sebep cümlesi hangi sıfatın geleceğini söyler.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Comparatives",
+    "tanim": "Karşılaştırma: kısa sıfat + -er (safer, easier), uzun sıfat “more …” (more challenging) + than."
+   },
+   {
+    "ad": "challenging",
+    "tanim": "Zorlu, uğraştırıcı."
+   }
+  ]
+ },
+ {
+  "id": "ing-025",
+  "ders": "ingilizce",
+  "unite": "Adventures",
+  "kazanimKod": "E8.6.R1",
+  "kazanimAd": "Students will be able to understand short and simple texts to find the main points about adventures.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "The table gives information about the activities at an adventure park.<br><table class=\"t\"><tr><th>Activity</th><th>Price</th><th>Minimum age</th><th>Duration</th></tr><tr><td>Rafting</td><td>300 TL</td><td>12</td><td>3 hours</td></tr><tr><td>Paragliding</td><td>900 TL</td><td>16</td><td>30 minutes</td></tr><tr><td>Kayaking</td><td>250 TL</td><td>10</td><td>2 hours</td></tr><tr><td>Caving</td><td>400 TL</td><td>14</td><td>4 hours</td></tr></table><br>According to the table, which of the following is <b>CORRECT</b>?",
+  "svg": "",
+  "siklar": [
+   "Caving lasts longer than the other activities.",
+   "Paragliding is cheaper than caving.",
+   "Kayaking takes more time than rafting.",
+   "A ten-year-old child can join the rafting tour."
+  ],
+  "dogru": 0,
+  "ipucu1": "Her şık tablonun farklı bir sütunuyla ilgili: süre (duration), fiyat (price), yaş (minimum age).",
+  "ipucu2": "“Lasts longer” için “Duration” sütunundaki en büyük değeri bul. Dakika ile saati karıştırma.",
+  "cozum": [
+   "Süreler: rafting 3 saat, paragliding 30 dakika, kayaking 2 saat, caving 4 saat.",
+   "En uzun süren etkinlik caving (mağaracılık) → A doğru.",
+   "Paragliding 900 TL, caving 400 TL → B yanlış. Kayaking 2 saat < rafting 3 saat → C yanlış.",
+   "Rafting için en küçük yaş 12 → 10 yaşındaki çocuk katılamaz; D yanlış. Cevap A."
+  ],
+  "tuzaklar": [
+   "",
+   "Paragliding en kısa süren etkinlik olduğu için en ucuz sanılabilir; fiyat sütunu tersini gösteriyor.",
+   "Satırlar karıştırılırsa kayaking ile rafting süreleri yer değiştirir.",
+   "Tablodaki “10” sayısı kayaking satırına ait; rafting satırıyla karıştırılırsa doğru sanılır."
+  ],
+  "taktik": "Şıktaki anahtar kelimeyi sütun başlığına çevir (cheaper → Price, lasts/takes → Duration) ve yalnızca o sütuna bak.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "minimum age",
+    "tanim": "En küçük yaş sınırı."
+   },
+   {
+    "ad": "last / take",
+    "tanim": "Sürmek: “Caving lasts four hours.” / “It takes four hours.”"
+   }
+  ]
+ },
+ {
+  "id": "ing-026",
+  "ders": "ingilizce",
+  "unite": "Adventures",
+  "kazanimKod": "E8.6.R1",
+  "kazanimAd": "Students will be able to understand short and simple texts to find the main points about adventures.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Hi! I’m Derin. Last summer, I tried scuba diving in Kaş and paragliding in Fethiye. Both of them were amazing, but I prefer scuba diving because the underwater world is more fascinating than the view from the sky. Paragliding was more frightening for me. I closed my eyes most of the time! My sister disagrees with me. She would rather fly than dive because she can’t swim well.<br><br>According to the text, which of the following is <b>CORRECT</b>?",
+  "svg": "",
+  "siklar": [
+   "Derin found scuba diving more frightening than paragliding.",
+   "Derin’s sister prefers paragliding to scuba diving.",
+   "Derin has never tried paragliding.",
+   "Derin and her sister prefer the same activity."
+  ],
+  "dogru": 1,
+  "ipucu1": "Derin’in tercihini ve kız kardeşinin tercihini ayrı ayrı bul.",
+  "ipucu2": "“She would rather fly than dive” cümlesinde “fly” hangi sporu, “dive” hangi sporu anlatıyor?",
+  "cozum": [
+   "Derin: “I prefer scuba diving” → dalışı tercih ediyor; korkutucu bulduğu ise paragliding. A yanlış.",
+   "Derin ikisini de denemiş (“I tried scuba diving … and paragliding”) → C yanlış.",
+   "Kız kardeşi: “She would rather fly than dive” → uçmayı (paragliding) dalmaya tercih ediyor.",
+   "İkisinin tercihi farklı (“My sister disagrees”) → D yanlış. Cevap B."
+  ],
+  "tuzaklar": [
+   "“Frightening” metinde geçiyor; hangi spor için söylendiği karıştırılırsa seçilir.",
+   "",
+   "Derin paraşütte gözlerini kapattığı için “denememiş” gibi düşünülebilir; oysa denemiş.",
+   "“Both of them were amazing” cümlesi ikisinin aynı fikirde olduğu izlenimini verir; “disagrees” bunu bozar."
+  ],
+  "taktik": "“would rather A than B” ve “prefer A to B” kalıplarında tercih edilen hep ilk söylenendir (A).",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "prefer A to B",
+    "tanim": "A’yı B’ye tercih etmek: “I prefer diving to flying.”"
+   },
+   {
+    "ad": "would rather A than B",
+    "tanim": "B yerine A’yı yeğlemek: “She would rather fly than dive.”"
+   }
+  ]
+ },
+ {
+  "id": "ing-027",
+  "ders": "ingilizce",
+  "unite": "Adventures",
+  "kazanimKod": "E8.6.R1",
+  "kazanimAd": "Students will be able to understand short and simple texts to find the main points about adventures.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "Three friends are going to an adventure camp. The camp offers <b>rafting</b>, <b>kayaking</b>, <b>caving</b> and <b>paragliding</b>.<br><br><b>Mete:</b> I love water sports, but I’d rather not be in a big boat with a team. I want to paddle on my own.<br><b>Sena:</b> I’m afraid of heights, and I can’t swim. I’d like to explore dark places under the ground.<br><b>Ozan:</b> Water sports are boring for me. I’d prefer to see the world from the sky.<br><br>Which of the following shows the best activities for them?",
+  "svg": "",
+  "siklar": [
+   "Mete: rafting / Sena: caving / Ozan: paragliding",
+   "Mete: kayaking / Sena: paragliding / Ozan: caving",
+   "Mete: kayaking / Sena: caving / Ozan: paragliding",
+   "Mete: rafting / Sena: kayaking / Ozan: paragliding"
+  ],
+  "dogru": 2,
+  "ipucu1": "Her kişinin istemediği şeyi de not al; bu, şıkları hızla eler.",
+  "ipucu2": "Rafting büyük bir botta takımla yapılır; kayak (kayaking) ise küçük bir teknede tek başına kürek çekmektir. Mete hangisini ister?",
+  "cozum": [
+   "Mete su sporu istiyor ama takımla büyük botta olmak istemiyor; tek başına kürek çekecek → kayaking.",
+   "Sena yükseklikten korkuyor ve yüzemiyor; yer altındaki karanlık yerleri keşfetmek istiyor → caving (mağaracılık).",
+   "Ozan dünyayı gökyüzünden görmek istiyor → paragliding (yamaç paraşütü).",
+   "Üçü birlikte: kayaking – caving – paragliding. Cevap C."
+  ],
+  "tuzaklar": [
+   "Rafting de bir su sporu olduğu için Mete’ye uygun görünür; ama Mete takımla büyük botta olmak istemiyor.",
+   "Mete doğru eşleşmiş; fakat Sena yükseklikten korkuyor, paragliding ona uymaz.",
+   "",
+   "Ozan doğru; ancak Sena yüzemiyor, Mete de takım botu istemiyor."
+  ],
+  "taktik": "Eşleştirme sorularında en net kişiden başla (burada Ozan ve Sena), sonra kalan şıkları zor kişiye göre ayır.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "rafting / kayaking",
+    "tanim": "Rafting: takımla şişme botta akarsu sporu. Kayaking: küçük teknede (kayak) kürek çekme, çoğunlukla tek kişilik."
+   },
+   {
+    "ad": "caving",
+    "tanim": "Mağaracılık; mağaraları keşfetme sporu."
+   }
+  ]
+ },
+ {
+  "id": "ing-028",
+  "ders": "ingilizce",
+  "unite": "Tourism",
+  "kazanimKod": "E8.7.SI1",
+  "kazanimAd": "Students will be able to exchange information about tourism.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "<b>Tourist:</b> _____<br><b>Guide:</b> Yes, I have. I went there two years ago. The fairy chimneys were incredible.<br><br>Which of the following completes the conversation?",
+  "svg": "",
+  "siklar": [
+   "Did you go to Cappadocia last year?",
+   "Would you like to visit Cappadocia?",
+   "When did you go to Cappadocia?",
+   "Have you ever been to Cappadocia?"
+  ],
+  "dogru": 3,
+  "ipucu1": "Rehberin cevabının ilk iki kelimesine bak: sorunun türü (Evet/Hayır sorusu mu, bilgi sorusu mu) hakkında ne söylüyor?",
+  "ipucu2": "Kısa cevaptaki yardımcı fiil sorudakiyle aynı olur. Örneğin “Did you…?” sorusunun cevabı “Yes, I did” olurdu.",
+  "cozum": [
+   "Kısa cevap: “Yes, I have.”",
+   "Kısa cevaptaki yardımcı fiil, sorudakiyle aynı olur: Have you…? → Yes, I have.",
+   "“Have you ever been to…?” = “Hiç …-e gittin mi?” (deneyim sorar). Cevap D."
+  ],
+  "tuzaklar": [
+   "Geçmişle ilgili olduğu için cazip; ama cevabı “Yes, I did” olurdu, ayrıca rehber iki yıl önce gitmiş.",
+   "Kibar bir teklif sorusu; cevabı “Yes, I would / I’d love to” olurdu.",
+   "“Two years ago” bilgisi bu soruya uyuyor gibi görünür; fakat “When” sorusuna “Yes” ile cevap verilmez.",
+   ""
+  ],
+  "taktik": "Kısa cevaplardaki yardımcı fiil (have / did / would) soruyu ele verir; önce ona bak.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Have you ever been to…?",
+    "tanim": "“Hiç …-de bulundun mu / …-e gittin mi?” Deneyim sorar. Cevap: Yes, I have. / No, I haven’t."
+   },
+   {
+    "ad": "incredible",
+    "tanim": "İnanılmaz, harika."
+   }
+  ]
+ },
+ {
+  "id": "ing-029",
+  "ders": "ingilizce",
+  "unite": "Tourism",
+  "kazanimKod": "E8.7.R1",
+  "kazanimAd": "Students will be able to find specific information from various texts about tourism.",
+  "zorluk": 2,
+  "tip": "gorsel",
+  "metin": "Read the brochure.<br><br>According to the brochure, which of the following is <b>NOT</b> correct?",
+  "svg": "<svg viewBox='0 0 320 173'><rect x='6' y='6' width='308' height='161' rx='10' fill='none' stroke='currentColor' stroke-width='1.5'/><text x='160' y='26' text-anchor='middle' font-size='14' font-weight='bold' fill='currentColor'>SUNNY COVE RESORT</text><line x1='18' y1='35' x2='302' y2='35' class='ac' stroke='currentColor'/><text x='20' y='55' font-size='12' fill='currentColor'>• All-inclusive</text><text x='20' y='73' font-size='12' fill='currentColor'>• 5 minutes’ walk to the beach</text><text x='20' y='91' font-size='12' fill='currentColor'>• Free Wi-Fi in all rooms</text><text x='20' y='109' font-size='12' fill='currentColor'>• Swimming pool and kids’ club</text><text x='20' y='127' font-size='12' fill='currentColor'>• Daily boat tours (extra charge)</text><text x='20' y='153' font-size='12' fill='currentColor'><tspan font-weight='bold'>Price:</tspan> 1,500 TL per night</text></svg>",
+  "siklar": [
+   "Guests don’t pay extra for their meals.",
+   "Guests need to take a bus to reach the beach.",
+   "Children can have fun at the resort.",
+   "Boat tours are not included in the price."
+  ],
+  "dogru": 1,
+  "ipucu1": "Her şıkkı broşürdeki bir satırla eşleştir: yemek, plaj, çocuklar, tekne turu.",
+  "ipucu2": "“All-inclusive” her şey dahil demektir. Plajla ilgili satırda mesafe nasıl verilmiş?",
+  "cozum": [
+   "“All-inclusive” (her şey dahil) → yemekler için ek ücret yok; A doğru.",
+   "“Kids’ club” (çocuk kulübü) → C doğru. “Boat tours (extra charge)” → tekne turları ek ücretli; D doğru.",
+   "“5 minutes’ walk to the beach” → plaja yürüyerek 5 dakika.",
+   "Otobüse gerek yok; yanlış olan B. Cevap B."
+  ],
+  "tuzaklar": [
+   "“All-inclusive” teriminin anlamı bilinmezse yemeklerin ücretli olduğu düşünülür.",
+   "",
+   "Broşürde “children” kelimesi geçmediği için (“kids” yazıyor) bilgi yok sanılabilir.",
+   "“Extra charge” (ek ücret) ifadesi anlaşılmazsa turların fiyata dahil olduğu sanılır."
+  ],
+  "taktik": "Broşür sorularında parantez içi küçük notlar (extra charge, free vb.) çoğu zaman bir şıkkın anahtarıdır.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "all-inclusive",
+    "tanim": "Her şey dahil (konaklama + yemek ve içecekler fiyata dahil)."
+   },
+   {
+    "ad": "extra charge",
+    "tanim": "Ek ücret."
+   }
+  ]
+ },
+ {
+  "id": "ing-030",
+  "ders": "ingilizce",
+  "unite": "Tourism",
+  "kazanimKod": "E8.7.R1",
+  "kazanimAd": "Students will be able to find specific information from various texts about tourism.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Dear Grandma,<br>Greetings from Mardin! We arrived here three days ago. The city is like an open-air museum with its ancient stone houses and narrow streets. Yesterday, we visited a historic monastery, and today we are going to try local food at the bazaar. The weather is hot, but the evenings are cool. I’ve taken lots of photos to show you. See you next week!<br>Love,<br>Azra<br><br>Which question does <b>NOT</b> have an answer in the postcard?",
+  "svg": "",
+  "siklar": [
+   "When did Azra arrive in Mardin?",
+   "What did Azra do yesterday?",
+   "What is the weather like in Mardin?",
+   "Where is Azra staying in Mardin?"
+  ],
+  "dogru": 3,
+  "ipucu1": "Her sorunun cevabını kartpostalda altını çizerek bul.",
+  "ipucu2": "“Staying” konaklamak demektir. Kartta otel, pansiyon ya da ev gibi bir konaklama yeri geçiyor mu?",
+  "cozum": [
+   "“We arrived here three days ago” (üç gün önce) → A’nın cevabı var.",
+   "“Yesterday, we visited a historic monastery” (tarihî bir manastır) → B’nin cevabı var.",
+   "“The weather is hot, but the evenings are cool” → C’nin cevabı var.",
+   "Azra’nın nerede kaldığı yazmıyor. Cevap D."
+  ],
+  "tuzaklar": [
+   "Kesin bir tarih yazmadığı için cevap yok sanılabilir; “three days ago” bir cevaptır.",
+   "“Monastery” kelimesi bilinmezse ziyaret edilen yerin yazmadığı düşünülür.",
+   "Hava bilgisi iki parçalı (hot / cool) olduğu için kafa karıştırabilir; yine de cevap var.",
+   ""
+  ],
+  "taktik": "“Where is … staying?” sorusu konaklama yerini sorar; şehir adını bu sorunun cevabı sanma.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "ancient / historic",
+    "tanim": "Antik, çok eski / tarihî."
+   },
+   {
+    "ad": "stay",
+    "tanim": "Konaklamak, kalmak: “We’re staying at a hotel.”"
+   }
+  ]
+ },
+ {
+  "id": "ing-031",
+  "ders": "ingilizce",
+  "unite": "Tourism",
+  "kazanimKod": "E8.7.R1",
+  "kazanimAd": "Students will be able to find specific information from various texts about tourism.",
+  "zorluk": 3,
+  "tip": "grafik-tablo",
+  "metin": "The table gives information about three holiday places.<br><table class=\"t\"><tr><th></th><th>Olive Hotel</th><th>Pine Camp</th><th>Grand City Hotel</th></tr><tr><td>Location</td><td>seaside</td><td>countryside</td><td>city centre</td></tr><tr><td>Type</td><td>all-inclusive</td><td>tents, no meals</td><td>bed and breakfast</td></tr><tr><td>Price (per night)</td><td>2,000 TL</td><td>500 TL</td><td>1,200 TL</td></tr><tr><td>Things to do</td><td>water sports</td><td>trekking, cycling</td><td>museums, historic sites</td></tr></table><br><b>Kerem:</b> I’m keen on history and museums. I can’t pay more than 1,500 TL a night.<br><b>Suna:</b> I’d rather be in nature than in a city. I don’t mind cooking my own meals, but I can’t swim, so I don’t want a seaside holiday.<br><br>Which places are the best for Kerem and Suna?",
+  "svg": "",
+  "siklar": [
+   "Kerem: Olive Hotel / Suna: Pine Camp",
+   "Kerem: Grand City Hotel / Suna: Olive Hotel",
+   "Kerem: Grand City Hotel / Suna: Pine Camp",
+   "Kerem: Pine Camp / Suna: Grand City Hotel"
+  ],
+  "dogru": 2,
+  "ipucu1": "Her kişinin iki koşulu var. Önce Kerem’in ilgi alanına (history, museums) uyan sütunu bul, sonra fiyatı kontrol et.",
+  "ipucu2": "Suna şehir ve deniz istemiyor; geriye hangi “Location” kalıyor? “I don’t mind cooking” hangi “Type” satırına uyar?",
+  "cozum": [
+   "Kerem tarih ve müze seviyor → “museums, historic sites” yalnızca Grand City Hotel’de.",
+   "Grand City Hotel 1,200 TL; 1,500 TL sınırının altında → Kerem için uygun.",
+   "Suna doğada olmak istiyor; şehir de deniz kenarı da istemiyor → “countryside” (kırsal): Pine Camp.",
+   "Pine Camp’te yemek yok; Suna kendi yemeğini pişirmeyi sorun etmiyor. Cevap C."
+  ],
+  "tuzaklar": [
+   "Suna doğru eşleşmiş; ama Olive Hotel’de müze yok ve fiyatı 2,000 TL, Kerem’in bütçesini aşıyor.",
+   "Kerem doğru; fakat Olive Hotel deniz kenarında ve Suna yüzemediği için bunu istemiyor.",
+   "",
+   "İsimler ters eşleştirilmiş: Pine Camp ucuz olduğu için Kerem’e uygun görünür ama orada müze yok; Suna da şehir istemiyor."
+  ],
+  "taktik": "İki koşullu eşleştirmede önce “istemiyorum” koşuluyla sütun ele, sonra kalan sütunda ikinci koşulu doğrula.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "bed and breakfast",
+    "tanim": "Oda + kahvaltı (yalnızca kahvaltı dahil konaklama)."
+   },
+   {
+    "ad": "countryside",
+    "tanim": "Kırsal bölge, şehir dışı doğa."
+   }
+  ]
+ },
+ {
+  "id": "ing-032",
+  "ders": "ingilizce",
+  "unite": "Tourism",
+  "kazanimKod": "E8.7.SP1",
+  "kazanimAd": "Students will be able to express their preferences for particular tourist attractions and give reasons.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "<b>Reporter:</b> Which do you prefer, historic sites or modern cities?<br><b>Tourist:</b> _____ I’m really interested in ancient civilizations.<br><br>Which of the following completes the conversation?",
+  "svg": "",
+  "siklar": [
+   "I’d rather visit modern cities.",
+   "I prefer historic sites to modern cities.",
+   "I think modern architecture is more attractive.",
+   "I can’t stand visiting old ruins."
+  ],
+  "dogru": 1,
+  "ipucu1": "Turistin ikinci cümlesi tercihinin sebebini veriyor. Neye ilgi duyuyor?",
+  "ipucu2": "“Ancient civilizations” (eski uygarlıklar) tarihî yerlerle mi, modern şehirlerle mi ilgilidir?",
+  "cozum": [
+   "Turist “I’m really interested in ancient civilizations” diyor: eski uygarlıklara ilgi duyuyor.",
+   "Eski uygarlıklar tarihî yerlerde (historic sites) görülür.",
+   "“I prefer historic sites to modern cities” = Tarihî yerleri modern şehirlere tercih ederim. Cevap B."
+  ],
+  "tuzaklar": [
+   "“I’d rather” doğru bir tercih kalıbı; ama modern şehirleri seçmek ikinci cümleyle çelişir.",
+   "",
+   "Karşılaştırma yapısı düzgün olduğu için cazip; fakat modern mimariyi övüyor.",
+   "“Old ruins” tarihle ilgili olduğu için dikkat çeker; “can’t stand” ise katlanamamak demektir."
+  ],
+  "taktik": "Tercih sorularında boşluktan sonraki sebep cümlesi hangi seçeneğin tercih edildiğini gösterir.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "prefer A to B",
+    "tanim": "A’yı B’ye tercih etmek."
+   },
+   {
+    "ad": "historic site",
+    "tanim": "Tarihî yer, ören yeri."
+   }
+  ]
+ },
+ {
+  "id": "ing-033",
+  "ders": "ingilizce",
+  "unite": "Chores",
+  "kazanimKod": "E8.8.SP1",
+  "kazanimAd": "Students will be able to express their obligations, likes and dislikes in simple terms.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "<b>Mum:</b> Your room is very messy, and your friends are coming in an hour. You _____ tidy it up before they arrive.<br><b>Ege:</b> OK, Mum. I’ll do it right now.<br><br>Which of the following completes the conversation?",
+  "svg": "",
+  "siklar": [
+   "must",
+   "mustn’t",
+   "don’t have to",
+   "can’t"
+  ],
+  "dogru": 0,
+  "ipucu1": "Annenin isteği bir zorunluluk mu, bir yasak mı?",
+  "ipucu2": "Oda dağınık ve misafir geliyor. “Toplamak zorundasın” anlamını hangi şık verir?",
+  "cozum": [
+   "Oda çok dağınık (“messy”) ve arkadaşlar bir saat içinde geliyor.",
+   "Anne odanın toplanmasını şart koşuyor; bu bir zorunluluk.",
+   "Zorunluluk “must” ile anlatılır: “You must tidy it up.” Cevap A."
+  ],
+  "tuzaklar": [
+   "",
+   "“Must” ile karıştırılır; “mustn’t” yasak bildirir (toplamamalısın), anlam ters olur.",
+   "“Have to” zorunluluk çağrıştırır; ama “don’t have to” gerek yok demektir.",
+   "Modal olduğu için seçilebilir; “can’t” yapamazsın anlamı verir, anne ise yapmasını istiyor."
+  ],
+  "taktik": "must = zorunlu, mustn’t = yasak, don’t have to = gerek yok. Cümlenin anlamını Türkçe düşün, sonra şıkka bak.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "must",
+    "tanim": "Zorunluluk bildirir: “You must tidy your room.”"
+   },
+   {
+    "ad": "tidy up",
+    "tanim": "Toplamak, düzenlemek."
+   }
+  ]
+ },
+ {
+  "id": "ing-034",
+  "ders": "ingilizce",
+  "unite": "Chores",
+  "kazanimKod": "E8.8.R1",
+  "kazanimAd": "Students will be able to understand various short and simple texts about responsibilities.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "The table shows the weekly chores in the Aydın family.<br><table class=\"t\"><tr><th>Chores</th><th>Efe</th><th>Naz</th><th>Dad</th></tr><tr><td>set the table</td><td>✓</td><td></td><td></td></tr><tr><td>do the laundry</td><td></td><td></td><td>✓</td></tr><tr><td>take out the rubbish</td><td>✓</td><td></td><td>✓</td></tr><tr><td>make the beds</td><td></td><td>✓</td><td></td></tr><tr><td>water the plants</td><td></td><td>✓</td><td></td></tr></table><br>According to the table, which of the following is <b>NOT</b> correct?",
+  "svg": "",
+  "siklar": [
+   "Efe is responsible for two chores.",
+   "Naz is in charge of making the beds.",
+   "Dad and Efe share one of the chores.",
+   "Naz has to do the laundry."
+  ],
+  "dogru": 3,
+  "ipucu1": "Her kişinin sütunundaki ✓ işaretlerini say ve hangi satırlarda olduğuna bak.",
+  "ipucu2": "“Do the laundry” satırındaki ✓ kimin sütununda?",
+  "cozum": [
+   "Efe: sofrayı kurmak ve çöpü çıkarmak → iki iş; A doğru.",
+   "Naz: yatakları yapmak ve çiçekleri sulamak → B doğru.",
+   "Çöpü çıkarma satırında hem Efe hem Dad işaretli → C doğru.",
+   "Çamaşır (“do the laundry”) Dad’in işi, Naz’ın değil. Yanlış olan D. Cevap D."
+  ],
+  "tuzaklar": [
+   "Soru kökündeki NOT atlanırsa ilk doğru cümle seçilir.",
+   "“In charge of” (sorumlu) ifadesi bilinmezse bu cümle yanlış sanılır.",
+   "“Share” (paylaşmak) için aynı satırda iki ✓ aranması gerektiği fark edilmezse yanlış sanılır.",
+   ""
+  ],
+  "taktik": "✓ tablolarında önce şıktaki işi satırda bul, sonra işaretin hangi sütunda olduğuna bak.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "be responsible for / be in charge of",
+    "tanim": "Bir işten sorumlu olmak."
+   },
+   {
+    "ad": "do the laundry",
+    "tanim": "Çamaşır yıkamak."
+   }
+  ]
+ },
+ {
+  "id": "ing-035",
+  "ders": "ingilizce",
+  "unite": "Chores",
+  "kazanimKod": "E8.8.R1",
+  "kazanimAd": "Students will be able to understand various short and simple texts about responsibilities.",
+  "zorluk": 3,
+  "tip": "uzun-metin",
+  "metin": "In our house, everybody has responsibilities. I have to make my bed every morning and load the dishwasher after dinner. My brother Can is only six, so he doesn’t have to do much; he just feeds the cat. Dad does the ironing because Mum hates it. Mum is in charge of cooking, but she doesn’t have to cook on Sundays because we always go to a restaurant on that day.<br><br>According to the text, which of the following is <b>CORRECT</b>?",
+  "svg": "",
+  "siklar": [
+   "Can has more responsibilities than the writer.",
+   "Mum enjoys ironing the clothes.",
+   "The family eats out on Sundays.",
+   "The writer loads the dishwasher before dinner."
+  ],
+  "dogru": 2,
+  "ipucu1": "Her şıktaki bilgiyi metinde bul; “doesn’t have to”, “hates”, “after” gibi küçük sözcükler anlamı belirler.",
+  "ipucu2": "Son cümleye bak: annenin pazar günleri yemek yapmasına neden gerek yok?",
+  "cozum": [
+   "Yazarın iki işi var; Can yalnızca kediyi besliyor (“doesn’t have to do much”) → A yanlış.",
+   "“Mum hates it” → anne ütüden nefret ediyor; B yanlış.",
+   "Bulaşık makinesi “after dinner” (akşam yemeğinden sonra) dolduruluyor → D yanlış.",
+   "“We always go to a restaurant on that day” → pazar günleri dışarıda yiyorlar (“eat out”). Cevap C."
+  ],
+  "tuzaklar": [
+   "Can’dan da iş beklenmesi bu şıkkı düşündürür; ama yazarın iki, Can’ın bir işi var.",
+   "“Ironing” ve “Mum” aynı cümlede geçiyor; “hates” yerine “likes” gibi okunursa seçilir.",
+   "",
+   "“Dishwasher” ve “dinner” doğru; yalnızca “after” yerine “before” yazılmış, bu küçük fark kaçabilir."
+  ],
+  "taktik": "Şıkta metindeki kelimeler aynen geçiyorsa tek bir kelimenin değişip değişmediğini kontrol et (after ↔ before, hates ↔ enjoys).",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "don’t / doesn’t have to",
+    "tanim": "Gerek yok, zorunda değil: “She doesn’t have to cook on Sundays.”"
+   },
+   {
+    "ad": "eat out",
+    "tanim": "Dışarıda (restoranda) yemek yemek."
+   }
+  ]
+ },
+ {
+  "id": "ing-036",
+  "ders": "ingilizce",
+  "unite": "Chores",
+  "kazanimKod": "E8.8.R1",
+  "kazanimAd": "Students will be able to understand various short and simple texts about responsibilities.",
+  "zorluk": 2,
+  "tip": "gorsel",
+  "metin": "İdil’s mother left a note for her.<br><br>According to the note, which of the following is <b>CORRECT</b>?",
+  "svg": "<svg viewBox='0 0 320 235'><rect x='6' y='6' width='308' height='223' rx='10' fill='none' stroke='currentColor' stroke-width='1.5'/><text x='160' y='26' text-anchor='middle' font-size='14' font-weight='bold' fill='currentColor'>TO-DO LIST</text><line x1='18' y1='35' x2='302' y2='35' class='ac' stroke='currentColor'/><text x='20' y='55' font-size='12' fill='currentColor'>Dear İdil, I’ll be late tonight. Please:</text><text x='20' y='81' font-size='12' fill='currentColor'>1. Pick up your sister from school</text><text x='20' y='99' font-size='12' fill='currentColor'>    at 3.30 p.m.</text><text x='20' y='117' font-size='12' fill='currentColor'>2. Buy some bread and milk. You must</text><text x='20' y='135' font-size='12' fill='currentColor'>    do this before 6 p.m.</text><text x='20' y='153' font-size='12' fill='currentColor'>3. Empty the dishwasher.</text><text x='20' y='171' font-size='12' fill='currentColor'>4. You don’t have to cook. There is</text><text x='20' y='189' font-size='12' fill='currentColor'>    soup in the fridge. Just heat it.</text><text x='20' y='215' font-size='12' fill='currentColor'>Love, Mum</text></svg>",
+  "siklar": [
+   "İdil needs to collect her sister in the afternoon.",
+   "İdil can do the shopping whenever she likes.",
+   "İdil has to cook soup for dinner.",
+   "İdil’s mother will be home early this evening."
+  ],
+  "dogru": 0,
+  "ipucu1": "Nottaki her maddeyi bir şıkla eşleştir. “Must” ve “don’t have to” ifadelerine dikkat et.",
+  "ipucu2": "“Pick up” (birini almak) fiilinin şıklardaki eş anlamlısını ara. Saat 3.30 günün hangi bölümü?",
+  "cozum": [
+   "“I’ll be late tonight” → anne geç gelecek; D yanlış.",
+   "“You must do this before 6 p.m.” → alışverişin saat sınırı var; B yanlış.",
+   "“You don’t have to cook” → çorba hazır, yalnızca ısıtılacak; C yanlış.",
+   "“Pick up your sister from school at 3.30 p.m.” → “pick up” = “collect” (almak), 3.30 öğleden sonra. Cevap A."
+  ],
+  "tuzaklar": [
+   "",
+   "Alışveriş notta var; ama “before 6 p.m.” koşulu atlanırsa serbest sanılır.",
+   "“Soup” kelimesi notta geçtiği için cazip; önündeki “don’t have to cook” kaçırılmış olur.",
+   "“Tonight” ve “late” kelimeleri hızlı okunursa annenin akşam evde olacağı düşünülür."
+  ],
+  "taktik": "Doğru şık çoğu zaman eş anlamlı fiil kullanır (pick up → collect). Aynı kelimeyi arama, aynı anlamı ara.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "pick up",
+    "tanim": "(Birini bir yerden) almak; eş anlamlısı “collect”."
+   },
+   {
+    "ad": "to-do list",
+    "tanim": "Yapılacaklar listesi."
+   }
+  ]
+ },
+ {
+  "id": "ing-037",
+  "ders": "ingilizce",
+  "unite": "Science",
+  "kazanimKod": "E8.9.SP1",
+  "kazanimAd": "Students will be able to describe actions happening currently.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Look! The students _____ an experiment in the science lab at the moment.<br><br>Which of the following completes the sentence?",
+  "svg": "",
+  "siklar": [
+   "do",
+   "did",
+   "are doing",
+   "have done"
+  ],
+  "dogru": 2,
+  "ipucu1": "Cümledeki zaman ifadelerini bul: “Look!” ve “at the moment”.",
+  "ipucu2": "“At the moment” (şu anda) ifadesi şu an devam eden bir işi gösterir. Bu zaman “am/is/are + fiil-ing” ile kurulur.",
+  "cozum": [
+   "“Look!” (Bak!) ve “at the moment” (şu anda) → olay şu an oluyor.",
+   "Şu an olan olaylar Present Continuous ile anlatılır: am/is/are + V-ing.",
+   "Özne “the students” (çoğul) → “are doing”. Cevap C."
+  ],
+  "tuzaklar": [
+   "Geniş zaman her gün yapılan işler içindir; “at the moment” ile kullanılmaz.",
+   "Deney okulda geçmişte yapılmış gibi düşünülebilir; ama cümlede geçmiş zaman ifadesi yok.",
+   "",
+   "“Have done” tamamlanmış bir işi anlatır; “Look!” ise işin hâlâ sürdüğünü gösterir."
+  ],
+  "taktik": "Önce zaman ifadesini bul: now / at the moment / Look! → am-is-are + V-ing; yesterday / ago / in 1928 → V2.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Present Continuous",
+    "tanim": "Şu anda olan eylemler: am/is/are + V-ing. Zaman ifadeleri: now, at the moment, nowadays."
+   },
+   {
+    "ad": "do an experiment",
+    "tanim": "Deney yapmak."
+   }
+  ]
+ },
+ {
+  "id": "ing-038",
+  "ders": "ingilizce",
+  "unite": "Science",
+  "kazanimKod": "E8.9.R2",
+  "kazanimAd": "Students will be able to identify main ideas and supporting details in short texts about science.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "The table gives information about some important inventions and discoveries.<br><table class=\"t\"><tr><th>Invention / Discovery</th><th>Scientist</th><th>Year</th></tr><tr><td>telephone</td><td>Alexander Graham Bell</td><td>1876</td></tr><tr><td>light bulb</td><td>Thomas Edison</td><td>1879</td></tr><tr><td>penicillin</td><td>Alexander Fleming</td><td>1928</td></tr><tr><td>World Wide Web</td><td>Tim Berners-Lee</td><td>1989</td></tr></table><br>According to the table, which of the following is <b>NOT</b> correct?",
+  "svg": "",
+  "siklar": [
+   "Bell invented the telephone before Edison invented the light bulb.",
+   "Fleming discovered penicillin earlier than Edison invented the light bulb.",
+   "The World Wide Web is the latest invention in the table.",
+   "There are more than a hundred years between the telephone and the World Wide Web."
+  ],
+  "dogru": 1,
+  "ipucu1": "Yılları küçükten büyüğe sırala; “before / earlier” daha küçük yıl, “latest” en büyük yıl demektir.",
+  "ipucu2": "Penisilinin yılı ile ampulün yılını karşılaştır: hangisi daha önce?",
+  "cozum": [
+   "Sıra: 1876 (telephone) → 1879 (light bulb) → 1928 (penicillin) → 1989 (World Wide Web).",
+   "1876 < 1879 → A doğru. En son yıl 1989 → C doğru.",
+   "1989 − 1876 = 113 yıl → D doğru.",
+   "Penisilin (1928), ampulden (1879) sonra bulundu; “earlier” yanlış. Cevap B."
+  ],
+  "tuzaklar": [
+   "Yıllar birbirine çok yakın (1876–1879) olduğu için sıra karıştırılabilir.",
+   "",
+   "“Latest” (en son) kelimesi “late/geç” ile karıştırılıp olumsuz sanılabilir.",
+   "Çıkarma işlemi yapılmadan “yüz yıldan az” diye tahmin edilirse yanlış sanılır."
+  ],
+  "taktik": "Tarihli tablolarda yılları kenara sırayla yaz; before/after/earlier/latest ifadelerini bu sıraya göre kontrol et.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "invent / discover",
+    "tanim": "İcat etmek (yeni bir şey yapmak) / keşfetmek (var olanı bulmak)."
+   },
+   {
+    "ad": "earlier than / the latest",
+    "tanim": "…-den daha önce / en son, en yeni."
+   }
+  ]
+ },
+ {
+  "id": "ing-039",
+  "ders": "ingilizce",
+  "unite": "Science",
+  "kazanimKod": "E8.9.R1",
+  "kazanimAd": "Students will be able to understand short and simple texts about actions happening currently and in the past.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Aziz Sancar was born in Savur, Mardin in 1946. He studied medicine at İstanbul University and worked as a doctor for a while. Then, he went to the USA to do scientific research. He studied how cells repair damaged DNA. In 2015, he won the Nobel Prize in Chemistry for his studies on DNA repair.<br><br>Which question does <b>NOT</b> have an answer in the text?",
+  "svg": "",
+  "siklar": [
+   "Who did Aziz Sancar share the Nobel Prize with?",
+   "Where was Aziz Sancar born?",
+   "What did Aziz Sancar study at university?",
+   "Why did Aziz Sancar win the Nobel Prize?"
+  ],
+  "dogru": 0,
+  "ipucu1": "Her sorunun cevabını metinde ara: yer, bölüm, sebep, kişi.",
+  "ipucu2": "“Share … with” (biriyle paylaşmak) sorusu başka kişilerin adını ister. Metinde Aziz Sancar’dan başka bir bilim insanı adı var mı?",
+  "cozum": [
+   "“was born in Savur, Mardin” → B’nin cevabı var.",
+   "“studied medicine” (tıp okudu) → C’nin cevabı var.",
+   "“for his studies on DNA repair” (DNA onarımı çalışmaları için) → D’nin cevabı var.",
+   "Ödülü kimlerle paylaştığı metinde yazmıyor. Cevap A."
+  ],
+  "tuzaklar": [
+   "",
+   "“Was born” yapısı tanınmazsa doğum yeri bilgisinin sorulduğu anlaşılmaz.",
+   "“Study” fiili hem okumak hem araştırmak anlamında geçtiği için kafa karıştırabilir; yine de “medicine” cevabı var.",
+   "“Why” sorusuna “because” aranır; metinde sebep “for his studies…” ile verilmiş, bu fark edilmeyebilir."
+  ],
+  "taktik": "“Why” sorularının cevabı her zaman “because” ile başlamaz; “for + isim” de sebep bildirir.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "win a prize",
+    "tanim": "Ödül kazanmak (win–won)."
+   },
+   {
+    "ad": "research",
+    "tanim": "Araştırma: “do scientific research” = bilimsel araştırma yapmak."
+   }
+  ]
+ },
+ {
+  "id": "ing-040",
+  "ders": "ingilizce",
+  "unite": "Science",
+  "kazanimKod": "E8.9.R1",
+  "kazanimAd": "Students will be able to understand short and simple texts about actions happening currently and in the past.",
+  "zorluk": 3,
+  "tip": "uzun-metin",
+  "metin": "A group of scientists at a university lab are working on an interesting project these days. They are trying to produce cheap plastic from potato peels. Last year, they tested banana peels, but the plastic wasn’t strong enough. Now, the results are much better. The team hasn’t finished the experiments yet, but they believe they will succeed next year.<br><br>According to the text, which of the following is <b>CORRECT</b>?",
+  "svg": "",
+  "siklar": [
+   "The scientists finished the potato project last year.",
+   "The scientists are testing banana peels at the moment.",
+   "The banana peel experiment gave better results.",
+   "The project is still in progress."
+  ],
+  "dogru": 3,
+  "ipucu1": "Hangi olay geçmişte kaldı, hangisi şu an sürüyor? Zaman ifadelerini (these days, last year, now, yet) işaretle.",
+  "ipucu2": "“Hasn’t finished … yet” ne demek? Bu ifade projenin durumu hakkında ne söylüyor?",
+  "cozum": [
+   "Şu an (“these days”) patates kabuğu üzerinde çalışıyorlar; muz kabuğu geçen yıl (“last year”) denendi → B yanlış.",
+   "Muz kabuğundan yapılan plastik yeterince sağlam değildi; şimdiki sonuçlar daha iyi → C yanlış.",
+   "“The team hasn’t finished the experiments yet” → deneyler henüz bitmedi → A yanlış.",
+   "Yani proje hâlâ sürüyor (“still in progress”). Cevap D."
+  ],
+  "tuzaklar": [
+   "“Last year” ifadesi metinde var; ama o yıl yapılan iş muz kabuğu denemesi, üstelik patates projesi henüz bitmedi.",
+   "“Tested banana peels” cümlesi görülüp zamanı (last year) atlanırsa şu an yapılıyor sanılır.",
+   "“Better” kelimesi metinde geçiyor; hangi deney için söylendiği karıştırılırsa seçilir.",
+   ""
+  ],
+  "taktik": "Şimdi–geçmiş karışık metinlerde iki sütun aç: NOW (these days, now, yet) ve PAST (last year, ago). Bilgileri bu sütunlara yaz.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "yet",
+    "tanim": "Henüz (olumsuz cümlede): “They haven’t finished yet.”"
+   },
+   {
+    "ad": "succeed",
+    "tanim": "Başarmak, başarılı olmak."
+   }
+  ]
+ },
+ {
+  "id": "ing-041",
+  "ders": "ingilizce",
+  "unite": "Science",
+  "kazanimKod": "E8.9.R1",
+  "kazanimAd": "Students will be able to understand short and simple texts about actions happening currently and in the past.",
+  "zorluk": 1,
+  "tip": "gorsel",
+  "metin": "Read the lab rules.<br><br>Which student obeys the rules?",
+  "svg": "<svg viewBox='0 0 320 147'><rect x='6' y='6' width='308' height='135' rx='10' fill='none' stroke='currentColor' stroke-width='1.5'/><text x='160' y='26' text-anchor='middle' font-size='14' font-weight='bold' fill='currentColor'>LAB SAFETY RULES</text><line x1='18' y1='35' x2='302' y2='35' class='ac' stroke='currentColor'/><text x='20' y='55' font-size='12' fill='currentColor'>1. Wear your safety goggles and gloves.</text><text x='20' y='73' font-size='12' fill='currentColor'>2. Don’t eat or drink in the lab.</text><text x='20' y='91' font-size='12' fill='currentColor'>3. Don’t touch or smell the chemicals</text><text x='20' y='109' font-size='12' fill='currentColor'>    without permission.</text><text x='20' y='127' font-size='12' fill='currentColor'>4. Wash your hands after the experiment.</text></svg>",
+  "siklar": [
+   "Hakan is eating a sandwich while he is waiting for the results.",
+   "Seda is smelling the liquid in the test tube without asking her teacher.",
+   "Umut is washing his hands after he finishes his experiment.",
+   "Gizem isn’t wearing her gloves because it is hot in the lab."
+  ],
+  "dogru": 2,
+  "ipucu1": "“Obey the rules” kurallara uymak demektir. Her öğrencinin yaptığı işi bir kuralla karşılaştır.",
+  "ipucu2": "Dördüncü kural deneyden sonra ne yapılmasını istiyor?",
+  "cozum": [
+   "Kural 2: Laboratuvarda yemek yenmez → Hakan uymuyor.",
+   "Kural 3: Kimyasallar izinsiz koklanmaz → Seda uymuyor.",
+   "Kural 1: Gözlük ve eldiven takılır → Gizem uymuyor.",
+   "Kural 4: Deneyden sonra eller yıkanır → Umut tam olarak bunu yapıyor. Cevap C."
+  ],
+  "tuzaklar": [
+   "Sonuçları beklemek masum göründüğü için kural ihlali fark edilmeyebilir; ama laboratuvarda yemek yasak.",
+   "Deney yapmak koklamayı da içerir gibi düşünülür; kural “without permission” (izinsiz) diyor.",
+   "",
+   "“Because it is hot” mazereti mantıklı görünebilir; kural ise her durumda eldiven istiyor."
+  ],
+  "taktik": "“Kim kurala uyuyor?” sorularında üç şık bir kuralı çiğner; her şıkkın çiğnediği kural numarasını yanına yaz.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "obey the rules",
+    "tanim": "Kurallara uymak."
+   },
+   {
+    "ad": "test tube",
+    "tanim": "Deney tüpü."
+   }
+  ]
+ },
+ {
+  "id": "ing-042",
+  "ders": "ingilizce",
+  "unite": "Natural Forces",
+  "kazanimKod": "E8.10.SP1",
+  "kazanimAd": "Students will be able to express predictions concerning future of the Earth.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "If people keep cutting down trees, there _____ more floods and erosion in the future.<br><br>Which of the following completes the sentence?",
+  "svg": "",
+  "siklar": [
+   "are",
+   "were",
+   "have been",
+   "will be"
+  ],
+  "dogru": 3,
+  "ipucu1": "Cümle gelecekle ilgili bir tahmin yapıyor. “In the future” ifadesine dikkat et.",
+  "ipucu2": "Yapı: If + geniş zaman, … will + fiil. “There is/are” yapısının gelecek hâli nedir?",
+  "cozum": [
+   "“In the future” (gelecekte) → cümle bir tahmin bildiriyor.",
+   "Tahminler “will” ile yapılır; koşul cümlesinde: If + present simple, will + fiil.",
+   "“There are” → gelecekte “there will be”. Cevap D."
+  ],
+  "tuzaklar": [
+   "Çoğul isim (“floods”) ile “are” uyumlu olduğu için cazip; ama zaman gelecek.",
+   "“If” cümlelerinde geçmiş zaman da görüldüğü için seçilebilir; burada “in the future” var.",
+   "“Have been” şimdiye kadar olanları anlatır; gelecekle ilgili tahminde kullanılmaz.",
+   ""
+  ],
+  "taktik": "“In the future, soon, next year” gördüğünde tahmin için “will” ara.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "will (predictions)",
+    "tanim": "Gelecekle ilgili tahmin: “There will be more floods.”"
+   },
+   {
+    "ad": "flood / erosion",
+    "tanim": "Sel / erozyon (toprak kayması, aşınma)."
+   }
+  ]
+ },
+ {
+  "id": "ing-043",
+  "ders": "ingilizce",
+  "unite": "Natural Forces",
+  "kazanimKod": "E8.10.R1",
+  "kazanimAd": "Students will be able to identify specific information in simple texts about natural forces and disasters.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "The graph shows the yearly rainfall (in millimetres) in a small town.<br><br>Which of the following can be said according to the graph?",
+  "svg": "<svg viewBox='0 0 320 196'><text x='160' y='16' text-anchor='middle' font-size='13' font-weight='bold' fill='currentColor'>Yearly Rainfall</text><text x='6' y='30' font-size='12' fill='currentColor'>mm</text><line x1='44' y1='170.0' x2='310' y2='170.0' stroke='currentColor' stroke-width='1.2' opacity='1'/><text x='39' y='174.0' text-anchor='end' font-size='12' fill='currentColor'>0</text><line x1='44' y1='151.7' x2='310' y2='151.7' stroke='currentColor' stroke-width='0.5' opacity='0.35'/><text x='39' y='155.7' text-anchor='end' font-size='12' fill='currentColor'>100</text><line x1='44' y1='133.4' x2='310' y2='133.4' stroke='currentColor' stroke-width='0.5' opacity='0.35'/><text x='39' y='137.4' text-anchor='end' font-size='12' fill='currentColor'>200</text><line x1='44' y1='115.1' x2='310' y2='115.1' stroke='currentColor' stroke-width='0.5' opacity='0.35'/><text x='39' y='119.1' text-anchor='end' font-size='12' fill='currentColor'>300</text><line x1='44' y1='96.9' x2='310' y2='96.9' stroke='currentColor' stroke-width='0.5' opacity='0.35'/><text x='39' y='100.9' text-anchor='end' font-size='12' fill='currentColor'>400</text><line x1='44' y1='78.6' x2='310' y2='78.6' stroke='currentColor' stroke-width='0.5' opacity='0.35'/><text x='39' y='82.6' text-anchor='end' font-size='12' fill='currentColor'>500</text><line x1='44' y1='60.3' x2='310' y2='60.3' stroke='currentColor' stroke-width='0.5' opacity='0.35'/><text x='39' y='64.3' text-anchor='end' font-size='12' fill='currentColor'>600</text><line x1='44' y1='42.0' x2='310' y2='42.0' stroke='currentColor' stroke-width='0.5' opacity='0.35'/><text x='39' y='46.0' text-anchor='end' font-size='12' fill='currentColor'>700</text><line x1='44' y1='38' x2='44' y2='170' stroke='currentColor' stroke-width='1.2'/><rect x='60.6' y='60.3' width='33.2' height='109.7' class='acf' stroke='currentColor'/><text x='77.2' y='187' text-anchor='middle' font-size='12' fill='currentColor'>2021</text><text x='77.2' y='56.3' text-anchor='middle' font-size='12' font-weight='bold' fill='currentColor'>600</text><rect x='127.1' y='78.6' width='33.2' height='91.4' class='acf' stroke='currentColor'/><text x='143.8' y='187' text-anchor='middle' font-size='12' fill='currentColor'>2022</text><text x='143.8' y='74.6' text-anchor='middle' font-size='12' font-weight='bold' fill='currentColor'>500</text><rect x='193.6' y='106.0' width='33.2' height='64.0' class='acf' stroke='currentColor'/><text x='210.2' y='187' text-anchor='middle' font-size='12' fill='currentColor'>2023</text><text x='210.2' y='102.0' text-anchor='middle' font-size='12' font-weight='bold' fill='currentColor'>350</text><rect x='260.1' y='133.4' width='33.2' height='36.6' class='acf' stroke='currentColor'/><text x='276.8' y='187' text-anchor='middle' font-size='12' fill='currentColor'>2024</text><text x='276.8' y='129.4' text-anchor='middle' font-size='12' font-weight='bold' fill='currentColor'>200</text></svg>",
+  "siklar": [
+   "The amount of rain has decreased every year, so the town may suffer from drought.",
+   "The town will probably have floods because the rainfall is increasing.",
+   "The town got the least rain in 2021.",
+   "It rained more in 2023 than in 2022."
+  ],
+  "dogru": 0,
+  "ipucu1": "Sütunların yıllara göre nasıl değiştiğine bak: yükseliyor mu, alçalıyor mu?",
+  "ipucu2": "“Decrease” azalmak, “increase” artmak demektir. Yağış azalırsa hangi doğa olayı beklenir: “flood” (sel) mi, “drought” (kuraklık) mı?",
+  "cozum": [
+   "Değerler: 2021 → 600, 2022 → 500, 2023 → 350, 2024 → 200 mm.",
+   "Yağış her yıl azalmış (“decreased”); artış yok → B yanlış.",
+   "En az yağış 2024’te → C yanlış. 2023 (350) < 2022 (500) → D yanlış.",
+   "Yağış azaldıkça kuraklık (“drought”) tehlikesi doğar. Cevap A."
+  ],
+  "tuzaklar": [
+   "",
+   "Yağış denince akla sel gelir; ama grafikte yağış artmıyor, azalıyor.",
+   "En yüksek sütun 2021 olduğu için “least” (en az) ile “most” (en çok) karıştırılırsa seçilir.",
+   "Yıllar ters okunursa (sağdan sola) 2023’ün daha yağışlı olduğu sanılır."
+  ],
+  "taktik": "Grafikte önce genel eğilimi tek kelimeyle söyle (increase / decrease), sonra şıklardaki ayrıntılara geç.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "drought",
+    "tanim": "Kuraklık (uzun süre yağmur yağmaması)."
+   },
+   {
+    "ad": "decrease / increase",
+    "tanim": "Azalmak / artmak."
+   }
+  ]
+ },
+ {
+  "id": "ing-044",
+  "ders": "ingilizce",
+  "unite": "Natural Forces",
+  "kazanimKod": "E8.10.R1",
+  "kazanimAd": "Students will be able to identify specific information in simple texts about natural forces and disasters.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "<b>EVENING NEWS</b><br>Heavy rain caused a flood in the town of Dereköy last night. The river rose two metres, and water covered the streets. Luckily, nobody was injured because the officials warned people in time, and they moved to higher places. However, about fifty houses and many farms were damaged. Experts say there will be more rain tomorrow, so people shouldn’t return to their homes yet.<br><br>Which question does <b>NOT</b> have an answer in the news?",
+  "svg": "",
+  "siklar": [
+   "What caused the flood?",
+   "How many people moved to higher places?",
+   "Was anybody hurt in the flood?",
+   "What do experts predict for tomorrow?"
+  ],
+  "dogru": 1,
+  "ipucu1": "Her sorunun cevabını haberde tek tek ara; bulduğun bilginin tam olarak soruyu karşılayıp karşılamadığına bak.",
+  "ipucu2": "Metinde “two metres” ve “about fifty houses” geçiyor. Yüksek yerlere çıkan insanların sayısı verilmiş mi?",
+  "cozum": [
+   "“Heavy rain caused a flood” (şiddetli yağmur) → A’nın cevabı var.",
+   "“Nobody was injured” (kimse yaralanmadı) → C’nin cevabı var.",
+   "“There will be more rain tomorrow” → D’nin cevabı var.",
+   "Kaç kişinin yüksek yerlere taşındığı yazmıyor; “fifty” evlerin sayısı. Cevap B."
+  ],
+  "tuzaklar": [
+   "“Caused” fiili ile “What caused…?” sorusu eşleştirilemezse cevap yok sanılır.",
+   "",
+   "Şıktaki “hurt” ile metindeki “injured” eş anlamlı olduğu bilinmezse cevap yok sanılır.",
+   "“Predict” (tahmin etmek) kelimesi metinde geçmediği için bilgi yok sanılabilir; “Experts say there will be…” bir tahmindir."
+  ],
+  "taktik": "“How many” sorularında metindeki her sayının neye ait olduğunu kontrol et; sayı var diye cevap var sanma.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "injured / hurt",
+    "tanim": "Yaralı / yaralanmış."
+   },
+   {
+    "ad": "predict",
+    "tanim": "Tahmin etmek, öngörmek."
+   }
+  ]
+ },
+ {
+  "id": "ing-045",
+  "ders": "ingilizce",
+  "unite": "Natural Forces",
+  "kazanimKod": "E8.10.R1",
+  "kazanimAd": "Students will be able to identify specific information in simple texts about natural forces and disasters.",
+  "zorluk": 3,
+  "tip": "uzun-metin",
+  "metin": "Global warming is one of the biggest problems of our planet. Because people burn too much coal and petrol, the Earth is getting hotter. As a result, the ice at the poles is melting, and sea levels are rising. Scientists predict that some cities on the coast will be under water in the future. They also think that there will be longer droughts, so farmers won’t be able to grow enough food. However, they say it isn’t too late. If we use clean energy such as wind and solar power, we will slow down global warming.<br><br>According to the text, which of the following is <b>NOT</b> correct?",
+  "svg": "",
+  "siklar": [
+   "Burning coal and petrol is a reason for the rise in temperature.",
+   "Rising sea levels may be dangerous for cities near the sea.",
+   "Scientists think nothing can be done about global warming.",
+   "A lack of rain may lead to food problems."
+  ],
+  "dogru": 2,
+  "ipucu1": "Sebep–sonuç bağlaçlarını işaretle: because, as a result, so. Son iki cümlede yazarın tavrına bak.",
+  "ipucu2": "“However, it isn’t too late” cümlesi umutlu mu, umutsuz mu? Bunu şıklarla karşılaştır.",
+  "cozum": [
+   "“Because people burn too much coal and petrol, the Earth is getting hotter” → A doğru.",
+   "“Some cities on the coast will be under water” → kıyı şehirleri tehlikede; B doğru.",
+   "“Longer droughts, so farmers won’t be able to grow enough food” → kuraklık (yağmur eksikliği) gıda sorununa yol açar; D doğru.",
+   "“It isn’t too late … we will slow down global warming” → çözüm var. “Nothing can be done” yanlış. Cevap C."
+  ],
+  "tuzaklar": [
+   "Şıkta “reason” ve “rise in temperature” gibi metinde olmayan sözcükler kullanıldığı için yanlış sanılabilir; anlam aynı.",
+   "“Coast” yerine “near the sea” yazılmış; eş anlamlı ifade tanınmazsa yanlış sanılır.",
+   "",
+   "“Drought” kelimesinin “lack of rain” (yağmur eksikliği) demek olduğu bilinmezse yanlış sanılır."
+  ],
+  "taktik": "Uzun metinlerde “However / But” ile başlayan cümle yazarın asıl mesajını verir; NOT’lu soruların cevabı sıkça orada gizlidir.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "as a result / so",
+    "tanim": "Sonuç bildirir: “Bunun sonucunda / bu yüzden”."
+   },
+   {
+    "ad": "global warming",
+    "tanim": "Küresel ısınma."
+   }
+  ]
+ }
+]

@@ -1,0 +1,632 @@
+[
+ {
+  "id": "ink-k-001",
+  "ders": "inkilap",
+  "unite": "Bir Kahraman Doğuyor",
+  "kazanimKod": "İTA.8.1.1",
+  "on": "Osmanlı'yı kurtarmak için ortaya çıkan 4 fikir akımı nedir?",
+  "arka": "Osmanlıcılık (herkes eşit Osmanlı), İslamcılık (Müslümanların birliği), Türkçülük (Türklerin birliği), Batıcılık (Avrupa'nın bilim ve tekniğini alma).",
+  "test": {
+   "soru": "Bütün Müslümanları halife etrafında birleştirmeyi savunan akım hangisidir?",
+   "siklar": [
+    "Osmanlıcılık",
+    "Türkçülük",
+    "İslamcılık",
+    "Batıcılık"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "ink-k-002",
+  "ders": "inkilap",
+  "unite": "Bir Kahraman Doğuyor",
+  "kazanimKod": "İTA.8.1.1",
+  "on": "Fransız İhtilali Osmanlı'yı nasıl etkiledi?",
+  "arka": "Milliyetçilik düşüncesi çok uluslu Osmanlı'da ayaklanmalara ve toprak kayıplarına yol açtı. Örn: Balkan milletlerinin bağımsızlık isyanları.",
+  "test": {
+   "soru": "Milliyetçilik akımından en çok hangi tür devletler zarar görmüştür?",
+   "siklar": [
+    "Çok uluslu devletler",
+    "Tek milletten oluşan devletler",
+    "Ada devletleri",
+    "Sömürgesi olmayan devletler"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "ink-k-003",
+  "ders": "inkilap",
+  "unite": "Bir Kahraman Doğuyor",
+  "kazanimKod": "İTA.8.1.2",
+  "on": "Mustafa Kemal'in yetişmesinde hangi şehir neyle etkili oldu?",
+  "arka": "Selanik: çok kültürlü ortam. Manastır: tarih ve edebiyat ilgisi, Fransızca. İstanbul: Harp Okulu ve Akademisi, ülke sorunları. Şam: ilk görev yeri.",
+  "test": {
+   "soru": "Mustafa Kemal'in subay olarak ilk görev yeri neresidir?",
+   "siklar": [
+    "Selanik",
+    "Şam",
+    "Manastır",
+    "Sofya"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "ink-k-004",
+  "ders": "inkilap",
+  "unite": "Bir Kahraman Doğuyor",
+  "kazanimKod": "İTA.8.1.4",
+  "on": "Mustafa Kemal'in Birinci Dünya Savaşı öncesi görevleri hangi sırayla gelir?",
+  "arka": "Şam (1905) → 31 Mart Olayı (1909, Hareket Ordusu) → Trablusgarp Savaşı (1911, Derne ve Tobruk) → Balkan Savaşları (1912–1913).",
+  "test": {
+   "soru": "Mustafa Kemal'in Derne ve Tobruk'ta yerli halkı örgütlediği savaş hangisidir?",
+   "siklar": [
+    "Balkan Savaşları",
+    "Çanakkale Savaşları",
+    "31 Mart Olayı",
+    "Trablusgarp Savaşı"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "ink-k-005",
+  "ders": "inkilap",
+  "unite": "Millî Uyanış: Bağımsızlık Yolunda Atılan Adımlar",
+  "kazanimKod": "İTA.8.2.2",
+  "on": "Birinci Dünya Savaşı'nda Osmanlı'nın taarruz ve savunma cepheleri hangileri?",
+  "arka": "Taarruz: Kafkas ve Kanal. Savunma: Çanakkale, Irak, Hicaz-Yemen, Suriye. Zafer kazanılanlar: Çanakkale ve Irak'ta Kut'ül-Amâre.",
+  "test": {
+   "soru": "Aşağıdakilerden hangisi Osmanlı'nın taarruz ettiği cephelerden biridir?",
+   "siklar": [
+    "Çanakkale",
+    "Irak",
+    "Kanal",
+    "Hicaz-Yemen"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "ink-k-006",
+  "ders": "inkilap",
+  "unite": "Millî Uyanış: Bağımsızlık Yolunda Atılan Adımlar",
+  "kazanimKod": "İTA.8.2.3",
+  "on": "Mondros'un en tehlikeli maddesi hangisi ve neden?",
+  "arka": "7. madde: İtilaf Devletleri güvenliklerini tehdit eden bir durumda istedikleri stratejik noktayı işgal edebilecek. Bu madde işgallere zemin hazırladı.",
+  "test": {
+   "soru": "Mondros'ta ordunun terhis edilmesi kararı neyi amaçlar?",
+   "siklar": [
+    "Osmanlı'yı savunmasız bırakmayı",
+    "Osmanlı ekonomisini güçlendirmeyi",
+    "Millî cemiyetleri desteklemeyi",
+    "Azınlık haklarını korumayı"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "ink-k-007",
+  "ders": "inkilap",
+  "unite": "Millî Uyanış: Bağımsızlık Yolunda Atılan Adımlar",
+  "kazanimKod": "İTA.8.2.5",
+  "on": "Amasya Genelgesi neden önemlidir?",
+  "arka": "Millî Mücadele'nin gerekçesi, amacı ve yöntemi ilk kez açıklandı. “Milletin bağımsızlığını yine milletin azim ve kararı kurtaracaktır.” → millî egemenlik düşüncesi.",
+  "test": {
+   "soru": "Amasya Genelgesi'ne göre milletin bağımsızlığını kim kurtaracaktır?",
+   "siklar": [
+    "İstanbul Hükûmeti",
+    "Milletin kendisi",
+    "İtilaf Devletleri",
+    "Padişah"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "ink-k-008",
+  "ders": "inkilap",
+  "unite": "Millî Uyanış: Bağımsızlık Yolunda Atılan Adımlar",
+  "kazanimKod": "İTA.8.2.5",
+  "on": "Erzurum ve Sivas Kongreleri arasındaki fark nedir?",
+  "arka": "Erzurum: toplanışı bölgesel, kararları millî. Sivas: toplanışı da kararları da millî; bütün cemiyetler tek çatı altında birleştirildi.",
+  "test": {
+   "soru": "Bütün millî cemiyetler hangi kongrede tek ad altında birleştirilmiştir?",
+   "siklar": [
+    "Erzurum Kongresi",
+    "Balıkesir Kongresi",
+    "Alaşehir Kongresi",
+    "Sivas Kongresi"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "ink-k-009",
+  "ders": "inkilap",
+  "unite": "Millî Uyanış: Bağımsızlık Yolunda Atılan Adımlar",
+  "kazanimKod": "İTA.8.2.6",
+  "on": "Millî egemenlik ile millî bağımsızlık (tam bağımsızlık) arasındaki fark nedir?",
+  "arka": "Millî egemenlik: ülkeyi milletin yönetmesi (içeride kim yönetiyor?). Millî bağımsızlık: başka devletlere bağlı olmamak (dışarıya karşı özgürlük). Örn: “Manda ve himaye kabul edilemez” → bağımsızlık.",
+  "test": {
+   "soru": "“Kuvâ-yı Millîye'yi etkin, millî iradeyi hâkim kılmak esastır.” kararı hangisiyle doğrudan ilgilidir?",
+   "siklar": [
+    "Millî egemenlik",
+    "Kapitülasyonlar",
+    "Azınlık hakları",
+    "Devletçilik"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "ink-k-010",
+  "ders": "inkilap",
+  "unite": "Millî Uyanış: Bağımsızlık Yolunda Atılan Adımlar",
+  "kazanimKod": "İTA.8.2.6",
+  "on": "TBMM ne zaman açıldı ve temel özelliği neydi?",
+  "arka": "23 Nisan 1920'de Ankara'da açıldı. Yasama, yürütme ve yargı yetkileri Meclis'te toplandı (güçler birliği); egemenlik millete dayandırıldı.",
+  "test": {
+   "soru": "Birinci TBMM'de yasama, yürütme ve yargının Meclis'te toplanmasına ne denir?",
+   "siklar": [
+    "Güçler ayrılığı",
+    "Meşrutiyet",
+    "Güçler birliği",
+    "Manda"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "ink-k-011",
+  "ders": "inkilap",
+  "unite": "Millî Bir Destan: Ya İstiklal Ya Ölüm!",
+  "kazanimKod": "İTA.8.3.1",
+  "on": "Millî Mücadele'de cepheler ve karşı taraflar nasıl eşleşir?",
+  "arka": "Doğu: Ermeniler (Kâzım Karabekir, Gümrü Antlaşması). Güney: Fransızlar ve Ermeniler (Kuvâ-yı Millîye, halk direnişi). Batı: Yunanlar (düzenli ordu).",
+  "test": {
+   "soru": "Düzenli ordunun değil, halkın Kuvâ-yı Millîye birlikleriyle direndiği cephe hangisidir?",
+   "siklar": [
+    "Doğu Cephesi",
+    "Güney Cephesi",
+    "Batı Cephesi",
+    "Kafkas Cephesi"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "ink-k-012",
+  "ders": "inkilap",
+  "unite": "Millî Bir Destan: Ya İstiklal Ya Ölüm!",
+  "kazanimKod": "İTA.8.3.2",
+  "on": "I. İnönü Zaferi'nin ardından hangi gelişmeler yaşandı?",
+  "arka": "Teşkilat-ı Esasiye (ilk anayasa) kabul edildi, TBMM Londra Konferansı'na çağrıldı, İstiklal Marşı kabul edildi, Moskova Antlaşması imzalandı (hepsi 1921 başı).",
+  "test": {
+   "soru": "Yeni Türk devletinin ilk anayasası hangisidir?",
+   "siklar": [
+    "Kanun-i Esasi",
+    "1924 Anayasası",
+    "Misakımillî",
+    "Teşkilat-ı Esasiye Kanunu (1921)"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "ink-k-013",
+  "ders": "inkilap",
+  "unite": "Millî Bir Destan: Ya İstiklal Ya Ölüm!",
+  "kazanimKod": "İTA.8.3.4",
+  "on": "Tekâlif-i Millîye Emirleri nedir?",
+  "arka": "Sakarya Savaşı öncesi ordunun giyecek, yiyecek, silah ve taşıt ihtiyacını halkın katkısıyla karşılamak için çıkarılan emirlerdir. Topyekûn savaşın örneğidir.",
+  "test": {
+   "soru": "Tekâlif-i Millîye Emirleri hangi savaştan önce çıkarılmıştır?",
+   "siklar": [
+    "Sakarya Meydan Savaşı",
+    "I. İnönü Muharebesi",
+    "Büyük Taarruz",
+    "Çanakkale Savaşları"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "ink-k-014",
+  "ders": "inkilap",
+  "unite": "Millî Bir Destan: Ya İstiklal Ya Ölüm!",
+  "kazanimKod": "İTA.8.3.5",
+  "on": "Sakarya Zaferi'nin sonuçları nelerdir?",
+  "arka": "Türk ordusu savunmadan taarruza geçti; Mustafa Kemal'e Gazi unvanı ve Mareşal rütbesi verildi; Kars Antlaşması ve Fransa ile Ankara Antlaşması imzalandı.",
+  "test": {
+   "soru": "Fransa ile imzalanan ve Güney Cephesi'ni kapatan antlaşma hangisidir?",
+   "siklar": [
+    "Gümrü Antlaşması",
+    "Moskova Antlaşması",
+    "Ankara Antlaşması (1921)",
+    "Kars Antlaşması"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "ink-k-015",
+  "ders": "inkilap",
+  "unite": "Millî Bir Destan: Ya İstiklal Ya Ölüm!",
+  "kazanimKod": "İTA.8.3.5",
+  "on": "Mudanya Ateşkes Antlaşması neden önemlidir?",
+  "arka": "Millî Mücadele'nin askerî safhası bitti; Doğu Trakya savaş yapılmadan kazanıldı (11 Ekim 1922).",
+  "test": {
+   "soru": "Mudanya Ateşkes Antlaşması ile savaş yapılmadan kazanılan yer neresidir?",
+   "siklar": [
+    "İzmir",
+    "Doğu Trakya",
+    "Musul",
+    "Hatay"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "ink-k-016",
+  "ders": "inkilap",
+  "unite": "Millî Bir Destan: Ya İstiklal Ya Ölüm!",
+  "kazanimKod": "İTA.8.3.6",
+  "on": "Lozan'da ne kazanıldı, ne eksik kaldı?",
+  "arka": "Kazanım: kapitülasyonlar kalktı, bağımsızlık tanındı. Eksik: Boğazlar komisyona bırakıldı, Musul sonraya kaldı, Hatay sınır dışında kaldı.",
+  "test": {
+   "soru": "Lozan Antlaşması'nda çözülemeyip sonraya bırakılan konu hangisidir?",
+   "siklar": [
+    "Kapitülasyonlar",
+    "Azınlıklar",
+    "Yabancı okullar",
+    "Musul sorunu"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "ink-k-017",
+  "ders": "inkilap",
+  "unite": "Atatürkçülük ve Çağdaşlaşan Türkiye",
+  "kazanimKod": "İTA.8.4.1",
+  "on": "Atatürk'ün altı ilkesi ve anahtar sözcükleri nedir?",
+  "arka": "Cumhuriyetçilik: millet egemenliği, seçim. Milliyetçilik: millî birlik. Halkçılık: eşitlik. Devletçilik: devlet eliyle ekonomi. Laiklik: din-devlet ayrımı. İnkılapçılık: sürekli yenilik.",
+  "test": {
+   "soru": "Kanun önünde eşitlik ve ayrıcalıkların kaldırılması hangi ilkeyle ilgilidir?",
+   "siklar": [
+    "Devletçilik",
+    "Laiklik",
+    "Halkçılık",
+    "İnkılapçılık"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "ink-k-018",
+  "ders": "inkilap",
+  "unite": "Atatürkçülük ve Çağdaşlaşan Türkiye",
+  "kazanimKod": "İTA.8.4.2",
+  "on": "Siyasi alandaki inkılapların sırası nedir?",
+  "arka": "Saltanatın kaldırılması (1 Kasım 1922) → Ankara'nın başkent oluşu (13 Ekim 1923) → Cumhuriyet'in ilanı (29 Ekim 1923) → Halifeliğin kaldırılması (3 Mart 1924).",
+  "test": {
+   "soru": "Aşağıdakilerden hangisi en önce gerçekleşmiştir?",
+   "siklar": [
+    "Saltanatın kaldırılması",
+    "Cumhuriyet'in ilanı",
+    "Halifeliğin kaldırılması",
+    "Ankara'nın başkent oluşu"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "ink-k-019",
+  "ders": "inkilap",
+  "unite": "Atatürkçülük ve Çağdaşlaşan Türkiye",
+  "kazanimKod": "İTA.8.4.3",
+  "on": "Türk Medeni Kanunu (1926) kadınlara hangi hakları verdi?",
+  "arka": "Resmî nikâh, tek eşle evlilik, boşanma hakkı, mirasta ve tanıklıkta eşitlik, meslek seçme hakkı. Dikkat: siyasi haklar bu kanunda yoktur.",
+  "test": {
+   "soru": "Aşağıdakilerden hangisi Medeni Kanun'la sağlanan haklardan biri <u>değildir</u>?",
+   "siklar": [
+    "Mirasta eşitlik",
+    "Milletvekili seçilme hakkı",
+    "Boşanma hakkı",
+    "Resmî nikâh"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "ink-k-020",
+  "ders": "inkilap",
+  "unite": "Atatürkçülük ve Çağdaşlaşan Türkiye",
+  "kazanimKod": "İTA.8.4.4",
+  "on": "Tevhid-i Tedrisat Kanunu ne getirdi?",
+  "arka": "3 Mart 1924'te bütün okullar Millî Eğitim Bakanlığına bağlandı; eğitimde birlik sağlandı. Laiklik ilkesiyle ilgilidir.",
+  "test": {
+   "soru": "Tevhid-i Tedrisat Kanunu ile sağlanan temel değişiklik hangisidir?",
+   "siklar": [
+    "Yeni harflerin kabulü",
+    "Üniversitenin kurulması",
+    "Soyadı kullanımı",
+    "Eğitim-öğretimin birleştirilmesi"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "ink-k-021",
+  "ders": "inkilap",
+  "unite": "Atatürkçülük ve Çağdaşlaşan Türkiye",
+  "kazanimKod": "İTA.8.4.5",
+  "on": "Türk kadını siyasi haklarını hangi yıllarda kazandı?",
+  "arka": "1930: belediye seçimlerine katılma. 1933: muhtarlık seçimlerine katılma. 1934: milletvekili seçme ve seçilme.",
+  "test": {
+   "soru": "Türk kadını milletvekili seçme ve seçilme hakkını hangi yıl kazanmıştır?",
+   "siklar": [
+    "1926",
+    "1930",
+    "1934",
+    "1938"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "ink-k-022",
+  "ders": "inkilap",
+  "unite": "Atatürkçülük ve Çağdaşlaşan Türkiye",
+  "kazanimKod": "İTA.8.4.6",
+  "on": "Devletçilik ilkesi neden uygulandı?",
+  "arka": "Özel girişimin sermayesi yetmedi, 1929 Dünya Ekonomik Bunalımı ekonomiyi sarstı; devlet fabrikalar kurdu. Örn: Birinci Beş Yıllık Sanayi Planı, Sümerbank.",
+  "test": {
+   "soru": "Aşağıdakilerden hangisi Devletçilik ilkesiyle doğrudan ilgilidir?",
+   "siklar": [
+    "Devlet eliyle fabrika kurulması",
+    "Aşar vergisinin kaldırılması",
+    "Halifeliğin kaldırılması",
+    "Harf İnkılabı"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "ink-k-023",
+  "ders": "inkilap",
+  "unite": "Demokratikleşme Çabaları",
+  "kazanimKod": "İTA.8.5.1",
+  "on": "Atatürk Dönemi'nde kurulan partiler hangileridir?",
+  "arka": "Halk Fırkası (1923, sonra CHF), Terakkiperver Cumhuriyet Fırkası (1924, ilk muhalefet), Serbest Cumhuriyet Fırkası (1930, Atatürk'ün isteğiyle).",
+  "test": {
+   "soru": "Cumhuriyet Dönemi'nin ilk muhalefet partisi hangisidir?",
+   "siklar": [
+    "Serbest Cumhuriyet Fırkası",
+    "Terakkiperver Cumhuriyet Fırkası",
+    "Demokrat Parti",
+    "Cumhuriyet Halk Fırkası"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "ink-k-024",
+  "ders": "inkilap",
+  "unite": "Demokratikleşme Çabaları",
+  "kazanimKod": "İTA.8.5.1",
+  "on": "Serbest Cumhuriyet Fırkası neden kuruldu?",
+  "arka": "Hükûmetin Meclis'te denetlenmesi ve farklı görüşlerin dile getirilmesi, yani çok partili demokrasiye geçiş için. Fethi Bey kurdu; aynı yıl kapandı.",
+  "test": {
+   "soru": "Serbest Cumhuriyet Fırkası'nı kim kurmuştur?",
+   "siklar": [
+    "Kâzım Karabekir",
+    "İsmet İnönü",
+    "Celal Bayar",
+    "Fethi Bey (Okyar)"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "ink-k-025",
+  "ders": "inkilap",
+  "unite": "Demokratikleşme Çabaları",
+  "kazanimKod": "İTA.8.5.2",
+  "on": "İzmir Suikastı girişimi nedir?",
+  "arka": "1926'da Mustafa Kemal'e İzmir gezisi sırasında suikast planlandı; önceden öğrenilip önlendi. Olay, Cumhuriyet'in kişilere bağlı olmadığı vurgusuyla anılır.",
+  "test": {
+   "soru": "Mustafa Kemal'e yönelik suikast girişimi hangi şehirde planlanmıştır?",
+   "siklar": [
+    "İzmir",
+    "Ankara",
+    "İstanbul",
+    "Bursa"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "ink-k-026",
+  "ders": "inkilap",
+  "unite": "Demokratikleşme Çabaları",
+  "kazanimKod": "İTA.8.5.3",
+  "on": "Şeyh Sait İsyanı'nın sonuçları nelerdir?",
+  "arka": "Takrir-i Sükûn Kanunu çıkarıldı, Terakkiperver Cumhuriyet Fırkası kapatıldı (çok partili deneme kesildi), Musul sorununda Türkiye'nin eli zayıfladı.",
+  "test": {
+   "soru": "Şeyh Sait İsyanı'nın ardından çıkarılan kanun hangisidir?",
+   "siklar": [
+    "Tevhid-i Tedrisat Kanunu",
+    "Soyadı Kanunu",
+    "Takrir-i Sükûn Kanunu",
+    "Teşvik-i Sanayi Kanunu"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "ink-k-027",
+  "ders": "inkilap",
+  "unite": "Atatürk Dönemi Türk Dış Politikası",
+  "kazanimKod": "İTA.8.6.1",
+  "on": "Atatürk Dönemi dış politikasının temel ilkeleri nelerdir?",
+  "arka": "Tam bağımsızlık, barışçılık (“Yurtta barış, dünyada barış”), gerçekçilik, akılcılık, mütekabiliyet (karşılıklılık), millî menfaatleri esas alma.",
+  "test": {
+   "soru": "Sorunları savaşa başvurmadan görüşmelerle çözmek hangi ilkeyle ilgilidir?",
+   "siklar": [
+    "Mütekabiliyet",
+    "Barışçılık",
+    "Devletçilik",
+    "İnkılapçılık"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "ink-k-028",
+  "ders": "inkilap",
+  "unite": "Atatürk Dönemi Türk Dış Politikası",
+  "kazanimKod": "İTA.8.6.2",
+  "on": "Musul sorunu nasıl sonuçlandı?",
+  "arka": "Lozan'da çözülemedi. 1926'da İngiltere ile yapılan Ankara Antlaşması'yla Musul Irak'a bırakıldı; Şeyh Sait İsyanı Türkiye'nin elini zayıflatmıştı.",
+  "test": {
+   "soru": "Musul sorunu hangi devletle yaşanmıştır?",
+   "siklar": [
+    "Fransa",
+    "Yunanistan",
+    "İtalya",
+    "İngiltere"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "ink-k-029",
+  "ders": "inkilap",
+  "unite": "Atatürk Dönemi Türk Dış Politikası",
+  "kazanimKod": "İTA.8.6.2",
+  "on": "Montrö Boğazlar Sözleşmesi (1936) ne sağladı?",
+  "arka": "Boğazlar Komisyonu kaldırıldı; Türkiye Boğazlar'da asker bulundurma hakkı kazandı. Boğazlar'da tam egemenlik sağlandı.",
+  "test": {
+   "soru": "Montrö ile Lozan'dan kalan hangi eksiklik giderilmiştir?",
+   "siklar": [
+    "Boğazlar'daki egemenlik sınırlaması",
+    "Kapitülasyonlar",
+    "Dış borçlar",
+    "Nüfus mübadelesi"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "ink-k-030",
+  "ders": "inkilap",
+  "unite": "Atatürk Dönemi Türk Dış Politikası",
+  "kazanimKod": "İTA.8.6.2",
+  "on": "Balkan Antantı ve Sadabat Paktı neyi amaçladı?",
+  "arka": "Balkan Antantı (1934): batı sınırının güvenliği. Sadabat Paktı (1937): doğu sınırının güvenliği. İkisi de barışı koruma amaçlıdır.",
+  "test": {
+   "soru": "Aşağıdakilerden hangisi Sadabat Paktı'nın üyelerinden biridir?",
+   "siklar": [
+    "Yunanistan",
+    "Romanya",
+    "İran",
+    "Yugoslavya"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "ink-k-031",
+  "ders": "inkilap",
+  "unite": "Atatürk Dönemi Türk Dış Politikası",
+  "kazanimKod": "İTA.8.6.3",
+  "on": "Hatay Türkiye'ye nasıl katıldı?",
+  "arka": "1938'de bağımsız Hatay Cumhuriyeti kuruldu; 1939'da Hatay Meclisi'nin kararıyla Türkiye'ye katıldı. Sorun savaşsız, diplomasiyle çözüldü.",
+  "test": {
+   "soru": "Hatay hangi yıl Türkiye'ye katılmıştır?",
+   "siklar": [
+    "1936",
+    "1939",
+    "1938",
+    "1934"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "ink-k-032",
+  "ders": "inkilap",
+  "unite": "Atatürk’ün Ölümü ve Sonrası",
+  "kazanimKod": "İTA.8.7.1",
+  "on": "Atatürk'ün ölümünden sonra kim cumhurbaşkanı oldu?",
+  "arka": "Atatürk 10 Kasım 1938'de vefat etti; TBMM İsmet İnönü'yü cumhurbaşkanı seçti.",
+  "test": {
+   "soru": "Türkiye Cumhuriyeti'nin ikinci cumhurbaşkanı kimdir?",
+   "siklar": [
+    "Celal Bayar",
+    "Fevzi Çakmak",
+    "Kâzım Karabekir",
+    "İsmet İnönü"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "ink-k-033",
+  "ders": "inkilap",
+  "unite": "Atatürk’ün Ölümü ve Sonrası",
+  "kazanimKod": "İTA.8.7.2",
+  "on": "Atatürk'ün başlıca eserleri nelerdir?",
+  "arka": "Nutuk (1919–1927 olayları), Geometri (Türkçe geometri terimleri), Zabit ve Kumandan ile Hasbihâl (askerlik). “En büyük eserim Türkiye Cumhuriyeti'dir.”",
+  "test": {
+   "soru": "Atatürk'ün Millî Mücadele'yi ve Cumhuriyet'in kuruluşunu anlattığı eseri hangisidir?",
+   "siklar": [
+    "Nutuk",
+    "Geometri",
+    "Zabit ve Kumandan ile Hasbihâl",
+    "Vatandaş İçin Medeni Bilgiler"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "ink-k-034",
+  "ders": "inkilap",
+  "unite": "Atatürk’ün Ölümü ve Sonrası",
+  "kazanimKod": "İTA.8.7.4",
+  "on": "İkinci Dünya Savaşı Türkiye'yi nasıl etkiledi?",
+  "arka": "Türkiye savaşa fiilen girmedi; ama çok sayıda kişi askere alındı, üretim düştü, kıtlık yaşandı, ekmek karneyle dağıtıldı.",
+  "test": {
+   "soru": "İkinci Dünya Savaşı yıllarında Türkiye'de karne uygulamasına geçilmesinin nedeni nedir?",
+   "siklar": [
+    "Savaşa girilmesi",
+    "Nüfusun azalması",
+    "Temel maddelerin kıtlaşması",
+    "Çok partili hayata geçilmesi"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "ink-k-035",
+  "ders": "inkilap",
+  "unite": "Atatürk’ün Ölümü ve Sonrası",
+  "kazanimKod": "İTA.8.7.5",
+  "on": "Türkiye çok partili hayata nasıl geçti?",
+  "arka": "1946'da Demokrat Parti kuruldu ve ilk çok partili genel seçim yapıldı. Bu seçimde açık oy, gizli sayım uygulandı; demokrasinin gereği ise gizli oy, açık sayımdır.",
+  "test": {
+   "soru": "Demokratik bir seçimde oy verme ve sayım nasıl olmalıdır?",
+   "siklar": [
+    "Açık oy, gizli sayım",
+    "Gizli oy, açık sayım",
+    "Açık oy, açık sayım",
+    "Gizli oy, gizli sayım"
+   ],
+   "dogru": 1
+  }
+ }
+]

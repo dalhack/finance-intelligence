@@ -1,0 +1,1827 @@
+[
+ {
+  "id": "din-001",
+  "ders": "din",
+  "unite": "Kader İnancı",
+  "kazanimKod": "DKAB.8.1.1",
+  "kazanimAd": "Kader ve kaza inancını ayet ve hadislerle açıklar.",
+  "zorluk": 1,
+  "tip": "uzun-metin",
+  "metin": "<i>“Şüphesiz biz her şeyi bir ölçüye göre yarattık.”</i> (Kamer suresi, 49. ayet)<br><br>Fen bilimleri dersi için Güneş sistemi maketi hazırlayan Elif, gezegenlerin yörüngelerinden sapmadan döndüğünü ve Dünya’nın Güneş’e uzaklığının canlıların yaşamasına uygun olduğunu öğrenince bu ayeti hatırlamıştır.<br><br><b>Elif’in hatırladığı ayet aşağıdaki kavramlardan en çok hangisiyle ilgilidir?</b>",
+  "svg": "",
+  "siklar": [
+   "Tevekkül",
+   "Kader",
+   "Ecel",
+   "Rızık"
+  ],
+  "dogru": 1,
+  "ipucu1": "Ayetteki anahtar söz “ölçü”dür. Hangi kavramın tanımında ölçü, düzen ve plan geçer?",
+  "ipucu2": "Allah’ın evrendeki her şeyi belli bir ölçü ve düzene göre belirlemesine ne ad veriyorduk? Şıkları bu tanımla karşılaştır.",
+  "cozum": [
+   "Ayette her şeyin bir ölçüye göre yaratıldığı söyleniyor.",
+   "Elif’in gözlemi de evrendeki düzen ve ölçüyle ilgili.",
+   "Allah’ın her şeyi bir ölçü ve düzen içinde belirlemesine kader denir.",
+   "Cevap: Kader."
+  ],
+  "tuzaklar": [
+   "Tevekkül de kader ünitesinde geçer; ama çalışıp sonucu Allah’a bırakmaktır, ölçüyle ilgili değildir.",
+   "",
+   "Ecel, hayatın sona erdiği andır; metinde ölümden söz edilmiyor.",
+   "Dünya’nın yaşama uygun olması rızkı çağrıştırabilir; ama vurgulanan şey nimet değil, ölçü ve düzendir."
+  ],
+  "taktik": "Ayet mealinde anahtar sözcüğü bul (burada “ölçü”) ve onu kavramın tanımıyla eşleştir.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Kader",
+    "tanim": "Allah’ın her şeyi sonsuz ilmiyle bilmesi ve belli bir ölçüye, düzene göre belirlemesi."
+   }
+  ]
+ },
+ {
+  "id": "din-002",
+  "ders": "din",
+  "unite": "Kader İnancı",
+  "kazanimKod": "DKAB.8.1.1",
+  "kazanimAd": "Kader ve kaza inancını ayet ve hadislerle açıklar.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "Zeynep, “evrendeki yasalar” konusunda defterine şu tabloyu hazırlamıştır:<table class=\"t\"><tr><th>No</th><th>Gözlem</th></tr><tr><td>1</td><td>Daldan kopan elma her zaman yere doğru düşer.</td></tr><tr><td>2</td><td>Toprağa atılan tohum filizlenir, büyür, meyve verir ve zamanı gelince kurur.</td></tr><tr><td>3</td><td>Adaletin gözetildiği, insanların birbirine güvendiği toplumlarda huzur artar.</td></tr></table><b>Zeynep’in gözlemleri sırasıyla hangi yasalarla ilgilidir?</b>",
+  "svg": "",
+  "siklar": [
+   "Biyolojik – Fiziksel – Toplumsal",
+   "Fiziksel – Toplumsal – Biyolojik",
+   "Toplumsal – Biyolojik – Fiziksel",
+   "Fiziksel – Biyolojik – Toplumsal"
+  ],
+  "dogru": 3,
+  "ipucu1": "Her gözlemde “Burada neyin davranışı anlatılıyor: madde mi, canlı mı, toplum mu?” diye sor.",
+  "ipucu2": "1. gözlemde bir cismin yer çekimiyle hareketi anlatılıyor. Maddeyle ilgili yasalar hangi gruptadır? Diğer ikisini de aynı soruyla sınıfla.",
+  "cozum": [
+   "1. gözlem: Yer çekimi maddeyle ilgilidir, fiziksel yasadır.",
+   "2. gözlem: Canlının doğup büyümesi ve ölmesi biyolojik yasadır.",
+   "3. gözlem: Adalet ile huzur arasındaki bağ toplumla ilgilidir, toplumsal yasadır.",
+   "Sıra: Fiziksel – Biyolojik – Toplumsal."
+  ],
+  "tuzaklar": [
+   "Elma bir canlı ürünü olduğu için 1. gözlem biyolojik sanılabilir; oysa anlatılan şey düşme, yani yer çekimidir.",
+   "İlk gözlem doğru bulunup son ikisinin sırası karıştırılırsa bu şık seçilir.",
+   "Tablo sondan başa okunursa bu sıra çıkar.",
+   ""
+  ],
+  "taktik": "Sıralama sorularında önce en emin olduğun maddeyi belirle, o maddeye uymayan şıkları ele.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Sünnetullah",
+    "tanim": "Allah’ın evrende koyduğu yasalar ve düzen. Fiziksel, biyolojik ve toplumsal yasalar olarak incelenir."
+   }
+  ]
+ },
+ {
+  "id": "din-003",
+  "ders": "din",
+  "unite": "Kader İnancı",
+  "kazanimKod": "DKAB.8.1.1",
+  "kazanimAd": "Kader ve kaza inancını ayet ve hadislerle açıklar.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Din kültürü öğretmeni derste şöyle bir benzetme yapmıştır:<br><br><i>“Bir mimar, yapacağı binanın bütün ayrıntılarını önce projesinde belirler. Sonra bina, zamanı gelince bu projeye uygun olarak yapılır. Hiçbir örnek tam karşılamaz ama konuyu anlamak için projeyi <u>kadere</u>, binanın yapılmasını <u>kazaya</u> benzetebiliriz.”</i><br><br><b>Bu benzetmeye göre “kaza” kavramı aşağıdakilerden hangisiyle açıklanır?</b>",
+  "svg": "",
+  "siklar": [
+   "Allah’ın takdir ettiği şeylerin, zamanı gelince gerçekleşmesi",
+   "Allah’ın olacak her şeyi sonsuz ilmiyle önceden bilip belirlemesi",
+   "İnsanın elinden geleni yaptıktan sonra sonucu Allah’a bırakması",
+   "Allah’ın evrende koyduğu değişmez yasaların bütünü"
+  ],
+  "dogru": 0,
+  "ipucu1": "Benzetmede iki aşama var: önce planlama, sonra gerçekleşme. Kaza hangisine benzetilmiş?",
+  "ipucu2": "Kaza, “binanın yapılması” ile eşleştirilmiş. Yani plan aşaması değil, planın hayata geçtiği aşama aranıyor.",
+  "cozum": [
+   "Proje = önceden belirleme = kader.",
+   "Binanın yapılması = belirlenenin gerçekleşmesi = kaza.",
+   "Kaza, Allah’ın takdir ettiği şeylerin zamanı gelince gerçekleşmesidir.",
+   "Cevap: A şıkkı."
+  ],
+  "tuzaklar": [
+   "",
+   "Bu tanım doğru bir tanımdır ama kaderin tanımıdır; iki kavram en çok burada karıştırılır.",
+   "Bu, tevekkülün tanımıdır; kader konusunda geçtiği için cazip gelir.",
+   "Bu, sünnetullahın (evrensel yasaların) tanımıdır."
+  ],
+  "taktik": "Kader = plan/ölçü, kaza = gerçekleşme. “Önce kader, sonra kaza” diye aklında tut.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Kaza",
+    "tanim": "Allah’ın önceden takdir ettiği şeylerin zamanı gelince gerçekleşmesi."
+   },
+   {
+    "ad": "Kader",
+    "tanim": "Allah’ın her şeyi önceden bilip bir ölçüye göre belirlemesi."
+   }
+  ]
+ },
+ {
+  "id": "din-004",
+  "ders": "din",
+  "unite": "Kader İnancı",
+  "kazanimKod": "DKAB.8.1.2",
+  "kazanimAd": "İnsanın ilmi, iradesi, sorumluluğu ile kader arasında ilişki kurar.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "<i>“De ki: Hak, Rabbinizdendir. Artık dileyen iman etsin, dileyen inkâr etsin.”</i> (Kehf suresi, 29. ayet)<br><br><b>Bu ayetten aşağıdaki yargılardan hangisine <u>ulaşılamaz</u>?</b>",
+  "svg": "",
+  "siklar": [
+   "İnsana doğru ile yanlış arasında seçim yapma imkânı verilmiştir.",
+   "İnsan, yaptığı tercihlerin sonucundan sorumludur.",
+   "İnsanın bütün davranışları, kendi iradesi dışında belirlenmiştir.",
+   "İman etmek, kişinin kendi isteğine bağlı bir tercihtir."
+  ],
+  "dogru": 2,
+  "ipucu1": "Ayetteki “dileyen” sözcüğüne dikkat et. Bu sözcük insanın hangi özelliğini gösterir?",
+  "ipucu2": "“Dileyen… dileyen…” ifadesi insanın seçebildiğini gösterir. Şıklardan hangisi bu seçme özgürlüğüyle çelişiyor?",
+  "cozum": [
+   "Ayette “dileyen iman etsin, dileyen inkâr etsin” deniyor.",
+   "Bu, insanın iradesiyle seçim yapabildiğini gösterir.",
+   "Seçim yapabilen insan, seçiminden sorumlu olur.",
+   "“Bütün davranışlar irade dışında belirlenmiştir” yargısı ayetle çelişir.",
+   "Cevap: C şıkkı."
+  ],
+  "tuzaklar": [
+   "Soru kökündeki “ulaşılamaz” gözden kaçarsa, ayetle uyumlu olan bu ilk şık işaretlenir.",
+   "Ayette “sorumluluk” sözcüğü geçmediği için ulaşılamaz sanılabilir; oysa seçme özgürlüğü sorumluluğu getirir.",
+   "",
+   "“İman” ayette açıkça geçtiği için bu yargı ayetle doğrudan uyumludur; olumsuz kök unutulursa seçilir."
+  ],
+  "taktik": "“Ulaşılamaz” sorularında ayetle çelişen ya da ayette hiç dayanağı olmayan şıkkı ara.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Cüzî irade",
+    "tanim": "Allah’ın insana verdiği sınırlı seçme ve karar verme gücü. İnsan bu yüzden yaptıklarından sorumludur."
+   },
+   {
+    "ad": "Küllî irade",
+    "tanim": "Allah’ın sınırsız, her şeyi kuşatan iradesi."
+   }
+  ]
+ },
+ {
+  "id": "din-005",
+  "ders": "din",
+  "unite": "Kader İnancı",
+  "kazanimKod": "DKAB.8.1.3",
+  "kazanimAd": "Kaza ve kader ile ilgili kavramları analiz eder.",
+  "zorluk": 1,
+  "tip": "uzun-metin",
+  "metin": "Dört arkadaş, haftaya yapılacak deneme sınavı hakkında konuşmaktadır:<br><br><b>Arda:</b> “Hiç çalışmadım. Nasipse yüksek puan alırım.”<br><b>Buse:</b> “Planımı yapıp konuları tekrar ettim. Elimden geleni yaptım, sonucu için Allah’a güveniyorum.”<br><b>Cem:</b> “Benim talihim kötü, ne yapsam olmuyor. O yüzden çalışmıyorum.”<br><b>Defne:</b> “Çalışmama gerek yok, sadece dua etsem yeter.”<br><br><b>Bu öğrencilerden hangisinin tutumu tevekkül anlayışına uygundur?</b>",
+  "svg": "",
+  "siklar": [
+   "Arda",
+   "Buse",
+   "Cem",
+   "Defne"
+  ],
+  "dogru": 1,
+  "ipucu1": "Tevekkülün iki parçası vardır. Her öğrencide bu iki parçanın ikisi de var mı diye bak.",
+  "ipucu2": "Tevekkülde önce çalışıp tedbir alınır, sonra sonuç için Allah’a güvenilir. Çalışmayı atlayanları ele.",
+  "cozum": [
+   "Tevekkül: Önce elinden geleni yapmak, sonra sonucu Allah’a bırakmaktır.",
+   "Arda, Cem ve Defne çalışma kısmını atlıyor.",
+   "Buse hem çalışmış hem de sonuç için Allah’a güvenmiş.",
+   "Cevap: Buse."
+  ],
+  "tuzaklar": [
+   "“Nasipse” sözü dinî bir ifade gibi durduğu için cazip gelir; ama çalışmadan beklemek tevekkül değildir.",
+   "",
+   "“Talih” ve “kader” karıştırılırsa seçilir; kötü talih anlayışı kaderin yanlış yorumudur.",
+   "Dua etmek güzel bir davranıştır; ancak çalışmadan yalnızca dua etmek tevekkül sayılmaz."
+  ],
+  "taktik": "Tevekkül sorularında formül: çalışma + tedbir + Allah’a güven. Biri eksikse o şıkkı ele.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Tevekkül",
+    "tanim": "Bir iş için gereken bütün çabayı gösterip tedbiri aldıktan sonra sonucu Allah’a bırakmak."
+   }
+  ]
+ },
+ {
+  "id": "din-006",
+  "ders": "din",
+  "unite": "Kader İnancı",
+  "kazanimKod": "DKAB.8.1.3",
+  "kazanimAd": "Kaza ve kader ile ilgili kavramları analiz eder.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "<i>“… İş konusunda onlarla müşavere et. Bir kere de karar verip azmettin mi, artık Allah’a tevekkül et. …”</i> (Âl-i İmrân suresi, 159. ayet)<br><br>Köy muhtarı Hasan Bey, kuraklığa karşı sulama kanalı açmak için köylülerle toplantı yapmıştır. Ortak karar alınmış, kanal birlikte kazılmıştır. İş bitince Hasan Bey, “Üzerimize düşeni yaptık, bundan sonrası için Allah’a güveniyoruz.” demiştir.<br><br>Ayet ve örnek olay birlikte düşünüldüğünde;<br>I. Tevekkül, gerekli adımlar atıldıktan sonra Allah’a güvenmektir.<br>II. Önemli işlerde başkalarının görüşünü almak doğru bir davranıştır.<br>III. Allah’a güvenen kişinin tedbir almasına gerek kalmaz.<br><br><b>yargılarından hangilerine ulaşılabilir?</b>",
+  "svg": "",
+  "siklar": [
+   "Yalnız I",
+   "Yalnız III",
+   "II ve III",
+   "I ve II"
+  ],
+  "dogru": 3,
+  "ipucu1": "Her yargıyı tek tek hem ayetle hem de Hasan Bey’in yaptıklarıyla karşılaştır.",
+  "ipucu2": "Hasan Bey önce toplantı yaptı, sonra kanalı kazdırdı, en son Allah’a güvendiğini söyledi. III. yargı bu sırayla uyuşuyor mu?",
+  "cozum": [
+   "Ayette önce danışma (müşavere), sonra karar, sonra tevekkül sıralanıyor.",
+   "Hasan Bey danıştı, kanalı kazdırdı, sonra Allah’a güvendi. I. yargı doğru.",
+   "Hem ayet hem toplantı, danışmanın önemini gösteriyor. II. yargı doğru.",
+   "Kanal kazmak bir tedbirdir; III. yargı metinle çelişir.",
+   "Cevap: I ve II."
+  ],
+  "tuzaklar": [
+   "I. yargı kolayca görülür; ayetteki “müşavere et” (danış) ifadesi atlanırsa II. yargı gözden kaçar.",
+   "Tevekkül “her şeyi Allah’a bırakmak” diye eksik bilinirse III doğru sanılır.",
+   "II doğru bulunur ama tevekkül yanlış anlaşılırsa III de eklenir.",
+   ""
+  ],
+  "taktik": "Öncüllü sorularda kesin yanlış olan öncülü bul (burada III) ve onu içeren şıkları hemen ele.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Tevekkül",
+    "tanim": "Çalışıp tedbir aldıktan sonra sonucu Allah’a bırakmak."
+   },
+   {
+    "ad": "İstişare",
+    "tanim": "Bir iş hakkında karar vermeden önce bilgili ve güvenilir kişilere danışmak."
+   }
+  ]
+ },
+ {
+  "id": "din-007",
+  "ders": "din",
+  "unite": "Kader İnancı",
+  "kazanimKod": "DKAB.8.1.3",
+  "kazanimAd": "Kaza ve kader ile ilgili kavramları analiz eder.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "<i>“Yeryüzünde hiçbir canlı yoktur ki rızkı Allah’a ait olmasın. …”</i> (Hûd suresi, 6. ayet)<br><br><i>“İnsan için ancak çalıştığı vardır.”</i> (Necm suresi, 39. ayet)<br><br><b>Bu iki ayet birlikte değerlendirildiğinde aşağıdakilerden hangisine ulaşılır?</b>",
+  "svg": "",
+  "siklar": [
+   "Rızkı veren Allah’tır; insanın da rızkını elde etmek için çalışması gerekir.",
+   "Rızık önceden belirlendiği için çalışmak sonucu değiştirmez.",
+   "İnsan rızkını yalnızca kendi gücüyle kazanır; bunun Allah’la bir ilgisi yoktur.",
+   "Rızık, yalnızca yiyecek ve içeceklerden oluşur."
+  ],
+  "dogru": 0,
+  "ipucu1": "“Birlikte değerlendirildiğinde” deniyor. Doğru şık her iki ayetin de mesajını taşımalı.",
+  "ipucu2": "İlk ayet rızkın kimden geldiğini, ikinci ayet insanın ne yapması gerektiğini anlatıyor. İkisini tek cümlede birleştir.",
+  "cozum": [
+   "1. ayet: Bütün canlıların rızkını Allah verir.",
+   "2. ayet: İnsan, emeğinin karşılığını alır.",
+   "İkisi birlikte: Rızkı Allah verir, insan da çalışarak ona ulaşır.",
+   "Cevap: A şıkkı."
+  ],
+  "tuzaklar": [
+   "",
+   "Yalnızca ilk ayete bakılır ve kader yanlış yorumlanırsa bu sonuca varılır; ikinci ayet bunu çürütür.",
+   "Yalnızca ikinci ayete bakılırsa seçilir; ilk ayet rızkın Allah’a ait olduğunu söylüyor.",
+   "Rızık günlük dilde “yiyecek” diye bilinir; ama ayetlerde böyle bir sınırlama yok. Rızık, Allah’ın verdiği bütün nimetlerdir."
+  ],
+  "taktik": "İki metinli sorularda yalnız bir metne uyan şıkları ele; doğru cevap ikisini de kapsar.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Rızık",
+    "tanim": "Allah’ın canlılara yaşamaları için verdiği her türlü nimet (yiyecek, içecek, sağlık, bilgi vb.)."
+   },
+   {
+    "ad": "Emek",
+    "tanim": "Bir işi başarmak için harcanan zihinsel ve bedensel çaba."
+   }
+  ]
+ },
+ {
+  "id": "din-008",
+  "ders": "din",
+  "unite": "Kader İnancı",
+  "kazanimKod": "DKAB.8.1.4",
+  "kazanimAd": "Toplumda kader ve kaza ile ilgili yaygın olan yanlış anlayışları sorgular.",
+  "zorluk": 3,
+  "tip": "grafik-tablo",
+  "metin": "Bir inşaatta, baret ve emniyet kemeri kullanılmadığı için iş kazası yaşanmıştır. Haberi okuyan dört öğrencinin yorumu tabloda verilmiştir:<table class=\"t\"><tr><th>Öğrenci</th><th>Yorum</th></tr><tr><td>Selim</td><td>Alın yazısı böyleymiş. Baret takılsa da takılmasa da sonuç değişmezdi.</td></tr><tr><td>Derya</td><td>Tedbirini alan insanın başına hiçbir şey gelmez. Bu yüzden ayrıca Allah’a güvenmeye gerek yoktur.</td></tr><tr><td>Onur</td><td>Önce bütün tedbirler alınmalıydı. Tedbiri ihmal edip sonucu kadere bağlamak, sorumluluktan kaçmaktır.</td></tr><tr><td>Melis</td><td>Tedbir almak iyidir; ama kaza olduysa kimse sorumlu tutulamaz, çünkü her şey kaderdir.</td></tr></table><b>Bu öğrencilerden hangisinin yorumu İslam’ın kader anlayışına uygundur?</b>",
+  "svg": "",
+  "siklar": [
+   "Selim",
+   "Derya",
+   "Onur",
+   "Melis"
+  ],
+  "dogru": 2,
+  "ipucu1": "Doğru kader anlayışında insanın iradesi ve sorumluluğu yok sayılmaz. Hangi yorumlar sorumluluğu ortadan kaldırıyor?",
+  "ipucu2": "Yorumların ikinci cümlelerine dikkat et: Bazıları iyi başlıyor ama sonunda ya sorumluluğu ya da Allah’a güvenmeyi dışarıda bırakıyor.",
+  "cozum": [
+   "Selim, tedbirin sonucu etkilemediğini söylüyor; bu yanlış bir “alın yazısı” anlayışıdır.",
+   "Derya tedbiri önemsiyor ama Allah’a güvenmeyi gereksiz görüyor; tevekkül eksik kalıyor.",
+   "Melis, kaza olunca sorumluluğu kaldırıyor; oysa ihmali olan sorumludur.",
+   "Onur hem tedbiri hem sorumluluğu vurguluyor.",
+   "Cevap: Onur."
+  ],
+  "tuzaklar": [
+   "“Alın yazısı” halk arasında kaderle aynı anlamda kullanıldığı için doğru sanılabilir.",
+   "Tedbiri savunduğu için ilk cümlesi doğru görünür; ikinci cümle okunmazsa seçilir.",
+   "",
+   "“Tedbir almak iyidir” diye başladığı için cazip gelir; ama ihmal edenin sorumluluğunu yok sayıyor."
+  ],
+  "taktik": "Uzun şıklarda cümlenin sonuna kadar oku; çeldiriciler çoğu zaman doğru başlar, yanlış biter.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Kaderi bahane etmek",
+    "tanim": "Tedbir almadan ya da sorumluluğu üstlenmeden olanları “alın yazısı, kara talih” diye açıklamak. İslam’ın kader anlayışına uymaz."
+   }
+  ]
+ },
+ {
+  "id": "din-009",
+  "ders": "din",
+  "unite": "Kader İnancı",
+  "kazanimKod": "DKAB.8.1.5",
+  "kazanimAd": "Hz. Musa’nın (a.s.) hayatını ana hatlarıyla tanır.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Bir peygamber hakkında hazırlanan bilgi kartında şunlar yazmaktadır:<br><br>• Mısır’da dünyaya geldi.<br>• Annesi, onu korumak için bir sandığa koyup Nil Nehri’ne bıraktı.<br>• Firavun’un sarayında büyüdü.<br>• Kardeşi Hz. Harun (a.s.) ona yardımcı oldu.<br>• Kendisine Tevrat verildi.<br><br><b>Bu bilgi kartı hangi peygamber için hazırlanmıştır?</b>",
+  "svg": "",
+  "siklar": [
+   "Hz. Yusuf (a.s.)",
+   "Hz. Nuh (a.s.)",
+   "Hz. Şuayb (a.s.)",
+   "Hz. Musa (a.s.)"
+  ],
+  "dogru": 3,
+  "ipucu1": "Karttaki en ayırt edici bilgileri seç: kutsal kitap ve kardeşinin adı.",
+  "ipucu2": "Tevrat hangi peygambere verilmişti? Nil’e bırakılan bebek kıssasını da hatırla.",
+  "cozum": [
+   "Tevrat, Hz. Musa’ya (a.s.) verilen kitaptır.",
+   "Nil’e bırakılma, Firavun’un sarayında büyüme ve Hz. Harun’un yardımı da onun hayatındandır.",
+   "Cevap: Hz. Musa (a.s.)."
+  ],
+  "tuzaklar": [
+   "Hz. Yusuf da Mısır’da yaşadığı için yalnızca “Mısır” bilgisine bakılırsa seçilir.",
+   "Hz. Nuh’un kıssasında gemi ve tufan vardır; “su” çağrışımıyla karıştırılabilir.",
+   "Hz. Şuayb aynı ünitelerde geçer; Medyen halkına gönderilmiştir.",
+   ""
+  ],
+  "taktik": "Peygamber kıssalarında her peygamber için 2–3 anahtar sözcük ezberle (Hz. Musa: Firavun, Tevrat, Hz. Harun).",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Hz. Musa (a.s.)",
+    "tanim": "Mısır’da doğan, Firavun’un zulmüne karşı mücadele eden ve kendisine Tevrat verilen peygamber. Kardeşi Hz. Harun yardımcısıdır."
+   }
+  ]
+ },
+ {
+  "id": "din-010",
+  "ders": "din",
+  "unite": "Kader İnancı",
+  "kazanimKod": "DKAB.8.1.6",
+  "kazanimAd": "Ayet el-Kürsi'yi okur, anlamını söyler.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "<i>“Allah, kendisinden başka hiçbir ilah olmayandır. Diridir, kayyumdur. Onu ne bir uyuklama tutabilir ne de bir uyku. Göklerdeki her şey, yerdeki her şey onundur. …”</i> (Bakara suresi, 255. ayet – Ayetü’l-Kürsi’den)<br><br><b>Ayetü’l-Kürsi’nin bu bölümünde Allah (c.c.) ile ilgili aşağıdakilerden hangisine <u>değinilmemiştir</u>?</b>",
+  "svg": "",
+  "siklar": [
+   "Kullarının hatalarını bağışladığına",
+   "Tek ilah olduğuna",
+   "Her şeyin sahibi olduğuna",
+   "Uyku gibi eksikliklerden uzak olduğuna"
+  ],
+  "dogru": 0,
+  "ipucu1": "Verilen bölümü cümle cümle oku ve her cümlenin karşılığını şıklarda bul.",
+  "ipucu2": "Dört cümle var: “başka ilah yok”, “diridir, kayyumdur”, “uyku tutmaz”, “her şey onundur”. Karşılığı olmayan şık hangisi?",
+  "cozum": [
+   "“Kendisinden başka ilah olmayan” → tek ilah oluşu.",
+   "“Uyuklama ve uyku tutmaz” → eksikliklerden uzak oluşu.",
+   "“Göklerdeki ve yerdeki her şey onundur” → her şeyin sahibi oluşu.",
+   "Bağışlamayla ilgili bir ifade bu bölümde yok.",
+   "Cevap: A şıkkı."
+  ],
+  "tuzaklar": [
+   "",
+   "Olumsuz kök gözden kaçarsa metnin ilk cümlesiyle örtüşen bu şık seçilir.",
+   "“Onundur” ifadesi dikkatli okunmazsa sahiplik anlamı fark edilmez.",
+   "Uykudan söz edilmesi garip gelip atlanabilir; oysa bu, Allah’ın eksikliklerden uzak olduğunu anlatır."
+  ],
+  "taktik": "“Değinilmemiştir” sorularında her şıkkın metindeki karşılığını bul ve üstünü çiz; açıkta kalan cevaptır.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Ayetü’l-Kürsi",
+    "tanim": "Bakara suresinin 255. ayeti. Allah’ın birliğini ve sıfatlarını (diri oluşu, her şeyi bilmesi ve koruması) anlatır."
+   },
+   {
+    "ad": "Kayyum",
+    "tanim": "Allah’ın her şeyi ayakta tutan, yöneten ve koruyan olması."
+   }
+  ]
+ },
+ {
+  "id": "din-011",
+  "ders": "din",
+  "unite": "Kader İnancı",
+  "kazanimKod": "DKAB.8.1.3",
+  "kazanimAd": "Kaza ve kader ile ilgili kavramları analiz eder.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "<i>“Her canlı ölümü tadacaktır. …”</i> (Âl-i İmrân suresi, 185. ayet)<br><br>Dedesini kaybeden Kerem’e öğretmeni şunları söylemiştir: “Doğan her canlının dünyada geçireceği <u>bir yaşam süresi</u> vardır. <u>Bu sürenin sona erdiği an</u> gelince hayat biter. Bu, bütün canlılar için geçerli bir yasadır.”<br><br><b>Öğretmenin sözlerinde altı çizili ifadeler sırasıyla hangi kavramları karşılar?</b>",
+  "svg": "",
+  "siklar": [
+   "Ecel – Ömür",
+   "Kader – Kaza",
+   "Ömür – Ecel",
+   "Rızık – Ecel"
+  ],
+  "dogru": 2,
+  "ipucu1": "Biri bir “süre”, diğeri bir “an”. Hangi kavram süreyi, hangisi sonu anlatır?",
+  "ipucu2": "Doğumdan ölüme kadar geçen zamana ne denir? Bu zamanın bittiği noktaya ne denir? Sırayı karıştırma.",
+  "cozum": [
+   "Doğumdan ölüme kadar geçen yaşam süresi: ömür.",
+   "Bu sürenin sona erdiği, ölümün gerçekleştiği an: ecel.",
+   "Sıra: Ömür – Ecel.",
+   "Cevap: C şıkkı."
+  ],
+  "tuzaklar": [
+   "İki kavram doğru bulunup sırası ters yazılırsa bu şık seçilir.",
+   "Konu kader ünitesinde olduğu için cazip gelir; ama burada süre ve son anlatılıyor.",
+   "",
+   "İkinci kavram doğru olduğu için dikkat çeker; ama ilk ifade nimetle değil, süreyle ilgilidir."
+  ],
+  "taktik": "“Sırasıyla” sorularında ilk kavramı bul, ilk sırası uymayan şıkları hemen ele.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Ömür",
+    "tanim": "Canlının doğumundan ölümüne kadar geçen süre."
+   },
+   {
+    "ad": "Ecel",
+    "tanim": "Ömrün sona erdiği, ölümün gerçekleştiği an."
+   }
+  ]
+ },
+ {
+  "id": "din-012",
+  "ders": "din",
+  "unite": "Zekât ve Sadaka",
+  "kazanimKod": "DKAB.8.2.1",
+  "kazanimAd": "İslam’ın paylaşma ve yardımlaşmaya verdiği önemi ayet ve hadisler ışığında yorumlar.",
+  "zorluk": 1,
+  "tip": "uzun-metin",
+  "metin": "<i>“Komşusu açken tok yatan bizden değildir.”</i> (Hadis-i şerif)<br><br>Bir mahalledeki fırıncı, tezgâhına “askıda ekmek” panosu koymuştur. İsteyen müşteriler fazladan ekmek parası bırakmakta, ihtiyacı olanlar da bu ekmeklerden almaktadır.<br><br><b>Hadis ve örnek olay birlikte düşünüldüğünde İslam’ın aşağıdakilerden hangisine önem verdiği söylenebilir?</b>",
+  "svg": "",
+  "siklar": [
+   "İbadetleri vaktinde yerine getirmeye",
+   "Yardımlaşma ve paylaşmaya",
+   "Bilgi edinmeye ve öğrenmeye",
+   "Verilen sözü tutmaya"
+  ],
+  "dogru": 1,
+  "ipucu1": "Hem hadiste hem olayda bir kişi, başka birinin hangi ihtiyacıyla ilgileniyor?",
+  "ipucu2": "Hadis aç komşuyu düşünmeyi, olay ise ekmeği ihtiyaç sahibiyle bölüşmeyi anlatıyor. Bu ikisinin ortak adı ne olur?",
+  "cozum": [
+   "Hadis, komşusunun açlığına kayıtsız kalmayı eleştiriyor.",
+   "Askıda ekmek, ihtiyacı olanla ekmeği bölüşmektir.",
+   "İkisinin ortak noktası yardımlaşma ve paylaşmadır.",
+   "Cevap: B şıkkı."
+  ],
+  "tuzaklar": [
+   "Hadis dinî bir metin olduğu için “ibadet” çağrışımı yapar; ama metinde ibadet vakitlerinden söz edilmiyor.",
+   "",
+   "Genel olarak doğru bir değerdir ama metinle ilgisi yoktur.",
+   "Bu da güzel bir ahlak ilkesidir; ancak metinde söz verme durumu yok."
+  ],
+  "taktik": "İki kaynaklı sorularda önce ortak noktayı kendi cümlenle söyle, sonra şıklara bak.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Yardımlaşma",
+    "tanim": "İnsanların ihtiyaçlarını karşılamak için birbirine destek olması. İslam, sahip olunanları ihtiyaç sahipleriyle paylaşmayı öğütler."
+   }
+  ]
+ },
+ {
+  "id": "din-013",
+  "ders": "din",
+  "unite": "Zekât ve Sadaka",
+  "kazanimKod": "DKAB.8.2.3",
+  "kazanimAd": "Zekât, infak ve sadakanın bireysel ve toplumsal önemini fark eder.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "<table class=\"t\"><tr><th>Kavram</th><th>Açıklama</th></tr><tr><td>İnfak</td><td>Allah’ın rızasını kazanmak için yapılan her türlü harcama ve yardımın genel adıdır.</td></tr><tr><td>Zekât</td><td>Dinen zengin sayılan Müslümanların, yılda bir kez malının belli bir bölümünü ihtiyaç sahiplerine vermesidir. Farzdır.</td></tr><tr><td>Sadaka</td><td>Kişinin gönüllü olarak yaptığı maddi ve manevi her türlü iyiliktir.</td></tr></table><b>Bu tabloya göre aşağıdakilerden hangisi <u>söylenemez</u>?</b>",
+  "svg": "",
+  "siklar": [
+   "Zekât, belirli şartları taşıyan Müslümanlar için zorunlu bir ibadettir.",
+   "İnfak, zekât ve sadakayı da içine alan geniş bir kavramdır.",
+   "Sadaka yalnızca para veya mal verilerek yerine getirilir.",
+   "Sadaka vermek için zengin olma şartı aranmaz."
+  ],
+  "dogru": 2,
+  "ipucu1": "Her şıkkı tablodaki ilgili satırla karşılaştır. Tabloyla çelişen şıkkı arıyorsun.",
+  "ipucu2": "Sadaka satırındaki “maddi ve manevi her türlü iyilik” ifadesine dikkat et. Hangi şık bu ifadeyi daraltıyor?",
+  "cozum": [
+   "Zekât satırında “farzdır” ve “dinen zengin” yazıyor; A doğru.",
+   "İnfak “her türlü harcama ve yardımın genel adı”; zekât ve sadakayı kapsar, B doğru.",
+   "Sadaka “maddi ve manevi” iyiliktir; yalnız parayla sınırlı değildir.",
+   "Bu yüzden C söylenemez. Cevap: C şıkkı."
+  ],
+  "tuzaklar": [
+   "Olumsuz kök unutulursa tabloda açıkça karşılığı olan bu şık işaretlenir.",
+   "Tabloda “kapsar” sözü geçmediği için söylenemez sanılabilir; “genel adı” ifadesi bunu anlatır.",
+   "",
+   "Zenginlik şartı zekât satırında geçtiği için sadakada da var sanılabilir; sadaka satırında böyle bir şart yok."
+  ],
+  "taktik": "“Yalnızca, sadece, her zaman” gibi kesin ifadeler taşıyan şıklara şüpheyle bak.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "İnfak",
+    "tanim": "Allah rızası için yapılan her türlü maddi harcama ve yardım; zekât ve sadakayı da kapsar."
+   },
+   {
+    "ad": "Sadaka",
+    "tanim": "Gönüllü olarak yapılan maddi ve manevi her iyilik (yardım etmek, güler yüz göstermek vb.)."
+   }
+  ]
+ },
+ {
+  "id": "din-014",
+  "ders": "din",
+  "unite": "Zekât ve Sadaka",
+  "kazanimKod": "DKAB.8.2.2",
+  "kazanimAd": "Zekât ve sadaka ibadetini ayet ve hadislerle açıklar.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "Zekât; temel ihtiyaçları ve borçları dışında <b>nisap</b> miktarı (80,18 gram altın veya bu değerde) mala sahip olan ve bu malının üzerinden bir yıl geçen Müslümanlara farzdır. Altın, para ve ticaret mallarında zekât oranı <b>kırkta bir</b>dir.<br><br>Kemal Bey’in bir yıldan uzun süredir 200 gram altın birikimi vardır. Kemal Bey’in 40 gram altın değerinde de borcu bulunmaktadır.<br><br><b>Buna göre Kemal Bey kaç gram altın değerinde zekât vermelidir?</b>",
+  "svg": "",
+  "siklar": [
+   "4",
+   "5",
+   "16",
+   "20"
+  ],
+  "dogru": 0,
+  "ipucu1": "Zekât bütün birikim üzerinden mi hesaplanır? Metnin ilk cümlesindeki “dışında” sözcüğüne dikkat et.",
+  "ipucu2": "Önce borcu birikimden çıkar. Kalan miktar nisabı geçiyor mu, kontrol et; sonra kırkta birini al.",
+  "cozum": [
+   "Borç düşülür: 200 − 40 = 160 gram.",
+   "160 gram, nisap olan 80,18 gramdan fazla; zekât gerekir.",
+   "Kırkta biri: 160 ÷ 40 = 4 gram.",
+   "Cevap: 4 gram."
+  ],
+  "tuzaklar": [
+   "",
+   "Borç düşülmeden 200 ÷ 40 yapılırsa 5 bulunur.",
+   "Borç düşülür ama oran onda bir (öşür oranı) alınırsa 160 ÷ 10 = 16 çıkar.",
+   "Hem borç unutulur hem oran onda bir alınırsa 200 ÷ 10 = 20 bulunur."
+  ],
+  "taktik": "Zekât hesabında sıra: borcu çıkar → nisabı kontrol et → kırka böl.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "Nisap",
+    "tanim": "Zekât vermek için sahip olunması gereken en az mal miktarı (80,18 gram altın veya değeri)."
+   },
+   {
+    "ad": "Zekât oranı",
+    "tanim": "Altın, para ve ticaret mallarında kırkta bir (%2,5)."
+   }
+  ]
+ },
+ {
+  "id": "din-015",
+  "ders": "din",
+  "unite": "Zekât ve Sadaka",
+  "kazanimKod": "DKAB.8.2.2",
+  "kazanimAd": "Zekât ve sadaka ibadetini ayet ve hadislerle açıklar.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Zekât vermekle yükümlü olan Sevim Hanım, zekâtını kime vereceğini düşünürken aklına şu kişiler gelmiştir:<br><br>• Emekli maaşıyla geçinen annesi<br>• Üniversitede okuyan oğlu<br>• İş arayan eşi<br>• Borcunu ödeyemeyen, ihtiyaç sahibi komşusu Hatice Hanım<br><br><b>Sevim Hanım zekâtını bu kişilerden hangisine verebilir?</b>",
+  "svg": "",
+  "siklar": [
+   "Annesine",
+   "Oğluna",
+   "Eşine",
+   "Komşusu Hatice Hanım’a"
+  ],
+  "dogru": 3,
+  "ipucu1": "Kişinin zaten bakmakla yükümlü olduğu yakınlarına zekât verilip verilemeyeceğini hatırla.",
+  "ipucu2": "Anne-baba, dede-nine, çocuk, torun ve eşe zekât verilmez. Listede bu gruba girmeyen kim?",
+  "cozum": [
+   "Kişi; annesine, babasına, çocuklarına, torunlarına ve eşine zekât veremez.",
+   "Anne, oğul ve eş bu gruptadır.",
+   "Komşu Hatice Hanım hem ihtiyaç sahibi hem borçludur; zekât verilebilecek kişilerdendir.",
+   "Cevap: D şıkkı."
+  ],
+  "tuzaklar": [
+   "Geliri az olduğu için uygun görünür; ama kişi annesine zekât veremez, ona bakmak zaten görevidir.",
+   "Öğrenci olması cazip kılar; ancak kişi kendi çocuğuna zekât veremez.",
+   "İşsiz olduğu için ihtiyaç sahibi sayılabilir; ama eşler birbirine zekât veremez.",
+   ""
+  ],
+  "taktik": "Önce “zekât verilemeyen yakınlar” listesini uygula, kalanlar arasından ihtiyaç sahibini seç.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Zekât verilmeyenler",
+    "tanim": "Anne-baba, dede-nine, çocuklar, torunlar, eş ve zenginler."
+   },
+   {
+    "ad": "Zekât verilenler",
+    "tanim": "Yoksullar, düşkünler, borçlular, yolda kalmışlar gibi ihtiyaç sahipleri (Tevbe suresi, 60. ayet)."
+   }
+  ]
+ },
+ {
+  "id": "din-016",
+  "ders": "din",
+  "unite": "Zekât ve Sadaka",
+  "kazanimKod": "DKAB.8.2.2",
+  "kazanimAd": "Zekât ve sadaka ibadetini ayet ve hadislerle açıklar.",
+  "zorluk": 1,
+  "tip": "uzun-metin",
+  "metin": "Öğretmen derste şu bilgiyi vermiştir:<br><br><i>“Peygamberimiz (s.a.v.), insanlara güler yüz göstermenin, yoldaki bir engeli kaldırmanın, yolunu kaybedene yol göstermenin de sadaka olduğunu bildirmiştir.”</i><br><br><b>Bu bilgiden sadaka ile ilgili aşağıdaki sonuçlardan hangisi çıkarılır?</b>",
+  "svg": "",
+  "siklar": [
+   "Sadaka verebilmek için zengin olmak gerekir.",
+   "Sadaka, yalnızca maddi yardımla sınırlı değildir.",
+   "Sadaka, yılın belirli bir zamanında verilir.",
+   "Sadaka, yalnızca yakın akrabaya verilir."
+  ],
+  "dogru": 1,
+  "ipucu1": "Sayılan üç davranışın ortak özelliğini düşün: Bunlar için para gerekir mi?",
+  "ipucu2": "Gülümsemek, engeli kaldırmak, yol göstermek… Hiçbiri para ya da mal vermek değil. Bu, sadakanın kapsamı hakkında ne söyler?",
+  "cozum": [
+   "Sayılan davranışların hiçbiri para ya da mal gerektirmiyor.",
+   "Demek ki sadaka, maddi olmayan iyilikleri de kapsar.",
+   "Cevap: B şıkkı."
+  ],
+  "tuzaklar": [
+   "Zekâttaki zenginlik şartı sadakaya taşınırsa seçilir; metin tam tersini gösteriyor.",
+   "",
+   "Zamanı belli olan zekât (yılda bir) ve fitre (ramazan) ile karıştırılırsa seçilir.",
+   "Metinde yolunu kaybeden, yani tanımadığımız kişiler de geçiyor; akraba şartı yok."
+  ],
+  "taktik": "Örnekler sayılıyorsa önce örneklerin ortak özelliğini bul; cevap o özelliğin genellemesidir.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Sadaka",
+    "tanim": "Allah rızası için gönüllü yapılan maddi ve manevi her türlü iyilik. Zamanı, miktarı ve zenginlik şartı yoktur."
+   }
+  ]
+ },
+ {
+  "id": "din-017",
+  "ders": "din",
+  "unite": "Zekât ve Sadaka",
+  "kazanimKod": "DKAB.8.2.3",
+  "kazanimAd": "Zekât, infak ve sadakanın bireysel ve toplumsal önemini fark eder.",
+  "zorluk": 3,
+  "tip": "uzun-metin",
+  "metin": "<i>“Zekât veren kişi, mala aşırı bağlanmaktan ve cimrilikten uzaklaşır. Zekât alan kişi ihtiyacını giderir; varlıklı insanlara karşı kıskançlık yerine sevgi duyar. Böylece zengin ile yoksul arasındaki mesafe azalır, toplumda kardeşlik duyguları güçlenir.”</i><br><br><b>Bu metinden aşağıdakilerden hangisi <u>çıkarılamaz</u>?</b>",
+  "svg": "",
+  "siklar": [
+   "Zekât, vereni bazı olumsuz duygulardan arındırır.",
+   "Zekât, toplumsal dayanışmayı güçlendirir.",
+   "Zekât, toplumdaki yoksulluğu tamamen ortadan kaldırır.",
+   "Zekât, hem veren hem de alan için faydalıdır."
+  ],
+  "dogru": 2,
+  "ipucu1": "Şıklardaki ifadelerin gücüne dikkat et. Metin “azalır” mı diyor, “biter” mi?",
+  "ipucu2": "Metinde “mesafe azalır” deniyor. Şıklardan biri bu ifadeyi olduğundan daha kesin bir hâle getirmiş.",
+  "cozum": [
+   "“Cimrilikten uzaklaşır” → A çıkarılır.",
+   "“Kardeşlik duyguları güçlenir” → B çıkarılır.",
+   "Veren cimrilikten kurtulur, alan ihtiyacını giderir → D çıkarılır.",
+   "Metin “mesafe azalır” diyor; “tamamen ortadan kalkar” demiyor.",
+   "Cevap: C şıkkı."
+  ],
+  "tuzaklar": [
+   "Metinde “arınma” sözcüğü geçmediği için çıkarılamaz sanılabilir; “cimrilikten uzaklaşır” bunu anlatır.",
+   "“Dayanışma” sözcüğü metinde yok diye işaretlenebilir; kardeşliğin güçlenmesi aynı anlamdadır.",
+   "",
+   "Metin iki tarafı ayrı cümlelerde anlattığı için bu genelleme fark edilmeyebilir."
+  ],
+  "taktik": "“Tamamen, hiç, asla” gibi sözcükler metinde yoksa o şık büyük olasılıkla çıkarılamaz.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Zekâtın toplumsal faydası",
+    "tanim": "Zengin ile yoksul arasındaki farkı azaltır, sosyal adaleti ve kardeşliği güçlendirir."
+   }
+  ]
+ },
+ {
+  "id": "din-018",
+  "ders": "din",
+  "unite": "Zekât ve Sadaka",
+  "kazanimKod": "DKAB.8.2.4",
+  "kazanimAd": "Hz. Şuayb’in (a.s.) hayatını ana hatlarıyla tanır.",
+  "zorluk": 1,
+  "tip": "uzun-metin",
+  "metin": "Hz. Şuayb (a.s.), Medyen halkına peygamber olarak gönderilmiştir. Bu halk, ticarette ölçü ve tartıda hile yapıyordu. Hz. Şuayb onları yalnızca Allah’a kulluk etmeye, ölçüyü ve tartıyı tam yapmaya çağırmıştır.<br><br><b>Buna göre manav Ali Bey’in aşağıdaki davranışlarından hangisi Hz. Şuayb’ın (a.s.) öğüdüne uygundur?</b>",
+  "svg": "",
+  "siklar": [
+   "Terazisini düzenli olarak kontrol ettirip ürünleri eksiksiz tartması",
+   "Ezik meyveleri kasanın alt kısmına yerleştirmesi",
+   "Ürünü daha çok satmak için tazeliği hakkında yanlış bilgi vermesi",
+   "Poşetin ağırlığını da ürün ağırlığına ekleyerek fiyat alması"
+  ],
+  "dogru": 0,
+  "ipucu1": "Hz. Şuayb’ın çağrısındaki anahtar söz “ölçü ve tartıyı tam yapmak”tır.",
+  "ipucu2": "Şıklardan üçünde müşteri bir şekilde aldatılıyor. Aldatmanın olmadığı, tartının doğru yapıldığı şıkkı bul.",
+  "cozum": [
+   "Hz. Şuayb, ticarette dürüst olmayı ve tartıyı tam yapmayı öğütlemiştir.",
+   "B, C ve D şıklarında müşteri aldatılıyor.",
+   "A şıkkında tartı doğru ve eksiksiz yapılıyor.",
+   "Cevap: A şıkkı."
+  ],
+  "tuzaklar": [
+   "",
+   "Tartıyla doğrudan ilgili görünmediği için zararsız sanılabilir; ama kusuru gizlemek de ticarette hiledir.",
+   "Satışı artırmak iyi bir amaç gibi durur; ancak yalan söylemek aldatmadır.",
+   "Küçük bir ayrıntı gibi görünür; oysa bu, tartıda hile yapmanın tam örneğidir."
+  ],
+  "taktik": "Davranış sorularında önce metindeki ilkeyi tek cümleyle yaz, sonra şıkları bu ilkeye göre test et.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Hz. Şuayb (a.s.)",
+    "tanim": "Medyen halkına gönderilen peygamber. Halkını Allah’a kulluğa, ölçü ve tartıda dürüstlüğe çağırmıştır."
+   }
+  ]
+ },
+ {
+  "id": "din-019",
+  "ders": "din",
+  "unite": "Zekât ve Sadaka",
+  "kazanimKod": "DKAB.8.2.5",
+  "kazanimAd": "Maûn suresini okur, anlamını söyler.",
+  "zorluk": 3,
+  "tip": "uzun-metin",
+  "metin": "<i>“Gördün mü, o hesap ve ceza gününü yalanlayanı! İşte o, yetimi itip kakan, yoksulu doyurmaya teşvik etmeyen kimsedir. Yazıklar olsun o namaz kılanlara ki, onlar namazlarını ciddiye almazlar. Onlar gösteriş yaparlar. Ufacık bir yardıma bile engel olurlar.”</i> (Mâûn suresi, 1-7. ayetler)<br><br><b>Bu sureden aşağıdaki yargılardan hangisine <u>ulaşılamaz</u>?</b>",
+  "svg": "",
+  "siklar": [
+   "Yetim ve yoksulları gözetmek, inanan insandan beklenen bir davranıştır.",
+   "İbadetler gösteriş için değil, samimiyetle yapılmalıdır.",
+   "Ahirete inanmamak, kişinin davranışlarını olumsuz etkileyebilir.",
+   "İbadetlerini yerine getiren kişinin başkalarına yardım etme sorumluluğu kalmaz."
+  ],
+  "dogru": 3,
+  "ipucu1": "Sure hem ibadetteki hem de insanlara karşı davranışlardaki kusurları eleştiriyor. Şıkları bu iki yönle karşılaştır.",
+  "ipucu2": "Surede namaz kıldığı hâlde yardıma engel olanlar eleştiriliyor. Bu eleştiriyle çelişen şık hangisi?",
+  "cozum": [
+   "Yetimi itip kakmak ve yoksulu doyurmamak eleştiriliyor → A’ya ulaşılır.",
+   "Gösteriş yapanlar eleştiriliyor → B’ye ulaşılır.",
+   "Bu davranışlar hesap gününü yalanlayana ait gösteriliyor → C’ye ulaşılır.",
+   "Namaz kılıp yardıma engel olanlar kınanıyor; yani ibadet, yardım sorumluluğunu kaldırmaz.",
+   "Cevap: D şıkkı."
+  ],
+  "tuzaklar": [
+   "Olumsuz kök gözden kaçarsa surenin ilk mesajı olan bu şık seçilir.",
+   "“Samimiyet” sözcüğü surede geçmediği için ulaşılamaz sanılabilir; gösterişin eleştirilmesi bunu anlatır.",
+   "İnanç ile davranış arasındaki bağ fark edilmezse bu yargı çıkarılamaz sanılır.",
+   ""
+  ],
+  "taktik": "Eleştirilen davranışı tersine çevir: Surede kınanan şeyin tersi, surenin öğüdüdür.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Mâûn suresi",
+    "tanim": "Kur’an’ın 107. suresi, 7 ayettir. Yetimi ve yoksulu gözetmeyi, ibadette samimiyeti ve yardımlaşmayı öğütler."
+   }
+  ]
+ },
+ {
+  "id": "din-020",
+  "ders": "din",
+  "unite": "Zekât ve Sadaka",
+  "kazanimKod": "DKAB.8.2.2",
+  "kazanimAd": "Zekât ve sadaka ibadetini ayet ve hadislerle açıklar.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "<table class=\"t\"><tr><th>Mal türü</th><th>Verilecek zekât</th></tr><tr><td>Altın, para, ticaret malları</td><td>Kırkta bir</td></tr><tr><td>Yağmur suyuyla sulanan toprak ürünleri</td><td>Onda bir</td></tr><tr><td>Masraf yapılarak sulanan toprak ürünleri</td><td>Yirmide bir</td></tr></table>Çiftçi Mehmet Bey, yalnızca yağmur suyuyla sulanan tarlasından bu yıl 6000 kg buğday elde etmiştir.<br><br><b>Mehmet Bey’in bu üründen vereceği zekâtın adı ve miktarı aşağıdakilerden hangisidir?</b>",
+  "svg": "",
+  "siklar": [
+   "Öşür – 150 kg",
+   "Öşür – 600 kg",
+   "Fitre – 600 kg",
+   "Nisap – 300 kg"
+  ],
+  "dogru": 1,
+  "ipucu1": "Önce buğdayın tabloda hangi satıra girdiğini bul. Sonra toprak ürünlerinin zekâtına verilen özel adı hatırla.",
+  "ipucu2": "Tarla yağmur suyuyla sulanıyor; oran onda bir. Toprak ürünlerinin zekâtının adı da “onda bir” anlamına gelir.",
+  "cozum": [
+   "Buğday toprak ürünüdür ve tarla yağmur suyuyla sulanıyor.",
+   "Tabloya göre oran onda birdir: 6000 ÷ 10 = 600 kg.",
+   "Toprak ürünlerinden verilen zekâta öşür denir.",
+   "Cevap: Öşür – 600 kg."
+  ],
+  "tuzaklar": [
+   "Ad doğru; ama altın ve para için geçerli kırkta bir oranı kullanılırsa 150 kg çıkar.",
+   "",
+   "Miktar doğru; ama fitre, ramazan ayında verilen ayrı bir sadakadır.",
+   "Nisap, zekât için gereken en az mal miktarıdır; ayrıca yirmide bir oranı masraflı sulama içindir."
+  ],
+  "taktik": "İki bilgili şıklarda (ad – miktar) önce emin olduğun bilgiyle iki şıkkı ele, sonra diğerine bak.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "Öşür",
+    "tanim": "Toprak ürünlerinden verilen zekât. Yağmurla sulanan ürünlerde onda bir oranındadır."
+   }
+  ]
+ },
+ {
+  "id": "din-021",
+  "ders": "din",
+  "unite": "Din ve Hayat",
+  "kazanimKod": "DKAB.8.3.2",
+  "kazanimAd": "İslam dininin can, nesil, akıl, mal ve din emniyetiyle ilgili ortaya koyduğu ilke ve hedefleri analiz eder.",
+  "zorluk": 1,
+  "tip": "uzun-metin",
+  "metin": "<i>“… Kim, bir insanı, bir can karşılığı veya yeryüzünde bozgunculuk çıkarmak karşılığı olmaksızın öldürürse, o sanki bütün insanları öldürmüştür. Her kim de birini yaşatırsa sanki bütün insanları yaşatmıştır. …”</i> (Mâide suresi, 32. ayet)<br><br><b>Bu ayet, İslam dininin korunmasını amaçladığı temel haklardan öncelikle hangisiyle ilgilidir?</b>",
+  "svg": "",
+  "siklar": [
+   "Can",
+   "Mal",
+   "Akıl",
+   "Nesil"
+  ],
+  "dogru": 0,
+  "ipucu1": "Ayette neyin korunması isteniyor? “Öldürmek” ve “yaşatmak” sözcüklerine bak.",
+  "ipucu2": "Ayet, haksız yere bir insanı öldürmeyi çok büyük bir suç sayıyor. Bu, insanın hangi hakkını korur?",
+  "cozum": [
+   "Ayet, haksız yere insan öldürmeyi yasaklıyor ve yaşatmayı övüyor.",
+   "Bu, insanın yaşama hakkının korunmasıdır.",
+   "Cevap: Can."
+  ],
+  "tuzaklar": [
+   "",
+   "Mal emniyeti hırsızlık, haksız kazanç gibi konularla ilgilidir; ayette bunlar geçmiyor.",
+   "Akıl emniyeti zararlı alışkanlıklardan korunmayla ilgilidir.",
+   "“Bütün insanlar” ifadesi gelecek nesilleri çağrıştırabilir; nesil emniyeti ise aile kurumunun korunmasıyla ilgilidir."
+  ],
+  "taktik": "Beş temel hak sorularında metindeki eylemi bul (öldürmek, çalmak, içki içmek…) ve neye zarar verdiğini sor.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Can emniyeti",
+    "tanim": "İslam’ın korunmasını amaçladığı beş temel değerden biri: insanın yaşama hakkı dokunulmazdır."
+   }
+  ]
+ },
+ {
+  "id": "din-022",
+  "ders": "din",
+  "unite": "Din ve Hayat",
+  "kazanimKod": "DKAB.8.3.2",
+  "kazanimAd": "İslam dininin can, nesil, akıl, mal ve din emniyetiyle ilgili ortaya koyduğu ilke ve hedefleri analiz eder.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "Bir öğrenci, İslam dininin korunmasını amaçladığı temel değerlerle ilgili şu tabloyu hazırlamıştır:<table class=\"t\"><tr><th>No</th><th>Korunan değer</th><th>Örnek</th></tr><tr><td>1</td><td>Akıl</td><td>Alkol ve uyuşturucu gibi zararlı alışkanlıkların yasaklanması</td></tr><tr><td>2</td><td>Mal</td><td>Hırsızlık ve rüşvet gibi haksız kazanç yollarının yasaklanması</td></tr><tr><td>3</td><td>Nesil</td><td>İş yerlerinde iş sağlığı ve güvenliği önlemlerinin alınması</td></tr><tr><td>4</td><td>Din</td><td>İnsanların inançlarını baskı görmeden yaşayabilmesi</td></tr></table><b>Öğrenci, numaralanmış eşleştirmelerden hangisinde hata yapmıştır?</b>",
+  "svg": "",
+  "siklar": [
+   "1",
+   "2",
+   "3",
+   "4"
+  ],
+  "dogru": 2,
+  "ipucu1": "Her satırda “Bu örnek gerçekleşmezse insanın en başta nesi zarar görür?” diye sor.",
+  "ipucu2": "İş güvenliği önlemleri alınmazsa çalışanın hayatı tehlikeye girer. Bu, tablodaki değerle uyuşuyor mu?",
+  "cozum": [
+   "1: Zararlı alışkanlıklar sağlıklı düşünmeyi bozar → akıl. Doğru.",
+   "2: Hırsızlık ve rüşvet başkasının malına zarar verir → mal. Doğru.",
+   "3: İş güvenliği, çalışanın hayatını korur → can olmalıydı. Hatalı.",
+   "4: İnancını özgürce yaşamak → din. Doğru.",
+   "Cevap: 3."
+  ],
+  "tuzaklar": [
+   "Alkol bedene de zarar verdiği için “can olmalıydı” diye düşünülebilir; ancak zararlı alışkanlıklar programda akıl emniyetiyle ele alınır.",
+   "Rüşvet ahlaki bir konu gibi görünüp “din” ile karıştırılabilir; ama haksız kazanç mal emniyetiyle ilgilidir.",
+   "",
+   "Din emniyeti az bilindiği için hatalı sanılabilir; inanç özgürlüğü tam olarak bu değerle ilgilidir."
+  ],
+  "taktik": "Eşleştirme: can ↔ iş güvenliği, mal ↔ haksız kazanç, akıl ↔ zararlı alışkanlıklar, nesil ↔ aile.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Beş temel değer",
+    "tanim": "İslam’ın korunmasını amaçladığı can, nesil, akıl, mal ve din emniyeti."
+   }
+  ]
+ },
+ {
+  "id": "din-023",
+  "ders": "din",
+  "unite": "Din ve Hayat",
+  "kazanimKod": "DKAB.8.3.2",
+  "kazanimAd": "İslam dininin can, nesil, akıl, mal ve din emniyetiyle ilgili ortaya koyduğu ilke ve hedefleri analiz eder.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Okulda düzenlenen seminerde rehber öğretmen şunları söylemiştir:<br><br><i>“Alkol ve uyuşturucu maddeler, insanın sağlıklı düşünmesini engeller. Bu maddelerin etkisindeki kişi doğruyu yanlıştan ayırmakta zorlanır, sonradan pişman olacağı davranışlarda bulunabilir.”</i><br><br><b>İslam dininin bu tür maddeleri yasaklaması, konuşmada vurgulanan yönüyle öncelikle hangi temel değeri korumaya yöneliktir?</b>",
+  "svg": "",
+  "siklar": [
+   "Mal",
+   "Nesil",
+   "Din",
+   "Akıl"
+  ],
+  "dogru": 3,
+  "ipucu1": "Konuşmada bu maddelerin insanın hangi yeteneğine zarar verdiği vurgulanıyor?",
+  "ipucu2": "“Sağlıklı düşünme” ve “doğruyu yanlıştan ayırma” insanın hangi özelliğiyle ilgilidir?",
+  "cozum": [
+   "Konuşmada düşünme ve doğruyu yanlıştan ayırma yeteneğinin bozulduğu vurgulanıyor.",
+   "Bu yetenekler akılla ilgilidir.",
+   "Zararlı alışkanlıkların yasaklanması aklı korumaya yöneliktir.",
+   "Cevap: Akıl."
+  ],
+  "tuzaklar": [
+   "Bu maddelere para harcandığı düşünülürse seçilir; ama konuşmada maddi zarardan söz edilmiyor.",
+   "Zararlı alışkanlıklar aileyi de etkiler; ancak metindeki vurgu düşünme yeteneğidir.",
+   "Yasak dinî bir hüküm olduğu için “din” cazip gelir; soru hangi değerin korunduğunu soruyor.",
+   ""
+  ],
+  "taktik": "“Vurgulanan yönüyle” ifadesi varsa genel bilgine değil, metinde altı çizilen noktaya göre cevap ver.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Akıl emniyeti",
+    "tanim": "İslam, insanın sağlıklı düşünmesini engelleyen alkol, uyuşturucu gibi zararlı alışkanlıkları yasaklayarak aklı korur."
+   }
+  ]
+ },
+ {
+  "id": "din-024",
+  "ders": "din",
+  "unite": "Din ve Hayat",
+  "kazanimKod": "DKAB.8.3.2",
+  "kazanimAd": "İslam dininin can, nesil, akıl, mal ve din emniyetiyle ilgili ortaya koyduğu ilke ve hedefleri analiz eder.",
+  "zorluk": 3,
+  "tip": "uzun-metin",
+  "metin": "Bir cuma hutbesinde şu öğütler verilmiştir:<br><br><i>“Tartıda hile yapmayın, kimsenin emeğinin karşılığını eksik vermeyin. Trafik kurallarına uyun; kendinizin ve başkalarının hayatını tehlikeye atmayın. Aile bağlarınızı güçlü tutun, çocuklarınızı sevgi ve güzel ahlakla yetiştirin.”</i><br><br><b>Bu hutbede, İslam’ın korunmasını amaçladığı temel değerlerden hangisine <u>değinilmemiştir</u>?</b>",
+  "svg": "",
+  "siklar": [
+   "Mal",
+   "Akıl",
+   "Can",
+   "Nesil"
+  ],
+  "dogru": 1,
+  "ipucu1": "Hutbede üç ayrı öğüt var. Her öğüdü bir temel değerle eşleştir.",
+  "ipucu2": "İlk öğüt kazançla, ikincisi hayatla, üçüncüsü aileyle ilgili. Şıklardan hangisi eşleşmeden kaldı?",
+  "cozum": [
+   "Tartıda hile ve emeğin karşılığı → mal.",
+   "Trafik kuralları ve hayatı tehlikeye atmamak → can.",
+   "Aile bağları ve çocuk yetiştirmek → nesil.",
+   "Akılla ilgili (zararlı alışkanlıklar gibi) bir öğüt yok.",
+   "Cevap: Akıl."
+  ],
+  "tuzaklar": [
+   "“Mal” sözcüğü metinde geçmediği için değinilmemiş sanılabilir; tartıda hile haksız kazançtır.",
+   "",
+   "Trafik örneği can emniyetiyle ilişkilendirilemezse seçilir.",
+   "Aile ve çocuk yetiştirmenin nesil emniyeti olduğu hatırlanmazsa seçilir."
+  ],
+  "taktik": "Metindeki her cümlenin yanına ilgili değeri yaz; şıklarda karşılığı kalmayan cevaptır.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Nesil emniyeti",
+    "tanim": "Aile kurumunun korunması ve sağlıklı nesiller yetiştirilmesi."
+   },
+   {
+    "ad": "Mal emniyeti",
+    "tanim": "Emeğin ve mülkiyetin korunması; hırsızlık, hile gibi haksız kazancın yasaklanması."
+   }
+  ]
+ },
+ {
+  "id": "din-025",
+  "ders": "din",
+  "unite": "Din ve Hayat",
+  "kazanimKod": "DKAB.8.3.1",
+  "kazanimAd": "Din, birey ve toplum arasındaki ilişkiyi yorumlar.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "<i>“Namaz için camide bir araya gelen insanlar birbirinin hâlini hatırını sorar. Oruç tutan, yoksulun durumunu daha iyi anlar. Zekât veren, ihtiyaç sahibinin yükünü hafifletir. Bayramlarda küsler barışır, büyükler ziyaret edilir.”</i><br><br><b>Bu metinde dinin aşağıdaki yönlerinden hangisi vurgulanmaktadır?</b>",
+  "svg": "",
+  "siklar": [
+   "Toplumsal birlik ve dayanışmayı güçlendirmesi",
+   "İnsanın evreni ve doğayı tanımasına yardım etmesi",
+   "İbadetlerin yalnızca kişinin kendisine fayda sağlaması",
+   "İnsanın ölüm sonrasıyla ilgili sorularına cevap vermesi"
+  ],
+  "dogru": 0,
+  "ipucu1": "Her cümlede ibadeti yapan kişi, başka insanlarla nasıl bir ilişki kuruyor?",
+  "ipucu2": "Hâl hatır sormak, yoksulu anlamak, yük hafifletmek, barışmak… Bunların hepsi insanlar arası ilişkilerle ilgili.",
+  "cozum": [
+   "Metindeki her örnekte ibadet, insanları birbirine yaklaştırıyor.",
+   "Bu, dinin toplumu birleştiren ve dayanışmayı artıran yönüdür.",
+   "Cevap: A şıkkı."
+  ],
+  "tuzaklar": [
+   "",
+   "Din insanı düşünmeye yöneltir; ama metinde evren ya da doğa geçmiyor.",
+   "Metinde ibadetler sayıldığı için cazip gelir; oysa metin ibadetlerin başkalarına faydasını anlatıyor, “yalnızca” ifadesi yanlış.",
+   "Dinin önemli bir işlevidir; ancak metinde ahiretle ilgili bir ifade yok."
+  ],
+  "taktik": "Ana fikir sorularında bütün cümlelerde ortak olan düşünceyi bul; tek bir cümleye uyan şık yetmez.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Din ve toplum",
+    "tanim": "Din; yardımlaşma, kardeşlik ve adalet gibi değerlerle toplumda birlik ve huzuru güçlendirir."
+   }
+  ]
+ },
+ {
+  "id": "din-026",
+  "ders": "din",
+  "unite": "Din ve Hayat",
+  "kazanimKod": "DKAB.8.3.3",
+  "kazanimAd": "Hz. Yusuf’un (a.s.) örnek hayatından ilkeler çıkarır.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Hz. Yusuf (a.s.), küçük yaşta kardeşleri tarafından kıskanılarak bir kuyuya atılmıştır. Yıllar sonra Mısır’da yönetici olduğunda, kıtlık yüzünden yardım istemeye gelen kardeşleriyle karşılaşmıştır. Kardeşleri onu tanıyınca yaptıklarından pişman olmuştur. Hz. Yusuf ise onları kınamamış, bağışlamış ve ailesini yanına almıştır.<br><br><b>Hz. Yusuf’un (a.s.) kardeşlerine karşı bu tutumunda aşağıdaki erdemlerden hangisi ön plana çıkmaktadır?</b>",
+  "svg": "",
+  "siklar": [
+   "Cesaret",
+   "Çalışkanlık",
+   "Affedicilik",
+   "Tevekkül"
+  ],
+  "dogru": 2,
+  "ipucu1": "Soru yalnızca “kardeşlerine karşı tutumunu” soruyor. Metnin son cümlesine odaklan.",
+  "ipucu2": "Gücü yettiği hâlde kendisine kötülük yapanları cezalandırmayıp bağışlayan kişinin bu davranışına ne denir?",
+  "cozum": [
+   "Hz. Yusuf güçlü konumdayken kardeşleriyle karşılaşıyor.",
+   "Onları kınamıyor ve bağışlıyor.",
+   "Kötülük yapanı bağışlamak affediciliktir.",
+   "Cevap: Affedicilik."
+  ],
+  "tuzaklar": [
+   "Yönetici olması güç ve cesareti çağrıştırır; ama sorulan tutum bağışlamadır.",
+   "Yöneticiliğe yükselmesi çalışkanlığını düşündürür; soru kardeşlerine davranışını soruyor.",
+   "",
+   "Hz. Yusuf’un hayatında Allah’a güven önemli yer tutar; ancak bu olayda öne çıkan, kardeşlerini bağışlamasıdır."
+  ],
+  "taktik": "Soru kökünde sınırlayan ifadeyi (“kardeşlerine karşı bu tutumu”) bul; cevabı yalnızca o bölümden çıkar.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Hz. Yusuf (a.s.)",
+    "tanim": "Hz. Yakub’un oğlu. Kuyuya atılmış, Mısır’da iftiraya uğrayıp zindana girmiş, sabrı ve dürüstlüğüyle yönetici olmuş, kardeşlerini affetmiştir."
+   }
+  ]
+ },
+ {
+  "id": "din-027",
+  "ders": "din",
+  "unite": "Din ve Hayat",
+  "kazanimKod": "DKAB.8.3.4",
+  "kazanimAd": "Asr suresini okur, anlamını söyler.",
+  "zorluk": 1,
+  "tip": "uzun-metin",
+  "metin": "<i>“Andolsun zamana ki, insan gerçekten ziyan içindedir. Ancak iman edip de salih ameller işleyenler, birbirlerine hakkı tavsiye edenler, birbirlerine sabrı tavsiye edenler başka.”</i> (Asr suresi, 1-3. ayetler)<br><br><b>Aşağıdakilerden hangisi, bu sureye göre ziyandan kurtulan insanların özelliklerinden biri <u>değildir</u>?</b>",
+  "svg": "",
+  "siklar": [
+   "İman etmek",
+   "İyi ve yararlı işler yapmak",
+   "Birbirine doğruyu ve sabrı öğütlemek",
+   "Çok mal ve servet sahibi olmak"
+  ],
+  "dogru": 3,
+  "ipucu1": "Surede “ancak” sözcüğünden sonra sayılan özellikleri tek tek işaretle.",
+  "ipucu2": "Dört özellik sayılıyor: iman, salih amel, hakkı tavsiye, sabrı tavsiye. Şıklardan hangisi bu listede yok?",
+  "cozum": [
+   "Surede sayılanlar: iman etmek, salih amel işlemek, hakkı ve sabrı tavsiye etmek.",
+   "“Salih amel” iyi ve yararlı iş demektir.",
+   "Mal ve servetten surede söz edilmiyor.",
+   "Cevap: D şıkkı."
+  ],
+  "tuzaklar": [
+   "Olumsuz kök gözden kaçarsa surede ilk sayılan özellik işaretlenir.",
+   "“Salih amel” ifadesinin anlamı bilinmezse bu şık surede yok sanılır.",
+   "Hak ve sabır tek şıkta birleştirildiği için farklı bir ifade gibi görünebilir.",
+   ""
+  ],
+  "taktik": "Listeleme yapan metinlerde maddeleri numaralandır; şıkları bu numaralarla eşleştir.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Asr suresi",
+    "tanim": "Kur’an’ın 103. suresi, 3 ayettir. Zamanın değerini; iman, salih amel, hakkı ve sabrı tavsiye etmenin önemini anlatır."
+   },
+   {
+    "ad": "Salih amel",
+    "tanim": "Allah’ın rızasına uygun, iyi ve yararlı her türlü iş."
+   }
+  ]
+ },
+ {
+  "id": "din-028",
+  "ders": "din",
+  "unite": "Din ve Hayat",
+  "kazanimKod": "DKAB.8.3.3",
+  "kazanimAd": "Hz. Yusuf’un (a.s.) örnek hayatından ilkeler çıkarır.",
+  "zorluk": 3,
+  "tip": "grafik-tablo",
+  "metin": "Hz. Yusuf’un (a.s.) hayatından bazı olaylar karışık olarak verilmiştir:<table class=\"t\"><tr><th>No</th><th>Olay</th></tr><tr><td>I</td><td>Mısır’da hazinelerin yönetimiyle görevlendirilmesi</td></tr><tr><td>II</td><td>Kardeşleri tarafından kuyuya atılması</td></tr><tr><td>III</td><td>İftiraya uğrayarak suçsuz yere zindana konulması</td></tr><tr><td>IV</td><td>Bir kervan tarafından bulunup Mısır’a götürülmesi</td></tr></table><b>Bu olayların oluş sırası aşağıdakilerden hangisidir?</b>",
+  "svg": "",
+  "siklar": [
+   "II – III – IV – I",
+   "II – IV – III – I",
+   "IV – II – III – I",
+   "II – IV – I – III"
+  ],
+  "dogru": 1,
+  "ipucu1": "Önce ilk ve son olayı belirle; sonra aradaki iki olayın sırasını düşün.",
+  "ipucu2": "Kıssa kuyuyla başlar. Hz. Yusuf zindana Mısır’da atılmıştı; öyleyse Mısır’a gidişi zindandan önce olmalı.",
+  "cozum": [
+   "Kıssa, kardeşlerinin onu kuyuya atmasıyla başlar (II).",
+   "Bir kervan onu bulur ve Mısır’a götürür (IV).",
+   "Mısır’da iftiraya uğrar ve zindana konulur (III).",
+   "Zindandan çıkınca hazinelerin yönetimine getirilir (I).",
+   "Cevap: II – IV – III – I."
+  ],
+  "tuzaklar": [
+   "Kuyu ve zindan benzer “sıkıntı” olayları olduğu için art arda düşünülürse bu sıra çıkar.",
+   "",
+   "Kervan olayı kuyudan önce sanılırsa seçilir; kervan onu kuyuda bulmuştur.",
+   "Yöneticiliğin zindandan önce olduğu sanılırsa seçilir; oysa yöneticilik zindan sonrasıdır."
+  ],
+  "taktik": "Sıralama sorularında “neden-sonuç” bağı kur: Bir olay olmadan diğeri olamıyorsa o önce gelir.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Hz. Yusuf kıssası",
+    "tanim": "Kuyu → Mısır’a götürülme → iftira ve zindan → yöneticilik → kardeşleriyle buluşma ve onları affetme."
+   }
+  ]
+ },
+ {
+  "id": "din-029",
+  "ders": "din",
+  "unite": "Hz. Muhammed’in Örnekliği",
+  "kazanimKod": "DKAB.8.4.1",
+  "kazanimAd": "Hz. Muhammed’in (s.a.v.) doğruluğu ve güvenilir kişiliği ile peygamberlerin özellikleri arasında ilişki kurar.",
+  "zorluk": 1,
+  "tip": "uzun-metin",
+  "metin": "Kâbe onarılırken Hacerülesved’i yerine hangi kabilenin koyacağı konusunda anlaşmazlık çıkmıştı. Kabileler, Kâbe’ye ilk girecek kişinin hakemliğini kabul edeceklerini söylediler. İçeri giren kişi Hz. Muhammed (s.a.v.) olunca hepsi sevinerek “İşte el-Emin! Onun vereceği karara razıyız.” dediler.<br><br><b>Bu olay, Hz. Muhammed’in (s.a.v.) aşağıdaki özelliklerinden hangisini göstermektedir?</b>",
+  "svg": "",
+  "siklar": [
+   "Cesur olmasını",
+   "Cömert olmasını",
+   "Güvenilir olmasını",
+   "Sabırlı olmasını"
+  ],
+  "dogru": 2,
+  "ipucu1": "Anlaşmazlık içindeki kabileler onun kararına neden hemen razı oldu? İnsanlar kimin kararını gönül rahatlığıyla kabul eder?",
+  "ipucu2": "Mekkelilerin ona verdiği lakaba dikkat et: “el-Emin” ne anlama gelir?",
+  "cozum": [
+   "Mekkeliler ona “el-Emin” yani “güvenilir kişi” diyordu.",
+   "Herkesin onun hakemliğine razı olması, ona duyulan güveni gösterir.",
+   "Cevap: Güvenilir olması."
+  ],
+  "tuzaklar": [
+   "Anlaşmazlığı çözmek cesaret ister gibi görünür; ama olayda vurgulanan şey “el-Emin” lakabıdır.",
+   "Cömertlik onun bilinen bir özelliğidir; ancak bu olayda mal paylaşımı yok.",
+   "",
+   "Sabır da peygamberlerin özelliğidir; fakat metinde sıkıntıya katlanma anlatılmıyor."
+  ],
+  "taktik": "Metindeki özel sözcüklere (el-Emin gibi) dikkat et; cevap çoğu zaman o sözcüğün anlamındadır.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "el-Emin",
+    "tanim": "“Güvenilir kişi” demektir. Mekkelilerin, peygamberlikten önce de Hz. Muhammed’e (s.a.v.) verdiği lakap."
+   }
+  ]
+ },
+ {
+  "id": "din-030",
+  "ders": "din",
+  "unite": "Hz. Muhammed’in Örnekliği",
+  "kazanimKod": "DKAB.8.4.3",
+  "kazanimAd": "Hz. Muhammed’in (s.a.v.) istişareye verdiği önemi ortaya koyan örnek olaylardan hareketle gündelik hayatla ilgili çıkarımlarda bulunur.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Büyük bir ordunun Medine’ye doğru geldiği öğrenilince Hz. Muhammed (s.a.v.) arkadaşlarını toplayıp şehrin nasıl savunulacağını onlara sordu. Selman-ı Farisi, şehrin çevresine hendek kazılmasını önerdi. Bu görüş uygun bulundu ve uygulandı.<br><br><b>Sınıf başkanı Ece’nin aşağıdaki davranışlarından hangisi, bu olaydaki tutumu örnek aldığını gösterir?</b>",
+  "svg": "",
+  "siklar": [
+   "Sınıf gezisinin yerini belirlemeden önce arkadaşlarının önerilerini dinlemesi",
+   "Gezi yerine tek başına karar verip sonucu sınıfa duyurması",
+   "Yalnızca en yakın arkadaşının istediği yeri seçmesi",
+   "Farklı görüşler çıkınca geziyi iptal etmesi"
+  ],
+  "dogru": 0,
+  "ipucu1": "Peygamberimiz karar vermeden önce ne yaptı? Bu davranışın adını hatırla.",
+  "ipucu2": "Olayda karar öncesi bütün arkadaşlarına danışılıyor ve uygun görüş uygulanıyor. Ece’nin hangi davranışı buna benziyor?",
+  "cozum": [
+   "Peygamberimiz karar vermeden önce arkadaşlarına danıştı; buna istişare denir.",
+   "Ece’nin arkadaşlarının önerilerini dinlemesi istişaredir.",
+   "Cevap: A şıkkı."
+  ],
+  "tuzaklar": [
+   "",
+   "Lider olan kişinin tek başına karar vermesi doğal görünebilir; ama olayda tam tersi yapılıyor.",
+   "Birine danışmış gibi görünür; ancak istişarede herkesin görüşüne açık olunur, kayırma yapılmaz.",
+   "Tartışmayı önlemek için iyi bir yol gibi durur; oysa istişarenin amacı farklı görüşlerden en uygununu bulmaktır."
+  ],
+  "taktik": "“Örnek alma” sorularında önce olaydaki davranışın adını koy (istişare), sonra aynı davranışı şıklarda ara.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "İstişare",
+    "tanim": "Karar vermeden önce konuyu bilen kişilerin görüşünü almak. Hz. Muhammed (s.a.v.) önemli işlerde arkadaşlarına danışırdı."
+   }
+  ]
+ },
+ {
+  "id": "din-031",
+  "ders": "din",
+  "unite": "Hz. Muhammed’in Örnekliği",
+  "kazanimKod": "DKAB.8.4.2",
+  "kazanimAd": "Hz. Muhammed’in (s.a.v.) merhametli ve affedici oluşunu davranışlarında yansıtmaya özen gösterir.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Mekke fethedildiğinde, yıllarca Hz. Muhammed’e (s.a.v.) ve arkadaşlarına eziyet etmiş olan Mekkeliler endişe içinde bekliyordu. Peygamberimiz ise onlardan intikam almadı; hepsinin serbest olduğunu bildirdi.<br><br><b>Bu olayı örnek alan bir öğrenciden aşağıdaki davranışlardan hangisi beklenir?</b>",
+  "svg": "",
+  "siklar": [
+   "Kendisini üzen arkadaşıyla bir daha hiç konuşmaması",
+   "Hatasını anlasın diye arkadaşını herkesin önünde eleştirmesi",
+   "Aynı davranışı ona yapabileceği günü beklemesi",
+   "Kendisinden özür dileyen arkadaşını bağışlayıp kin tutmaması"
+  ],
+  "dogru": 3,
+  "ipucu1": "Peygamberimiz gücü elindeyken kendisine kötülük yapanlara nasıl davrandı?",
+  "ipucu2": "Olayda intikam alınmıyor, bağışlanıyor. Şıklardan hangisinde karşılık verme ya da cezalandırma yok?",
+  "cozum": [
+   "Peygamberimiz güçlü olduğu hâlde intikam almadı, affetti.",
+   "A, B ve C şıklarında küsme, utandırma ya da karşılık verme var.",
+   "D şıkkında bağışlama ve kin tutmama var.",
+   "Cevap: D şıkkı."
+  ],
+  "tuzaklar": [
+   "Kavga etmediği için olgun bir davranış sanılabilir; ama küsmek affetmek değildir.",
+   "“Hatasını anlasın” amacı iyi niyetli görünür; ancak başkalarının önünde utandırmak merhametle bağdaşmaz.",
+   "Hemen karşılık vermediği için sabırlı görünür; aslında intikam duygusunu sürdürmektir.",
+   ""
+  ],
+  "taktik": "Affetme sorularında “küsme, utandırma, intikam” içeren şıkları ele; geriye bağışlama kalır.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Affedicilik",
+    "tanim": "Gücü yettiği hâlde kendisine yapılan kötülüğü bağışlamak. Peygamberimiz Mekke’nin fethinde bunun en güzel örneğini vermiştir."
+   }
+  ]
+ },
+ {
+  "id": "din-032",
+  "ders": "din",
+  "unite": "Hz. Muhammed’in Örnekliği",
+  "kazanimKod": "DKAB.8.4.4",
+  "kazanimAd": "Hz. Muhammed’in (s.a.v.) cesaret ve kararlılığını örnek olaylarla açıklar.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Mekkeli müşrikler, Hz. Muhammed’in (s.a.v.) İslam’a davetten vazgeçmesi için amcası Ebu Talib aracılığıyla ona mal ve makam önerdiler. Peygamberimiz, <i>“Güneşi sağ elime, ayı sol elime verseler yine de davamdan vazgeçmem.”</i> anlamında bir cevap verdi.<br><br><b>Hz. Muhammed’in (s.a.v.) bu cevabı, onun hangi özelliğini ortaya koymaktadır?</b>",
+  "svg": "",
+  "siklar": [
+   "Affedici oluşunu",
+   "Davasındaki kararlılığını",
+   "İstişareye önem vermesini",
+   "Cömertliğini"
+  ],
+  "dogru": 1,
+  "ipucu1": "Cevaptaki “vazgeçmem” sözüne odaklan. Çok büyük teklifler karşısında bile yolundan dönmemek hangi özelliktir?",
+  "ipucu2": "Mal ve makam teklifini reddedip görevini sürdüreceğini söylüyor. Bu, amacına bağlılığı gösteren bir özelliktir.",
+  "cozum": [
+   "Peygamberimize görevini bırakması için büyük teklifler yapılıyor.",
+   "O, hiçbir teklifin kendisini davasından döndüremeyeceğini söylüyor.",
+   "Bu, cesaret ve kararlılığın göstergesidir.",
+   "Cevap: B şıkkı."
+  ],
+  "tuzaklar": [
+   "Müşriklere sert davranmadığı için affedicilik düşünülebilir; ama olayda bağışlanan biri yok.",
+   "",
+   "Amcası Ebu Talib’in araya girmesi danışmayı çağrıştırır; oysa Peygamberimiz kimseye danışmıyor, kararını bildiriyor.",
+   "Mal teklifini reddetmesi mala önem vermediğini gösterir; fakat cömertlik malı paylaşmaktır."
+  ],
+  "taktik": "Sözün içindeki eyleme bak: “vazgeçmem” → kararlılık; “bağışladım” → af; “danıştı” → istişare.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Azim ve kararlılık",
+    "tanim": "Zorluklar ve cazip teklifler karşısında doğru bildiği yoldan dönmemek."
+   }
+  ]
+ },
+ {
+  "id": "din-033",
+  "ders": "din",
+  "unite": "Hz. Muhammed’in Örnekliği",
+  "kazanimKod": "DKAB.8.4.6",
+  "kazanimAd": "Hz. Muhammed’in (s.a.v.) insanlara verdiği değeri örneklerle açıklar.",
+  "zorluk": 3,
+  "tip": "grafik-tablo",
+  "metin": "Bir öğrenci, Hz. Muhammed’in (s.a.v.) hayatından olayları onun örnek özellikleriyle eşleştirmiştir:<table class=\"t\"><tr><th>No</th><th>Olay</th><th>Özellik</th></tr><tr><td>1</td><td>Önünden geçen bir cenaze için, başka dinden olduğu söylendiği hâlde “O da bir insan değil mi?” diyerek ayağa kalkması</td><td>Cesaret</td></tr><tr><td>2</td><td>Uhud Savaşı öncesinde savaşın nerede yapılacağını arkadaşlarına sorması</td><td>İstişareye önem verme</td></tr><tr><td>3</td><td>Taif’te taşlandığı hâlde oranın halkına beddua etmemesi</td><td>Merhamet</td></tr><tr><td>4</td><td>Soylu bir aileden olan suçlunun affedilmesini isteyenlere, kendi kızı bile olsa cezanın uygulanacağını söylemesi</td><td>Hakkı gözetme</td></tr></table><b>Öğrenci, numaralanmış eşleştirmelerden hangisinde hata yapmıştır?</b>",
+  "svg": "",
+  "siklar": [
+   "1",
+   "2",
+   "3",
+   "4"
+  ],
+  "dogru": 0,
+  "ipucu1": "Her olayda Peygamberimizin kime, nasıl davrandığını düşün ve bu davranışa kendin bir ad ver.",
+  "ipucu2": "1. olayda bir tehlike ya da korkulacak bir durum var mı? Yoksa din farkı gözetmeden insana gösterilen bir saygı mı anlatılıyor?",
+  "cozum": [
+   "2: Arkadaşlarına sormak istişaredir. Doğru.",
+   "3: Kendisine eziyet edenlere beddua etmemek merhamettir. Doğru.",
+   "4: Soylu–sıradan ayrımı yapmamak adalettir, hakkı gözetmektir. Doğru.",
+   "1: Cenazeye ayağa kalkmak cesaret değil, insana verilen değerdir. Hatalı.",
+   "Cevap: 1."
+  ],
+  "tuzaklar": [
+   "",
+   "Savaş geçtiği için özelliğin cesaret olması gerektiği düşünülebilir; ama anlatılan davranış danışmaktır.",
+   "Beddua etmemek “sabır” diye düşünülüp hatalı sanılabilir; kötülük edene iyilik dilemek merhametin göstergesidir.",
+   "Kendi kızını örnek vermesi sert bulunup hatalı sanılabilir; oysa kimseyi kayırmamak hakkı gözetmektir."
+  ],
+  "taktik": "Eşleştirme tablolarında özelliği kapatıp olaya kendi adını koy; sonra tablodakiyle karşılaştır.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "İnsana değer verme",
+    "tanim": "Hz. Muhammed (s.a.v.) din, soy, zenginlik ayrımı yapmadan her insana insan olduğu için saygı göstermiştir."
+   },
+   {
+    "ad": "Hakkı gözetme",
+    "tanim": "Kim olursa olsun herkese adaletle davranmak, kimseyi kayırmamak."
+   }
+  ]
+ },
+ {
+  "id": "din-034",
+  "ders": "din",
+  "unite": "Hz. Muhammed’in Örnekliği",
+  "kazanimKod": "DKAB.8.4.5",
+  "kazanimAd": "Hz. Muhammed’in (s.a.v.) hakkı gözetmedeki hassasiyetine örnekler verir.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Hz. Muhammed (s.a.v.), gençliğinde Mekke’de haksızlığa uğrayanların hakkını korumak için kurulan <b>Hilfü’l-fudûl</b> (Erdemliler Topluluğu) adlı birliğe katılmıştır. Peygamber olduktan sonra da böyle bir birliğe çağrılsa yine katılacağını söylemiştir.<br><br><b>Bu bilgi, Hz. Muhammed’in (s.a.v.) aşağıdaki özelliklerinden hangisine örnektir?</b>",
+  "svg": "",
+  "siklar": [
+   "İstişareye önem vermesine",
+   "Affedici olmasına",
+   "Adaletli olup hakkı gözetmesine",
+   "Cömert olmasına"
+  ],
+  "dogru": 2,
+  "ipucu1": "Bu topluluk ne amaçla kurulmuştu? Amaç cümlesini bul.",
+  "ipucu2": "Amaç “haksızlığa uğrayanların hakkını korumak”. Haksızlığa karşı durmak hangi özelliğin göstergesidir?",
+  "cozum": [
+   "Hilfü’l-fudûl, haksızlığa uğrayanları korumak için kurulmuştu.",
+   "Peygamberimiz bu birliğe katıldı ve hep destekledi.",
+   "Bu, adalete ve hakka verdiği önemi gösterir.",
+   "Cevap: C şıkkı."
+  ],
+  "tuzaklar": [
+   "Bir topluluk içinde yer alması danışmayı çağrıştırır; ama amaç görüş almak değil, hakkı korumaktır.",
+   "Haksızlığa uğrayanlara yardım merhameti hatırlatır; fakat olayda birini bağışlama yok.",
+   "",
+   "Yardım etmek cömertlikle karıştırılabilir; burada mal paylaşımı değil, hak savunması var."
+  ],
+  "taktik": "Bir kurum ya da topluluk soruluyorsa kuruluş amacına bak; özellik o amaçta gizlidir.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Hilfü’l-fudûl",
+    "tanim": "Mekke’de haksızlığa uğrayanları korumak için kurulan Erdemliler Topluluğu. Hz. Muhammed (s.a.v.) gençliğinde bu birliğe katılmıştır."
+   }
+  ]
+ },
+ {
+  "id": "din-035",
+  "ders": "din",
+  "unite": "Hz. Muhammed’in Örnekliği",
+  "kazanimKod": "DKAB.8.4.9",
+  "kazanimAd": "Kureyş suresini okur, anlamını söyler.",
+  "zorluk": 1,
+  "tip": "uzun-metin",
+  "metin": "<i>“Kureyş’e kolaylaştırıldığı, evet, kış ve yaz yolculukları onlara kolaylaştırıldığı için onlar, kendilerini besleyip açlıklarını gideren ve onları korkudan emin kılan şu evin (Kâbe’nin) Rabbine kulluk etsinler.”</i> (Kureyş suresi, 1-4. ayetler)<br><br><b>Bu surede verilen temel mesaj aşağıdakilerden hangisidir?</b>",
+  "svg": "",
+  "siklar": [
+   "Ticaret yolculukları yalnızca yaz aylarında yapılmalıdır.",
+   "Zenginler mallarını yoksullarla paylaşmalıdır.",
+   "Kâbe’yi her yıl ziyaret etmek gerekir.",
+   "Verilen nimetlere karşılık Allah’a kulluk edilmelidir."
+  ],
+  "dogru": 3,
+  "ipucu1": "Sure önce nimetleri sayıyor, sonra bir şey istiyor. Surenin sonundaki isteği bul.",
+  "ipucu2": "Sayılan nimetler: yolculukların kolaylığı, açlıktan ve korkudan kurtulma. Bunların karşılığında ne yapılması isteniyor?",
+  "cozum": [
+   "Sure, Kureyş’e verilen nimetleri hatırlatıyor: kolay yolculuk, bolluk, güven.",
+   "Sonra “Rabbine kulluk etsinler” diyor.",
+   "Mesaj: Nimetlere şükür olarak Allah’a kulluk edilmelidir.",
+   "Cevap: D şıkkı."
+  ],
+  "tuzaklar": [
+   "Surede yolculuk geçtiği için cazip gelir; ama hem kış hem yaz yolculuğu anılıyor ve bir kural konmuyor.",
+   "Açlığın giderilmesi ifadesi yardımlaşmayı çağrıştırır; bu mesaj Mâûn suresinde vurgulanır.",
+   "Kâbe sözcüğü geçtiği için seçilebilir; surede ziyaret değil, Kâbe’nin Rabbine kulluk isteniyor.",
+   ""
+  ],
+  "taktik": "Temel mesaj genellikle emir ya da istek bildiren cümlededir (“… etsinler”).",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Kureyş suresi",
+    "tanim": "Kur’an’ın 106. suresi, 4 ayettir. Kureyş kabilesine verilen nimetleri hatırlatır ve Allah’a kulluğa çağırır."
+   }
+  ]
+ },
+ {
+  "id": "din-036",
+  "ders": "din",
+  "unite": "Hz. Muhammed’in Örnekliği",
+  "kazanimKod": "DKAB.8.4.1",
+  "kazanimAd": "Hz. Muhammed’in (s.a.v.) doğruluğu ve güvenilir kişiliği ile peygamberlerin özellikleri arasında ilişki kurar.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "Peygamberlerin ortak özelliklerinden bazıları şunlardır:<br><b>Sıdk:</b> Doğru sözlü olmak. <b>Emanet:</b> Güvenilir olmak. <b>Fetanet:</b> Akıllı ve zeki olmak. <b>Tebliğ:</b> Allah’tan aldığı mesajı insanlara ulaştırmak.<br><br>Hz. Muhammed (s.a.v.) Safa Tepesi’ne çıkarak Mekkelilere, “Şu dağın ardında düşman atlıları var desem bana inanır mısınız?” diye sordu. Mekkeliler, <u>“Evet, senin yalan söylediğini hiç duymadık.”</u> dediler. Bunun üzerine Peygamberimiz <u>onları İslam’a çağırdı</u>.<br><br><b>Altı çizili bölümler, sırasıyla peygamberlerin hangi özellikleriyle ilgilidir?</b>",
+  "svg": "",
+  "siklar": [
+   "Emanet – Tebliğ",
+   "Sıdk – Tebliğ",
+   "Sıdk – Fetanet",
+   "Fetanet – Emanet"
+  ],
+  "dogru": 1,
+  "ipucu1": "Altı çizili ilk bölümde Mekkeliler onun neyine tanıklık ediyor? Tanımlarla karşılaştır.",
+  "ipucu2": "İlk bölüm “yalan söylememek” ile, ikinci bölüm “insanları dine çağırmak” ile ilgili. Yukarıdaki tanımlardan hangileri bunlara denk geliyor?",
+  "cozum": [
+   "“Yalan söylediğini hiç duymadık” → doğru sözlülük → sıdk.",
+   "“Onları İslam’a çağırdı” → Allah’ın mesajını ulaştırma → tebliğ.",
+   "Sıra: Sıdk – Tebliğ.",
+   "Cevap: B şıkkı."
+  ],
+  "tuzaklar": [
+   "Doğruluk ve güvenilirlik birbirine çok yakın olduğu için sıdk yerine emanet seçilebilir; yalan söylememek doğrudan sıdktır.",
+   "",
+   "Önce soru sorup sonra davet etmesi zekice bir yöntem olduğu için fetanet düşünülebilir; ama altı çizili bölüm çağrının kendisidir.",
+   "Tanımlar karıştırılırsa ya da sıra ters düşünülürse seçilir."
+  ],
+  "taktik": "Tanım verilen sorularda altı çizili ifadeyi tanımdaki anahtar sözcükle eşleştir (yalan söylememek ↔ doğru sözlü).",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Sıdk",
+    "tanim": "Peygamberlerin doğru sözlü olması; asla yalan söylememeleri."
+   },
+   {
+    "ad": "Tebliğ",
+    "tanim": "Peygamberlerin Allah’tan aldıkları mesajı eksiksiz olarak insanlara ulaştırmaları."
+   }
+  ]
+ },
+ {
+  "id": "din-037",
+  "ders": "din",
+  "unite": "Kur’an-ı Kerim ve Özellikleri",
+  "kazanimKod": "DKAB.8.5.1",
+  "kazanimAd": "İslam dininin temel kaynaklarını tanır.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Müslümanlar, bir konuda İslam’ın ne söylediğini öğrenmek istediklerinde önce <u>Allah’ın (c.c.) sözü olan kitaba</u>, sonra <u>Hz. Muhammed’in (s.a.v.) söz, davranış ve onaylarına</u> başvururlar.<br><br><b>Altı çizili ifadelerle anlatılan temel kaynaklar sırasıyla aşağıdakilerden hangisidir?</b>",
+  "svg": "",
+  "siklar": [
+   "Kur’an – Sünnet",
+   "Sünnet – Kur’an",
+   "Kur’an – Kıssa",
+   "Kıssa – Sünnet"
+  ],
+  "dogru": 0,
+  "ipucu1": "İslam’ın iki temel kaynağını hatırla. Hangisi Allah’ın sözü, hangisi Peygamberimizin uygulamalarıdır?",
+  "ipucu2": "Peygamberimizin söz, davranış ve onaylarının tümüne verilen adı düşün. Sıraya da dikkat et.",
+  "cozum": [
+   "Allah’ın sözü olan kitap: Kur’an-ı Kerim.",
+   "Peygamberimizin söz, davranış ve onayları: sünnet.",
+   "Sıra: Kur’an – Sünnet.",
+   "Cevap: A şıkkı."
+  ],
+  "tuzaklar": [
+   "",
+   "Kavramlar doğru bilinip sıra ters okunursa seçilir.",
+   "Kıssa, Kur’an’ın ana konularından biridir; ayrı bir kaynak değildir.",
+   "İki kavram da ünitede geçtiği için tanıdık gelir; ama kıssa bir kaynak değildir."
+  ],
+  "taktik": "“Sırasıyla” sözcüğünü görünce ilk ifadeyi çöz ve ilk sözcüğü uymayan şıkları ele.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Sünnet",
+    "tanim": "Hz. Muhammed’in (s.a.v.) söz, davranış ve onaylarının tümü. Kur’an’dan sonra İslam’ın ikinci temel kaynağıdır."
+   }
+  ]
+ },
+ {
+  "id": "din-038",
+  "ders": "din",
+  "unite": "Kur’an-ı Kerim ve Özellikleri",
+  "kazanimKod": "DKAB.8.5.1",
+  "kazanimAd": "İslam dininin temel kaynaklarını tanır.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Kur’an-ı Kerim’de namaz kılınması emredilir; ancak namazın nasıl kılınacağı ve kaç rekât olduğu ayrıntılı olarak anlatılmaz. Müslümanlar bu ayrıntıları Hz. Muhammed’in (s.a.v.) uygulamalarından öğrenmiştir. Peygamberimiz, <i>“Beni namaz kılarken gördüğünüz gibi namaz kılın.”</i> buyurmuştur.<br><br><b>Bu metinden aşağıdaki sonuçlardan hangisi çıkarılır?</b>",
+  "svg": "",
+  "siklar": [
+   "Sünnet, Kur’an’dan bağımsız bir kaynaktır.",
+   "Kur’an’da ibadetlerle ilgili hüküm bulunmaz.",
+   "Namaz, yalnızca sünnetle emredilmiş bir ibadettir.",
+   "Sünnet, Kur’an’daki hükümleri açıklar ve nasıl uygulanacağını gösterir."
+  ],
+  "dogru": 3,
+  "ipucu1": "Metinde Kur’an ne yapıyor, sünnet ne yapıyor? İkisinin görevini ayrı ayrı belirle.",
+  "ipucu2": "Kur’an namazı emrediyor; sünnet ise nasıl kılınacağını gösteriyor. Bu ilişkiyi anlatan şık hangisi?",
+  "cozum": [
+   "Kur’an namazı emrediyor; yani Kur’an’da ibadet hükmü var.",
+   "Namazın ayrıntıları Peygamberimizin uygulamasından öğreniliyor.",
+   "Demek ki sünnet, Kur’an’daki hükmü açıklıyor ve uygulamasını gösteriyor.",
+   "Cevap: D şıkkı."
+  ],
+  "tuzaklar": [
+   "Ayrıntılar sünnetten öğrenildiği için bağımsız sanılabilir; oysa sünnet Kur’an’daki emri açıklıyor, ona bağlı.",
+   "“Ayrıntılı anlatılmaz” ifadesi “hiç yoktur” diye okunursa seçilir; ilk cümlede emir açıkça var.",
+   "Hadis namazla ilgili olduğu için cazip gelir; ama metne göre emir Kur’an’da.",
+   ""
+  ],
+  "taktik": "Şıklardaki “yalnızca, bağımsız, bulunmaz” gibi kesin sözleri metnin ilk cümlesiyle sına.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Sünnetin konumu",
+    "tanim": "Sünnet, Kur’an’ı açıklar ve hükümlerin günlük hayatta nasıl uygulanacağını gösterir."
+   }
+  ]
+ },
+ {
+  "id": "din-039",
+  "ders": "din",
+  "unite": "Kur’an-ı Kerim ve Özellikleri",
+  "kazanimKod": "DKAB.8.5.2",
+  "kazanimAd": "Ayetlerden hareketle Kur’an’ın ana konularını sınıflandırır.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "Bir öğrenci, bazı ayetleri Kur’an’ın ana konularıyla eşleştirmiştir:<table class=\"t\"><tr><th>No</th><th>Ayet</th><th>Ana konu</th></tr><tr><td>1</td><td>“De ki: O, Allah’tır, bir tektir.” (İhlâs, 1)</td><td>İnanç</td></tr><tr><td>2</td><td>“Ey iman edenler! … oruç, sizden öncekilere farz kılındığı gibi size de farz kılındı.” (Bakara, 183)</td><td>İbadet</td></tr><tr><td>3</td><td>“… Birbirinizin kusurlarını … araştırmayın. Birbirinizin gıybetini yapmayın. …” (Hucurât, 12)</td><td>İbadet</td></tr><tr><td>4</td><td>“Andolsun, onların kıssalarında akıl sahipleri için ibret vardır. …” (Yûsuf, 111)</td><td>Kıssa</td></tr></table><b>Öğrenci, numaralanmış eşleştirmelerden hangisinde hata yapmıştır?</b>",
+  "svg": "",
+  "siklar": [
+   "1",
+   "2",
+   "3",
+   "4"
+  ],
+  "dogru": 2,
+  "ipucu1": "Her ayette “Bu ayet bana neye inanacağımı mı, hangi ibadeti yapacağımı mı, nasıl davranacağımı mı söylüyor?” diye sor.",
+  "ipucu2": "3. ayet, insanların birbirine karşı davranışlarıyla ilgili bir uyarı. Namaz, oruç gibi bir ibadetten söz ediyor mu?",
+  "cozum": [
+   "1: Allah’ın birliği → inanç. Doğru.",
+   "2: Oruç → ibadet. Doğru.",
+   "3: Kusur araştırmamak, gıybet etmemek davranışla ilgilidir → ahlak olmalıydı. Hatalı.",
+   "4: Geçmiş kıssalardan ibret → kıssa. Doğru.",
+   "Cevap: 3."
+  ],
+  "tuzaklar": [
+   "Ayet çok kısa olduğu için konusu belirsiz sanılabilir; Allah’ın birliği inancın temelidir.",
+   "“Ey iman edenler” hitabı yüzünden inanç olması gerektiği düşünülebilir; ayetin konusu oruçtur.",
+   "",
+   "Ayette bir kıssa anlatılmadığı için hatalı sanılabilir; ayet kıssaların amacını bildiriyor, konu yine kıssadır."
+  ],
+  "taktik": "Ana konu eşleştirmesi: iman esasları → inanç; namaz, oruç, zekât → ibadet; davranış kuralları → ahlak; peygamber hikâyeleri → kıssa.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Kur’an’ın ana konuları",
+    "tanim": "İnanç, ibadet, ahlak, sosyal hayat ve kıssalar."
+   }
+  ]
+ },
+ {
+  "id": "din-040",
+  "ders": "din",
+  "unite": "Kur’an-ı Kerim ve Özellikleri",
+  "kazanimKod": "DKAB.8.5.2",
+  "kazanimAd": "Ayetlerden hareketle Kur’an’ın ana konularını sınıflandırır.",
+  "zorluk": 3,
+  "tip": "uzun-metin",
+  "metin": "• <i>“Namazı kılın, zekâtı verin. …”</i> (Bakara suresi, 43. ayet)<br>• <i>“Allah, kendisinden başka hiçbir ilah olmayandır. …”</i> (Bakara suresi, 255. ayet)<br>• <i>“Küçümseyerek insanlardan yüz çevirme ve yeryüzünde böbürlenerek yürüme. …”</i> (Lokmân suresi, 18. ayet)<br><br><b>Bu ayetler arasında, Kur’an’ın ana konularından hangisine örnek <u>yoktur</u>?</b>",
+  "svg": "",
+  "siklar": [
+   "İnanç",
+   "Kıssa",
+   "İbadet",
+   "Ahlak"
+  ],
+  "dogru": 1,
+  "ipucu1": "Üç ayet var, dört şık var. Her ayetin konusunu yanına yaz; bir konu açıkta kalacak.",
+  "ipucu2": "İlk ayet namaz ve zekâttan, ikincisi Allah’ın birliğinden, üçüncüsü kibirlenmemekten söz ediyor. Geçmişte yaşanmış bir olay anlatan ayet var mı?",
+  "cozum": [
+   "1. ayet: Namaz ve zekât → ibadet.",
+   "2. ayet: Allah’tan başka ilah olmaması → inanç.",
+   "3. ayet: Kibirlenmemek → ahlak.",
+   "Geçmiş peygamber ve toplumların hikâyesini anlatan ayet yok.",
+   "Cevap: Kıssa."
+  ],
+  "tuzaklar": [
+   "2. ayetin inançla ilgili olduğu fark edilmezse seçilir.",
+   "",
+   "Zekât “yardımlaşma” diye düşünülüp ibadet sayılmazsa bu şık açıkta kalır.",
+   "Lokmân suresi Hz. Lokman’ın öğütlerini içerdiği için 3. ayet kıssa sanılabilir; ayetin konusu bir davranış kuralıdır."
+  ],
+  "taktik": "“Örnek yoktur” sorularında her maddeyi bir şıkla eşleştir, eşleşmeyen şıkkı işaretle.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Kıssa",
+    "tanim": "Kur’an’da geçmiş peygamberlerin ve toplumların ibret alınması için anlatılan hikâyeleri."
+   },
+   {
+    "ad": "Ahlak ayetleri",
+    "tanim": "İnsanın nasıl davranması gerektiğini bildiren ayetler (kibirlenmemek, gıybet etmemek vb.)."
+   }
+  ]
+ },
+ {
+  "id": "din-041",
+  "ders": "din",
+  "unite": "Kur’an-ı Kerim ve Özellikleri",
+  "kazanimKod": "DKAB.8.5.3",
+  "kazanimAd": "Kur’an-ı Kerim’in temel özelliklerini değerlendirir.",
+  "zorluk": 1,
+  "tip": "uzun-metin",
+  "metin": "<i>“Bu Kur’an, ayetlerini düşünsünler ve akıl sahipleri öğüt alsınlar diye sana indirdiğimiz mübarek bir kitaptır.”</i> (Sâd suresi, 29. ayet)<br><br><b>Bu ayette Kur’an-ı Kerim’in aşağıdaki özelliklerinden hangisi vurgulanmaktadır?</b>",
+  "svg": "",
+  "siklar": [
+   "Arapça olarak indirilmesi",
+   "114 sureden oluşması",
+   "Son ilahi kitap olması",
+   "İnsanları düşünmeye ve aklını kullanmaya yöneltmesi"
+  ],
+  "dogru": 3,
+  "ipucu1": "Ayette Kur’an’ın indiriliş amacı söyleniyor. “… diye” ifadesinden önceki sözcüklere bak.",
+  "ipucu2": "“Düşünsünler” ve “akıl sahipleri öğüt alsınlar” ifadeleri Kur’an’ın insandan ne beklediğini gösteriyor?",
+  "cozum": [
+   "Ayette “düşünsünler” ve “akıl sahipleri öğüt alsınlar” deniyor.",
+   "Bu, Kur’an’ın insanı düşünmeye ve aklını kullanmaya çağırdığını gösterir.",
+   "Cevap: D şıkkı."
+  ],
+  "tuzaklar": [
+   "Doğru bir bilgidir; ama ayette dilden söz edilmiyor.",
+   "Doğru bir bilgidir; ancak ayette sure sayısı geçmiyor.",
+   "Doğru bir bilgidir; fakat ayette başka kitaplardan söz edilmiyor.",
+   ""
+  ],
+  "taktik": "Şıkların hepsi doğru bilgi olabilir; soru “bu ayette” diyorsa yalnızca ayette geçen özelliği seç.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Kur’an’ın temel özellikleri",
+    "tanim": "İyiye, doğruya ve güzele yönlendirir; kötülükten sakındırır; yol gösterir; açıklayıcıdır; düşünmeye ve aklı kullanmaya çağırır."
+   }
+  ]
+ },
+ {
+  "id": "din-042",
+  "ders": "din",
+  "unite": "Kur’an-ı Kerim ve Özellikleri",
+  "kazanimKod": "DKAB.8.5.4",
+  "kazanimAd": "Hz. Nuh’un (a.s.) tevhide davetini özetler.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Bir peygamber, kavmini uzun yıllar boyunca putlara tapmayı bırakıp yalnızca Allah’a kulluk etmeye çağırdı. Kavminden çok az kişi ona inandı. Allah’ın emriyle bir gemi yaptı; inananlar bu gemiyle büyük tufandan kurtuldu.<br><br><b>Metinde anlatılan peygamber ve çağrısının özü aşağıdakilerin hangisinde doğru verilmiştir?</b>",
+  "svg": "",
+  "siklar": [
+   "Hz. Musa (a.s.) – Tevhid",
+   "Hz. Nuh (a.s.) – Zekât",
+   "Hz. Nuh (a.s.) – Tevhid",
+   "Hz. Şuayb (a.s.) – Tevhid"
+  ],
+  "dogru": 2,
+  "ipucu1": "Peygamberi bulmak için “gemi” ve “tufan” sözcüklerini kullan. Çağrının özü için ilk cümleye bak.",
+  "ipucu2": "“Yalnızca Allah’a kulluk etmek” inancına ne ad verilir? Gemi ve tufan hangi peygamberin kıssasında geçer?",
+  "cozum": [
+   "Gemi ve tufan, Hz. Nuh’un (a.s.) kıssasında geçer.",
+   "Putları bırakıp yalnızca Allah’a kulluk etmeye çağırmak tevhide davettir.",
+   "Cevap: Hz. Nuh (a.s.) – Tevhid."
+  ],
+  "tuzaklar": [
+   "Hz. Musa’nın kıssasında da su (Nil, deniz) geçtiği için karıştırılabilir; ama gemi ve tufan yoktur.",
+   "Peygamber doğru; ancak metinde zekâttan değil, yalnızca Allah’a kulluktan söz ediliyor.",
+   "",
+   "Çağrı doğru, çünkü bütün peygamberler tevhide çağırmıştır; ama gemi ve tufan Hz. Şuayb’ın kıssasında yoktur."
+  ],
+  "taktik": "İki bilgili şıklarda her bilgiyi ayrı kontrol et; ikisi de doğru olan tek şık cevaptır.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Tevhid",
+    "tanim": "Allah’ın bir olduğuna, ondan başka ilah olmadığına inanmak. Bütün peygamberlerin ortak çağrısıdır."
+   },
+   {
+    "ad": "Hz. Nuh (a.s.)",
+    "tanim": "Kavmini uzun yıllar tevhide çağıran, inananlarla birlikte gemiyle tufandan kurtulan peygamber."
+   }
+  ]
+ },
+ {
+  "id": "din-043",
+  "ders": "din",
+  "unite": "Kur’an-ı Kerim ve Özellikleri",
+  "kazanimKod": "DKAB.8.5.4",
+  "kazanimAd": "Hz. Nuh’un (a.s.) tevhide davetini özetler.",
+  "zorluk": 3,
+  "tip": "uzun-metin",
+  "metin": "Hz. Nuh (a.s.), kavmini gece gündüz, açıkça ve gizlice, uzun yıllar boyunca Allah’a kulluğa çağırdı. Kavminin ileri gelenleri onunla alay etti; ona yalnızca az sayıda kişi inandı. Kendi oğlu da inanmayanlar arasındaydı ve tufanda boğuldu. Hz. Nuh bütün bunlara rağmen görevini sonuna kadar sürdürdü.<br><br><b>Bu metinden aşağıdaki yargılardan hangisine <u>ulaşılamaz</u>?</b>",
+  "svg": "",
+  "siklar": [
+   "Peygamberlerin aile bireyleri, onların çağrısını mutlaka kabul eder.",
+   "İman etmek, kişinin kendi tercihine bağlıdır.",
+   "Hz. Nuh, kavmini çağırırken farklı yollar denemiştir.",
+   "Hz. Nuh, karşılaştığı zorluklara rağmen kararlılığını korumuştur."
+  ],
+  "dogru": 0,
+  "ipucu1": "Şıkları metindeki cümlelerle tek tek eşleştir. Biri metindeki bir bilgiyle doğrudan çelişiyor.",
+  "ipucu2": "Metinde Hz. Nuh’un oğluyla ilgili verilen bilgiyi tekrar oku. Hangi şık bu bilgiyle uyuşmuyor?",
+  "cozum": [
+   "“Gece gündüz, açıkça ve gizlice” → farklı yollar denemiş. C’ye ulaşılır.",
+   "“Görevini sonuna kadar sürdürdü” → kararlı. D’ye ulaşılır.",
+   "Peygamberin oğlu bile inanmamış → iman kişinin kendi tercihidir. B’ye ulaşılır.",
+   "Oğlu inanmadığına göre aile bireyleri “mutlaka” kabul etmez. A’ya ulaşılamaz.",
+   "Cevap: A şıkkı."
+  ],
+  "tuzaklar": [
+   "",
+   "Metinde “tercih” sözcüğü geçmediği için ulaşılamaz sanılabilir; oğlun inanmaması bunu gösterir.",
+   "“Açıkça ve gizlice” ifadesi atlanırsa bu yargının dayanağı görülmez.",
+   "Olumsuz kök unutulursa metnin son cümlesiyle örtüşen bu şık seçilir."
+  ],
+  "taktik": "“Mutlaka, her zaman” içeren şıkkı metinde tek bir karşı örnekle çürütebilirsin (burada: oğlu).",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Hz. Nuh’un daveti",
+    "tanim": "Uzun yıllar, her yolu deneyerek ve sabırla kavmini tevhide çağırmıştır; inanıp inanmamak ise kişinin kendi tercihidir."
+   }
+  ]
+ },
+ {
+  "id": "din-044",
+  "ders": "din",
+  "unite": "Kur’an-ı Kerim ve Özellikleri",
+  "kazanimKod": "DKAB.8.5.3",
+  "kazanimAd": "Kur’an-ı Kerim’in temel özelliklerini değerlendirir.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "<i>“Şüphesiz bu Kur’an en doğru olana iletir. …”</i> (İsrâ suresi, 9. ayet)<br><br>Dedesi, torunu Yusuf’a şöyle demiştir: “Bilmediğin bir şehirde yolunu bulmak için haritaya bakarsın. İnsan da hayat yolculuğunda doğruyu yanlıştan ayırmak için Kur’an’a başvurur.”<br><br><b>Ayet ve dedenin sözleri, Kur’an-ı Kerim’in aşağıdaki özelliklerinden hangisini vurgulamaktadır?</b>",
+  "svg": "",
+  "siklar": [
+   "Geçmiş toplumların kıssalarına yer vermesini",
+   "İnsanlara yol gösterici olmasını",
+   "Bölüm bölüm indirilmiş olmasını",
+   "Kolayca ezberlenebilmesini"
+  ],
+  "dogru": 1,
+  "ipucu1": "Dede Kur’an’ı neye benzetiyor? O nesnenin görevini düşün.",
+  "ipucu2": "Harita yol bulmaya yarar. Ayetteki “en doğru olana iletir” ifadesi de aynı görevi anlatıyor.",
+  "cozum": [
+   "Ayet: Kur’an en doğru olana iletir.",
+   "Dede: Kur’an, yol bulmaya yarayan bir harita gibidir.",
+   "İkisi de Kur’an’ın yol gösterici, rehber oluşunu anlatır.",
+   "Cevap: B şıkkı."
+  ],
+  "tuzaklar": [
+   "Kur’an’ın bir özelliğidir; ama metinde geçmiş toplumlardan söz edilmiyor.",
+   "",
+   "“Yolculuk” sözcüğü bir süreci çağrıştırsa da metinde Kur’an’ın indiriliş biçimi anlatılmıyor.",
+   "Doğru bir bilgi olabilir; ancak ne ayette ne de dedenin sözünde ezberden söz ediliyor."
+  ],
+  "taktik": "Benzetmeli sorularda benzetilen nesnenin işlevini bul (harita → yol gösterir); cevap o işlevdir.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Hidayet rehberi",
+    "tanim": "Kur’an’ın insanlara doğru yolu göstermesi; iyiyi kötüden, doğruyu yanlıştan ayırmayı öğretmesi."
+   }
+  ]
+ }
+]

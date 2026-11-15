@@ -1,0 +1,142 @@
+[
+ {
+  "kod": "DKAB.8.1.1",
+  "ad": "Kader ve kaza inancını ayet ve hadislerle açıklar.",
+  "unite": "Kader İnancı"
+ },
+ {
+  "kod": "DKAB.8.1.2",
+  "ad": "İnsanın ilmi, iradesi, sorumluluğu ile kader arasında ilişki kurar.",
+  "unite": "Kader İnancı"
+ },
+ {
+  "kod": "DKAB.8.1.3",
+  "ad": "Kaza ve kader ile ilgili kavramları analiz eder.",
+  "unite": "Kader İnancı"
+ },
+ {
+  "kod": "DKAB.8.1.4",
+  "ad": "Toplumda kader ve kaza ile ilgili yaygın olan yanlış anlayışları sorgular.",
+  "unite": "Kader İnancı"
+ },
+ {
+  "kod": "DKAB.8.1.5",
+  "ad": "Hz. Musa’nın (a.s.) hayatını ana hatlarıyla tanır.",
+  "unite": "Kader İnancı"
+ },
+ {
+  "kod": "DKAB.8.1.6",
+  "ad": "Ayet el-Kürsi'yi okur, anlamını söyler.",
+  "unite": "Kader İnancı"
+ },
+ {
+  "kod": "DKAB.8.2.1",
+  "ad": "İslam’ın paylaşma ve yardımlaşmaya verdiği önemi ayet ve hadisler ışığında yorumlar.",
+  "unite": "Zekât ve Sadaka"
+ },
+ {
+  "kod": "DKAB.8.2.2",
+  "ad": "Zekât ve sadaka ibadetini ayet ve hadislerle açıklar.",
+  "unite": "Zekât ve Sadaka"
+ },
+ {
+  "kod": "DKAB.8.2.3",
+  "ad": "Zekât, infak ve sadakanın bireysel ve toplumsal önemini fark eder.",
+  "unite": "Zekât ve Sadaka"
+ },
+ {
+  "kod": "DKAB.8.2.4",
+  "ad": "Hz. Şuayb’in (a.s.) hayatını ana hatlarıyla tanır.",
+  "unite": "Zekât ve Sadaka"
+ },
+ {
+  "kod": "DKAB.8.2.5",
+  "ad": "Maûn suresini okur, anlamını söyler.",
+  "unite": "Zekât ve Sadaka"
+ },
+ {
+  "kod": "DKAB.8.3.1",
+  "ad": "Din, birey ve toplum arasındaki ilişkiyi yorumlar.",
+  "unite": "Din ve Hayat"
+ },
+ {
+  "kod": "DKAB.8.3.2",
+  "ad": "İslam dininin can, nesil, akıl, mal ve din emniyetiyle ilgili ortaya koyduğu ilke ve hedefleri analiz eder.",
+  "unite": "Din ve Hayat"
+ },
+ {
+  "kod": "DKAB.8.3.3",
+  "ad": "Hz. Yusuf’un (a.s.) örnek hayatından ilkeler çıkarır.",
+  "unite": "Din ve Hayat"
+ },
+ {
+  "kod": "DKAB.8.3.4",
+  "ad": "Asr suresini okur, anlamını söyler.",
+  "unite": "Din ve Hayat"
+ },
+ {
+  "kod": "DKAB.8.4.1",
+  "ad": "Hz. Muhammed’in (s.a.v.) doğruluğu ve güvenilir kişiliği ile peygamberlerin özellikleri arasında ilişki kurar.",
+  "unite": "Hz. Muhammed’in Örnekliği"
+ },
+ {
+  "kod": "DKAB.8.4.2",
+  "ad": "Hz. Muhammed’in (s.a.v.) merhametli ve affedici oluşunu davranışlarında yansıtmaya özen gösterir.",
+  "unite": "Hz. Muhammed’in Örnekliği"
+ },
+ {
+  "kod": "DKAB.8.4.3",
+  "ad": "Hz. Muhammed’in (s.a.v.) istişareye verdiği önemi ortaya koyan örnek olaylardan hareketle gündelik hayatla ilgili çıkarımlarda bulunur.",
+  "unite": "Hz. Muhammed’in Örnekliği"
+ },
+ {
+  "kod": "DKAB.8.4.4",
+  "ad": "Hz. Muhammed’in (s.a.v.) cesaret ve kararlılığını örnek olaylarla açıklar.",
+  "unite": "Hz. Muhammed’in Örnekliği"
+ },
+ {
+  "kod": "DKAB.8.4.5",
+  "ad": "Hz. Muhammed’in (s.a.v.) hakkı gözetmedeki hassasiyetine örnekler verir.",
+  "unite": "Hz. Muhammed’in Örnekliği"
+ },
+ {
+  "kod": "DKAB.8.4.6",
+  "ad": "Hz. Muhammed’in (s.a.v.) insanlara verdiği değeri örneklerle açıklar.",
+  "unite": "Hz. Muhammed’in Örnekliği"
+ },
+ {
+  "kod": "DKAB.8.4.7",
+  "ad": "Hz. Muhammed’in (s.a.v.) örnek davranışlarının toplumsal hayattaki önemini değerlendirir.",
+  "unite": "Hz. Muhammed’in Örnekliği"
+ },
+ {
+  "kod": "DKAB.8.4.8",
+  "ad": "Hz. Muhammed’in (s.a.v.) hikmetli söz ve davranışlarıyla insanları iyiye ve güzele yönlendirdiğini fark eder.",
+  "unite": "Hz. Muhammed’in Örnekliği"
+ },
+ {
+  "kod": "DKAB.8.4.9",
+  "ad": "Kureyş suresini okur, anlamını söyler.",
+  "unite": "Hz. Muhammed’in Örnekliği"
+ },
+ {
+  "kod": "DKAB.8.5.1",
+  "ad": "İslam dininin temel kaynaklarını tanır.",
+  "unite": "Kur’an-ı Kerim ve Özellikleri"
+ },
+ {
+  "kod": "DKAB.8.5.2",
+  "ad": "Ayetlerden hareketle Kur’an’ın ana konularını sınıflandırır.",
+  "unite": "Kur’an-ı Kerim ve Özellikleri"
+ },
+ {
+  "kod": "DKAB.8.5.3",
+  "ad": "Kur’an-ı Kerim’in temel özelliklerini değerlendirir.",
+  "unite": "Kur’an-ı Kerim ve Özellikleri"
+ },
+ {
+  "kod": "DKAB.8.5.4",
+  "ad": "Hz. Nuh’un (a.s.) tevhide davetini özetler.",
+  "unite": "Kur’an-ı Kerim ve Özellikleri"
+ }
+]

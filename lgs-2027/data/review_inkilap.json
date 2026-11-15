@@ -1,0 +1,47 @@
+{
+ "incelenen": 44,
+ "korCozumUyusma": 44,
+ "incelenenKart": 35,
+ "bulgular": [
+  {
+   "id": "ink-035",
+   "tur": "olgu-hatasi",
+   "ciddiyet": "kucuk",
+   "aciklama": "Atatürk'e atfedilen söz yaygın bilinen biçimiyle 'fakat' bağlacıyla aktarılır: “Benim naçiz vücudum elbet bir gün toprak olacaktır, fakat Türkiye Cumhuriyeti ilelebet payidar kalacaktır.” Metinde '; ancak' yazılmış. Anahtar ve çözüm etkilenmiyor.",
+   "duzeltme": {
+    "metin": "1926'da Mustafa Kemal'in İzmir gezisi sırasında kendisine suikast yapılması planlandı; ancak plan önceden öğrenildi ve girişim engellendi. Mustafa Kemal bu olayın ardından şu sözü söyledi:<br><br><i>“Benim naçiz vücudum elbet bir gün toprak olacaktır, fakat Türkiye Cumhuriyeti ilelebet payidar kalacaktır.”</i><br>(naçiz: önemsiz, değersiz · payidar: kalıcı)<br><br>Bu sözle aşağıdakilerden hangisi vurgulanmıştır?"
+   }
+  },
+  {
+   "id": "ink-039",
+   "tur": "olgu-hatasi",
+   "ciddiyet": "kucuk",
+   "aciklama": "Metin ve çözümün I. adımı iş birliklerinin 'komşularıyla' kurulduğunu söylüyor; tablodaki Yugoslavya, Romanya ve Afganistan Türkiye'nin sınır komşusu değildir. 'Bölgesindeki ülkelerle' denmeli. Anahtar (I ve II) etkilenmiyor.",
+   "duzeltme": {
+    "metin": "1930'lu yıllarda İtalya ve Almanya'nın yayılmacı politikaları dünya barışını tehdit etmeye başladı. Türkiye bu dönemde bölgesindeki ülkelerle aşağıdaki iş birliklerini kurdu.<table class='t'><tr><th>İş birliği</th><th>Yıl</th><th>Üyeler</th></tr><tr><td>Balkan Antantı</td><td>1934</td><td>Türkiye, Yunanistan, Yugoslavya, Romanya</td></tr><tr><td>Sadabat Paktı</td><td>1937</td><td>Türkiye, İran, Irak, Afganistan</td></tr></table><br>Bu bilgilere göre,<br>I. Türkiye, güvenliğini bölgesel iş birlikleriyle güçlendirmeye çalışmıştır.<br>II. Türkiye, hem batı hem doğu sınırlarının güvenliğini önemsemiştir.<br>III. Türkiye, bu iş birlikleriyle yeni topraklar kazanmayı hedeflemiştir.<br>yargılarından hangilerine ulaşılabilir?",
+    "cozum": [
+     "I: Türkiye bölgesindeki ülkelerle iki ayrı iş birliği kurmuş → doğru.",
+     "II: Balkan ülkeleri batıda; İran, Irak ve Afganistan doğuda → iki yön de güvenceye alınmış. Doğru.",
+     "III: Amaç tehdide karşı korunmak; toprak kazanma hedefi yok. Yanlış.",
+     "Cevap: I ve II."
+    ]
+   }
+  },
+  {
+   "id": "ink-040",
+   "tur": "ipucu-cevabi-veriyor",
+   "ciddiyet": "kucuk",
+   "aciklama": "ipucu1 doğrudan 'yılları Atatürk'ün ölüm tarihiyle karşılaştır' diyor; şıklarda Atatürk'ün hayatta olup olmadığına değinen tek şık B olduğu için ilk ipucu cevabı fiilen veriyor (ipucu2 zaten tarihi de söylüyor). Not: doğru şık metin dışı bilgi (10 Kasım 1938) gerektiriyor; bu kabul edilebilir, anahtar doğru.",
+   "duzeltme": {
+    "ipucu1": "Soru “ulaşılamaz” diyor: her şık için metinde bir dayanak ara. Metindeki yıllara (1936, 1938, 1939) da dikkat et."
+   }
+  },
+  {
+   "id": "ink-028",
+   "tur": "belirsiz",
+   "ciddiyet": "kucuk",
+   "aciklama": "D şıkkı ve çözüm/tuzak, Medeni Kanun'la kadınların 'istedikleri mesleği seçebilme hakkı' kazandığını söylüyor. MEB ders kitabı anlatımı bu yöndedir ('istediği meslekte çalışabilme hakkı'), bu nedenle LGS açısından anahtar (B) doğru ve tek. Ancak 1926 tarihli kanunun metninde kadının meslek icrası kocanın iznine bağlıydı; tarihsel olarak ifade tartışmalı. Ders kitabı esas alındığı için düzeltme önerilmiyor; aynı ifade ink-k-019 kartında da var.",
+   "duzeltme": {}
+  }
+ ]
+}

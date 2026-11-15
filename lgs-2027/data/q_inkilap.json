@@ -1,0 +1,1950 @@
+[
+ {
+  "id": "ink-001",
+  "ders": "inkilap",
+  "unite": "Bir Kahraman Doğuyor",
+  "kazanimKod": "İTA.8.1.1",
+  "kazanimAd": "Avrupa’daki gelişmelerin yansımaları bağlamında Osmanlı Devleti’nin yirminci yüzyılın başlarındaki siyasi ve sosyal durumunu kavrar.",
+  "zorluk": 1,
+  "tip": "uzun-metin",
+  "metin": "Osmanlı Devleti'nin son döneminde aydınlar, devleti dağılmaktan kurtarmak için farklı çözüm yolları önermiştir. Bunlardan birine göre; din, dil ve ırk ayrımı yapılmadan ülkede yaşayan herkes eşit haklara sahip olmalı, böylece bütün halk tek bir “Osmanlı milleti” duygusu etrafında birleştirilmeliydi.<br><br>Bu metinde sözü edilen fikir akımı aşağıdakilerden hangisidir?",
+  "svg": "",
+  "siklar": [
+   "İslamcılık",
+   "Osmanlıcılık",
+   "Türkçülük",
+   "Batıcılık"
+  ],
+  "dogru": 1,
+  "ipucu1": "Metinde kimlerin birleştirilmek istendiğine bak: yalnız Müslümanlar mı, yalnız Türkler mi, yoksa ülkedeki herkes mi?",
+  "ipucu2": "“Din, dil, ırk ayrımı yapılmadan herkes” ifadesinin altını çiz. Akımın adı, birleştirmek istediği topluluğun adından gelir.",
+  "cozum": [
+   "Metin, ülkede yaşayan herkesi ayrım yapmadan birleştirmekten söz ediyor.",
+   "Ortak kimlik olarak “Osmanlı milleti” gösteriliyor.",
+   "Herkesi Osmanlı kimliği altında toplamayı savunan akım Osmanlıcılıktır.",
+   "Cevap: Osmanlıcılık."
+  ],
+  "tuzaklar": [
+   "İslamcılık yalnızca Müslümanları halife etrafında birleştirmeyi savunur; metinde ise din ayrımı yapılmıyor.",
+   "",
+   "Türkçülük yalnızca Türkleri esas alır; metinde ırk ayrımı yapılmadığı söyleniyor.",
+   "Batıcılık, kurtuluşu Avrupa'nın bilim ve tekniğini almakta görür; metinde böyle bir bilgi yok."
+  ],
+  "taktik": "Fikir akımı sorularında “kimi birleştiriyor?” diye sor: herkes → Osmanlıcılık, Müslümanlar → İslamcılık, Türkler → Türkçülük.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Osmanlıcılık",
+    "tanim": "Din, dil, ırk ayrımı yapmadan bütün Osmanlı vatandaşlarını eşit sayarak devleti kurtarmayı amaçlayan fikir akımı."
+   },
+   {
+    "ad": "Fikir akımları",
+    "tanim": "Osmanlı'yı dağılmaktan kurtarmak için ortaya çıkan düşünceler: Osmanlıcılık, İslamcılık, Türkçülük, Batıcılık."
+   }
+  ]
+ },
+ {
+  "id": "ink-002",
+  "ders": "inkilap",
+  "unite": "Bir Kahraman Doğuyor",
+  "kazanimKod": "İTA.8.1.1",
+  "kazanimAd": "Avrupa’daki gelişmelerin yansımaları bağlamında Osmanlı Devleti’nin yirminci yüzyılın başlarındaki siyasi ve sosyal durumunu kavrar.",
+  "zorluk": 2,
+  "tip": "cok-adimli",
+  "metin": "1789'da başlayan Fransız İhtilali, “her millet kendi devletini kurmalıdır” düşüncesini, yani milliyetçiliği Avrupa'ya yaydı. Bu düşünce, içinde pek çok farklı milleti barındıran Osmanlı Devleti'ni de etkiledi. 19. yüzyılda Balkanlar'da yaşayan bazı milletler bağımsızlık için ayaklandı; Osmanlı Devleti bu ayaklanmaları bastırmakta zorlandı ve Balkanlar'da toprak kaybetti.<br><br>Bu bilgilere göre,<br>I. Milliyetçilik düşüncesi çok uluslu devletleri olumsuz etkilemiştir.<br>II. Osmanlı Devleti'nin sınırları daralmıştır.<br>III. Osmanlı Devleti, Avrupa'daki gelişmelerin dışında kalmıştır.<br>yargılarından hangilerine ulaşılabilir?",
+  "svg": "",
+  "siklar": [
+   "Yalnız I",
+   "Yalnız III",
+   "I ve II",
+   "II ve III"
+  ],
+  "dogru": 2,
+  "ipucu1": "Her öncülü metindeki bir cümleyle eşleştirmeye çalış. Karşılığını bulamadığın ya da metnin tersini söyleyen öncülü ele.",
+  "ipucu2": "III. öncüle dikkat: Avrupa'da doğan bir düşünce Osmanlı'yı etkilemişse Osmanlı bu gelişmelerin dışında kalmış sayılır mı?",
+  "cozum": [
+   "I: Osmanlı çok uluslu bir devletti ve milliyetçilik ayaklanmalara yol açtı. Doğru.",
+   "II: “Balkanlar'da toprak kaybetti” deniyor; sınırlar daralmış. Doğru.",
+   "III: Avrupa'daki bir düşünce Osmanlı'yı doğrudan etkilemiş; yani dışında kalmamış. Yanlış.",
+   "Cevap: I ve II."
+  ],
+  "tuzaklar": [
+   "I doğru ama tek başına değil; toprak kaybı bilgisi II'yi de doğruluyor.",
+   "III, metnin tam tersini söylüyor; “etkiledi” sözcüğünü kaçıranlar bu şıkka gider.",
+   "",
+   "II doğru olsa da III yanlış olduğu için bu şık elenir."
+  ],
+  "taktik": "Öncüllü sorularda önce kesin yanlış olan öncülü bul; onu içeren şıkların hepsini birden ele.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Milliyetçilik",
+    "tanim": "Fransız İhtilali ile yayılan, her milletin kendi devletini kurmasını savunan düşünce."
+   },
+   {
+    "ad": "Çok uluslu devlet",
+    "tanim": "Sınırları içinde farklı milletleri barındıran devlet (Osmanlı Devleti gibi)."
+   }
+  ]
+ },
+ {
+  "id": "ink-003",
+  "ders": "inkilap",
+  "unite": "Bir Kahraman Doğuyor",
+  "kazanimKod": "İTA.8.1.2",
+  "kazanimAd": "Mustafa Kemal’in çocukluk ve öğrenim hayatından hareketle onun kişilik özelliklerinin oluşumu hakkında çıkarımlarda bulunur.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "Aşağıdaki tabloda Mustafa Kemal'in çocukluk ve gençlik yıllarında bulunduğu bazı şehirler verilmiştir.<table class='t'><tr><th>Şehir</th><th>Mustafa Kemal'in hayatındaki yeri</th></tr><tr><td>Selanik</td><td>Doğduğu ve ilk öğrenimini gördüğü şehirdir. Farklı milletlerin bir arada yaşadığı, limanı ve demir yolu olan hareketli bir kentti.</td></tr><tr><td>Manastır</td><td>Askerî İdadiyi (lise) burada okudu. Tarih öğretmeni Mehmet Tevfik Bey sayesinde tarihe ilgisi arttı; Fransızcasını geliştirdi.</td></tr><tr><td>İstanbul</td><td>Harp Okulunu ve Harp Akademisini burada bitirdi. Arkadaşlarıyla ülkenin sorunlarını tartıştı.</td></tr><tr><td>Şam</td><td>Kurmay yüzbaşı olarak ilk görev yeri oldu.</td></tr></table><br>Bu tabloya göre Mustafa Kemal ile ilgili aşağıdakilerden hangisine <u>ulaşılamaz</u>?",
+  "svg": "",
+  "siklar": [
+   "Farklı kültürleri yakından tanıma fırsatı bulmuştur.",
+   "Öğretmenleri, ilgi alanlarının gelişmesinde etkili olmuştur.",
+   "Ülke sorunlarıyla öğrencilik yıllarında ilgilenmeye başlamıştır.",
+   "Öğrenim hayatının tamamını doğduğu şehirde geçirmiştir."
+  ],
+  "dogru": 3,
+  "ipucu1": "Soru “ulaşılamaz” diyor; yani üç şık tabloda var, biri yok ya da tabloyla çelişiyor. Her şık için tabloda bir satır ara.",
+  "ipucu2": "Okuduğu okulların hangi şehirlerde olduğunu say: Selanik, Manastır, İstanbul… Bu kaç farklı şehir eder?",
+  "cozum": [
+   "A: Selanik'te farklı milletler bir arada yaşıyor → ulaşılır.",
+   "B: Mehmet Tevfik Bey tarihe ilgisini artırmış → ulaşılır.",
+   "C: İstanbul'da öğrenciyken ülke sorunlarını tartışmış → ulaşılır.",
+   "D: Selanik, Manastır ve İstanbul'da okumuş; tek şehirde değil → ulaşılamaz.",
+   "Cevap: D."
+  ],
+  "tuzaklar": [
+   "Selanik satırındaki “farklı milletler” bilgisini atlayınca bu şık tabloda yokmuş gibi görünür.",
+   "Öğretmen adı tabloda geçiyor; satırı hızlı okuyan bunu kaçırabilir.",
+   "“Tartıştı” sözcüğü ilgilendiğini gösterir; bunu çıkarım saymayanlar bu şıkkı işaretler.",
+   ""
+  ],
+  "taktik": "“Ulaşılamaz” sorularında şıkları tek tek tabloyla eşleştir; eşleşmeyen ilk şık cevaptır.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Selanik",
+    "tanim": "Mustafa Kemal'in doğduğu, çok kültürlü yapısıyla onun açık fikirli yetişmesinde etkili olan şehir."
+   },
+   {
+    "ad": "Manastır Askerî İdadisi",
+    "tanim": "Mustafa Kemal'in tarih ve edebiyata ilgisinin arttığı, Fransızcasını geliştirdiği okul."
+   }
+  ]
+ },
+ {
+  "id": "ink-004",
+  "ders": "inkilap",
+  "unite": "Bir Kahraman Doğuyor",
+  "kazanimKod": "İTA.8.1.4",
+  "kazanimAd": "Mustafa Kemal’in askerlik hayatı ile ilgili olayları ve olguları onun kişilik özellikleri ile ilişkilendirir.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "Mustafa Kemal'in askerlik hayatına ait bazı olaylar aşağıda karışık olarak verilmiştir.<br><br>I. Hareket Ordusu'nda görev alarak İstanbul'da çıkan 31 Mart Olayı'nın bastırılmasına katıldı.<br>II. Trablusgarp'ta Derne ve Tobruk'ta yerli halkı örgütleyerek İtalyanlara karşı mücadele etti.<br>III. Çanakkale Cephesi'nde Anafartalar'da görev yaptı.<br>IV. Harp Akademisini bitirerek Şam'daki 5. Orduya atandı.<br><br>Bu olayların <b>eskiden yeniye</b> doğru sıralanışı aşağıdakilerden hangisidir?",
+  "svg": "",
+  "siklar": [
+   "IV – I – II – III",
+   "IV – II – I – III",
+   "I – IV – II – III",
+   "IV – I – III – II"
+  ],
+  "dogru": 0,
+  "ipucu1": "Önce en baştaki ve en sondaki olayı bul: Hangisi mesleğe başlangıç, hangisi Birinci Dünya Savaşı içinde?",
+  "ipucu2": "Şam ilk görev yeridir, yani en başta. Çanakkale, Birinci Dünya Savaşı'ndadır, yani en sonda. Geriye 31 Mart Olayı (1909) ile Trablusgarp Savaşı'nı (1911) sıralamak kalıyor.",
+  "cozum": [
+   "Şam'a atanması ilk görevidir (1905) → IV başta.",
+   "31 Mart Olayı 1909'da yaşandı → I.",
+   "Trablusgarp Savaşı 1911'de başladı → II.",
+   "Çanakkale Savaşları 1915'te, Birinci Dünya Savaşı içinde → III sonda.",
+   "Cevap: IV – I – II – III."
+  ],
+  "tuzaklar": [
+   "",
+   "31 Mart Olayı ile Trablusgarp Savaşı'nın yerini karıştıranlar bu sıralamayı seçer; 1909, 1911'den öncedir.",
+   "31 Mart Olayı'nı en başa koymak cazip gelir; ama Mustafa Kemal göreve Şam'da başladı.",
+   "Çanakkale'yi Trablusgarp'tan önce sanmak yaygın bir hatadır; Çanakkale Birinci Dünya Savaşı'ndadır ve en sondur."
+  ],
+  "taktik": "Sıralama sorularında yılları tek tek ezberlemek yerine zinciri hatırla: Şam → 31 Mart → Trablusgarp → Balkan Savaşları → Birinci Dünya Savaşı.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "31 Mart Olayı",
+    "tanim": "1909'da İstanbul'da çıkan ayaklanma; Hareket Ordusu tarafından bastırılmıştır."
+   },
+   {
+    "ad": "Trablusgarp Savaşı",
+    "tanim": "1911'de İtalya'nın saldırısıyla başlayan, Mustafa Kemal'in Derne ve Tobruk'ta halkı örgütlediği savaş."
+   }
+  ]
+ },
+ {
+  "id": "ink-005",
+  "ders": "inkilap",
+  "unite": "Millî Uyanış: Bağımsızlık Yolunda Atılan Adımlar",
+  "kazanimKod": "İTA.8.2.1",
+  "kazanimAd": "Birinci Dünya Savaşı’nın sebeplerini ve savaşın başlamasına yol açan gelişmeleri kavrar.",
+  "zorluk": 1,
+  "tip": "grafik-tablo",
+  "metin": "Birinci Dünya Savaşı öncesinde Avrupa'nın güçlü devletleri iki ayrı blok oluşturmuştur.<table class='t'><tr><th>Üçlü İtilaf</th><th>Üçlü İttifak</th></tr><tr><td>İngiltere<br>Fransa<br>Rusya</td><td>Almanya<br>Avusturya-Macaristan<br>İtalya</td></tr></table><br>Savaş başladıktan sonra İtalya, İtilaf Devletleri'nin yanına geçmiş; Osmanlı Devleti ve Bulgaristan ise İttifak Devletleri'nin yanında savaşa katılmıştır.<br><br>Bu bilgilere göre aşağıdakilerden hangisi <u>söylenemez</u>?",
+  "svg": "",
+  "siklar": [
+   "Avrupa'nın güçlü devletleri savaş öncesinde iki gruba ayrılmıştır.",
+   "Savaş sırasında taraf değiştiren bir devlet olmuştur.",
+   "Bloklaşma, devletler arasındaki gerginliği azaltarak savaşı önlemiştir.",
+   "Bloklara savaş başladıktan sonra katılan devletler olmuştur."
+  ],
+  "dogru": 2,
+  "ipucu1": "“Söylenemez” yazıyor: üç şık verilen bilgiyle uyumlu, bir şık ise bilgiyle çelişiyor.",
+  "ipucu2": "Metinde “savaş başladıktan sonra” deniyor. Savaş başlamışsa bloklaşma savaşı önleyebilmiş midir?",
+  "cozum": [
+   "A: Tabloda iki blok var → söylenebilir.",
+   "B: İtalya taraf değiştirmiş → söylenebilir.",
+   "D: Osmanlı Devleti ve Bulgaristan sonradan katılmış → söylenebilir.",
+   "C: Savaş çıkmıştır; bloklaşma savaşı önlememiş, tersine gerginliği artırmıştır → söylenemez.",
+   "Cevap: C."
+  ],
+  "tuzaklar": [
+   "Tablonun iki sütunu zaten iki grubu gösteriyor; “söylenemez”i “söylenebilir” diye okuyanlar bu şıkka gider.",
+   "İtalya'nın iki yerde de adının geçmesi kafa karıştırabilir; metin taraf değiştirdiğini açıkça söylüyor.",
+   "",
+   "Osmanlı Devleti'nin tabloda olmaması bu şıkkı yanlış gibi gösterir; ama metin sonradan katıldığını söylüyor."
+  ],
+  "taktik": "Olumsuz köklü sorularda (söylenemez, ulaşılamaz) soru kökündeki altı çizili sözcüğü daire içine al; sonra şıkları oku.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "İtilaf Devletleri",
+    "tanim": "Birinci Dünya Savaşı'nda İngiltere, Fransa ve Rusya'nın öncülük ettiği blok."
+   },
+   {
+    "ad": "İttifak Devletleri",
+    "tanim": "Almanya ve Avusturya-Macaristan'ın öncülük ettiği, Osmanlı Devleti'nin de yanında yer aldığı blok."
+   }
+  ]
+ },
+ {
+  "id": "ink-006",
+  "ders": "inkilap",
+  "unite": "Millî Uyanış: Bağımsızlık Yolunda Atılan Adımlar",
+  "kazanimKod": "İTA.8.2.2",
+  "kazanimAd": "Birinci Dünya Savaşı’nda Osmanlı Devleti’nin durumu hakkında çıkarımlarda bulunur.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "Tabloda Osmanlı Devleti'nin Birinci Dünya Savaşı'nda savaştığı bazı cepheler verilmiştir.<table class='t'><tr><th>Cephe</th><th>Karşı taraf</th><th>Özellik</th></tr><tr><td>Kafkas</td><td>Rusya</td><td>Osmanlı'nın taarruz ettiği cephedir. Sarıkamış Harekâtı'nda ağır kış şartları nedeniyle büyük kayıp verilmiştir.</td></tr><tr><td>Kanal</td><td>İngiltere</td><td>Süveyş Kanalı'nı ele geçirmek için taarruz edilmiş, başarı sağlanamamıştır.</td></tr><tr><td>Çanakkale</td><td>İngiltere, Fransa</td><td>Savunma yapılmış; denizde ve karada zafer kazanılmıştır.</td></tr><tr><td>Irak</td><td>İngiltere</td><td>Savunma yapılmış; Kut'ül-Amâre'de zafer kazanılmıştır.</td></tr></table><br>Bu tabloya göre,<br>I. Osmanlı Devleti birden fazla devletle mücadele etmiştir.<br>II. Osmanlı Devleti bütün cephelerde yalnızca savunma yapmıştır.<br>III. Osmanlı Devleti bazı cephelerde başarı kazanmıştır.<br>yargılarından hangilerine ulaşılabilir?",
+  "svg": "",
+  "siklar": [
+   "Yalnız II",
+   "I ve III",
+   "II ve III",
+   "I, II ve III"
+  ],
+  "dogru": 1,
+  "ipucu1": "“Özellik” sütununda taarruz ve savunma sözcüklerini ara. Hepsi aynı mı?",
+  "ipucu2": "II. öncülde “bütün” ve “yalnızca” sözcükleri var. Tabloda tek bir taarruz cephesi bile bulursan bu öncül yanlış olur.",
+  "cozum": [
+   "I: Rusya, İngiltere ve Fransa ile savaşılmış → doğru.",
+   "II: Kafkas ve Kanal cephelerinde taarruz edilmiş → “yalnızca savunma” yanlış.",
+   "III: Çanakkale ve Kut'ül-Amâre'de zafer kazanılmış → doğru.",
+   "Cevap: I ve III."
+  ],
+  "tuzaklar": [
+   "Çanakkale ve Irak satırlarına bakıp tüm cepheleri savunma sananlar bu şıkkı seçer.",
+   "",
+   "III doğru; ama II'yi Kafkas ve Kanal satırları çürütüyor.",
+   "“Bütün” ve “yalnızca” gibi kesin sözcükleri fark etmeyince üç öncül de doğru görünür."
+  ],
+  "taktik": "Öncülde “bütün, hiçbir, yalnızca” gibi kesin sözcük görürsen tabloda bunu bozan tek bir örnek ara.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "Taarruz cephesi",
+    "tanim": "Osmanlı'nın saldırıya geçtiği cephe: Kafkas ve Kanal."
+   },
+   {
+    "ad": "Savunma cephesi",
+    "tanim": "Osmanlı'nın topraklarını korumak için savaştığı cephe: Çanakkale, Irak, Hicaz-Yemen, Suriye."
+   }
+  ]
+ },
+ {
+  "id": "ink-007",
+  "ders": "inkilap",
+  "unite": "Millî Uyanış: Bağımsızlık Yolunda Atılan Adımlar",
+  "kazanimKod": "İTA.8.2.3",
+  "kazanimAd": "Mondros Ateşkes Antlaşması’nın imzalanması ve uygulanması karşısında Osmanlı yönetiminin, Mustafa Kemal’in ve halkın tutumunu analiz eder.",
+  "zorluk": 2,
+  "tip": "cok-adimli",
+  "metin": "30 Ekim 1918'de imzalanan Mondros Ateşkes Antlaşması'nın bazı maddeleri şunlardır:<br><br>I. Sınırların korunması ve iç güvenlik için gerekenler dışındaki Osmanlı askerleri terhis edilecek; silah ve cephane İtilaf Devletleri'ne teslim edilecektir.<br>II. İtilaf Devletleri, güvenliklerini tehdit eden bir durum ortaya çıkarsa herhangi bir stratejik noktayı işgal edebilecektir.<br>III. Telsiz, telgraf ve kablo haberleşmesi İtilaf Devletleri'nin denetimine bırakılacaktır.<br><br>Bu maddelerle ilgili aşağıdakilerden hangisi <u>söylenemez</u>?",
+  "svg": "",
+  "siklar": [
+   "Osmanlı Devleti'nin egemenlik haklarını güçlendirmeyi amaçlamaktadır.",
+   "I. madde ile Osmanlı Devleti savunmasız bırakılmak istenmiştir.",
+   "II. madde, İtilaf Devletleri'nin yapacağı işgallere zemin hazırlamaktadır.",
+   "III. madde ile ülke içindeki haberleşme denetim altına alınmak istenmiştir."
+  ],
+  "dogru": 0,
+  "ipucu1": "Her maddenin Osmanlı Devleti'nin işine mi, İtilaf Devletleri'nin işine mi yaradığını düşün.",
+  "ipucu2": "Askeri dağıtılan, haberleşmesi denetlenen ve toprakları işgale açık hâle gelen bir devletin egemenliği güçlenir mi, zayıflar mı?",
+  "cozum": [
+   "I: Ordu dağıtılıyor, silahlar alınıyor → devlet savunmasız kalıyor.",
+   "II: “Güvenlik” gerekçesiyle istenen yer işgal edilebiliyor → işgallere zemin.",
+   "III: Haberleşme İtilaf denetiminde → halkın haberleşmesi kontrol altında.",
+   "Üç madde de egemenliği zayıflatıyor; “güçlendirme” söylenemez.",
+   "Cevap: A."
+  ],
+  "tuzaklar": [
+   "",
+   "Terhis sözcüğünün (askerin dağıtılması) anlamı bilinmeyince bu doğru yorum yanlış sanılır.",
+   "7. madde olarak bilinen bu hüküm en tehlikeli maddedir; “güvenlik” sözcüğü masum gösterir ama işgalin kapısını açar.",
+   "Haberleşmenin denetimi önemsiz bir ayrıntı gibi görünür; oysa işgallere tepkinin duyulmasını zorlaştırır."
+  ],
+  "taktik": "Mondros maddelerini üç başlıkta toplayabilirsin: orduyu dağıt, haberleşmeyi ve ulaşımı ele geçir, işgale kapı aç.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Mondros Ateşkes Antlaşması",
+    "tanim": "30 Ekim 1918'de imzalanan, Osmanlı Devleti'nin Birinci Dünya Savaşı'ndan çekildiği ve işgallere açık hâle geldiği ateşkes."
+   },
+   {
+    "ad": "Terhis",
+    "tanim": "Askerlerin silah bırakarak evlerine gönderilmesi."
+   }
+  ]
+ },
+ {
+  "id": "ink-008",
+  "ders": "inkilap",
+  "unite": "Millî Uyanış: Bağımsızlık Yolunda Atılan Adımlar",
+  "kazanimKod": "İTA.8.2.4",
+  "kazanimAd": "Kuvâ-yı Millîye’nin oluşum sürecini ve sonrasında meydana gelen gelişmeleri kavrar.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "Mondros Ateşkes Antlaşması'ndan sonra başlayan işgallere karşı Anadolu ve Trakya'da millî cemiyetler kurulmuştur.<table class='t'><tr><th>Cemiyet</th><th>Kuruluş amacı</th></tr><tr><td>Trakya-Paşaeli Müdafaa-i Hukuk Cemiyeti</td><td>Trakya'nın Yunanistan'a bırakılmasını önlemek</td></tr><tr><td>İzmir Redd-i İlhak Cemiyeti</td><td>İzmir'in Yunanistan'a katılmasını önlemek</td></tr><tr><td>Doğu Anadolu Müdafaa-i Hukuk Cemiyeti</td><td>Doğu Anadolu'da bir Ermeni devleti kurulmasını önlemek</td></tr><tr><td>Kilikyalılar Cemiyeti</td><td>Adana ve çevresini Fransız ve Ermeni işgaline karşı korumak</td></tr></table><br>Tabloya göre bu cemiyetlerle ilgili aşağıdakilerden hangisi söylenebilir?",
+  "svg": "",
+  "siklar": [
+   "Tek bir merkezden yönetilmişlerdir.",
+   "Hepsi aynı devlete karşı mücadele etmiştir.",
+   "Güçlü bir devletin korumasına girmeyi savunmuşlardır.",
+   "Kuruldukları bölgeyi işgallere karşı korumayı amaçlamışlardır."
+  ],
+  "dogru": 3,
+  "ipucu1": "“Kuruluş amacı” sütunundaki ortak noktayı bul: Her cemiyet neresiyle ilgileniyor?",
+  "ipucu2": "Her satırda bir bölge adı var (Trakya, İzmir, Doğu Anadolu, Adana). Bu, cemiyetlerin bölgesel mi yoksa ülke çapında mı kurulduğunu gösterir?",
+  "cozum": [
+   "Her cemiyet kendi bölgesinin adını taşıyor ve o bölgeyi korumak istiyor.",
+   "Karşı çıkılan taraflar farklı: Yunanistan, Ermeniler, Fransızlar.",
+   "Tabloda ortak bir merkezden ya da korumaya girmekten söz edilmiyor.",
+   "Ortak özellik: bölgelerini işgale karşı korumak.",
+   "Cevap: D."
+  ],
+  "tuzaklar": [
+   "Cemiyetler ancak Sivas Kongresi'nde birleştirildi; bu bilgiyi kuruluş dönemine taşımak hatadır.",
+   "İlk iki satırda Yunanistan geçtiği için hepsi öyle sanılabilir; diğer satırlar bunu bozuyor.",
+   "Bu görüş (manda ve himaye) millî varlığa zararlı bazı cemiyetlere aittir, millî cemiyetlere değil.",
+   ""
+  ],
+  "taktik": "Tabloda “ortak özellik” sorulduğunda her satırda tekrar eden şeyi ara; tek satırda geçen bilgi ortak özellik olamaz.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "Millî cemiyetler",
+    "tanim": "İşgallere karşı bölgelerini savunmak için kurulan, Sivas Kongresi'nde tek çatı altında birleştirilen cemiyetler."
+   },
+   {
+    "ad": "Müdafaa-i hukuk",
+    "tanim": "“Hakların savunulması” anlamına gelir."
+   }
+  ]
+ },
+ {
+  "id": "ink-009",
+  "ders": "inkilap",
+  "unite": "Millî Uyanış: Bağımsızlık Yolunda Atılan Adımlar",
+  "kazanimKod": "İTA.8.2.5",
+  "kazanimAd": "Millî Mücadele’nin hazırlık döneminde Mustafa Kemal’in yaptığı çalışmaları analiz eder.",
+  "zorluk": 1,
+  "tip": "uzun-metin",
+  "metin": "22 Haziran 1919'da yayımlanan Amasya Genelgesi'nde şu ifade yer alır:<br><br><i>“Milletin bağımsızlığını yine milletin azim ve kararı kurtaracaktır.”</i><br><br>Bu ifadeye göre aşağıdakilerden hangisine ulaşılabilir?",
+  "svg": "",
+  "siklar": [
+   "Kurtuluş için İstanbul Hükûmeti'nin kararları beklenecektir.",
+   "Kurtuluş mücadelesi milletin kendi gücüne dayanacaktır.",
+   "Bağımsızlık için güçlü bir devletin koruması istenecektir.",
+   "Mücadele yalnızca belirli bir bölgeyle sınırlı kalacaktır."
+  ],
+  "dogru": 1,
+  "ipucu1": "Cümlede kurtarıcı olarak kim gösteriliyor? O sözcüğün altını çiz.",
+  "ipucu2": "Cümlede “millet” sözcüğü iki kez geçiyor: Kurtarılacak olan da kurtaracak olan da millet. Padişah, hükûmet ya da başka bir devlet geçiyor mu?",
+  "cozum": [
+   "Cümlede bağımsızlığı kurtaracak güç “milletin azim ve kararı” olarak gösteriliyor.",
+   "Hükûmetten, başka bir devletten ya da belli bir bölgeden söz edilmiyor.",
+   "Demek ki mücadele milletin kendi gücüne dayanacak.",
+   "Cevap: B."
+  ],
+  "tuzaklar": [
+   "Amasya Genelgesi tam tersine İstanbul Hükûmeti'nin görevini yerine getiremediğini söyler.",
+   "",
+   "Başka bir devletin koruması manda ve himaye demektir; cümle ise milletin kendi kararını öne çıkarır.",
+   "Genelge bütün millete seslenir; bölge sınırı koymaz."
+  ],
+  "taktik": "Alıntı cümlesi verilen sorularda cümlenin öznesine bak: İşi kim yapıyor? Cevap çoğunlukla oradadır.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Amasya Genelgesi",
+    "tanim": "Millî Mücadele'nin gerekçesinin, amacının ve yönteminin ilk kez açıklandığı belge (22 Haziran 1919)."
+   },
+   {
+    "ad": "Millî egemenlik",
+    "tanim": "Yönetme yetkisinin ve kararın millete ait olması."
+   }
+  ]
+ },
+ {
+  "id": "ink-010",
+  "ders": "inkilap",
+  "unite": "Millî Uyanış: Bağımsızlık Yolunda Atılan Adımlar",
+  "kazanimKod": "İTA.8.2.5",
+  "kazanimAd": "Millî Mücadele’nin hazırlık döneminde Mustafa Kemal’in yaptığı çalışmaları analiz eder.",
+  "zorluk": 3,
+  "tip": "grafik-tablo",
+  "metin": "Tabloda Erzurum ve Sivas Kongreleri karşılaştırılmıştır.<table class='t'><tr><th></th><th>Erzurum Kongresi<br>(23 Temmuz–7 Ağustos 1919)</th><th>Sivas Kongresi<br>(4–11 Eylül 1919)</th></tr><tr><td>Katılım</td><td>Doğu illerinin delegeleri</td><td>Yurdun farklı bölgelerinden delegeler</td></tr><tr><td>Vatanın bütünlüğü</td><td>“Millî sınırlar içinde vatan bir bütündür, parçalanamaz.”</td><td>Bu karar aynen kabul edildi.</td></tr><tr><td>Manda ve himaye</td><td>Kabul edilemez.</td><td>Kesin olarak reddedildi.</td></tr><tr><td>Cemiyetler</td><td>Doğu illerindeki cemiyetler birleştirildi.</td><td>Bütün millî cemiyetler “Anadolu ve Rumeli Müdafaa-i Hukuk Cemiyeti” adıyla birleştirildi.</td></tr></table><br>Bu tabloya göre,<br>I. Erzurum'da alınan kararlar, Sivas'ta bütün yurdu kapsayacak şekilde genişletilmiştir.<br>II. Sivas Kongresi ile millî direniş tek çatı altında toplanmıştır.<br>III. İki kongrede de vatanın yalnızca bir bölümünün kurtarılması yeterli görülmüştür.<br>yargılarından hangilerine ulaşılabilir?",
+  "svg": "",
+  "siklar": [
+   "Yalnız I",
+   "I ve II",
+   "I ve III",
+   "II ve III"
+  ],
+  "dogru": 1,
+  "ipucu1": "Tabloyu satır satır oku: Sol sütundaki karar sağ sütunda nasıl değişmiş, büyümüş mü küçülmüş mü?",
+  "ipucu2": "“Vatanın bütünlüğü” satırı III. öncülü, “Cemiyetler” satırı II. öncülü sınamak için yeterli. “Parçalanamaz” diyen bir kongre vatanın bir bölümüyle yetinir mi?",
+  "cozum": [
+   "I: Doğu illeri → bütün yurt; doğudaki cemiyetler → bütün cemiyetler. Kararlar genişlemiş. Doğru.",
+   "II: Bütün cemiyetler tek ad altında birleşmiş. Doğru.",
+   "III: “Vatan bir bütündür, parçalanamaz” kararı ikisinde de var; bir bölümle yetinilmemiş. Yanlış.",
+   "Cevap: I ve II."
+  ],
+  "tuzaklar": [
+   "I doğru ama “Cemiyetler” satırı II'yi de doğruluyor; satırı atlayanlar burada kalır.",
+   "",
+   "Erzurum'a yalnız doğu illerinin katılması, kararların da yalnız doğuyu ilgilendirdiği yanılgısına yol açar; kararlar millîdir.",
+   "II doğru; ancak III “parçalanamaz” kararıyla çelişir."
+  ],
+  "taktik": "Erzurum Kongresi: toplanışı bölgesel, kararları millî. Sivas Kongresi: toplanışı da kararları da millî. Bu iki cümle çoğu soruyu çözer.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "Manda ve himaye",
+    "tanim": "Bir devletin, güçlü bir başka devletin koruması ve yönetimi altına girmesi."
+   },
+   {
+    "ad": "Anadolu ve Rumeli Müdafaa-i Hukuk Cemiyeti",
+    "tanim": "Sivas Kongresi'nde bütün millî cemiyetlerin birleştirilmesiyle oluşan cemiyet."
+   }
+  ]
+ },
+ {
+  "id": "ink-011",
+  "ders": "inkilap",
+  "unite": "Millî Uyanış: Bağımsızlık Yolunda Atılan Adımlar",
+  "kazanimKod": "İTA.8.2.5",
+  "kazanimAd": "Millî Mücadele’nin hazırlık döneminde Mustafa Kemal’in yaptığı çalışmaları analiz eder.",
+  "zorluk": 2,
+  "tip": "gorsel",
+  "metin": "Zaman çizelgesinde Millî Mücadele'nin hazırlık dönemindeki bazı gelişmeler verilmiştir. “?” ile gösterilen gelişmeyle ilgili şunlar bilinmektedir:<br>• Toplanma şekli bakımından bölgesel, aldığı kararlar bakımından millîdir.<br>• Manda ve himaye ilk kez burada reddedilmiştir.<br><br>Buna göre “?” yerine aşağıdakilerden hangisi gelmelidir?",
+  "svg": "<svg viewBox='0 0 320 256'><line x1='14' y1='18' x2='14' y2='218' stroke='currentColor' stroke-width='2'/><circle cx='14' cy='18' r='5' fill='currentColor' stroke='currentColor' stroke-width='2'/><text x='30' y='19' font-size='12' fill='currentColor'>19 Mayıs 1919</text><text x='30' y='35' font-size='13' font-weight='bold' fill='currentColor'>Samsun'a çıkış</text><circle cx='14' cy='58' r='5' fill='currentColor' stroke='currentColor' stroke-width='2'/><text x='30' y='59' font-size='12' fill='currentColor'>28 Mayıs 1919</text><text x='30' y='75' font-size='13' font-weight='bold' fill='currentColor'>Havza Genelgesi</text><circle cx='14' cy='98' r='5' fill='currentColor' stroke='currentColor' stroke-width='2'/><text x='30' y='99' font-size='12' fill='currentColor'>22 Haziran 1919</text><text x='30' y='115' font-size='13' font-weight='bold' fill='currentColor'>Amasya Genelgesi</text><circle cx='14' cy='138' r='5' class='acf' stroke='currentColor' stroke-width='2'/><text x='30' y='139' font-size='12' fill='currentColor'>23 Temmuz 1919</text><text x='30' y='155' font-size='13' font-weight='bold' fill='currentColor'>?</text><circle cx='14' cy='178' r='5' fill='currentColor' stroke='currentColor' stroke-width='2'/><text x='30' y='179' font-size='12' fill='currentColor'>4 Eylül 1919</text><text x='30' y='195' font-size='13' font-weight='bold' fill='currentColor'>Sivas Kongresi</text><circle cx='14' cy='218' r='5' fill='currentColor' stroke='currentColor' stroke-width='2'/><text x='30' y='219' font-size='12' fill='currentColor'>20 Ekim 1919</text><text x='30' y='235' font-size='13' font-weight='bold' fill='currentColor'>Amasya Görüşmeleri</text></svg>",
+  "siklar": [
+   "Erzurum Kongresi",
+   "Misakımillî'nin kabulü",
+   "TBMM'nin açılması",
+   "Mondros Ateşkes Antlaşması"
+  ],
+  "dogru": 0,
+  "ipucu1": "Çizelgede “?” hangi iki gelişmenin arasında? Önce zaman aralığını belirle.",
+  "ipucu2": "“?” Amasya Genelgesi ile Sivas Kongresi arasında. Bu aralıkta toplanan ve “bölgesel toplanıp millî kararlar alan” toplantıyı düşün.",
+  "cozum": [
+   "“?” 23 Temmuz 1919'da; Amasya Genelgesi'nden sonra, Sivas Kongresi'nden önce.",
+   "Bu tarihte Erzurum Kongresi toplanmıştır.",
+   "Doğu illerinin delegeleriyle toplandı (bölgesel) ama vatanın bütünlüğü gibi millî kararlar aldı; manda ve himayeyi reddetti.",
+   "Cevap: Erzurum Kongresi."
+  ],
+  "tuzaklar": [
+   "",
+   "Misakımillî 1920'de kabul edildi; çizelgedeki bütün olaylar 1919'da.",
+   "TBMM 23 Nisan 1920'de açıldı; çizelgenin bitişinden sonradır.",
+   "Mondros 30 Ekim 1918'de imzalandı; çizelgenin başlangıcından öncedir."
+  ],
+  "taktik": "Zaman çizelgesi sorularında önce boşluğun iki yanındaki olaylara bak; aralığa sığmayan şıkları hemen ele.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Erzurum Kongresi",
+    "tanim": "23 Temmuz–7 Ağustos 1919'da toplanan; toplanışı bölgesel, kararları millî olan kongre."
+   },
+   {
+    "ad": "Hazırlık dönemi sırası",
+    "tanim": "Samsun → Havza → Amasya Genelgesi → Erzurum → Sivas → Amasya Görüşmeleri."
+   }
+  ]
+ },
+ {
+  "id": "ink-012",
+  "ders": "inkilap",
+  "unite": "Millî Uyanış: Bağımsızlık Yolunda Atılan Adımlar",
+  "kazanimKod": "İTA.8.2.6",
+  "kazanimAd": "Misakımilli’nin kabulünü ve Büyük Millet Meclisinin açılışını vatanın bütünlüğü esası ile “ulusal egemenlik” ve “tam bağımsızlık” ilkeleri ile ilişkilendirir.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Son Osmanlı Mebusan Meclisi'nde 28 Ocak 1920'de kabul edilen Misakımillî'nin (Millî Ant) bir maddesinde özetle şu görüş yer alır:<br><br><i>Siyasi, adli ve mali gelişmemizi engelleyen sınırlamalar kaldırılmalıdır.</i><br><br>Bu madde ile aşağıdakilerden hangisi hedeflenmiştir?",
+  "svg": "",
+  "siklar": [
+   "Azınlıklara yeni haklar tanınması",
+   "Saltanatın güçlendirilmesi",
+   "Kapitülasyonların kaldırılarak tam bağımsızlığın sağlanması",
+   "Sınırların halk oylamasıyla belirlenmesi"
+  ],
+  "dogru": 2,
+  "ipucu1": "Bir devletin kendi mahkemesini, vergisini ve siyasetini özgürce yönetememesi hangi kavramla ilgilidir?",
+  "ipucu2": "Osmanlı'da yabancılara tanınan ve devletin mali, adli işlerine engel olan ayrıcalıkların adını hatırla. “Sınırlamalar” sözcüğü bunları anlatıyor.",
+  "cozum": [
+   "Madde siyasi, adli ve mali sınırlamalardan söz ediyor.",
+   "Osmanlı'da bu sınırlamalar, yabancılara tanınan ayrıcalıklar yani kapitülasyonlardı.",
+   "Bunların kaldırılması her alanda serbest olmak, yani tam bağımsızlık demektir.",
+   "Cevap: C."
+  ],
+  "tuzaklar": [
+   "Misakımillî'de azınlıklarla ilgili bir madde gerçekten vardır; ama bu madde o değil, sınırlamalarla ilgili.",
+   "Meclis Osmanlı Mebusan Meclisi olduğu için saltanatla ilişkilendirmek cazip gelir; madde bağımsızlıkla ilgilidir.",
+   "",
+   "Halk oylaması Misakımillî'nin başka maddelerinde (Kars, Ardahan, Batum; Batı Trakya) geçer; “sınır” ile “sınırlama” sözcüklerini karıştırma."
+  ],
+  "taktik": "“Siyasi, adli, mali, ekonomik sınırlamalar” gördüğünde aklına kapitülasyonlar ve tam bağımsızlık gelsin.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Misakımillî",
+    "tanim": "28 Ocak 1920'de son Osmanlı Mebusan Meclisi'nde kabul edilen; vatanın sınırlarını ve tam bağımsızlığı esas alan kararlar."
+   },
+   {
+    "ad": "Kapitülasyon",
+    "tanim": "Yabancı devletlere tanınan ticari, hukuki ve mali ayrıcalıklar."
+   }
+  ]
+ },
+ {
+  "id": "ink-013",
+  "ders": "inkilap",
+  "unite": "Millî Uyanış: Bağımsızlık Yolunda Atılan Adımlar",
+  "kazanimKod": "İTA.8.2.7",
+  "kazanimAd": "Büyük Millet Meclisine karşı ayaklanmalar ile ayaklanmaların bastırılması için alınan tedbirleri analiz eder.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "TBMM açıldıktan kısa süre sonra Anadolu'nun çeşitli yerlerinde Meclis'e karşı ayaklanmalar çıktı. TBMM, bu ayaklanmalara karşı şu önlemleri aldı:<br><br>• Hıyanet-i Vataniye (Vatana İhanet) Kanunu'nu çıkardı.<br>• Bu kanuna uymayanları yargılamak için, üyeleri milletvekilleri arasından seçilen İstiklal Mahkemeleri'ni kurdu.<br><br>Yalnızca bu iki önleme bakıldığında TBMM'nin aşağıdaki yetkilerden hangilerini kullandığı söylenebilir?",
+  "svg": "",
+  "siklar": [
+   "Yalnız yasama",
+   "Yalnız yürütme",
+   "Yasama ve yürütme",
+   "Yasama ve yargı"
+  ],
+  "dogru": 3,
+  "ipucu1": "Üç yetkiyi hatırla: yasama = kanun yapma, yürütme = kanunu uygulama, yargı = yargılama. Her önlemi bunlardan biriyle eşleştir.",
+  "ipucu2": "Birinci önlemde “kanun çıkardı”, ikinci önlemde “yargılamak için mahkeme” sözleri var. Bu sözcükler hangi yetkilerin adını çağrıştırıyor?",
+  "cozum": [
+   "Kanun çıkarmak yasama yetkisidir → birinci önlem.",
+   "Mahkemelerde yargılama yapmak yargı yetkisidir; hâkimler milletvekili olduğu için bu yetkiyi Meclis kullanmış olur → ikinci önlem.",
+   "Yürütme (kanunları uygulayıp ülkeyi yönetme) bu iki önlemde geçmiyor.",
+   "Cevap: Yasama ve yargı."
+  ],
+  "tuzaklar": [
+   "Kanun çıkarma kısmı doğru; ama mahkeme üyelerinin milletvekili olması yargı yetkisini de gösterir.",
+   "Yürütme, hükûmet etme işidir; verilen iki önlemde hükûmetle ilgili bilgi yok.",
+   "Birinci TBMM'de yürütme de Meclis'teydi (güçler birliği); ancak soru “yalnızca bu iki önleme” bakmanı istiyor.",
+   ""
+  ],
+  "taktik": "“Kanun” sözcüğü → yasama, “mahkeme/yargılama” → yargı, “hükûmet/uygulama” → yürütme. Soruda hangisi geçiyorsa yalnızca onu işaretle.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Güçler birliği",
+    "tanim": "Yasama, yürütme ve yargı yetkilerinin tek elde (Birinci TBMM'de Meclis'te) toplanması."
+   },
+   {
+    "ad": "İstiklal Mahkemeleri",
+    "tanim": "Ayaklanmaları önlemek için kurulan, üyeleri milletvekillerinden oluşan mahkemeler."
+   }
+  ]
+ },
+ {
+  "id": "ink-014",
+  "ders": "inkilap",
+  "unite": "Millî Uyanış: Bağımsızlık Yolunda Atılan Adımlar",
+  "kazanimKod": "İTA.8.2.8",
+  "kazanimAd": "Mustafa Kemal’in ve Türk milletinin Sevr Antlaşması’na karşı tepkilerini değerlendirir.",
+  "zorluk": 1,
+  "tip": "uzun-metin",
+  "metin": "10 Ağustos 1920'de Osmanlı Hükûmeti'nin temsilcileri Sevr Antlaşması'nı imzaladı. Ancak Osmanlı anayasasına göre antlaşmaların geçerli olması için Mebusan Meclisi'nin onayı gerekiyordu ve bu meclis kapalıydı. TBMM ise antlaşmayı tanımadığını açıkladı. Türk milleti mücadelesini sürdürdü ve Sevr hiçbir zaman uygulanamadı.<br><br>Buna göre Sevr Antlaşması ile ilgili aşağıdakilerden hangisi söylenebilir?",
+  "svg": "",
+  "siklar": [
+   "Milletin temsilcileri tarafından onaylanmadığı için hukuken geçerlilik kazanmamıştır.",
+   "TBMM'nin temsilcileri tarafından imzalanmıştır.",
+   "Birinci Dünya Savaşı'nın başlamasına neden olmuştur.",
+   "Millî Mücadele'nin sona ermesini sağlamıştır."
+  ],
+  "dogru": 0,
+  "ipucu1": "Metinde antlaşmanın geçerli olması için ne gerektiği yazıyor. O şart gerçekleşmiş mi?",
+  "ipucu2": "İki meclise bak: Mebusan Meclisi kapalı, TBMM ise antlaşmayı tanımıyor. Öyleyse antlaşmayı onaylayan bir meclis var mı?",
+  "cozum": [
+   "Antlaşmanın geçerli olması için meclis onayı gerekiyor.",
+   "Mebusan Meclisi kapalı olduğu için onaylayamadı; TBMM de tanımadı.",
+   "Yani milletin temsilcileri onay vermedi; antlaşma hukuken geçersiz kaldı ve uygulanamadı.",
+   "Cevap: A."
+  ],
+  "tuzaklar": [
+   "",
+   "Antlaşmayı imzalayan Osmanlı Hükûmeti'dir; TBMM tam tersine tanımamıştır. İki yönetimi karıştırma.",
+   "Sevr, savaşın sonunda imzalanmış bir barış antlaşmasıdır; savaşı başlatmış olamaz.",
+   "Metinde mücadelenin sürdüğü yazıyor; Millî Mücadele'yi sona erdiren antlaşma Lozan'dır."
+  ],
+  "taktik": "Sevr için üç sözcük yeter: imzalandı, onaylanmadı, uygulanamadı (ölü doğmuş antlaşma).",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Sevr Antlaşması",
+    "tanim": "10 Ağustos 1920'de Osmanlı Hükûmeti'nin imzaladığı, TBMM'nin tanımadığı ve hiç uygulanamayan antlaşma."
+   },
+   {
+    "ad": "Hukuken geçersiz",
+    "tanim": "Kanunların aradığı şartlar yerine gelmediği için yürürlüğe girmemiş."
+   }
+  ]
+ },
+ {
+  "id": "ink-015",
+  "ders": "inkilap",
+  "unite": "Millî Bir Destan: Ya İstiklal Ya Ölüm!",
+  "kazanimKod": "İTA.8.3.1",
+  "kazanimAd": "Millî Mücadele Dönemi’nde Doğu Cephesi ve Güney Cephesi’nde meydana gelen gelişmeleri kavrar.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Kâzım Karabekir Paşa komutasındaki Türk ordusu, Doğu Cephesi'nde Ermeni kuvvetlerini yenilgiye uğrattı. Aralık 1920'de imzalanan Gümrü Antlaşması ile Ermenistan, Sevr Antlaşması'nı tanımadığını kabul etti. Bu antlaşma, TBMM'nin uluslararası alanda imzaladığı ilk antlaşma oldu. Doğu Cephesi'nin kapanmasıyla buradaki birliklerin bir kısmı Batı Cephesi'ne kaydırıldı.<br><br>Bu bilgilere göre aşağıdakilerden hangisine <u>ulaşılamaz</u>?",
+  "svg": "",
+  "siklar": [
+   "TBMM, askerî başarının yanında siyasi bir başarı da elde etmiştir.",
+   "Doğu Cephesi'ndeki başarı, Batı Cephesi'nin güçlenmesine katkı sağlamıştır.",
+   "Sevr Antlaşması'nı geçersiz sayan bir devlet olmuştur.",
+   "İtilaf Devletleri TBMM'yi resmen tanımıştır."
+  ],
+  "dogru": 3,
+  "ipucu1": "Metinde adı geçen devletleri say. Şıklarda adı geçip metinde hiç geçmeyen bir taraf var mı?",
+  "ipucu2": "Gümrü Antlaşması hangi devletle imzalandı? İngiltere, Fransa gibi İtilaf Devletleri metinde yer alıyor mu?",
+  "cozum": [
+   "A: Savaş kazanıldı (askerî), antlaşma imzalandı (siyasi) → ulaşılır.",
+   "B: Birlikler Batı Cephesi'ne kaydırıldı → ulaşılır.",
+   "C: Ermenistan Sevr'i tanımadığını kabul etti → ulaşılır.",
+   "D: Metinde İtilaf Devletleri'nin TBMM'yi tanıdığına dair bilgi yok → ulaşılamaz.",
+   "Cevap: D."
+  ],
+  "tuzaklar": [
+   "Antlaşma imzalamanın siyasi başarı olduğunu düşünmeyenler bu şıkkı işaretler.",
+   "Son cümledeki “Batı Cephesi'ne kaydırıldı” bilgisini atlayanlar bu şıkka gider.",
+   "“Bir devlet” ifadesi belirsiz gelebilir; bu devlet Ermenistan'dır.",
+   ""
+  ],
+  "taktik": "Şıkta metinde hiç geçmeyen bir ad (devlet, kişi, kurum) görürsen, o şık büyük ihtimalle “ulaşılamaz” olandır.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Gümrü Antlaşması",
+    "tanim": "Aralık 1920'de Ermenistan ile imzalanan, TBMM'nin uluslararası alandaki ilk antlaşması."
+   },
+   {
+    "ad": "Doğu Cephesi",
+    "tanim": "Kâzım Karabekir Paşa komutasında Ermenilere karşı savaşılan cephe."
+   }
+  ]
+ },
+ {
+  "id": "ink-016",
+  "ders": "inkilap",
+  "unite": "Millî Bir Destan: Ya İstiklal Ya Ölüm!",
+  "kazanimKod": "İTA.8.3.1",
+  "kazanimAd": "Millî Mücadele Dönemi’nde Doğu Cephesi ve Güney Cephesi’nde meydana gelen gelişmeleri kavrar.",
+  "zorluk": 1,
+  "tip": "grafik-tablo",
+  "metin": "Millî Mücadele'de Güney Cephesi'nde düzenli bir ordu yoktu. Halk, Fransız ve Ermeni kuvvetlerine karşı kendi kurduğu Kuvâ-yı Millîye birlikleriyle direndi.<table class='t'><tr><th>Şehir</th><th>Öne çıkan kahraman</th><th>Şehre sonradan verilen unvan</th></tr><tr><td>Antep</td><td>Şahin Bey</td><td>Gazi</td></tr><tr><td>Maraş</td><td>Sütçü İmam</td><td>Kahraman</td></tr><tr><td>Urfa</td><td>Ali Saip Bey</td><td>Şanlı</td></tr></table><br>Bu bilgilere göre Güney Cephesi ile ilgili aşağıdakilerden hangisi söylenebilir?",
+  "svg": "",
+  "siklar": [
+   "Mücadele düzenli ordularla yürütülmüştür.",
+   "Halk, yaşadığı şehri kendi imkânlarıyla savunmuştur.",
+   "Mücadele Yunan kuvvetlerine karşı yapılmıştır.",
+   "Mücadele yalnızca tek bir şehirde yaşanmıştır."
+  ],
+  "dogru": 1,
+  "ipucu1": "Metnin ilk iki cümlesini dikkatle oku: Kim, kime karşı, hangi birliklerle direnmiş?",
+  "ipucu2": "“Düzenli bir ordu yoktu” ve “halk… kendi kurduğu birliklerle” ifadelerinin altını çiz. Bu ifadeler hangi şıkla aynı anlama geliyor?",
+  "cozum": [
+   "Metne göre düzenli ordu yok; direnen halkın kendisi.",
+   "Düşman Fransız ve Ermeni kuvvetleri; tabloda üç ayrı şehir var.",
+   "Halk, şehrini kendi kurduğu Kuvâ-yı Millîye birlikleriyle savunmuş.",
+   "Cevap: B."
+  ],
+  "tuzaklar": [
+   "Batı Cephesi'ndeki düzenli orduyla karıştırılır; metin Güney'de düzenli ordu olmadığını açıkça söylüyor.",
+   "",
+   "Yunan kuvvetleriyle Batı Cephesi'nde savaşıldı; Güney'de karşı taraf Fransızlar ve Ermenilerdi.",
+   "Tabloda Antep, Maraş ve Urfa olmak üzere üç şehir var."
+  ],
+  "taktik": "Cepheleri karıştırmamak için eşleştir: Doğu → Ermeniler, Güney → Fransızlar ve Ermeniler, Batı → Yunanlar.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Kuvâ-yı Millîye",
+    "tanim": "İşgallere karşı halkın kendi imkânlarıyla kurduğu silahlı direniş birlikleri (millî kuvvetler)."
+   },
+   {
+    "ad": "Güney Cephesi",
+    "tanim": "Antep, Maraş, Urfa ve Adana'da halkın Fransız ve Ermeni kuvvetlerine karşı direndiği cephe."
+   }
+  ]
+ },
+ {
+  "id": "ink-017",
+  "ders": "inkilap",
+  "unite": "Millî Bir Destan: Ya İstiklal Ya Ölüm!",
+  "kazanimKod": "İTA.8.3.2",
+  "kazanimAd": "Millî Mücadele Dönemi’nde Batı Cephesi’nde meydana gelen gelişmeleri kavrar.",
+  "zorluk": 2,
+  "tip": "gorsel",
+  "metin": "Zaman çizelgesinde 1921 yılının ilk aylarında yaşanan bazı gelişmeler verilmiştir.<br><br>Bu çizelgeye göre,<br>I. Askerî başarının ardından TBMM, diplomatik alanda da muhatap alınmıştır.<br>II. Savaş sürerken hukuk ve kültür alanında da çalışmalar yapılmıştır.<br>III. Batı Cephesi'ndeki savaşlar I. İnönü Zaferi ile sona ermiştir.<br>yargılarından hangilerine ulaşılabilir?",
+  "svg": "<svg viewBox='0 0 320 256'><line x1='14' y1='18' x2='14' y2='218' stroke='currentColor' stroke-width='2'/><circle cx='14' cy='18' r='5' fill='currentColor' stroke='currentColor' stroke-width='2'/><text x='30' y='19' font-size='12' fill='currentColor'>Ocak 1921</text><text x='30' y='35' font-size='13' font-weight='bold' fill='currentColor'>I. İnönü Zaferi</text><circle cx='14' cy='58' r='5' fill='currentColor' stroke='currentColor' stroke-width='2'/><text x='30' y='59' font-size='12' fill='currentColor'>20 Ocak 1921</text><text x='30' y='75' font-size='13' font-weight='bold' fill='currentColor'>Teşkilat-ı Esasiye (ilk anayasa)</text><circle cx='14' cy='98' r='5' fill='currentColor' stroke='currentColor' stroke-width='2'/><text x='30' y='99' font-size='12' fill='currentColor'>Şubat 1921</text><text x='30' y='115' font-size='13' font-weight='bold' fill='currentColor'>Londra Konferansı'na TBMM de çağrıldı</text><circle cx='14' cy='138' r='5' fill='currentColor' stroke='currentColor' stroke-width='2'/><text x='30' y='139' font-size='12' fill='currentColor'>12 Mart 1921</text><text x='30' y='155' font-size='13' font-weight='bold' fill='currentColor'>İstiklal Marşı'nın kabulü</text><circle cx='14' cy='178' r='5' fill='currentColor' stroke='currentColor' stroke-width='2'/><text x='30' y='179' font-size='12' fill='currentColor'>16 Mart 1921</text><text x='30' y='195' font-size='13' font-weight='bold' fill='currentColor'>Moskova Antlaşması</text><circle cx='14' cy='218' r='5' fill='currentColor' stroke='currentColor' stroke-width='2'/><text x='30' y='219' font-size='12' fill='currentColor'>Mart–Nisan 1921</text><text x='30' y='235' font-size='13' font-weight='bold' fill='currentColor'>II. İnönü Zaferi</text></svg>",
+  "siklar": [
+   "I ve II",
+   "I ve III",
+   "II ve III",
+   "I, II ve III"
+  ],
+  "dogru": 0,
+  "ipucu1": "Çizelgedeki olayları türlerine ayır: Hangileri savaş, hangileri diplomasi (konferans, antlaşma), hangileri hukuk ve kültür?",
+  "ipucu2": "III. öncül için çizelgenin son satırına bak: I. İnönü'den sonra aynı cephede başka bir savaş var mı?",
+  "cozum": [
+   "I: I. İnönü'den sonra TBMM Londra Konferansı'na çağrıldı, Moskova Antlaşması imzalandı → doğru.",
+   "II: İlk anayasa (hukuk) ve İstiklal Marşı (kültür) savaş yıllarında kabul edildi → doğru.",
+   "III: Çizelgenin sonunda II. İnönü Zaferi var; savaşlar sürmüş → yanlış.",
+   "Cevap: I ve II."
+  ],
+  "tuzaklar": [
+   "",
+   "I doğru; ama çizelgedeki son satır III'ü çürütüyor.",
+   "II doğru; ama III, II. İnönü satırıyla çelişiyor.",
+   "Çizelgenin son satırını okumayanlar üç öncülü de doğru sanar."
+  ],
+  "taktik": "Çizelgeyi baştan sona, son satır dâhil oku; “sona ermiştir, ilk kez, yalnızca” gibi ifadeleri çizelgenin uçlarıyla sına.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "Teşkilat-ı Esasiye Kanunu",
+    "tanim": "20 Ocak 1921'de kabul edilen, yeni Türk devletinin ilk anayasası."
+   },
+   {
+    "ad": "Londra Konferansı",
+    "tanim": "I. İnönü Zaferi'nden sonra İtilaf Devletleri'nin TBMM Hükûmeti'ni de çağırdığı konferans."
+   }
+  ]
+ },
+ {
+  "id": "ink-018",
+  "ders": "inkilap",
+  "unite": "Millî Bir Destan: Ya İstiklal Ya Ölüm!",
+  "kazanimKod": "İTA.8.3.5",
+  "kazanimAd": "Sakarya Meydan Savaşı’nın kazanılmasında ve Büyük Taarruz’un başarılı olmasında Mustafa Kemal’in rolüne ilişkin çıkarımlarda bulunur.",
+  "zorluk": 3,
+  "tip": "uzun-metin",
+  "metin": "Temmuz 1921'deki Kütahya-Eskişehir Muharebeleri'nde Türk ordusu, daha fazla kayıp vermemek için Sakarya Irmağı'nın doğusuna çekildi. Bu zor günlerde TBMM, 5 Ağustos 1921'de çıkardığı kanunla Mustafa Kemal Paşa'yı Başkomutan yaptı ve orduyla ilgili konularda Meclis'in yetkilerini kullanma hakkını <b>üç ay süreyle</b> ona verdi. Süre dolduğunda yetkinin uzatılıp uzatılmayacağına yine Meclis karar verecekti.<br><br>Yetkinin süreyle sınırlandırılması ve uzatma kararının Meclis'e bırakılması aşağıdakilerden hangisini gösterir?",
+  "svg": "",
+  "siklar": [
+   "Meclis'in çalışmalarına son verildiğini",
+   "Ordunun yönetiminin İstanbul Hükûmeti'ne bırakıldığını",
+   "Olağanüstü koşullarda bile millî egemenlik anlayışından vazgeçilmediğini",
+   "Savaşın üç ay içinde biteceğinin kesin olarak bilindiğini"
+  ],
+  "dogru": 2,
+  "ipucu1": "Soru, yetkinin neden verildiğini değil, neden “süreli” verildiğini soruyor. Son söz kimde kalıyor?",
+  "ipucu2": "Yetkiyi veren de, süreyi belirleyen de, uzatıp uzatmamaya karar verecek olan da Meclis. Meclis kimi temsil eder?",
+  "cozum": [
+   "Yetki süresiz değil, üç aylığına verilmiş.",
+   "Süre bitince kararı yine Meclis verecek; yani asıl yetki Meclis'te kalıyor.",
+   "Meclis milleti temsil ettiğine göre millî egemenlik korunmuş oluyor.",
+   "Cevap: C."
+  ],
+  "tuzaklar": [
+   "Yetki devri Meclis kapandı sanılabilir; oysa uzatma kararını verecek olan yine Meclis, yani çalışıyor.",
+   "Metinde İstanbul Hükûmeti hiç geçmiyor; yetkiyi veren TBMM, alan Mustafa Kemal Paşa.",
+   "",
+   "“Üç ay” ifadesi savaşın süresi sanılabilir; bu, yetkinin süresidir ve uzatılabilir."
+  ],
+  "taktik": "“Süreli yetki, Meclis onayı, Meclis kararı” ifadeleri gördüğünde millî egemenlik kavramını düşün.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Başkomutanlık Kanunu",
+    "tanim": "5 Ağustos 1921'de Mustafa Kemal Paşa'ya üç ay süreyle Meclis'in orduyla ilgili yetkilerini veren kanun."
+   },
+   {
+    "ad": "Millî egemenlik",
+    "tanim": "Son sözün milletin ve onu temsil eden Meclis'in olması."
+   }
+  ]
+ },
+ {
+  "id": "ink-019",
+  "ders": "inkilap",
+  "unite": "Millî Bir Destan: Ya İstiklal Ya Ölüm!",
+  "kazanimKod": "İTA.8.3.3",
+  "kazanimAd": "Millî Mücadele’nin zor bir döneminde Maarif Kongresi yapan Atatürk’ün, millî ve çağdaş eğitime verdiği önemi kavrar.",
+  "zorluk": 1,
+  "tip": "uzun-metin",
+  "metin": "Temmuz 1921'de Batı Cephesi'nde Kütahya-Eskişehir Muharebeleri sürüyordu. Aynı günlerde Ankara'da öğretmenlerin katıldığı Maarif (Eğitim) Kongresi toplandı. Mustafa Kemal Paşa cepheden gelerek kongrenin açılış konuşmasını yaptı ve millî bir eğitim programının gerekliliğini anlattı.<br><br>Bu bilgiye göre aşağıdakilerden hangisi söylenebilir?",
+  "svg": "",
+  "siklar": [
+   "Savaş nedeniyle eğitim çalışmaları tamamen durdurulmuştur.",
+   "Kongre, savaş bittikten sonra toplanmıştır.",
+   "Eğitim konusu yalnızca askerlere bırakılmıştır.",
+   "Savaş koşullarında bile eğitime önem verilmiştir."
+  ],
+  "dogru": 3,
+  "ipucu1": "Kongre toplandığında cephede ne oluyordu? “Aynı günlerde” ifadesine dikkat et.",
+  "ipucu2": "Savaşın en yoğun günlerinde bir komutanın cepheden gelip öğretmenlere konuşma yapması, eğitime bakışı hakkında ne söyler?",
+  "cozum": [
+   "Kongre, muharebeler sürerken toplanmış.",
+   "Mustafa Kemal Paşa cepheden gelip kongreyi açmış.",
+   "Bu, savaş sırasında bile eğitimin ihmal edilmediğini gösterir.",
+   "Cevap: D."
+  ],
+  "tuzaklar": [
+   "Savaş varsa eğitim durur diye düşünmek doğal; ama metin tam tersini, kongrenin toplandığını anlatıyor.",
+   "“Aynı günlerde” ifadesini kaçıranlar kongreyi savaş sonrasına yerleştirir.",
+   "Konuşmayı bir komutanın yapması yanıltabilir; kongreye katılanlar öğretmenlerdir.",
+   ""
+  ],
+  "taktik": "Maarif Kongresi sorularının ana fikri hep aynıdır: “Savaşta bile eğitime önem verildi.”",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Maarif Kongresi",
+    "tanim": "Temmuz 1921'de, savaş sürerken Ankara'da toplanan eğitim kongresi."
+   },
+   {
+    "ad": "Maarif",
+    "tanim": "Eğitim ve öğretim işleri."
+   }
+  ]
+ },
+ {
+  "id": "ink-020",
+  "ders": "inkilap",
+  "unite": "Millî Bir Destan: Ya İstiklal Ya Ölüm!",
+  "kazanimKod": "İTA.8.3.4",
+  "kazanimAd": "Türk milletinin millî birlik, beraberlik ve dayanışmasının bir örneği olarak Tekalif-i Millîye Emirleri doğrultusunda yapılan uygulamaları analiz eder.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "Sakarya Meydan Savaşı öncesinde ordunun ihtiyaçlarını karşılamak için Başkomutan Mustafa Kemal Paşa, Tekâlif-i Millîye (Millî Yükümlülükler) Emirleri'ni yayımladı. Bu emirlerden bazıları tabloda verilmiştir.<table class='t'><tr><th></th><th>Emir</th></tr><tr><td>1</td><td>Her aile bir kat çamaşır, bir çift çorap ve çarık verecektir.</td></tr><tr><td>2</td><td>Tüccarın ve halkın elindeki yiyecek ve giyecek maddelerinin %40'ı, bedeli sonradan ödenmek üzere orduya verilecektir.</td></tr><tr><td>3</td><td>Halk, elindeki silah ve cephaneyi üç gün içinde orduya teslim edecektir.</td></tr><tr><td>4</td><td>Taşıt sahipleri ayda bir kez 100 km'lik askerî taşımayı ücretsiz yapacaktır.</td></tr></table><br>Bu emirlere bakılarak aşağıdakilerden hangisine <u>ulaşılamaz</u>?",
+  "svg": "",
+  "siklar": [
+   "Ordunun ihtiyaçları başka devletlerden alınan borçlarla karşılanmıştır.",
+   "Ordunun giyecek, silah ve ulaşım ihtiyacı giderilmeye çalışılmıştır.",
+   "Halktan alınan bazı malların karşılığının ödenmesi planlanmıştır.",
+   "Savaşın yükünü cephedeki askerle birlikte halk da paylaşmıştır."
+  ],
+  "dogru": 0,
+  "ipucu1": "Her emirde ihtiyacın kimden karşılandığına bak: aile, tüccar, halk, taşıt sahibi… Bunların hepsi kimdir?",
+  "ipucu2": "Tabloda “borç” ya da “başka devlet” sözcükleri geçiyor mu? Geçmiyorsa bu bilgiye tablodan ulaşamazsın.",
+  "cozum": [
+   "B: 1. emir giyecek, 3. emir silah, 4. emir ulaşım → ulaşılır.",
+   "C: 2. emirde “bedeli sonradan ödenmek üzere” deniyor → ulaşılır.",
+   "D: Aileler, tüccarlar, taşıt sahipleri katkı veriyor → ulaşılır.",
+   "A: Kaynak halkın kendisi; dış borçtan söz edilmiyor → ulaşılamaz.",
+   "Cevap: A."
+  ],
+  "tuzaklar": [
+   "",
+   "Üç ayrı emri tek cümlede birleştirmek zor gelebilir; 1, 3 ve 4. emirlere tek tek bakınca hepsi görülür.",
+   "2. emirdeki “bedeli sonradan ödenmek üzere” ifadesini atlayanlar bu şıkkı tabloda yok sanar.",
+   "Bu bir yorum cümlesi olduğu için tabloda yazmıyor gibi görünür; ama bütün emirler halka yöneliktir."
+  ],
+  "taktik": "Tekâlif-i Millîye = “topyekûn savaş”: Asker cephede, halk cephe gerisinde aynı mücadelenin içindedir.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Tekâlif-i Millîye Emirleri",
+    "tanim": "Sakarya Savaşı öncesinde ordunun ihtiyaçlarını halkın katkısıyla karşılamak için çıkarılan emirler (millî yükümlülükler)."
+   },
+   {
+    "ad": "Topyekûn savaş",
+    "tanim": "Bir milletin askeriyle, halkıyla, bütün kaynaklarıyla savaşa katılması."
+   }
+  ]
+ },
+ {
+  "id": "ink-021",
+  "ders": "inkilap",
+  "unite": "Millî Bir Destan: Ya İstiklal Ya Ölüm!",
+  "kazanimKod": "İTA.8.3.5",
+  "kazanimAd": "Sakarya Meydan Savaşı’nın kazanılmasında ve Büyük Taarruz’un başarılı olmasında Mustafa Kemal’in rolüne ilişkin çıkarımlarda bulunur.",
+  "zorluk": 2,
+  "tip": "cok-adimli",
+  "metin": "Sakarya Meydan Savaşı (23 Ağustos–13 Eylül 1921) Türk ordusunun zaferiyle sonuçlandı. Bu zafer, TBMM'nin diplomatik alanda da güç kazanmasını sağladı.<br><br>I. Gümrü Antlaşması<br>II. Kars Antlaşması<br>III. Ankara Antlaşması (Fransa ile)<br><br>Yukarıdaki antlaşmalardan hangileri Sakarya Zaferi'nden <b>sonra</b> imzalanmıştır?",
+  "svg": "",
+  "siklar": [
+   "Yalnız II",
+   "II ve III",
+   "I ve III",
+   "I, II ve III"
+  ],
+  "dogru": 1,
+  "ipucu1": "Gümrü Antlaşması hangi cephedeki savaşın sonunda imzalanmıştı? O cephe Sakarya'dan önce mi kapandı, sonra mı?",
+  "ipucu2": "Gümrü Antlaşması 1920'nin sonunda imzalandı. Sakarya Savaşı ise 1921'in Ağustos–Eylül aylarında. Diğer iki antlaşma 1921 sonbaharında.",
+  "cozum": [
+   "Gümrü Antlaşması Aralık 1920'de imzalandı → Sakarya'dan önce.",
+   "Kars Antlaşması 13 Ekim 1921'de imzalandı → Sakarya'dan sonra.",
+   "Fransa ile Ankara Antlaşması 20 Ekim 1921'de imzalandı → Sakarya'dan sonra.",
+   "Cevap: II ve III."
+  ],
+  "tuzaklar": [
+   "Kars doğru; ama Fransa ile yapılan Ankara Antlaşması da Sakarya'nın sonucudur.",
+   "",
+   "Gümrü ile Kars'ın ikisi de doğu sınırıyla ilgili olduğu için karıştırılır; Gümrü 1920'dedir.",
+   "Üç antlaşmanın da TBMM'nin başarısı olması hepsini Sakarya'ya bağlama hatasına yol açar."
+  ],
+  "taktik": "Doğu sınırı üç adımda çizildi: Gümrü (1920) → Moskova (Mart 1921) → Kars (Ekim 1921). Kars ve Ankara antlaşmaları Sakarya'nın meyvesidir.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Kars Antlaşması",
+    "tanim": "13 Ekim 1921'de Ermenistan, Gürcistan ve Azerbaycan ile imzalanan, doğu sınırını kesinleştiren antlaşma."
+   },
+   {
+    "ad": "Ankara Antlaşması (1921)",
+    "tanim": "20 Ekim 1921'de Fransa ile imzalanan, Güney Cephesi'ni kapatan antlaşma."
+   }
+  ]
+ },
+ {
+  "id": "ink-022",
+  "ders": "inkilap",
+  "unite": "Millî Bir Destan: Ya İstiklal Ya Ölüm!",
+  "kazanimKod": "İTA.8.3.5",
+  "kazanimAd": "Sakarya Meydan Savaşı’nın kazanılmasında ve Büyük Taarruz’un başarılı olmasında Mustafa Kemal’in rolüne ilişkin çıkarımlarda bulunur.",
+  "zorluk": 3,
+  "tip": "uzun-metin",
+  "metin": "Büyük Taarruz'un zaferle sonuçlanmasının ardından 11 Ekim 1922'de Mudanya Ateşkes Antlaşması imzalandı. Antlaşmanın bazı hükümleri şunlardır:<br><br>• Doğu Trakya, Meriç Nehri'ne kadar boşaltılarak TBMM Hükûmeti'ne teslim edilecektir.<br>• İstanbul ve Boğazlar'ın yönetimi TBMM Hükûmeti'ne bırakılacak; ancak İtilaf kuvvetleri barış antlaşması imzalanıncaya kadar buralarda kalacaktır.<br><br>Bu hükümlere göre,<br>I. Doğu Trakya savaş yapılmadan geri alınmıştır.<br>II. İtilaf Devletleri, İstanbul'un yönetimi konusunda TBMM Hükûmeti'ni muhatap almıştır.<br>III. İtilaf kuvvetleri, ateşkesle birlikte İstanbul'u hemen boşaltmıştır.<br>yargılarından hangilerine ulaşılabilir?",
+  "svg": "",
+  "siklar": [
+   "Yalnız II",
+   "I ve III",
+   "I ve II",
+   "I, II ve III"
+  ],
+  "dogru": 2,
+  "ipucu1": "Bir bölgenin “ateşkes antlaşmasıyla” teslim edilmesi ne anlama gelir? Orada savaş yapılmış mıdır?",
+  "ipucu2": "III. öncül için ikinci hükmün “ancak” ile başlayan bölümünü tekrar oku: İtilaf kuvvetleri ne zamana kadar kalacak?",
+  "cozum": [
+   "I: Doğu Trakya masada, ateşkes hükmüyle teslim alınıyor → savaşsız kazanılmış. Doğru.",
+   "II: İstanbul'un yönetimi Osmanlı Hükûmeti'ne değil, TBMM Hükûmeti'ne bırakılıyor → doğru.",
+   "III: İtilaf kuvvetleri barış antlaşmasına kadar kalacak → “hemen boşaltmıştır” yanlış.",
+   "Cevap: I ve II."
+  ],
+  "tuzaklar": [
+   "II doğru; ama Doğu Trakya'nın masada alınması I'i de doğrular.",
+   "“Yönetim TBMM'ye bırakılacak” cümlesini okuyup “ancak”tan sonrasını atlayanlar III'ü doğru sanar.",
+   "",
+   "İkinci hükmün ikinci yarısını okumayanlar üç öncülü de kabul eder."
+  ],
+  "taktik": "Antlaşma maddelerinde “ancak, fakat, …-e kadar” gibi ifadeler tuzak öncüllerin kaynağıdır; cümleyi sonuna kadar oku.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Mudanya Ateşkes Antlaşması",
+    "tanim": "11 Ekim 1922'de imzalanan; Millî Mücadele'nin askerî safhasını bitiren ve Doğu Trakya'yı savaşsız kazandıran ateşkes."
+   },
+   {
+    "ad": "Ateşkes",
+    "tanim": "Savaşan tarafların çatışmayı durdurmak için yaptığı anlaşma; barış antlaşmasından önce gelir."
+   }
+  ]
+ },
+ {
+  "id": "ink-023",
+  "ders": "inkilap",
+  "unite": "Millî Bir Destan: Ya İstiklal Ya Ölüm!",
+  "kazanimKod": "İTA.8.3.6",
+  "kazanimAd": "Lozan Antlaşması’nın sağladığı kazanımları analiz eder.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "24 Temmuz 1923'te imzalanan Lozan Barış Antlaşması'nda alınan bazı kararlar tabloda verilmiştir.<table class='t'><tr><th>Konu</th><th>Alınan karar</th></tr><tr><td>Kapitülasyonlar</td><td>Tamamen kaldırıldı.</td></tr><tr><td>Azınlıklar</td><td>Türk vatandaşı sayıldı.</td></tr><tr><td>Yabancı okullar</td><td>Türk kanunlarına uymaları kabul edildi.</td></tr><tr><td>Boğazlar</td><td>Başkanı Türk olan uluslararası bir komisyon tarafından yönetilecek; Boğazlar'ın çevresi askerden arındırılacaktı.</td></tr></table><br>Tablodaki kararlardan hangisi Türkiye'nin egemenlik haklarını <b>sınırlayan</b> bir durum içermektedir?",
+  "svg": "",
+  "siklar": [
+   "Kapitülasyonlar",
+   "Azınlıklar",
+   "Yabancı okullar",
+   "Boğazlar"
+  ],
+  "dogru": 3,
+  "ipucu1": "Egemenlik, bir devletin kendi toprağında tek başına söz sahibi olmasıdır. Hangi satırda Türkiye'nin yanında başka devletler de söz sahibi?",
+  "ipucu2": "“Uluslararası komisyon” ve “askerden arındırılacak” ifadelerine bak. Bir devletin kendi toprağında asker bulunduramaması neyi gösterir?",
+  "cozum": [
+   "Kapitülasyonların kalkması, azınlıkların vatandaş sayılması ve okulların Türk kanunlarına bağlanması egemenliği güçlendirir.",
+   "Boğazlar'ı ise uluslararası bir komisyon yönetecek ve Türkiye orada asker bulunduramayacak.",
+   "Bu durum Türkiye'nin kendi toprağındaki yetkisini sınırlar.",
+   "Cevap: Boğazlar. (Bu sınırlama 1936'da Montrö ile kaldırılmıştır.)"
+  ],
+  "tuzaklar": [
+   "Kapitülasyonlar egemenliği sınırlayan şeydi; ama tabloda “kaldırıldı” yazıyor, yani sınırlama bitmiş.",
+   "“Azınlık” sözcüğü yabancı müdahalesini çağrıştırır; karar ise onları Türk vatandaşı sayarak müdahaleyi önlüyor.",
+   "“Yabancı” sözcüğü yanıltır; okullar Türk kanunlarına bağlandığı için söz hakkı Türkiye'dedir.",
+   ""
+  ],
+  "taktik": "Lozan'da tam istenen sonuç alınamayan konuları ayrı tut: Boğazlar (komisyon), Musul (sonraya bırakıldı), Hatay (sınır dışında kaldı).",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Lozan Barış Antlaşması",
+    "tanim": "24 Temmuz 1923'te imzalanan; yeni Türk devletinin bağımsızlığının uluslararası alanda tanındığı antlaşma."
+   },
+   {
+    "ad": "Egemenlik hakkı",
+    "tanim": "Bir devletin kendi toprakları üzerinde tek başına karar verme yetkisi."
+   }
+  ]
+ },
+ {
+  "id": "ink-024",
+  "ders": "inkilap",
+  "unite": "Atatürkçülük ve Çağdaşlaşan Türkiye",
+  "kazanimKod": "İTA.8.4.1",
+  "kazanimAd": "Çağdaşlaşan Türkiye’nin temeli olan Atatürk ilkelerini açıklar.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Atatürk ilkelerinden biri; devlet yönetiminde ve hukukta din kurallarının değil aklın ve bilimin esas alınmasını, herkesin inanç ve ibadet özgürlüğünün devlet tarafından güvence altına alınmasını öngörür.<br><br>Bu açıklama aşağıdaki ilkelerden hangisine aittir?",
+  "svg": "",
+  "siklar": [
+   "Halkçılık",
+   "Laiklik",
+   "Devletçilik",
+   "Milliyetçilik"
+  ],
+  "dogru": 1,
+  "ipucu1": "Açıklamadaki anahtar sözcükleri bul: “din”, “akıl ve bilim”, “inanç özgürlüğü”. Hangi ilke din ve devlet işleriyle ilgilidir?",
+  "ipucu2": "Din ve devlet işlerinin birbirinden ayrılması ve herkesin inancında özgür olması hangi ilkenin tanımıdır?",
+  "cozum": [
+   "Açıklamada devlet yönetiminin dine değil akla ve bilime dayanması anlatılıyor.",
+   "Ayrıca inanç ve ibadet özgürlüğü güvence altına alınıyor.",
+   "Din ve devlet işlerinin ayrılması Laiklik ilkesidir.",
+   "Cevap: Laiklik."
+  ],
+  "tuzaklar": [
+   "Halkçılık eşitlikle ilgilidir; “herkesin” sözcüğü yanıltabilir ama konu inanç özgürlüğü.",
+   "",
+   "Devletçilik adı “devlet” sözcüğünü içerdiği için cazip gelir; oysa ekonomiyle ilgili bir ilkedir.",
+   "Milliyetçilik millî birlik ve vatan sevgisiyle ilgilidir; açıklamada bunlar geçmiyor."
+  ],
+  "taktik": "İlke tanımlarında anahtar sözcük ara: eşitlik → Halkçılık, din-devlet ayrımı → Laiklik, ekonomi → Devletçilik, seçim/egemenlik → Cumhuriyetçilik, yenilik → İnkılapçılık, millî birlik → Milliyetçilik.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Laiklik",
+    "tanim": "Din ve devlet işlerinin birbirinden ayrılması; devletin akıl ve bilimle yönetilmesi, herkesin inancında özgür olması."
+   },
+   {
+    "ad": "Atatürk ilkeleri",
+    "tanim": "Cumhuriyetçilik, Milliyetçilik, Halkçılık, Devletçilik, Laiklik, İnkılapçılık."
+   }
+  ]
+ },
+ {
+  "id": "ink-025",
+  "ders": "inkilap",
+  "unite": "Atatürkçülük ve Çağdaşlaşan Türkiye",
+  "kazanimKod": "İTA.8.4.1",
+  "kazanimAd": "Çağdaşlaşan Türkiye’nin temeli olan Atatürk ilkelerini açıklar.",
+  "zorluk": 3,
+  "tip": "grafik-tablo",
+  "metin": "Bir öğrenci, Atatürk Dönemi'nde yapılan bazı inkılapları doğrudan ilgili oldukları ilkelerle eşleştirerek aşağıdaki tabloyu hazırlamış, ancak bir satırda hata yapmıştır.<table class='t'><tr><th></th><th>İnkılap</th><th>İlke</th></tr><tr><td>1</td><td>Saltanatın kaldırılması</td><td>Cumhuriyetçilik</td></tr><tr><td>2</td><td>Medreselerin kapatılması</td><td>Laiklik</td></tr><tr><td>3</td><td>Ağa, hacı, hoca, paşa gibi ayrıcalık bildiren unvanların kaldırılması</td><td>Devletçilik</td></tr><tr><td>4</td><td>Köylüden alınan aşar vergisinin kaldırılması</td><td>Halkçılık</td></tr></table><br>Tablonun tamamen doğru olması için aşağıdakilerden hangisi yapılmalıdır?",
+  "svg": "",
+  "siklar": [
+   "1. satırdaki ilke “Halkçılık” olarak değiştirilmelidir.",
+   "2. satırdaki ilke “Milliyetçilik” olarak değiştirilmelidir.",
+   "3. satırdaki ilke “Halkçılık” olarak değiştirilmelidir.",
+   "4. satırdaki ilke “Devletçilik” olarak değiştirilmelidir."
+  ],
+  "dogru": 2,
+  "ipucu1": "Devletçilik hangi alanla ilgili bir ilkedir? Tablodaki hangi satır bu alanla ilgili değil?",
+  "ipucu2": "Unvanların kaldırılması insanlar arasındaki ayrıcalıkları bitirir. Ayrıcalıkların kalkması ve eşitlik hangi ilkenin konusudur?",
+  "cozum": [
+   "1: Saltanatın kalkması millet egemenliğini güçlendirir → Cumhuriyetçilik doğru.",
+   "2: Medreselerin kapatılması eğitimi dinî kurumlardan ayırır → Laiklik doğru.",
+   "4: Aşarın kalkması köylünün yükünü hafifletir, halkın yararını gözetir → Halkçılık doğru.",
+   "3: Unvanların kalkması eşitliği sağlar; bu Devletçilik değil Halkçılıktır.",
+   "Cevap: C."
+  ],
+  "tuzaklar": [
+   "Saltanatın kalkması halkın yararına olduğu için Halkçılık sanılabilir; doğrudan ilgili ilke egemenliği millete veren Cumhuriyetçiliktir.",
+   "Medrese bir eğitim kurumu olduğu için farklı bir ilke aranabilir; ancak din-eğitim ayrımı Laiklikle ilgilidir.",
+   "",
+   "Aşar bir vergi olduğu için “ekonomi = Devletçilik” diye düşünmek en yaygın hatadır; burada amaç köylüyü rahatlatmaktır."
+  ],
+  "taktik": "Devletçilik yalnızca “devletin ekonomide yatırım yapması”dır (fabrika, banka, sanayi planı). Vergi kaldırma, unvan kaldırma gibi eşitlik adımları Halkçılıktır.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Halkçılık",
+    "tanim": "Hiçbir kişi ya da gruba ayrıcalık tanınmaması; herkesin kanun önünde eşit olması."
+   },
+   {
+    "ad": "Devletçilik",
+    "tanim": "Özel girişimin yetmediği alanlarda ekonomik yatırımların devlet eliyle yapılması."
+   }
+  ]
+ },
+ {
+  "id": "ink-026",
+  "ders": "inkilap",
+  "unite": "Atatürkçülük ve Çağdaşlaşan Türkiye",
+  "kazanimKod": "İTA.8.4.2",
+  "kazanimAd": "Siyasi alanda meydana gelen gelişmeleri kavrar.",
+  "zorluk": 2,
+  "tip": "cok-adimli",
+  "metin": "Yeni Türk devletinde millî egemenliği güçlendirmek için siyasi alanda adım adım değişiklikler yapılmıştır. Bu değişikliklerden bazıları karışık olarak verilmiştir.<br><br>I. Halifeliğin kaldırılması<br>II. Cumhuriyet'in ilan edilmesi<br>III. Saltanatın kaldırılması<br>IV. Ankara'nın başkent olması<br><br>Bu gelişmelerin <b>eskiden yeniye</b> doğru sıralanışı aşağıdakilerden hangisidir?",
+  "svg": "",
+  "siklar": [
+   "III – II – IV – I",
+   "IV – III – II – I",
+   "III – IV – I – II",
+   "III – IV – II – I"
+  ],
+  "dogru": 3,
+  "ipucu1": "Önce ilk ve son adımı bul: Saltanat Lozan görüşmelerinden önce kaldırıldı; halifelik ise Cumhuriyet'ten sonra.",
+  "ipucu2": "Ortadaki iki olay aynı ay içinde yaşandı: 13 Ekim 1923 ve 29 Ekim 1923. Hangisi hangisi?",
+  "cozum": [
+   "Saltanat 1 Kasım 1922'de kaldırıldı → III başta.",
+   "Ankara 13 Ekim 1923'te başkent oldu → IV.",
+   "Cumhuriyet 29 Ekim 1923'te ilan edildi → II.",
+   "Halifelik 3 Mart 1924'te kaldırıldı → I sonda.",
+   "Cevap: III – IV – II – I."
+  ],
+  "tuzaklar": [
+   "Cumhuriyet'in ilanını Ankara'nın başkent oluşundan önce sanmak çok yaygındır; başkent 16 gün önce belirlendi.",
+   "Ankara, TBMM'nin 1920'den beri merkezi olduğu için en başa konur; ama resmen başkent oluşu 1923'tedir.",
+   "Saltanat ile halifeliğin birlikte kaldırıldığı sanılır; halifelik Cumhuriyet'ten sonra, 1924'te kaldırıldı.",
+   ""
+  ],
+  "taktik": "Akılda tutma yolu: “Saltanat gitti (1922) → başkent belli oldu → Cumhuriyet ilan edildi (1923) → halifelik kalktı (1924).”",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Saltanatın kaldırılması",
+    "tanim": "1 Kasım 1922'de padişahlığın sona erdirilmesi; millî egemenliğin önündeki en büyük engel kalktı."
+   },
+   {
+    "ad": "Halifeliğin kaldırılması",
+    "tanim": "3 Mart 1924'te halifelik makamının sona erdirilmesi; laikleşme yolunda önemli bir adım."
+   }
+  ]
+ },
+ {
+  "id": "ink-027",
+  "ders": "inkilap",
+  "unite": "Atatürkçülük ve Çağdaşlaşan Türkiye",
+  "kazanimKod": "İTA.8.4.2",
+  "kazanimAd": "Siyasi alanda meydana gelen gelişmeleri kavrar.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "3 Mart 1924'te TBMM'de kabul edilen kanunlarla şu değişiklikler yapılmıştır:<br><br>I. Halifelik kaldırıldı.<br>II. Şeriye ve Evkaf Vekâleti (Din İşleri ve Vakıflar Bakanlığı) kaldırıldı; yerine Diyanet İşleri Başkanlığı ve Vakıflar Genel Müdürlüğü kuruldu.<br>III. Erkân-ı Harbiye Vekâleti (Genelkurmay Bakanlığı) kaldırıldı; yerine Genelkurmay Başkanlığı kuruldu.<br>IV. Tevhid-i Tedrisat Kanunu ile bütün okullar Maarif Vekâleti'ne (Millî Eğitim Bakanlığı) bağlandı.<br><br>Bu değişikliklerden hangileri <b>laik devlet düzenine geçişi</b> kolaylaştırmıştır?",
+  "svg": "",
+  "siklar": [
+   "I, II ve IV",
+   "I ve III",
+   "II ve III",
+   "I, III ve IV"
+  ],
+  "dogru": 0,
+  "ipucu1": "Laiklik din ve devlet işlerinin ayrılmasıdır. Hangi maddelerde dinî bir makam ya da kurumla ilgili değişiklik var?",
+  "ipucu2": "III. madde orduyla ilgili: Genelkurmay'ın hükûmetten çıkarılması ordunun siyasetten ayrılmasıdır. Bunun din-devlet ilişkisiyle bir ilgisi var mı?",
+  "cozum": [
+   "I: Halifelik dinî bir makamdı; kaldırılması laikleşme adımıdır.",
+   "II: Din işleri bakanlık olmaktan, yani siyasetin içinden çıkarıldı → laikleşme.",
+   "IV: Dinî ve diğer okullar tek bakanlığa bağlandı, eğitim birleştirildi → laikleşme.",
+   "III: Ordunun siyasetten ayrılmasıyla ilgilidir; laiklikle doğrudan ilgili değildir.",
+   "Cevap: I, II ve IV."
+  ],
+  "tuzaklar": [
+   "",
+   "Aynı gün yapıldığı için III de laiklikle ilişkilendirilir; oysa III ordu-siyaset ayrımıdır ve IV unutulmuştur.",
+   "II doğru; ama III laiklikle değil orduyla ilgilidir.",
+   "IV'ü yalnızca eğitim konusu sayıp II'yi atlamak ve III'ü eklemek bu şıkka götürür."
+  ],
+  "taktik": "3 Mart 1924'ü ikiye ayır: üç kanun laiklikle ilgili (halifelik, Şeriye ve Evkaf, Tevhid-i Tedrisat), biri ordunun siyasetten ayrılmasıyla (Erkân-ı Harbiye).",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Tevhid-i Tedrisat Kanunu",
+    "tanim": "3 Mart 1924'te bütün okulları Millî Eğitim Bakanlığına bağlayarak eğitimde birliği sağlayan kanun."
+   },
+   {
+    "ad": "Erkân-ı Harbiye Vekâleti'nin kaldırılması",
+    "tanim": "Genelkurmay'ın hükûmetin dışına çıkarılması; ordunun siyasetten ayrılması yolunda atılan adım."
+   }
+  ]
+ },
+ {
+  "id": "ink-028",
+  "ders": "inkilap",
+  "unite": "Atatürkçülük ve Çağdaşlaşan Türkiye",
+  "kazanimKod": "İTA.8.4.3",
+  "kazanimAd": "Hukuk alanında meydana gelen gelişmelerin toplumsal hayata yansımalarını kavrar.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "1926'da kabul edilen Türk Medeni Kanunu ile aile hayatında ve kadının toplumdaki yerinde önemli değişiklikler oldu. Bir okulun tarih kulübü, bu kanunun getirdiklerini anlatan bir pano hazırlıyor. Panoya şu cümleler yazılıyor:<br><br>• Evlilikler resmî nikâhla yapılmaya başlandı.<br>• Kadınlar boşanma hakkı kazandı.<br>• Kadınlar mirastan erkeklerle eşit pay almaya başladı.<br><br>Aşağıdaki cümlelerden hangisi bu panoya <u>eklenemez</u>?",
+  "svg": "",
+  "siklar": [
+   "Mahkemede kadının tanıklığı erkeğinkiyle eşit sayıldı.",
+   "Kadınlar milletvekili seçme ve seçilme hakkı kazandı.",
+   "Tek eşle evlilik esası getirildi.",
+   "Kadınlar istedikleri mesleği seçebilme hakkı elde etti."
+  ],
+  "dogru": 1,
+  "ipucu1": "Medeni Kanun aile, miras, evlilik gibi günlük (medeni) hayatı düzenler. Şıklardan hangisi başka türden bir hak?",
+  "ipucu2": "Seçme ve seçilme hakkı “siyasi” bir haktır. Siyasi haklar Medeni Kanun'la mı, yoksa 1930'lu yıllarda çıkarılan başka kanunlarla mı verildi?",
+  "cozum": [
+   "Medeni Kanun kadınlara sosyal, hukuki ve ekonomik haklar verdi: tanıklık, tek eşle evlilik, meslek seçimi.",
+   "Siyasi haklar bu kanunda yer almaz.",
+   "Kadınlar milletvekili seçme ve seçilme hakkını 1934'te kazandı.",
+   "Cevap: B."
+  ],
+  "tuzaklar": [
+   "Tanıklık mahkemeyle ilgili olduğu için başka bir kanuna aitmiş gibi görünür; Medeni Kanun'la gelmiştir.",
+   "",
+   "Panodaki resmî nikâh maddesine çok benzediği için “zaten var” diye düşünülebilir; ama ayrı bir yeniliktir ve eklenebilir.",
+   "Meslek seçimi ekonomik bir hak olduğu için Medeni Kanun dışında sanılır; oysa bu kanunla gelmiştir."
+  ],
+  "taktik": "Medeni Kanun'da siyasi hak YOK. Kadınların siyasi hakları: 1930 belediye, 1933 muhtarlık, 1934 milletvekilliği.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Türk Medeni Kanunu",
+    "tanim": "1926'da kabul edilen; evlilik, boşanma, miras gibi konularda kadın-erkek eşitliğini sağlayan kanun."
+   },
+   {
+    "ad": "Siyasi haklar",
+    "tanim": "Seçme, seçilme gibi yönetime katılma hakları; Türk kadınına 1930–1934 arasında verildi."
+   }
+  ]
+ },
+ {
+  "id": "ink-029",
+  "ders": "inkilap",
+  "unite": "Atatürkçülük ve Çağdaşlaşan Türkiye",
+  "kazanimKod": "İTA.8.4.4",
+  "kazanimAd": "Eğitim ve kültür alanında yapılan inkılapları ve gelişmeleri kavrar.",
+  "zorluk": 1,
+  "tip": "uzun-metin",
+  "metin": "1 Kasım 1928'de yeni Türk harfleri kabul edildi. Hemen ardından, yeni harfleri her yaştan vatandaşa öğretmek için ülkenin dört bir yanında Millet Mektepleri açıldı. Mustafa Kemal de gezdiği şehirlerde kara tahtanın başına geçerek halka yeni harfleri bizzat tanıttı.<br><br>Bu çalışmaların temel amacı aşağıdakilerden hangisidir?",
+  "svg": "",
+  "siklar": [
+   "Okuma yazma bilenlerin sayısını artırmak",
+   "Yabancı okulları kapatmak",
+   "Yükseköğretimi yeniden düzenlemek",
+   "Kadınlara siyasi haklar vermek"
+  ],
+  "dogru": 0,
+  "ipucu1": "Metinde tekrar eden sözcüğe bak: “harfler”, “öğretmek”, “mektep”. Bunlar hangi beceriyle ilgili?",
+  "ipucu2": "Harfleri her yaştan vatandaşa öğretmek için okul açılıyorsa hedeflenen şey halkın neyi öğrenmesidir?",
+  "cozum": [
+   "Yeni harfler kabul edilmiş ve halka öğretilmek isteniyor.",
+   "Bunun için her yaştan vatandaşa açık Millet Mektepleri kurulmuş.",
+   "Amaç, halkın kolayca okuyup yazmasını sağlamak.",
+   "Cevap: A."
+  ],
+  "tuzaklar": [
+   "",
+   "“Mektep” sözcüğü okullarla ilgili her şıkkı cazip gösterir; metinde yabancı okullardan söz edilmiyor.",
+   "Yükseköğretim (üniversite) 1933 Üniversite Reformu'yla düzenlendi; burada halk eğitimi anlatılıyor.",
+   "Metinde kadın hakları ya da seçimle ilgili bir bilgi yok."
+  ],
+  "taktik": "Harf İnkılabı + Millet Mektepleri = okuryazarlığı artırma. Bu ikiliyi birlikte hatırla.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Harf İnkılabı",
+    "tanim": "1 Kasım 1928'de yeni Türk harflerinin kabul edilmesi."
+   },
+   {
+    "ad": "Millet Mektepleri",
+    "tanim": "Yeni harfleri halka öğretmek için açılan, her yaştan vatandaşın gidebildiği okullar."
+   }
+  ]
+ },
+ {
+  "id": "ink-030",
+  "ders": "inkilap",
+  "unite": "Atatürkçülük ve Çağdaşlaşan Türkiye",
+  "kazanimKod": "İTA.8.4.5",
+  "kazanimAd": "Toplumsal alanda yapılan inkılapları ve meydana gelen gelişmeleri kavrar.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Cumhuriyet'in ilk yıllarında bir kumaş tüccarı, bir şehirde “arşın”, başka bir şehirde “endaze” ile ölçülen kumaşların hesabını yapmakta zorlanıyor; Avrupa'dan mal getirirken de metre ve kilogramı kendi kullandığı ölçülere çevirmek zorunda kalıyordu. Takvimin ve saatin Avrupa'dakinden farklı olması işlerini daha da karıştırıyordu.<br><br>1925–1931 yılları arasında yapılan düzenlemelerle miladi takvim, uluslararası saat ve metre, kilogram gibi ölçü birimleri kabul edildi.<br><br>Buna göre bu düzenlemelerle aşağıdakilerden hangisi amaçlanmıştır?",
+  "svg": "",
+  "siklar": [
+   "Tarımda üretimi artırmak",
+   "Devlet eliyle fabrikalar kurmak",
+   "Okuma yazma oranını yükseltmek",
+   "Ülke içinde birliği sağlamak ve diğer ülkelerle ilişkileri kolaylaştırmak"
+  ],
+  "dogru": 3,
+  "ipucu1": "Tüccarın iki ayrı sıkıntısı var: biri ülke içinde, biri Avrupa ile alışverişte. İkisini de bul.",
+  "ipucu2": "Şehirden şehre değişen ölçüler ülke içinde hangi sorunu, Avrupa'dan farklı takvim ve ölçüler ise dışarıyla hangi sorunu yaratıyor?",
+  "cozum": [
+   "Ülke içinde farklı ölçüler kullanılıyor → karışıklık var, birlik yok.",
+   "Avrupa ile takvim, saat ve ölçüler farklı → ticaret ve ilişkiler zorlaşıyor.",
+   "Yeni düzenlemeler iki sorunu da çözüyor.",
+   "Cevap: D."
+  ],
+  "tuzaklar": [
+   "Kumaş ve mal sözcükleri üretimi çağrıştırır; ama sorun üretim değil ölçme ve hesaplama.",
+   "Ekonomiyle ilgili bir örnek olduğu için Devletçilik akla gelir; metinde fabrika kurulmasından söz edilmiyor.",
+   "Aynı yıllardaki Harf İnkılabı ile karıştırılır; burada konu takvim, saat ve ölçüler.",
+   ""
+  ],
+  "taktik": "Takvim, saat ve ölçü değişikliklerinin iki amacı vardır: içeride birlik, dışarıyla (özellikle ticarette) uyum.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Takvim, saat ve ölçülerde değişiklik",
+    "tanim": "1925–1931 arasında miladi takvim, uluslararası saat ve metre-kilogram gibi ölçülerin kabul edilmesi."
+   },
+   {
+    "ad": "Miladi takvim",
+    "tanim": "Dünyada yaygın olarak kullanılan, bugün de kullandığımız takvim."
+   }
+  ]
+ },
+ {
+  "id": "ink-031",
+  "ders": "inkilap",
+  "unite": "Atatürkçülük ve Çağdaşlaşan Türkiye",
+  "kazanimKod": "İTA.8.4.6",
+  "kazanimAd": "Ekonomi alanında meydana gelen gelişmeleri kavrar.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Lozan görüşmelerine ara verildiği günlerde, 17 Şubat–4 Mart 1923'te İzmir'de Türkiye İktisat Kongresi toplandı. Kongreye çiftçi, tüccar, sanayici ve işçi temsilcileri katıldı. Alınan kararlardan bazıları şunlardır:<br><br>• Ham maddesi yurt içinde bulunan sanayi dalları kurulmalıdır.<br>• Yerli malı kullanımı özendirilmelidir.<br>• Yabancıların kurduğu tekellere izin verilmemelidir.<br><br>Bu bilgilere göre aşağıdakilerden hangisine ulaşılabilir?",
+  "svg": "",
+  "siklar": [
+   "Ekonomide dışa bağımlılığın artırılması hedeflenmiştir.",
+   "Kongreye yalnızca devlet görevlileri katılmıştır.",
+   "Siyasi bağımsızlığın ekonomik bağımsızlıkla desteklenmesi amaçlanmıştır.",
+   "Kongre kararları Lozan'da görüşülerek kabul edilmiştir."
+  ],
+  "dogru": 2,
+  "ipucu1": "Üç kararın ortak yönünü bul: “yurt içi”, “yerli”, “yabancı tekele hayır”. Hepsi neyi korumaya çalışıyor?",
+  "ipucu2": "Barış görüşmeleri sürerken bir ekonomi kongresi toplanması, bağımsızlığın yalnız savaş meydanında ve masada kazanılmayacağını gösterir. Eksik kalan alan hangisi?",
+  "cozum": [
+   "Kararlar yerli üretimi ve yerli malını öne çıkarıyor, yabancı tekellere karşı çıkıyor.",
+   "Bu, ekonomide de bağımsız olma isteğini gösterir.",
+   "Kongrenin barış görüşmeleri sürerken toplanması, siyasi bağımsızlığın ekonomiyle tamamlanmak istendiğini gösterir.",
+   "Cevap: C."
+  ],
+  "tuzaklar": [
+   "Kararları tersinden okuyanlar bu şıkka gider; hedef dışa bağımlılığı azaltmaktır.",
+   "Metinde çiftçi, tüccar, sanayici ve işçilerin katıldığı yazıyor.",
+   "",
+   "Kongre ile Lozan aynı günlerde olduğu için birbirine bağlanır; kongre İzmir'de toplanmış ayrı bir toplantıdır."
+  ],
+  "taktik": "İzmir İktisat Kongresi için anahtar kavram: ekonomik bağımsızlık (millî ekonomi).",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "İzmir İktisat Kongresi",
+    "tanim": "1923'te toplanan; millî ekonominin hedeflerini belirleyen kongre."
+   },
+   {
+    "ad": "Ekonomik bağımsızlık",
+    "tanim": "Bir ülkenin üretim ve ticarette başka devletlere bağımlı olmaması."
+   }
+  ]
+ },
+ {
+  "id": "ink-032",
+  "ders": "inkilap",
+  "unite": "Atatürkçülük ve Çağdaşlaşan Türkiye",
+  "kazanimKod": "İTA.8.4.6",
+  "kazanimAd": "Ekonomi alanında meydana gelen gelişmeleri kavrar.",
+  "zorluk": 3,
+  "tip": "uzun-metin",
+  "metin": "Cumhuriyet'in ilk yıllarında sanayinin özel girişimciler eliyle kurulması hedeflendi; bunun için 1927'de Teşvik-i Sanayi Kanunu çıkarıldı. Ancak özel girişimcilerin sermayesi ve teknik bilgisi büyük fabrikalar kurmaya yetmedi. 1929'da başlayan Dünya Ekonomik Bunalımı da ekonomiyi olumsuz etkiledi. Bunun üzerine 1930'lu yıllarda devlet, Birinci Beş Yıllık Sanayi Planı'nı hazırladı ve Sümerbank gibi kuruluşlar aracılığıyla fabrikalar kurdu. Özel girişimciler de çalışmalarını sürdürdü.<br><br>Bu bilgilere göre aşağıdakilerden hangisine <u>ulaşılamaz</u>?",
+  "svg": "",
+  "siklar": [
+   "Devletçilik ilkesinin uygulanmasında ülkenin ekonomik koşulları etkili olmuştur.",
+   "Devletçilik ilkesiyle özel girişim tamamen yasaklanmıştır.",
+   "Dünyadaki ekonomik gelişmeler Türkiye'yi de etkilemiştir.",
+   "Sanayileşmenin planlı bir şekilde yürütülmesi istenmiştir."
+  ],
+  "dogru": 1,
+  "ipucu1": "Metnin son cümlesi kısa ama önemli. O cümle hangi şıkla çelişiyor?",
+  "ipucu2": "“Özel girişimciler de çalışmalarını sürdürdü.” cümlesini bir şıktaki “tamamen yasaklanmıştır” ifadesiyle karşılaştır.",
+  "cozum": [
+   "A: Sermaye ve teknik bilgi yetersizliği devleti yatırıma yöneltti → ulaşılır.",
+   "C: 1929 Dünya Ekonomik Bunalımı ekonomiyi etkiledi → ulaşılır.",
+   "D: Beş yıllık plan hazırlandı → ulaşılır.",
+   "B: Özel girişimciler çalışmayı sürdürdü; yasaklanmadı → ulaşılamaz.",
+   "Cevap: B."
+  ],
+  "tuzaklar": [
+   "Bu bir neden-sonuç yorumu olduğu için metinde yok sanılabilir; “bunun üzerine” ifadesi bu bağı kurar.",
+   "",
+   "Bunalım dünya çapında anlatıldığı için Türkiye ile ilgisi atlanabilir; metin “ekonomiyi olumsuz etkiledi” diyor.",
+   "“Planlı” sözcüğü metinde geçmiyor gibi görünür; “Beş Yıllık Sanayi Planı” bunun kanıtıdır."
+  ],
+  "taktik": "Devletçilik, özel girişimin yerine geçmek değil, onun yetmediği yerde devletin devreye girmesidir. “Tamamen, hiç” gibi sözcüklere dikkat et.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Devletçilik",
+    "tanim": "Özel girişimin gücünün yetmediği alanlarda devletin ekonomik yatırım yapması."
+   },
+   {
+    "ad": "Birinci Beş Yıllık Sanayi Planı",
+    "tanim": "1930'lu yıllarda devlet eliyle fabrikalar kurulmasını öngören kalkınma planı."
+   }
+  ]
+ },
+ {
+  "id": "ink-033",
+  "ders": "inkilap",
+  "unite": "Demokratikleşme Çabaları",
+  "kazanimKod": "İTA.8.5.1",
+  "kazanimAd": "Atatürk Dönemi’ndeki demokratikleşme yolunda atılan adımları açıklar.",
+  "zorluk": 1,
+  "tip": "grafik-tablo",
+  "metin": "Tabloda Atatürk Dönemi'nde kurulan bazı siyasi partiler verilmiştir.<table class='t'><tr><th>Parti</th><th>Kuruluş</th><th>Bilgi</th></tr><tr><td>Halk Fırkası (sonradan Cumhuriyet Halk Fırkası)</td><td>1923</td><td>Cumhuriyet Dönemi'nin ilk siyasi partisidir.</td></tr><tr><td>Terakkiperver Cumhuriyet Fırkası</td><td>1924</td><td>İlk muhalefet partisidir; 1925'te kapatılmıştır.</td></tr><tr><td>Serbest Cumhuriyet Fırkası</td><td>1930</td><td>Mustafa Kemal'in isteğiyle Fethi Bey tarafından kurulmuş; aynı yıl kendi kendini kapatmıştır.</td></tr></table><br>Bu tabloya göre aşağıdakilerden hangisi söylenebilir?",
+  "svg": "",
+  "siklar": [
+   "Atatürk Dönemi'nde hiç muhalefet partisi kurulmamıştır.",
+   "Kurulan bütün partiler varlığını kesintisiz sürdürmüştür.",
+   "Çok partili hayata geçiş denemeleri yapılmış ancak kalıcı olmamıştır.",
+   "Muhalefet partileri seçimleri kazanarak iktidara gelmiştir."
+  ],
+  "dogru": 2,
+  "ipucu1": "“Bilgi” sütununda iki partinin sonunun ne olduğuna bak.",
+  "ipucu2": "Tabloda birden fazla parti kurulduğunu görüyorsun; ama ikisi kısa sürede kapanmış. Bu, denemenin kalıcı olduğunu mu gösterir?",
+  "cozum": [
+   "Tabloda üç parti var; ikisi muhalefet partisi.",
+   "Bu iki parti kısa sürede kapanmış (1925 ve 1930).",
+   "Demek ki çok partili hayat denenmiş ama sürdürülememiş.",
+   "Cevap: C."
+  ],
+  "tuzaklar": [
+   "Tablodaki “ilk muhalefet partisi” ifadesini atlayanlar bu şıkka gider.",
+   "İki partinin kapandığı tabloda yazıyor; “bütün” sözcüğü bu şıkkı yanlış yapar.",
+   "",
+   "Tabloda seçim sonucuyla ilgili hiçbir bilgi yok."
+  ],
+  "taktik": "Atatürk Dönemi'nde çok partili hayat iki kez denendi (1924 ve 1930), ikisi de kısa sürdü. Kalıcı geçiş 1946'da oldu.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "Muhalefet partisi",
+    "tanim": "İktidarda olmayan, hükûmeti denetleyen ve eleştiren parti."
+   },
+   {
+    "ad": "Çok partili hayat",
+    "tanim": "Birden fazla partinin seçimlerde yarıştığı demokratik düzen."
+   }
+  ]
+ },
+ {
+  "id": "ink-034",
+  "ders": "inkilap",
+  "unite": "Demokratikleşme Çabaları",
+  "kazanimKod": "İTA.8.5.1",
+  "kazanimAd": "Atatürk Dönemi’ndeki demokratikleşme yolunda atılan adımları açıklar.",
+  "zorluk": 1,
+  "tip": "uzun-metin",
+  "metin": "1930'da ekonomik sıkıntıların arttığı bir dönemde Mustafa Kemal, Meclis'te hükûmetin çalışmalarının daha iyi denetlenmesini ve farklı görüşlerin dile getirilmesini istiyordu. Bu amaçla yakın arkadaşı Fethi Bey'i yeni bir parti kurması için teşvik etti. Böylece Serbest Cumhuriyet Fırkası kuruldu.<br><br>Buna göre Mustafa Kemal'in bu girişimi aşağıdakilerden hangisine önem verdiğini gösterir?",
+  "svg": "",
+  "siklar": [
+   "Meclis'in yetkilerinin azaltılmasına",
+   "Tek partili yönetimin sürdürülmesine",
+   "Demokrasinin çok partili siyasi hayatla güçlenmesine",
+   "Ekonomide özel girişimin yasaklanmasına"
+  ],
+  "dogru": 2,
+  "ipucu1": "Mustafa Kemal'in iki isteği metinde yazıyor: denetim ve farklı görüşler. Bunlar için neye ihtiyaç var?",
+  "ipucu2": "Hükûmeti Meclis'te kim denetler ve farklı görüşleri kim dile getirir? İktidar partisi mi, ikinci bir parti mi?",
+  "cozum": [
+   "Mustafa Kemal hükûmetin denetlenmesini ve farklı görüşlerin duyulmasını istiyor.",
+   "Bunun yolu Meclis'te ikinci bir partinin, yani muhalefetin bulunmasıdır.",
+   "Yeni parti kurdurması çok partili hayata ve demokrasiye verdiği önemi gösterir.",
+   "Cevap: C."
+  ],
+  "tuzaklar": [
+   "Tam tersine, denetimin artması Meclis'i güçlendirir.",
+   "Yeni bir parti kurdurmak tek partili düzenin dışına çıkma isteğidir.",
+   "",
+   "Metinde ekonomik sıkıntı geçtiği için ekonomi şıkkı cazip gelir; ama girişim siyasi bir adımdır."
+  ],
+  "taktik": "“Denetim, farklı görüş, muhalefet, yeni parti” sözcükleri → demokrasi ve çok partili hayat.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Serbest Cumhuriyet Fırkası",
+    "tanim": "1930'da Mustafa Kemal'in isteğiyle Fethi Bey'in kurduğu, aynı yıl kapanan muhalefet partisi."
+   },
+   {
+    "ad": "Denetim",
+    "tanim": "Meclis'in, hükûmetin yaptığı işleri incelemesi ve sorgulaması."
+   }
+  ]
+ },
+ {
+  "id": "ink-035",
+  "ders": "inkilap",
+  "unite": "Demokratikleşme Çabaları",
+  "kazanimKod": "İTA.8.5.2",
+  "kazanimAd": "Mustafa Kemal’e suikast girişimini analiz eder.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "1926'da Mustafa Kemal'in İzmir gezisi sırasında kendisine suikast yapılması planlandı; ancak plan önceden öğrenildi ve girişim engellendi. Mustafa Kemal bu olayın ardından şu sözü söyledi:<br><br><i>“Benim naçiz vücudum elbet bir gün toprak olacaktır, fakat Türkiye Cumhuriyeti ilelebet payidar kalacaktır.”</i><br>(naçiz: önemsiz, değersiz · payidar: kalıcı)<br><br>Bu sözle aşağıdakilerden hangisi vurgulanmıştır?",
+  "svg": "",
+  "siklar": [
+   "Cumhuriyet'in kişilere bağlı olmadığı ve sonsuza kadar yaşayacağı",
+   "Suikast girişiminin amacına ulaştığı",
+   "Cumhuriyet'in varlığının tek bir kişiye bağlı olduğu",
+   "Yeni partilerin kurulmasına izin verilmeyeceği"
+  ],
+  "dogru": 0,
+  "ipucu1": "Sözde iki şey karşılaştırılıyor: biri geçici, biri kalıcı. Hangisi hangisi?",
+  "ipucu2": "“Vücudum toprak olacak” (ben geçiciyim) ama “Cumhuriyet ilelebet payidar kalacak” (o kalıcı). Öyleyse Cumhuriyet'in yaşaması bir kişiye bağlı mı?",
+  "cozum": [
+   "Mustafa Kemal kendi ömrünün bir gün biteceğini söylüyor.",
+   "Cumhuriyet'in ise sonsuza kadar yaşayacağını belirtiyor.",
+   "Yani Cumhuriyet bir kişiye bağlı değildir; kalıcıdır.",
+   "Cevap: A."
+  ],
+  "tuzaklar": [
+   "",
+   "Metinde girişimin engellendiği yazıyor; ilk cümleyi hızlı okuyanlar yanılır.",
+   "Söz tam tersini söylüyor: Kişi gider, Cumhuriyet kalır.",
+   "Sözde partilerle ilgili hiçbir ifade yok; demokratikleşme ünitesindeki diğer konularla karıştırılır."
+  ],
+  "taktik": "Alıntıda bilmediğin eski sözcükler olabilir; parantez içindeki açıklamaları oku ve cümleyi kendi sözlerinle yeniden söyle.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "İzmir Suikastı girişimi",
+    "tanim": "1926'da Mustafa Kemal'e karşı planlanan ve gerçekleşmeden önlenen suikast girişimi."
+   },
+   {
+    "ad": "İlelebet payidar",
+    "tanim": "Sonsuza kadar yaşayacak, kalıcı."
+   }
+  ]
+ },
+ {
+  "id": "ink-036",
+  "ders": "inkilap",
+  "unite": "Demokratikleşme Çabaları",
+  "kazanimKod": "İTA.8.5.3",
+  "kazanimAd": "Cumhuriyetin ilk yıllarında Türkiye Cumhuriyetine yönelik tehditleri analiz eder.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "1925'te Doğu Anadolu'da çıkan Şeyh Sait İsyanı'nın ardından şu gelişmeler yaşandı:<br><br>• TBMM, Takrir-i Sükûn Kanunu'nu çıkararak hükûmete olağanüstü yetkiler verdi.<br>• İsyanla ilişkilendirilen Terakkiperver Cumhuriyet Fırkası kapatıldı.<br>• İsyanla uğraşan Türkiye, o sırada İngiltere ile görüşülen Musul sorununda istediği sonucu alamadı.<br><br>Bu gelişmelere göre,<br>I. İsyan, çok partili hayata geçiş denemesini kesintiye uğratmıştır.<br>II. İsyan, dış politikada da Türkiye'yi olumsuz etkilemiştir.<br>III. İsyan, devletin özel bir önlem almasına gerek kalmadan sona ermiştir.<br>yargılarından hangilerine ulaşılabilir?",
+  "svg": "",
+  "siklar": [
+   "Yalnız II",
+   "I ve III",
+   "II ve III",
+   "I ve II"
+  ],
+  "dogru": 3,
+  "ipucu1": "Üç gelişmeyi sırayla öncüllerle eşleştir: Hangi madde hangi öncülü doğruluyor ya da çürütüyor?",
+  "ipucu2": "Birinci madde (olağanüstü yetkiler veren kanun) III. öncülle uyumlu mu? Kanun çıkarmak bir önlem değil midir?",
+  "cozum": [
+   "I: Muhalefet partisi kapatıldı → çok partili deneme kesintiye uğradı. Doğru.",
+   "II: Musul sorununda istenen sonuç alınamadı → dış politika etkilendi. Doğru.",
+   "III: Takrir-i Sükûn Kanunu çıkarıldı, yani özel önlem alındı. Yanlış.",
+   "Cevap: I ve II."
+  ],
+  "tuzaklar": [
+   "II doğru; ama partinin kapatılması I'i de doğruluyor.",
+   "I doğru; III ise birinci maddeyle çelişiyor.",
+   "II doğru; III ise Takrir-i Sükûn Kanunu bilgisiyle çelişiyor.",
+   ""
+  ],
+  "taktik": "Bir olayın sonuçları sorulduğunda “iç politika” ve “dış politika” diye iki kutu aç; maddeleri bu kutulara yerleştir.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Takrir-i Sükûn Kanunu",
+    "tanim": "1925'te ülkede huzuru ve güvenliği sağlamak için çıkarılan, hükûmete geniş yetkiler veren kanun."
+   },
+   {
+    "ad": "Musul sorunu",
+    "tanim": "Lozan'da çözülemeyen, 1926'da İngiltere ile yapılan Ankara Antlaşması'yla Musul'un Irak'a bırakılmasıyla sonuçlanan sınır sorunu."
+   }
+  ]
+ },
+ {
+  "id": "ink-037",
+  "ders": "inkilap",
+  "unite": "Atatürk Dönemi Türk Dış Politikası",
+  "kazanimKod": "İTA.8.6.1",
+  "kazanimAd": "Atatürk Dönemi Türk dış politikasının temel ilkelerini ve amaçlarını açıklar.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Bir sosyal bilgiler öğretmeni, Atatürk Dönemi Türk dış politikasının ilkelerinden birini şöyle örneklendiriyor:<br><br>“Bir ülke bizim vatandaşlarımıza hangi hakları tanıyorsa biz de o ülkenin vatandaşlarına aynı hakları tanırız. Bize bir kısıtlama getirirse biz de aynısını uygularız.”<br><br>Öğretmenin örneklendirdiği ilke aşağıdakilerden hangisidir?",
+  "svg": "",
+  "siklar": [
+   "Barışçılık",
+   "Gerçekçilik",
+   "Tam bağımsızlık",
+   "Mütekabiliyet"
+  ],
+  "dogru": 3,
+  "ipucu1": "Örnekteki ilişki tek taraflı mı, yoksa “sen ne yaparsan ben de onu yaparım” biçiminde mi?",
+  "ipucu2": "“Karşılıklılık” sözcüğünün eski dildeki karşılığını düşün; “mukabele” (karşılık verme) sözcüğüyle aynı kökten gelir.",
+  "cozum": [
+   "Örnekte iki devlet birbirine aynı şekilde davranıyor.",
+   "Bu, devletler arasında karşılıklılık demektir.",
+   "Karşılıklılık ilkesinin adı mütekabiliyettir.",
+   "Cevap: Mütekabiliyet."
+  ],
+  "tuzaklar": [
+   "Barışçılık sorunları savaşsız çözmektir; örnekte savaş ya da barıştan söz edilmiyor.",
+   "Gerçekçilik, gücünü ve koşulları doğru hesaplayarak hareket etmektir; örnekte eşit karşılık verme anlatılıyor.",
+   "Tam bağımsızlık kendi kararını kendin vermektir; yakın görünür ama örneğin özü “aynısını yapma”dır.",
+   ""
+  ],
+  "taktik": "Mütekabiliyet = karşılıklılık. “Aynı hak, aynı uygulama, eşit davranış” sözcükleri bu ilkeyi gösterir.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Mütekabiliyet",
+    "tanim": "Devletlerin birbirine karşılıklı ve eşit davranması ilkesi."
+   },
+   {
+    "ad": "Dış politika ilkeleri",
+    "tanim": "Tam bağımsızlık, barışçılık, gerçekçilik, akılcılık, mütekabiliyet, millî menfaatleri esas alma."
+   }
+  ]
+ },
+ {
+  "id": "ink-038",
+  "ders": "inkilap",
+  "unite": "Atatürk Dönemi Türk Dış Politikası",
+  "kazanimKod": "İTA.8.6.2",
+  "kazanimAd": "Atatürk Dönemi Türk dış politikasında yaşanan gelişmeleri analiz eder.",
+  "zorluk": 1,
+  "tip": "grafik-tablo",
+  "metin": "Tabloda Boğazlar'ın durumu iki farklı antlaşmaya göre karşılaştırılmıştır.<table class='t'><tr><th></th><th>Lozan Antlaşması (1923)</th><th>Montrö Boğazlar Sözleşmesi (1936)</th></tr><tr><td>Boğazlar'ın yönetimi</td><td>Başkanı Türk olan uluslararası komisyon</td><td>Komisyon kaldırıldı; yönetim Türkiye'ye geçti.</td></tr><tr><td>Boğazlar'da asker</td><td>Türkiye asker bulunduramayacak.</td><td>Türkiye asker bulundurabilecek.</td></tr></table><br>Bu tabloya göre Montrö Boğazlar Sözleşmesi ile ilgili aşağıdakilerden hangisi söylenebilir?",
+  "svg": "",
+  "siklar": [
+   "Türkiye'nin Boğazlar üzerindeki egemenlik hakları güçlenmiştir.",
+   "Boğazlar'ın yönetimi uluslararası bir komisyona devredilmiştir.",
+   "Türkiye'nin Boğazlar'daki savunma gücü azaltılmıştır.",
+   "Lozan'da alınan kararlar değiştirilmeden sürdürülmüştür."
+  ],
+  "dogru": 0,
+  "ipucu1": "Tabloyu soldan sağa oku: 1923'teki durum 1936'da Türkiye'nin lehine mi, aleyhine mi değişmiş?",
+  "ipucu2": "1936 sütununda “yönetim Türkiye'ye geçti” ve “asker bulundurabilecek” yazıyor. Bir yeri hem yönetmek hem savunabilmek ne demektir?",
+  "cozum": [
+   "1923'te Boğazlar'ı komisyon yönetiyor, Türkiye asker bulunduramıyor.",
+   "1936'da komisyon kalkıyor, Türkiye asker bulundurabiliyor.",
+   "Yani Boğazlar tamamen Türkiye'nin denetimine geçiyor; egemenlik güçleniyor.",
+   "Cevap: A."
+  ],
+  "tuzaklar": [
+   "",
+   "Sütunları karıştıranlar Lozan'daki durumu Montrö'ye yazar; komisyon Montrö ile kaldırıldı.",
+   "Asker satırı ters okunursa bu sonuca varılır; Montrö ile asker bulundurma hakkı geldi.",
+   "İki sütundaki bilgiler birbirinden farklı; yani Lozan'daki kararlar değişmiş."
+  ],
+  "taktik": "Karşılaştırma tablolarında her satır için “önce → sonra” oku ve değişimin yönünü (+ ya da −) not et.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "Montrö Boğazlar Sözleşmesi",
+    "tanim": "1936'da imzalanan; Boğazlar'ın yönetimini ve savunmasını tamamen Türkiye'ye bırakan sözleşme."
+   },
+   {
+    "ad": "Boğazlar Komisyonu",
+    "tanim": "Lozan'a göre Boğazlar'ı yöneten, Montrö ile kaldırılan uluslararası komisyon."
+   }
+  ]
+ },
+ {
+  "id": "ink-039",
+  "ders": "inkilap",
+  "unite": "Atatürk Dönemi Türk Dış Politikası",
+  "kazanimKod": "İTA.8.6.2",
+  "kazanimAd": "Atatürk Dönemi Türk dış politikasında yaşanan gelişmeleri analiz eder.",
+  "zorluk": 3,
+  "tip": "grafik-tablo",
+  "metin": "1930'lu yıllarda İtalya ve Almanya'nın yayılmacı politikaları dünya barışını tehdit etmeye başladı. Türkiye bu dönemde bölgesindeki ülkelerle aşağıdaki iş birliklerini kurdu.<table class='t'><tr><th>İş birliği</th><th>Yıl</th><th>Üyeler</th></tr><tr><td>Balkan Antantı</td><td>1934</td><td>Türkiye, Yunanistan, Yugoslavya, Romanya</td></tr><tr><td>Sadabat Paktı</td><td>1937</td><td>Türkiye, İran, Irak, Afganistan</td></tr></table><br>Bu bilgilere göre,<br>I. Türkiye, güvenliğini bölgesel iş birlikleriyle güçlendirmeye çalışmıştır.<br>II. Türkiye, hem batı hem doğu sınırlarının güvenliğini önemsemiştir.<br>III. Türkiye, bu iş birlikleriyle yeni topraklar kazanmayı hedeflemiştir.<br>yargılarından hangilerine ulaşılabilir?",
+  "svg": "",
+  "siklar": [
+   "Yalnız I",
+   "Yalnız III",
+   "I ve II",
+   "I, II ve III"
+  ],
+  "dogru": 2,
+  "ipucu1": "Üye ülkelerin Türkiye'ye göre hangi yönde olduğunu düşün: Balkan ülkeleri nerede, İran ve Irak nerede?",
+  "ipucu2": "Metin iş birliklerinin nedenini açıklıyor: “barışı tehdit eden yayılmacı politikalar”. Tehdide karşı kurulan bir iş birliğinin amacı korunmak mıdır, toprak kazanmak mı?",
+  "cozum": [
+   "I: Türkiye bölgesindeki ülkelerle iki ayrı iş birliği kurmuş → doğru.",
+   "II: Balkan ülkeleri batıda; İran, Irak ve Afganistan doğuda → iki yön de güvenceye alınmış. Doğru.",
+   "III: Amaç tehdide karşı korunmak; toprak kazanma hedefi yok. Yanlış.",
+   "Cevap: I ve II."
+  ],
+  "tuzaklar": [
+   "I doğru; ama üyelerin konumu II'yi de doğruluyor.",
+   "“Pakt, antant” sözcükleri savaş ittifakı gibi algılanırsa III doğru sanılır; bunlar barışı koruma amaçlıdır.",
+   "",
+   "III'ün Atatürk'ün barışçı dış politikasıyla çeliştiğini fark etmeyenler hepsini işaretler."
+  ],
+  "taktik": "Balkan Antantı → batı sınırı; Sadabat Paktı → doğu sınırı. İkisi de “Yurtta barış, dünyada barış” anlayışının ürünüdür.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Balkan Antantı",
+    "tanim": "1934'te Türkiye, Yunanistan, Yugoslavya ve Romanya arasında kurulan; batı sınırının güvenliğini sağlayan iş birliği."
+   },
+   {
+    "ad": "Sadabat Paktı",
+    "tanim": "1937'de Türkiye, İran, Irak ve Afganistan arasında kurulan; doğu sınırının güvenliğini sağlayan iş birliği."
+   }
+  ]
+ },
+ {
+  "id": "ink-040",
+  "ders": "inkilap",
+  "unite": "Atatürk Dönemi Türk Dış Politikası",
+  "kazanimKod": "İTA.8.6.3",
+  "kazanimAd": "Atatürk’ün Hatay’ı ülkemize katmak konusunda yaptıklarına ve bu uğurda gösterdiği özveriye kanıtlar gösterir.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Hatay, Lozan Antlaşması'nda Türkiye sınırları dışında, Fransa'nın denetimindeki Suriye'de kalmıştı. Fransa'nın 1936'da Suriye'ye bağımsızlık vermeyi kabul etmesi üzerine Türkiye konuyu Milletler Cemiyeti'ne taşıdı. Görüşmeler sonucunda 1938'de bağımsız Hatay Cumhuriyeti kuruldu. Atatürk, hastalığına rağmen bu süreci yakından izledi ve güneye yaptığı gezilerle Türkiye'nin kararlılığını gösterdi. Hatay Meclisi 1939'da aldığı kararla Türkiye'ye katıldı.<br><br>Bu bilgilere göre aşağıdakilerden hangisine <u>ulaşılamaz</u>?",
+  "svg": "",
+  "siklar": [
+   "Sorun, savaşa başvurulmadan çözülmüştür.",
+   "Hatay, Atatürk hayattayken Türkiye'ye katılmıştır.",
+   "Türkiye, sorunun çözümünde uluslararası bir kuruluştan yararlanmıştır.",
+   "Atatürk, Hatay meselesine özel önem vermiştir."
+  ],
+  "dogru": 1,
+  "ipucu1": "Soru “ulaşılamaz” diyor: her şık için metinde bir dayanak ara. Metindeki yıllara (1936, 1938, 1939) da dikkat et.",
+  "ipucu2": "Atatürk 10 Kasım 1938'de hayatını kaybetti. Hatay'ın Türkiye'ye katılma kararı hangi yıl alındı?",
+  "cozum": [
+   "A: Sorun görüşmelerle ve Meclis kararıyla çözüldü → ulaşılır.",
+   "C: Konu Milletler Cemiyeti'ne taşındı → ulaşılır.",
+   "D: Atatürk hastalığına rağmen süreci izledi, geziler yaptı → ulaşılır.",
+   "B: Hatay 1939'da katıldı; Atatürk 1938'de vefat etti → ulaşılamaz.",
+   "Cevap: B."
+  ],
+  "tuzaklar": [
+   "“Kararlılık göstermek” savaş gibi algılanabilir; metinde görüşmelerden ve Meclis kararından söz ediliyor.",
+   "",
+   "Milletler Cemiyeti'nin bir uluslararası kuruluş olduğunu hatırlamayanlar bu şıkkı işaretler.",
+   "Bu bir yorum cümlesi olduğu için metinde yok sanılır; “hastalığına rağmen” ifadesi bunu kanıtlar."
+  ],
+  "taktik": "Hatay için üç tarih: 1936 sorun gündeme geldi → 1938 bağımsız Hatay Cumhuriyeti → 1939 Türkiye'ye katılma (Atatürk'ün ölümünden sonra).",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Hatay'ın anavatana katılması",
+    "tanim": "1938'de bağımsız cumhuriyet olan Hatay'ın, 1939'da kendi meclisinin kararıyla Türkiye'ye katılması."
+   },
+   {
+    "ad": "Milletler Cemiyeti",
+    "tanim": "Birinci Dünya Savaşı'ndan sonra dünya barışını korumak için kurulan uluslararası kuruluş; Türkiye 1932'de üye oldu."
+   }
+  ]
+ },
+ {
+  "id": "ink-041",
+  "ders": "inkilap",
+  "unite": "Atatürk’ün Ölümü ve Sonrası",
+  "kazanimKod": "İTA.8.7.1",
+  "kazanimAd": "Atatürk’ün ölümüne ilişkin yansıma ve değerlendirmelerden hareketle onun fikir ve eserlerinin evrensel değerine ilişkin çıkarımlarda bulunur.",
+  "zorluk": 1,
+  "tip": "uzun-metin",
+  "metin": "Atatürk, 10 Kasım 1938'de hayatını kaybetti. Ölümü yalnızca Türkiye'de değil, dünyada da büyük üzüntüyle karşılandı. Pek çok ülkenin gazetesi onu savaşlarda başarılı bir komutan, ülkesini yenileyen bir devlet adamı ve barışa önem veren bir lider olarak andı; cenaze törenine birçok ülke temsilci gönderdi.<br><br>Bu bilgiye göre Atatürk ile ilgili aşağıdakilerden hangisi söylenebilir?",
+  "svg": "",
+  "siklar": [
+   "Yalnızca askerî başarılarıyla tanınmıştır.",
+   "Fikirleri yalnız kendi ülkesinde ilgi görmüştür.",
+   "Dış politikada savaşı ön planda tutmuştur.",
+   "Dünya çapında saygı gören bir liderdir."
+  ],
+  "dogru": 3,
+  "ipucu1": "Metinde Atatürk'ü kimlerin andığına bak: yalnız Türkiye mi, başka ülkeler de mi?",
+  "ipucu2": "“Pek çok ülkenin gazetesi” ve “birçok ülke temsilci gönderdi” ifadeleri Atatürk'ün etkisinin nereye kadar ulaştığını gösteriyor?",
+  "cozum": [
+   "Ölümü dünyada da üzüntüyle karşılanmış.",
+   "Yabancı gazeteler onu komutan, devlet adamı ve barışçı lider olarak anmış.",
+   "Bu, dünya çapında saygı gördüğünü gösterir.",
+   "Cevap: D."
+  ],
+  "tuzaklar": [
+   "Metinde komutanlığı geçiyor; ama devlet adamlığı ve barışçılığı da sayılıyor. “Yalnızca” sözcüğü şıkkı yanlış yapar.",
+   "Yabancı ülkelerin tepkisi bunun tersini gösteriyor.",
+   "Metin onu “barışa önem veren lider” olarak tanıtıyor.",
+   ""
+  ],
+  "taktik": "Şıkta “yalnızca, sadece” görürsen metinde ikinci bir örnek ara; bulursan şık yanlıştır.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "10 Kasım 1938",
+    "tanim": "Atatürk'ün hayatını kaybettiği tarih."
+   },
+   {
+    "ad": "Evrensel",
+    "tanim": "Yalnız bir milleti değil, bütün insanlığı ilgilendiren."
+   }
+  ]
+ },
+ {
+  "id": "ink-042",
+  "ders": "inkilap",
+  "unite": "Atatürk’ün Ölümü ve Sonrası",
+  "kazanimKod": "İTA.8.7.2",
+  "kazanimAd": "Atatürk’ün Türk Milleti’ne bıraktığı eserlerinden örnekler verir.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "Tabloda Atatürk'ün bazı eserleri ve konuları verilmiştir.<table class='t'><tr><th>Eser</th><th>Konusu</th></tr><tr><td>Nutuk</td><td>1919–1927 yılları arasındaki Millî Mücadele'yi ve Cumhuriyet'in kuruluşunu anlatır.</td></tr><tr><td>Geometri</td><td>Geometri terimlerine üçgen, açı, dikdörtgen gibi Türkçe karşılıklar önerir.</td></tr><tr><td>Zabit ve Kumandan ile Hasbihâl</td><td>Askerlik mesleği ve komutanlık üzerine görüşlerini içerir.</td></tr><tr><td>Vatandaş İçin Medeni Bilgiler</td><td>Vatandaşlık bilgisi konularını ele alır; hazırlanmasına katkıda bulunmuştur.</td></tr></table><br>Bu tabloya göre Atatürk ile ilgili aşağıdakilerden hangisine ulaşılabilir?",
+  "svg": "",
+  "siklar": [
+   "Yalnızca askerlik alanında eser vermiştir.",
+   "Eserlerinin tamamını Millî Mücadele'den önce yazmıştır.",
+   "Farklı alanlarla ilgilenen çok yönlü bir kişiliğe sahiptir.",
+   "Eserlerinde yalnızca kendi hayatını anlatmıştır."
+  ],
+  "dogru": 2,
+  "ipucu1": "“Konusu” sütunundaki alanları say: tarih, matematik, askerlik, vatandaşlık…",
+  "ipucu2": "Dört eserin dördü de farklı bir alanda. Birbirinden farklı alanlarda eser veren bir insanı hangi sözcükle tanımlarız?",
+  "cozum": [
+   "Nutuk tarih, Geometri matematik, Hasbihâl askerlik, Medeni Bilgiler vatandaşlıkla ilgili.",
+   "Dört farklı alan var.",
+   "Bu, Atatürk'ün çok yönlü olduğunu gösterir.",
+   "Cevap: C."
+  ],
+  "tuzaklar": [
+   "Tabloda bir askerlik kitabı var; ama diğer üç eser başka alanlarda.",
+   "Nutuk 1927'ye kadar olan olayları anlatıyor; Millî Mücadele'den önce yazılmış olamaz.",
+   "",
+   "Nutuk'u bir hatıra kitabı sananlar bu şıkka gider; Geometri gibi eserler bununla ilgisiz."
+  ],
+  "taktik": "Tabloda birbirinden farklı alanlar sayılıyorsa cevap çoğunlukla “çok yönlülük”tür.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "Nutuk",
+    "tanim": "Atatürk'ün 1919–1927 arasındaki olayları anlattığı, 1927'de okuduğu eseri."
+   },
+   {
+    "ad": "Çok yönlülük",
+    "tanim": "Bir kişinin askerlik, siyaset, bilim, kültür gibi farklı alanlarda bilgili ve etkin olması."
+   }
+  ]
+ },
+ {
+  "id": "ink-043",
+  "ders": "inkilap",
+  "unite": "Atatürk’ün Ölümü ve Sonrası",
+  "kazanimKod": "İTA.8.7.4",
+  "kazanimAd": "İkinci Dünya Savaşı’ndaki gelişmelerin ve bu savaşın sonuçlarının Türkiye’ye etkilerini analiz eder.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Türkiye, 1939–1945 yılları arasında süren İkinci Dünya Savaşı'na fiilen katılmadı. Ancak savaş tehlikesine karşı çok sayıda erkek askere alındı; tarlalarda ve fabrikalarda çalışanların sayısı azaldığı için üretim düştü. Bazı temel maddeler kıtlaştı; ekmek gibi ürünler bir süre karneyle dağıtıldı.<br><br>Bu bilgiye göre aşağıdakilerden hangisi söylenebilir?",
+  "svg": "",
+  "siklar": [
+   "Savaşa girmeyen ülkeler de savaştan ekonomik olarak etkilenebilir.",
+   "Türkiye savaş yıllarında üretimini artırmıştır.",
+   "Türkiye savaş boyunca cephelerde çarpışmıştır.",
+   "Savaş, Türkiye'de günlük hayatı etkilememiştir."
+  ],
+  "dogru": 0,
+  "ipucu1": "İlk cümle ile sonraki cümleler arasındaki “ancak” bağlacına dikkat et: Savaşa girilmedi ama…",
+  "ipucu2": "Üretimin düşmesi ve ekmeğin karneyle dağıtılması hangi alandaki sıkıntıyı gösterir? Bu sıkıntıyı yaşayan ülke savaşa girmiş miydi?",
+  "cozum": [
+   "Türkiye savaşa fiilen katılmadı.",
+   "Buna rağmen üretim düştü, temel maddeler kıtlaştı, karne uygulandı.",
+   "Demek ki savaşa girmeyen bir ülke de ekonomik olarak etkilenebiliyor.",
+   "Cevap: A."
+  ],
+  "tuzaklar": [
+   "",
+   "Metin üretimin düştüğünü söylüyor; “artırmıştır” tam tersi.",
+   "“Askere alındı” ifadesi savaşa girildiği izlenimi verir; askerler tedbir amacıyla silah altındaydı.",
+   "Karne uygulaması günlük hayatın doğrudan etkilendiğini gösterir."
+  ],
+  "taktik": "“Ancak, fakat, buna rağmen” gördüğünde cümlenin asıl mesajı bağlaçtan sonra gelir.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Karne uygulaması",
+    "tanim": "Kıtlık dönemlerinde temel ürünlerin kişi başına belirli miktarda dağıtılması."
+   },
+   {
+    "ad": "İkinci Dünya Savaşı'nda Türkiye",
+    "tanim": "Savaşa fiilen girmeyen, ancak savaşın ekonomik ve sosyal etkilerini yaşayan ülke."
+   }
+  ]
+ },
+ {
+  "id": "ink-044",
+  "ders": "inkilap",
+  "unite": "Atatürk’ün Ölümü ve Sonrası",
+  "kazanimKod": "İTA.8.7.5",
+  "kazanimAd": "Türkiye’de çok partili siyasi hayata geçişi hızlandıran gelişmeleri, demokrasinin gerekleri açısından analiz eder.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "İkinci Dünya Savaşı'ndan sonra Türkiye'de çok partili hayata geçiş hızlandı. 1946'da Demokrat Parti kuruldu ve aynı yıl ilk çok partili genel seçim yapıldı. Bu seçimle ilgili bazı bilgiler şunlardır:<br><br>I. Seçime birden fazla parti katılmıştır.<br>II. Halk, milletvekillerini aracı olmadan doğrudan seçmiştir (tek dereceli seçim).<br>III. Oylar açık verilmiş, sayım gizli yapılmıştır.<br><br>Bu özelliklerden hangileri demokrasinin gereklerine <b>uygundur</b>?",
+  "svg": "",
+  "siklar": [
+   "Yalnız III",
+   "I ve II",
+   "I ve III",
+   "II ve III"
+  ],
+  "dogru": 1,
+  "ipucu1": "Demokratik bir seçimde oy nasıl verilir, sayım nasıl yapılır? Bugünkü seçimleri düşün.",
+  "ipucu2": "Bugün oyunu perdeli kabinde, kimse görmeden veriyorsun (gizli oy); sandıklar ise herkesin önünde sayılıyor (açık sayım). III. madde bunun aynısı mı, tersi mi?",
+  "cozum": [
+   "I: Birden fazla partinin yarışması seçmene seçenek sunar → uygun.",
+   "II: Halkın temsilcisini doğrudan seçmesi iradesini tam yansıtır → uygun.",
+   "III: Demokraside oy gizli, sayım açık olmalıdır; burada tersi yapılmış → uygun değil.",
+   "Cevap: I ve II."
+  ],
+  "tuzaklar": [
+   "“Açık” sözcüğü şeffaflık gibi olumlu algılanır; ama açık oy seçmeni baskı altında bırakır.",
+   "",
+   "I doğru; ancak III demokrasiye aykırı.",
+   "II doğru; ancak III demokrasiye aykırı."
+  ],
+  "taktik": "Demokratik seçimin kuralı: gizli oy, açık sayım. 1946'da tam tersi uygulanmıştı.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Gizli oy, açık sayım",
+    "tanim": "Seçmenin oyunu kimse görmeden vermesi, oyların ise herkesin önünde sayılması; demokratik seçimin temel kuralı."
+   },
+   {
+    "ad": "Tek dereceli seçim",
+    "tanim": "Halkın milletvekillerini aracı olmadan doğrudan seçmesi."
+   }
+  ]
+ }
+]

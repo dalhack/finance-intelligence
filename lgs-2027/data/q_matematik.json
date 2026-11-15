@@ -1,0 +1,2020 @@
+[
+ {
+  "id": "mat-001",
+  "ders": "matematik",
+  "unite": "Çarpanlar ve Katlar",
+  "kazanimKod": "M.8.1.1.1",
+  "kazanimAd": "Verilen pozitif tam sayıların pozitif tam sayı çarpanlarını bulur, pozitif tam sayıların pozitif tam sayı çarpanlarını üslü ifadelerin çarpımı şeklinde yazar.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Kodlama kulübündeki Deniz, kasasının şifresini şöyle belirliyor: 360 sayısını asal çarpanlarının kuvvetleri biçiminde <b>2<sup>a</sup> · 3<sup>b</sup> · 5<sup>c</sup></b> olarak yazıyor ve şifre olarak <b>a + b + c</b> toplamını kullanıyor.<br>Buna göre Deniz'in şifresi kaçtır?",
+  "svg": "",
+  "siklar": [
+   "5",
+   "6",
+   "7",
+   "10"
+  ],
+  "dogru": 1,
+  "ipucu1": "360'ı en küçük asal sayıdan başlayarak bölmeyi dene.",
+  "ipucu2": "360 = 2 · 180 = 2 · 2 · 90 … diye devam et; her asalın kaç kez kullanıldığını say.",
+  "cozum": [
+   "360'ı asal çarpanlarına ayıralım: 360 = 2 · 2 · 2 · 3 · 3 · 5.",
+   "Üslü yazarsak 360 = 2³ · 3² · 5¹ olur.",
+   "a = 3, b = 2, c = 1 olduğundan a + b + c = 6'dır."
+  ],
+  "tuzaklar": [
+   "360 = 2² · 3² · 10 gibi eksik ayırıp 10'u asal sanınca üsler eksik sayılır.",
+   "",
+   "2'nin kuvveti 3 yerine 4 alınırsa (360'ı 720 gibi bölmeye devam etmek) bu sonuç çıkar.",
+   "Üsler yerine asal çarpanların kendisi toplanınca (2 + 3 + 5) bu sonuç çıkar."
+  ],
+  "taktik": "Asal çarpan algoritmasında (bölen listesi) her asalın kaç kez yazıldığını say; üs o sayıdır.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "Asal çarpanlara ayırma",
+    "tanim": "Bir sayıyı asal sayıların kuvvetlerinin çarpımı olarak yazmak. Örn: 12 = 2² · 3"
+   }
+  ]
+ },
+ {
+  "id": "mat-002",
+  "ders": "matematik",
+  "unite": "Çarpanlar ve Katlar",
+  "kazanimKod": "M.8.1.1.2",
+  "kazanimAd": "İki doğal sayının en büyük ortak bölenini (EBOB) ve en küçük ortak katını (EKOK) hesaplar, ilgili problemleri çözer.",
+  "zorluk": 2,
+  "tip": "cok-adimli",
+  "metin": "Bir limandaki iki fenerden biri 18 saniyede bir, diğeri 24 saniyede bir yanıp sönmektedir. İki fener saat tam 21.00'de aynı anda yanmıştır.<br>Buna göre fenerler 21.00 ile 21.10 arasında (21.00'deki yanış <b>dâhil</b>) kaç kez aynı anda yanar?",
+  "svg": "",
+  "siklar": [
+   "8",
+   "10",
+   "9",
+   "14"
+  ],
+  "dogru": 2,
+  "ipucu1": "İki fenerin yeniden birlikte yanması için geçen süre, 18 ve 24'ün ortak katı olmalı.",
+  "ipucu2": "EKOK(18, 24)'ü bul; 10 dakikanın kaç saniye olduğunu yaz ve başlangıç anını unutma.",
+  "cozum": [
+   "18 = 2 · 3², 24 = 2³ · 3 olduğundan EKOK(18, 24) = 2³ · 3² = 72.",
+   "Fenerler 72 saniyede bir birlikte yanar. 10 dakika = 600 saniyedir.",
+   "600 ÷ 72 = 8 (kalan 24). Yani başlangıçtan sonra 8 kez daha birlikte yanarlar.",
+   "21.00'deki yanış da sayıldığından toplam 8 + 1 = 9 kez."
+  ],
+  "tuzaklar": [
+   "21.00'deki ilk birlikte yanış sayılmazsa 8 bulunur.",
+   "Sürenin sonu olan 600. saniye de birlikte yanış sanılırsa 10 bulunur; 600, 72'nin katı değildir.",
+   "",
+   "18 ile 24 toplanıp 600 saniye 42'ye bölünürse bu sonuç çıkar."
+  ],
+  "taktik": "\"Birlikte tekrar\" sorularında EKOK al; soruda başlangıç anı dâhil mi diye mutlaka kontrol et.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "EKOK",
+    "tanim": "İki sayının ortak katlarının en küçüğü. Örn: EKOK(18, 24) = 72"
+   }
+  ]
+ },
+ {
+  "id": "mat-003",
+  "ders": "matematik",
+  "unite": "Çarpanlar ve Katlar",
+  "kazanimKod": "M.8.1.1.2",
+  "kazanimAd": "İki doğal sayının en büyük ortak bölenini (EBOB) ve en küçük ortak katını (EKOK) hesaplar, ilgili problemleri çözer.",
+  "zorluk": 2,
+  "tip": "cok-adimli",
+  "metin": "Bir marangoz, 96 cm ve 120 cm uzunluğundaki iki çıtayı hiç artmayacak şekilde, <b>birbirine eşit ve mümkün olan en uzun</b> parçalara ayıracaktır. Her kesimde bir çıta tek bir yerden kesilmektedir.<br>Buna göre marangoz toplam kaç kesim yapar?",
+  "svg": "",
+  "siklar": [
+   "7",
+   "9",
+   "24",
+   "8"
+  ],
+  "dogru": 0,
+  "ipucu1": "Parçalar eşit ve en uzun olacaksa parça boyu iki uzunluğu da tam bölmeli.",
+  "ipucu2": "EBOB(96, 120)'yi bul. Sonra her çıtadan kaç parça çıktığını ve bir çıtayı n parçaya ayırmak için kaç kesim gerektiğini düşün.",
+  "cozum": [
+   "96 = 2⁵ · 3, 120 = 2³ · 3 · 5 olduğundan EBOB(96, 120) = 2³ · 3 = 24 cm.",
+   "96 ÷ 24 = 4 parça, 120 ÷ 24 = 5 parça elde edilir.",
+   "Bir çıtayı 4 parçaya ayırmak için 3, 5 parçaya ayırmak için 4 kesim gerekir.",
+   "Toplam 3 + 4 = 7 kesim yapılır."
+  ],
+  "tuzaklar": [
+   "",
+   "Parça sayısı (4 + 5) bulunup kesim sayısı sanılırsa 9 çıkar.",
+   "Bir parçanın uzunluğu olan EBOB değeri cevap sanılırsa 24 işaretlenir.",
+   "İki çıta tek parça gibi düşünülüp 9 parça için 8 kesim hesaplanırsa bu sonuç çıkar."
+  ],
+  "taktik": "\"Eş ve en büyük parça\" → EBOB. Kesim sayısı her çıta için parça sayısının 1 eksiğidir.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "EBOB",
+    "tanim": "İki sayının ortak bölenlerinin en büyüğü. Örn: EBOB(96, 120) = 24"
+   }
+  ]
+ },
+ {
+  "id": "mat-004",
+  "ders": "matematik",
+  "unite": "Çarpanlar ve Katlar",
+  "kazanimKod": "M.8.1.1.2",
+  "kazanimAd": "İki doğal sayının en büyük ortak bölenini (EBOB) ve en küçük ortak katını (EKOK) hesaplar, ilgili problemleri çözer.",
+  "zorluk": 3,
+  "tip": "uzun-metin",
+  "metin": "Bir fidanlıktaki görevli, sayısı 100'den fazla 200'den az olan fidanları gruplamak istiyor. Fidanları<br>• 8'erli gruplara ayırdığında 3 fidan,<br>• 12'şerli gruplara ayırdığında yine 3 fidan artıyor.<br>• 7'şerli gruplara ayırdığında ise hiç fidan artmıyor.<br>Buna göre görevli bu fidanları 5'erli gruplara ayırırsa kaç fidan artar?",
+  "svg": "",
+  "siklar": [
+   "0",
+   "1",
+   "3",
+   "2"
+  ],
+  "dogru": 3,
+  "ipucu1": "Fidan sayısından 3 çıkarırsan kalan sayı hem 8'e hem 12'ye tam bölünür.",
+  "ipucu2": "EKOK(8, 12) = 24. Fidan sayısı 24'ün bir katının 3 fazlasıdır; 100 ile 200 arasındaki adayları yazıp 7'ye bölünebileni ara.",
+  "cozum": [
+   "Fidan sayısının 3 eksiği 8 ve 12'nin ortak katıdır. EKOK(8, 12) = 24.",
+   "100 ile 200 arasındaki adaylar: 123, 147, 171, 195.",
+   "Bunlardan yalnız 147, 7'ye tam bölünür (147 = 7 · 21).",
+   "147 = 5 · 29 + 2 olduğundan 5'erli gruplamada 2 fidan artar."
+  ],
+  "tuzaklar": [
+   "24'ün katının 3 fazlası olan 195 seçilip 7'ye bölünme koşulu kontrol edilmezse bu sonuç çıkar.",
+   "171 sayısı seçilip 7'ye tam bölünmediği gözden kaçarsa 1 bulunur.",
+   "123 sayısı seçilip 7'ye bölünme koşulu atlanırsa 3 bulunur.",
+   ""
+  ],
+  "taktik": "Aynı kalanı veren bölmelerde: sayı = EKOK'un katı + kalan. Adayları listele, son koşulla ele.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Ortak kat ve kalan",
+    "tanim": "Bir sayı a ve b ile bölündüğünde aynı k kalanını veriyorsa sayı − k, EKOK(a, b)'nin katıdır."
+   }
+  ]
+ },
+ {
+  "id": "mat-005",
+  "ders": "matematik",
+  "unite": "Çarpanlar ve Katlar",
+  "kazanimKod": "M.8.1.1.3",
+  "kazanimAd": "Verilen iki doğal sayının aralarında asal olup olmadığını belirler.",
+  "zorluk": 1,
+  "tip": "grafik-tablo",
+  "metin": "Bir zekâ oyununda kartların üzerinde sayı çiftleri yazmaktadır. Üzerindeki iki sayı <b>aralarında asal</b> olan kartlar puan kazandırmaktadır.<table class=\"t\"><tr><th>Kart</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr><tr><td>Sayılar</td><td>14 ve 25</td><td>21 ve 35</td><td>16 ve 27</td><td>22 ve 33</td><td>9 ve 28</td><td>15 ve 39</td></tr></table>Buna göre tablodaki kartlardan kaç tanesi puan kazandırır?",
+  "svg": "",
+  "siklar": [
+   "2",
+   "4",
+   "3",
+   "5"
+  ],
+  "dogru": 2,
+  "ipucu1": "Aralarında asal olmak için sayıların asal olması gerekmez; 1'den başka ortak bölenleri olmamalı.",
+  "ipucu2": "Her çift için ortak bir asal bölen (2, 3, 5, 7, 11…) var mı diye bak.",
+  "cozum": [
+   "14 ve 25: ortak bölen yok → aralarında asal. 16 ve 27: ortak bölen yok → aralarında asal. 9 ve 28: ortak bölen yok → aralarında asal.",
+   "21 ve 35'in ortak böleni 7; 22 ve 33'ün ortak böleni 11; 15 ve 39'un ortak böleni 3'tür.",
+   "Aralarında asal olan 3 kart vardır (1, 3 ve 5 numaralı kartlar)."
+  ],
+  "tuzaklar": [
+   "9 ve 28 gibi ikisi de asal olmayan bir çift, aralarında asal sayılmazsa 2 bulunur.",
+   "15 ve 39'un ortak böleni 3 gözden kaçarsa 4 bulunur.",
+   "",
+   "Yalnızca 21 ve 35'in ortak böleni fark edilip diğerleri kontrol edilmezse 5 bulunur."
+  ],
+  "taktik": "Her sayıyı asal çarpanlarıyla düşün: ortak asal yoksa aralarında asaldır.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Aralarında asal",
+    "tanim": "1'den başka ortak böleni olmayan sayılar. Örn: 9 ve 28 (ikisi de asal değildir ama aralarında asaldır)."
+   }
+  ]
+ },
+ {
+  "id": "mat-006",
+  "ders": "matematik",
+  "unite": "Üslü İfadeler",
+  "kazanimKod": "M.8.1.2.1",
+  "kazanimAd": "Tam sayıların, tam sayı kuvvetlerini hesaplar.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "<b>(−2)<sup>3</sup> + 3<sup>−2</sup> · 3<sup>4</sup> − 5<sup>0</sup></b><br>işleminin sonucu kaçtır?",
+  "svg": "",
+  "siklar": [
+   "0",
+   "16",
+   "1",
+   "−4"
+  ],
+  "dogru": 0,
+  "ipucu1": "Negatif sayının tek kuvvetinin işaretine ve sıfırıncı kuvvete dikkat et.",
+  "ipucu2": "Tabanlar aynıysa çarpmada üsler toplanır: 3⁻² · 3⁴ = 3². Her terimi ayrı ayrı hesapla.",
+  "cozum": [
+   "(−2)³ = −8 (tek kuvvet, sonuç negatif).",
+   "3⁻² · 3⁴ = 3² = 9.",
+   "5⁰ = 1.",
+   "−8 + 9 − 1 = 0."
+  ],
+  "tuzaklar": [
+   "",
+   "(−2)³ = +8 alınırsa 8 + 9 − 1 = 16 bulunur.",
+   "5⁰ = 0 alınırsa −8 + 9 − 0 = 1 bulunur.",
+   "5⁰ = 5 alınırsa −8 + 9 − 5 = −4 bulunur."
+  ],
+  "taktik": "Önce her üslü terimi tek sayıya indir, sonra topla-çıkar.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "Sıfırıncı kuvvet",
+    "tanim": "a ≠ 0 için a⁰ = 1"
+   },
+   {
+    "ad": "Negatif tabanın kuvveti",
+    "tanim": "Negatif sayının tek kuvveti negatif, çift kuvveti pozitiftir."
+   }
+  ]
+ },
+ {
+  "id": "mat-007",
+  "ders": "matematik",
+  "unite": "Üslü İfadeler",
+  "kazanimKod": "M.8.1.2.2",
+  "kazanimAd": "Üslü ifadelerle ilgili temel kuralları anlar, birbirine denk ifadeler oluşturur.",
+  "zorluk": 2,
+  "tip": "cok-adimli",
+  "metin": "Bir video paylaşıldığı anda 2<sup>5</sup> kez izlenmiştir. Videonun izlenme sayısı, her saatin sonunda bir önceki saatin sonundaki sayının <b>4 katına</b> çıkmaktadır.<br>Buna göre 6 saatin sonunda videonun izlenme sayısı 2'nin kaçıncı kuvvetine eşit olur?",
+  "svg": "",
+  "siklar": [
+   "11",
+   "29",
+   "30",
+   "17"
+  ],
+  "dogru": 3,
+  "ipucu1": "Her saat 4 ile çarpılıyorsa 6 saatte kaç tane 4 çarpılmış olur?",
+  "ipucu2": "İzlenme sayısı 2⁵ · 4⁶ olur. 4'ü 2'nin kuvveti olarak yaz.",
+  "cozum": [
+   "6 saat boyunca sayı 6 kez 4 ile çarpılır: 2⁵ · 4⁶.",
+   "4 = 2² olduğundan 4⁶ = (2²)⁶ = 2¹².",
+   "2⁵ · 2¹² = 2¹⁷. Cevap 17'dir."
+  ],
+  "tuzaklar": [
+   "4⁶ yerine 2⁶ alınırsa 5 + 6 = 11 bulunur.",
+   "4⁶ = 2²⁴ sanılırsa (4 ile 6 çarpılırsa) 5 + 24 = 29 bulunur.",
+   "Çarpmada üsler toplanacakken çarpılırsa (5 · 6) bu sonuç çıkar.",
+   ""
+  ],
+  "taktik": "Tabanları aynı asal sayıya çevir; üssün üssünde çarp, çarpımda topla.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "Üssün üssü",
+    "tanim": "(aⁿ)ᵐ = aⁿ·ᵐ. Örn: (2²)⁶ = 2¹²"
+   },
+   {
+    "ad": "Aynı tabanda çarpma",
+    "tanim": "aⁿ · aᵐ = aⁿ⁺ᵐ"
+   }
+  ]
+ },
+ {
+  "id": "mat-008",
+  "ders": "matematik",
+  "unite": "Üslü İfadeler",
+  "kazanimKod": "M.8.1.2.5",
+  "kazanimAd": "Çok büyük ve çok küçük sayıları bilimsel gösterimle ifade eder ve karşılaştırır.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "Bir laboratuvarda dört farklı toz taneciğinin çapı ölçülmüş ve sonuçlar farklı biçimlerde not edilmiştir.<table class=\"t\"><tr><th>Tanecik</th><th>Çap (m)</th></tr><tr><td>K</td><td>3,2 · 10<sup>−4</sup></td></tr><tr><td>L</td><td>0,00045</td></tr><tr><td>M</td><td>28 · 10<sup>−5</sup></td></tr><tr><td>N</td><td>0,51 · 10<sup>−3</sup></td></tr></table>Buna göre taneciklerin çaplarının küçükten büyüğe doğru sıralanışı hangisidir?",
+  "svg": "",
+  "siklar": [
+   "N < K < L < M",
+   "M < K < L < N",
+   "K < M < L < N",
+   "M < K < N < L"
+  ],
+  "dogru": 1,
+  "ipucu1": "Sayıları karşılaştırmak için hepsini 10'un aynı kuvvetiyle yaz.",
+  "ipucu2": "Hepsini … · 10⁻⁴ biçimine çevir: virgül sağa kayarsa üs küçülür, sola kayarsa üs büyür.",
+  "cozum": [
+   "K = 3,2 · 10⁻⁴.",
+   "L = 0,00045 = 4,5 · 10⁻⁴.",
+   "M = 28 · 10⁻⁵ = 2,8 · 10⁻⁴ ve N = 0,51 · 10⁻³ = 5,1 · 10⁻⁴.",
+   "2,8 < 3,2 < 4,5 < 5,1 olduğundan sıralama M < K < L < N'dir."
+  ],
+  "tuzaklar": [
+   "Üslere bakılmadan yalnız baştaki sayılar (0,51; 3,2; 4,5; 28) sıralanırsa bu sonuç çıkar.",
+   "",
+   "28 · 10⁻⁵ sayısı 2,8 · 10⁻⁴ yerine 3,2 · 10⁻⁴'ten büyük sanılırsa bu sıralama çıkar.",
+   "0,00045 çevrilirken sıfırlar yanlış sayılıp L = 4,5 · 10⁻³ alınırsa L en büyük sanılır ve bu sıralama çıkar."
+  ],
+  "taktik": "Üsleri eşitle, sonra yalnız katsayıları karşılaştır.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "Bilimsel gösterim",
+    "tanim": "1 ≤ a < 10 ve n tam sayı olmak üzere a · 10ⁿ. Örn: 0,00045 = 4,5 · 10⁻⁴"
+   }
+  ]
+ },
+ {
+  "id": "mat-009",
+  "ders": "matematik",
+  "unite": "Üslü İfadeler",
+  "kazanimKod": "M.8.1.2.2",
+  "kazanimAd": "Üslü ifadelerle ilgili temel kuralları anlar, birbirine denk ifadeler oluşturur.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "Bir harici diskin kapasitesi 2<sup>40</sup> bayttır ve diskin <span class=\"frac\"><span>1</span><span>8</span></span>'i doludur. Ece, diskin boş kalan kısmının tamamına her biri 2<sup>22</sup> bayt yer kaplayan fotoğraflar yükleyecektir.<br>Buna göre Ece bu diske en fazla kaç fotoğraf yükleyebilir?",
+  "svg": "",
+  "siklar": [
+   "2<sup>15</sup>",
+   "2<sup>18</sup>",
+   "7 · 2<sup>15</sup>",
+   "7 · 2<sup>18</sup>"
+  ],
+  "dogru": 2,
+  "ipucu1": "Önce diskin boş kısmının kaç bayt olduğunu üslü biçimde yaz.",
+  "ipucu2": "8 = 2³ olduğundan diskin 1/8'i 2⁴⁰ ÷ 2³ = 2³⁷ bayttır. Boş kısım bunun 7 katıdır.",
+  "cozum": [
+   "Diskin 1/8'i: 2⁴⁰ ÷ 2³ = 2³⁷ bayt doludur.",
+   "Boş kısım 7/8'dir: 7 · 2³⁷ bayt.",
+   "Fotoğraf sayısı: (7 · 2³⁷) ÷ 2²² = 7 · 2¹⁵.",
+   "Cevap 7 · 2¹⁵'tir."
+  ],
+  "tuzaklar": [
+   "Boş kısım yerine dolu kısım (2³⁷ bayt) fotoğraf boyutuna bölünürse bu sonuç çıkar.",
+   "Diskin dolu kısmı hiç hesaba katılmazsa 2⁴⁰ ÷ 2²² = 2¹⁸ bulunur.",
+   "",
+   "Boş kısım 7/8 yerine 7 katı gibi alınır, 8'e bölme unutulursa bu sonuç çıkar."
+  ],
+  "taktik": "Kesirli kısmı da 2'nin kuvvetiyle yaz (8 = 2³); bölmede üsleri çıkar.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Aynı tabanda bölme",
+    "tanim": "aᵐ ÷ aⁿ = aᵐ⁻ⁿ. Örn: 2³⁷ ÷ 2²² = 2¹⁵"
+   }
+  ]
+ },
+ {
+  "id": "mat-010",
+  "ders": "matematik",
+  "unite": "Üslü İfadeler",
+  "kazanimKod": "M.8.1.2.3",
+  "kazanimAd": "Sayıların ondalık gösterimlerini 10’un tam sayı kuvvetlerini kullanarak çözümler.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Bir elektronik terazinin ekranında beliren sayının çözümlenmiş biçimi şöyledir:<br><b>3 · 10<sup>2</sup> + 4 · 10<sup>0</sup> + 7 · 10<sup>−2</sup> + 5 · 10<sup>−3</sup></b><br>Buna göre ekrandaki sayı aşağıdakilerden hangisidir?",
+  "svg": "",
+  "siklar": [
+   "340,75",
+   "304,075",
+   "304,75",
+   "34,075"
+  ],
+  "dogru": 1,
+  "ipucu1": "10'un hangi kuvvetlerinin eksik olduğuna bak; o basamaklara 0 gelir.",
+  "ipucu2": "10² yüzler, 10⁰ birler, 10⁻² yüzde birler, 10⁻³ binde birler basamağıdır.",
+  "cozum": [
+   "3 · 10² = 300 ve 4 · 10⁰ = 4.",
+   "7 · 10⁻² = 0,07 ve 5 · 10⁻³ = 0,005.",
+   "10¹ ve 10⁻¹ terimleri olmadığından onlar ve onda birler basamağı 0'dır.",
+   "300 + 4 + 0,07 + 0,005 = 304,075."
+  ],
+  "tuzaklar": [
+   "4 · 10⁰ onlar basamağına, kesir kısmı da bir basamak sola yazılırsa bu sonuç çıkar.",
+   "",
+   "10⁻¹'li terimin olmadığı fark edilmeyip 7 onda birler basamağına yazılırsa bu sonuç çıkar.",
+   "10¹'li terim olmadığı için onlar basamağına 0 yazmak unutulursa bu sonuç çıkar."
+  ],
+  "taktik": "Basamak tablosu çiz: 10², 10¹, 10⁰, 10⁻¹, 10⁻², 10⁻³; olmayan kuvvetlere 0 yaz.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Çözümleme",
+    "tanim": "Bir sayıyı basamak değerlerinin toplamı olarak yazmak. Örn: 82,53 = 8·10¹ + 2·10⁰ + 5·10⁻¹ + 3·10⁻²"
+   }
+  ]
+ },
+ {
+  "id": "mat-011",
+  "ders": "matematik",
+  "unite": "Kareköklü İfadeler",
+  "kazanimKod": "M.8.1.3.1",
+  "kazanimAd": "Tam kare pozitif tam sayılarla bu sayıların karekökleri arasındaki ilişkiyi belirler.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Alanı 196 m² olan kare biçimindeki bir sebze bahçesinin çevresi bir sıra tel ile çevrilecektir.<br>Buna göre kaç metre tel gerekir?",
+  "svg": "",
+  "siklar": [
+   "14",
+   "28",
+   "49",
+   "56"
+  ],
+  "dogru": 3,
+  "ipucu1": "Karenin alanı bir kenarının karesidir.",
+  "ipucu2": "Hangi sayının karesi 196'dır? Kenarı bulduktan sonra çevreyi hesapla.",
+  "cozum": [
+   "Karenin bir kenarı √196 = 14 m'dir (14 · 14 = 196).",
+   "Çevre = 4 · 14 = 56 m."
+  ],
+  "tuzaklar": [
+   "Yalnız bir kenar uzunluğu (√196) bulunup bırakılırsa 14 çıkar.",
+   "Kenar 2 ile çarpılırsa (yarım çevre) 28 çıkar.",
+   "Alan 4'e bölünürse (196 ÷ 4) bu sonuç çıkar; alan ile çevre karıştırılmıştır.",
+   ""
+  ],
+  "taktik": "1'den 20'ye kadar sayıların karelerini ezbere bilmek bu soruları saniyeler içinde çözdürür.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Tam kare sayı",
+    "tanim": "Bir doğal sayının karesi olan sayı. Örn: 196 = 14², √196 = 14"
+   }
+  ]
+ },
+ {
+  "id": "mat-012",
+  "ders": "matematik",
+  "unite": "Kareköklü İfadeler",
+  "kazanimKod": "M.8.1.3.2",
+  "kazanimAd": "Tam kare olmayan kareköklü bir sayının hangi iki doğal sayı arasında olduğunu belirler.",
+  "zorluk": 2,
+  "tip": "gorsel",
+  "metin": "Aşağıdaki sayı doğrusunda K, L, M ve N noktaları işaretlenmiştir.<br>Buna göre <b>3√6</b> sayısına karşılık gelen nokta hangisi olabilir?",
+  "svg": "<svg viewBox='0 0 320 70' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><line x1='14' y1='40' x2='306' y2='40' /><line x1='28' y1='35' x2='28' y2='45' /><text x='28' y='60' text-anchor='middle' fill='currentColor' stroke='none' >4</text><line x1='72' y1='35' x2='72' y2='45' /><text x='72' y='60' text-anchor='middle' fill='currentColor' stroke='none' >5</text><line x1='116' y1='35' x2='116' y2='45' /><text x='116' y='60' text-anchor='middle' fill='currentColor' stroke='none' >6</text><line x1='160' y1='35' x2='160' y2='45' /><text x='160' y='60' text-anchor='middle' fill='currentColor' stroke='none' >7</text><line x1='204' y1='35' x2='204' y2='45' /><text x='204' y='60' text-anchor='middle' fill='currentColor' stroke='none' >8</text><line x1='248' y1='35' x2='248' y2='45' /><text x='248' y='60' text-anchor='middle' fill='currentColor' stroke='none' >9</text><line x1='292' y1='35' x2='292' y2='45' /><text x='292' y='60' text-anchor='middle' fill='currentColor' stroke='none' >10</text><circle cx='85.2' cy='40' r='3.5' fill='currentColor'/><text x='85.2' y='26' text-anchor='middle' fill='currentColor' stroke='none' font-weight='bold'>K</text><circle cx='146.8' cy='40' r='3.5' fill='currentColor'/><text x='146.8' y='26' text-anchor='middle' fill='currentColor' stroke='none' font-weight='bold'>L</text><circle cx='175.4' cy='40' r='3.5' fill='currentColor'/><text x='175.4' y='26' text-anchor='middle' fill='currentColor' stroke='none' font-weight='bold'>M</text><circle cx='226' cy='40' r='3.5' fill='currentColor'/><text x='226' y='26' text-anchor='middle' fill='currentColor' stroke='none' font-weight='bold'>N</text></svg>",
+  "siklar": [
+   "K",
+   "L",
+   "M",
+   "N"
+  ],
+  "dogru": 2,
+  "ipucu1": "Önce katsayıyı kök içine alarak sayıyı tek bir karekök olarak yaz.",
+  "ipucu2": "3√6 = √(9 · 6). Bu sayı hangi iki tam kare arasında?",
+  "cozum": [
+   "3√6 = √(3² · 6) = √54.",
+   "49 < 54 < 64 olduğundan 7 < √54 < 8.",
+   "7 ile 8 arasındaki tek nokta M'dir."
+  ],
+  "tuzaklar": [
+   "3√6 sayısı 3 + √6 gibi düşünülürse (yaklaşık 5,4) K seçilir.",
+   "√54'ün 49 ile 64 arasında olduğu yanlış belirlenip 6 ile 7 arasında sanılırsa L seçilir.",
+   "",
+   "√6 yaklaşık 2,8 gibi fazla tahmin edilirse 3 · 2,8 = 8,4 bulunup N seçilir."
+  ],
+  "taktik": "a√b'yi konumlandırırken kök içine al, sonra en yakın iki tam kareyi bul.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Katsayıyı kök içine alma",
+    "tanim": "a√b = √(a² · b) (a > 0). Örn: 3√6 = √54"
+   },
+   {
+    "ad": "Karekök tahmini",
+    "tanim": "√54, 7² = 49 ile 8² = 64 arasında olduğundan 7 ile 8 arasındadır."
+   }
+  ]
+ },
+ {
+  "id": "mat-013",
+  "ders": "matematik",
+  "unite": "Kareköklü İfadeler",
+  "kazanimKod": "M.8.1.3.5",
+  "kazanimAd": "Kareköklü ifadelerde toplama ve çıkarma işlemlerini yapar.",
+  "zorluk": 2,
+  "tip": "cok-adimli",
+  "metin": "Dikdörtgen biçimindeki bir fotoğraf çerçevesinin kenar uzunlukları <b>√48 cm</b> ve <b>√75 cm</b>'dir.<br>Buna göre çerçevenin çevresi kaç santimetredir?",
+  "svg": "",
+  "siklar": [
+   "18√3",
+   "9√3",
+   "2√123",
+   "18√6"
+  ],
+  "dogru": 0,
+  "ipucu1": "Kareköklü sayılar ancak kök içleri aynıyken toplanabilir.",
+  "ipucu2": "48 = 16 · 3 ve 75 = 25 · 3. Her birini a√3 biçiminde yaz.",
+  "cozum": [
+   "√48 = √(16 · 3) = 4√3.",
+   "√75 = √(25 · 3) = 5√3.",
+   "Çevre = 2 · (4√3 + 5√3) = 2 · 9√3 = 18√3 cm."
+  ],
+  "tuzaklar": [
+   "",
+   "İki kenar toplanıp 2 ile çarpılmazsa (yarım çevre) 9√3 bulunur.",
+   "Kök içleri doğrudan toplanırsa (√48 + √75 = √123) bu sonuç çıkar.",
+   "4√3 + 5√3 toplanırken kök içleri de toplanırsa (√3 + √3 = √6) bu sonuç çıkar."
+  ],
+  "taktik": "Toplamadan önce her kökü a√b biçimine getir; kök içi aynı olanların katsayılarını topla.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "a√b biçimi",
+    "tanim": "Kök içindeki tam kare çarpan dışarı çıkar. Örn: √48 = 4√3"
+   },
+   {
+    "ad": "Köklü toplama",
+    "tanim": "a√c + b√c = (a + b)√c"
+   }
+  ]
+ },
+ {
+  "id": "mat-014",
+  "ders": "matematik",
+  "unite": "Kareköklü İfadeler",
+  "kazanimKod": "M.8.1.3.4",
+  "kazanimAd": "Kareköklü ifadelerde çarpma ve bölme işlemlerini yapar.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "Dikdörtgen biçimindeki bir duyuru panosunun kısa kenarı <b>√12 dm</b>, alanı <b>30 dm²</b>'dir.<br>Buna göre panonun çevresi kaç desimetredir?",
+  "svg": "",
+  "siklar": [
+   "7√3",
+   "14√3",
+   "10√3",
+   "14√6"
+  ],
+  "dogru": 1,
+  "ipucu1": "Alan = kısa kenar · uzun kenar. Uzun kenarı bulmak için bölme yapman gerekir.",
+  "ipucu2": "√12 = 2√3. Uzun kenar 30 ÷ 2√3 = 15/√3 olur; paydayı kökten kurtar.",
+  "cozum": [
+   "√12 = 2√3 dm.",
+   "Uzun kenar = 30 ÷ 2√3 = 15/√3. Pay ve paydayı √3 ile çarparsak 15√3/3 = 5√3 dm.",
+   "Çevre = 2 · (2√3 + 5√3) = 2 · 7√3 = 14√3 dm."
+  ],
+  "tuzaklar": [
+   "Kısa ve uzun kenar toplanıp 2 ile çarpılmazsa 7√3 bulunur.",
+   "",
+   "Yalnız uzun kenarların toplamı (2 · 5√3) alınırsa bu sonuç çıkar.",
+   "2√3 + 5√3 toplanırken kök içleri de toplanırsa bu sonuç çıkar."
+  ],
+  "taktik": "Paydada kök kalırsa pay ve paydayı aynı kökle çarp: a/√b = a√b/b.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "Paydayı rasyonel yapma",
+    "tanim": "a/√b = a√b/b. Örn: 15/√3 = 5√3"
+   }
+  ]
+ },
+ {
+  "id": "mat-015",
+  "ders": "matematik",
+  "unite": "Kareköklü İfadeler",
+  "kazanimKod": "M.8.1.3.8",
+  "kazanimAd": "Gerçek sayıları tanır, rasyonel ve irrasyonel sayılarla ilişkilendirir.",
+  "zorluk": 2,
+  "tip": "klasik",
+  "metin": "Zeynep dört karta birer sayı yazıyor ve bunlardan <b>irrasyonel</b> olanı arkadaşına soruyor.<br>Buna göre aşağıdaki sayılardan hangisi irrasyoneldir?",
+  "svg": "",
+  "siklar": [
+   "√0,16",
+   "√1,21",
+   "√2,5",
+   "√6,25"
+  ],
+  "dogru": 2,
+  "ipucu1": "Ondalık sayıyı kesre çevir; pay ve payda tam kare mi?",
+  "ipucu2": "2,5 = 25/10; 0,16 = 16/100; 1,21 = 121/100; 6,25 = 625/100. Paydası tam kare olmayan hangisi?",
+  "cozum": [
+   "√0,16 = √(16/100) = 4/10 = 0,4 → rasyonel.",
+   "√1,21 = √(121/100) = 11/10 ve √6,25 = √(625/100) = 25/10 → rasyonel.",
+   "2,5 = 25/10 = 5/2'dir; 2 tam kare olmadığından √2,5 iki tam sayının oranı olarak yazılamaz.",
+   "İrrasyonel olan √2,5'tir."
+  ],
+  "tuzaklar": [
+   "Ondalık sayının karekökü hep irrasyonel sanılır; oysa √0,16 = 0,4'tür.",
+   "121 = 11² olduğu fark edilmezse irrasyonel sanılır; √1,21 = 1,1'dir.",
+   "",
+   "625 = 25² olduğu görülmezse irrasyonel sanılır; √6,25 = 2,5'tir."
+  ],
+  "taktik": "Ondalık sayıyı paydası 100 (ya da 10 000) olan kesre çevir; pay tam kare mi diye bak.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "İrrasyonel sayı",
+    "tanim": "İki tam sayının oranı olarak yazılamayan gerçek sayı. Örn: √2, √2,5, π"
+   },
+   {
+    "ad": "Ondalık sayının karekökü",
+    "tanim": "√(a/b) = √a/√b. Örn: √1,21 = 11/10"
+   }
+  ]
+ },
+ {
+  "id": "mat-016",
+  "ders": "matematik",
+  "unite": "Veri Analizi ve Olasılık",
+  "kazanimKod": "M.8.4.1.1",
+  "kazanimAd": "En fazla üç veri grubuna ait çizgi ve sütun grafiklerini yorumlar.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "Aşağıdaki sütun grafiğinde bir kitabevinin Çarşı (A) ve Sahil (B) şubelerinin dört ayda sattığı kitap sayıları gösterilmiştir. Kesikli çizgiler 10, 30, 50 ve 70 değerlerini gösterir.<br>Buna göre bu dört ayda B şubesinin <b>aylık ortalama</b> satışı, A şubesinin aylık ortalama satışından kaç kitap eksiktir?",
+  "svg": "<svg viewBox='0 0 320 200' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><line x1='40' y1='175' x2='310' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><text x='34' y='179' text-anchor='end' fill='currentColor' stroke='none' >0</text><line x1='40' y1='140' x2='310' y2='140' stroke-width='0.6' stroke-opacity='0.35'/><text x='34' y='144' text-anchor='end' fill='currentColor' stroke='none' >20</text><line x1='40' y1='105' x2='310' y2='105' stroke-width='0.6' stroke-opacity='0.35'/><text x='34' y='109' text-anchor='end' fill='currentColor' stroke='none' >40</text><line x1='40' y1='70' x2='310' y2='70' stroke-width='0.6' stroke-opacity='0.35'/><text x='34' y='74' text-anchor='end' fill='currentColor' stroke='none' >60</text><line x1='40' y1='35' x2='310' y2='35' stroke-width='0.6' stroke-opacity='0.35'/><text x='34' y='39' text-anchor='end' fill='currentColor' stroke='none' >80</text><line x1='40' y1='157.5' x2='310' y2='157.5' stroke-width='0.5' stroke-opacity='0.2' stroke-dasharray='3 3'/><line x1='40' y1='122.5' x2='310' y2='122.5' stroke-width='0.5' stroke-opacity='0.2' stroke-dasharray='3 3'/><line x1='40' y1='87.5' x2='310' y2='87.5' stroke-width='0.5' stroke-opacity='0.2' stroke-dasharray='3 3'/><line x1='40' y1='52.5' x2='310' y2='52.5' stroke-width='0.5' stroke-opacity='0.2' stroke-dasharray='3 3'/><line x1='40' y1='175' x2='310' y2='175' /><line x1='40' y1='175' x2='40' y2='22' /><rect class='acf' x='58' y='105' width='22' height='70'/><text x='69' y='101' text-anchor='middle' fill='currentColor' stroke='none' >A</text><rect class='mf' x='82' y='122.5' width='22' height='52.5'/><text x='93' y='118.5' text-anchor='middle' fill='currentColor' stroke='none' >B</text><text x='81' y='191' text-anchor='middle' fill='currentColor' stroke='none' >Ocak</text><rect class='acf' x='122' y='70' width='22' height='105'/><text x='133' y='66' text-anchor='middle' fill='currentColor' stroke='none' >A</text><rect class='mf' x='146' y='87.5' width='22' height='87.5'/><text x='157' y='83.5' text-anchor='middle' fill='currentColor' stroke='none' >B</text><text x='145' y='191' text-anchor='middle' fill='currentColor' stroke='none' >Şubat</text><rect class='acf' x='186' y='87.5' width='22' height='87.5'/><text x='197' y='83.5' text-anchor='middle' fill='currentColor' stroke='none' >A</text><rect class='mf' x='210' y='35' width='22' height='140'/><text x='221' y='31' text-anchor='middle' fill='currentColor' stroke='none' >B</text><text x='209' y='191' text-anchor='middle' fill='currentColor' stroke='none' >Mart</text><rect class='acf' x='250' y='52.5' width='22' height='122.5'/><text x='261' y='48.5' text-anchor='middle' fill='currentColor' stroke='none' >A</text><rect class='mf' x='274' y='105' width='22' height='70'/><text x='285' y='101' text-anchor='middle' fill='currentColor' stroke='none' >B</text><text x='273' y='191' text-anchor='middle' fill='currentColor' stroke='none' >Nisan</text><text x='8' y='14' text-anchor='start' fill='currentColor' stroke='none' >Satılan kitap sayısı</text></svg>",
+  "siklar": [
+   "5",
+   "20",
+   "10",
+   "30"
+  ],
+  "dogru": 0,
+  "ipucu1": "Her şubenin dört aylık satışlarını grafikten tek tek oku.",
+  "ipucu2": "A için 40 + 60 + 50 + 70, B için 30 + 50 + 80 + 40 toplamlarını bul; ortalama için ay sayısına böl.",
+  "cozum": [
+   "A şubesi: 40 + 60 + 50 + 70 = 220 kitap; ortalama 220 ÷ 4 = 55.",
+   "B şubesi: 30 + 50 + 80 + 40 = 200 kitap; ortalama 200 ÷ 4 = 50.",
+   "Fark 55 − 50 = 5 kitaptır."
+  ],
+  "tuzaklar": [
+   "",
+   "İki şubenin toplam satışları arasındaki fark bulunup 4'e bölünmezse 20 çıkar.",
+   "Yalnız ilk ayın (Ocak) farkına bakılırsa 10 bulunur.",
+   "Yalnız Mart ayındaki fark okunursa 30 bulunur; üstelik o ay B fazladır."
+  ],
+  "taktik": "Ortalamalar farkı = toplamlar farkı ÷ veri sayısı. Önce toplam farkı bulup sonra bölmek daha hızlıdır.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "Aritmetik ortalama",
+    "tanim": "Verilerin toplamının veri sayısına bölümü."
+   }
+  ]
+ },
+ {
+  "id": "mat-017",
+  "ders": "matematik",
+  "unite": "Veri Analizi ve Olasılık",
+  "kazanimKod": "M.8.4.1.2",
+  "kazanimAd": "Verileri sütun, daire veya çizgi grafiği ile gösterir ve bu gösterimler arasında uygun olan dönüşümleri yapar.",
+  "zorluk": 3,
+  "tip": "grafik-tablo",
+  "metin": "Bir ortaokuldaki öğrencilerin her biri dört kulüpten birini seçmiştir. Seçimlerin dağılımı aşağıdaki daire grafiğinde gösterilmiştir. Kodlama kulübünü seçen <b>54</b> öğrenci vardır.<br>Bu veriler sütun grafiğine dönüştürüldüğünde Spor sütunu, Resim sütunundan kaç öğrenci daha yüksek olur?",
+  "svg": "<svg viewBox='0 0 320 205' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><path class='mf' d='M160 118 L160 38 A80 80 0 0 1 229.3 158 Z'/><text x='201.6' y='92' text-anchor='middle' fill='currentColor' stroke='none' >Spor</text><text x='201.6' y='107' text-anchor='middle' fill='currentColor' stroke='none' >120°</text><path  d='M160 118 L229.3 158 A80 80 0 0 1 100.5 171.5 Z'/><text x='165' y='163.7' text-anchor='middle' fill='currentColor' stroke='none' >Kodlama</text><text x='165' y='178.7' text-anchor='middle' fill='currentColor' stroke='none' >108°</text><path class='mf' d='M160 118 L100.5 171.5 A80 80 0 0 1 106.5 58.5 Z'/><text x='112.1' y='113.5' text-anchor='middle' fill='currentColor' stroke='none' >Müzik</text><text x='112.1' y='128.5' text-anchor='middle' fill='currentColor' stroke='none' >90°</text><path  d='M160 118 L106.5 58.5 A80 80 0 0 1 160 38 Z'/><text x='128.5' y='35.8' text-anchor='end' fill='currentColor' stroke='none' >Resim 42°</text></svg>",
+  "siklar": [
+   "78",
+   "60",
+   "21",
+   "39"
+  ],
+  "dogru": 3,
+  "ipucu1": "Kodlama diliminin açısı ve öğrenci sayısı belli; 1°'nin kaç öğrenciye karşılık geldiğini bulabilirsin.",
+  "ipucu2": "108° → 54 öğrenci ise 1° → 0,5 öğrenci. Spor ile Resim arasındaki açı farkını kullan.",
+  "cozum": [
+   "108° 54 öğrenciye karşılık geliyorsa 1° → 54 ÷ 108 = 0,5 öğrencidir.",
+   "Spor ile Resim dilimlerinin açı farkı 120° − 42° = 78°'dir.",
+   "78 · 0,5 = 39 öğrenci.",
+   "Spor sütunu Resim sütunundan 39 öğrenci daha yüksektir."
+  ],
+  "tuzaklar": [
+   "Öğrenci sayısı yerine merkez açıların farkı (120° − 42°) cevap sanılırsa 78 bulunur.",
+   "Yalnız Spor kulübünü seçen öğrenci sayısı (60) bulunup bırakılırsa bu sonuç çıkar.",
+   "Yalnız Resim kulübünü seçen öğrenci sayısı (21) bulunup bırakılırsa bu sonuç çıkar.",
+   ""
+  ],
+  "taktik": "Fark soruluyorsa iki dilimi ayrı ayrı hesaplama; açı farkını bulup tek orantı kur.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "Daire grafiği",
+    "tanim": "Bütün 360°'dir; her dilimin merkez açısı o grubun veri sayısıyla doğru orantılıdır."
+   }
+  ]
+ },
+ {
+  "id": "mat-018",
+  "ders": "matematik",
+  "unite": "Veri Analizi ve Olasılık",
+  "kazanimKod": "M.8.5.1.5",
+  "kazanimAd": "Basit bir olayın olma olasılığını hesaplar.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Bir torbada aynı büyüklükte 5 kırmızı, 4 mavi ve 3 sarı bilye vardır.<br>Bu torbadan rastgele çekilen bir bilyenin <b>mavi olmama</b> olasılığı kaçtır?",
+  "svg": "",
+  "siklar": [
+   "1/3",
+   "2/3",
+   "3/4",
+   "1/4"
+  ],
+  "dogru": 1,
+  "ipucu1": "\"Mavi olmama\" demek kırmızı ya da sarı gelmesi demektir.",
+  "ipucu2": "Toplam bilye sayısını bul; mavi olmayan bilyeleri say ve oranla.",
+  "cozum": [
+   "Toplam bilye: 5 + 4 + 3 = 12.",
+   "Mavi olmayan bilye: 5 + 3 = 8.",
+   "Olasılık = 8/12 = 2/3."
+  ],
+  "tuzaklar": [
+   "Mavi olma olasılığı (4/12) bulunup bırakılırsa 1/3 çıkar.",
+   "",
+   "Sarı olmama olasılığı (9/12) hesaplanırsa bu sonuç çıkar.",
+   "Yalnız sarı bilyeler sayılırsa (3/12) bu sonuç çıkar."
+  ],
+  "taktik": "Olmama olasılığı = 1 − olma olasılığı. 1 − 4/12 = 8/12.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Olasılık",
+    "tanim": "İstenen durum sayısı ÷ tüm olası durum sayısı"
+   },
+   {
+    "ad": "Olmama olasılığı",
+    "tanim": "Bir olayın olma ve olmama olasılıklarının toplamı 1'dir."
+   }
+  ]
+ },
+ {
+  "id": "mat-019",
+  "ders": "matematik",
+  "unite": "Veri Analizi ve Olasılık",
+  "kazanimKod": "M.8.5.1.5",
+  "kazanimAd": "Basit bir olayın olma olasılığını hesaplar.",
+  "zorluk": 2,
+  "tip": "cok-adimli",
+  "metin": "Bir spor salonunda 1'den 40'a kadar numaralandırılmış 40 dolap vardır. Salona gelen Mert'e bu dolaplardan biri rastgele verilecektir.<br>Buna göre Mert'e verilen dolabın numarasının <b>40'ın bir çarpanı</b> olma olasılığı kaçtır?",
+  "svg": "",
+  "siklar": [
+   "1/8",
+   "3/20",
+   "1/5",
+   "7/40"
+  ],
+  "dogru": 2,
+  "ipucu1": "Önce 40'ın bütün pozitif çarpanlarını çiftler hâlinde listele.",
+  "ipucu2": "40 = 1 · 40 = 2 · 20 = 4 · 10 = 5 · 8. Çarpanların kaç tane olduğunu say, 40 dolaba oranla.",
+  "cozum": [
+   "40'ın çarpanları: 1, 2, 4, 5, 8, 10, 20, 40 → 8 tane.",
+   "Tüm olası durum sayısı 40'tır.",
+   "Olasılık = 8/40 = 1/5."
+  ],
+  "tuzaklar": [
+   "Çarpan sayısı olan 8 bulunup olasılık 1/8 sanılırsa bu sonuç çıkar.",
+   "1 ve 40 çarpan olarak sayılmazsa 6/40 = 3/20 bulunur.",
+   "",
+   "Çarpanlardan biri (örneğin 8) unutulursa 7/40 bulunur."
+  ],
+  "taktik": "Çarpanları çiftler hâlinde yazarsan (1·40, 2·20, 4·10, 5·8) hiçbirini atlamazsın.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Çarpan (bölen)",
+    "tanim": "Bir sayıyı kalansız bölen pozitif tam sayı. 1 ve sayının kendisi de çarpandır."
+   }
+  ]
+ },
+ {
+  "id": "mat-020",
+  "ders": "matematik",
+  "unite": "Cebirsel İfadeler ve Özdeşlikler",
+  "kazanimKod": "M.8.2.1.2",
+  "kazanimAd": "Cebirsel ifadelerin çarpımını yapar.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Dikdörtgen biçimindeki bir halının kenar uzunlukları <b>(2x + 3)</b> metre ve <b>(x − 4)</b> metredir.<br>Buna göre halının alanını metrekare cinsinden veren cebirsel ifade hangisidir?",
+  "svg": "",
+  "siklar": [
+   "2x² − 12",
+   "2x² + 5x − 12",
+   "2x² − 11x − 12",
+   "2x² − 5x − 12"
+  ],
+  "dogru": 3,
+  "ipucu1": "Birinci parantezdeki her terimi ikinci parantezdeki her terimle çarp.",
+  "ipucu2": "2x · x, 2x · (−4), 3 · x ve 3 · (−4) çarpımlarını yaz; benzer terimleri topla.",
+  "cozum": [
+   "(2x + 3)(x − 4) = 2x · x + 2x · (−4) + 3 · x + 3 · (−4).",
+   "= 2x² − 8x + 3x − 12.",
+   "= 2x² − 5x − 12."
+  ],
+  "tuzaklar": [
+   "Yalnız ilk terimler ve son terimler çarpılıp ortadaki çarpımlar unutulursa bu sonuç çıkar.",
+   "−8x + 3x toplanırken işaret hatası yapılırsa +5x bulunur.",
+   "3 · x çarpımı −3x alınırsa −8x − 3x = −11x bulunur.",
+   ""
+  ],
+  "taktik": "Dört çarpımı sırayla yaz (ilkler, dışlar, içler, sonlar); işaretleri çarpım sırasında koy.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "Dağılma özelliği",
+    "tanim": "(a + b)(c + d) = ac + ad + bc + bd"
+   }
+  ]
+ },
+ {
+  "id": "mat-021",
+  "ders": "matematik",
+  "unite": "Cebirsel İfadeler ve Özdeşlikler",
+  "kazanimKod": "M.8.2.1.3",
+  "kazanimAd": "Özdeşlikleri modellerle açıklar.",
+  "zorluk": 2,
+  "tip": "gorsel",
+  "metin": "Bir kenarı x cm olan kare biçimindeki bir kartonun köşesinden, şekildeki gibi bir kenarı 3 cm olan kare biçiminde bir parça kesilip atılıyor. Kalan parça kesilip yeniden birleştirilerek, alanı değişmeden bir dikdörtgen elde ediliyor.<br>Bu dikdörtgenin kısa kenarı <b>(x − 3) cm</b> olduğuna göre uzun kenarı kaç santimetredir?",
+  "svg": "<svg viewBox='0 0 320 165' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><rect x='40' y='20' width='120' height='120'/><rect class='mf' x='124' y='20' width='36' height='36' stroke-dasharray='4 3'/><text x='100' y='157' text-anchor='middle' fill='currentColor' stroke='none' >x</text><text x='28' y='84' text-anchor='middle' fill='currentColor' stroke='none' >x</text><text x='142' y='14' text-anchor='middle' fill='currentColor' stroke='none' >3</text><text x='170' y='42' text-anchor='start' fill='currentColor' stroke='none' >3</text><text x='100' y='100' text-anchor='middle' fill='currentColor' stroke='none' >Kalan parça</text></svg>",
+  "siklar": [
+   "x − 3",
+   "x + 3",
+   "x + 9",
+   "x − 9"
+  ],
+  "dogru": 1,
+  "ipucu1": "Kalan parçanın alanını büyük karenin alanından küçük karenin alanını çıkararak yaz.",
+  "ipucu2": "Kalan alan x² − 9'dur. Bu, iki kare farkıdır; çarpanlarına ayır.",
+  "cozum": [
+   "Kalan parçanın alanı: x² − 3² = x² − 9.",
+   "İki kare farkı: x² − 9 = (x − 3)(x + 3).",
+   "Kısa kenar (x − 3) ise uzun kenar (x + 3) cm'dir."
+  ],
+  "tuzaklar": [
+   "Kalan şekil kare sanılıp iki kenar eşit alınırsa bu sonuç çıkar.",
+   "",
+   "x² − 9 ifadesindeki 9, çarpanlara ayırmadan doğrudan kenara taşınırsa bu sonuç çıkar.",
+   "x² − 9 ifadesi (x − 3)(x − 9) gibi ayrılırsa bu sonuç çıkar."
+  ],
+  "taktik": "\"Kareden kare çıkar\" gördüğünde iki kare farkını hatırla: a² − b² = (a − b)(a + b).",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "İki kare farkı",
+    "tanim": "a² − b² = (a − b)(a + b). Örn: x² − 9 = (x − 3)(x + 3)"
+   }
+  ]
+ },
+ {
+  "id": "mat-022",
+  "ders": "matematik",
+  "unite": "Cebirsel İfadeler ve Özdeşlikler",
+  "kazanimKod": "M.8.2.1.4",
+  "kazanimAd": "Cebirsel ifadeleri çarpanlara ayırır.",
+  "zorluk": 2,
+  "tip": "cok-adimli",
+  "metin": "Kare biçimindeki bir satranç tahtasının alanı <b>(4x² − 12x + 9)</b> cm² olarak ifade ediliyor (x > 2).<br>Buna göre tahtanın çevresini santimetre cinsinden veren cebirsel ifade hangisidir?",
+  "svg": "",
+  "siklar": [
+   "8x − 12",
+   "2x − 3",
+   "8x − 3",
+   "4x − 6"
+  ],
+  "dogru": 0,
+  "ipucu1": "Karenin alanı (kenar)² biçimindedir; verilen ifade bir tam kare olmalı.",
+  "ipucu2": "4x² = (2x)² ve 9 = 3². Ortadaki terim 2 · 2x · 3 mü? İşaretine bak.",
+  "cozum": [
+   "4x² − 12x + 9 = (2x)² − 2 · 2x · 3 + 3² = (2x − 3)².",
+   "Karenin bir kenarı (2x − 3) cm'dir.",
+   "Çevre = 4 · (2x − 3) = 8x − 12 cm."
+  ],
+  "tuzaklar": [
+   "",
+   "Yalnız bir kenar bulunup çevre hesaplanmazsa bu sonuç çıkar.",
+   "Kenar 4 ile çarpılırken yalnız ilk terim çarpılırsa (4 · 2x − 3) bu sonuç çıkar.",
+   "Kenar 2 ile çarpılırsa (yarım çevre) bu sonuç çıkar."
+  ],
+  "taktik": "İlk ve son terimin kareköklerini al; ortadaki terim bunların çarpımının 2 katıysa ifade tam karedir.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "Tam kare ifade",
+    "tanim": "a² − 2ab + b² = (a − b)². Örn: 4x² − 12x + 9 = (2x − 3)²"
+   }
+  ]
+ },
+ {
+  "id": "mat-023",
+  "ders": "matematik",
+  "unite": "Cebirsel İfadeler ve Özdeşlikler",
+  "kazanimKod": "M.8.2.1.3",
+  "kazanimAd": "Özdeşlikleri modellerle açıklar.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "Bir parkta kenar uzunlukları a metre ve b metre olan kare biçiminde iki çiçek tarhı ile kenar uzunlukları a metre ve b metre olan dikdörtgen biçiminde bir havuz vardır.<br>• a + b = 9<br>• Havuzun alanı 18 m²<br>Buna göre iki çiçek tarhının alanları toplamı kaç metrekaredir?",
+  "svg": "",
+  "siklar": [
+   "81",
+   "63",
+   "45",
+   "117"
+  ],
+  "dogru": 2,
+  "ipucu1": "İstenen a² + b². Bunu (a + b)² özdeşliğinin içinde görebilir misin?",
+  "ipucu2": "(a + b)² = a² + 2ab + b². Bildiklerini yerine yaz: 9² = a² + b² + 2 · 18.",
+  "cozum": [
+   "Havuzun alanı a · b = 18'dir.",
+   "(a + b)² = a² + 2ab + b² → 81 = a² + b² + 36.",
+   "a² + b² = 81 − 36 = 45.",
+   "Tarhların alanları toplamı 45 m²'dir."
+  ],
+  "tuzaklar": [
+   "(a + b)² = a² + b² sanılıp 9² hesaplanırsa 81 bulunur.",
+   "(a + b)²'den 2ab yerine yalnız ab çıkarılırsa 81 − 18 = 63 bulunur.",
+   "",
+   "2ab çıkarılacakken eklenirse 81 + 36 = 117 bulunur."
+  ],
+  "taktik": "Toplam ve çarpım verilip kareler toplamı sorulursa: a² + b² = (a + b)² − 2ab.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Tam kare özdeşliği",
+    "tanim": "(a + b)² = a² + 2ab + b²"
+   }
+  ]
+ },
+ {
+  "id": "mat-024",
+  "ders": "matematik",
+  "unite": "Cebirsel İfadeler ve Özdeşlikler",
+  "kazanimKod": "M.8.2.1.1",
+  "kazanimAd": "Basit cebirsel ifadeleri anlar ve farklı biçimlerde yazar.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "<b>4a² − ab − 7</b> cebirsel ifadesinin katsayıları toplamı kaçtır?",
+  "svg": "",
+  "siklar": [
+   "3",
+   "−3",
+   "12",
+   "−4"
+  ],
+  "dogru": 3,
+  "ipucu1": "Her terimin önündeki sayı (işaretiyle birlikte) katsayıdır; sabit terim de bir katsayıdır.",
+  "ipucu2": "−ab teriminin katsayısı −1'dir. Üç katsayıyı işaretleriyle yaz ve topla.",
+  "cozum": [
+   "Terimler: 4a², −ab ve −7.",
+   "Katsayılar: 4, −1 ve −7 (sabit terim de katsayıdır).",
+   "4 + (−1) + (−7) = −4."
+  ],
+  "tuzaklar": [
+   "Sabit terim (−7) katsayı sayılmazsa 4 − 1 = 3 bulunur.",
+   "ab teriminin katsayısı görünmediği için 0 alınırsa 4 − 7 = −3 bulunur.",
+   "Katsayıların işaretleri dikkate alınmazsa 4 + 1 + 7 = 12 bulunur.",
+   ""
+  ],
+  "taktik": "Katsayı yazılmamışsa 1 ya da −1'dir; sabit terimi unutma.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Katsayı",
+    "tanim": "Bir terimdeki sayısal çarpan. Sabit terim de bir katsayıdır."
+   },
+   {
+    "ad": "Terim",
+    "tanim": "Cebirsel ifadede + veya − ile ayrılan her bir parça."
+   }
+  ]
+ },
+ {
+  "id": "mat-025",
+  "ders": "matematik",
+  "unite": "Doğrusal Denklemler",
+  "kazanimKod": "M.8.2.2.1",
+  "kazanimAd": "Birinci dereceden bir bilinmeyenli denklemleri çözer.",
+  "zorluk": 1,
+  "tip": "cok-adimli",
+  "metin": "Bir takside açılış ücreti 30 TL'dir ve gidilen her kilometre için 20 TL eklenmektedir. Selin bu taksiyle yaptığı yolculuk için 170 TL ödemiştir.<br>Buna göre Selin kaç kilometre yol gitmiştir?",
+  "svg": "",
+  "siklar": [
+   "7",
+   "8,5",
+   "10",
+   "6"
+  ],
+  "dogru": 0,
+  "ipucu1": "Ödenen para iki parçadan oluşur: sabit açılış ücreti ve kilometreye bağlı ücret.",
+  "ipucu2": "Gidilen yol x km olsun: 30 + 20x = 170 denklemini çöz.",
+  "cozum": [
+   "Gidilen yol x km olsun. Ücret: 30 + 20x.",
+   "30 + 20x = 170 → 20x = 140.",
+   "x = 7. Selin 7 km yol gitmiştir."
+  ],
+  "tuzaklar": [
+   "",
+   "Açılış ücreti çıkarılmadan 170 ÷ 20 yapılırsa 8,5 bulunur.",
+   "Açılış ücreti çıkarılacakken eklenirse (200 ÷ 20) 10 bulunur.",
+   "Açılış ücreti ilk kilometrenin parası sanılıp sonuçtan 1 çıkarılırsa 6 bulunur."
+  ],
+  "taktik": "Önce sabit ücreti toplamdan çıkar, kalanı birim ücrete böl.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "Birinci dereceden denklem",
+    "tanim": "ax + b = c biçimindeki denklem; x = (c − b) ÷ a"
+   }
+  ]
+ },
+ {
+  "id": "mat-026",
+  "ders": "matematik",
+  "unite": "Doğrusal Denklemler",
+  "kazanimKod": "M.8.2.2.5",
+  "kazanimAd": "Doğrusal ilişki içeren gerçek hayat durumlarına ait denklem, tablo ve grafiği oluşturur ve yorumlar.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "Tam dolu bir su deposunun dibindeki musluk açılıyor ve depo sabit hızla boşalıyor. Depoda kalan su miktarının zamana göre değişimi aşağıdaki grafikte verilmiştir.<br>Buna göre musluk açıldıktan 5 saat sonra depoda kaç litre su kalır?",
+  "svg": "<svg viewBox='0 0 320 215' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><line x1='45' y1='178' x2='45' y2='182' /><text x='45' y='195' text-anchor='middle' fill='currentColor' stroke='none' >0</text><line x1='75' y1='178' x2='75' y2='182' /><text x='75' y='195' text-anchor='middle' fill='currentColor' stroke='none' >1</text><line x1='75' y1='178' x2='75' y2='34' stroke-width='0.6' stroke-opacity='0.35'/><line x1='105' y1='178' x2='105' y2='182' /><text x='105' y='195' text-anchor='middle' fill='currentColor' stroke='none' >2</text><line x1='105' y1='178' x2='105' y2='34' stroke-width='0.6' stroke-opacity='0.35'/><line x1='135' y1='178' x2='135' y2='182' /><text x='135' y='195' text-anchor='middle' fill='currentColor' stroke='none' >3</text><line x1='135' y1='178' x2='135' y2='34' stroke-width='0.6' stroke-opacity='0.35'/><line x1='165' y1='178' x2='165' y2='182' /><text x='165' y='195' text-anchor='middle' fill='currentColor' stroke='none' >4</text><line x1='165' y1='178' x2='165' y2='34' stroke-width='0.6' stroke-opacity='0.35'/><line x1='195' y1='178' x2='195' y2='182' /><text x='195' y='195' text-anchor='middle' fill='currentColor' stroke='none' >5</text><line x1='195' y1='178' x2='195' y2='34' stroke-width='0.6' stroke-opacity='0.35'/><line x1='225' y1='178' x2='225' y2='182' /><text x='225' y='195' text-anchor='middle' fill='currentColor' stroke='none' >6</text><line x1='225' y1='178' x2='225' y2='34' stroke-width='0.6' stroke-opacity='0.35'/><line x1='255' y1='178' x2='255' y2='182' /><text x='255' y='195' text-anchor='middle' fill='currentColor' stroke='none' >7</text><line x1='255' y1='178' x2='255' y2='34' stroke-width='0.6' stroke-opacity='0.35'/><line x1='285' y1='178' x2='285' y2='182' /><text x='285' y='195' text-anchor='middle' fill='currentColor' stroke='none' >8</text><line x1='285' y1='178' x2='285' y2='34' stroke-width='0.6' stroke-opacity='0.35'/><line x1='41' y1='142' x2='45' y2='142' /><text x='38' y='146' text-anchor='end' fill='currentColor' stroke='none' >60</text><line x1='45' y1='142' x2='285' y2='142' stroke-width='0.6' stroke-opacity='0.35'/><line x1='41' y1='106' x2='45' y2='106' /><text x='38' y='110' text-anchor='end' fill='currentColor' stroke='none' >120</text><line x1='45' y1='106' x2='285' y2='106' stroke-width='0.6' stroke-opacity='0.35'/><line x1='41' y1='70' x2='45' y2='70' /><text x='38' y='74' text-anchor='end' fill='currentColor' stroke='none' >180</text><line x1='45' y1='70' x2='285' y2='70' stroke-width='0.6' stroke-opacity='0.35'/><line x1='41' y1='34' x2='45' y2='34' /><text x='38' y='38' text-anchor='end' fill='currentColor' stroke='none' >240</text><line x1='45' y1='34' x2='285' y2='34' stroke-width='0.6' stroke-opacity='0.35'/><line x1='45' y1='178' x2='299' y2='178' /><line x1='45' y1='178' x2='45' y2='20' /><line x1='45' y1='34' x2='285' y2='178' class='ac' stroke-width='2.5'/><text x='8' y='14' text-anchor='start' fill='currentColor' stroke='none' >Su miktarı (L)</text><text x='312' y='210' text-anchor='end' fill='currentColor' stroke='none' >Süre (saat)</text></svg>",
+  "siklar": [
+   "150",
+   "120",
+   "60",
+   "90"
+  ],
+  "dogru": 3,
+  "ipucu1": "Grafiğin eksenleri kestiği noktalar sana başlangıçtaki su miktarını ve deponun boşalma süresini verir.",
+  "ipucu2": "Depo 8 saatte 240 litre boşalıyor. Saatte kaç litre azaldığını bul.",
+  "cozum": [
+   "Grafik (0, 240) ve (8, 0) noktalarından geçer: 240 litre su 8 saatte biter.",
+   "Saatte 240 ÷ 8 = 30 litre su azalır.",
+   "5 saatte 5 · 30 = 150 litre boşalır.",
+   "Kalan su: 240 − 150 = 90 litre."
+  ],
+  "tuzaklar": [
+   "5 saatte boşalan su miktarı (5 · 30) bulunup kalan su hesaplanmazsa 150 çıkar.",
+   "Grafikten 5. saat yerine 4. saatin değeri okunursa 120 bulunur.",
+   "Grafikten 5. saat yerine 6. saatin değeri okunursa 60 bulunur.",
+   ""
+  ],
+  "taktik": "Doğrusal grafikte birim zamandaki değişimi bul (eğim), sonra istenen ana kadar uygula.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "Doğrusal ilişki",
+    "tanim": "Bir değişken eşit miktarda arttıkça diğerinin de hep aynı miktarda değişmesi. Grafiği doğrudur."
+   },
+   {
+    "ad": "Eksenleri kesen noktalar",
+    "tanim": "Doğrunun y eksenini kestiği nokta başlangıç değerini gösterir."
+   }
+  ]
+ },
+ {
+  "id": "mat-027",
+  "ders": "matematik",
+  "unite": "Doğrusal Denklemler",
+  "kazanimKod": "M.8.2.2.6",
+  "kazanimAd": "Doğrunun eğimini modellerle açıklar, doğrusal denklemleri ve grafiklerini eğimle ilişkilendirir.",
+  "zorluk": 2,
+  "tip": "gorsel",
+  "metin": "Bir okulun girişine, yerden yüksekliği 0,9 m olan kapı eşiğine ulaşan bir tekerlekli sandalye rampası yapılacaktır. Rampanın eğimi (dikey uzunluğun yatay uzunluğa oranı) <span class=\"frac\"><span>3</span><span>20</span></span> olacaktır.<br>Buna göre rampanın yatay uzunluğu kaç metre olmalıdır?",
+  "svg": "<svg viewBox='0 0 320 138' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><path class='mf' d='M25 110 L265 110 L265 74 Z'/><path d='M255 110 L255 100 L265 100' stroke-width='1'/><text x='271' y='96' text-anchor='start' fill='currentColor' stroke='none' >0,9 m</text><text x='145' y='128' text-anchor='middle' fill='currentColor' stroke='none' >? m</text><text x='120' y='84' text-anchor='middle' fill='currentColor' stroke='none' >rampa</text></svg>",
+  "siklar": [
+   "18",
+   "6",
+   "0,135",
+   "4,5"
+  ],
+  "dogru": 1,
+  "ipucu1": "Eğim = dikey uzunluk ÷ yatay uzunluk.",
+  "ipucu2": "0,9 ÷ (yatay uzunluk) = 3/20 orantısını kur ve içler-dışlar çarpımı yap.",
+  "cozum": [
+   "Eğim = dikey ÷ yatay → 0,9 ÷ y = 3/20.",
+   "3 · y = 0,9 · 20 = 18.",
+   "y = 6. Rampanın yatay uzunluğu 6 m olmalıdır."
+  ],
+  "tuzaklar": [
+   "0,9 yalnızca 20 ile çarpılıp 3'e bölünmezse 18 bulunur.",
+   "",
+   "Dikey uzunluk eğime bölünecekken eğimle çarpılırsa 0,135 bulunur.",
+   "3/20 kesri 0,15 yerine 0,2 alınırsa 0,9 ÷ 0,2 = 4,5 bulunur."
+  ],
+  "taktik": "Eğim kesrini \"3 birim yükselmek için 20 birim yatay\" diye oku; 0,9 = 3 · 0,3 olduğundan yatay 20 · 0,3 = 6.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Eğim",
+    "tanim": "Dikey uzunluğun yatay uzunluğa oranı. Eğim büyüdükçe rampa dikleşir."
+   }
+  ]
+ },
+ {
+  "id": "mat-028",
+  "ders": "matematik",
+  "unite": "Doğrusal Denklemler",
+  "kazanimKod": "M.8.2.2.5",
+  "kazanimAd": "Doğrusal ilişki içeren gerçek hayat durumlarına ait denklem, tablo ve grafiği oluşturur ve yorumlar.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "Boyları 30 cm ve 24 cm olan iki mum aynı anda yakılıyor. Uzun mum saatte 3 cm, kısa mum saatte 2 cm kısalıyor.<br>Buna göre mumlar yakıldıktan kaç saat sonra uzun mumun boyu, kısa mumun boyunun <b>yarısına</b> eşit olur?",
+  "svg": "",
+  "siklar": [
+   "6",
+   "10",
+   "9",
+   "12"
+  ],
+  "dogru": 2,
+  "ipucu1": "t saat sonra her mumun boyunu t'ye bağlı birer ifadeyle yaz.",
+  "ipucu2": "Uzun mum: 30 − 3t, kısa mum: 24 − 2t. \"Uzun, kısanın yarısı\" → 2 · (30 − 3t) = 24 − 2t.",
+  "cozum": [
+   "t saat sonra uzun mumun boyu 30 − 3t, kısa mumun boyu 24 − 2t cm olur.",
+   "Uzun mum, kısanın yarısı ise: 2 · (30 − 3t) = 24 − 2t.",
+   "60 − 6t = 24 − 2t → 36 = 4t → t = 9.",
+   "Kontrol: 9 saat sonra boylar 3 cm ve 6 cm'dir. Cevap 9 saat."
+  ],
+  "tuzaklar": [
+   "Boyların birbirine eşit olduğu an (30 − 3t = 24 − 2t) bulunursa 6 çıkar.",
+   "Uzun mumun tamamen bittiği an (30 ÷ 3) hesaplanırsa 10 bulunur.",
+   "",
+   "Kısa mumun tamamen bittiği an (24 ÷ 2) hesaplanırsa 12 bulunur."
+  ],
+  "taktik": "Denklemi kurduktan sonra bulduğun değeri yerine koyup boyların pozitif kaldığını kontrol et.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Doğrusal denklem kurma",
+    "tanim": "Sabit hızla değişen nicelik: başlangıç değeri ± (hız · süre)"
+   }
+  ]
+ },
+ {
+  "id": "mat-029",
+  "ders": "matematik",
+  "unite": "Doğrusal Denklemler",
+  "kazanimKod": "M.8.2.2.4",
+  "kazanimAd": "Doğrusal denklemlerin grafiğini çizer.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "Bir şehir planında, <b>2x + 3y = 12</b> doğrusu üzerindeki yol ile koordinat eksenleri üzerindeki iki cadde arasında kalan üçgen biçimindeki bölge park olarak ayrılmıştır. Plan aşağıdaki koordinat sisteminde verilmiştir ve her birim 1 km'dir.<br>Buna göre parkın alanı kaç kilometrekaredir?",
+  "svg": "<svg viewBox='0 0 320 215' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><path class='mf' stroke='none' d='M92 165 L248 165 L92 61 Z'/><line x1='40' y1='165' x2='300' y2='165' /><line x1='92' y1='204' x2='92' y2='19.4' /><line x1='66' y1='162' x2='66' y2='168' /><line x1='118' y1='162' x2='118' y2='168' /><text x='118' y='181' text-anchor='middle' fill='currentColor' stroke='none' >1</text><line x1='144' y1='162' x2='144' y2='168' /><text x='144' y='181' text-anchor='middle' fill='currentColor' stroke='none' >2</text><line x1='170' y1='162' x2='170' y2='168' /><text x='170' y='181' text-anchor='middle' fill='currentColor' stroke='none' >3</text><line x1='196' y1='162' x2='196' y2='168' /><text x='196' y='181' text-anchor='middle' fill='currentColor' stroke='none' >4</text><line x1='222' y1='162' x2='222' y2='168' /><text x='222' y='181' text-anchor='middle' fill='currentColor' stroke='none' >5</text><line x1='248' y1='162' x2='248' y2='168' /><text x='248' y='181' text-anchor='middle' fill='currentColor' stroke='none' >6</text><line x1='274' y1='162' x2='274' y2='168' /><line x1='89' y1='191' x2='95' y2='191' /><line x1='89' y1='139' x2='95' y2='139' /><text x='84' y='143' text-anchor='end' fill='currentColor' stroke='none' >1</text><line x1='89' y1='113' x2='95' y2='113' /><text x='84' y='117' text-anchor='end' fill='currentColor' stroke='none' >2</text><line x1='89' y1='87' x2='95' y2='87' /><text x='84' y='91' text-anchor='end' fill='currentColor' stroke='none' >3</text><line x1='89' y1='61' x2='95' y2='61' /><text x='84' y='65' text-anchor='end' fill='currentColor' stroke='none' >4</text><line x1='89' y1='35' x2='95' y2='35' /><text x='84' y='39' text-anchor='end' fill='currentColor' stroke='none' >5</text><line x1='53' y1='35' x2='287' y2='191' class='ac' stroke-width='2.5'/><text x='302' y='159' text-anchor='end' fill='currentColor' stroke='none' >x</text><text x='100' y='27.4' text-anchor='start' fill='currentColor' stroke='none' >y</text><text x='84' y='180' text-anchor='end' fill='currentColor' stroke='none' >O</text><text x='203.8' y='97.4' text-anchor='start' fill='currentColor' stroke='none' >2x + 3y = 12</text></svg>",
+  "siklar": [
+   "12",
+   "24",
+   "10",
+   "6"
+  ],
+  "dogru": 0,
+  "ipucu1": "Doğrunun eksenleri kestiği noktalar üçgenin dik kenar uzunluklarını verir.",
+  "ipucu2": "x eksenini kestiği nokta için y = 0, y eksenini kestiği nokta için x = 0 yaz.",
+  "cozum": [
+   "y = 0 için 2x = 12 → x = 6. Doğru x eksenini (6, 0) noktasında keser.",
+   "x = 0 için 3y = 12 → y = 4. Doğru y eksenini (0, 4) noktasında keser.",
+   "Dik üçgenin dik kenarları 6 km ve 4 km'dir.",
+   "Alan = (6 · 4) ÷ 2 = 12 km²."
+  ],
+  "tuzaklar": [
+   "",
+   "Dik kenarlar çarpılıp 2'ye bölünmezse 6 · 4 = 24 bulunur.",
+   "Dik kenar uzunlukları çarpılacakken toplanırsa 6 + 4 = 10 bulunur.",
+   "Denklemdeki katsayılar (2 ve 3) kenar uzunluğu sanılıp çarpılırsa 6 bulunur."
+  ],
+  "taktik": "Eksenleri kestiği noktaları bulmak için sırayla x = 0 ve y = 0 yaz; grafikle de doğrula.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "Eksenleri kesen noktalar",
+    "tanim": "x eksenini kestiği noktada y = 0, y eksenini kestiği noktada x = 0'dır."
+   }
+  ]
+ },
+ {
+  "id": "mat-030",
+  "ders": "matematik",
+  "unite": "Eşitsizlikler",
+  "kazanimKod": "M.8.2.3.1",
+  "kazanimAd": "Birinci dereceden bir bilinmeyenli eşitsizlik içeren günlük hayat durumlarına uygun matematik cümleleri yazar.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Bir yük asansörü en fazla 615 kg taşıyabilmektedir. 75 kg kütleli bir görevli, her biri 45 kg olan kolilerden x tanesini bu asansöre yükleyip kendisi de binerek tek seferde yukarı çıkacaktır.<br>Buna göre bu durumu ifade eden eşitsizlik hangisidir?",
+  "svg": "",
+  "siklar": [
+   "45x + 75 < 615",
+   "45x + 75 ≤ 615",
+   "45x + 75 ≥ 615",
+   "45(x + 75) ≤ 615"
+  ],
+  "dogru": 1,
+  "ipucu1": "Toplam kütle tam 615 kg olursa asansör yine çalışır mı? \"En fazla\" ifadesinin sınır değeri kapsayıp kapsamadığını düşün.",
+  "ipucu2": "Toplam kütleyi yaz: kolilerin kütlesi + görevlinin kütlesi. Sonra uygun eşitsizlik işaretini seç.",
+  "cozum": [
+   "x kolinin kütlesi 45x kg'dır; görevliyle birlikte toplam 45x + 75 kg olur.",
+   "Toplam kütle en fazla 615 kg olabilir, yani 615'e eşit ya da 615'ten küçük olmalıdır.",
+   "Eşitsizlik: 45x + 75 ≤ 615."
+  ],
+  "tuzaklar": [
+   "\"En fazla\" ifadesinde eşitliğin de dâhil olduğu unutulursa < işareti kullanılır.",
+   "",
+   "\"En fazla\" ifadesi \"en az\" ile karıştırılırsa işaretin yönü ters yazılır.",
+   "Görevlinin kütlesi de koli kütlesiyle çarpılırsa bu ifade yazılır."
+  ],
+  "taktik": "\"En fazla / en çok\" → ≤, \"en az\" → ≥. \"-den az\" için < , \"-den fazla\" için > kullanılır.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "En fazla – en az",
+    "tanim": "\"En fazla a\" → x ≤ a; \"en az a\" → x ≥ a"
+   }
+  ]
+ },
+ {
+  "id": "mat-031",
+  "ders": "matematik",
+  "unite": "Eşitsizlikler",
+  "kazanimKod": "M.8.2.3.2",
+  "kazanimAd": "Birinci dereceden bir bilinmeyenli eşitsizlikleri sayı doğrusunda gösterir.",
+  "zorluk": 2,
+  "tip": "gorsel",
+  "metin": "<b>−3x + 5 > −7</b> eşitsizliğinin çözüm kümesi aşağıdaki sayı doğrularından hangisinde doğru gösterilmiştir? (İçi dolu daire sayının dâhil olduğunu, içi boş daire dâhil olmadığını gösterir.)",
+  "svg": "<svg viewBox='0 0 320 200' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><text x='14' y='32' text-anchor='middle' fill='currentColor' stroke='none' font-weight='bold'>I</text><line x1='40' y1='28' x2='300' y2='28' stroke-width='1'/><line x1='60' y1='24' x2='60' y2='32' stroke-width='1'/><text x='60' y='47' text-anchor='middle' fill='currentColor' stroke='none' >1</text><line x1='95' y1='24' x2='95' y2='32' stroke-width='1'/><text x='95' y='47' text-anchor='middle' fill='currentColor' stroke='none' >2</text><line x1='130' y1='24' x2='130' y2='32' stroke-width='1'/><text x='130' y='47' text-anchor='middle' fill='currentColor' stroke='none' >3</text><line x1='165' y1='24' x2='165' y2='32' stroke-width='1'/><text x='165' y='47' text-anchor='middle' fill='currentColor' stroke='none' >4</text><line x1='200' y1='24' x2='200' y2='32' stroke-width='1'/><text x='200' y='47' text-anchor='middle' fill='currentColor' stroke='none' >5</text><line x1='235' y1='24' x2='235' y2='32' stroke-width='1'/><text x='235' y='47' text-anchor='middle' fill='currentColor' stroke='none' >6</text><line x1='270' y1='24' x2='270' y2='32' stroke-width='1'/><text x='270' y='47' text-anchor='middle' fill='currentColor' stroke='none' >7</text><line x1='160' y1='28' x2='44' y2='28' class='ac' stroke-width='3.5'/><path class='ac' d='M50 23 L42 28 L50 33' stroke-width='2.5'/><circle class='ac' cx='165' cy='28' r='5' fill='currentColor' stroke-width='2'/><text x='14' y='80' text-anchor='middle' fill='currentColor' stroke='none' font-weight='bold'>II</text><line x1='40' y1='76' x2='300' y2='76' stroke-width='1'/><line x1='60' y1='72' x2='60' y2='80' stroke-width='1'/><text x='60' y='95' text-anchor='middle' fill='currentColor' stroke='none' >1</text><line x1='95' y1='72' x2='95' y2='80' stroke-width='1'/><text x='95' y='95' text-anchor='middle' fill='currentColor' stroke='none' >2</text><line x1='130' y1='72' x2='130' y2='80' stroke-width='1'/><text x='130' y='95' text-anchor='middle' fill='currentColor' stroke='none' >3</text><line x1='165' y1='72' x2='165' y2='80' stroke-width='1'/><text x='165' y='95' text-anchor='middle' fill='currentColor' stroke='none' >4</text><line x1='200' y1='72' x2='200' y2='80' stroke-width='1'/><text x='200' y='95' text-anchor='middle' fill='currentColor' stroke='none' >5</text><line x1='235' y1='72' x2='235' y2='80' stroke-width='1'/><text x='235' y='95' text-anchor='middle' fill='currentColor' stroke='none' >6</text><line x1='270' y1='72' x2='270' y2='80' stroke-width='1'/><text x='270' y='95' text-anchor='middle' fill='currentColor' stroke='none' >7</text><line x1='170' y1='76' x2='296' y2='76' class='ac' stroke-width='3.5'/><path class='ac' d='M290 71 L298 76 L290 81' stroke-width='2.5'/><circle class='ac' cx='165' cy='76' r='5' fill='none' stroke-width='2'/><text x='14' y='128' text-anchor='middle' fill='currentColor' stroke='none' font-weight='bold'>III</text><line x1='40' y1='124' x2='300' y2='124' stroke-width='1'/><line x1='60' y1='120' x2='60' y2='128' stroke-width='1'/><text x='60' y='143' text-anchor='middle' fill='currentColor' stroke='none' >1</text><line x1='95' y1='120' x2='95' y2='128' stroke-width='1'/><text x='95' y='143' text-anchor='middle' fill='currentColor' stroke='none' >2</text><line x1='130' y1='120' x2='130' y2='128' stroke-width='1'/><text x='130' y='143' text-anchor='middle' fill='currentColor' stroke='none' >3</text><line x1='165' y1='120' x2='165' y2='128' stroke-width='1'/><text x='165' y='143' text-anchor='middle' fill='currentColor' stroke='none' >4</text><line x1='200' y1='120' x2='200' y2='128' stroke-width='1'/><text x='200' y='143' text-anchor='middle' fill='currentColor' stroke='none' >5</text><line x1='235' y1='120' x2='235' y2='128' stroke-width='1'/><text x='235' y='143' text-anchor='middle' fill='currentColor' stroke='none' >6</text><line x1='270' y1='120' x2='270' y2='128' stroke-width='1'/><text x='270' y='143' text-anchor='middle' fill='currentColor' stroke='none' >7</text><line x1='160' y1='124' x2='44' y2='124' class='ac' stroke-width='3.5'/><path class='ac' d='M50 119 L42 124 L50 129' stroke-width='2.5'/><circle class='ac' cx='165' cy='124' r='5' fill='none' stroke-width='2'/><text x='14' y='176' text-anchor='middle' fill='currentColor' stroke='none' font-weight='bold'>IV</text><line x1='40' y1='172' x2='300' y2='172' stroke-width='1'/><line x1='60' y1='168' x2='60' y2='176' stroke-width='1'/><text x='60' y='191' text-anchor='middle' fill='currentColor' stroke='none' >1</text><line x1='95' y1='168' x2='95' y2='176' stroke-width='1'/><text x='95' y='191' text-anchor='middle' fill='currentColor' stroke='none' >2</text><line x1='130' y1='168' x2='130' y2='176' stroke-width='1'/><text x='130' y='191' text-anchor='middle' fill='currentColor' stroke='none' >3</text><line x1='165' y1='168' x2='165' y2='176' stroke-width='1'/><text x='165' y='191' text-anchor='middle' fill='currentColor' stroke='none' >4</text><line x1='200' y1='168' x2='200' y2='176' stroke-width='1'/><text x='200' y='191' text-anchor='middle' fill='currentColor' stroke='none' >5</text><line x1='235' y1='168' x2='235' y2='176' stroke-width='1'/><text x='235' y='191' text-anchor='middle' fill='currentColor' stroke='none' >6</text><line x1='270' y1='168' x2='270' y2='176' stroke-width='1'/><text x='270' y='191' text-anchor='middle' fill='currentColor' stroke='none' >7</text><line x1='170' y1='172' x2='296' y2='172' class='ac' stroke-width='3.5'/><path class='ac' d='M290 167 L298 172 L290 177' stroke-width='2.5'/><circle class='ac' cx='165' cy='172' r='5' fill='currentColor' stroke-width='2'/></svg>",
+  "siklar": [
+   "I",
+   "II",
+   "III",
+   "IV"
+  ],
+  "dogru": 2,
+  "ipucu1": "Eşitsizliği denklem gibi çöz; ama negatif sayıyla bölerken ne olduğunu hatırla.",
+  "ipucu2": "−3x > −12 elde edersin. Her iki tarafı −3'e bölerken eşitsizliğin yönünü değiştir.",
+  "cozum": [
+   "−3x + 5 > −7 → −3x > −12.",
+   "Her iki taraf −3'e bölünür ve yön değişir: x < 4.",
+   "4 dâhil değildir (içi boş daire) ve 4'ün solu taranır.",
+   "Bu gösterim III numaralı sayı doğrusudur."
+  ],
+  "tuzaklar": [
+   "Yön doğru bulunup 4'ün dâhil olmadığı (> işareti) gözden kaçarsa I seçilir.",
+   "Negatif sayıya bölerken eşitsizlik yön değiştirilmezse x > 4 bulunur.",
+   "",
+   "Hem yön değiştirilmez hem de 4 dâhil sanılırsa IV seçilir."
+  ],
+  "taktik": "Çözümden sonra bir sayı dene: x = 0 için 5 > −7 doğru; demek ki 0 çözümde olmalı.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "Negatifle bölmede yön",
+    "tanim": "Eşitsizliğin iki tarafı negatif bir sayıyla çarpılır ya da bölünürse yön değişir."
+   },
+   {
+    "ad": "Sayı doğrusunda gösterim",
+    "tanim": "≤ ve ≥ için içi dolu; < ve > için içi boş daire kullanılır."
+   }
+  ]
+ },
+ {
+  "id": "mat-032",
+  "ders": "matematik",
+  "unite": "Eşitsizlikler",
+  "kazanimKod": "M.8.2.3.3",
+  "kazanimAd": "Birinci dereceden bir bilinmeyenli eşitsizlikleri çözer.",
+  "zorluk": 2,
+  "tip": "cok-adimli",
+  "metin": "Bir otoparkta ilk saat için 50 TL, sonraki her saat için 20 TL ücret alınmaktadır. Ücretler tam saatler üzerinden hesaplanmaktadır.<br>Cebinde 175 TL olan Kerem arabasını bu otoparkta <b>en fazla</b> kaç saat bırakabilir?",
+  "svg": "",
+  "siklar": [
+   "7",
+   "6",
+   "8",
+   "3"
+  ],
+  "dogru": 0,
+  "ipucu1": "İlk saatin ücretini ayır; kalan parayla kaç \"sonraki saat\" ödenebilir?",
+  "ipucu2": "Toplam süre x saat olsun: 50 + 20(x − 1) ≤ 175.",
+  "cozum": [
+   "Toplam süre x saat olsun. Ücret: 50 + 20(x − 1).",
+   "50 + 20(x − 1) ≤ 175 → 20(x − 1) ≤ 125 → x − 1 ≤ 6,25.",
+   "x ≤ 7,25 olur; saat tam sayı olduğundan en fazla 7 saat."
+  ],
+  "tuzaklar": [
+   "",
+   "İlk saatten sonraki 6 saat bulunup ilk saat eklenmezse 6 çıkar.",
+   "Bütün saatler 20 TL sanılıp 175 ÷ 20 yapılırsa 8 bulunur.",
+   "Bütün saatler 50 TL sanılıp 175 ÷ 50 yapılırsa 3 bulunur."
+  ],
+  "taktik": "Önce sabit kısmı çıkar (175 − 50 = 125), kalanı böl (6 tam saat), sonra ilk saati ekle.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Eşitsizlik çözme",
+    "tanim": "Denklem gibi çözülür; sonuç bağlama göre (tam sayı, en fazla, en az) yorumlanır."
+   }
+  ]
+ },
+ {
+  "id": "mat-033",
+  "ders": "matematik",
+  "unite": "Eşitsizlikler",
+  "kazanimKod": "M.8.2.3.3",
+  "kazanimAd": "Birinci dereceden bir bilinmeyenli eşitsizlikleri çözer.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "20 soruluk bir bilgi yarışmasında her doğru cevap 5 puan kazandırmakta, her yanlış cevap 2 puan kaybettirmektedir. Soruların tamamını cevaplayan Elif finale kalmak için <b>en az 65 puan</b> almalıdır.<br>Buna göre Elif en az kaç soruyu doğru cevaplamalıdır?",
+  "svg": "",
+  "siklar": [
+   "13",
+   "14",
+   "16",
+   "15"
+  ],
+  "dogru": 3,
+  "ipucu1": "Doğru sayısı x ise yanlış sayısı kaçtır? Puanı x cinsinden yaz.",
+  "ipucu2": "Puan = 5x − 2(20 − x). Bu ifade 65'e eşit ya da 65'ten büyük olmalı.",
+  "cozum": [
+   "Doğru sayısı x ise yanlış sayısı 20 − x'tir.",
+   "Puan: 5x − 2(20 − x) = 7x − 40.",
+   "7x − 40 ≥ 65 → 7x ≥ 105 → x ≥ 15.",
+   "Elif en az 15 soruyu doğru cevaplamalıdır."
+  ],
+  "tuzaklar": [
+   "Yanlışların götürdüğü puan hesaba katılmazsa 5x ≥ 65 → x ≥ 13 bulunur.",
+   "65 + 40 işlemi 95 gibi yanlış yapılırsa 7x ≥ 95'ten 14 bulunur.",
+   "x ≥ 15 bulunduktan sonra 15'in dâhil olmadığı düşünülürse 16 seçilir.",
+   ""
+  ],
+  "taktik": "Bulduğun sınır değeri dene: 15 doğru, 5 yanlış → 75 − 10 = 65 puan. Tam sınırda.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "Eşitsizlik kurma",
+    "tanim": "\"En az 65\" → puan ≥ 65. Bilinmeyeni seç, diğer niceliği onun cinsinden yaz."
+   }
+  ]
+ },
+ {
+  "id": "mat-034",
+  "ders": "matematik",
+  "unite": "Üçgenler",
+  "kazanimKod": "M.8.3.1.5",
+  "kazanimAd": "Pisagor bağıntısını oluşturur, ilgili problemleri çözer.",
+  "zorluk": 1,
+  "tip": "gorsel",
+  "metin": "2,5 m uzunluğundaki bir merdiven, şekildeki gibi yere dik bir duvara dayanmıştır. Merdivenin ayağı duvardan 0,7 m uzaktadır.<br>Buna göre merdivenin üst ucu yerden kaç metre yüksektedir?",
+  "svg": "<svg viewBox='0 0 320 175' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><rect class='mf' x='200' y='18' width='12' height='132'/><line x1='60' y1='150' x2='270' y2='150' /><line x1='165' y1='150' x2='200' y2='30' class='ac' stroke-width='3'/><text x='170' y='84' text-anchor='end' fill='currentColor' stroke='none' >2,5 m</text><text x='182' y='166' text-anchor='middle' fill='currentColor' stroke='none' >0,7 m</text><text x='220' y='95' text-anchor='start' fill='currentColor' stroke='none' font-weight='bold'>?</text><path d='M192 150 L192 142 L200 142' stroke-width='1'/></svg>",
+  "siklar": [
+   "1,8",
+   "2,4",
+   "3,2",
+   "2,6"
+  ],
+  "dogru": 1,
+  "ipucu1": "Merdiven, duvar ve zemin bir dik üçgen oluşturur. Hipotenüs hangisi?",
+  "ipucu2": "Hipotenüs 2,5 m'dir: 0,7² + h² = 2,5² yaz.",
+  "cozum": [
+   "Merdiven hipotenüstür: 0,7² + h² = 2,5².",
+   "0,49 + h² = 6,25 → h² = 5,76.",
+   "h = 2,4 m (24² = 576)."
+  ],
+  "tuzaklar": [
+   "Uzunluklar doğrudan çıkarılırsa 2,5 − 0,7 = 1,8 bulunur.",
+   "",
+   "Uzunluklar doğrudan toplanırsa 2,5 + 0,7 = 3,2 bulunur.",
+   "Merdiven hipotenüs yerine dik kenar alınıp kareler toplanırsa yaklaşık 2,6 bulunur."
+  ],
+  "taktik": "7-24-25 özel dik üçgenini tanırsan (0,7 – 2,4 – 2,5) hesap yapmadan cevap gelir.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "Pisagor bağıntısı",
+    "tanim": "Dik üçgende dik kenarların kareleri toplamı hipotenüsün karesine eşittir: a² + b² = c²"
+   }
+  ]
+ },
+ {
+  "id": "mat-035",
+  "ders": "matematik",
+  "unite": "Üçgenler",
+  "kazanimKod": "M.8.3.1.2",
+  "kazanimAd": "Üçgenin iki kenar uzunluğunun toplamı veya farkı ile üçüncü kenarının uzunluğunu ilişkilendirir.",
+  "zorluk": 2,
+  "tip": "cok-adimli",
+  "metin": "Arda, uzunlukları 7 cm ve 12 cm olan iki çubuğa üçüncü bir çubuk ekleyerek uç uca birleştirip bir üçgen oluşturacaktır. Üçüncü çubuğun uzunluğu santimetre cinsinden bir <b>tam sayıdır</b>.<br>Buna göre Arda üçüncü çubuk için kaç farklı uzunluk seçebilir?",
+  "svg": "",
+  "siklar": [
+   "12",
+   "14",
+   "13",
+   "15"
+  ],
+  "dogru": 2,
+  "ipucu1": "Üçüncü kenar, diğer iki kenarın farkından büyük, toplamından küçük olmalı.",
+  "ipucu2": "12 − 7 < x < 12 + 7 eşitsizliğini yaz ve aradaki tam sayıları say.",
+  "cozum": [
+   "Üçgen eşitsizliği: 12 − 7 < x < 12 + 7 → 5 < x < 19.",
+   "x; 6, 7, 8, …, 18 değerlerini alabilir.",
+   "18 − 6 + 1 = 13 farklı uzunluk seçilebilir."
+  ],
+  "tuzaklar": [
+   "19 − 5 − 1 = 13 yerine sayma hatasıyla 18 − 6 = 12 bulunur.",
+   "Sınır değerlerden biri (5 ya da 19) dâhil edilirse 14 bulunur.",
+   "",
+   "Hem 5 hem 19 dâhil edilirse 15 bulunur; bu uzunluklarla üçgen oluşmaz."
+  ],
+  "taktik": "a < x < b aralığındaki tam sayı adedi b − a − 1'dir (uçlar dâhil değil).",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Üçgen eşitsizliği",
+    "tanim": "Bir kenar, diğer iki kenarın toplamından küçük, farkının mutlak değerinden büyüktür."
+   }
+  ]
+ },
+ {
+  "id": "mat-036",
+  "ders": "matematik",
+  "unite": "Üçgenler",
+  "kazanimKod": "M.8.3.1.3",
+  "kazanimAd": "Üçgenin kenar uzunlukları ile bu kenarların karşısındaki açıların ölçülerini ilişkilendirir.",
+  "zorluk": 2,
+  "tip": "gorsel",
+  "metin": "A, B ve C köyleri düz yollarla birbirine bağlıdır ve bu yollar şekildeki ABC üçgenini oluşturmaktadır. Üçgende A açısının ölçüsü 50°, B açısının ölçüsü 72°'dir.<br>Buna göre köyler arasındaki yolların uzunluklarının doğru sıralanışı hangisidir?",
+  "svg": "<svg viewBox='0 0 320 192' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><path d='M70 170 L220 170 L178.1 41.1 Z'/><text x='60' y='176' text-anchor='end' fill='currentColor' stroke='none' font-weight='bold'>A</text><text x='230' y='176' text-anchor='start' fill='currentColor' stroke='none' font-weight='bold'>B</text><text x='178.1' y='33.1' text-anchor='middle' fill='currentColor' stroke='none' font-weight='bold'>C</text><text x='100' y='162' text-anchor='middle' fill='currentColor' stroke='none' >50°</text><text x='198' y='162' text-anchor='middle' fill='currentColor' stroke='none' >72°</text></svg>",
+  "siklar": [
+   "|AB| < |BC| < |AC|",
+   "|AC| < |AB| < |BC|",
+   "|BC| < |AC| < |AB|",
+   "|BC| < |AB| < |AC|"
+  ],
+  "dogru": 3,
+  "ipucu1": "Önce üçüncü açıyı bul. Sonra her açının karşısındaki kenarı belirle.",
+  "ipucu2": "C açısı 180° − 50° − 72° = 58°. A'nın karşısı BC, B'nin karşısı AC, C'nin karşısı AB'dir.",
+  "cozum": [
+   "C açısı: 180° − (50° + 72°) = 58°.",
+   "Açılar: A (50°) < C (58°) < B (72°).",
+   "Küçük açının karşısında kısa kenar bulunur: A'nın karşısı BC, C'nin karşısı AB, B'nin karşısı AC.",
+   "Sıralama: |BC| < |AB| < |AC|."
+  ],
+  "tuzaklar": [
+   "C açısı hesaplanmadan en küçük sanılırsa AB en kısa kenar olarak seçilir.",
+   "Büyük açının karşısında kısa kenar olduğu düşünülürse sıralama ters çevrilir.",
+   "C açısı hesaplanmadan en büyük açı sanılırsa (A < B < C) AB en uzun kenar kabul edilir ve bu sıralama çıkar.",
+   ""
+  ],
+  "taktik": "Bir açının karşısındaki kenar, adında o açının harfi OLMAYAN kenardır (A'nın karşısı BC).",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Açı – kenar ilişkisi",
+    "tanim": "Üçgende büyük açının karşısında uzun kenar, küçük açının karşısında kısa kenar bulunur."
+   }
+  ]
+ },
+ {
+  "id": "mat-037",
+  "ders": "matematik",
+  "unite": "Üçgenler",
+  "kazanimKod": "M.8.3.1.5",
+  "kazanimAd": "Pisagor bağıntısını oluşturur, ilgili problemleri çözer.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "Bir kargo dronu depodan havalanıp sırasıyla 8 km doğuya, 6 km kuzeye, 4 km doğuya ve 10 km kuzeye uçarak dört teslimat yapıyor. Son teslimattan sonra depoya <b>en kısa yoldan</b> (dümdüz) geri dönüyor.<br>Dron tüm yolculuk boyunca saatte 60 km sabit hızla uçtuğuna göre, yolculuğun tamamı kaç dakika sürmüştür?",
+  "svg": "",
+  "siklar": [
+   "48",
+   "56",
+   "28",
+   "20"
+  ],
+  "dogru": 0,
+  "ipucu1": "Dronun son konumunun depoya göre toplam kaç km doğuda ve kaç km kuzeyde olduğunu bul.",
+  "ipucu2": "Toplam 12 km doğu, 16 km kuzey. Dönüş yolu, dik kenarları 12 ve 16 olan dik üçgenin hipotenüsüdür.",
+  "cozum": [
+   "Gidiş yolu: 8 + 6 + 4 + 10 = 28 km.",
+   "Dron depodan 8 + 4 = 12 km doğuda, 6 + 10 = 16 km kuzeydedir.",
+   "Dönüş yolu: √(12² + 16²) = √400 = 20 km.",
+   "Toplam yol 28 + 20 = 48 km'dir. Saatte 60 km hızla (dakikada 1 km) bu yol 48 dakika sürer."
+  ],
+  "tuzaklar": [
+   "",
+   "Dönüşte de gidiş yolunun (28 km) izlendiği düşünülürse 56 km → 56 dakika bulunur.",
+   "Yalnız gidiş yolu hesaplanıp dönüş unutulursa 28 dakika bulunur.",
+   "Yalnız dönüş yolu (20 km) hesaplanırsa 20 dakika bulunur."
+  ],
+  "taktik": "Doğu-batı ve kuzey-güney hareketlerini ayrı ayrı topla; 12-16-20, 3-4-5 üçgeninin 4 katıdır.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Özel dik üçgenler",
+    "tanim": "3-4-5 ve katları (6-8-10, 12-16-20), 5-12-13, 8-15-17, 7-24-25"
+   }
+  ]
+ },
+ {
+  "id": "mat-038",
+  "ders": "matematik",
+  "unite": "Üçgenler",
+  "kazanimKod": "M.8.3.1.5",
+  "kazanimAd": "Pisagor bağıntısını oluşturur, ilgili problemleri çözer.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "Bir tekne için şekildeki gibi ikizkenar üçgen biçiminde bir yelken dikilecektir. Yelkenin eş kenarları 13 m, tabanı 10 m'dir. Yelken kumaşının metrekaresi 150 TL'dir.<br>Buna göre bu yelken için gereken kumaşın maliyeti kaç TL'dir? (Dikiş payı dikkate alınmayacaktır.)",
+  "svg": "<svg viewBox='0 0 320 192' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><path class='mf' d='M100 168 L220 168 L160 24 Z'/><line x1='160' y1='24' x2='160' y2='168' stroke-dasharray='4 3'/><path d='M160 160 L168 160 L168 168' stroke-width='1'/><text x='118' y='92' text-anchor='end' fill='currentColor' stroke='none' >13 m</text><text x='202' y='92' text-anchor='start' fill='currentColor' stroke='none' >13 m</text><text x='160' y='185' text-anchor='middle' fill='currentColor' stroke='none' >10 m</text></svg>",
+  "siklar": [
+   "9750",
+   "9000",
+   "18 000",
+   "4500"
+  ],
+  "dogru": 1,
+  "ipucu1": "Alan için yüksekliğe ihtiyacın var. İkizkenar üçgende tabana inen yükseklik tabanı nasıl böler?",
+  "ipucu2": "Yükseklik tabanı iki eş parçaya (5 m ve 5 m) ayırır. Dik kenarı 5, hipotenüsü 13 olan dik üçgende diğer kenarı bul.",
+  "cozum": [
+   "İkizkenar üçgende tabana ait yükseklik tabanı ortalar: 5 m ve 5 m.",
+   "Pisagor: h² + 5² = 13² → h² = 144 → h = 12 m.",
+   "Alan = (10 · 12) ÷ 2 = 60 m².",
+   "Maliyet = 60 · 150 = 9000 TL."
+  ],
+  "tuzaklar": [
+   "Yükseklik yerine eş kenar (13 m) kullanılırsa alan 65 m² bulunur ve 9750 TL çıkar.",
+   "",
+   "Üçgenin alanında 2'ye bölme unutulursa alan 120 m² bulunur.",
+   "Tabanın yarısı (5 m) alınıp ayrıca 2'ye de bölünürse alan 30 m² bulunur."
+  ],
+  "taktik": "İkizkenar üçgende tepe yüksekliği aynı zamanda kenarortaydır; 5-12-13 üçgenini hatırla.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "İkizkenar üçgende yükseklik",
+    "tanim": "Tabana ait yükseklik aynı zamanda kenarortay ve açıortaydır; tabanı iki eş parçaya böler."
+   }
+  ]
+ },
+ {
+  "id": "mat-039",
+  "ders": "matematik",
+  "unite": "Eşlik ve Benzerlik",
+  "kazanimKod": "M.8.3.3.2",
+  "kazanimAd": "Benzer çokgenlerin benzerlik oranını belirler, bir çokgene eş ve benzer çokgenler oluşturur.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Kenar uzunlukları 10 cm ve 15 cm olan dikdörtgen biçimindeki bir fotoğraf, <b>benzeri</b> olacak şekilde büyütülerek bastırılıyor. Büyütülmüş fotoğrafın kısa kenarı 24 cm'dir.<br>Buna göre büyütülmüş fotoğrafın uzun kenarı kaç santimetredir?",
+  "svg": "",
+  "siklar": [
+   "29",
+   "30",
+   "16",
+   "36"
+  ],
+  "dogru": 3,
+  "ipucu1": "Benzer şekillerde karşılıklı kenarların oranı eşittir.",
+  "ipucu2": "Benzerlik oranı 24 ÷ 10'dur. Aynı oranı uzun kenara uygula.",
+  "cozum": [
+   "Benzerlik oranı: 24 ÷ 10 = 2,4.",
+   "Uzun kenar: 15 · 2,4 = 36 cm."
+  ],
+  "tuzaklar": [
+   "Kısa kenardaki artış (14 cm) uzun kenara eklenirse 15 + 14 = 29 bulunur; benzerlikte fark değil oran korunur.",
+   "Uzun kenar doğrudan 2 katına çıkarılırsa 30 bulunur; oran 2 değil 2,4'tür.",
+   "Orantı ters kurulursa (24 · 10 ÷ 15) 16 bulunur.",
+   ""
+  ],
+  "taktik": "10/15 = 2/3 olduğundan kısa kenar uzun kenarın 2/3'üdür: 24 = (2/3) · 36.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Benzerlik oranı",
+    "tanim": "Benzer iki şeklin karşılıklı kenar uzunluklarının oranı. Açılar eşit, kenarlar orantılıdır."
+   }
+  ]
+ },
+ {
+  "id": "mat-040",
+  "ders": "matematik",
+  "unite": "Eşlik ve Benzerlik",
+  "kazanimKod": "M.8.3.3.1",
+  "kazanimAd": "Eşlik ve benzerliği ilişkilendirir, eş ve benzer şekillerin kenar ve açı ilişkilerini belirler.",
+  "zorluk": 2,
+  "tip": "gorsel",
+  "metin": "Güneşli bir günde boyu 1,6 m olan Defne'nin gölgesinin uzunluğu 2 m'dir. Aynı anda, aynı düz zemindeki bir ağacın gölgesinin uzunluğu 7,5 m olarak ölçülüyor. Güneş ışınları aynı açıyla geldiğinden oluşan dik üçgenler benzerdir.<br>Buna göre ağacın boyu kaç metredir?",
+  "svg": "<svg viewBox='0 0 320 175' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><line x1='20' y1='150' x2='305' y2='150' /><line x1='45' y1='150' x2='45' y2='124' stroke-width='2.5'/><circle cx='45' cy='121' r='3' fill='currentColor'/><line x1='45' y1='118' x2='85' y2='150' stroke-dasharray='4 3' stroke-width='1'/><line x1='45' y1='150' x2='85' y2='150' class='ac' stroke-width='4'/><line x1='140' y1='150' x2='140' y2='66' stroke-width='3'/><circle class='mf' cx='140' cy='48' r='18'/><line x1='140' y1='30' x2='290' y2='150' stroke-dasharray='4 3' stroke-width='1'/><line x1='140' y1='150' x2='290' y2='150' class='ac' stroke-width='4'/><text x='45' y='110' text-anchor='middle' fill='currentColor' stroke='none' >1,6 m</text><text x='65' y='166' text-anchor='middle' fill='currentColor' stroke='none' >2 m</text><text x='112' y='90' text-anchor='middle' fill='currentColor' stroke='none' font-weight='bold'>?</text><text x='215' y='166' text-anchor='middle' fill='currentColor' stroke='none' >7,5 m</text></svg>",
+  "siklar": [
+   "6",
+   "9,375",
+   "7,1",
+   "5,5"
+  ],
+  "dogru": 0,
+  "ipucu1": "İki dik üçgen benzer: boy ile gölge uzunluğu aynı oranda.",
+  "ipucu2": "1,6 ÷ 2 = (ağacın boyu) ÷ 7,5 orantısını kur.",
+  "cozum": [
+   "Benzer üçgenlerde boy ÷ gölge oranı eşittir: 1,6 ÷ 2 = 0,8.",
+   "Ağacın boyu ÷ 7,5 = 0,8.",
+   "Ağacın boyu = 7,5 · 0,8 = 6 m."
+  ],
+  "tuzaklar": [
+   "",
+   "Orantı ters kurulursa (7,5 · 2 ÷ 1,6) bu sonuç çıkar.",
+   "Defne'nin boyu ile gölgesi arasındaki fark (0,4 m) ağacın gölgesinden çıkarılırsa 7,1 bulunur.",
+   "Gölgeler arasındaki fark (7,5 − 2) ağacın boyu sanılırsa 5,5 bulunur."
+  ],
+  "taktik": "Orantı kurarken aynı tür uzunlukları aynı hizaya yaz: boy/gölge = boy/gölge.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "Benzer üçgenler",
+    "tanim": "Karşılıklı açıları eşit, karşılıklı kenarları orantılı olan üçgenler."
+   }
+  ]
+ },
+ {
+  "id": "mat-041",
+  "ders": "matematik",
+  "unite": "Eşlik ve Benzerlik",
+  "kazanimKod": "M.8.3.3.1",
+  "kazanimAd": "Eşlik ve benzerliği ilişkilendirir, eş ve benzer şekillerin kenar ve açı ilişkilerini belirler.",
+  "zorluk": 3,
+  "tip": "gorsel",
+  "metin": "Şekildeki A biçimli merdivenin eş uzunluktaki iki ayağının her biri 250 cm'dir. Ayaklar, her bir ayak üzerinde tepe noktasından 100 cm uzaklıktaki noktalardan, zemine paralel 80 cm uzunluğunda bir bağlantı çubuğu ile birbirine bağlanmıştır.<br>Buna göre merdivenin ayakları zeminde birbirinden kaç santimetre uzaktadır?",
+  "svg": "<svg viewBox='0 0 320 190' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><line x1='80' y1='157.5' x2='240' y2='157.5' /><line x1='160' y1='20' x2='100' y2='157.5' stroke-width='2.5'/><line x1='160' y1='20' x2='220' y2='157.5' stroke-width='2.5'/><line x1='136' y1='75' x2='184' y2='75' class='ac' stroke-width='3'/><text x='142' y='51.5' text-anchor='end' fill='currentColor' stroke='none' >100 cm</text><text x='111' y='120.2' text-anchor='end' fill='currentColor' stroke='none' >150 cm</text><text x='195' y='79' text-anchor='start' fill='currentColor' stroke='none' >80 cm</text><text x='160' y='174.5' text-anchor='middle' fill='currentColor' stroke='none' font-weight='bold'>?</text></svg>",
+  "siklar": [
+   "120",
+   "230",
+   "200",
+   "32"
+  ],
+  "dogru": 2,
+  "ipucu1": "Çubuk zemine paralel olduğundan küçük üçgen ile büyük üçgen benzerdir. Kenarları tepe noktasından başlayarak ölç.",
+  "ipucu2": "Küçük üçgenin kenarı 100 cm'dir. Büyük üçgenin kenarı ise çubuğun altında kalan parça değil, ayağın tamamıdır (250 cm).",
+  "cozum": [
+   "Çubuk zemine paralel olduğundan üstteki küçük üçgen, merdivenin oluşturduğu büyük üçgene benzerdir.",
+   "Benzerlik oranı: 100 ÷ 250 = 2/5.",
+   "80 ÷ x = 2/5 → x = 80 · 5 ÷ 2 = 200.",
+   "Ayaklar arası uzaklık 200 cm'dir."
+  ],
+  "tuzaklar": [
+   "Oran, ayağın tamamı (250) yerine çubuğun altında kalan parça (150) ile kurulursa 80 · 150 ÷ 100 = 120 bulunur.",
+   "Benzerlik kurulmadan uzunluklar toplanırsa 80 + 150 = 230 bulunur.",
+   "",
+   "Orantı ters kurulursa (80 · 100 ÷ 250) 32 bulunur."
+  ],
+  "taktik": "İç içe benzer üçgenlerde oranı parça/parça değil, tepe noktasından ölçülen kenar/tüm kenar olarak kur.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "İç içe benzer üçgenler",
+    "tanim": "Bir kenara paralel çizilen doğru, üçgenden benzer bir küçük üçgen ayırır; oran tepe noktasından ölçülen kenarlarla kurulur."
+   }
+  ]
+ },
+ {
+  "id": "mat-042",
+  "ders": "matematik",
+  "unite": "Eşlik ve Benzerlik",
+  "kazanimKod": "M.8.3.3.2",
+  "kazanimAd": "Benzer çokgenlerin benzerlik oranını belirler, bir çokgene eş ve benzer çokgenler oluşturur.",
+  "zorluk": 2,
+  "tip": "cok-adimli",
+  "metin": "Bir mimar, tasarladığı evin maketini gerçeğiyle benzer ve benzerlik oranı <span class=\"frac\"><span>1</span><span>50</span></span> olacak şekilde hazırlıyor. Makette dikdörtgen biçimindeki salonun kenar uzunlukları 12 cm ve 8 cm'dir.<br>Buna göre gerçek salonun alanı kaç metrekaredir?",
+  "svg": "",
+  "siklar": [
+   "0,48",
+   "24",
+   "4,8",
+   "20"
+  ],
+  "dogru": 1,
+  "ipucu1": "Benzerlik oranı uzunluklar içindir. Önce gerçek kenar uzunluklarını bul.",
+  "ipucu2": "Her kenarı 50 ile çarp ve metreye çevir: 12 cm → 600 cm = 6 m.",
+  "cozum": [
+   "Gerçek uzun kenar: 12 · 50 = 600 cm = 6 m.",
+   "Gerçek kısa kenar: 8 · 50 = 400 cm = 4 m.",
+   "Alan = 6 · 4 = 24 m²."
+  ],
+  "tuzaklar": [
+   "Maketteki alan (96 cm²) 50 ile çarpılırsa 4800 cm² = 0,48 m² bulunur; oran alana değil kenarlara uygulanır.",
+   "",
+   "Maketteki alan 50 ile çarpılıp birim çevirmede de hata yapılırsa 4,8 bulunur.",
+   "Alan yerine gerçek salonun çevresi (2 · (6 + 4)) hesaplanırsa 20 bulunur."
+  ],
+  "taktik": "Önce kenarları büyüt ve birimi çevir, alanı en son hesapla; alanlar oranı benzerlik oranının karesidir.",
+  "hataTipi": "birim",
+  "kavramlar": [
+   {
+    "ad": "Benzerlikte alan",
+    "tanim": "Benzerlik oranı k ise alanların oranı k²'dir."
+   }
+  ]
+ },
+ {
+  "id": "mat-043",
+  "ders": "matematik",
+  "unite": "Dönüşüm Geometrisi",
+  "kazanimKod": "M.8.3.2.1",
+  "kazanimAd": "Nokta, doğru parçası ve diğer şekillerin öteleme sonucundaki görüntülerini çizer.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Bir bilgisayar oyununda karakter, koordinat sistemindeki <b>A(−3, 2)</b> noktasında durmaktadır. Oyuncu karakteri önce 5 birim sağa, sonra 4 birim aşağı öteliyor.<br>Buna göre karakterin son konumunun koordinatları nedir?",
+  "svg": "",
+  "siklar": [
+   "(2, −2)",
+   "(−8, 6)",
+   "(2, 6)",
+   "(1, −3)"
+  ],
+  "dogru": 0,
+  "ipucu1": "Sağa-sola öteleme x'i, yukarı-aşağı öteleme y'yi değiştirir.",
+  "ipucu2": "Sağa gidince x artar, aşağı inince y azalır: x için −3 + 5, y için 2 − 4.",
+  "cozum": [
+   "5 birim sağa: x = −3 + 5 = 2.",
+   "4 birim aşağı: y = 2 − 4 = −2.",
+   "Son konum (2, −2)'dir."
+  ],
+  "tuzaklar": [
+   "",
+   "Sağa öteleme çıkarma, aşağı öteleme toplama olarak yapılırsa (yönler ters) bu sonuç çıkar.",
+   "Aşağı ötelemede y'ye 4 eklenirse (yukarı gibi) bu sonuç çıkar.",
+   "Öteleme miktarları karıştırılıp 4 birim sağa, 5 birim aşağı ötelenirse bu sonuç çıkar."
+  ],
+  "taktik": "Sağ (+x), sol (−x), yukarı (+y), aşağı (−y). İşlemi koordinat koordinat yap.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "Öteleme",
+    "tanim": "Şeklin her noktasının aynı yönde ve aynı miktarda kaydırılması; şekil ile görüntüsü eştir."
+   }
+  ]
+ },
+ {
+  "id": "mat-044",
+  "ders": "matematik",
+  "unite": "Dönüşüm Geometrisi",
+  "kazanimKod": "M.8.3.2.2",
+  "kazanimAd": "Nokta, doğru parçası ve diğer şekillerin yansıma sonucu oluşan görüntüsünü oluşturur.",
+  "zorluk": 2,
+  "tip": "gorsel",
+  "metin": "Aşağıdaki koordinat sisteminde P noktası işaretlenmiştir.<br>Buna göre P noktasının <b>y eksenine göre</b> yansıması olan noktanın koordinatları nedir?",
+  "svg": "<svg viewBox='0 0 320 210' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><line x1='50' y1='193' x2='50' y2='17' stroke-width='0.6' stroke-opacity='0.35'/><line x1='72' y1='193' x2='72' y2='17' stroke-width='0.6' stroke-opacity='0.35'/><line x1='94' y1='193' x2='94' y2='17' stroke-width='0.6' stroke-opacity='0.35'/><line x1='116' y1='193' x2='116' y2='17' stroke-width='0.6' stroke-opacity='0.35'/><line x1='138' y1='193' x2='138' y2='17' stroke-width='0.6' stroke-opacity='0.35'/><line x1='160' y1='193' x2='160' y2='17' stroke-width='0.6' stroke-opacity='0.35'/><line x1='182' y1='193' x2='182' y2='17' stroke-width='0.6' stroke-opacity='0.35'/><line x1='204' y1='193' x2='204' y2='17' stroke-width='0.6' stroke-opacity='0.35'/><line x1='226' y1='193' x2='226' y2='17' stroke-width='0.6' stroke-opacity='0.35'/><line x1='248' y1='193' x2='248' y2='17' stroke-width='0.6' stroke-opacity='0.35'/><line x1='270' y1='193' x2='270' y2='17' stroke-width='0.6' stroke-opacity='0.35'/><line x1='50' y1='193' x2='270' y2='193' stroke-width='0.6' stroke-opacity='0.35'/><line x1='50' y1='171' x2='270' y2='171' stroke-width='0.6' stroke-opacity='0.35'/><line x1='50' y1='149' x2='270' y2='149' stroke-width='0.6' stroke-opacity='0.35'/><line x1='50' y1='127' x2='270' y2='127' stroke-width='0.6' stroke-opacity='0.35'/><line x1='50' y1='105' x2='270' y2='105' stroke-width='0.6' stroke-opacity='0.35'/><line x1='50' y1='83' x2='270' y2='83' stroke-width='0.6' stroke-opacity='0.35'/><line x1='50' y1='61' x2='270' y2='61' stroke-width='0.6' stroke-opacity='0.35'/><line x1='50' y1='39' x2='270' y2='39' stroke-width='0.6' stroke-opacity='0.35'/><line x1='50' y1='17' x2='270' y2='17' stroke-width='0.6' stroke-opacity='0.35'/><line x1='42' y1='105' x2='280' y2='105' /><line x1='160' y1='199' x2='160' y2='9' /><text x='72' y='119' text-anchor='middle' fill='currentColor' stroke='none' >−4</text><text x='116' y='119' text-anchor='middle' fill='currentColor' stroke='none' >−2</text><text x='204' y='119' text-anchor='middle' fill='currentColor' stroke='none' >2</text><text x='248' y='119' text-anchor='middle' fill='currentColor' stroke='none' >4</text><text x='155' y='197' text-anchor='end' fill='currentColor' stroke='none' >−4</text><text x='155' y='153' text-anchor='end' fill='currentColor' stroke='none' >−2</text><text x='155' y='65' text-anchor='end' fill='currentColor' stroke='none' >2</text><text x='155' y='21' text-anchor='end' fill='currentColor' stroke='none' >4</text><text x='286' y='109' text-anchor='middle' fill='currentColor' stroke='none' >x</text><text x='169' y='15' text-anchor='middle' fill='currentColor' stroke='none' >y</text><circle cx='116' cy='39' r='4' fill='currentColor'/><text x='109' y='33' text-anchor='end' fill='currentColor' stroke='none' font-weight='bold'>P</text></svg>",
+  "siklar": [
+   "(−2, −3)",
+   "(2, −3)",
+   "(3, −2)",
+   "(2, 3)"
+  ],
+  "dogru": 3,
+  "ipucu1": "Önce P'nin koordinatlarını grafikten oku: önce x (yatay), sonra y (dikey).",
+  "ipucu2": "P(−2, 3). y eksenine göre yansımada nokta y ekseninin öbür tarafına aynı uzaklığa geçer; yüksekliği değişmez.",
+  "cozum": [
+   "Grafikten P(−2, 3) okunur.",
+   "y eksenine göre yansımada x'in işareti değişir, y aynı kalır.",
+   "Görüntü (2, 3)'tür."
+  ],
+  "tuzaklar": [
+   "y ekseni yerine x eksenine göre yansıma alınırsa y'nin işareti değişir.",
+   "İki koordinatın da işareti değiştirilirse (orijine göre simetri) bu sonuç çıkar.",
+   "Yansıma almak yerine koordinatların yeri değiştirilirse (−2, 3) → (3, −2) bulunur; yansımada koordinatların sırası değişmez.",
+   ""
+  ],
+  "taktik": "Hangi eksene göre yansıtıyorsan o eksenin koordinatı aynı kalır, diğerinin işareti değişir.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "Eksene göre yansıma",
+    "tanim": "x eksenine göre: (a, b) → (a, −b). y eksenine göre: (a, b) → (−a, b)."
+   }
+  ]
+ },
+ {
+  "id": "mat-045",
+  "ders": "matematik",
+  "unite": "Dönüşüm Geometrisi",
+  "kazanimKod": "M.8.3.2.3",
+  "kazanimAd": "Çokgenlerin öteleme ve yansımalar sonucunda ortaya çıkan görüntüsünü oluşturur.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "Bir robot süpürgenin hareketi koordinat sisteminde modelleniyor. Robot <b>P(3, 2)</b> noktasından başlıyor. Konumu önce <b>x eksenine göre yansıtılıyor</b>, ardından 6 birim sola ve 4 birim aşağı öteleniyor.<br>Buna göre robotun son konumu ile başlangıç noktası P arasındaki uzaklık kaç birimdir?",
+  "svg": "",
+  "siklar": [
+   "2√13",
+   "10",
+   "14",
+   "8"
+  ],
+  "dogru": 1,
+  "ipucu1": "Dönüşümleri sırayla uygula ve son noktanın koordinatlarını bul.",
+  "ipucu2": "x eksenine göre yansıma: (3, 2) → (3, −2). Sonra ötelemeyi uygula; iki nokta arasındaki uzaklık için dik üçgen çiz.",
+  "cozum": [
+   "x eksenine göre yansıma: (3, 2) → (3, −2).",
+   "6 birim sola, 4 birim aşağı: (3 − 6, −2 − 4) = (−3, −6).",
+   "P(3, 2) ile (−3, −6) arasında yatay fark 6, dikey fark 8 birimdir.",
+   "Uzaklık: √(6² + 8²) = √100 = 10 birim."
+  ],
+  "tuzaklar": [
+   "Yansıma adımı atlanıp yalnız öteleme yapılırsa son nokta (−3, −2) olur ve uzaklık 2√13 bulunur.",
+   "",
+   "Yatay ve dikey farklar Pisagor yerine doğrudan toplanırsa 6 + 8 = 14 bulunur.",
+   "Yalnız dikey fark (2 ile −6 arası) uzaklık sanılırsa 8 bulunur."
+  ],
+  "taktik": "Her dönüşümden sonra yeni koordinatı yaz; uzaklık için yatay ve dikey farklarla Pisagor kur (6-8-10).",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Ardışık dönüşümler",
+    "tanim": "Dönüşümler verilen sırayla uygulanır; her adımda bir önceki görüntü kullanılır."
+   }
+  ]
+ },
+ {
+  "id": "mat-046",
+  "ders": "matematik",
+  "unite": "Dönüşüm Geometrisi",
+  "kazanimKod": "M.8.3.2.3",
+  "kazanimAd": "Çokgenlerin öteleme ve yansımalar sonucunda ortaya çıkan görüntüsünü oluşturur.",
+  "zorluk": 2,
+  "tip": "gorsel",
+  "metin": "Bir kilim deseni tasarlayan Ayşe, kareli kâğıt üzerindeki I numaralı motife dönüşümler uygulayarak II numaralı motifi elde ediyor. Kareli kâğıtta her karenin kenarı 1 birimdir.<br>Buna göre Ayşe aşağıdaki dönüşümlerden hangisini uygulamıştır?",
+  "svg": "<svg viewBox='0 0 320 190' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><line x1='20' y1='15' x2='20' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='40' y1='15' x2='40' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='60' y1='15' x2='60' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='80' y1='15' x2='80' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='100' y1='15' x2='100' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='120' y1='15' x2='120' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='140' y1='15' x2='140' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='160' y1='15' x2='160' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='180' y1='15' x2='180' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='200' y1='15' x2='200' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='220' y1='15' x2='220' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='240' y1='15' x2='240' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='260' y1='15' x2='260' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='280' y1='15' x2='280' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='300' y1='15' x2='300' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='20' y1='15' x2='300' y2='15' stroke-width='0.6' stroke-opacity='0.35'/><line x1='20' y1='35' x2='300' y2='35' stroke-width='0.6' stroke-opacity='0.35'/><line x1='20' y1='55' x2='300' y2='55' stroke-width='0.6' stroke-opacity='0.35'/><line x1='20' y1='75' x2='300' y2='75' stroke-width='0.6' stroke-opacity='0.35'/><line x1='20' y1='95' x2='300' y2='95' stroke-width='0.6' stroke-opacity='0.35'/><line x1='20' y1='115' x2='300' y2='115' stroke-width='0.6' stroke-opacity='0.35'/><line x1='20' y1='135' x2='300' y2='135' stroke-width='0.6' stroke-opacity='0.35'/><line x1='20' y1='155' x2='300' y2='155' stroke-width='0.6' stroke-opacity='0.35'/><line x1='20' y1='175' x2='300' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><polygon class='mf' points='60,35 100,35 100,55 80,55 80,115 60,115'/><polygon class='acf' points='260,75 220,75 220,95 240,95 240,155 260,155'/><line x1='160' y1='12' x2='160' y2='178' stroke-dasharray='4 3' stroke-width='2'/><text x='168' y='11' text-anchor='middle' fill='currentColor' stroke='none' >d</text><text x='80' y='30' text-anchor='middle' fill='currentColor' stroke='none' font-weight='bold'>I</text><text x='240' y='70' text-anchor='middle' fill='currentColor' stroke='none' font-weight='bold'>II</text></svg>",
+  "siklar": [
+   "8 birim sağa ve 2 birim aşağı öteleme",
+   "Yalnızca d doğrusuna göre yansıma",
+   "d doğrusuna göre yansıma, sonra 2 birim aşağı öteleme",
+   "d doğrusuna göre yansıma, sonra 2 birim yukarı öteleme"
+  ],
+  "dogru": 2,
+  "ipucu1": "Motifin çıkıntısı I'de sağa, II'de sola bakıyor. Yalnız öteleme şeklin yönünü değiştirir mi?",
+  "ipucu2": "I'i d doğrusuna göre yansıt: köşelerin d'ye uzaklığı aynı kalır. Sonra görüntünün II ile aynı satırlarda olup olmadığına bak.",
+  "cozum": [
+   "Ötelemede şeklin yönü değişmez; II'de çıkıntı ters tarafa baktığı için bir yansıma vardır.",
+   "I, d doğrusuna göre yansıtılınca görüntü d'nin sağında, I ile aynı satırlarda oluşur.",
+   "II ise bu görüntünün 2 satır altındadır.",
+   "Uygulanan dönüşüm: d'ye göre yansıma, sonra 2 birim aşağı öteleme."
+  ],
+  "tuzaklar": [
+   "Motifin yönünün değiştiği (çıkıntının sola baktığı) fark edilmezse yalnız öteleme sanılır.",
+   "Yön değişimi görülüp II'nin 2 birim aşağıda olduğu fark edilmezse bu seçilir.",
+   "",
+   "Ötelemenin yönü ters okunursa bu seçilir."
+  ],
+  "taktik": "Önce şeklin yönüne bak (yön değiştiyse yansıma var), sonra bir köşeyi takip ederek ötelemeyi say.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "Yansıma",
+    "tanim": "Şekil ile görüntüsünün karşılıklı noktaları simetri doğrusuna eşit uzaklıktadır; şeklin yönü ters döner."
+   },
+   {
+    "ad": "Öteleme",
+    "tanim": "Şeklin yönü ve biçimi değişmez, yalnız yeri değişir."
+   }
+  ]
+ },
+ {
+  "id": "mat-047",
+  "ders": "matematik",
+  "unite": "Geometrik Cisimler",
+  "kazanimKod": "M.8.3.4.4",
+  "kazanimAd": "Dik dairesel silindirin hacim bağıntısını oluşturur; ilgili problemleri çözer.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Dik dairesel silindir biçimindeki bir bardağın taban <b>çapı</b> 10 cm, yüksekliği 12 cm'dir.<br>Buna göre bu bardak ağzına kadar doldurulduğunda kaç santimetreküp su alır? (π = 3 alınız.)",
+  "svg": "",
+  "siklar": [
+   "3600",
+   "180",
+   "360",
+   "900"
+  ],
+  "dogru": 3,
+  "ipucu1": "Silindirin hacmi taban alanı ile yüksekliğin çarpımıdır. Çap verilmiş; yarıçap kaç?",
+  "ipucu2": "Yarıçap 5 cm'dir. Taban alanı π · r² = 3 · 25.",
+  "cozum": [
+   "Yarıçap: 10 ÷ 2 = 5 cm.",
+   "Taban alanı: π · r² = 3 · 5² = 75 cm².",
+   "Hacim = 75 · 12 = 900 cm³."
+  ],
+  "tuzaklar": [
+   "Çap (10 cm) yarıçap yerine kullanılırsa 3 · 100 · 12 = 3600 bulunur.",
+   "Yarıçapın karesi alınmazsa 3 · 5 · 12 = 180 bulunur.",
+   "Hacim yerine yan yüzey alanı (2 · 3 · 5 · 12) hesaplanırsa 360 bulunur.",
+   ""
+  ],
+  "taktik": "Soruda çap mı yarıçap mı verilmiş, ilk iş onu işaretle.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Silindirin hacmi",
+    "tanim": "V = π · r² · h (taban alanı × yükseklik)"
+   }
+  ]
+ },
+ {
+  "id": "mat-048",
+  "ders": "matematik",
+  "unite": "Geometrik Cisimler",
+  "kazanimKod": "M.8.3.4.3",
+  "kazanimAd": "Dik dairesel silindirin yüzey alanı bağıntısını oluşturur, ilgili problemleri çözer.",
+  "zorluk": 2,
+  "tip": "gorsel",
+  "metin": "Dik dairesel silindir biçimindeki bir konserve kutusunun açınımı şekilde verilmiştir. Kutunun taban yarıçapı 4 cm, yüksekliği 10 cm'dir. Kutunun yan yüzünün tamamı, üst üste gelmeyecek şekilde bir etiketle kaplanacaktır.<br>Buna göre etiketin alanı kaç santimetrekaredir? (π = 3 alınız.)",
+  "svg": "<svg viewBox='0 0 320 235' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><rect class='mf' x='64' y='84' width='192' height='80'/><circle cx='160' cy='52' r='32'/><circle cx='160' cy='196' r='32'/><line x1='160' y1='52' x2='192' y2='52' stroke-width='1'/><circle cx='160' cy='52' r='2' fill='currentColor'/><text x='198' y='56' text-anchor='start' fill='currentColor' stroke='none' >4 cm</text><text x='58' y='128' text-anchor='end' fill='currentColor' stroke='none' >10 cm</text><text x='160' y='128' text-anchor='middle' fill='currentColor' stroke='none' >etiket</text></svg>",
+  "siklar": [
+   "240",
+   "336",
+   "120",
+   "480"
+  ],
+  "dogru": 0,
+  "ipucu1": "Etiket açınımdaki dikdörtgendir. Dikdörtgenin bir kenarı yükseklik; diğer kenarı neye eşit?",
+  "ipucu2": "Dikdörtgenin uzun kenarı taban çemberinin çevresine eşittir: 2 · π · r.",
+  "cozum": [
+   "Yan yüz açıldığında dikdörtgen olur; bir kenarı yükseklik (10 cm).",
+   "Diğer kenarı taban çevresi: 2 · π · r = 2 · 3 · 4 = 24 cm.",
+   "Etiketin alanı = 24 · 10 = 240 cm²."
+  ],
+  "tuzaklar": [
+   "",
+   "Yan yüzle birlikte iki taban da eklenirse (240 + 96) tüm yüzey alanı bulunur.",
+   "Dikdörtgenin uzun kenarı 2πr yerine πr alınırsa 12 · 10 = 120 bulunur.",
+   "Çevre hesabında yarıçap yerine çap kullanılırsa (2 · 3 · 8 · 10) 480 bulunur."
+  ],
+  "taktik": "Yanal alan = taban çevresi × yükseklik. \"Etiket, boya şeridi\" gibi ifadeler yalnız yan yüzü sorar.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Silindirin yan yüzey alanı",
+    "tanim": "2 · π · r · h (açınımdaki dikdörtgenin alanı)"
+   },
+   {
+    "ad": "Silindirin yüzey alanı",
+    "tanim": "2πr² + 2πrh (iki taban + yan yüz)"
+   }
+  ]
+ },
+ {
+  "id": "mat-049",
+  "ders": "matematik",
+  "unite": "Geometrik Cisimler",
+  "kazanimKod": "M.8.3.4.4",
+  "kazanimAd": "Dik dairesel silindirin hacim bağıntısını oluşturur; ilgili problemleri çözer.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "Dik dairesel silindir biçimindeki bir sürahinin taban yarıçapı 6 cm, yüksekliği 20 cm'dir ve sürahi ağzına kadar limonata ile doludur. Bu limonata, taban yarıçapı 3 cm ve yüksekliği 10 cm olan silindir biçimindeki özdeş bardaklara, her bardağın <span class=\"frac\"><span>4</span><span>5</span></span>'i dolacak şekilde paylaştırılacaktır.<br>Buna göre sürahideki limonatanın tamamı kaç bardağı bu şekilde doldurur? (π = 3 alınız.)",
+  "svg": "",
+  "siklar": [
+   "8",
+   "10",
+   "6",
+   "4"
+  ],
+  "dogru": 1,
+  "ipucu1": "Önce sürahinin hacmini, sonra bir bardağa konan limonata miktarını bul.",
+  "ipucu2": "Sürahi: 3 · 6² · 20. Bardağın tamamı: 3 · 3² · 10; bunun 4/5'ini al.",
+  "cozum": [
+   "Sürahinin hacmi: 3 · 6² · 20 = 2160 cm³.",
+   "Bir bardağın hacmi: 3 · 3² · 10 = 270 cm³.",
+   "Her bardağa 270 · 4/5 = 216 cm³ limonata konur.",
+   "2160 ÷ 216 = 10 bardak dolar."
+  ],
+  "tuzaklar": [
+   "Bardakların tam doldurulduğu düşünülürse 2160 ÷ 270 = 8 bulunur.",
+   "",
+   "8 bardak bulunduktan sonra 4/5 ile çarpılırsa (bölünecekken) yaklaşık 6 bulunur.",
+   "Yarıçapların karesi alınmadan yalnız oranlar çarpılırsa (2 · 2) 4 bulunur."
+  ],
+  "taktik": "π'leri çarpmadan oranla: (6² · 20) ÷ (3² · 10 · 4/5) = 720 ÷ 72 = 10.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Hacim oranı",
+    "tanim": "Yarıçap 2 katına çıkarsa hacim 4 katına, yükseklik 2 katına çıkarsa hacim 2 katına çıkar."
+   }
+  ]
+ },
+ {
+  "id": "mat-050",
+  "ders": "matematik",
+  "unite": "Geometrik Cisimler",
+  "kazanimKod": "M.8.3.4.5",
+  "kazanimAd": "Dik piramidi tanır, temel elemanlarını belirler, inşa eder ve açınımını çizer.",
+  "zorluk": 2,
+  "tip": "cok-adimli",
+  "metin": "Bir tasarım atölyesinde çubuk ve macun topları kullanılarak cisim iskeletleri yapılıyor: her ayrıt için bir çubuk, her köşe için bir macun topu kullanılıyor. Tuna, tabanı <b>altıgen olan bir dik piramit</b> iskeleti; Ada ise <b>üçgen dik prizma</b> iskeleti yapıyor.<br>Buna göre Tuna'nın kullandığı çubuk sayısı ile Ada'nın kullandığı macun topu sayısının toplamı kaçtır?",
+  "svg": "",
+  "siklar": [
+   "13",
+   "21",
+   "18",
+   "12"
+  ],
+  "dogru": 2,
+  "ipucu1": "Çubuk = ayrıt, macun topu = köşe. Her cisim için hangisinin sorulduğuna dikkat et.",
+  "ipucu2": "Altıgen piramitte 6 taban ayrıtı ve tepeye çıkan 6 yan ayrıt vardır. Üçgen prizmanın iki üçgen tabanı vardır.",
+  "cozum": [
+   "Altıgen dik piramit: 6 taban ayrıtı + 6 yan ayrıt = 12 ayrıt → 12 çubuk.",
+   "Üçgen dik prizma: her tabanda 3 köşe, toplam 2 · 3 = 6 köşe → 6 macun topu.",
+   "Toplam: 12 + 6 = 18."
+  ],
+  "tuzaklar": [
+   "Tuna için çubuk yerine macun topu (7 köşe) sayılırsa 7 + 6 = 13 bulunur.",
+   "Ada için macun topu yerine çubuk (9 ayrıt) sayılırsa 12 + 9 = 21 bulunur.",
+   "",
+   "Piramidin yalnız taban ayrıtları (6) sayılıp yan ayrıtlar unutulursa 6 + 6 = 12 bulunur."
+  ],
+  "taktik": "Tabanı n-gen olan piramitte 2n ayrıt, n + 1 köşe; prizmada 3n ayrıt, 2n köşe vardır.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Piramidin elemanları",
+    "tanim": "Tabanı n kenarlı piramit: n + 1 köşe, 2n ayrıt, n + 1 yüz"
+   },
+   {
+    "ad": "Prizmanın elemanları",
+    "tanim": "Tabanı n kenarlı prizma: 2n köşe, 3n ayrıt, n + 2 yüz"
+   }
+  ]
+ }
+]

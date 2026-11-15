@@ -1,0 +1,51 @@
+{
+ "incelenen": 44,
+ "korCozumUyusma": 44,
+ "bulgular": [
+  {
+   "id": "din-006",
+   "tur": "alinti-supheli",
+   "ciddiyet": "kucuk",
+   "aciklama": "Âl-i İmrân 159: sure/ayet numarası ve anlam doğru; ancak tırnak içindeki ifade Diyanet mealinin birebir metni değil, sadeleştirilmiş hâli. Hatırladığım Diyanet metni: “… İş konusunda onlarla müşavere et. Bir kere de karar verip azmettin mi, artık Allah’a tevekkül et. …” (çevrim içi doğrulanamadı; diyanet.gov.tr erişilemiyor). Anlam ve cevap anahtarı etkilenmiyor. Birebir alıntı isteniyorsa basılı mealden kontrol edilmeli.",
+   "duzeltme": {}
+  },
+  {
+   "id": "din-039",
+   "tur": "alinti-supheli",
+   "ciddiyet": "kucuk",
+   "aciklama": "3. satırdaki Hucurât 12 alıntısı: Diyanet mealinde ifade “Birbirinizin kusurlarını ve mahremiyetlerini araştırmayın. Birbirinizin gıybetini yapmayın.” biçiminde hatırlanıyor; soruda “ve mahremiyetlerini” kısmı üç nokta konmadan atlanmış. Anlam ve cevap (ahlak) etkilenmiyor. Kesin doğrulama yapılamadı; basılı mealden kontrol edilip gerekiyorsa atlanan yer “…” ile gösterilmeli.",
+   "duzeltme": {}
+  },
+  {
+   "id": "din-007",
+   "tur": "alinti-supheli",
+   "ciddiyet": "kucuk",
+   "aciklama": "Necm 39: numara ve anlam doğru. Diyanet mealinde “İnsan için ancak çalıştığı vardır.” biçiminde hatırlanıyor; sorudaki “çalıştığının karşılığı vardır” MEB kitaplarında da görülen açıklayıcı bir sürüm. Anlamca uyumlu; cevap etkilenmiyor. Birebirlik isteniyorsa kontrol edilmeli.",
+   "duzeltme": {}
+  },
+  {
+   "id": "din-032",
+   "tur": "belirsiz",
+   "ciddiyet": "kucuk",
+   "aciklama": "Siyer kaynaklarında “Güneşi sağ elime…” sözü, müşriklerin Ebu Talib’e yeğenini durdurması için baskı yapması üzerine söylenir; mal-makam teklifi ise çoğunlukla ayrı bir olay (Utbe b. Rebîa’nın doğrudan teklifi) olarak anlatılır. Soru ikisini tek olayda birleştiriyor. Okul kitaplarında da bu birleşik anlatım yaygın ve soru “anlamında bir cevap verdi” diyerek ihtiyatlı; cevap (kararlılık) her iki anlatımda da aynı. İstenirse giriş cümlesi “… amcası Ebu Talib aracılığıyla ondan davetini bırakmasını istediler.” biçiminde sadeleştirilebilir (bu durumda ipucu2 ve D şıkkı tuzağındaki “mal teklifi” ifadeleri de uyarlanmalı).",
+   "duzeltme": {}
+  },
+  {
+   "id": "din-029",
+   "tur": "ipucu-cevabi-veriyor",
+   "ciddiyet": "kucuk",
+   "aciklama": "ipucu1 doğrudan “el-Emin ne anlama gelir?” diye soruyor; el-Emin = güvenilir olduğu için ilk ipucu cevabı neredeyse veriyor. Bu yönlendirme ipucu2 düzeyinde olmalı.",
+   "duzeltme": {
+    "ipucu1": "Anlaşmazlık içindeki kabileler onun kararına neden hemen razı oldu? İnsanlar kimin kararını gönül rahatlığıyla kabul eder?",
+    "ipucu2": "Mekkelilerin ona verdiği lakaba dikkat et: “el-Emin” ne anlama gelir?"
+   }
+  },
+  {
+   "id": "din-015",
+   "tur": "belirsiz",
+   "ciddiyet": "kucuk",
+   "aciklama": "Cevap anahtarı (komşu) tartışmasız doğru ve tek. Yalnız “eşine” çeldiricisi, kadının yoksul kocasına zekât vermesi durumudur; bu konu mezhepler arasında (ve Hanefî mezhebi içinde) görüş ayrılığı olan bir noktadır. Ders kitabı ve Diyanet’in yaygın anlatımı ‘eşler birbirine zekât veremez’ şeklinde olduğundan soru kullanılabilir; düzeltme şart değil.",
+   "duzeltme": {}
+  }
+ ]
+}
