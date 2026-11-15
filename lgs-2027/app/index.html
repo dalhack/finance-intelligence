@@ -744,6 +744,15 @@ function vMeb(){
         d.baglantilar.map(function(b){ return '<a href="' + esc(b.url) + '" target="_blank" rel="noopener">' + esc(b.ad) + '</a>'; }).join('') + '</div></div></details>';
     });
   }
+  var az = CT.analiz;
+  if (az){
+    h += '<div class="stack" style="gap:4px"><h2>Hangi konudan kaç soru çıktı?</h2><p class="small muted">' + az.yillar[0] + '–' + az.yillar[az.yillar.length - 1] + ' arasındaki ' + az.yillar.length + ' sınavın ' + az.n + ' sorusu tek tek konulara ayrıldı. 2020 ve 2023 sınavlarında yalnızca birinci dönem konuları soruldu; 2021 kitapçığında da son ünitelerden soru yok.</p></div>';
+    az.dersler.forEach(function(d){
+      var mx = d.unite.length ? d.unite[0].t : 1;
+      h += '<details class="ders d-' + d.ders + '"><summary><span>' + d.ad + '</span><span class="small muted" style="margin-left:auto;font-weight:400">' + d.n + ' soru</span></summary><div class="in" style="gap:8px">' +
+        d.unite.map(function(u){ return '<div class="row" style="flex-wrap:nowrap"><span class="small grow">' + esc(u.u) + '</span><div class="bar" style="width:34%;flex:none"><i style="width:' + Math.round(100 * u.t / mx) + '%;background:var(--dc)"></i></div><span class="small muted" style="width:26px;text-align:right;flex:none">' + u.t + '</span></div>'; }).join('') + '</div></details>';
+    });
+  }
   if (k.not) h += '<p class="small muted">' + k.not + '</p>';
   return h;
 }

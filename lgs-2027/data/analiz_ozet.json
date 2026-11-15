@@ -1,0 +1,2084 @@
+{
+ "yillar": [
+  2018,
+  2019,
+  2020,
+  2021,
+  2022,
+  2023,
+  2024,
+  2025,
+  2026
+ ],
+ "soruSayisi": 810,
+ "dersler": {
+  "turkce": {
+   "ad": "Türkçe",
+   "n": 180,
+   "unite": [
+    {
+     "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama",
+     "toplam": 35,
+     "yil": {
+      "2018": 1,
+      "2019": 6,
+      "2020": 6,
+      "2021": 4,
+      "2022": 4,
+      "2023": 4,
+      "2024": 4,
+      "2025": 3,
+      "2026": 3
+     }
+    },
+    {
+     "unite": "Cümlede Anlam",
+     "toplam": 32,
+     "yil": {
+      "2018": 4,
+      "2019": 3,
+      "2020": 2,
+      "2021": 5,
+      "2022": 4,
+      "2023": 4,
+      "2024": 3,
+      "2025": 3,
+      "2026": 4
+     }
+    },
+    {
+     "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce",
+     "toplam": 27,
+     "yil": {
+      "2018": 5,
+      "2019": 2,
+      "2020": 2,
+      "2021": 4,
+      "2022": 2,
+      "2023": 3,
+      "2024": 2,
+      "2025": 4,
+      "2026": 3
+     }
+    },
+    {
+     "unite": "Sözcükte Anlam ve Deyimler",
+     "toplam": 21,
+     "yil": {
+      "2018": 2,
+      "2019": 3,
+      "2020": 1,
+      "2021": 4,
+      "2022": 2,
+      "2023": 1,
+      "2024": 3,
+      "2025": 2,
+      "2026": 3
+     }
+    },
+    {
+     "unite": "Paragraf – Yapı ve Anlatım",
+     "toplam": 20,
+     "yil": {
+      "2018": 2,
+      "2019": 0,
+      "2020": 2,
+      "2021": 3,
+      "2022": 2,
+      "2023": 5,
+      "2024": 1,
+      "2025": 2,
+      "2026": 3
+     }
+    },
+    {
+     "unite": "Yazım Kuralları ve Noktalama",
+     "toplam": 16,
+     "yil": {
+      "2018": 2,
+      "2019": 2,
+      "2020": 2,
+      "2021": 0,
+      "2022": 2,
+      "2023": 2,
+      "2024": 2,
+      "2025": 2,
+      "2026": 2
+     }
+    },
+    {
+     "unite": "Söz Sanatları ve Metin Türleri",
+     "toplam": 8,
+     "yil": {
+      "2018": 1,
+      "2019": 1,
+      "2020": 3,
+      "2021": 0,
+      "2022": 1,
+      "2023": 0,
+      "2024": 1,
+      "2025": 1,
+      "2026": 0
+     }
+    },
+    {
+     "unite": "Cümle Türleri ve Fiilde Çatı",
+     "toplam": 7,
+     "yil": {
+      "2018": 1,
+      "2019": 1,
+      "2020": 0,
+      "2021": 0,
+      "2022": 1,
+      "2023": 0,
+      "2024": 1,
+      "2025": 2,
+      "2026": 1
+     }
+    },
+    {
+     "unite": "Anlatım Bozuklukları",
+     "toplam": 6,
+     "yil": {
+      "2018": 1,
+      "2019": 1,
+      "2020": 0,
+      "2021": 0,
+      "2022": 1,
+      "2023": 0,
+      "2024": 2,
+      "2025": 1,
+      "2026": 0
+     }
+    },
+    {
+     "unite": "Fiilimsiler",
+     "toplam": 5,
+     "yil": {
+      "2018": 1,
+      "2019": 1,
+      "2020": 1,
+      "2021": 0,
+      "2022": 0,
+      "2023": 1,
+      "2024": 1,
+      "2025": 0,
+      "2026": 0
+     }
+    },
+    {
+     "unite": "Cümlenin Ögeleri",
+     "toplam": 3,
+     "yil": {
+      "2018": 0,
+      "2019": 0,
+      "2020": 1,
+      "2021": 0,
+      "2022": 1,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 1
+     }
+    }
+   ],
+   "kazanim": [
+    {
+     "kod": "T.8.3.32",
+     "ad": "Grafik, tablo ve çizelgeyle sunulan bilgileri yorumlar.",
+     "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama",
+     "n": 22
+    },
+    {
+     "kod": "T.8.3.25",
+     "ad": "Okudukları ile ilgili çıkarımlarda bulunur.",
+     "unite": "Cümlede Anlam",
+     "n": 17
+    },
+    {
+     "kod": "T.8.3.5",
+     "ad": "Bağlamdan yararlanarak bilmediği kelime ve kelime gruplarının anlamını tahmin eder.",
+     "unite": "Sözcükte Anlam ve Deyimler",
+     "n": 16
+    },
+    {
+     "kod": "T.8.4.16",
+     "ad": "Yazdıklarını düzenler.",
+     "unite": "Yazım Kuralları ve Noktalama",
+     "n": 16
+    },
+    {
+     "kod": "T.8.3.21",
+     "ad": "Metnin içeriğini yorumlar.",
+     "unite": "Cümlede Anlam",
+     "n": 15
+    },
+    {
+     "kod": "T.8.3.17",
+     "ad": "Metnin ana fikrini/ana duygusunu belirler.",
+     "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce",
+     "n": 10
+    },
+    {
+     "kod": "T.8.3.10",
+     "ad": "Geçiş ve bağlantı ifadelerinin metnin anlamına olan katkısını değerlendirir.",
+     "unite": "Paragraf – Yapı ve Anlatım",
+     "n": 8
+    },
+    {
+     "kod": "T.8.3.18",
+     "ad": "Metindeki yardımcı fikirleri belirler.",
+     "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce",
+     "n": 7
+    },
+    {
+     "kod": "T.8.3.8",
+     "ad": "Metindeki anlatım bozukluklarını belirler.",
+     "unite": "Anlatım Bozuklukları",
+     "n": 6
+    },
+    {
+     "kod": "T.8.3.34",
+     "ad": "Okuduklarında kullanılan düşünceyi geliştirme yollarını belirler.",
+     "unite": "Paragraf – Yapı ve Anlatım",
+     "n": 6
+    },
+    {
+     "kod": "T.8.3.27",
+     "ad": "Görsellerle ilgili soruları cevaplar.",
+     "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama",
+     "n": 6
+    },
+    {
+     "kod": "T.8.3.35",
+     "ad": "Metindeki iş ve işlem basamaklarını kavrar.",
+     "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama",
+     "n": 6
+    },
+    {
+     "kod": "T.8.3.9",
+     "ad": "Fiilimsilerin cümledeki işlevlerini kavrar.",
+     "unite": "Fiilimsiler",
+     "n": 5
+    },
+    {
+     "kod": "T.8.3.26",
+     "ad": "Metin türlerini ayırt eder.",
+     "unite": "Söz Sanatları ve Metin Türleri",
+     "n": 5
+    },
+    {
+     "kod": "T.8.3.6",
+     "ad": "Deyim, atasözü ve özdeyişlerin metne katkısını belirler.",
+     "unite": "Sözcükte Anlam ve Deyimler",
+     "n": 5
+    },
+    {
+     "kod": "T.8.4.19",
+     "ad": "Cümle türlerini tanır.",
+     "unite": "Cümle Türleri ve Fiilde Çatı",
+     "n": 4
+    },
+    {
+     "kod": "T.8.3.14",
+     "ad": "Metinle ilgili soruları cevaplar.",
+     "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce",
+     "n": 4
+    },
+    {
+     "kod": "T.8.3.11",
+     "ad": "Metindeki anlatım biçimlerini belirler.",
+     "unite": "Paragraf – Yapı ve Anlatım",
+     "n": 4
+    },
+    {
+     "kod": "T.8.3.23",
+     "ad": "Metinler arasında karşılaştırma yapar.",
+     "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce",
+     "n": 3
+    },
+    {
+     "kod": "T.8.4.18",
+     "ad": "Cümlenin ögelerini ayırt eder.",
+     "unite": "Cümlenin Ögeleri",
+     "n": 3
+    },
+    {
+     "kod": "T.8.4.20",
+     "ad": "Fiillerin çatı özelliklerinin anlama olan katkısını kavrar.",
+     "unite": "Cümle Türleri ve Fiilde Çatı",
+     "n": 3
+    },
+    {
+     "kod": "T.8.3.15",
+     "ad": "Metinle ilgili sorular sorar.",
+     "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce",
+     "n": 2
+    },
+    {
+     "kod": "T.8.3.7",
+     "ad": "Metindeki söz sanatlarını tespit eder.",
+     "unite": "Söz Sanatları ve Metin Türleri",
+     "n": 2
+    },
+    {
+     "kod": "T.8.3.20",
+     "ad": "Okuduğu metinlerdeki hikâye unsurlarını belirler.",
+     "unite": "Paragraf – Yapı ve Anlatım",
+     "n": 2
+    },
+    {
+     "kod": "T.8.3.30",
+     "ad": "Bilgi kaynaklarını etkili bir şekilde kullanır.",
+     "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama",
+     "n": 1
+    },
+    {
+     "kod": "T.8.3.29",
+     "ad": "Medya metinlerini analiz eder.",
+     "unite": "Söz Sanatları ve Metin Türleri",
+     "n": 1
+    },
+    {
+     "kod": "T.8.3.16",
+     "ad": "Metnin konusunu belirler.",
+     "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce",
+     "n": 1
+    }
+   ],
+   "tip": {
+    "klasik": 98,
+    "uzun-metin": 47,
+    "cok-adimli": 5,
+    "gorsel": 10,
+    "grafik-tablo": 20
+   },
+   "ozellik": {
+    "olumsuz-kok": 54,
+    "oncullu": 24,
+    "sozel-mantik": 26,
+    "tablo": 15,
+    "metin-karsilastirma": 18,
+    "sekil": 12,
+    "gunluk-hayat": 16,
+    "grafik": 9,
+    "diyalog": 3
+   }
+  },
+  "matematik": {
+   "ad": "Matematik",
+   "n": 180,
+   "unite": [
+    {
+     "unite": "Kareköklü İfadeler",
+     "toplam": 31,
+     "yil": {
+      "2018": 3,
+      "2019": 3,
+      "2020": 5,
+      "2021": 3,
+      "2022": 3,
+      "2023": 5,
+      "2024": 3,
+      "2025": 3,
+      "2026": 3
+     }
+    },
+    {
+     "unite": "Veri Analizi ve Olasılık",
+     "toplam": 24,
+     "yil": {
+      "2018": 1,
+      "2019": 2,
+      "2020": 6,
+      "2021": 3,
+      "2022": 2,
+      "2023": 4,
+      "2024": 2,
+      "2025": 2,
+      "2026": 2
+     }
+    },
+    {
+     "unite": "Doğrusal Denklemler",
+     "toplam": 22,
+     "yil": {
+      "2018": 4,
+      "2019": 4,
+      "2020": 0,
+      "2021": 2,
+      "2022": 3,
+      "2023": 0,
+      "2024": 3,
+      "2025": 3,
+      "2026": 3
+     }
+    },
+    {
+     "unite": "Üslü İfadeler",
+     "toplam": 21,
+     "yil": {
+      "2018": 2,
+      "2019": 2,
+      "2020": 3,
+      "2021": 3,
+      "2022": 2,
+      "2023": 3,
+      "2024": 2,
+      "2025": 2,
+      "2026": 2
+     }
+    },
+    {
+     "unite": "Cebirsel İfadeler ve Özdeşlikler",
+     "toplam": 20,
+     "yil": {
+      "2018": 2,
+      "2019": 1,
+      "2020": 3,
+      "2021": 2,
+      "2022": 2,
+      "2023": 4,
+      "2024": 2,
+      "2025": 2,
+      "2026": 2
+     }
+    },
+    {
+     "unite": "Çarpanlar ve Katlar",
+     "toplam": 16,
+     "yil": {
+      "2018": 1,
+      "2019": 1,
+      "2020": 3,
+      "2021": 2,
+      "2022": 2,
+      "2023": 4,
+      "2024": 1,
+      "2025": 1,
+      "2026": 1
+     }
+    },
+    {
+     "unite": "Üçgenler",
+     "toplam": 14,
+     "yil": {
+      "2018": 2,
+      "2019": 2,
+      "2020": 0,
+      "2021": 2,
+      "2022": 2,
+      "2023": 0,
+      "2024": 2,
+      "2025": 2,
+      "2026": 2
+     }
+    },
+    {
+     "unite": "Eşitsizlikler",
+     "toplam": 12,
+     "yil": {
+      "2018": 1,
+      "2019": 2,
+      "2020": 0,
+      "2021": 2,
+      "2022": 1,
+      "2023": 0,
+      "2024": 2,
+      "2025": 2,
+      "2026": 2
+     }
+    },
+    {
+     "unite": "Geometrik Cisimler",
+     "toplam": 8,
+     "yil": {
+      "2018": 3,
+      "2019": 1,
+      "2020": 0,
+      "2021": 0,
+      "2022": 1,
+      "2023": 0,
+      "2024": 1,
+      "2025": 1,
+      "2026": 1
+     }
+    },
+    {
+     "unite": "Eşlik ve Benzerlik",
+     "toplam": 7,
+     "yil": {
+      "2018": 1,
+      "2019": 1,
+      "2020": 0,
+      "2021": 1,
+      "2022": 1,
+      "2023": 0,
+      "2024": 1,
+      "2025": 1,
+      "2026": 1
+     }
+    },
+    {
+     "unite": "Dönüşüm Geometrisi",
+     "toplam": 5,
+     "yil": {
+      "2018": 0,
+      "2019": 1,
+      "2020": 0,
+      "2021": 0,
+      "2022": 1,
+      "2023": 0,
+      "2024": 1,
+      "2025": 1,
+      "2026": 1
+     }
+    }
+   ],
+   "kazanim": [
+    {
+     "kod": "M.8.4.1.2",
+     "ad": "Verileri sütun, daire veya çizgi grafiği ile gösterir ve bu gösterimler arasında uygun olan dönüşümleri yapar.",
+     "unite": "Veri Analizi ve Olasılık",
+     "n": 12
+    },
+    {
+     "kod": "M.8.5.1.5",
+     "ad": "Basit bir olayın olma olasılığını hesaplar.",
+     "unite": "Veri Analizi ve Olasılık",
+     "n": 10
+    },
+    {
+     "kod": "M.8.1.2.2",
+     "ad": "Üslü ifadelerle ilgili temel kuralları anlar, birbirine denk ifadeler oluşturur.",
+     "unite": "Üslü İfadeler",
+     "n": 10
+    },
+    {
+     "kod": "M.8.2.2.1",
+     "ad": "Birinci dereceden bir bilinmeyenli denklemleri çözer.",
+     "unite": "Doğrusal Denklemler",
+     "n": 9
+    },
+    {
+     "kod": "M.8.1.3.5",
+     "ad": "Kareköklü ifadelerde toplama ve çıkarma işlemlerini yapar.",
+     "unite": "Kareköklü İfadeler",
+     "n": 8
+    },
+    {
+     "kod": "M.8.1.1.2",
+     "ad": "İki doğal sayının en büyük ortak bölenini (EBOB) ve en küçük ortak katını (EKOK) hesaplar, ilgili problemleri çözer.",
+     "unite": "Çarpanlar ve Katlar",
+     "n": 7
+    },
+    {
+     "kod": "M.8.3.1.5",
+     "ad": "Pisagor bağıntısını oluşturur, ilgili problemleri çözer.",
+     "unite": "Üçgenler",
+     "n": 7
+    },
+    {
+     "kod": "M.8.2.1.2",
+     "ad": "Cebirsel ifadelerin çarpımını yapar.",
+     "unite": "Cebirsel İfadeler ve Özdeşlikler",
+     "n": 7
+    },
+    {
+     "kod": "M.8.1.1.1",
+     "ad": "Verilen pozitif tam sayıların pozitif tam sayı çarpanlarını bulur, pozitif tam sayıların pozitif tam sayı çarpanlarını üslü ifadelerin çarpımı şeklinde yazar.",
+     "unite": "Çarpanlar ve Katlar",
+     "n": 7
+    },
+    {
+     "kod": "M.8.1.3.2",
+     "ad": "Tam kare olmayan kareköklü bir sayının hangi iki doğal sayı arasında olduğunu belirler.",
+     "unite": "Kareköklü İfadeler",
+     "n": 6
+    },
+    {
+     "kod": "M.8.2.2.5",
+     "ad": "Doğrusal ilişki içeren gerçek hayat durumlarına ait denklem, tablo ve grafiği oluşturur ve yorumlar.",
+     "unite": "Doğrusal Denklemler",
+     "n": 6
+    },
+    {
+     "kod": "M.8.2.1.4",
+     "ad": "Cebirsel ifadeleri çarpanlara ayırır.",
+     "unite": "Cebirsel İfadeler ve Özdeşlikler",
+     "n": 6
+    },
+    {
+     "kod": "M.8.1.3.4",
+     "ad": "Kareköklü ifadelerde çarpma ve bölme işlemlerini yapar.",
+     "unite": "Kareköklü İfadeler",
+     "n": 6
+    },
+    {
+     "kod": "M.8.2.2.6",
+     "ad": "Doğrunun eğimini modellerle açıklar, doğrusal denklemleri ve grafiklerini eğimle ilişkilendirir.",
+     "unite": "Doğrusal Denklemler",
+     "n": 6
+    },
+    {
+     "kod": "M.8.2.3.1",
+     "ad": "Birinci dereceden bir bilinmeyenli eşitsizlik içeren günlük hayat durumlarına uygun matematik cümleleri yazar.",
+     "unite": "Eşitsizlikler",
+     "n": 5
+    },
+    {
+     "kod": "M.8.2.1.1",
+     "ad": "Basit cebirsel ifadeleri anlar ve farklı biçimlerde yazar.",
+     "unite": "Cebirsel İfadeler ve Özdeşlikler",
+     "n": 5
+    },
+    {
+     "kod": "M.8.3.3.2",
+     "ad": "Benzer çokgenlerin benzerlik oranını belirler, bir çokgene eş ve benzer çokgenler oluşturur.",
+     "unite": "Eşlik ve Benzerlik",
+     "n": 4
+    },
+    {
+     "kod": "M.8.1.3.1",
+     "ad": "Tam kare pozitif tam sayılarla bu sayıların karekökleri arasındaki ilişkiyi belirler.",
+     "unite": "Kareköklü İfadeler",
+     "n": 4
+    },
+    {
+     "kod": "M.8.2.3.3",
+     "ad": "Birinci dereceden bir bilinmeyenli eşitsizlikleri çözer.",
+     "unite": "Eşitsizlikler",
+     "n": 4
+    },
+    {
+     "kod": "M.8.3.1.3",
+     "ad": "Üçgenin kenar uzunlukları ile bu kenarların karşısındaki açıların ölçülerini ilişkilendirir.",
+     "unite": "Üçgenler",
+     "n": 4
+    },
+    {
+     "kod": "M.8.3.4.4",
+     "ad": "Dik dairesel silindirin hacim bağıntısını oluşturur; ilgili problemleri çözer.",
+     "unite": "Geometrik Cisimler",
+     "n": 4
+    },
+    {
+     "kod": "M.8.3.2.2",
+     "ad": "Nokta, doğru parçası ve diğer şekillerin yansıma sonucu oluşan görüntüsünü oluşturur.",
+     "unite": "Dönüşüm Geometrisi",
+     "n": 4
+    },
+    {
+     "kod": "M.8.1.3.3",
+     "ad": "Kareköklü bir ifadeyi a√b şeklinde yazar ve a√b şeklindeki ifadede katsayıyı kök içine alır.",
+     "unite": "Kareköklü İfadeler",
+     "n": 4
+    },
+    {
+     "kod": "M.8.1.2.4",
+     "ad": "Verilen bir sayıyı 10’un farklı tam sayı kuvvetlerini kullanarak ifade eder.",
+     "unite": "Üslü İfadeler",
+     "n": 3
+    },
+    {
+     "kod": "M.8.1.2.1",
+     "ad": "Tam sayıların, tam sayı kuvvetlerini hesaplar.",
+     "unite": "Üslü İfadeler",
+     "n": 3
+    },
+    {
+     "kod": "M.8.2.3.2",
+     "ad": "Birinci dereceden bir bilinmeyenli eşitsizlikleri sayı doğrusunda gösterir.",
+     "unite": "Eşitsizlikler",
+     "n": 3
+    },
+    {
+     "kod": "M.8.1.2.5",
+     "ad": "Çok büyük ve çok küçük sayıları bilimsel gösterimle ifade eder ve karşılaştırır.",
+     "unite": "Üslü İfadeler",
+     "n": 3
+    },
+    {
+     "kod": "M.8.3.3.1",
+     "ad": "Eşlik ve benzerliği ilişkilendirir, eş ve benzer şekillerin kenar ve açı ilişkilerini belirler.",
+     "unite": "Eşlik ve Benzerlik",
+     "n": 3
+    },
+    {
+     "kod": "M.8.3.1.2",
+     "ad": "Üçgenin iki kenar uzunluğunun toplamı veya farkı ile üçüncü kenarının uzunluğunu ilişkilendirir.",
+     "unite": "Üçgenler",
+     "n": 3
+    },
+    {
+     "kod": "M.8.3.4.1",
+     "ad": "Dik prizmaları tanır, temel elemanlarını belirler, inşa eder ve açınımını çizer.",
+     "unite": "Geometrik Cisimler",
+     "n": 2
+    },
+    {
+     "kod": "M.8.1.2.3",
+     "ad": "Sayıların ondalık gösterimlerini 10’un tam sayı kuvvetlerini kullanarak çözümler.",
+     "unite": "Üslü İfadeler",
+     "n": 2
+    },
+    {
+     "kod": "M.8.1.3.7",
+     "ad": "Ondalık ifadelerin kareköklerini belirler.",
+     "unite": "Kareköklü İfadeler",
+     "n": 2
+    },
+    {
+     "kod": "M.8.2.1.3",
+     "ad": "Özdeşlikleri modellerle açıklar.",
+     "unite": "Cebirsel İfadeler ve Özdeşlikler",
+     "n": 2
+    },
+    {
+     "kod": "M.8.1.1.3",
+     "ad": "Verilen iki doğal sayının aralarında asal olup olmadığını belirler.",
+     "unite": "Çarpanlar ve Katlar",
+     "n": 2
+    },
+    {
+     "kod": "M.8.5.1.2",
+     "ad": "“Daha fazla”, “eşit”, “daha az” olasılıklı olayları ayırt eder, örnek verir.",
+     "unite": "Veri Analizi ve Olasılık",
+     "n": 2
+    },
+    {
+     "kod": "M.8.2.2.2",
+     "ad": "Koordinat sistemini özellikleriyle tanır ve sıralı ikilileri gösterir.",
+     "unite": "Doğrusal Denklemler",
+     "n": 1
+    },
+    {
+     "kod": "M.8.3.4.5",
+     "ad": "Dik piramidi tanır, temel elemanlarını belirler, inşa eder ve açınımını çizer.",
+     "unite": "Geometrik Cisimler",
+     "n": 1
+    },
+    {
+     "kod": "M.8.3.2.3",
+     "ad": "Çokgenlerin öteleme ve yansımalar sonucunda ortaya çıkan görüntüsünü oluşturur.",
+     "unite": "Dönüşüm Geometrisi",
+     "n": 1
+    },
+    {
+     "kod": "M.8.1.3.8",
+     "ad": "Gerçek sayıları tanır, rasyonel ve irrasyonel sayılarla ilişkilendirir.",
+     "unite": "Kareköklü İfadeler",
+     "n": 1
+    },
+    {
+     "kod": "M.8.3.4.3",
+     "ad": "Dik dairesel silindirin yüzey alanı bağıntısını oluşturur, ilgili problemleri çözer.",
+     "unite": "Geometrik Cisimler",
+     "n": 1
+    }
+   ],
+   "tip": {
+    "klasik": 18,
+    "gorsel": 47,
+    "grafik-tablo": 33,
+    "cok-adimli": 82
+   },
+   "ozellik": {
+    "sekil": 113,
+    "grafik": 19,
+    "gunluk-hayat": 89,
+    "tablo": 25,
+    "olumsuz-kok": 12,
+    "sozel-mantik": 2
+   }
+  },
+  "fen": {
+   "ad": "Fen Bilimleri",
+   "n": 180,
+   "unite": [
+    {
+     "unite": "Madde ve Endüstri",
+     "toplam": 44,
+     "yil": {
+      "2018": 6,
+      "2019": 5,
+      "2020": 4,
+      "2021": 5,
+      "2022": 5,
+      "2023": 4,
+      "2024": 5,
+      "2025": 5,
+      "2026": 5
+     }
+    },
+    {
+     "unite": "DNA ve Genetik Kod",
+     "toplam": 41,
+     "yil": {
+      "2018": 3,
+      "2019": 3,
+      "2020": 8,
+      "2021": 5,
+      "2022": 4,
+      "2023": 8,
+      "2024": 4,
+      "2025": 3,
+      "2026": 3
+     }
+    },
+    {
+     "unite": "Enerji Dönüşümleri ve Çevre Bilimi",
+     "toplam": 26,
+     "yil": {
+      "2018": 2,
+      "2019": 4,
+      "2020": 0,
+      "2021": 4,
+      "2022": 4,
+      "2023": 0,
+      "2024": 4,
+      "2025": 4,
+      "2026": 4
+     }
+    },
+    {
+     "unite": "Basınç",
+     "toplam": 22,
+     "yil": {
+      "2018": 0,
+      "2019": 2,
+      "2020": 5,
+      "2021": 2,
+      "2022": 2,
+      "2023": 5,
+      "2024": 2,
+      "2025": 2,
+      "2026": 2
+     }
+    },
+    {
+     "unite": "Elektrik Yükleri ve Elektrik Enerjisi",
+     "toplam": 16,
+     "yil": {
+      "2018": 3,
+      "2019": 3,
+      "2020": 0,
+      "2021": 0,
+      "2022": 2,
+      "2023": 0,
+      "2024": 2,
+      "2025": 3,
+      "2026": 3
+     }
+    },
+    {
+     "unite": "Basit Makineler",
+     "toplam": 14,
+     "yil": {
+      "2018": 2,
+      "2019": 2,
+      "2020": 0,
+      "2021": 2,
+      "2022": 2,
+      "2023": 0,
+      "2024": 2,
+      "2025": 2,
+      "2026": 2
+     }
+    },
+    {
+     "unite": "Mevsimler ve İklim",
+     "toplam": 13,
+     "yil": {
+      "2018": 0,
+      "2019": 1,
+      "2020": 3,
+      "2021": 2,
+      "2022": 1,
+      "2023": 3,
+      "2024": 1,
+      "2025": 1,
+      "2026": 1
+     }
+    },
+    {
+     "unite": "belirsiz",
+     "toplam": 4,
+     "yil": {
+      "2018": 4,
+      "2019": 0,
+      "2020": 0,
+      "2021": 0,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 0
+     }
+    }
+   ],
+   "kazanim": [
+    {
+     "kod": "F.8.5.1.1",
+     "ad": "Basit makinelerin sağladığı avantajları örnekler üzerinden açıklar.",
+     "unite": "Basit Makineler",
+     "n": 14
+    },
+    {
+     "kod": "F.8.2.2.2",
+     "ad": "Tek karakter çaprazlamaları ile ilgili problemler çözerek sonuçlar hakkında yorum yapar.",
+     "unite": "DNA ve Genetik Kod",
+     "n": 11
+    },
+    {
+     "kod": "F.8.3.1.1",
+     "ad": "Katı basıncını etkileyen değişkenleri deneyerek keşfeder.",
+     "unite": "Basınç",
+     "n": 11
+    },
+    {
+     "kod": "F.8.3.1.2",
+     "ad": "Sıvı basıncını etkileyen değişkenleri tahmin eder ve tahminlerini test eder.",
+     "unite": "Basınç",
+     "n": 11
+    },
+    {
+     "kod": "F.8.1.1.1",
+     "ad": "Mevsimlerin oluşumuna yönelik tahminlerde bulunur.",
+     "unite": "Mevsimler ve İklim",
+     "n": 10
+    },
+    {
+     "kod": "F.8.4.5.1",
+     "ad": "Isınmanın maddenin cinsine, kütlesine ve/veya sıcaklık değişimine bağlı olduğunu deney yaparak keşfeder.",
+     "unite": "Madde ve Endüstri",
+     "n": 7
+    },
+    {
+     "kod": "F.8.4.2.1",
+     "ad": "Fiziksel ve kimyasal değişim arasındaki farkları, çeşitli olayları gözlemleyerek açıklar.",
+     "unite": "Madde ve Endüstri",
+     "n": 7
+    },
+    {
+     "kod": "F.8.2.5.1",
+     "ad": "Genetik mühendisliğini ve biyoteknolojiyi ilişkilendirir.",
+     "unite": "DNA ve Genetik Kod",
+     "n": 6
+    },
+    {
+     "kod": "F.8.4.1.2",
+     "ad": "Elementleri periyodik tablo üzerinde metal, yarımetal ve ametal olarak sınıflandırır.",
+     "unite": "Madde ve Endüstri",
+     "n": 6
+    },
+    {
+     "kod": "F.8.6.1.1",
+     "ad": "Besin zincirindeki üretici, tüketici, ayrıştırıcılara örnekler verir.",
+     "unite": "Enerji Dönüşümleri ve Çevre Bilimi",
+     "n": 6
+    },
+    {
+     "kod": "F.8.6.3.1",
+     "ad": "Madde döngülerini şema üzerinde göstererek açıklar.",
+     "unite": "Enerji Dönüşümleri ve Çevre Bilimi",
+     "n": 6
+    },
+    {
+     "kod": "F.8.2.3.2",
+     "ad": "Örneklerden yola çıkarak modifikasyonu açıklar.",
+     "unite": "DNA ve Genetik Kod",
+     "n": 5
+    },
+    {
+     "kod": "F.8.2.4.1",
+     "ad": "Canlıların yaşadıkları çevreye uyumlarını gözlem yaparak açıklar.",
+     "unite": "DNA ve Genetik Kod",
+     "n": 5
+    },
+    {
+     "kod": "F.8.7.1.2",
+     "ad": "Elektrik yüklerini sınıflandırarak aynı ve farklı cins elektrik yüklerinin birbirlerine etkisini açıklar.",
+     "unite": "Elektrik Yükleri ve Elektrik Enerjisi",
+     "n": 5
+    },
+    {
+     "kod": "F.8.7.1.1",
+     "ad": "Elektriklenmeyi, bazı doğa olayları ve teknolojideki uygulama örnekleri ile açıklar.",
+     "unite": "Elektrik Yükleri ve Elektrik Enerjisi",
+     "n": 4
+    },
+    {
+     "kod": "F.8.4.3.1",
+     "ad": "Bileşiklerin kimyasal tepkime sonucunda oluştuğunu bilir.",
+     "unite": "Madde ve Endüstri",
+     "n": 4
+    },
+    {
+     "kod": "F.8.4.5.3",
+     "ad": "Maddelerin hâl değişimi ve ısınma grafiğini çizerek yorumlar.",
+     "unite": "Madde ve Endüstri",
+     "n": 4
+    },
+    {
+     "kod": "F.8.2.1.1",
+     "ad": "Nükleotid, gen, DNA ve kromozom kavramlarını açıklayarak bu kavramlar arasında ilişki kurar.",
+     "unite": "DNA ve Genetik Kod",
+     "n": 4
+    },
+    {
+     "kod": "F.8.2.1.3",
+     "ad": "DNA’nın kendini nasıl eşlediğini ifade eder.",
+     "unite": "DNA ve Genetik Kod",
+     "n": 4
+    },
+    {
+     "kod": "F.8.6.2.2",
+     "ad": "Fotosentez hızını etkileyen faktörler ile ilgili çıkarımlarda bulunur.",
+     "unite": "Enerji Dönüşümleri ve Çevre Bilimi",
+     "n": 4
+    },
+    {
+     "kod": "F.8.4.4.4",
+     "ad": "Maddelerin asitlik ve bazlık durumlarına ilişkin pH değerlerini kullanarak çıkarımda bulunur.",
+     "unite": "Madde ve Endüstri",
+     "n": 4
+    },
+    {
+     "kod": "F.8.2.1.2",
+     "ad": "DNA’nın yapısını model üzerinde gösterir.",
+     "unite": "DNA ve Genetik Kod",
+     "n": 3
+    },
+    {
+     "kod": "F.8.6.2.1",
+     "ad": "Bitkilerde besin üretiminde fotosentezin önemini fark eder.",
+     "unite": "Enerji Dönüşümleri ve Çevre Bilimi",
+     "n": 3
+    },
+    {
+     "kod": "F.8.6.3.3",
+     "ad": "Küresel iklim değişikliklerinin nedenlerini ve olası sonuçlarını tartışır.",
+     "unite": "Enerji Dönüşümleri ve Çevre Bilimi",
+     "n": 3
+    },
+    {
+     "kod": "F.8.7.2.1",
+     "ad": "Cisimleri, sahip oldukları elektrik yükleri bakımından sınıflandırır.",
+     "unite": "Elektrik Yükleri ve Elektrik Enerjisi",
+     "n": 3
+    },
+    {
+     "kod": "F.8.4.1.1",
+     "ad": "Periyodik sistemde, grup ve periyotların nasıl oluşturulduğunu açıklar.",
+     "unite": "Madde ve Endüstri",
+     "n": 3
+    },
+    {
+     "kod": "F.8.2.3.1",
+     "ad": "Örneklerden yola çıkarak mutasyonu açıklar.",
+     "unite": "DNA ve Genetik Kod",
+     "n": 3
+    },
+    {
+     "kod": "F.8.1.2.1",
+     "ad": "İklim ve hava olayları arasındaki farkı açıklar.",
+     "unite": "Mevsimler ve İklim",
+     "n": 3
+    },
+    {
+     "kod": "F.8.7.2.2",
+     "ad": "Topraklamayı açıklar.",
+     "unite": "Elektrik Yükleri ve Elektrik Enerjisi",
+     "n": 2
+    },
+    {
+     "kod": "F.8.4.4.5",
+     "ad": "Asit ve bazların çeşitli maddeler üzerindeki etkilerini gözlemler.",
+     "unite": "Madde ve Endüstri",
+     "n": 2
+    },
+    {
+     "kod": "F.8.4.5.4",
+     "ad": "Günlük yaşamda meydana gelen hâl değişimleri ile ısı alışverişini ilişkilendirir.",
+     "unite": "Madde ve Endüstri",
+     "n": 2
+    },
+    {
+     "kod": "F.8.4.4.3",
+     "ad": "Günlük hayatta ulaşılabilecek malzemeleri asit-baz ayracı olarak kullanır.",
+     "unite": "Madde ve Endüstri",
+     "n": 2
+    },
+    {
+     "kod": "F.8.4.5.2",
+     "ad": "Hâl değiştirmek için gerekli ısının maddenin cinsi ve kütlesiyle ilişkili olduğunu deney yaparak keşfeder.",
+     "unite": "Madde ve Endüstri",
+     "n": 2
+    },
+    {
+     "kod": "F.8.6.4.1",
+     "ad": "Kaynakların kullanımında tasarruflu davranmaya özen gösterir.",
+     "unite": "Enerji Dönüşümleri ve Çevre Bilimi",
+     "n": 2
+    },
+    {
+     "kod": "F.8.6.4.5",
+     "ad": "Kaynakların tasarruflu kullanılmaması durumunda gelecekte karşılaşılabilecek problemleri belirterek çözüm önerileri sunar.",
+     "unite": "Enerji Dönüşümleri ve Çevre Bilimi",
+     "n": 1
+    },
+    {
+     "kod": "F.8.4.4.1",
+     "ad": "Asit ve bazların genel özelliklerini ifade eder.",
+     "unite": "Madde ve Endüstri",
+     "n": 1
+    },
+    {
+     "kod": "F.8.7.3.2",
+     "ad": "Elektrik enerjisinin ısı, ışık veya hareket enerjisine dönüşümü temel alan bir model tasarlar.",
+     "unite": "Elektrik Yükleri ve Elektrik Enerjisi",
+     "n": 1
+    },
+    {
+     "kod": "F.8.6.4.3",
+     "ad": "Geri dönüşüm için katı atıkların ayrıştırılmasının önemini açıklar.",
+     "unite": "Enerji Dönüşümleri ve Çevre Bilimi",
+     "n": 1
+    },
+    {
+     "kod": "F.8.7.1.3",
+     "ad": "Deneyler yaparak elektriklenme çeşitlerini fark eder.",
+     "unite": "Elektrik Yükleri ve Elektrik Enerjisi",
+     "n": 1
+    }
+   ],
+   "tip": {
+    "gorsel": 58,
+    "uzun-metin": 11,
+    "deney": 56,
+    "grafik-tablo": 19,
+    "klasik": 25,
+    "cok-adimli": 11
+   },
+   "ozellik": {
+    "sekil": 115,
+    "olumsuz-kok": 24,
+    "grafik": 13,
+    "oncullu": 52,
+    "gunluk-hayat": 37,
+    "harita": 1,
+    "tablo": 18,
+    "sozel-mantik": 1
+   }
+  },
+  "inkilap": {
+   "ad": "İnkılap Tarihi",
+   "n": 90,
+   "unite": [
+    {
+     "unite": "Millî Uyanış: Bağımsızlık Yolunda Atılan Adımlar",
+     "toplam": 24,
+     "yil": {
+      "2018": 1,
+      "2019": 2,
+      "2020": 4,
+      "2021": 2,
+      "2022": 2,
+      "2023": 4,
+      "2024": 2,
+      "2025": 3,
+      "2026": 4
+     }
+    },
+    {
+     "unite": "Atatürkçülük ve Çağdaşlaşan Türkiye",
+     "toplam": 22,
+     "yil": {
+      "2018": 5,
+      "2019": 4,
+      "2020": 0,
+      "2021": 3,
+      "2022": 2,
+      "2023": 0,
+      "2024": 3,
+      "2025": 3,
+      "2026": 2
+     }
+    },
+    {
+     "unite": "Millî Bir Destan: Ya İstiklal Ya Ölüm!",
+     "toplam": 17,
+     "yil": {
+      "2018": 1,
+      "2019": 2,
+      "2020": 3,
+      "2021": 2,
+      "2022": 2,
+      "2023": 3,
+      "2024": 2,
+      "2025": 1,
+      "2026": 1
+     }
+    },
+    {
+     "unite": "Bir Kahraman Doğuyor",
+     "toplam": 13,
+     "yil": {
+      "2018": 1,
+      "2019": 1,
+      "2020": 3,
+      "2021": 1,
+      "2022": 1,
+      "2023": 3,
+      "2024": 1,
+      "2025": 1,
+      "2026": 1
+     }
+    },
+    {
+     "unite": "Atatürk Dönemi Türk Dış Politikası",
+     "toplam": 7,
+     "yil": {
+      "2018": 1,
+      "2019": 1,
+      "2020": 0,
+      "2021": 1,
+      "2022": 1,
+      "2023": 0,
+      "2024": 1,
+      "2025": 1,
+      "2026": 1
+     }
+    },
+    {
+     "unite": "Demokratikleşme Çabaları",
+     "toplam": 6,
+     "yil": {
+      "2018": 0,
+      "2019": 0,
+      "2020": 0,
+      "2021": 1,
+      "2022": 2,
+      "2023": 0,
+      "2024": 1,
+      "2025": 1,
+      "2026": 1
+     }
+    },
+    {
+     "unite": "Atatürk’ün Ölümü ve Sonrası",
+     "toplam": 1,
+     "yil": {
+      "2018": 1,
+      "2019": 0,
+      "2020": 0,
+      "2021": 0,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 0
+     }
+    }
+   ],
+   "kazanim": [
+    {
+     "kod": "İTA.8.2.2",
+     "ad": "Birinci Dünya Savaşı’nda Osmanlı Devleti’nin durumu hakkında çıkarımlarda bulunur.",
+     "unite": "Millî Uyanış: Bağımsızlık Yolunda Atılan Adımlar",
+     "n": 10
+    },
+    {
+     "kod": "İTA.8.4.1",
+     "ad": "Çağdaşlaşan Türkiye’nin temeli olan Atatürk ilkelerini açıklar.",
+     "unite": "Atatürkçülük ve Çağdaşlaşan Türkiye",
+     "n": 9
+    },
+    {
+     "kod": "İTA.8.1.1",
+     "ad": "Avrupa’daki gelişmelerin yansımaları bağlamında Osmanlı Devleti’nin yirminci yüzyılın başlarındaki siyasi ve sosyal durumunu kavrar.",
+     "unite": "Bir Kahraman Doğuyor",
+     "n": 6
+    },
+    {
+     "kod": "İTA.8.3.2",
+     "ad": "Millî Mücadele Dönemi’nde Batı Cephesi’nde meydana gelen gelişmeleri kavrar.",
+     "unite": "Millî Bir Destan: Ya İstiklal Ya Ölüm!",
+     "n": 6
+    },
+    {
+     "kod": "İTA.8.4.9",
+     "ad": "Atatürk ilke ve inkılaplarını oluşturan temel esasları kavrar.",
+     "unite": "Atatürkçülük ve Çağdaşlaşan Türkiye",
+     "n": 5
+    },
+    {
+     "kod": "İTA.8.2.5",
+     "ad": "Millî Mücadele’nin hazırlık döneminde Mustafa Kemal’in yaptığı çalışmaları analiz eder.",
+     "unite": "Millî Uyanış: Bağımsızlık Yolunda Atılan Adımlar",
+     "n": 5
+    },
+    {
+     "kod": "İTA.8.1.4",
+     "ad": "Mustafa Kemal’in askerlik hayatı ile ilgili olayları ve olguları onun kişilik özellikleri ile ilişkilendirir.",
+     "unite": "Bir Kahraman Doğuyor",
+     "n": 5
+    },
+    {
+     "kod": "İTA.8.2.3",
+     "ad": "Mondros Ateşkes Antlaşması’nın imzalanması ve uygulanması karşısında Osmanlı yönetiminin, Mustafa Kemal’in ve halkın tutumunu analiz eder.",
+     "unite": "Millî Uyanış: Bağımsızlık Yolunda Atılan Adımlar",
+     "n": 5
+    },
+    {
+     "kod": "İTA.8.5.1",
+     "ad": "Atatürk Dönemi’ndeki demokratikleşme yolunda atılan adımları açıklar.",
+     "unite": "Demokratikleşme Çabaları",
+     "n": 5
+    },
+    {
+     "kod": "İTA.8.6.1",
+     "ad": "Atatürk Dönemi Türk dış politikasının temel ilkelerini ve amaçlarını açıklar.",
+     "unite": "Atatürk Dönemi Türk Dış Politikası",
+     "n": 4
+    },
+    {
+     "kod": "İTA.8.3.1",
+     "ad": "Millî Mücadele Dönemi’nde Doğu Cephesi ve Güney Cephesi’nde meydana gelen gelişmeleri kavrar.",
+     "unite": "Millî Bir Destan: Ya İstiklal Ya Ölüm!",
+     "n": 3
+    },
+    {
+     "kod": "İTA.8.4.4",
+     "ad": "Eğitim ve kültür alanında yapılan inkılapları ve gelişmeleri kavrar.",
+     "unite": "Atatürkçülük ve Çağdaşlaşan Türkiye",
+     "n": 3
+    },
+    {
+     "kod": "İTA.8.3.7",
+     "ad": "Millî Mücadele Dönemi’nin siyasi, sosyal ve kültürel olaylarının sanat ve edebiyat ürünlerine yansımalarına kanıtlar gösterir.",
+     "unite": "Millî Bir Destan: Ya İstiklal Ya Ölüm!",
+     "n": 3
+    },
+    {
+     "kod": "İTA.8.2.6",
+     "ad": "Misakımilli’nin kabulünü ve Büyük Millet Meclisinin açılışını vatanın bütünlüğü esası ile “ulusal egemenlik” ve “tam bağımsızlık” ilkeleri ile ilişkilendirir.",
+     "unite": "Millî Uyanış: Bağımsızlık Yolunda Atılan Adımlar",
+     "n": 2
+    },
+    {
+     "kod": "İTA.8.4.6",
+     "ad": "Ekonomi alanında meydana gelen gelişmeleri kavrar.",
+     "unite": "Atatürkçülük ve Çağdaşlaşan Türkiye",
+     "n": 2
+    },
+    {
+     "kod": "İTA.8.3.5",
+     "ad": "Sakarya Meydan Savaşı’nın kazanılmasında ve Büyük Taarruz’un başarılı olmasında Mustafa Kemal’in rolüne ilişkin çıkarımlarda bulunur.",
+     "unite": "Millî Bir Destan: Ya İstiklal Ya Ölüm!",
+     "n": 2
+    },
+    {
+     "kod": "İTA.8.2.7",
+     "ad": "Büyük Millet Meclisine karşı ayaklanmalar ile ayaklanmaların bastırılması için alınan tedbirleri analiz eder.",
+     "unite": "Millî Uyanış: Bağımsızlık Yolunda Atılan Adımlar",
+     "n": 2
+    },
+    {
+     "kod": "İTA.8.3.3",
+     "ad": "Millî Mücadele’nin zor bir döneminde Maarif Kongresi yapan Atatürk’ün, millî ve çağdaş eğitime verdiği önemi kavrar.",
+     "unite": "Millî Bir Destan: Ya İstiklal Ya Ölüm!",
+     "n": 2
+    },
+    {
+     "kod": "İTA.8.6.2",
+     "ad": "Atatürk Dönemi Türk dış politikasında yaşanan gelişmeleri analiz eder.",
+     "unite": "Atatürk Dönemi Türk Dış Politikası",
+     "n": 2
+    },
+    {
+     "kod": "İTA.8.4.5",
+     "ad": "Toplumsal alanda yapılan inkılapları ve meydana gelen gelişmeleri kavrar.",
+     "unite": "Atatürkçülük ve Çağdaşlaşan Türkiye",
+     "n": 2
+    },
+    {
+     "kod": "İTA.8.1.3",
+     "ad": "Gençlik döneminde Mustafa Kemal’in fikir hayatını etkileyen önemli kişileri ve olayları kavrar.",
+     "unite": "Bir Kahraman Doğuyor",
+     "n": 1
+    },
+    {
+     "kod": "İTA.8.6.3",
+     "ad": "Atatürk’ün Hatay’ı ülkemize katmak konusunda yaptıklarına ve bu uğurda gösterdiği özveriye kanıtlar gösterir.",
+     "unite": "Atatürk Dönemi Türk Dış Politikası",
+     "n": 1
+    },
+    {
+     "kod": "İTA.8.7.4",
+     "ad": "İkinci Dünya Savaşı’ndaki gelişmelerin ve bu savaşın sonuçlarının Türkiye’ye etkilerini analiz eder.",
+     "unite": "Atatürk’ün Ölümü ve Sonrası",
+     "n": 1
+    },
+    {
+     "kod": "İTA.8.1.2",
+     "ad": "Mustafa Kemal’in çocukluk ve öğrenim hayatından hareketle onun kişilik özelliklerinin oluşumu hakkında çıkarımlarda bulunur.",
+     "unite": "Bir Kahraman Doğuyor",
+     "n": 1
+    },
+    {
+     "kod": "İTA.8.4.7",
+     "ad": "Atatürk Dönemi’nde sağlık alanında yapılan çalışmaları devletin temel görevleri ile ilişkilendirir.",
+     "unite": "Atatürkçülük ve Çağdaşlaşan Türkiye",
+     "n": 1
+    },
+    {
+     "kod": "İTA.8.5.2",
+     "ad": "Mustafa Kemal’e suikast girişimini analiz eder.",
+     "unite": "Demokratikleşme Çabaları",
+     "n": 1
+    },
+    {
+     "kod": "İTA.8.3.4",
+     "ad": "Türk milletinin millî birlik, beraberlik ve dayanışmasının bir örneği olarak Tekalif-i Millîye Emirleri doğrultusunda yapılan uygulamaları analiz eder.",
+     "unite": "Millî Bir Destan: Ya İstiklal Ya Ölüm!",
+     "n": 1
+    }
+   ],
+   "tip": {
+    "klasik": 50,
+    "uzun-metin": 29,
+    "grafik-tablo": 9,
+    "gorsel": 2
+   },
+   "ozellik": {
+    "olumsuz-kok": 22,
+    "oncullu": 18,
+    "tablo": 9,
+    "sekil": 1,
+    "harita": 1
+   }
+  },
+  "din": {
+   "ad": "Din Kültürü",
+   "n": 90,
+   "unite": [
+    {
+     "unite": "Kader İnancı",
+     "toplam": 26,
+     "yil": {
+      "2018": 1,
+      "2019": 2,
+      "2020": 3,
+      "2021": 2,
+      "2022": 5,
+      "2023": 4,
+      "2024": 3,
+      "2025": 4,
+      "2026": 2
+     }
+    },
+    {
+     "unite": "Zekât ve Sadaka",
+     "toplam": 25,
+     "yil": {
+      "2018": 2,
+      "2019": 3,
+      "2020": 5,
+      "2021": 3,
+      "2022": 1,
+      "2023": 4,
+      "2024": 3,
+      "2025": 2,
+      "2026": 2
+     }
+    },
+    {
+     "unite": "Hz. Muhammed’in Örnekliği",
+     "toplam": 16,
+     "yil": {
+      "2018": 2,
+      "2019": 3,
+      "2020": 0,
+      "2021": 2,
+      "2022": 1,
+      "2023": 0,
+      "2024": 1,
+      "2025": 4,
+      "2026": 3
+     }
+    },
+    {
+     "unite": "Din ve Hayat",
+     "toplam": 16,
+     "yil": {
+      "2018": 2,
+      "2019": 1,
+      "2020": 2,
+      "2021": 3,
+      "2022": 2,
+      "2023": 2,
+      "2024": 2,
+      "2025": 0,
+      "2026": 2
+     }
+    },
+    {
+     "unite": "Kur’an-ı Kerim ve Özellikleri",
+     "toplam": 4,
+     "yil": {
+      "2018": 0,
+      "2019": 1,
+      "2020": 0,
+      "2021": 0,
+      "2022": 1,
+      "2023": 0,
+      "2024": 1,
+      "2025": 0,
+      "2026": 1
+     }
+    },
+    {
+     "unite": "belirsiz",
+     "toplam": 3,
+     "yil": {
+      "2018": 3,
+      "2019": 0,
+      "2020": 0,
+      "2021": 0,
+      "2022": 0,
+      "2023": 0,
+      "2024": 0,
+      "2025": 0,
+      "2026": 0
+     }
+    }
+   ],
+   "kazanim": [
+    {
+     "kod": "DKAB.8.2.2",
+     "ad": "Zekât ve sadaka ibadetini ayet ve hadislerle açıklar.",
+     "unite": "Zekât ve Sadaka",
+     "n": 13
+    },
+    {
+     "kod": "DKAB.8.3.1",
+     "ad": "Din, birey ve toplum arasındaki ilişkiyi yorumlar.",
+     "unite": "Din ve Hayat",
+     "n": 9
+    },
+    {
+     "kod": "DKAB.8.1.3",
+     "ad": "Kaza ve kader ile ilgili kavramları analiz eder.",
+     "unite": "Kader İnancı",
+     "n": 8
+    },
+    {
+     "kod": "DKAB.8.1.1",
+     "ad": "Kader ve kaza inancını ayet ve hadislerle açıklar.",
+     "unite": "Kader İnancı",
+     "n": 8
+    },
+    {
+     "kod": "DKAB.8.3.2",
+     "ad": "İslam dininin can, nesil, akıl, mal ve din emniyetiyle ilgili ortaya koyduğu ilke ve hedefleri analiz eder.",
+     "unite": "Din ve Hayat",
+     "n": 6
+    },
+    {
+     "kod": "DKAB.8.2.1",
+     "ad": "İslam’ın paylaşma ve yardımlaşmaya verdiği önemi ayet ve hadisler ışığında yorumlar.",
+     "unite": "Zekât ve Sadaka",
+     "n": 5
+    },
+    {
+     "kod": "DKAB.8.2.3",
+     "ad": "Zekât, infak ve sadakanın bireysel ve toplumsal önemini fark eder.",
+     "unite": "Zekât ve Sadaka",
+     "n": 5
+    },
+    {
+     "kod": "DKAB.8.1.2",
+     "ad": "İnsanın ilmi, iradesi, sorumluluğu ile kader arasında ilişki kurar.",
+     "unite": "Kader İnancı",
+     "n": 5
+    },
+    {
+     "kod": "DKAB.8.4.6",
+     "ad": "Hz. Muhammed’in (s.a.v.) insanlara verdiği değeri örneklerle açıklar.",
+     "unite": "Hz. Muhammed’in Örnekliği",
+     "n": 4
+    },
+    {
+     "kod": "DKAB.8.5.1",
+     "ad": "İslam dininin temel kaynaklarını tanır.",
+     "unite": "Kur’an-ı Kerim ve Özellikleri",
+     "n": 3
+    },
+    {
+     "kod": "DKAB.8.4.7",
+     "ad": "Hz. Muhammed’in (s.a.v.) örnek davranışlarının toplumsal hayattaki önemini değerlendirir.",
+     "unite": "Hz. Muhammed’in Örnekliği",
+     "n": 3
+    },
+    {
+     "kod": "DKAB.8.4.8",
+     "ad": "Hz. Muhammed’in (s.a.v.) hikmetli söz ve davranışlarıyla insanları iyiye ve güzele yönlendirdiğini fark eder.",
+     "unite": "Hz. Muhammed’in Örnekliği",
+     "n": 2
+    },
+    {
+     "kod": "DKAB.8.1.5",
+     "ad": "Hz. Musa’nın (a.s.) hayatını ana hatlarıyla tanır.",
+     "unite": "Kader İnancı",
+     "n": 2
+    },
+    {
+     "kod": "DKAB.8.4.5",
+     "ad": "Hz. Muhammed’in (s.a.v.) hakkı gözetmedeki hassasiyetine örnekler verir.",
+     "unite": "Hz. Muhammed’in Örnekliği",
+     "n": 2
+    },
+    {
+     "kod": "DKAB.8.1.6",
+     "ad": "Ayet el-Kürsi'yi okur, anlamını söyler.",
+     "unite": "Kader İnancı",
+     "n": 2
+    },
+    {
+     "kod": "DKAB.8.4.4",
+     "ad": "Hz. Muhammed’in (s.a.v.) cesaret ve kararlılığını örnek olaylarla açıklar.",
+     "unite": "Hz. Muhammed’in Örnekliği",
+     "n": 2
+    },
+    {
+     "kod": "DKAB.8.4.1",
+     "ad": "Hz. Muhammed’in (s.a.v.) doğruluğu ve güvenilir kişiliği ile peygamberlerin özellikleri arasında ilişki kurar.",
+     "unite": "Hz. Muhammed’in Örnekliği",
+     "n": 1
+    },
+    {
+     "kod": "DKAB.8.3.3",
+     "ad": "Hz. Yusuf’un (a.s.) örnek hayatından ilkeler çıkarır.",
+     "unite": "Din ve Hayat",
+     "n": 1
+    },
+    {
+     "kod": "DKAB.8.1.4",
+     "ad": "Toplumda kader ve kaza ile ilgili yaygın olan yanlış anlayışları sorgular.",
+     "unite": "Kader İnancı",
+     "n": 1
+    },
+    {
+     "kod": "DKAB.8.2.5",
+     "ad": "Maûn suresini okur, anlamını söyler.",
+     "unite": "Zekât ve Sadaka",
+     "n": 1
+    },
+    {
+     "kod": "DKAB.8.2.4",
+     "ad": "Hz. Şuayb’in (a.s.) hayatını ana hatlarıyla tanır.",
+     "unite": "Zekât ve Sadaka",
+     "n": 1
+    },
+    {
+     "kod": "DKAB.8.5.3",
+     "ad": "Kur’an-ı Kerim’in temel özelliklerini değerlendirir.",
+     "unite": "Kur’an-ı Kerim ve Özellikleri",
+     "n": 1
+    },
+    {
+     "kod": "DKAB.8.4.3",
+     "ad": "Hz. Muhammed’in (s.a.v.) istişareye verdiği önemi ortaya koyan örnek olaylardan hareketle gündelik hayatla ilgili çıkarımlarda bulunur.",
+     "unite": "Hz. Muhammed’in Örnekliği",
+     "n": 1
+    },
+    {
+     "kod": "DKAB.8.4.2",
+     "ad": "Hz. Muhammed’in (s.a.v.) merhametli ve affedici oluşunu davranışlarında yansıtmaya özen gösterir.",
+     "unite": "Hz. Muhammed’in Örnekliği",
+     "n": 1
+    }
+   ],
+   "tip": {
+    "klasik": 65,
+    "uzun-metin": 23,
+    "gorsel": 1,
+    "cok-adimli": 1
+   },
+   "ozellik": {
+    "olumsuz-kok": 27,
+    "gunluk-hayat": 15,
+    "oncullu": 15,
+    "metin-karsilastirma": 2,
+    "sekil": 1,
+    "tablo": 2
+   }
+  },
+  "ingilizce": {
+   "ad": "İngilizce",
+   "n": 90,
+   "unite": [
+    {
+     "unite": "Friendship",
+     "toplam": 18,
+     "yil": {
+      "2018": 1,
+      "2019": 1,
+      "2020": 3,
+      "2021": 2,
+      "2022": 2,
+      "2023": 4,
+      "2024": 2,
+      "2025": 2,
+      "2026": 1
+     }
+    },
+    {
+     "unite": "In the Kitchen",
+     "toplam": 11,
+     "yil": {
+      "2018": 1,
+      "2019": 1,
+      "2020": 2,
+      "2021": 1,
+      "2022": 1,
+      "2023": 2,
+      "2024": 1,
+      "2025": 1,
+      "2026": 1
+     }
+    },
+    {
+     "unite": "On the Phone",
+     "toplam": 11,
+     "yil": {
+      "2018": 0,
+      "2019": 1,
+      "2020": 3,
+      "2021": 1,
+      "2022": 1,
+      "2023": 2,
+      "2024": 1,
+      "2025": 1,
+      "2026": 1
+     }
+    },
+    {
+     "unite": "Tourism",
+     "toplam": 10,
+     "yil": {
+      "2018": 3,
+      "2019": 1,
+      "2020": 0,
+      "2021": 1,
+      "2022": 1,
+      "2023": 0,
+      "2024": 1,
+      "2025": 1,
+      "2026": 2
+     }
+    },
+    {
+     "unite": "Teen Life",
+     "toplam": 10,
+     "yil": {
+      "2018": 2,
+      "2019": 2,
+      "2020": 0,
+      "2021": 1,
+      "2022": 2,
+      "2023": 0,
+      "2024": 1,
+      "2025": 1,
+      "2026": 1
+     }
+    },
+    {
+     "unite": "The Internet",
+     "toplam": 8,
+     "yil": {
+      "2018": 1,
+      "2019": 1,
+      "2020": 1,
+      "2021": 1,
+      "2022": 0,
+      "2023": 2,
+      "2024": 1,
+      "2025": 0,
+      "2026": 1
+     }
+    },
+    {
+     "unite": "Adventures",
+     "toplam": 8,
+     "yil": {
+      "2018": 1,
+      "2019": 1,
+      "2020": 0,
+      "2021": 1,
+      "2022": 1,
+      "2023": 0,
+      "2024": 1,
+      "2025": 2,
+      "2026": 1
+     }
+    },
+    {
+     "unite": "Chores",
+     "toplam": 8,
+     "yil": {
+      "2018": 1,
+      "2019": 1,
+      "2020": 1,
+      "2021": 1,
+      "2022": 1,
+      "2023": 0,
+      "2024": 1,
+      "2025": 1,
+      "2026": 1
+     }
+    },
+    {
+     "unite": "Science",
+     "toplam": 6,
+     "yil": {
+      "2018": 0,
+      "2019": 1,
+      "2020": 0,
+      "2021": 1,
+      "2022": 1,
+      "2023": 0,
+      "2024": 1,
+      "2025": 1,
+      "2026": 1
+     }
+    }
+   ],
+   "kazanim": [
+    {
+     "kod": "E8.3.R1",
+     "ad": "Students will be able to understand the overall meaning of short texts about a process.",
+     "unite": "In the Kitchen",
+     "n": 10
+    },
+    {
+     "kod": "E8.2.R1",
+     "ad": "Students will be able to understand short and simple texts about regular activities of teenagers.",
+     "unite": "Teen Life",
+     "n": 9
+    },
+    {
+     "kod": "E8.7.R1",
+     "ad": "Students will be able to find specific information from various texts about tourism.",
+     "unite": "Tourism",
+     "n": 9
+    },
+    {
+     "kod": "E8.4.R1",
+     "ad": "Students will be able to understand short and simple texts with related vocabulary.",
+     "unite": "On the Phone",
+     "n": 9
+    },
+    {
+     "kod": "E8.8.R1",
+     "ad": "Students will be able to understand various short and simple texts about responsibilities.",
+     "unite": "Chores",
+     "n": 8
+    },
+    {
+     "kod": "E8.1.R1",
+     "ad": "Students will be able to understand short and simple texts about friendship.",
+     "unite": "Friendship",
+     "n": 8
+    },
+    {
+     "kod": "E8.1.R2",
+     "ad": "Students will be able to understand short and simple invitation letters, cards and e-mails.",
+     "unite": "Friendship",
+     "n": 8
+    },
+    {
+     "kod": "E8.5.R2",
+     "ad": "Students will be able to find specific information about the Internet in various texts.",
+     "unite": "The Internet",
+     "n": 7
+    },
+    {
+     "kod": "E8.6.R1",
+     "ad": "Students will be able to understand short and simple texts to find the main points about adventures.",
+     "unite": "Adventures",
+     "n": 6
+    },
+    {
+     "kod": "E8.9.R2",
+     "ad": "Students will be able to identify main ideas and supporting details in short texts about science.",
+     "unite": "Science",
+     "n": 5
+    },
+    {
+     "kod": "E8.1.SI1",
+     "ad": "Students will be able to interact with reasonable ease in structured situations and short conversations involving accepting and refusing an offer/invitation, apologizing and making simple inquiries.",
+     "unite": "Friendship",
+     "n": 2
+    },
+    {
+     "kod": "E8.6.SI1",
+     "ad": "Students will be able to interact with reasonable ease in short conversations.",
+     "unite": "Adventures",
+     "n": 2
+    },
+    {
+     "kod": "E8.4.SI1",
+     "ad": "Students will be able to make a simple phone call asking and responding to questions.",
+     "unite": "On the Phone",
+     "n": 2
+    },
+    {
+     "kod": "E8.7.SP1",
+     "ad": "Students will be able to express their preferences for particular tourist attractions and give reasons.",
+     "unite": "Tourism",
+     "n": 1
+    },
+    {
+     "kod": "E8.2.SP1",
+     "ad": "Students will be able to express what they prefer, like and dislike.",
+     "unite": "Teen Life",
+     "n": 1
+    },
+    {
+     "kod": "E8.3.SI1",
+     "ad": "Students will be able to ask and answer questions and exchange ideas and information on a topic related to how something is processed.",
+     "unite": "In the Kitchen",
+     "n": 1
+    },
+    {
+     "kod": "E8.5.R1",
+     "ad": "Students will be able to identify main ideas in short and simple texts about internet habits.",
+     "unite": "The Internet",
+     "n": 1
+    },
+    {
+     "kod": "E8.9.R1",
+     "ad": "Students will be able to understand short and simple texts about actions happening currently and in the past.",
+     "unite": "Science",
+     "n": 1
+    }
+   ],
+   "tip": {
+    "gorsel": 26,
+    "klasik": 43,
+    "uzun-metin": 10,
+    "grafik-tablo": 10,
+    "cok-adimli": 1
+   },
+   "ozellik": {
+    "sekil": 26,
+    "diyalog": 26,
+    "gunluk-hayat": 15,
+    "tablo": 8,
+    "olumsuz-kok": 26,
+    "grafik": 2,
+    "sozel-mantik": 4,
+    "oncullu": 1,
+    "metin-karsilastirma": 8,
+    "harita": 1
+   }
+  }
+ },
+ "tip": {},
+ "ozellik": {},
+ "okuma": {
+  "metin": 773,
+  "goruntu": 37
+ },
+ "guven": {
+  "yuksek": 493,
+  "orta": 282,
+  "dusuk": 35
+ },
+ "gecersizKod": 0,
+ "enCokPuan": [
+  {
+   "ders": "Türkçe",
+   "kod": "T.8.3.32",
+   "ad": "Grafik, tablo ve çizelgeyle sunulan bilgileri yorumlar.",
+   "n": 22,
+   "kat": 4,
+   "agirlikliPuan": 88
+  },
+  {
+   "ders": "Türkçe",
+   "kod": "T.8.3.25",
+   "ad": "Okudukları ile ilgili çıkarımlarda bulunur.",
+   "n": 17,
+   "kat": 4,
+   "agirlikliPuan": 68
+  },
+  {
+   "ders": "Türkçe",
+   "kod": "T.8.3.5",
+   "ad": "Bağlamdan yararlanarak bilmediği kelime ve kelime gruplarının anlamını tahmin eder.",
+   "n": 16,
+   "kat": 4,
+   "agirlikliPuan": 64
+  },
+  {
+   "ders": "Türkçe",
+   "kod": "T.8.4.16",
+   "ad": "Yazdıklarını düzenler.",
+   "n": 16,
+   "kat": 4,
+   "agirlikliPuan": 64
+  },
+  {
+   "ders": "Türkçe",
+   "kod": "T.8.3.21",
+   "ad": "Metnin içeriğini yorumlar.",
+   "n": 15,
+   "kat": 4,
+   "agirlikliPuan": 60
+  },
+  {
+   "ders": "Fen Bilimleri",
+   "kod": "F.8.5.1.1",
+   "ad": "Basit makinelerin sağladığı avantajları örnekler üzerinden açıklar.",
+   "n": 14,
+   "kat": 4,
+   "agirlikliPuan": 56
+  },
+  {
+   "ders": "Matematik",
+   "kod": "M.8.4.1.2",
+   "ad": "Verileri sütun, daire veya çizgi grafiği ile gösterir ve bu gösterimler arasında uygun olan dönüşümleri yapar.",
+   "n": 12,
+   "kat": 4,
+   "agirlikliPuan": 48
+  },
+  {
+   "ders": "Fen Bilimleri",
+   "kod": "F.8.2.2.2",
+   "ad": "Tek karakter çaprazlamaları ile ilgili problemler çözerek sonuçlar hakkında yorum yapar.",
+   "n": 11,
+   "kat": 4,
+   "agirlikliPuan": 44
+  },
+  {
+   "ders": "Fen Bilimleri",
+   "kod": "F.8.3.1.1",
+   "ad": "Katı basıncını etkileyen değişkenleri deneyerek keşfeder.",
+   "n": 11,
+   "kat": 4,
+   "agirlikliPuan": 44
+  },
+  {
+   "ders": "Fen Bilimleri",
+   "kod": "F.8.3.1.2",
+   "ad": "Sıvı basıncını etkileyen değişkenleri tahmin eder ve tahminlerini test eder.",
+   "n": 11,
+   "kat": 4,
+   "agirlikliPuan": 44
+  }
+ ]
+}

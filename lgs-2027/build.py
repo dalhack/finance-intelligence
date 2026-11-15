@@ -59,6 +59,10 @@ for o in src.get('ornek', []):
 content = {'sinav': tk['sinav'], 'taktikler': tk['taktikler'], 'kartlar': cards,
            'kaynaklar': {'cikmis': cik, 'ornek': [{'donem': k, 'baglantilar': v} for k, v in sorted(orn.items(), reverse=True)],
                          'not': 'Bağlantılar 15 Kasım 2026 tarihinde tek tek denetlendi. MEB dosya adreslerini değiştirirse açılmayabilir.'}}
+az = load('analiz_ozet.json')
+if az:
+    content['analiz'] = {'yillar': az['yillar'], 'n': az['soruSayisi'], 'dersler': [{'ders': d, 'ad': az['dersler'][d]['ad'], 'n': az['dersler'][d]['n'],
+        'unite': [{'u': u['unite'], 't': u['toplam']} for u in az['dersler'][d]['unite'] if u['unite'] != 'belirsiz']} for d in DERS]}
 js = lambda o: json.dumps(o, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
 open(os.path.join(A, 'questions.js'), 'w', encoding='utf-8').write('window.LGS_QUESTIONS=' + js(qs) + ';\n')
 open(os.path.join(A, 'content.js'), 'w', encoding='utf-8').write('window.LGS_CONTENT=' + js(content) + ';\n')
