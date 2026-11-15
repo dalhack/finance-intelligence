@@ -1,0 +1,262 @@
+[
+ {
+  "kod": "M.8.1.1.1",
+  "ad": "Verilen pozitif tam sayıların pozitif tam sayı çarpanlarını bulur, pozitif tam sayıların pozitif tam sayı çarpanlarını üslü ifadelerin çarpımı şeklinde yazar.",
+  "unite": "Çarpanlar ve Katlar"
+ },
+ {
+  "kod": "M.8.1.1.2",
+  "ad": "İki doğal sayının en büyük ortak bölenini (EBOB) ve en küçük ortak katını (EKOK) hesaplar, ilgili problemleri çözer.",
+  "unite": "Çarpanlar ve Katlar"
+ },
+ {
+  "kod": "M.8.1.1.3",
+  "ad": "Verilen iki doğal sayının aralarında asal olup olmadığını belirler.",
+  "unite": "Çarpanlar ve Katlar"
+ },
+ {
+  "kod": "M.8.1.2.1",
+  "ad": "Tam sayıların, tam sayı kuvvetlerini hesaplar.",
+  "unite": "Üslü İfadeler"
+ },
+ {
+  "kod": "M.8.1.2.2",
+  "ad": "Üslü ifadelerle ilgili temel kuralları anlar, birbirine denk ifadeler oluşturur.",
+  "unite": "Üslü İfadeler"
+ },
+ {
+  "kod": "M.8.1.2.3",
+  "ad": "Sayıların ondalık gösterimlerini 10’un tam sayı kuvvetlerini kullanarak çözümler.",
+  "unite": "Üslü İfadeler"
+ },
+ {
+  "kod": "M.8.1.2.4",
+  "ad": "Verilen bir sayıyı 10’un farklı tam sayı kuvvetlerini kullanarak ifade eder.",
+  "unite": "Üslü İfadeler"
+ },
+ {
+  "kod": "M.8.1.2.5",
+  "ad": "Çok büyük ve çok küçük sayıları bilimsel gösterimle ifade eder ve karşılaştırır.",
+  "unite": "Üslü İfadeler"
+ },
+ {
+  "kod": "M.8.1.3.1",
+  "ad": "Tam kare pozitif tam sayılarla bu sayıların karekökleri arasındaki ilişkiyi belirler.",
+  "unite": "Kareköklü İfadeler"
+ },
+ {
+  "kod": "M.8.1.3.2",
+  "ad": "Tam kare olmayan kareköklü bir sayının hangi iki doğal sayı arasında olduğunu belirler.",
+  "unite": "Kareköklü İfadeler"
+ },
+ {
+  "kod": "M.8.1.3.3",
+  "ad": "Kareköklü bir ifadeyi a√b şeklinde yazar ve a√b şeklindeki ifadede katsayıyı kök içine alır.",
+  "unite": "Kareköklü İfadeler"
+ },
+ {
+  "kod": "M.8.1.3.4",
+  "ad": "Kareköklü ifadelerde çarpma ve bölme işlemlerini yapar.",
+  "unite": "Kareköklü İfadeler"
+ },
+ {
+  "kod": "M.8.1.3.5",
+  "ad": "Kareköklü ifadelerde toplama ve çıkarma işlemlerini yapar.",
+  "unite": "Kareköklü İfadeler"
+ },
+ {
+  "kod": "M.8.1.3.6",
+  "ad": "Kareköklü bir ifade ile çarpıldığında, sonucu bir doğal sayı yapan çarpanlara örnek verir.",
+  "unite": "Kareköklü İfadeler"
+ },
+ {
+  "kod": "M.8.1.3.7",
+  "ad": "Ondalık ifadelerin kareköklerini belirler.",
+  "unite": "Kareköklü İfadeler"
+ },
+ {
+  "kod": "M.8.1.3.8",
+  "ad": "Gerçek sayıları tanır, rasyonel ve irrasyonel sayılarla ilişkilendirir.",
+  "unite": "Kareköklü İfadeler"
+ },
+ {
+  "kod": "M.8.2.1.1",
+  "ad": "Basit cebirsel ifadeleri anlar ve farklı biçimlerde yazar.",
+  "unite": "Cebirsel İfadeler ve Özdeşlikler"
+ },
+ {
+  "kod": "M.8.2.1.2",
+  "ad": "Cebirsel ifadelerin çarpımını yapar.",
+  "unite": "Cebirsel İfadeler ve Özdeşlikler"
+ },
+ {
+  "kod": "M.8.2.1.3",
+  "ad": "Özdeşlikleri modellerle açıklar.",
+  "unite": "Cebirsel İfadeler ve Özdeşlikler"
+ },
+ {
+  "kod": "M.8.2.1.4",
+  "ad": "Cebirsel ifadeleri çarpanlara ayırır.",
+  "unite": "Cebirsel İfadeler ve Özdeşlikler"
+ },
+ {
+  "kod": "M.8.2.2.1",
+  "ad": "Birinci dereceden bir bilinmeyenli denklemleri çözer.",
+  "unite": "Doğrusal Denklemler"
+ },
+ {
+  "kod": "M.8.2.2.2",
+  "ad": "Koordinat sistemini özellikleriyle tanır ve sıralı ikilileri gösterir.",
+  "unite": "Doğrusal Denklemler"
+ },
+ {
+  "kod": "M.8.2.2.3",
+  "ad": "Aralarında doğrusal ilişki bulunan iki değişkenden birinin diğerine bağlı olarak nasıl değiştiğini tablo ve denklem ile ifade eder.",
+  "unite": "Doğrusal Denklemler"
+ },
+ {
+  "kod": "M.8.2.2.4",
+  "ad": "Doğrusal denklemlerin grafiğini çizer.",
+  "unite": "Doğrusal Denklemler"
+ },
+ {
+  "kod": "M.8.2.2.5",
+  "ad": "Doğrusal ilişki içeren gerçek hayat durumlarına ait denklem, tablo ve grafiği oluşturur ve yorumlar.",
+  "unite": "Doğrusal Denklemler"
+ },
+ {
+  "kod": "M.8.2.2.6",
+  "ad": "Doğrunun eğimini modellerle açıklar, doğrusal denklemleri ve grafiklerini eğimle ilişkilendirir.",
+  "unite": "Doğrusal Denklemler"
+ },
+ {
+  "kod": "M.8.2.3.1",
+  "ad": "Birinci dereceden bir bilinmeyenli eşitsizlik içeren günlük hayat durumlarına uygun matematik cümleleri yazar.",
+  "unite": "Eşitsizlikler"
+ },
+ {
+  "kod": "M.8.2.3.2",
+  "ad": "Birinci dereceden bir bilinmeyenli eşitsizlikleri sayı doğrusunda gösterir.",
+  "unite": "Eşitsizlikler"
+ },
+ {
+  "kod": "M.8.2.3.3",
+  "ad": "Birinci dereceden bir bilinmeyenli eşitsizlikleri çözer.",
+  "unite": "Eşitsizlikler"
+ },
+ {
+  "kod": "M.8.3.1.1",
+  "ad": "Üçgende kenarortay, açıortay ve yüksekliği inşa eder.",
+  "unite": "Üçgenler"
+ },
+ {
+  "kod": "M.8.3.1.2",
+  "ad": "Üçgenin iki kenar uzunluğunun toplamı veya farkı ile üçüncü kenarının uzunluğunu ilişkilendirir.",
+  "unite": "Üçgenler"
+ },
+ {
+  "kod": "M.8.3.1.3",
+  "ad": "Üçgenin kenar uzunlukları ile bu kenarların karşısındaki açıların ölçülerini ilişkilendirir.",
+  "unite": "Üçgenler"
+ },
+ {
+  "kod": "M.8.3.1.4",
+  "ad": "Yeterli sayıda elemanının ölçüleri verilen bir üçgeni çizer.",
+  "unite": "Üçgenler"
+ },
+ {
+  "kod": "M.8.3.1.5",
+  "ad": "Pisagor bağıntısını oluşturur, ilgili problemleri çözer.",
+  "unite": "Üçgenler"
+ },
+ {
+  "kod": "M.8.3.2.1",
+  "ad": "Nokta, doğru parçası ve diğer şekillerin öteleme sonucundaki görüntülerini çizer.",
+  "unite": "Dönüşüm Geometrisi"
+ },
+ {
+  "kod": "M.8.3.2.2",
+  "ad": "Nokta, doğru parçası ve diğer şekillerin yansıma sonucu oluşan görüntüsünü oluşturur.",
+  "unite": "Dönüşüm Geometrisi"
+ },
+ {
+  "kod": "M.8.3.2.3",
+  "ad": "Çokgenlerin öteleme ve yansımalar sonucunda ortaya çıkan görüntüsünü oluşturur.",
+  "unite": "Dönüşüm Geometrisi"
+ },
+ {
+  "kod": "M.8.3.3.1",
+  "ad": "Eşlik ve benzerliği ilişkilendirir, eş ve benzer şekillerin kenar ve açı ilişkilerini belirler.",
+  "unite": "Eşlik ve Benzerlik"
+ },
+ {
+  "kod": "M.8.3.3.2",
+  "ad": "Benzer çokgenlerin benzerlik oranını belirler, bir çokgene eş ve benzer çokgenler oluşturur.",
+  "unite": "Eşlik ve Benzerlik"
+ },
+ {
+  "kod": "M.8.3.4.1",
+  "ad": "Dik prizmaları tanır, temel elemanlarını belirler, inşa eder ve açınımını çizer.",
+  "unite": "Geometrik Cisimler"
+ },
+ {
+  "kod": "M.8.3.4.2",
+  "ad": "Dik dairesel silindirin temel elemanlarını belirler, inşa eder ve açınımını çizer.",
+  "unite": "Geometrik Cisimler"
+ },
+ {
+  "kod": "M.8.3.4.3",
+  "ad": "Dik dairesel silindirin yüzey alanı bağıntısını oluşturur, ilgili problemleri çözer.",
+  "unite": "Geometrik Cisimler"
+ },
+ {
+  "kod": "M.8.3.4.4",
+  "ad": "Dik dairesel silindirin hacim bağıntısını oluşturur; ilgili problemleri çözer.",
+  "unite": "Geometrik Cisimler"
+ },
+ {
+  "kod": "M.8.3.4.5",
+  "ad": "Dik piramidi tanır, temel elemanlarını belirler, inşa eder ve açınımını çizer.",
+  "unite": "Geometrik Cisimler"
+ },
+ {
+  "kod": "M.8.3.4.6",
+  "ad": "Dik koniyi tanır, temel elemanlarını belirler, inşa eder ve açınımını çizer.",
+  "unite": "Geometrik Cisimler"
+ },
+ {
+  "kod": "M.8.4.1.1",
+  "ad": "En fazla üç veri grubuna ait çizgi ve sütun grafiklerini yorumlar.",
+  "unite": "Veri Analizi ve Olasılık"
+ },
+ {
+  "kod": "M.8.4.1.2",
+  "ad": "Verileri sütun, daire veya çizgi grafiği ile gösterir ve bu gösterimler arasında uygun olan dönüşümleri yapar.",
+  "unite": "Veri Analizi ve Olasılık"
+ },
+ {
+  "kod": "M.8.5.1.1",
+  "ad": "Bir olaya ait olası durumları belirler.",
+  "unite": "Veri Analizi ve Olasılık"
+ },
+ {
+  "kod": "M.8.5.1.2",
+  "ad": "“Daha fazla”, “eşit”, “daha az” olasılıklı olayları ayırt eder, örnek verir.",
+  "unite": "Veri Analizi ve Olasılık"
+ },
+ {
+  "kod": "M.8.5.1.3",
+  "ad": "Eşit şansa sahip olan olaylarda her bir çıktının olasılık değerinin eşit olduğunu ve bu değerin 1/n olduğunu açıklar.",
+  "unite": "Veri Analizi ve Olasılık"
+ },
+ {
+  "kod": "M.8.5.1.4",
+  "ad": "Olasılık değerinin 0 ile 1 arasında (0 ve 1 dâhil) olduğunu anlar.",
+  "unite": "Veri Analizi ve Olasılık"
+ },
+ {
+  "kod": "M.8.5.1.5",
+  "ad": "Basit bir olayın olma olasılığını hesaplar.",
+  "unite": "Veri Analizi ve Olasılık"
+ }
+]

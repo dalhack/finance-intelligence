@@ -1,0 +1,407 @@
+[
+ {
+  "id": "mat-001",
+  "ders": "matematik",
+  "unite": "Çarpanlar ve Katlar",
+  "kazanimKod": "M.8.1.1.1",
+  "kazanimAd": "Verilen pozitif tam sayıların pozitif tam sayı çarpanlarını bulur, pozitif tam sayıların pozitif tam sayı çarpanlarını üslü ifadelerin çarpımı şeklinde yazar.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Kodlama kulübündeki Deniz, kasasının şifresini şöyle belirliyor: 360 sayısını asal çarpanlarının kuvvetleri biçiminde <b>2<sup>a</sup> · 3<sup>b</sup> · 5<sup>c</sup></b> olarak yazıyor ve şifre olarak <b>a + b + c</b> toplamını kullanıyor.<br>Buna göre Deniz'in şifresi kaçtır?",
+  "svg": "",
+  "siklar": [
+   "5",
+   "6",
+   "7",
+   "10"
+  ],
+  "dogru": 1,
+  "ipucu1": "360'ı en küçük asal sayıdan başlayarak bölmeyi dene.",
+  "ipucu2": "360 = 2 · 180 = 2 · 2 · 90 … diye devam et; her asalın kaç kez kullanıldığını say.",
+  "cozum": [
+   "360'ı asal çarpanlarına ayıralım: 360 = 2 · 2 · 2 · 3 · 3 · 5.",
+   "Üslü yazarsak 360 = 2³ · 3² · 5¹ olur.",
+   "a = 3, b = 2, c = 1 olduğundan a + b + c = 6'dır."
+  ],
+  "tuzaklar": [
+   "360 = 2² · 3² · 10 gibi eksik ayırıp 10'u asal sanınca üsler eksik sayılır.",
+   "",
+   "2'nin kuvveti 3 yerine 4 alınırsa (360'ı 720 gibi bölmeye devam etmek) bu sonuç çıkar.",
+   "Üsler yerine asal çarpanların kendisi toplanınca (2 + 3 + 5) bu sonuç çıkar."
+  ],
+  "taktik": "Asal çarpan algoritmasında (bölen listesi) her asalın kaç kez yazıldığını say; üs o sayıdır.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "Asal çarpanlara ayırma",
+    "tanim": "Bir sayıyı asal sayıların kuvvetlerinin çarpımı olarak yazmak. Örn: 12 = 2² · 3"
+   }
+  ]
+ },
+ {
+  "id": "mat-002",
+  "ders": "matematik",
+  "unite": "Çarpanlar ve Katlar",
+  "kazanimKod": "M.8.1.1.2",
+  "kazanimAd": "İki doğal sayının en büyük ortak bölenini (EBOB) ve en küçük ortak katını (EKOK) hesaplar, ilgili problemleri çözer.",
+  "zorluk": 2,
+  "tip": "cok-adimli",
+  "metin": "Bir limandaki iki fenerden biri 18 saniyede bir, diğeri 24 saniyede bir yanıp sönmektedir. İki fener saat tam 21.00'de aynı anda yanmıştır.<br>Buna göre fenerler 21.00 ile 21.10 arasında (21.00'deki yanış <b>dâhil</b>) kaç kez aynı anda yanar?",
+  "svg": "",
+  "siklar": [
+   "8",
+   "10",
+   "9",
+   "14"
+  ],
+  "dogru": 2,
+  "ipucu1": "İki fenerin yeniden birlikte yanması için geçen süre, 18 ve 24'ün ortak katı olmalı.",
+  "ipucu2": "EKOK(18, 24)'ü bul; 10 dakikanın kaç saniye olduğunu yaz ve başlangıç anını unutma.",
+  "cozum": [
+   "18 = 2 · 3², 24 = 2³ · 3 olduğundan EKOK(18, 24) = 2³ · 3² = 72.",
+   "Fenerler 72 saniyede bir birlikte yanar. 10 dakika = 600 saniyedir.",
+   "600 ÷ 72 = 8 (kalan 24). Yani başlangıçtan sonra 8 kez daha birlikte yanarlar.",
+   "21.00'deki yanış da sayıldığından toplam 8 + 1 = 9 kez."
+  ],
+  "tuzaklar": [
+   "21.00'deki ilk birlikte yanış sayılmazsa 8 bulunur.",
+   "Sürenin sonu olan 600. saniye de birlikte yanış sanılırsa 10 bulunur; 600, 72'nin katı değildir.",
+   "",
+   "18 ile 24 toplanıp 600 saniye 42'ye bölünürse bu sonuç çıkar."
+  ],
+  "taktik": "\"Birlikte tekrar\" sorularında EKOK al; soruda başlangıç anı dâhil mi diye mutlaka kontrol et.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "EKOK",
+    "tanim": "İki sayının ortak katlarının en küçüğü. Örn: EKOK(18, 24) = 72"
+   }
+  ]
+ },
+ {
+  "id": "mat-003",
+  "ders": "matematik",
+  "unite": "Çarpanlar ve Katlar",
+  "kazanimKod": "M.8.1.1.2",
+  "kazanimAd": "İki doğal sayının en büyük ortak bölenini (EBOB) ve en küçük ortak katını (EKOK) hesaplar, ilgili problemleri çözer.",
+  "zorluk": 2,
+  "tip": "cok-adimli",
+  "metin": "Bir marangoz, 96 cm ve 120 cm uzunluğundaki iki çıtayı hiç artmayacak şekilde, <b>birbirine eşit ve mümkün olan en uzun</b> parçalara ayıracaktır. Her kesimde bir çıta tek bir yerden kesilmektedir.<br>Buna göre marangoz toplam kaç kesim yapar?",
+  "svg": "",
+  "siklar": [
+   "7",
+   "9",
+   "24",
+   "8"
+  ],
+  "dogru": 0,
+  "ipucu1": "Parçalar eşit ve en uzun olacaksa parça boyu iki uzunluğu da tam bölmeli.",
+  "ipucu2": "EBOB(96, 120)'yi bul. Sonra her çıtadan kaç parça çıktığını ve bir çıtayı n parçaya ayırmak için kaç kesim gerektiğini düşün.",
+  "cozum": [
+   "96 = 2⁵ · 3, 120 = 2³ · 3 · 5 olduğundan EBOB(96, 120) = 2³ · 3 = 24 cm.",
+   "96 ÷ 24 = 4 parça, 120 ÷ 24 = 5 parça elde edilir.",
+   "Bir çıtayı 4 parçaya ayırmak için 3, 5 parçaya ayırmak için 4 kesim gerekir.",
+   "Toplam 3 + 4 = 7 kesim yapılır."
+  ],
+  "tuzaklar": [
+   "",
+   "Parça sayısı (4 + 5) bulunup kesim sayısı sanılırsa 9 çıkar.",
+   "Bir parçanın uzunluğu olan EBOB değeri cevap sanılırsa 24 işaretlenir.",
+   "İki çıta tek parça gibi düşünülüp 9 parça için 8 kesim hesaplanırsa bu sonuç çıkar."
+  ],
+  "taktik": "\"Eş ve en büyük parça\" → EBOB. Kesim sayısı her çıta için parça sayısının 1 eksiğidir.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "EBOB",
+    "tanim": "İki sayının ortak bölenlerinin en büyüğü. Örn: EBOB(96, 120) = 24"
+   }
+  ]
+ },
+ {
+  "id": "mat-004",
+  "ders": "matematik",
+  "unite": "Çarpanlar ve Katlar",
+  "kazanimKod": "M.8.1.1.2",
+  "kazanimAd": "İki doğal sayının en büyük ortak bölenini (EBOB) ve en küçük ortak katını (EKOK) hesaplar, ilgili problemleri çözer.",
+  "zorluk": 3,
+  "tip": "uzun-metin",
+  "metin": "Bir fidanlıktaki görevli, sayısı 100'den fazla 200'den az olan fidanları gruplamak istiyor. Fidanları<br>• 8'erli gruplara ayırdığında 3 fidan,<br>• 12'şerli gruplara ayırdığında yine 3 fidan artıyor.<br>• 7'şerli gruplara ayırdığında ise hiç fidan artmıyor.<br>Buna göre görevli bu fidanları 5'erli gruplara ayırırsa kaç fidan artar?",
+  "svg": "",
+  "siklar": [
+   "0",
+   "1",
+   "3",
+   "2"
+  ],
+  "dogru": 3,
+  "ipucu1": "Fidan sayısından 3 çıkarırsan kalan sayı hem 8'e hem 12'ye tam bölünür.",
+  "ipucu2": "EKOK(8, 12) = 24. Fidan sayısı 24'ün bir katının 3 fazlasıdır; 100 ile 200 arasındaki adayları yazıp 7'ye bölünebileni ara.",
+  "cozum": [
+   "Fidan sayısının 3 eksiği 8 ve 12'nin ortak katıdır. EKOK(8, 12) = 24.",
+   "100 ile 200 arasındaki adaylar: 123, 147, 171, 195.",
+   "Bunlardan yalnız 147, 7'ye tam bölünür (147 = 7 · 21).",
+   "147 = 5 · 29 + 2 olduğundan 5'erli gruplamada 2 fidan artar."
+  ],
+  "tuzaklar": [
+   "24'ün katının 3 fazlası olan 195 seçilip 7'ye bölünme koşulu kontrol edilmezse bu sonuç çıkar.",
+   "171 sayısı seçilip 7'ye tam bölünmediği gözden kaçarsa 1 bulunur.",
+   "123 sayısı seçilip 7'ye bölünme koşulu atlanırsa 3 bulunur.",
+   ""
+  ],
+  "taktik": "Aynı kalanı veren bölmelerde: sayı = EKOK'un katı + kalan. Adayları listele, son koşulla ele.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Ortak kat ve kalan",
+    "tanim": "Bir sayı a ve b ile bölündüğünde aynı k kalanını veriyorsa sayı − k, EKOK(a, b)'nin katıdır."
+   }
+  ]
+ },
+ {
+  "id": "mat-005",
+  "ders": "matematik",
+  "unite": "Çarpanlar ve Katlar",
+  "kazanimKod": "M.8.1.1.3",
+  "kazanimAd": "Verilen iki doğal sayının aralarında asal olup olmadığını belirler.",
+  "zorluk": 1,
+  "tip": "grafik-tablo",
+  "metin": "Bir zekâ oyununda kartların üzerinde sayı çiftleri yazmaktadır. Üzerindeki iki sayı <b>aralarında asal</b> olan kartlar puan kazandırmaktadır.<table class=\"t\"><tr><th>Kart</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th></tr><tr><td>Sayılar</td><td>14 ve 25</td><td>21 ve 35</td><td>16 ve 27</td><td>22 ve 33</td><td>9 ve 28</td><td>15 ve 39</td></tr></table>Buna göre tablodaki kartlardan kaç tanesi puan kazandırır?",
+  "svg": "",
+  "siklar": [
+   "2",
+   "4",
+   "3",
+   "5"
+  ],
+  "dogru": 2,
+  "ipucu1": "Aralarında asal olmak için sayıların asal olması gerekmez; 1'den başka ortak bölenleri olmamalı.",
+  "ipucu2": "Her çift için ortak bir asal bölen (2, 3, 5, 7, 11…) var mı diye bak.",
+  "cozum": [
+   "14 ve 25: ortak bölen yok → aralarında asal. 16 ve 27: ortak bölen yok → aralarında asal. 9 ve 28: ortak bölen yok → aralarında asal.",
+   "21 ve 35'in ortak böleni 7; 22 ve 33'ün ortak böleni 11; 15 ve 39'un ortak böleni 3'tür.",
+   "Aralarında asal olan 3 kart vardır (1, 3 ve 5 numaralı kartlar)."
+  ],
+  "tuzaklar": [
+   "9 ve 28 gibi ikisi de asal olmayan bir çift, aralarında asal sayılmazsa 2 bulunur.",
+   "15 ve 39'un ortak böleni 3 gözden kaçarsa 4 bulunur.",
+   "",
+   "Yalnızca 21 ve 35'in ortak böleni fark edilip diğerleri kontrol edilmezse 5 bulunur."
+  ],
+  "taktik": "Her sayıyı asal çarpanlarıyla düşün: ortak asal yoksa aralarında asaldır.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Aralarında asal",
+    "tanim": "1'den başka ortak böleni olmayan sayılar. Örn: 9 ve 28 (ikisi de asal değildir ama aralarında asaldır)."
+   }
+  ]
+ },
+ {
+  "id": "mat-006",
+  "ders": "matematik",
+  "unite": "Üslü İfadeler",
+  "kazanimKod": "M.8.1.2.1",
+  "kazanimAd": "Tam sayıların, tam sayı kuvvetlerini hesaplar.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "<b>(−2)<sup>3</sup> + 3<sup>−2</sup> · 3<sup>4</sup> − 5<sup>0</sup></b><br>işleminin sonucu kaçtır?",
+  "svg": "",
+  "siklar": [
+   "0",
+   "16",
+   "1",
+   "−4"
+  ],
+  "dogru": 0,
+  "ipucu1": "Negatif sayının tek kuvvetinin işaretine ve sıfırıncı kuvvete dikkat et.",
+  "ipucu2": "Tabanlar aynıysa çarpmada üsler toplanır: 3⁻² · 3⁴ = 3². Her terimi ayrı ayrı hesapla.",
+  "cozum": [
+   "(−2)³ = −8 (tek kuvvet, sonuç negatif).",
+   "3⁻² · 3⁴ = 3² = 9.",
+   "5⁰ = 1.",
+   "−8 + 9 − 1 = 0."
+  ],
+  "tuzaklar": [
+   "",
+   "(−2)³ = +8 alınırsa 8 + 9 − 1 = 16 bulunur.",
+   "5⁰ = 0 alınırsa −8 + 9 − 0 = 1 bulunur.",
+   "5⁰ = 5 alınırsa −8 + 9 − 5 = −4 bulunur."
+  ],
+  "taktik": "Önce her üslü terimi tek sayıya indir, sonra topla-çıkar.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "Sıfırıncı kuvvet",
+    "tanim": "a ≠ 0 için a⁰ = 1"
+   },
+   {
+    "ad": "Negatif tabanın kuvveti",
+    "tanim": "Negatif sayının tek kuvveti negatif, çift kuvveti pozitiftir."
+   }
+  ]
+ },
+ {
+  "id": "mat-007",
+  "ders": "matematik",
+  "unite": "Üslü İfadeler",
+  "kazanimKod": "M.8.1.2.2",
+  "kazanimAd": "Üslü ifadelerle ilgili temel kuralları anlar, birbirine denk ifadeler oluşturur.",
+  "zorluk": 2,
+  "tip": "cok-adimli",
+  "metin": "Bir video paylaşıldığı anda 2<sup>5</sup> kez izlenmiştir. Videonun izlenme sayısı, her saatin sonunda bir önceki saatin sonundaki sayının <b>4 katına</b> çıkmaktadır.<br>Buna göre 6 saatin sonunda videonun izlenme sayısı 2'nin kaçıncı kuvvetine eşit olur?",
+  "svg": "",
+  "siklar": [
+   "11",
+   "29",
+   "30",
+   "17"
+  ],
+  "dogru": 3,
+  "ipucu1": "Her saat 4 ile çarpılıyorsa 6 saatte kaç tane 4 çarpılmış olur?",
+  "ipucu2": "İzlenme sayısı 2⁵ · 4⁶ olur. 4'ü 2'nin kuvveti olarak yaz.",
+  "cozum": [
+   "6 saat boyunca sayı 6 kez 4 ile çarpılır: 2⁵ · 4⁶.",
+   "4 = 2² olduğundan 4⁶ = (2²)⁶ = 2¹².",
+   "2⁵ · 2¹² = 2¹⁷. Cevap 17'dir."
+  ],
+  "tuzaklar": [
+   "4⁶ yerine 2⁶ alınırsa 5 + 6 = 11 bulunur.",
+   "4⁶ = 2²⁴ sanılırsa (4 ile 6 çarpılırsa) 5 + 24 = 29 bulunur.",
+   "Çarpmada üsler toplanacakken çarpılırsa (5 · 6) bu sonuç çıkar.",
+   ""
+  ],
+  "taktik": "Tabanları aynı asal sayıya çevir; üssün üssünde çarp, çarpımda topla.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "Üssün üssü",
+    "tanim": "(aⁿ)ᵐ = aⁿ·ᵐ. Örn: (2²)⁶ = 2¹²"
+   },
+   {
+    "ad": "Aynı tabanda çarpma",
+    "tanim": "aⁿ · aᵐ = aⁿ⁺ᵐ"
+   }
+  ]
+ },
+ {
+  "id": "mat-008",
+  "ders": "matematik",
+  "unite": "Üslü İfadeler",
+  "kazanimKod": "M.8.1.2.5",
+  "kazanimAd": "Çok büyük ve çok küçük sayıları bilimsel gösterimle ifade eder ve karşılaştırır.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "Bir laboratuvarda dört farklı toz taneciğinin çapı ölçülmüş ve sonuçlar farklı biçimlerde not edilmiştir.<table class=\"t\"><tr><th>Tanecik</th><th>Çap (m)</th></tr><tr><td>K</td><td>3,2 · 10<sup>−4</sup></td></tr><tr><td>L</td><td>0,00045</td></tr><tr><td>M</td><td>28 · 10<sup>−5</sup></td></tr><tr><td>N</td><td>0,51 · 10<sup>−3</sup></td></tr></table>Buna göre taneciklerin çaplarının küçükten büyüğe doğru sıralanışı hangisidir?",
+  "svg": "",
+  "siklar": [
+   "N &lt; K &lt; L &lt; M",
+   "M &lt; K &lt; L &lt; N",
+   "K &lt; M &lt; L &lt; N",
+   "M &lt; K &lt; N &lt; L"
+  ],
+  "dogru": 1,
+  "ipucu1": "Sayıları karşılaştırmak için hepsini 10'un aynı kuvvetiyle yaz.",
+  "ipucu2": "Hepsini … · 10⁻⁴ biçimine çevir: virgül sağa kayarsa üs küçülür, sola kayarsa üs büyür.",
+  "cozum": [
+   "K = 3,2 · 10⁻⁴.",
+   "L = 0,00045 = 4,5 · 10⁻⁴.",
+   "M = 28 · 10⁻⁵ = 2,8 · 10⁻⁴ ve N = 0,51 · 10⁻³ = 5,1 · 10⁻⁴.",
+   "2,8 &lt; 3,2 &lt; 4,5 &lt; 5,1 olduğundan sıralama M &lt; K &lt; L &lt; N'dir."
+  ],
+  "tuzaklar": [
+   "Üslere bakılmadan yalnız baştaki sayılar (0,51; 3,2; 4,5; 28) sıralanırsa bu sonuç çıkar.",
+   "",
+   "28 · 10⁻⁵ sayısı 2,8 · 10⁻⁴ yerine 3,2 · 10⁻⁴'ten büyük sanılırsa bu sıralama çıkar.",
+   "0,51 · 10⁻³ sayısı 5,1 · 10⁻⁴ yerine 0,51 · 10⁻⁴ gibi düşünülürse N, L'den küçük sanılır."
+  ],
+  "taktik": "Üsleri eşitle, sonra yalnız katsayıları karşılaştır.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "Bilimsel gösterim",
+    "tanim": "1 ≤ a &lt; 10 ve n tam sayı olmak üzere a · 10ⁿ. Örn: 0,00045 = 4,5 · 10⁻⁴"
+   }
+  ]
+ },
+ {
+  "id": "mat-009",
+  "ders": "matematik",
+  "unite": "Üslü İfadeler",
+  "kazanimKod": "M.8.1.2.2",
+  "kazanimAd": "Üslü ifadelerle ilgili temel kuralları anlar, birbirine denk ifadeler oluşturur.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "Bir harici diskin kapasitesi 2<sup>40</sup> bayttır ve diskin <span class=\"frac\"><span>1</span><span>8</span></span>'i doludur. Ece, diskin boş kalan kısmının tamamına her biri 2<sup>22</sup> bayt yer kaplayan fotoğraflar yükleyecektir.<br>Buna göre Ece bu diske en fazla kaç fotoğraf yükleyebilir?",
+  "svg": "",
+  "siklar": [
+   "2<sup>15</sup>",
+   "2<sup>18</sup>",
+   "7 · 2<sup>15</sup>",
+   "7 · 2<sup>18</sup>"
+  ],
+  "dogru": 2,
+  "ipucu1": "Önce diskin boş kısmının kaç bayt olduğunu üslü biçimde yaz.",
+  "ipucu2": "8 = 2³ olduğundan diskin 1/8'i 2⁴⁰ ÷ 2³ = 2³⁷ bayttır. Boş kısım bunun 7 katıdır.",
+  "cozum": [
+   "Diskin 1/8'i: 2⁴⁰ ÷ 2³ = 2³⁷ bayt doludur.",
+   "Boş kısım 7/8'dir: 7 · 2³⁷ bayt.",
+   "Fotoğraf sayısı: (7 · 2³⁷) ÷ 2²² = 7 · 2¹⁵.",
+   "Cevap 7 · 2¹⁵'tir."
+  ],
+  "tuzaklar": [
+   "Boş kısım yerine dolu kısım (2³⁷ bayt) fotoğraf boyutuna bölünürse bu sonuç çıkar.",
+   "Diskin dolu kısmı hiç hesaba katılmazsa 2⁴⁰ ÷ 2²² = 2¹⁸ bulunur.",
+   "",
+   "Boş kısım 7/8 yerine 7 katı gibi alınır, 8'e bölme unutulursa bu sonuç çıkar."
+  ],
+  "taktik": "Kesirli kısmı da 2'nin kuvvetiyle yaz (8 = 2³); bölmede üsleri çıkar.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Aynı tabanda bölme",
+    "tanim": "aᵐ ÷ aⁿ = aᵐ⁻ⁿ. Örn: 2³⁷ ÷ 2²² = 2¹⁵"
+   }
+  ]
+ },
+ {
+  "id": "mat-010",
+  "ders": "matematik",
+  "unite": "Üslü İfadeler",
+  "kazanimKod": "M.8.1.2.3",
+  "kazanimAd": "Sayıların ondalık gösterimlerini 10’un tam sayı kuvvetlerini kullanarak çözümler.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Bir elektronik terazinin ekranında beliren sayının çözümlenmiş biçimi şöyledir:<br><b>3 · 10<sup>2</sup> + 4 · 10<sup>0</sup> + 7 · 10<sup>−2</sup> + 5 · 10<sup>−3</sup></b><br>Buna göre ekrandaki sayı aşağıdakilerden hangisidir?",
+  "svg": "",
+  "siklar": [
+   "340,75",
+   "304,075",
+   "304,75",
+   "34,075"
+  ],
+  "dogru": 1,
+  "ipucu1": "10'un hangi kuvvetlerinin eksik olduğuna bak; o basamaklara 0 gelir.",
+  "ipucu2": "10² yüzler, 10⁰ birler, 10⁻² yüzde birler, 10⁻³ binde birler basamağıdır.",
+  "cozum": [
+   "3 · 10² = 300 ve 4 · 10⁰ = 4.",
+   "7 · 10⁻² = 0,07 ve 5 · 10⁻³ = 0,005.",
+   "10¹ ve 10⁻¹ terimleri olmadığından onlar ve onda birler basamağı 0'dır.",
+   "300 + 4 + 0,07 + 0,005 = 304,075."
+  ],
+  "tuzaklar": [
+   "4 · 10⁰ onlar basamağına, kesir kısmı da bir basamak sola yazılırsa bu sonuç çıkar.",
+   "",
+   "10⁻¹'li terimin olmadığı fark edilmeyip 7 onda birler basamağına yazılırsa bu sonuç çıkar.",
+   "10¹'li terim olmadığı için onlar basamağına 0 yazmak unutulursa bu sonuç çıkar."
+  ],
+  "taktik": "Basamak tablosu çiz: 10², 10¹, 10⁰, 10⁻¹, 10⁻², 10⁻³; olmayan kuvvetlere 0 yaz.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Çözümleme",
+    "tanim": "Bir sayıyı basamak değerlerinin toplamı olarak yazmak. Örn: 82,53 = 8·10¹ + 2·10⁰ + 5·10⁻¹ + 3·10⁻²"
+   }
+  ]
+ }
+]

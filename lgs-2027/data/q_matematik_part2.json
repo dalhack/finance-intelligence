@@ -1,0 +1,570 @@
+[
+ {
+  "id": "mat-011",
+  "ders": "matematik",
+  "unite": "Kareköklü İfadeler",
+  "kazanimKod": "M.8.1.3.1",
+  "kazanimAd": "Tam kare pozitif tam sayılarla bu sayıların karekökleri arasındaki ilişkiyi belirler.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Alanı 196 m² olan kare biçimindeki bir sebze bahçesinin çevresi bir sıra tel ile çevrilecektir.<br>Buna göre kaç metre tel gerekir?",
+  "svg": "",
+  "siklar": [
+   "14",
+   "28",
+   "49",
+   "56"
+  ],
+  "dogru": 3,
+  "ipucu1": "Karenin alanı bir kenarının karesidir.",
+  "ipucu2": "Hangi sayının karesi 196'dır? Kenarı bulduktan sonra çevreyi hesapla.",
+  "cozum": [
+   "Karenin bir kenarı √196 = 14 m'dir (14 · 14 = 196).",
+   "Çevre = 4 · 14 = 56 m."
+  ],
+  "tuzaklar": [
+   "Yalnız bir kenar uzunluğu (√196) bulunup bırakılırsa 14 çıkar.",
+   "Kenar 2 ile çarpılırsa (yarım çevre) 28 çıkar.",
+   "Alan 4'e bölünürse (196 ÷ 4) bu sonuç çıkar; alan ile çevre karıştırılmıştır.",
+   ""
+  ],
+  "taktik": "1'den 20'ye kadar sayıların karelerini ezbere bilmek bu soruları saniyeler içinde çözdürür.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Tam kare sayı",
+    "tanim": "Bir doğal sayının karesi olan sayı. Örn: 196 = 14², √196 = 14"
+   }
+  ]
+ },
+ {
+  "id": "mat-012",
+  "ders": "matematik",
+  "unite": "Kareköklü İfadeler",
+  "kazanimKod": "M.8.1.3.2",
+  "kazanimAd": "Tam kare olmayan kareköklü bir sayının hangi iki doğal sayı arasında olduğunu belirler.",
+  "zorluk": 2,
+  "tip": "gorsel",
+  "metin": "Aşağıdaki sayı doğrusunda K, L, M ve N noktaları işaretlenmiştir.<br>Buna göre <b>3√6</b> sayısına karşılık gelen nokta hangisi olabilir?",
+  "svg": "<svg viewBox='0 0 320 70' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><line x1='14' y1='40' x2='306' y2='40' /><line x1='28' y1='35' x2='28' y2='45' /><text x='28' y='60' text-anchor='middle' fill='currentColor' stroke='none' >4</text><line x1='72' y1='35' x2='72' y2='45' /><text x='72' y='60' text-anchor='middle' fill='currentColor' stroke='none' >5</text><line x1='116' y1='35' x2='116' y2='45' /><text x='116' y='60' text-anchor='middle' fill='currentColor' stroke='none' >6</text><line x1='160' y1='35' x2='160' y2='45' /><text x='160' y='60' text-anchor='middle' fill='currentColor' stroke='none' >7</text><line x1='204' y1='35' x2='204' y2='45' /><text x='204' y='60' text-anchor='middle' fill='currentColor' stroke='none' >8</text><line x1='248' y1='35' x2='248' y2='45' /><text x='248' y='60' text-anchor='middle' fill='currentColor' stroke='none' >9</text><line x1='292' y1='35' x2='292' y2='45' /><text x='292' y='60' text-anchor='middle' fill='currentColor' stroke='none' >10</text><circle cx='85.2' cy='40' r='3.5' fill='currentColor'/><text x='85.2' y='26' text-anchor='middle' fill='currentColor' stroke='none' font-weight='bold'>K</text><circle cx='146.8' cy='40' r='3.5' fill='currentColor'/><text x='146.8' y='26' text-anchor='middle' fill='currentColor' stroke='none' font-weight='bold'>L</text><circle cx='175.4' cy='40' r='3.5' fill='currentColor'/><text x='175.4' y='26' text-anchor='middle' fill='currentColor' stroke='none' font-weight='bold'>M</text><circle cx='226' cy='40' r='3.5' fill='currentColor'/><text x='226' y='26' text-anchor='middle' fill='currentColor' stroke='none' font-weight='bold'>N</text></svg>",
+  "siklar": [
+   "K",
+   "L",
+   "M",
+   "N"
+  ],
+  "dogru": 2,
+  "ipucu1": "Önce katsayıyı kök içine alarak sayıyı tek bir karekök olarak yaz.",
+  "ipucu2": "3√6 = √(9 · 6). Bu sayı hangi iki tam kare arasında?",
+  "cozum": [
+   "3√6 = √(3² · 6) = √54.",
+   "49 &lt; 54 &lt; 64 olduğundan 7 &lt; √54 &lt; 8.",
+   "7 ile 8 arasındaki tek nokta M'dir."
+  ],
+  "tuzaklar": [
+   "3√6 sayısı 3 + √6 gibi düşünülürse (yaklaşık 5,4) K seçilir.",
+   "√54'ün 49 ile 64 arasında olduğu yanlış belirlenip 6 ile 7 arasında sanılırsa L seçilir.",
+   "",
+   "√6 yaklaşık 2,8 gibi fazla tahmin edilirse 3 · 2,8 = 8,4 bulunup N seçilir."
+  ],
+  "taktik": "a√b'yi konumlandırırken kök içine al, sonra en yakın iki tam kareyi bul.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Katsayıyı kök içine alma",
+    "tanim": "a√b = √(a² · b) (a &gt; 0). Örn: 3√6 = √54"
+   },
+   {
+    "ad": "Karekök tahmini",
+    "tanim": "√54, 7² = 49 ile 8² = 64 arasında olduğundan 7 ile 8 arasındadır."
+   }
+  ]
+ },
+ {
+  "id": "mat-013",
+  "ders": "matematik",
+  "unite": "Kareköklü İfadeler",
+  "kazanimKod": "M.8.1.3.5",
+  "kazanimAd": "Kareköklü ifadelerde toplama ve çıkarma işlemlerini yapar.",
+  "zorluk": 2,
+  "tip": "cok-adimli",
+  "metin": "Dikdörtgen biçimindeki bir fotoğraf çerçevesinin kenar uzunlukları <b>√48 cm</b> ve <b>√75 cm</b>'dir.<br>Buna göre çerçevenin çevresi kaç santimetredir?",
+  "svg": "",
+  "siklar": [
+   "18√3",
+   "9√3",
+   "2√123",
+   "18√6"
+  ],
+  "dogru": 0,
+  "ipucu1": "Kareköklü sayılar ancak kök içleri aynıyken toplanabilir.",
+  "ipucu2": "48 = 16 · 3 ve 75 = 25 · 3. Her birini a√3 biçiminde yaz.",
+  "cozum": [
+   "√48 = √(16 · 3) = 4√3.",
+   "√75 = √(25 · 3) = 5√3.",
+   "Çevre = 2 · (4√3 + 5√3) = 2 · 9√3 = 18√3 cm."
+  ],
+  "tuzaklar": [
+   "",
+   "İki kenar toplanıp 2 ile çarpılmazsa (yarım çevre) 9√3 bulunur.",
+   "Kök içleri doğrudan toplanırsa (√48 + √75 = √123) bu sonuç çıkar.",
+   "4√3 + 5√3 toplanırken kök içleri de toplanırsa (√3 + √3 = √6) bu sonuç çıkar."
+  ],
+  "taktik": "Toplamadan önce her kökü a√b biçimine getir; kök içi aynı olanların katsayılarını topla.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "a√b biçimi",
+    "tanim": "Kök içindeki tam kare çarpan dışarı çıkar. Örn: √48 = 4√3"
+   },
+   {
+    "ad": "Köklü toplama",
+    "tanim": "a√c + b√c = (a + b)√c"
+   }
+  ]
+ },
+ {
+  "id": "mat-014",
+  "ders": "matematik",
+  "unite": "Kareköklü İfadeler",
+  "kazanimKod": "M.8.1.3.4",
+  "kazanimAd": "Kareköklü ifadelerde çarpma ve bölme işlemlerini yapar.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "Dikdörtgen biçimindeki bir duyuru panosunun kısa kenarı <b>√12 dm</b>, alanı <b>30 dm²</b>'dir.<br>Buna göre panonun çevresi kaç desimetredir?",
+  "svg": "",
+  "siklar": [
+   "7√3",
+   "14√3",
+   "10√3",
+   "14√6"
+  ],
+  "dogru": 1,
+  "ipucu1": "Alan = kısa kenar · uzun kenar. Uzun kenarı bulmak için bölme yapman gerekir.",
+  "ipucu2": "√12 = 2√3. Uzun kenar 30 ÷ 2√3 = 15/√3 olur; paydayı kökten kurtar.",
+  "cozum": [
+   "√12 = 2√3 dm.",
+   "Uzun kenar = 30 ÷ 2√3 = 15/√3. Pay ve paydayı √3 ile çarparsak 15√3/3 = 5√3 dm.",
+   "Çevre = 2 · (2√3 + 5√3) = 2 · 7√3 = 14√3 dm."
+  ],
+  "tuzaklar": [
+   "Kısa ve uzun kenar toplanıp 2 ile çarpılmazsa 7√3 bulunur.",
+   "",
+   "Yalnız uzun kenarların toplamı (2 · 5√3) alınırsa bu sonuç çıkar.",
+   "2√3 + 5√3 toplanırken kök içleri de toplanırsa bu sonuç çıkar."
+  ],
+  "taktik": "Paydada kök kalırsa pay ve paydayı aynı kökle çarp: a/√b = a√b/b.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "Paydayı rasyonel yapma",
+    "tanim": "a/√b = a√b/b. Örn: 15/√3 = 5√3"
+   }
+  ]
+ },
+ {
+  "id": "mat-015",
+  "ders": "matematik",
+  "unite": "Kareköklü İfadeler",
+  "kazanimKod": "M.8.1.3.8",
+  "kazanimAd": "Gerçek sayıları tanır, rasyonel ve irrasyonel sayılarla ilişkilendirir.",
+  "zorluk": 2,
+  "tip": "klasik",
+  "metin": "Zeynep dört karta birer sayı yazıyor ve bunlardan <b>irrasyonel</b> olanı arkadaşına soruyor.<br>Buna göre aşağıdaki sayılardan hangisi irrasyoneldir?",
+  "svg": "",
+  "siklar": [
+   "√0,16",
+   "√1,21",
+   "√2,5",
+   "√6,25"
+  ],
+  "dogru": 2,
+  "ipucu1": "Ondalık sayıyı kesre çevir; pay ve payda tam kare mi?",
+  "ipucu2": "2,5 = 25/10; 0,16 = 16/100; 1,21 = 121/100; 6,25 = 625/100. Paydası tam kare olmayan hangisi?",
+  "cozum": [
+   "√0,16 = √(16/100) = 4/10 = 0,4 → rasyonel.",
+   "√1,21 = √(121/100) = 11/10 ve √6,25 = √(625/100) = 25/10 → rasyonel.",
+   "2,5 = 25/10 = 5/2'dir; 2 tam kare olmadığından √2,5 iki tam sayının oranı olarak yazılamaz.",
+   "İrrasyonel olan √2,5'tir."
+  ],
+  "tuzaklar": [
+   "Ondalık sayının karekökü hep irrasyonel sanılır; oysa √0,16 = 0,4'tür.",
+   "121 = 11² olduğu fark edilmezse irrasyonel sanılır; √1,21 = 1,1'dir.",
+   "",
+   "625 = 25² olduğu görülmezse irrasyonel sanılır; √6,25 = 2,5'tir."
+  ],
+  "taktik": "Ondalık sayıyı paydası 100 (ya da 10 000) olan kesre çevir; pay tam kare mi diye bak.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "İrrasyonel sayı",
+    "tanim": "İki tam sayının oranı olarak yazılamayan gerçek sayı. Örn: √2, √2,5, π"
+   },
+   {
+    "ad": "Ondalık sayının karekökü",
+    "tanim": "√(a/b) = √a/√b. Örn: √1,21 = 11/10"
+   }
+  ]
+ },
+ {
+  "id": "mat-016",
+  "ders": "matematik",
+  "unite": "Veri Analizi ve Olasılık",
+  "kazanimKod": "M.8.4.1.1",
+  "kazanimAd": "En fazla üç veri grubuna ait çizgi ve sütun grafiklerini yorumlar.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "Aşağıdaki sütun grafiğinde bir kitabevinin Çarşı (A) ve Sahil (B) şubelerinin dört ayda sattığı kitap sayıları gösterilmiştir.<br>Buna göre bu dört ayda B şubesinin <b>aylık ortalama</b> satışı, A şubesinin aylık ortalama satışından kaç kitap eksiktir?",
+  "svg": "<svg viewBox='0 0 320 200' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><line x1='40' y1='175' x2='310' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><text x='34' y='179' text-anchor='end' fill='currentColor' stroke='none' >0</text><line x1='40' y1='140' x2='310' y2='140' stroke-width='0.6' stroke-opacity='0.35'/><text x='34' y='144' text-anchor='end' fill='currentColor' stroke='none' >20</text><line x1='40' y1='105' x2='310' y2='105' stroke-width='0.6' stroke-opacity='0.35'/><text x='34' y='109' text-anchor='end' fill='currentColor' stroke='none' >40</text><line x1='40' y1='70' x2='310' y2='70' stroke-width='0.6' stroke-opacity='0.35'/><text x='34' y='74' text-anchor='end' fill='currentColor' stroke='none' >60</text><line x1='40' y1='35' x2='310' y2='35' stroke-width='0.6' stroke-opacity='0.35'/><text x='34' y='39' text-anchor='end' fill='currentColor' stroke='none' >80</text><line x1='40' y1='175' x2='310' y2='175' /><line x1='40' y1='175' x2='40' y2='22' /><rect class='acf' x='58' y='105' width='22' height='70'/><text x='69' y='101' text-anchor='middle' fill='currentColor' stroke='none' >A</text><rect class='mf' x='82' y='122.5' width='22' height='52.5'/><text x='93' y='118.5' text-anchor='middle' fill='currentColor' stroke='none' >B</text><text x='81' y='191' text-anchor='middle' fill='currentColor' stroke='none' >Ocak</text><rect class='acf' x='122' y='70' width='22' height='105'/><text x='133' y='66' text-anchor='middle' fill='currentColor' stroke='none' >A</text><rect class='mf' x='146' y='87.5' width='22' height='87.5'/><text x='157' y='83.5' text-anchor='middle' fill='currentColor' stroke='none' >B</text><text x='145' y='191' text-anchor='middle' fill='currentColor' stroke='none' >Şubat</text><rect class='acf' x='186' y='87.5' width='22' height='87.5'/><text x='197' y='83.5' text-anchor='middle' fill='currentColor' stroke='none' >A</text><rect class='mf' x='210' y='35' width='22' height='140'/><text x='221' y='31' text-anchor='middle' fill='currentColor' stroke='none' >B</text><text x='209' y='191' text-anchor='middle' fill='currentColor' stroke='none' >Mart</text><rect class='acf' x='250' y='52.5' width='22' height='122.5'/><text x='261' y='48.5' text-anchor='middle' fill='currentColor' stroke='none' >A</text><rect class='mf' x='274' y='105' width='22' height='70'/><text x='285' y='101' text-anchor='middle' fill='currentColor' stroke='none' >B</text><text x='273' y='191' text-anchor='middle' fill='currentColor' stroke='none' >Nisan</text><text x='8' y='14' text-anchor='start' fill='currentColor' stroke='none' >Satılan kitap sayısı</text></svg>",
+  "siklar": [
+   "5",
+   "20",
+   "10",
+   "30"
+  ],
+  "dogru": 0,
+  "ipucu1": "Her şubenin dört aylık satışlarını grafikten tek tek oku.",
+  "ipucu2": "A için 40 + 60 + 50 + 70, B için 30 + 50 + 80 + 40 toplamlarını bul; ortalama için ay sayısına böl.",
+  "cozum": [
+   "A şubesi: 40 + 60 + 50 + 70 = 220 kitap; ortalama 220 ÷ 4 = 55.",
+   "B şubesi: 30 + 50 + 80 + 40 = 200 kitap; ortalama 200 ÷ 4 = 50.",
+   "Fark 55 − 50 = 5 kitaptır."
+  ],
+  "tuzaklar": [
+   "",
+   "İki şubenin toplam satışları arasındaki fark bulunup 4'e bölünmezse 20 çıkar.",
+   "Yalnız ilk ayın (Ocak) farkına bakılırsa 10 bulunur.",
+   "Yalnız Mart ayındaki fark okunursa 30 bulunur; üstelik o ay B fazladır."
+  ],
+  "taktik": "Ortalamalar farkı = toplamlar farkı ÷ veri sayısı. Önce toplam farkı bulup sonra bölmek daha hızlıdır.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "Aritmetik ortalama",
+    "tanim": "Verilerin toplamının veri sayısına bölümü."
+   }
+  ]
+ },
+ {
+  "id": "mat-017",
+  "ders": "matematik",
+  "unite": "Veri Analizi ve Olasılık",
+  "kazanimKod": "M.8.4.1.2",
+  "kazanimAd": "Verileri sütun, daire veya çizgi grafiği ile gösterir ve bu gösterimler arasında uygun olan dönüşümleri yapar.",
+  "zorluk": 3,
+  "tip": "grafik-tablo",
+  "metin": "Bir ortaokuldaki öğrencilerin her biri dört kulüpten birini seçmiştir. Seçimlerin dağılımı aşağıdaki daire grafiğinde gösterilmiştir. Kodlama kulübünü seçen <b>54</b> öğrenci vardır.<br>Bu veriler sütun grafiğine dönüştürüldüğünde Spor sütunu, Resim sütunundan kaç öğrenci daha yüksek olur?",
+  "svg": "<svg viewBox='0 0 320 205' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><path class='mf' d='M160 118 L160 38 A80 80 0 0 1 229.3 158 Z'/><text x='201.6' y='92' text-anchor='middle' fill='currentColor' stroke='none' >Spor</text><text x='201.6' y='107' text-anchor='middle' fill='currentColor' stroke='none' >120°</text><path  d='M160 118 L229.3 158 A80 80 0 0 1 100.5 171.5 Z'/><text x='165' y='163.7' text-anchor='middle' fill='currentColor' stroke='none' >Kodlama</text><text x='165' y='178.7' text-anchor='middle' fill='currentColor' stroke='none' >108°</text><path class='mf' d='M160 118 L100.5 171.5 A80 80 0 0 1 106.5 58.5 Z'/><text x='112.1' y='113.5' text-anchor='middle' fill='currentColor' stroke='none' >Müzik</text><text x='112.1' y='128.5' text-anchor='middle' fill='currentColor' stroke='none' >90°</text><path  d='M160 118 L106.5 58.5 A80 80 0 0 1 160 38 Z'/><text x='128.5' y='35.8' text-anchor='end' fill='currentColor' stroke='none' >Resim 42°</text></svg>",
+  "siklar": [
+   "78",
+   "60",
+   "21",
+   "39"
+  ],
+  "dogru": 3,
+  "ipucu1": "Kodlama diliminin açısı ve öğrenci sayısı belli; 1°'nin kaç öğrenciye karşılık geldiğini bulabilirsin.",
+  "ipucu2": "108° → 54 öğrenci ise 1° → 0,5 öğrenci. Spor ile Resim arasındaki açı farkını kullan.",
+  "cozum": [
+   "108° 54 öğrenciye karşılık geliyorsa 1° → 54 ÷ 108 = 0,5 öğrencidir.",
+   "Spor ile Resim dilimlerinin açı farkı 120° − 42° = 78°'dir.",
+   "78 · 0,5 = 39 öğrenci.",
+   "Spor sütunu Resim sütunundan 39 öğrenci daha yüksektir."
+  ],
+  "tuzaklar": [
+   "Öğrenci sayısı yerine merkez açıların farkı (120° − 42°) cevap sanılırsa 78 bulunur.",
+   "Yalnız Spor kulübünü seçen öğrenci sayısı (60) bulunup bırakılırsa bu sonuç çıkar.",
+   "Yalnız Resim kulübünü seçen öğrenci sayısı (21) bulunup bırakılırsa bu sonuç çıkar.",
+   ""
+  ],
+  "taktik": "Fark soruluyorsa iki dilimi ayrı ayrı hesaplama; açı farkını bulup tek orantı kur.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "Daire grafiği",
+    "tanim": "Bütün 360°'dir; her dilimin merkez açısı o grubun veri sayısıyla doğru orantılıdır."
+   }
+  ]
+ },
+ {
+  "id": "mat-018",
+  "ders": "matematik",
+  "unite": "Veri Analizi ve Olasılık",
+  "kazanimKod": "M.8.5.1.5",
+  "kazanimAd": "Basit bir olayın olma olasılığını hesaplar.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Bir torbada aynı büyüklükte 5 kırmızı, 4 mavi ve 3 sarı bilye vardır.<br>Bu torbadan rastgele çekilen bir bilyenin <b>mavi olmama</b> olasılığı kaçtır?",
+  "svg": "",
+  "siklar": [
+   "1/3",
+   "2/3",
+   "3/4",
+   "1/4"
+  ],
+  "dogru": 1,
+  "ipucu1": "\"Mavi olmama\" demek kırmızı ya da sarı gelmesi demektir.",
+  "ipucu2": "Toplam bilye sayısını bul; mavi olmayan bilyeleri say ve oranla.",
+  "cozum": [
+   "Toplam bilye: 5 + 4 + 3 = 12.",
+   "Mavi olmayan bilye: 5 + 3 = 8.",
+   "Olasılık = 8/12 = 2/3."
+  ],
+  "tuzaklar": [
+   "Mavi olma olasılığı (4/12) bulunup bırakılırsa 1/3 çıkar.",
+   "",
+   "Sarı olmama olasılığı (9/12) hesaplanırsa bu sonuç çıkar.",
+   "Yalnız sarı bilyeler sayılırsa (3/12) bu sonuç çıkar."
+  ],
+  "taktik": "Olmama olasılığı = 1 − olma olasılığı. 1 − 4/12 = 8/12.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Olasılık",
+    "tanim": "İstenen durum sayısı ÷ tüm olası durum sayısı"
+   },
+   {
+    "ad": "Olmama olasılığı",
+    "tanim": "Bir olayın olma ve olmama olasılıklarının toplamı 1'dir."
+   }
+  ]
+ },
+ {
+  "id": "mat-019",
+  "ders": "matematik",
+  "unite": "Veri Analizi ve Olasılık",
+  "kazanimKod": "M.8.5.1.5",
+  "kazanimAd": "Basit bir olayın olma olasılığını hesaplar.",
+  "zorluk": 2,
+  "tip": "cok-adimli",
+  "metin": "Bir spor salonunda 1'den 40'a kadar numaralandırılmış 40 dolap vardır. Salona gelen Mert'e bu dolaplardan biri rastgele verilecektir.<br>Buna göre Mert'e verilen dolabın numarasının <b>40'ın bir çarpanı</b> olma olasılığı kaçtır?",
+  "svg": "",
+  "siklar": [
+   "1/8",
+   "3/20",
+   "1/5",
+   "7/40"
+  ],
+  "dogru": 2,
+  "ipucu1": "Önce 40'ın bütün pozitif çarpanlarını çiftler hâlinde listele.",
+  "ipucu2": "40 = 1 · 40 = 2 · 20 = 4 · 10 = 5 · 8. Çarpanların kaç tane olduğunu say, 40 dolaba oranla.",
+  "cozum": [
+   "40'ın çarpanları: 1, 2, 4, 5, 8, 10, 20, 40 → 8 tane.",
+   "Tüm olası durum sayısı 40'tır.",
+   "Olasılık = 8/40 = 1/5."
+  ],
+  "tuzaklar": [
+   "Çarpan sayısı olan 8 bulunup olasılık 1/8 sanılırsa bu sonuç çıkar.",
+   "1 ve 40 çarpan olarak sayılmazsa 6/40 = 3/20 bulunur.",
+   "",
+   "Çarpanlardan biri (örneğin 8) unutulursa 7/40 bulunur."
+  ],
+  "taktik": "Çarpanları çiftler hâlinde yazarsan (1·40, 2·20, 4·10, 5·8) hiçbirini atlamazsın.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Çarpan (bölen)",
+    "tanim": "Bir sayıyı kalansız bölen pozitif tam sayı. 1 ve sayının kendisi de çarpandır."
+   }
+  ]
+ },
+ {
+  "id": "mat-020",
+  "ders": "matematik",
+  "unite": "Cebirsel İfadeler ve Özdeşlikler",
+  "kazanimKod": "M.8.2.1.2",
+  "kazanimAd": "Cebirsel ifadelerin çarpımını yapar.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Dikdörtgen biçimindeki bir halının kenar uzunlukları <b>(2x + 3)</b> metre ve <b>(x − 4)</b> metredir.<br>Buna göre halının alanını metrekare cinsinden veren cebirsel ifade hangisidir?",
+  "svg": "",
+  "siklar": [
+   "2x² − 12",
+   "2x² + 5x − 12",
+   "2x² − 11x − 12",
+   "2x² − 5x − 12"
+  ],
+  "dogru": 3,
+  "ipucu1": "Birinci parantezdeki her terimi ikinci parantezdeki her terimle çarp.",
+  "ipucu2": "2x · x, 2x · (−4), 3 · x ve 3 · (−4) çarpımlarını yaz; benzer terimleri topla.",
+  "cozum": [
+   "(2x + 3)(x − 4) = 2x · x + 2x · (−4) + 3 · x + 3 · (−4).",
+   "= 2x² − 8x + 3x − 12.",
+   "= 2x² − 5x − 12."
+  ],
+  "tuzaklar": [
+   "Yalnız ilk terimler ve son terimler çarpılıp ortadaki çarpımlar unutulursa bu sonuç çıkar.",
+   "−8x + 3x toplanırken işaret hatası yapılırsa +5x bulunur.",
+   "3 · x çarpımı −3x alınırsa −8x − 3x = −11x bulunur.",
+   ""
+  ],
+  "taktik": "Dört çarpımı sırayla yaz (ilkler, dışlar, içler, sonlar); işaretleri çarpım sırasında koy.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "Dağılma özelliği",
+    "tanim": "(a + b)(c + d) = ac + ad + bc + bd"
+   }
+  ]
+ },
+ {
+  "id": "mat-021",
+  "ders": "matematik",
+  "unite": "Cebirsel İfadeler ve Özdeşlikler",
+  "kazanimKod": "M.8.2.1.3",
+  "kazanimAd": "Özdeşlikleri modellerle açıklar.",
+  "zorluk": 2,
+  "tip": "gorsel",
+  "metin": "Bir kenarı x cm olan kare biçimindeki bir kartonun köşesinden, şekildeki gibi bir kenarı 3 cm olan kare biçiminde bir parça kesilip atılıyor. Kalan parça kesilip yeniden birleştirilerek, alanı değişmeden bir dikdörtgen elde ediliyor.<br>Bu dikdörtgenin kısa kenarı <b>(x − 3) cm</b> olduğuna göre uzun kenarı kaç santimetredir?",
+  "svg": "<svg viewBox='0 0 320 165' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><rect x='40' y='20' width='120' height='120'/><rect class='mf' x='124' y='20' width='36' height='36' stroke-dasharray='4 3'/><text x='100' y='157' text-anchor='middle' fill='currentColor' stroke='none' >x</text><text x='28' y='84' text-anchor='middle' fill='currentColor' stroke='none' >x</text><text x='142' y='14' text-anchor='middle' fill='currentColor' stroke='none' >3</text><text x='170' y='42' text-anchor='start' fill='currentColor' stroke='none' >3</text><text x='100' y='100' text-anchor='middle' fill='currentColor' stroke='none' >Kalan parça</text></svg>",
+  "siklar": [
+   "x − 3",
+   "x + 3",
+   "x + 9",
+   "x − 9"
+  ],
+  "dogru": 1,
+  "ipucu1": "Kalan parçanın alanını büyük karenin alanından küçük karenin alanını çıkararak yaz.",
+  "ipucu2": "Kalan alan x² − 9'dur. Bu, iki kare farkıdır; çarpanlarına ayır.",
+  "cozum": [
+   "Kalan parçanın alanı: x² − 3² = x² − 9.",
+   "İki kare farkı: x² − 9 = (x − 3)(x + 3).",
+   "Kısa kenar (x − 3) ise uzun kenar (x + 3) cm'dir."
+  ],
+  "tuzaklar": [
+   "Kalan şekil kare sanılıp iki kenar eşit alınırsa bu sonuç çıkar.",
+   "",
+   "x² − 9 ifadesindeki 9, çarpanlara ayırmadan doğrudan kenara taşınırsa bu sonuç çıkar.",
+   "x² − 9 ifadesi (x − 3)(x − 9) gibi ayrılırsa bu sonuç çıkar."
+  ],
+  "taktik": "\"Kareden kare çıkar\" gördüğünde iki kare farkını hatırla: a² − b² = (a − b)(a + b).",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "İki kare farkı",
+    "tanim": "a² − b² = (a − b)(a + b). Örn: x² − 9 = (x − 3)(x + 3)"
+   }
+  ]
+ },
+ {
+  "id": "mat-022",
+  "ders": "matematik",
+  "unite": "Cebirsel İfadeler ve Özdeşlikler",
+  "kazanimKod": "M.8.2.1.4",
+  "kazanimAd": "Cebirsel ifadeleri çarpanlara ayırır.",
+  "zorluk": 2,
+  "tip": "cok-adimli",
+  "metin": "Kare biçimindeki bir satranç tahtasının alanı <b>(4x² − 12x + 9)</b> cm² olarak ifade ediliyor (x &gt; 2).<br>Buna göre tahtanın çevresini santimetre cinsinden veren cebirsel ifade hangisidir?",
+  "svg": "",
+  "siklar": [
+   "8x − 12",
+   "2x − 3",
+   "8x − 3",
+   "4x − 6"
+  ],
+  "dogru": 0,
+  "ipucu1": "Karenin alanı (kenar)² biçimindedir; verilen ifade bir tam kare olmalı.",
+  "ipucu2": "4x² = (2x)² ve 9 = 3². Ortadaki terim 2 · 2x · 3 mü? İşaretine bak.",
+  "cozum": [
+   "4x² − 12x + 9 = (2x)² − 2 · 2x · 3 + 3² = (2x − 3)².",
+   "Karenin bir kenarı (2x − 3) cm'dir.",
+   "Çevre = 4 · (2x − 3) = 8x − 12 cm."
+  ],
+  "tuzaklar": [
+   "",
+   "Yalnız bir kenar bulunup çevre hesaplanmazsa bu sonuç çıkar.",
+   "Kenar 4 ile çarpılırken yalnız ilk terim çarpılırsa (4 · 2x − 3) bu sonuç çıkar.",
+   "Kenar 2 ile çarpılırsa (yarım çevre) bu sonuç çıkar."
+  ],
+  "taktik": "İlk ve son terimin kareköklerini al; ortadaki terim bunların çarpımının 2 katıysa ifade tam karedir.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "Tam kare ifade",
+    "tanim": "a² − 2ab + b² = (a − b)². Örn: 4x² − 12x + 9 = (2x − 3)²"
+   }
+  ]
+ },
+ {
+  "id": "mat-023",
+  "ders": "matematik",
+  "unite": "Cebirsel İfadeler ve Özdeşlikler",
+  "kazanimKod": "M.8.2.1.3",
+  "kazanimAd": "Özdeşlikleri modellerle açıklar.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "Bir parkta kenar uzunlukları a metre ve b metre olan kare biçiminde iki çiçek tarhı ile kenar uzunlukları a metre ve b metre olan dikdörtgen biçiminde bir havuz vardır.<br>• a + b = 9<br>• Havuzun alanı 18 m²<br>Buna göre iki çiçek tarhının alanları toplamı kaç metrekaredir?",
+  "svg": "",
+  "siklar": [
+   "81",
+   "63",
+   "45",
+   "117"
+  ],
+  "dogru": 2,
+  "ipucu1": "İstenen a² + b². Bunu (a + b)² özdeşliğinin içinde görebilir misin?",
+  "ipucu2": "(a + b)² = a² + 2ab + b². Bildiklerini yerine yaz: 9² = a² + b² + 2 · 18.",
+  "cozum": [
+   "Havuzun alanı a · b = 18'dir.",
+   "(a + b)² = a² + 2ab + b² → 81 = a² + b² + 36.",
+   "a² + b² = 81 − 36 = 45.",
+   "Tarhların alanları toplamı 45 m²'dir."
+  ],
+  "tuzaklar": [
+   "(a + b)² = a² + b² sanılıp 9² hesaplanırsa 81 bulunur.",
+   "(a + b)²'den 2ab yerine yalnız ab çıkarılırsa 81 − 18 = 63 bulunur.",
+   "",
+   "2ab çıkarılacakken eklenirse 81 + 36 = 117 bulunur."
+  ],
+  "taktik": "Toplam ve çarpım verilip kareler toplamı sorulursa: a² + b² = (a + b)² − 2ab.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Tam kare özdeşliği",
+    "tanim": "(a + b)² = a² + 2ab + b²"
+   }
+  ]
+ },
+ {
+  "id": "mat-024",
+  "ders": "matematik",
+  "unite": "Cebirsel İfadeler ve Özdeşlikler",
+  "kazanimKod": "M.8.2.1.1",
+  "kazanimAd": "Basit cebirsel ifadeleri anlar ve farklı biçimlerde yazar.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "<b>4a² − ab − 7</b> cebirsel ifadesinin katsayıları toplamı kaçtır?",
+  "svg": "",
+  "siklar": [
+   "3",
+   "−3",
+   "12",
+   "−4"
+  ],
+  "dogru": 3,
+  "ipucu1": "Her terimin önündeki sayı (işaretiyle birlikte) katsayıdır; sabit terim de bir katsayıdır.",
+  "ipucu2": "−ab teriminin katsayısı −1'dir. Üç katsayıyı işaretleriyle yaz ve topla.",
+  "cozum": [
+   "Terimler: 4a², −ab ve −7.",
+   "Katsayılar: 4, −1 ve −7 (sabit terim de katsayıdır).",
+   "4 + (−1) + (−7) = −4."
+  ],
+  "tuzaklar": [
+   "Sabit terim (−7) katsayı sayılmazsa 4 − 1 = 3 bulunur.",
+   "ab teriminin katsayısı görünmediği için 0 alınırsa 4 − 7 = −3 bulunur.",
+   "Katsayıların işaretleri dikkate alınmazsa 4 + 1 + 7 = 12 bulunur.",
+   ""
+  ],
+  "taktik": "Katsayı yazılmamışsa 1 ya da −1'dir; sabit terimi unutma.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Katsayı",
+    "tanim": "Bir terimdeki sayısal çarpan. Sabit terim de bir katsayıdır."
+   },
+   {
+    "ad": "Terim",
+    "tanim": "Cebirsel ifadede + veya − ile ayrılan her bir parça."
+   }
+  ]
+ }
+]
