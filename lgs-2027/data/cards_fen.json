@@ -1,0 +1,704 @@
+[
+ {
+  "id": "fen-k-001",
+  "ders": "fen",
+  "unite": "Mevsimler ve İklim",
+  "kazanimKod": "F.8.1.1.1",
+  "on": "Mevsimler neden oluşur?",
+  "arka": "Dünya'nın dönme ekseninin eğik olması ve Güneş çevresinde dolanması sonucu. Güneş'e uzaklık mevsimlerin nedeni değildir.",
+  "test": {
+   "soru": "Mevsimlerin oluşmasının temel nedeni hangisidir?",
+   "siklar": [
+    "Dünya'nın Güneş'e yaklaşıp uzaklaşması",
+    "Dünya'nın kendi ekseni etrafında dönmesi",
+    "Dönme ekseninin eğik olması ve Dünya'nın dolanması",
+    "Ay'ın Dünya çevresinde dolanması"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "fen-k-002",
+  "ders": "fen",
+  "unite": "Mevsimler ve İklim",
+  "kazanimKod": "F.8.1.1.1",
+  "on": "Işınlar dik gelince ne olur?",
+  "arka": "Birim yüzeye düşen enerji artar, sıcaklık yükselir. Işınlar eğik gelince aynı enerji geniş alana yayılır, ısıtma azalır.",
+  "test": {
+   "soru": "Güneş ışınlarını daha dik alan bir bölge için hangisi doğrudur?",
+   "siklar": [
+    "Birim yüzeye düşen enerji daha fazladır.",
+    "Gölge boyları daha uzundur.",
+    "Kış mevsimi yaşanır.",
+    "Gündüzler daha kısadır."
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "fen-k-003",
+  "ders": "fen",
+  "unite": "Mevsimler ve İklim",
+  "kazanimKod": "F.8.1.1.1",
+  "on": "21 Haziran ve 21 Aralık",
+  "arka": "21 Haziran: Kuzey Yarım Küre'de yaz, Güney'de kış başlar; ışınlar Yengeç Dönencesi'ne dik gelir. 21 Aralık'ta durum tam tersidir (Oğlak Dönencesi).",
+  "test": {
+   "soru": "21 Aralık'ta Güney Yarım Küre'de hangi mevsim başlar?",
+   "siklar": [
+    "Kış",
+    "İlkbahar",
+    "Sonbahar",
+    "Yaz"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "fen-k-004",
+  "ders": "fen",
+  "unite": "Mevsimler ve İklim",
+  "kazanimKod": "F.8.1.2.1",
+  "on": "İklim – hava olayı farkı",
+  "arka": "Hava olayı: dar alanda, kısa sürede, değişken (yarın yağmurlu). İklim: geniş bölgede, uzun yılların ortalaması (yazlar sıcak ve kurak).",
+  "test": {
+   "soru": "Hangisi bir hava olayıdır?",
+   "siklar": [
+    "Karadeniz'de her mevsim yağış görülmesi",
+    "Bugün Ankara'da dolu yağması",
+    "İç Anadolu'da kışların soğuk geçmesi",
+    "Akdeniz'de yazların kurak olması"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "fen-k-005",
+  "ders": "fen",
+  "unite": "Mevsimler ve İklim",
+  "kazanimKod": "F.8.1.2.2",
+  "on": "Klimatolog kimdir?",
+  "arka": "İklim bilimi (klimatoloji) uzmanıdır; uzun yıllara ait verilerle iklimi inceler. Günlük hava tahminini meteorolog yapar.",
+  "test": {
+   "soru": "Bir bölgenin 50 yıllık yağış ortalamalarını inceleyen uzman kimdir?",
+   "siklar": [
+    "Meteorolog",
+    "Jeolog",
+    "Klimatolog",
+    "Astronom"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "fen-k-006",
+  "ders": "fen",
+  "unite": "DNA ve Genetik Kod",
+  "kazanimKod": "F.8.2.1.1",
+  "on": "Küçükten büyüğe kalıtım birimleri",
+  "arka": "Nükleotid → gen → DNA → kromozom. Gen, DNA'nın görev birimidir; DNA paketlenerek kromozomu oluşturur.",
+  "test": {
+   "soru": "Hangisi DNA'nın yapı birimidir?",
+   "siklar": [
+    "Gen",
+    "Nükleotid",
+    "Kromozom",
+    "Hücre"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "fen-k-007",
+  "ders": "fen",
+  "unite": "DNA ve Genetik Kod",
+  "kazanimKod": "F.8.2.1.2",
+  "on": "DNA'da baz eşleşmesi",
+  "arka": "Adenin (A) ↔ timin (T), guanin (G) ↔ sitozin (C). Örn: bir zincir ATG ise karşısı TAC olur.",
+  "test": {
+   "soru": "Bir zincirdeki baz dizisi GCA ise karşı zincirdeki dizi nedir?",
+   "siklar": [
+    "GCA",
+    "ACG",
+    "CGT",
+    "TGC"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "fen-k-008",
+  "ders": "fen",
+  "unite": "DNA ve Genetik Kod",
+  "kazanimKod": "F.8.2.1.3",
+  "on": "DNA kendini nasıl eşler?",
+  "arka": "İki zincir fermuar gibi açılır, her zincirin karşısına uygun nükleotidler gelir. Oluşan iki DNA'nın her birinde bir eski, bir yeni zincir bulunur.",
+  "test": {
+   "soru": "Kendini eşleyen bir DNA'dan oluşan iki DNA için hangisi doğrudur?",
+   "siklar": [
+    "Birbirinin aynısıdır.",
+    "Biri tamamen eski, diğeri tamamen yenidir.",
+    "Baz dizilişleri birbirinden farklıdır.",
+    "Yalnızca biri gen taşır."
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "fen-k-009",
+  "ders": "fen",
+  "unite": "DNA ve Genetik Kod",
+  "kazanimKod": "F.8.2.2.1",
+  "on": "Genotip – fenotip, saf – melez",
+  "arka": "Genotip gen yapısıdır (AA, Aa, aa), fenotip dış görünüştür. AA ve aa saf döl, Aa melez döldür; çekinik özellik yalnız aa'da görülür.",
+  "test": {
+   "soru": "Sarı (S) yeşile (s) baskınsa Ss genotipli bezelye için hangisi doğrudur?",
+   "siklar": [
+    "Saf döl, sarı",
+    "Melez döl, yeşil",
+    "Saf döl, yeşil",
+    "Melez döl, sarı"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "fen-k-010",
+  "ders": "fen",
+  "unite": "DNA ve Genetik Kod",
+  "kazanimKod": "F.8.2.2.2",
+  "on": "Sık çıkan çaprazlama oranları",
+  "arka": "Aa × Aa → 3 baskın : 1 çekinik. Aa × aa → 1 : 1. AA × aa → hepsi baskın (Aa).",
+  "test": {
+   "soru": "İki melez mor çiçekli bezelye (Mm × Mm) çaprazlanırsa beyaz çiçekli yavru olasılığı nedir?",
+   "siklar": [
+    "%0",
+    "%25",
+    "%50",
+    "%75"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "fen-k-011",
+  "ders": "fen",
+  "unite": "DNA ve Genetik Kod",
+  "kazanimKod": "F.8.2.3.3",
+  "on": "Mutasyon – modifikasyon – adaptasyon",
+  "arka": "Mutasyon: DNA'nın yapısı değişir. Modifikasyon: çevre etkisiyle genin işleyişi değişir, kalıtsal değildir. Adaptasyon: ortama uyumu sağlayan kalıtsal özellik.",
+  "test": {
+   "soru": "Spor yapan birinin kaslarının gelişmesi neye örnektir?",
+   "siklar": [
+    "Modifikasyon",
+    "Mutasyon",
+    "Adaptasyon",
+    "Doğal seçilim"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "fen-k-012",
+  "ders": "fen",
+  "unite": "Basınç",
+  "kazanimKod": "F.8.3.1.1",
+  "on": "Katı basıncı nelere bağlıdır?",
+  "arka": "Kuvvet (ağırlık) arttıkça artar, temas yüzeyi büyüdükçe azalır. Birimi pascaldır (Pa).",
+  "test": {
+   "soru": "Aynı tuğla hangi durumda zemine en büyük basıncı yapar?",
+   "siklar": [
+    "En geniş yüzeyi üzerinde",
+    "Orta büyüklükteki yüzeyi üzerinde",
+    "En dar yüzeyi üzerinde",
+    "Her durumda aynı basıncı yapar"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "fen-k-013",
+  "ders": "fen",
+  "unite": "Basınç",
+  "kazanimKod": "F.8.3.1.2",
+  "on": "Sıvı basıncı nelere bağlıdır?",
+  "arka": "Sıvının derinliğine ve yoğunluğuna bağlıdır; ikisi de arttıkça basınç artar. Kabın şekli ve sıvı miktarı etkilemez.",
+  "test": {
+   "soru": "Hangisi sıvı basıncını etkilemez?",
+   "siklar": [
+    "Sıvının derinliği",
+    "Kabın genişliği",
+    "Sıvının yoğunluğu",
+    "Sıvının cinsi"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "fen-k-014",
+  "ders": "fen",
+  "unite": "Basınç",
+  "kazanimKod": "F.8.3.1.2",
+  "on": "Açık hava basıncı",
+  "arka": "Atmosferdeki gazların ağırlığı nedeniyle yüzeylere uyguladığı basınçtır. Yükseklere çıkıldıkça azalır; barometre ile ölçülür.",
+  "test": {
+   "soru": "Deniz kıyısından dağın zirvesine çıkan biri için açık hava basıncı nasıl değişir?",
+   "siklar": [
+    "Artar",
+    "Değişmez",
+    "Önce artar sonra azalır",
+    "Azalır"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "fen-k-015",
+  "ders": "fen",
+  "unite": "Basınç",
+  "kazanimKod": "F.8.3.1.3",
+  "on": "Pascal prensibi",
+  "arka": "Kapalı kaptaki sıvılar, uygulanan basıncı her yöne aynen iletir. Örn: hidrolik fren, araç lifti, berber koltuğu.",
+  "test": {
+   "soru": "Hangisi Pascal prensibiyle çalışır?",
+   "siklar": [
+    "Hidrolik araç lifti",
+    "Kar ayakkabısı",
+    "Bıçak",
+    "Çivi"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "fen-k-016",
+  "ders": "fen",
+  "unite": "Basınç",
+  "kazanimKod": "F.8.3.1.3",
+  "on": "Basıncı artıran / azaltan uygulamalar",
+  "arka": "Yüzeyi küçült → basınç artar (bıçak, çivi, krampon). Yüzeyi büyüt → basınç azalır (palet, kar ayakkabısı, geniş lastik).",
+  "test": {
+   "soru": "Ağır kamyonlarda çok sayıda ve geniş tekerlek kullanılmasının nedeni nedir?",
+   "siklar": [
+    "Ağırlığı azaltmak",
+    "Yola yapılan basıncı artırmak",
+    "Yola yapılan basıncı azaltmak",
+    "Hızı artırmak"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "fen-k-017",
+  "ders": "fen",
+  "unite": "Madde ve Endüstri",
+  "kazanimKod": "F.8.4.1.2",
+  "on": "Metal – ametal – yarımetal – soygaz",
+  "arka": "Metaller solda ve ortada: parlak, iletken, işlenebilir. Ametaller sağda: mat, kırılgan, yalıtkan. Soygazlar 8A grubunda, kararlıdır.",
+  "test": {
+   "soru": "Periyodik sistemin en sağ sütunundaki (8A) elementler hangi sınıftadır?",
+   "siklar": [
+    "Metal",
+    "Yarımetal",
+    "Ametal",
+    "Soygaz"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "fen-k-018",
+  "ders": "fen",
+  "unite": "Madde ve Endüstri",
+  "kazanimKod": "F.8.4.2.1",
+  "on": "Fiziksel mi, kimyasal mı?",
+  "arka": "Fiziksel: yalnız görünüş değişir (erime, çözünme, kırılma). Kimyasal: yeni madde oluşur (yanma, paslanma, ekşime, pişme, çürüme).",
+  "test": {
+   "soru": "Hangisi kimyasal değişimdir?",
+   "siklar": [
+    "Demirin paslanması",
+    "Buzun erimesi",
+    "Tuzun suda çözünmesi",
+    "Kâğıdın yırtılması"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "fen-k-019",
+  "ders": "fen",
+  "unite": "Madde ve Endüstri",
+  "kazanimKod": "F.8.4.3.1",
+  "on": "Kimyasal tepkimede kütle",
+  "arka": "Kütle korunur: tepkimeye girenlerin toplam kütlesi = ürünlerin toplam kütlesi. Atomların cinsi ve sayısı değişmez; yalnızca bağlar yeniden düzenlenir.",
+  "test": {
+   "soru": "12 g karbon, 32 g oksijenle artansız tepkimeye girerse kaç g karbondioksit oluşur?",
+   "siklar": [
+    "20",
+    "32",
+    "44",
+    "56"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "fen-k-020",
+  "ders": "fen",
+  "unite": "Madde ve Endüstri",
+  "kazanimKod": "F.8.4.4.4",
+  "on": "pH cetveli",
+  "arka": "0–7 arası asit, 7 nötr, 7–14 arası baz. 0'a yaklaştıkça asitlik, 14'e yaklaştıkça bazlık kuvvetlenir.",
+  "test": {
+   "soru": "pH değeri 2 olan çözelti için hangisi doğrudur?",
+   "siklar": [
+    "Kuvvetli bazdır.",
+    "Kuvvetli asittir.",
+    "Nötrdür.",
+    "Zayıf bazdır."
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "fen-k-021",
+  "ders": "fen",
+  "unite": "Madde ve Endüstri",
+  "kazanimKod": "F.8.4.4.1",
+  "on": "Asit ve bazların özellikleri",
+  "arka": "Asit: tadı ekşi, mavi turnusolu kırmızıya çevirir. Baz: tadı acı, ele kayganlık verir, kırmızı turnusolu maviye çevirir. Asit + baz → tuz + su.",
+  "test": {
+   "soru": "Kırmızı turnusol kâğıdını maviye çeviren madde hangisi olabilir?",
+   "siklar": [
+    "Limon suyu",
+    "Sirke",
+    "Saf su",
+    "Sabunlu su"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "fen-k-022",
+  "ders": "fen",
+  "unite": "Madde ve Endüstri",
+  "kazanimKod": "F.8.4.5.1",
+  "on": "Isınma nelere bağlıdır?",
+  "arka": "Eşit ısı alan maddelerden kütlesi ve öz ısısı büyük olanın sıcaklığı daha az artar. Öz ısı maddeler için ayırt edici bir özelliktir.",
+  "test": {
+   "soru": "Özdeş ısıtıcılarla eşit süre ısıtılan 100 g ve 300 g sudan hangisinin sıcaklığı daha çok artar?",
+   "siklar": [
+    "100 g su",
+    "300 g su",
+    "İkisi eşit artar",
+    "Suyun ilk sıcaklığına bağlıdır"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "fen-k-023",
+  "ders": "fen",
+  "unite": "Basit Makineler",
+  "kazanimKod": "F.8.5.1.1",
+  "on": "Basit makinelerin altın kuralı",
+  "arka": "Hiçbir basit makine işten kazanç sağlamaz. Kuvvetten kazanılırsa yoldan aynı oranda kaybedilir.",
+  "test": {
+   "soru": "Kuvvetten 3 kat kazanç sağlayan bir basit makinede yoldan ne olur?",
+   "siklar": [
+    "3 kat kazanç",
+    "Değişmez",
+    "3 kat kayıp",
+    "9 kat kayıp"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "fen-k-024",
+  "ders": "fen",
+  "unite": "Basit Makineler",
+  "kazanimKod": "F.8.5.1.1",
+  "on": "Sabit ve hareketli makara",
+  "arka": "Sabit makara: yalnızca kuvvetin yönünü değiştirir, F = yük. Hareketli makara: kuvveti yarıya indirir (F = yük/2), ip iki kat çekilir.",
+  "test": {
+   "soru": "Ağırlığı önemsiz tek bir hareketli makarayla 60 N'luk yük kaç N kuvvetle dengelenir?",
+   "siklar": [
+    "120",
+    "60",
+    "20",
+    "30"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "fen-k-025",
+  "ders": "fen",
+  "unite": "Basit Makineler",
+  "kazanimKod": "F.8.5.1.1",
+  "on": "Kaldıraçta denge",
+  "arka": "Kuvvet × kuvvet kolu = yük × yük kolu. Kuvvet kolu yük kolundan uzunsa kuvvetten kazanç vardır.",
+  "test": {
+   "soru": "Yük desteğe 1 m, kuvvet desteğe 4 m uzaklıktaysa 80 N'luk yük kaç N'la dengelenir?",
+   "siklar": [
+    "320",
+    "20",
+    "40",
+    "80"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "fen-k-026",
+  "ders": "fen",
+  "unite": "Basit Makineler",
+  "kazanimKod": "F.8.5.1.1",
+  "on": "Eğik düzlem ve çıkrık",
+  "arka": "Eğik düzlem: rampa uzadıkça (eğim azaldıkça) kuvvet azalır, yol uzar. Çıkrık: kol uzadıkça ya da silindir inceldikçe kuvvet azalır.",
+  "test": {
+   "soru": "Aynı yüksekliğe çıkan rampalardan hangisinde yük en küçük kuvvetle çekilir?",
+   "siklar": [
+    "En uzun rampada",
+    "En kısa rampada",
+    "En dik rampada",
+    "Hepsinde aynı kuvvetle"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "fen-k-027",
+  "ders": "fen",
+  "unite": "Basit Makineler",
+  "kazanimKod": "F.8.5.1.2",
+  "on": "Hangi araç hangi basit makine?",
+  "arka": "Makas, tahterevalli, el arabası, cımbız: kaldıraç. Vida ve rampa: eğik düzlem. Kapı kolu, tornavida, kuyu çıkrığı: çıkrık.",
+  "test": {
+   "soru": "Kapı kolu hangi basit makineye örnektir?",
+   "siklar": [
+    "Kaldıraç",
+    "Eğik düzlem",
+    "Çıkrık",
+    "Makara"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "fen-k-028",
+  "ders": "fen",
+  "unite": "Enerji Dönüşümleri ve Çevre Bilimi",
+  "kazanimKod": "F.8.6.1.1",
+  "on": "Besin zincirinin elemanları",
+  "arka": "Üreticiler (bitkiler) → birincil tüketiciler (otçullar) → ikincil ve üçüncül tüketiciler. Ayrıştırıcılar (bakteri, mantar) atıkları parçalar.",
+  "test": {
+   "soru": "Ot → çekirge → kurbağa → yılan zincirinde kurbağa hangi basamaktadır?",
+   "siklar": [
+    "Üretici",
+    "İkincil tüketici",
+    "Birincil tüketici",
+    "Ayrıştırıcı"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "fen-k-029",
+  "ders": "fen",
+  "unite": "Enerji Dönüşümleri ve Çevre Bilimi",
+  "kazanimKod": "F.8.6.1.1",
+  "on": "Ekoloji piramidinde yukarı çıkarken",
+  "arka": "Aktarılan enerji ve birey sayısı azalır; biyolojik birikim (vücutta biriken zararlı madde) artar.",
+  "test": {
+   "soru": "Besin piramidinde zararlı madde birikimi en çok hangi canlılarda görülür?",
+   "siklar": [
+    "Üreticilerde",
+    "Otçullarda",
+    "Ayrıştırıcılarda",
+    "Son tüketicilerde"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "fen-k-030",
+  "ders": "fen",
+  "unite": "Enerji Dönüşümleri ve Çevre Bilimi",
+  "kazanimKod": "F.8.6.2.1",
+  "on": "Fotosentez",
+  "arka": "Üreticiler ışık enerjisiyle karbondioksit ve sudan besin ve oksijen üretir. Yapay ışıkta da gerçekleşir.",
+  "test": {
+   "soru": "Fotosentezde kullanılan maddeler hangileridir?",
+   "siklar": [
+    "Karbondioksit ve su",
+    "Oksijen ve besin",
+    "Oksijen ve su",
+    "Besin ve karbondioksit"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "fen-k-031",
+  "ders": "fen",
+  "unite": "Enerji Dönüşümleri ve Çevre Bilimi",
+  "kazanimKod": "F.8.6.2.2",
+  "on": "Fotosentez hızını etkileyenler",
+  "arka": "Işık şiddeti, ışık rengi, karbondioksit miktarı, su miktarı ve sıcaklık. Hız, yeşil ışıkta en düşüktür; çok yüksek sıcaklıkta da azalır.",
+  "test": {
+   "soru": "Fotosentez hangi renk ışıkta en yavaş gerçekleşir?",
+   "siklar": [
+    "Kırmızı",
+    "Mor",
+    "Yeşil",
+    "Mavi"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "fen-k-032",
+  "ders": "fen",
+  "unite": "Enerji Dönüşümleri ve Çevre Bilimi",
+  "kazanimKod": "F.8.6.2.3",
+  "on": "Solunum",
+  "arka": "Besinlerin parçalanarak enerji (ATP) elde edilmesidir. Oksijenli solunumda daha çok enerji açığa çıkar. Bitkiler de gece gündüz solunum yapar.",
+  "test": {
+   "soru": "Bitkilerle ilgili hangisi doğrudur?",
+   "siklar": [
+    "Yalnız gece solunum yaparlar.",
+    "Gece ve gündüz solunum yaparlar.",
+    "Hiç solunum yapmazlar.",
+    "Yalnız gündüz solunum yaparlar."
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "fen-k-033",
+  "ders": "fen",
+  "unite": "Enerji Dönüşümleri ve Çevre Bilimi",
+  "kazanimKod": "F.8.6.3.3",
+  "on": "Sera etkisi ve küresel ısınma",
+  "arka": "Sera gazları (karbondioksit, metan vb.) ısıyı tutar; bu doğal ve gereklidir. Fosil yakıt kullanımıyla bu gazların artması küresel ısınmaya yol açar.",
+  "test": {
+   "soru": "Hangisi atmosferdeki karbondioksit miktarını artırır?",
+   "siklar": [
+    "Ağaçlandırma yapmak",
+    "Güneş enerjisi kullanmak",
+    "Toplu taşıma kullanmak",
+    "Fosil yakıt kullanmak"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "fen-k-034",
+  "ders": "fen",
+  "unite": "Elektrik Yükleri ve Elektrik Enerjisi",
+  "kazanimKod": "F.8.7.1.2",
+  "on": "Yüklerin etkileşimi",
+  "arka": "Aynı cins yükler birbirini iter, zıt cins yükler çeker. Yüklü cisim nötr cismi de çeker; itme varsa iki cisim kesinlikle aynı cins yüklüdür.",
+  "test": {
+   "soru": "Birbirini iten iki küre için hangisi kesinlikle doğrudur?",
+   "siklar": [
+    "Aynı cins yüklüdürler.",
+    "Zıt cins yüklüdürler.",
+    "Biri nötrdür.",
+    "İkisi de nötrdür."
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "fen-k-035",
+  "ders": "fen",
+  "unite": "Elektrik Yükleri ve Elektrik Enerjisi",
+  "kazanimKod": "F.8.7.1.3",
+  "on": "Elektriklenme çeşitleri",
+  "arka": "Sürtünme: cisimler zıt cins yüklenir. Dokunma: cisimler aynı cins yüklenir. Etki: cisimler birbirine değmeden yük ayrışması olur.",
+  "test": {
+   "soru": "Yüklü bir cisme dokundurulan nötr iletken cisim nasıl yüklenir?",
+   "siklar": [
+    "Zıt cins yükle",
+    "Yüklenmez",
+    "Aynı cins yükle",
+    "Önce zıt sonra aynı cins yükle"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "fen-k-036",
+  "ders": "fen",
+  "unite": "Elektrik Yükleri ve Elektrik Enerjisi",
+  "kazanimKod": "F.8.7.2.1",
+  "on": "Nötr cisim yüksüz müdür?",
+  "arka": "Hayır. Nötr cisimde pozitif ve negatif yük sayıları eşittir. Negatif yük fazlaysa cisim negatif, pozitif yük fazlaysa pozitif yüklüdür.",
+  "test": {
+   "soru": "8 pozitif, 5 negatif yükü olan cisim için hangisi doğrudur?",
+   "siklar": [
+    "Nötrdür.",
+    "Pozitif yüklüdür.",
+    "Negatif yüklüdür.",
+    "Yüksüzdür."
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "fen-k-037",
+  "ders": "fen",
+  "unite": "Elektrik Yükleri ve Elektrik Enerjisi",
+  "kazanimKod": "F.8.7.2.2",
+  "on": "Topraklama",
+  "arka": "Yüklü cismin iletkenle toprağa bağlanıp nötrlenmesidir. Negatif yüklü cisim fazla yükünü toprağa verir; pozitif yüklü cisim topraktan negatif yük alır. Örn: paratoner.",
+  "test": {
+   "soru": "Hangisi topraklamanın bir uygulamasıdır?",
+   "siklar": [
+    "Elektroskop",
+    "Jeneratör",
+    "Sigorta",
+    "Paratoner"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "fen-k-038",
+  "ders": "fen",
+  "unite": "Elektrik Yükleri ve Elektrik Enerjisi",
+  "kazanimKod": "F.8.7.3.1",
+  "on": "Elektrik enerjisinin dönüşümleri",
+  "arka": "Isıya: ütü, fırın. Işığa: ampul. Harekete: elektrik motoru, vantilatör. Sigorta, devreden fazla akım geçince devreyi keserek güvenlik sağlar.",
+  "test": {
+   "soru": "Vantilatörde elektrik enerjisi temel olarak hangi enerjiye dönüşür?",
+   "siklar": [
+    "Hareket enerjisi",
+    "Işık enerjisi",
+    "Kimyasal enerji",
+    "Potansiyel enerji"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "fen-k-039",
+  "ders": "fen",
+  "unite": "Elektrik Yükleri ve Elektrik Enerjisi",
+  "kazanimKod": "F.8.7.3.5",
+  "on": "Elektrik tüketimi nasıl hesaplanır?",
+  "arka": "Tüketilen enerji = güç × süre; faturada birim kWh'tir. Örn: 1000 W'lık ısıtıcı 2 saatte 2 kWh enerji harcar.",
+  "test": {
+   "soru": "500 W gücündeki bir cihaz 4 saat çalışırsa kaç kWh enerji harcar?",
+   "siklar": [
+    "0,5",
+    "1",
+    "2",
+    "2000"
+   ],
+   "dogru": 2
+  }
+ }
+]

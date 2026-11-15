@@ -1,0 +1,131 @@
+{
+ "incelenen": 54,
+ "korCozumUyusma": 54,
+ "kartIncelenen": 44,
+ "bulgular": [
+  {
+   "id": "tur-046",
+   "tur": "ipucu-cevabi-veriyor",
+   "ciddiyet": "duzelt",
+   "aciklama": "ipucu1 'istisna: kurum ve kuruluş adları' diyerek cevabı doğrudan veriyor (şıklarda tek kurum adı A'da). Anahtar (A) doğru; TDK kuralı doğru uygulanmış.",
+   "duzeltme": {
+    "ipucu1": "Kesme işareti özel adlara gelen çekim eklerini ayırır; ama bu kural her ad türünde geçerli değildir. Dört cümledeki adların türünü tek tek belirle."
+   }
+  },
+  {
+   "id": "tur-008",
+   "tur": "aciklama-hatasi",
+   "ciddiyet": "duzelt",
+   "aciklama": "ipucu2'de bağlaç olan 'de' için \"'De' eki\" denmiş; buradaki 'de' ek değil bağlaçtır (tur-043 tam da bu ayrımı öğretiyor). Ayrıca alıntı metinle uyuşmuyor (metinde 'köşelerine').",
+   "duzeltme": {
+    "ipucu2": "'Yalnızca' sözcüğüne dikkat et. Yazar çok satan kitaplara mı karşı, yoksa sadece onlarla yetinmeye mi? 'De' bağlacı da önemli: 'tozlu köşelerine <i>de</i> bakmalıdır'."
+   }
+  },
+  {
+   "id": "tur-010",
+   "tur": "dil-hatasi",
+   "ciddiyet": "duzelt",
+   "aciklama": "Metinde 'yazılar kazdırırdı' denmiş. Taşa yazı 'kazınır' (kazımak → kazıtmak); 'kazdırmak' kazmak (çukur açmak) fiilinin ettirgenidir. Tuzak metni de 'taşa kazınan yazılar' diyor. Anahtar doğru.",
+   "duzeltme": {
+    "metin": "Eski mahallelerde çeşmeler yalnızca su içilen yerler değildi. Sabahları kovasını alan kadınlar çeşme başında buluşur, günün haberlerini birbirine anlatırdı. Yolcular atlarını burada sular, çocuklar oyun aralarında koşup avuçlarıyla su içerdi. Çeşmeyi yaptıran kişi adının hayırla anılmasını isterdi; bu yüzden taşına özenle yazılar kazıtırdı. Musluklar evlere girince çeşmelerin önü yavaş yavaş boşaldı. Bugün çoğu kurumuş olsa da o taş yapılar, mahallelinin bir zamanlar nerede bir araya geldiğini bize hâlâ hatırlatıyor.<br><br>Bu metnin konusu aşağıdakilerden hangisidir?"
+   }
+  },
+  {
+   "id": "tur-017",
+   "tur": "olgu-hatasi",
+   "ciddiyet": "kucuk",
+   "aciklama": "II. cümle satrancın amacını 'rakibin şahını hareket edemez duruma getirmek' diye veriyor; bu tanım pat (beraberlik) durumunu da kapsar. Doğrusu şahı kaçamayacağı biçimde tehdit etmek (mat). Cevabı etkilemiyor.",
+   "duzeltme": {
+    "metin": "(I) Satranç, iki kişinin karşılıklı oynadığı bir zekâ oyunudur. (II) Oyuncular, rakibin şahını kaçamayacağı biçimde sıkıştırmaya, yani mat etmeye çalışır. (III) Her taşın tahta üzerinde kendine özgü bir hareket biçimi vardır. (IV) Dama da aynı tahtada oynanan eğlenceli bir oyundur. (V) İyi bir satranç oyuncusu, yapacağı hamleden önce birkaç hamle sonrasını düşünür. (VI) Bu yüzden satranç, insana sabırlı olmayı ve plan yapmayı da öğretir.<br><br>Bu metinde numaralanmış cümlelerden hangisi düşüncenin akışını bozmaktadır?"
+   }
+  },
+  {
+   "id": "tur-032",
+   "tur": "aciklama-hatasi",
+   "ciddiyet": "kucuk",
+   "aciklama": "Çözümde 'batarken' için \"'Ne zaman topladı?' sorusuna cevap verir\" deniyor; cümlede 'güneş batarken' daha doğal olarak 'yürümeyi (seven)' sözüne bağlanır. Tür (zarf-fiil) ve anahtar (D) değişmiyor; açıklama tartışmaya yer bırakmayacak biçimde sadeleştirilmeli.",
+   "duzeltme": {
+    "cozum": [
+     "batar-ken: -ken ekiyle kurulmuş, zaman bildiren bir sözcüktür → zarf-fiil.",
+     "yürü-me-yi: yürüme işinin adıdır, hâl eki (-yi) almıştır → isim-fiil.",
+     "sev-en: 'Hangi balıkçı?' sorusuna cevap verir, adı niteler → sıfat-fiil.",
+     "Üç tür de vardır. Cevap D."
+    ],
+    "ipucu2": "'Topladı' yüklem. 'Batarken' zaman bildiriyor, 'seven' hangi balıkçı sorusuna cevap veriyor. 'Yürümeyi' ise bir işin adı. Her biri hangi tür?"
+   }
+  },
+  {
+   "id": "tur-033",
+   "tur": "tartismali-ornek",
+   "ciddiyet": "kucuk",
+   "aciklama": "Taktikte '-dığında' ve '-madan önce' zarf-fiil eki gibi sayılmış; '-dığında' sıfat-fiil eki + iyelik + hâl ekidir ve kaynaklar arasında tartışmalıdır. Ayrıca '-madan' hem zaman hem durum listesinde geçiyor. Soru ve anahtar (B) sorunsuz.",
+   "duzeltme": {
+    "taktik": "-ınca, -ken, -alı, -dıkça genellikle zaman; -arak, -a…-a, -madan genellikle durum bildirir. Yine de yükleme 'ne zaman?' ve 'nasıl?' sorularını sorarak doğrula."
+   }
+  },
+  {
+   "id": "tur-038",
+   "tur": "aciklama-hatasi",
+   "ciddiyet": "kucuk",
+   "aciklama": "Taktikteki 'Virgüle kadar olan bölüm çoğu zaman öznedir' genellemesi yanlış alışkanlık kazandırır (virgül sıralı öge, ara söz vb. için de kullanılır). Anahtar (A) doğru.",
+   "duzeltme": {
+    "taktik": "Cümlede fiilimsi varsa dikkat: Fiilimsi, kendinden önceki sözcükleri yanına alıp tek bir öge oluşturur. Özneyi bulmak için yükleme 'kim?' diye sor ve cevabı niteleyen sözleriyle birlikte al."
+   }
+  },
+  {
+   "id": "tur-047",
+   "tur": "aciklama-hatasi",
+   "ciddiyet": "kucuk",
+   "aciklama": "Kavram tanımı 'yüklem özneyle tekillik-çoğulluk yönünden uyumlu olmalıdır' diyor; D şıkkının tuzağı ise (doğru olarak) çoğul özneyle tekil yüklemin bozukluk olmadığını söylüyor. İç tutarsızlık.",
+   "duzeltme": {
+    "kavramlar": [
+     {
+      "ad": "Özne-yüklem uyumu",
+      "tanim": "Yüklem, özneyle kişi yönünden uyumlu olmalıdır (ben + o = biz; sen + o = siz). Örn: Ben ve sen gideceğiz. Çoğul özneyle tekil yüklem kullanılabilir: Öğrenciler geldi."
+     },
+     {
+      "ad": "Anlatım bozukluğu",
+      "tanim": "Cümlenin dil bilgisi ya da anlam yönünden kusurlu olması."
+     }
+    ]
+   }
+  },
+  {
+   "id": "tur-003",
+   "tur": "belirsiz",
+   "ciddiyet": "kucuk",
+   "aciklama": "Küçük kurgu tutarsızlığı: günde 10 sayfa ≈ yılda 3650 sayfa; 32 kitap ortalama ~115 sayfa eder, bu incelikte 32 kitabın yığını masanın boyunu aşmaz. Cevabı etkilemez; istenirse 'masasının boyunu aşmıştı' ifadesi yumuşatılabilir.",
+   "duzeltme": {
+    "metin": "Zehra, bu yıl kendine bir söz verdi: Her gün yalnızca on sayfa kitap okuyacaktı. Arkadaşları “On sayfayla ne olur ki?” diye gülüyordu. Zehra aldırmadı; otobüste, teneffüste, yatmadan önce on sayfasını okudu. Yıl sonunda okuduğu kitapları üst üste dizdiğinde ortaya kocaman bir yığın çıkmıştı. Tam otuz iki kitap bitirmişti.<br><br>Bu metinde anlatılan durumu aşağıdaki atasözlerinden hangisi <b>en iyi</b> açıklar?"
+   }
+  },
+  {
+   "id": "tur-k-007",
+   "tur": "tartismali-ornek",
+   "ciddiyet": "kucuk",
+   "aciklama": "Koşul ipuçları arasında '-ınca' sayılmış; -ınca asıl olarak zaman bildirir (tur-033 ve tur-k-022 de böyle öğretiyor). Öğrenci her -ınca'yı koşul sanabilir.",
+   "duzeltme": {
+    "arka": "Bir işin gerçekleşmesi başka bir işe bağlıdır. İpuçları: -sa/-se, -dıkça, 'yeter ki', 'ancak … -arak'. Örn: Çalışırsan kazanırsın."
+   }
+  },
+  {
+   "id": "tur-k-021",
+   "tur": "tartismali-ornek",
+   "ciddiyet": "kucuk",
+   "aciklama": "Test ve örnekte 'tanıdık (yüz)' kullanılmış. Ders kitaplarında -dık örneği olarak geçse de 'tanıdık' sözlükte kalıcı ad/sıfat olarak da yer alır; aynı bankada kalıcı isim ayrımı öğretildiği için tartışmasız bir örnek daha güvenli.",
+   "duzeltme": {
+    "arka": "-an, -ası, -mez, -ar, -dik, -ecek, -miş (kısaca: “anası mezar dikecekmiş”). Bir adı niteler. Örn: koşan çocuk, okuduğum kitap, gelecek hafta.",
+    "test": {
+     "soru": "Hangisinde sıfat-fiil vardır?",
+     "siklar": [
+      "Okuduğum kitabı sana vereceğim.",
+      "Akşam eve geldik.",
+      "Kitabı dün okudum.",
+      "Yarın sana geleceğim."
+     ],
+     "dogru": 0
+    }
+   }
+  }
+ ]
+}
