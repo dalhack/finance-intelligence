@@ -1,0 +1,532 @@
+[
+ {
+  "id": "fen-013",
+  "ders": "fen",
+  "unite": "DNA ve Genetik Kod",
+  "kazanimKod": "F.8.2.3.2",
+  "kazanimAd": "Örneklerden yola çıkarak modifikasyonu açıklar.",
+  "zorluk": 2,
+  "tip": "deney",
+  "metin": "Bir araştırmacı, aynı bitkiden çelikle çoğalttığı (genetik yapısı aynı olan) çuha çiçeklerini iki gruba ayırıyor. Işık, su ve toprak koşulları iki grupta da aynıdır.<table class=\"t\"><tr><th>Grup</th><th>Sera sıcaklığı</th><th>Açan çiçeklerin rengi</th></tr><tr><td>1</td><td>20 °C</td><td>Kırmızı</td></tr><tr><td>2</td><td>32 °C</td><td>Beyaz</td></tr></table>Araştırmacı daha sonra 2. gruptaki beyaz çiçekli bitkilerin tohumlarını 20 °C'lik serada yetiştiriyor ve çiçeklerin <b>kırmızı</b> açtığını gözlüyor.<br><br>Bu deneyle ilgili aşağıdakilerden hangisi <b>yanlıştır</b>?",
+  "svg": "",
+  "siklar": [
+   "Deneyin bağımsız değişkeni sera sıcaklığıdır.",
+   "Deneyin bağımlı değişkeni çiçek rengidir.",
+   "Gözlenen renk değişimi modifikasyona örnektir.",
+   "Yüksek sıcaklık, bitkinin genlerinin yapısını değiştirmiştir."
+  ],
+  "dogru": 3,
+  "ipucu1": "Beyaz çiçekli bitkilerin tohumlarından yetişen bitkiler 20 °C'ta hangi renkte çiçek açtı? Bu, değişimin kalıtsal olup olmadığı hakkında ne söyler?",
+  "ipucu2": "Genlerin yapısı değişmiş olsaydı beyaz çiçek özelliği yavrulara da geçerdi. Yavrular kırmızı açtığına göre değişen şey genin yapısı mı, işleyişi mi?",
+  "cozum": [
+   "Araştırmacı yalnızca sıcaklığı değiştirdi: bağımsız değişken sıcaklıktır.",
+   "Sıcaklığa bağlı olarak değişen ve gözlenen şey çiçek rengidir: bağımlı değişken.",
+   "Beyaz çiçekli bitkilerin yavruları 20 °C'ta yine kırmızı açtı; yani değişim kalıtsal değildir.",
+   "Kalıtsal olmayan, çevre etkisiyle oluşan bu değişim modifikasyondur; genlerin yapısı değil işleyişi değişmiştir.",
+   "Yanlış olan ifade: Yüksek sıcaklık, bitkinin genlerinin yapısını değiştirmiştir."
+  ],
+  "tuzaklar": [
+   "Soru kökündeki 'yanlıştır' ifadesi kaçırılırsa ilk doğru cümle işaretlenir.",
+   "Bağımlı ve bağımsız değişken birbirine karıştırılırsa bu cümle hatalı sanılır.",
+   "Renk değişimi büyük bir farklılık gibi göründüğü için mutasyon sanılır ve bu cümle yanlış diye işaretlenir.",
+   ""
+  ],
+  "taktik": "Değişim yavrulara geçmiyorsa modifikasyondur: gen yapısı aynı kalır, yalnız işleyişi değişir.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Modifikasyon",
+    "tanim": "Çevre etkisiyle genlerin işleyişinde oluşan, yavrulara aktarılmayan değişiklik."
+   },
+   {
+    "ad": "Bağımlı değişken",
+    "tanim": "Bağımsız değişkene bağlı olarak değişen, deneyde gözlenen ya da ölçülen değişken."
+   }
+  ]
+ },
+ {
+  "id": "fen-014",
+  "ders": "fen",
+  "unite": "DNA ve Genetik Kod",
+  "kazanimKod": "F.8.2.4.1",
+  "kazanimAd": "Canlıların yaşadıkları çevreye uyumlarını gözlem yaparak açıklar.",
+  "zorluk": 3,
+  "tip": "uzun-metin",
+  "metin": "Bir adadaki kara salyangozlarının bir kısmı açık, bir kısmı koyu renk kabukludur ve kabuk rengi kalıtsaldır. Adadaki açık renkli kumluk alan, bir yanardağ patlamasından sonra koyu renkli küllerle kaplanmıştır. Salyangozlarla beslenen kuşlar avlarını görerek bulmaktadır. Araştırmacıların sayımları şöyledir:<table class=\"t\"><tr><th>Sayım zamanı</th><th>Açık kabuklu</th><th>Koyu kabuklu</th></tr><tr><td>Patlamadan önce</td><td>%80</td><td>%20</td></tr><tr><td>10 yıl sonra</td><td>%45</td><td>%55</td></tr><tr><td>20 yıl sonra</td><td>%15</td><td>%85</td></tr></table>Bu değişimi en iyi açıklayan ifade hangisidir?",
+  "svg": "",
+  "siklar": [
+   "Salyangozlar kuşlardan korunmak için kabuk renklerini zamanla koyulaştırmıştır.",
+   "Koyu zeminde daha zor fark edilen koyu kabuklular hayatta kalıp daha çok yavru bırakmıştır.",
+   "Küller salyangozların kabuğunu boyamış, bu özellik yavrulara geçmiştir.",
+   "Açık kabuklu salyangozlar modifikasyon geçirerek koyu kabuklu hâle gelmiştir."
+  ],
+  "dogru": 1,
+  "ipucu1": "Patlamadan önce de koyu kabuklu salyangozlar var mıydı? Kuşlar koyu zeminde hangi salyangozu daha kolay görür?",
+  "ipucu2": "Kabuk rengi kalıtsal ve bir salyangozun rengi yaşamı boyunca değişmiyor. Değişen şey, hangi renkten kaç salyangozun hayatta kalıp ürediğidir.",
+  "cozum": [
+   "Patlamadan önce de iki renk vardı; bu kalıtsal çeşitliliğe varyasyon denir.",
+   "Zemin koyulaşınca açık kabuklular kuşlar tarafından daha kolay fark edilip avlandı.",
+   "Koyu kabuklular daha çok hayatta kaldı, üredi ve koyu kabuk genini yavrularına aktardı (doğal seçilim).",
+   "Böylece kuşaklar içinde koyu kabukluların oranı arttı. Doğru cevap: koyu kabukluların hayatta kalıp daha çok yavru bırakması."
+  ],
+  "tuzaklar": [
+   "Canlıların ihtiyaç duyduğu için isteyerek değiştiği yanılgısı; tek bir salyangoz kalıtsal rengini değiştiremez.",
+   "",
+   "Sonradan kazanılan (boyanma gibi) özelliklerin yavrulara geçtiği sanılır; bunlar kalıtsal değildir.",
+   "Modifikasyon kalıtsal değildir ve kuşaklar boyunca oranı bu şekilde değiştiremez; kabuk rengi burada kalıtsaldır."
+  ],
+  "taktik": "'Canlı istediği için değişti' diyen şıkkı ele; doğru açıklamada var olan çeşitlilik + uygun olanın hayatta kalması bulunur.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Doğal seçilim",
+    "tanim": "Ortama uygun özellik taşıyan bireylerin hayatta kalıp üreyerek genlerini aktarması."
+   },
+   {
+    "ad": "Varyasyon",
+    "tanim": "Aynı türün bireyleri arasındaki kalıtsal çeşitlilik."
+   }
+  ]
+ },
+ {
+  "id": "fen-015",
+  "ders": "fen",
+  "unite": "DNA ve Genetik Kod",
+  "kazanimKod": "F.8.2.5.1",
+  "kazanimAd": "Genetik mühendisliğini ve biyoteknolojiyi ilişkilendirir.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Bir ilaç firması, insanda insülin hormonunun üretimini sağlayan geni bir bakteriye yerleştiriyor. Hızla çoğalan bakteriler insülin üretiyor ve bu insülin şeker hastalarının tedavisinde kullanılıyor.<br><br>Bu çalışma aşağıdaki biyoteknoloji uygulamalarından hangisine örnektir?",
+  "svg": "",
+  "siklar": [
+   "Gen aktarımı",
+   "Klonlama",
+   "Islah",
+   "Aşılama"
+  ],
+  "dogru": 0,
+  "ipucu1": "Çalışmada bir canlıya ait hangi yapı başka bir canlıya yerleştiriliyor?",
+  "ipucu2": "İnsana ait bir gen, bakterinin DNA'sına ekleniyor. Bir canlının geninin başka bir canlıya taşınmasına ne ad verilir?",
+  "cozum": [
+   "Çalışmada insana ait insülin geni bakteriye yerleştiriliyor.",
+   "Bir canlının geninin başka bir canlıya aktarılması gen aktarımıdır.",
+   "Bakteri artık bu geni taşıdığı için insülin üretir.",
+   "Doğru cevap: gen aktarımı."
+  ],
+  "tuzaklar": [
+   "",
+   "Bakterilerin çoğalıp aynı ürünü üretmesi klonlamayı çağrıştırır; asıl işlem genin başka canlıya taşınmasıdır.",
+   "'Daha yararlı canlı elde etme' fikri ıslahı çağrıştırır; ıslahta üstün özellikli bireyler eşleştirilir, gen taşınmaz.",
+   "'Tedavi' sözcüğü aşıyı çağrıştırır; biyoteknolojide aşılama, bir bitki parçasının başka bitkiye eklenmesidir."
+  ],
+  "taktik": "Metinde 'bir canlının geni başka canlıya' ifadesini görürsen cevap gen aktarımıdır.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Gen aktarımı",
+    "tanim": "Bir canlıya ait genin başka bir canlının DNA'sına yerleştirilmesi."
+   },
+   {
+    "ad": "Biyoteknoloji",
+    "tanim": "Canlıların ya da canlı parçalarının kullanılarak yararlı ürünler elde edilmesi."
+   }
+  ]
+ },
+ {
+  "id": "fen-016",
+  "ders": "fen",
+  "unite": "Basınç",
+  "kazanimKod": "F.8.3.1.1",
+  "kazanimAd": "Katı basıncını etkileyen değişkenleri deneyerek keşfeder.",
+  "zorluk": 1,
+  "tip": "gorsel",
+  "metin": "Kenar uzunlukları 5 cm, 10 cm ve 20 cm olan özdeş üç tuğla, yumuşak kum zemine şekildeki gibi farklı yüzeyleri üzerine bırakılıyor. K tuğlası 10 cm × 20 cm'lik, L tuğlası 5 cm × 20 cm'lik, M tuğlası 5 cm × 10 cm'lik yüzeyi üzerinde durmaktadır.<br><br>Tuğlaların zemine yaptığı basınçlar (kumda bıraktıkları izlerin derinliği) arasındaki ilişki hangisidir?",
+  "svg": "<svg viewBox='0 0 320 128' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><line x1='10' y1='100' x2='310' y2='100' /><rect x='25' y='85' width='60' height='15' class='mf'/><rect x='130' y='70' width='60' height='30' class='mf'/><rect x='240' y='40' width='30' height='60' class='mf'/><text x='55' y='120' text-anchor='middle' fill='currentColor' stroke='none' font-size='12'>K</text><text x='160' y='120' text-anchor='middle' fill='currentColor' stroke='none' font-size='12'>L</text><text x='255' y='120' text-anchor='middle' fill='currentColor' stroke='none' font-size='12'>M</text></svg>",
+  "siklar": [
+   "K = L = M",
+   "K &gt; L &gt; M",
+   "M &gt; K &gt; L",
+   "M &gt; L &gt; K"
+  ],
+  "dogru": 3,
+  "ipucu1": "Tuğlalar özdeş olduğuna göre ağırlıkları eşittir. Peki zemine değen yüzeyleri eşit mi?",
+  "ipucu2": "Ağırlık aynıyken temas yüzeyi küçüldükçe basınç artar. Üç tuğlanın temas yüzeylerini küçükten büyüğe sırala.",
+  "cozum": [
+   "Tuğlalar özdeş: zemine uyguladıkları kuvvet (ağırlık) eşittir.",
+   "Temas yüzeyleri: K 200 cm², L 100 cm², M 50 cm².",
+   "Kuvvet aynıyken yüzey küçüldükçe basınç büyür.",
+   "En küçük yüzey M'de, en büyük yüzey K'dedir. Doğru cevap: M > L > K."
+  ],
+  "tuzaklar": [
+   "Tuğlalar özdeş diye ağırlık ile basınç karıştırılınca çıkar.",
+   "Geniş yüzeyin daha çok basınç yaptığı sanılırsa sıralama tersine döner.",
+   "En büyük basınç doğru bulunmuş, ancak K ve L'nin temas yüzeyleri karıştırılmış.",
+   ""
+  ],
+  "taktik": "Ağırlıklar eşitse yalnızca temas yüzeyine bak: en küçük yüzey = en büyük basınç.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Katı basıncı",
+    "tanim": "Birim yüzeye dik olarak etki eden kuvvet; kuvvet arttıkça artar, yüzey büyüdükçe azalır."
+   },
+   {
+    "ad": "Pascal",
+    "tanim": "Basınç birimi (Pa)."
+   }
+  ]
+ },
+ {
+  "id": "fen-017",
+  "ders": "fen",
+  "unite": "Basınç",
+  "kazanimKod": "F.8.3.1.1",
+  "kazanimAd": "Katı basıncını etkileyen değişkenleri deneyerek keşfeder.",
+  "zorluk": 2,
+  "tip": "deney",
+  "metin": "Elif, katı basıncını etkileyen değişkenleri araştırmak için özdeş süngerler ve özdeş plastik şişelerle üç düzenek kuruyor.<br><br>1. düzenek: Tamamen kumla dolu şişe, <b>tabanı</b> üzerinde<br>2. düzenek: Tamamen kumla dolu şişe, <b>kapağı</b> üzerinde (ters)<br>3. düzenek: Yarısına kadar kumla dolu şişe, <b>tabanı</b> üzerinde<br><br>Elif, “Katı basıncı, cismin <b>ağırlığına</b> bağlıdır.” hipotezini sınamak için süngerlerdeki çökme miktarlarını karşılaştıracaktır. Hangi düzenekleri birlikte kullanmalıdır?",
+  "svg": "",
+  "siklar": [
+   "1 ve 2",
+   "1 ve 3",
+   "2 ve 3",
+   "1, 2 ve 3"
+  ],
+  "dogru": 1,
+  "ipucu1": "Hipotezde etkisi araştırılan değişken hangisi? O değişken farklı, geri kalan her şey aynı olmalı.",
+  "ipucu2": "Ağırlığın etkisi araştırılıyor: şişelerdeki kum miktarı farklı, süngere değen yüzey aynı olmalı. Hangi iki şişe aynı yüzeyi üzerinde duruyor?",
+  "cozum": [
+   "Hipotezde bağımsız değişken ağırlıktır; yalnızca ağırlık değişmelidir.",
+   "Temas yüzeyi kontrol edilen değişkendir; iki düzenekte de aynı olmalıdır.",
+   "1 ve 3'te şişeler tabanı üzerindedir (yüzey aynı), kum miktarları farklıdır (ağırlık farklı).",
+   "1 ve 2'de ağırlık aynı, yüzey farklıdır; 2 ve 3'te ise iki değişken birden farklıdır.",
+   "Doğru cevap: 1 ve 3."
+  ],
+  "tuzaklar": [
+   "Bu çift yüzey alanının etkisini sınar; ağırlık iki düzenekte de aynıdır.",
+   "",
+   "Hem ağırlık hem yüzey farklıdır; çökme farkının hangisinden kaynaklandığı anlaşılamaz.",
+   "Ne kadar çok düzenek o kadar iyi diye düşünülür; kontrollü deneyde yalnız bir değişken değişmelidir."
+  ],
+  "taktik": "Hipotezdeki değişkeni bul; o değişkenin FARKLI, diğer her şeyin AYNI olduğu iki düzeneği seç.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Kontrol edilen değişken",
+    "tanim": "Deney boyunca sabit tutulan değişken."
+   },
+   {
+    "ad": "Kontrollü deney",
+    "tanim": "Her seferinde yalnızca bir değişkenin değiştirildiği deney."
+   }
+  ]
+ },
+ {
+  "id": "fen-018",
+  "ders": "fen",
+  "unite": "Basınç",
+  "kazanimKod": "F.8.3.1.2",
+  "kazanimAd": "Sıvı basıncını etkileyen değişkenleri tahmin eder ve tahminlerini test eder.",
+  "zorluk": 2,
+  "tip": "gorsel",
+  "metin": "Şekildeki K, L ve M kaplarında belirtilen yüksekliklerde sıvılar bulunmaktadır. Tuzlu suyun yoğunluğu suyun yoğunluğundan büyüktür. K kabı L kabından daha geniştir.<br><br>Sıvıların kap <b>tabanına</b> yaptığı basınçlar P<sub>K</sub>, P<sub>L</sub> ve P<sub>M</sub> arasındaki ilişki hangisidir?",
+  "svg": "<svg viewBox='0 0 320 146' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><rect x='15' y='85' width='90' height='35' class='mf' stroke='none'/><polyline points='15,40 15,120 105,120 105,40' /><line x1='15' y1='85' x2='105' y2='85' stroke-width='1'/><text x='60' y='107' text-anchor='middle' fill='currentColor' stroke='none' font-size='12'>10 cm</text><rect x='140' y='50' width='40' height='70' class='mf' stroke='none'/><polyline points='140,40 140,120 180,120 180,40' /><line x1='140' y1='50' x2='180' y2='50' stroke-width='1'/><text x='185' y='90' text-anchor='start' fill='currentColor' stroke='none' font-size='12'>20 cm</text><rect x='232' y='50' width='70' height='70' class='mf' stroke='none'/><polyline points='232,40 232,120 302,120 302,40' /><line x1='232' y1='50' x2='302' y2='50' stroke-width='1'/><text x='267' y='90' text-anchor='middle' fill='currentColor' stroke='none' font-size='12'>20 cm</text><text x='60' y='138' text-anchor='middle' fill='currentColor' stroke='none' font-size='12'>K: su</text><text x='160' y='138' text-anchor='middle' fill='currentColor' stroke='none' font-size='12'>L: su</text><text x='267' y='138' text-anchor='middle' fill='currentColor' stroke='none' font-size='12'>M: tuzlu su</text></svg>",
+  "siklar": [
+   "P<sub>M</sub> &gt; P<sub>L</sub> &gt; P<sub>K</sub>",
+   "P<sub>K</sub> &gt; P<sub>M</sub> &gt; P<sub>L</sub>",
+   "P<sub>M</sub> &gt; P<sub>L</sub> = P<sub>K</sub>",
+   "P<sub>L</sub> = P<sub>M</sub> &gt; P<sub>K</sub>"
+  ],
+  "dogru": 0,
+  "ipucu1": "Sıvı basıncı hangi iki değişkene bağlıdır? Kabın genişliği bunlardan biri mi?",
+  "ipucu2": "Önce aynı sıvıyı içeren K ve L'yi yüksekliklerine göre, sonra aynı yükseklikteki L ve M'yi yoğunluklarına göre karşılaştır.",
+  "cozum": [
+   "Sıvı basıncı sıvının derinliğine (yüksekliğine) ve yoğunluğuna bağlıdır; kabın genişliğine bağlı değildir.",
+   "K ve L'de sıvı aynı; L'de yükseklik daha fazla: L'nin basıncı K'den büyüktür.",
+   "L ve M'de yükseklik aynı; M'deki sıvının yoğunluğu daha büyük: M'nin basıncı L'den büyüktür.",
+   "Doğru cevap: M > L > K."
+  ],
+  "tuzaklar": [
+   "",
+   "Geniş kapta daha çok sıvı olduğu için basıncın büyük olacağı sanılır; sıvı basıncı kabın genişliğine bağlı değildir.",
+   "Yoğunluk farkı görülmüş, ancak aynı sıvıdaki yükseklik farkı gözden kaçmış.",
+   "Yükseklik etkisi doğru, yoğunluk etkisi unutulmuş; L ve M eşit sanılmış."
+  ],
+  "taktik": "Sıvı basıncında yalnız iki şeye bak: derinlik ve yoğunluk. Kabın şekli ve sıvı miktarı çeldiricidir.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Sıvı basıncı",
+    "tanim": "Sıvının derinliği ve yoğunluğu arttıkça artar; kabın şekline bağlı değildir."
+   },
+   {
+    "ad": "Yoğunluk",
+    "tanim": "Birim hacimdeki madde miktarı."
+   }
+  ]
+ },
+ {
+  "id": "fen-019",
+  "ders": "fen",
+  "unite": "Basınç",
+  "kazanimKod": "F.8.3.1.1",
+  "kazanimAd": "Katı basıncını etkileyen değişkenleri deneyerek keşfeder.",
+  "zorluk": 2,
+  "tip": "gorsel",
+  "metin": "Özdeş küp biçimindeki tahta bloklar yatay zemine şekildeki gibi yerleştirilmiştir (K: tek blok, L: üst üste iki blok, M: yan yana iki blok, N: yan yana iki bloktan birinin üstünde bir blok daha).<br><br>Düzeneklerin zemine yaptığı basınçlar arasındaki ilişki hangisidir?",
+  "svg": "<svg viewBox='0 0 320 116' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><line x1='10' y1='90' x2='310' y2='90' /><rect x='22' y='62' width='28' height='28' class='mf'/><rect x='92' y='62' width='28' height='28' class='mf'/><rect x='92' y='34' width='28' height='28' class='mf'/><rect x='152' y='62' width='28' height='28' class='mf'/><rect x='180' y='62' width='28' height='28' class='mf'/><rect x='240' y='62' width='28' height='28' class='mf'/><rect x='268' y='62' width='28' height='28' class='mf'/><rect x='240' y='34' width='28' height='28' class='mf'/><text x='36' y='108' text-anchor='middle' fill='currentColor' stroke='none' font-size='12'>K</text><text x='106' y='108' text-anchor='middle' fill='currentColor' stroke='none' font-size='12'>L</text><text x='180' y='108' text-anchor='middle' fill='currentColor' stroke='none' font-size='12'>M</text><text x='268' y='108' text-anchor='middle' fill='currentColor' stroke='none' font-size='12'>N</text></svg>",
+  "siklar": [
+   "N &gt; L = M &gt; K",
+   "K = L &gt; M = N",
+   "L &gt; N &gt; K = M",
+   "L &gt; N &gt; M &gt; K"
+  ],
+  "dogru": 2,
+  "ipucu1": "Her düzenek için iki şeyi say: toplam blok sayısı (ağırlık) ve zemine değen blok yüzü sayısı (yüzey).",
+  "ipucu2": "Basıncı karşılaştırmak için ağırlığı zemine değen yüzey sayısına böl. Örneğin M'de 2 blok, 2 yüzey var.",
+  "cozum": [
+   "Bir bloğun ağırlığına 1 birim, bir yüzünün alanına 1 birim diyelim.",
+   "K: 1 ağırlık / 1 yüzey = 1. L: 2 / 1 = 2.",
+   "M: 2 / 2 = 1. N: 3 / 2 = 1,5.",
+   "Sıralama: L (2) > N (1,5) > K (1) = M (1).",
+   "Doğru cevap: L > N > K = M."
+  ],
+  "tuzaklar": [
+   "Yalnızca blok sayısına (ağırlığa) bakılınca çıkar; temas yüzeyi hesaba katılmamış.",
+   "Yalnızca temas yüzeyine bakılınca çıkar; ağırlık farkı hesaba katılmamış.",
+   "",
+   "M'de iki blok olduğu için K'den büyük basınç yapacağı sanılmış; oysa yüzey de iki katına çıkmıştır."
+  ],
+  "taktik": "Her düzeneğin yanına 'blok sayısı / zemine değen yüz sayısı' kesrini yaz ve kesirleri karşılaştır.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "Basınç–kuvvet ilişkisi",
+    "tanim": "Yüzey aynıyken kuvvet (ağırlık) arttıkça basınç artar."
+   },
+   {
+    "ad": "Basınç–yüzey ilişkisi",
+    "tanim": "Kuvvet aynıyken temas yüzeyi büyüdükçe basınç azalır."
+   }
+  ]
+ },
+ {
+  "id": "fen-020",
+  "ders": "fen",
+  "unite": "Basınç",
+  "kazanimKod": "F.8.3.1.3",
+  "kazanimAd": "Katı, sıvı ve gazların basınç özelliklerinin günlük yaşam ve teknolojideki uygulamalarına örnekler verir.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Karlı bir günde yumuşak kara batmadan yürümenin yolunu araştıran Ali, basıncın günlük yaşamdaki uygulamalarını inceliyor.<br><br>Aşağıdaki uygulamaların hangisinde amaç, zemine yapılan basıncı <b>azaltmaktır</b>?",
+  "svg": "",
+  "siklar": [
+   "Bıçağın ağzının bilenerek inceltilmesi",
+   "Çivilerin ucunun sivri yapılması",
+   "Futbol ayakkabılarının altına krampon (diş) takılması",
+   "İş makinelerinde tekerlek yerine geniş paletler kullanılması"
+  ],
+  "dogru": 3,
+  "ipucu1": "Basıncı azaltmak için temas yüzeyi büyütülmeli mi, küçültülmeli mi?",
+  "ipucu2": "Şıklardaki uygulamaların hangisinde zemine değen yüzey genişletiliyor?",
+  "cozum": [
+   "Ağırlık değişmeden basıncı azaltmak için temas yüzeyi büyütülür.",
+   "Bıçağı bilemek, çivi ucunu sivriltmek ve krampon takmak temas yüzeyini küçültür; basıncı artırır.",
+   "Geniş paletler iş makinesinin ağırlığını büyük bir yüzeye yayar; basınç azalır ve makine yumuşak zemine batmaz.",
+   "Doğru cevap: iş makinelerinde geniş palet kullanılması."
+  ],
+  "tuzaklar": [
+   "Soru kökündeki 'azaltmak' gözden kaçarsa seçilir; bileme yüzeyi küçültüp basıncı artırır.",
+   "Sivri uç yüzeyi küçültür; basınç artar, çivi kolayca çakılır.",
+   "Kramponlar zemine değen yüzeyi küçültüp basıncı artırır; böylece ayakkabı zemine tutunur.",
+   ""
+  ],
+  "taktik": "Yüzey küçülüyorsa (sivri, ince, dişli) basınç artar; yüzey büyüyorsa (geniş, yayvan) basınç azalır.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Basıncı azaltma",
+    "tanim": "Temas yüzeyini büyüterek sağlanır: palet, kar ayakkabısı, geniş lastik."
+   },
+   {
+    "ad": "Basıncı artırma",
+    "tanim": "Temas yüzeyini küçülterek sağlanır: bıçak, çivi, iğne."
+   }
+  ]
+ },
+ {
+  "id": "fen-021",
+  "ders": "fen",
+  "unite": "Basınç",
+  "kazanimKod": "F.8.3.1.3",
+  "kazanimAd": "Katı, sıvı ve gazların basınç özelliklerinin günlük yaşam ve teknolojideki uygulamalarına örnekler verir.",
+  "zorluk": 3,
+  "tip": "deney",
+  "metin": "Su ile dolu, farklı kalınlıktaki iki şırınga ince bir hortumla birbirine bağlanmıştır. K şırıngasının pistonu küçük, L şırıngasının pistonu büyük yüzeylidir. Barış, K pistonunu aşağı ittiğinde L pistonunun yükseldiğini gözlüyor.<br><br>Bu düzenekle ilgili,<br>I. Sıvılar, üzerlerine uygulanan basıncı her yöne aynen iletir.<br>II. K pistonuna uygulanan küçük bir kuvvetle, L pistonunun üzerindeki daha ağır bir yük kaldırılabilir.<br>III. Düzenek, sıvı basıncının derinlikle arttığını göstermek için uygundur.<br>ifadelerinden hangileri doğrudur?",
+  "svg": "<svg viewBox='0 0 320 132' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><rect x='30' y='55' width='30' height='45' class='mf' stroke='none'/><polyline points='30,36 30,100 60,100 60,36' /><line x1='30' y1='55' x2='60' y2='55' stroke-width='3'/><line x1='45' y1='55' x2='45' y2='24' stroke-width='3'/><line x1='45' y1='2' x2='45' y2='20' class='ac'/><polygon points='45,20 42.3,13.6 47.7,13.6' fill='currentColor' class='ac'/><text x='56' y='14' text-anchor='start' fill='currentColor' stroke='none' font-size='12'>F</text><rect x='200' y='70' width='80' height='30' class='mf' stroke='none'/><polyline points='200,36 200,100 280,100 280,36' /><line x1='200' y1='70' x2='280' y2='70' stroke-width='3'/><line x1='240' y1='70' x2='240' y2='40' stroke-width='3'/><polyline points='45,100 45,116 240,116 240,100' stroke-width='4'/><text x='70' y='60' text-anchor='start' fill='currentColor' stroke='none' font-size='12'>K</text><text x='288' y='74' text-anchor='start' fill='currentColor' stroke='none' font-size='12'>L</text><text x='140' y='108' text-anchor='middle' fill='currentColor' stroke='none' font-size='12'>hortum</text></svg>",
+  "siklar": [
+   "I ve II",
+   "Yalnız I",
+   "II ve III",
+   "I, II ve III"
+  ],
+  "dogru": 0,
+  "ipucu1": "Kapalı bir kaptaki sıvıya bir noktadan basınç uygulanınca bu basınca ne olur? Bu ilke hangi bilim insanının adıyla anılır?",
+  "ipucu2": "Basınç L pistonuna aynen iletilir. L pistonunun yüzeyi daha büyük olduğuna göre ona etki eden toplam kuvvet nasıl olur? Ayrıca deneyde derinlik değiştirildi mi?",
+  "cozum": [
+   "Pascal prensibi: Kapalı kaptaki sıvı, uygulanan basıncı her yöne aynen iletir. I doğru.",
+   "Aynı basınç daha büyük yüzeyli L pistonuna daha büyük kuvvet uygular; hidrolik liftler böyle çalışır. II doğru.",
+   "Deneyde sıvının derinliği değiştirilip ölçüm yapılmamıştır; düzenek derinlik etkisini göstermez. III yanlış.",
+   "Doğru cevap: I ve II."
+  ],
+  "tuzaklar": [
+   "",
+   "Kuvvetin de aynen iletildiği sanılıp II elenir; aynen iletilen kuvvet değil basınçtır.",
+   "Sıvı basıncı denince ezberden 'derinlik' akla gelir ve III doğru sanılır; I ise elenmiştir.",
+   "Bütün öncüller sıvı basıncıyla ilgili doğru cümleler gibi görünür; III'ün bu düzenekle sınanmadığı gözden kaçar."
+  ],
+  "taktik": "Pascal prensibinde 'basınç aynen iletilir, kuvvet yüzeyle birlikte büyür' cümlesini aklında tut.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Pascal prensibi",
+    "tanim": "Kapalı kaptaki sıvılar, kendilerine uygulanan basıncı her yöne aynen iletir."
+   },
+   {
+    "ad": "Hidrolik sistem",
+    "tanim": "Pascal prensibiyle çalışan düzenek: araç lifti, hidrolik fren, berber koltuğu."
+   }
+  ]
+ },
+ {
+  "id": "fen-022",
+  "ders": "fen",
+  "unite": "Madde ve Endüstri",
+  "kazanimKod": "F.8.4.1.2",
+  "kazanimAd": "Elementleri periyodik tablo üzerinde metal, yarımetal ve ametal olarak sınıflandırır.",
+  "zorluk": 1,
+  "tip": "gorsel",
+  "metin": "Şekilde periyodik sistemin ilk üç periyodu verilmiş, bazı elementlerin yerleri X, Y, Z ve T harfleriyle gösterilmiştir (harfler element sembolü değildir; soldaki sayılar periyot numarasıdır).<br><br>Buna göre aşağıdakilerden hangisi doğrudur?",
+  "svg": "<svg viewBox='0 0 320 120' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><text x='46' y='24' text-anchor='middle' fill='currentColor' stroke='none' font-size='12'>1A</text><text x='78' y='24' text-anchor='middle' fill='currentColor' stroke='none' font-size='12'>2A</text><text x='110' y='24' text-anchor='middle' fill='currentColor' stroke='none' font-size='12'>3A</text><text x='142' y='24' text-anchor='middle' fill='currentColor' stroke='none' font-size='12'>4A</text><text x='174' y='24' text-anchor='middle' fill='currentColor' stroke='none' font-size='12'>5A</text><text x='206' y='24' text-anchor='middle' fill='currentColor' stroke='none' font-size='12'>6A</text><text x='238' y='24' text-anchor='middle' fill='currentColor' stroke='none' font-size='12'>7A</text><text x='270' y='24' text-anchor='middle' fill='currentColor' stroke='none' font-size='12'>8A</text><text x='18' y='48' text-anchor='middle' fill='currentColor' stroke='none' font-size='12'>1</text><rect x='30' y='30' width='32' height='26' /><rect x='254' y='30' width='32' height='26' /><text x='18' y='74' text-anchor='middle' fill='currentColor' stroke='none' font-size='12'>2</text><rect x='30' y='56' width='32' height='26' /><rect x='62' y='56' width='32' height='26' /><rect x='94' y='56' width='32' height='26' /><rect x='126' y='56' width='32' height='26' /><rect x='158' y='56' width='32' height='26' /><rect x='190' y='56' width='32' height='26' /><rect x='222' y='56' width='32' height='26' /><rect x='254' y='56' width='32' height='26' /><text x='18' y='100' text-anchor='middle' fill='currentColor' stroke='none' font-size='12'>3</text><rect x='30' y='82' width='32' height='26' /><rect x='62' y='82' width='32' height='26' /><rect x='94' y='82' width='32' height='26' /><rect x='126' y='82' width='32' height='26' /><rect x='158' y='82' width='32' height='26' /><rect x='190' y='82' width='32' height='26' /><rect x='222' y='82' width='32' height='26' /><rect x='254' y='82' width='32' height='26' /><text x='46' y='100' text-anchor='middle' fill='currentColor' stroke='none' font-size='13'>X</text><text x='238' y='74' text-anchor='middle' fill='currentColor' stroke='none' font-size='13'>Y</text><text x='270' y='100' text-anchor='middle' fill='currentColor' stroke='none' font-size='13'>Z</text><text x='78' y='74' text-anchor='middle' fill='currentColor' stroke='none' font-size='13'>T</text></svg>",
+  "siklar": [
+   "X bir ametaldir.",
+   "Y ile Z aynı periyotta bulunur.",
+   "Z bir soygazdır.",
+   "T ile X aynı grupta bulunur."
+  ],
+  "dogru": 2,
+  "ipucu1": "Periyodik sistemde yatay sıralara ve düşey sütunlara ne ad verilir? Soygazlar hangi grupta yer alır?",
+  "ipucu2": "Her harfin satırını (periyot) ve sütununu (grup) oku. Z harfi 8A sütununda duruyor.",
+  "cozum": [
+   "Yatay sıralar periyot, düşey sütunlar gruptur.",
+   "X: 3. periyot 1A (metal). T: 2. periyot 2A. Y: 2. periyot 7A. Z: 3. periyot 8A.",
+   "8A grubundaki elementler soygazdır; Z bir soygazdır.",
+   "Y ile Z farklı periyotlarda, T ile X farklı gruplardadır. Doğru cevap: Z bir soygazdır."
+  ],
+  "tuzaklar": [
+   "Sınıflar karıştırılınca seçilir; 1A grubundaki X (hidrojen olmadığı için) metaldir.",
+   "Y ve Z tablonun sağında yan yana sütunlarda durur; ancak satırları (periyotları) farklıdır.",
+   "",
+   "T ve X solda birbirine yakın olduğu için aynı grup sanılır; T 2A, X 1A grubundadır."
+  ],
+  "taktik": "Önce her harfin 'periyot, grup' adresini yaz; metaller solda, ametaller sağda, soygazlar en sağ sütunda (8A).",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Grup – periyot",
+    "tanim": "Periyodik sistemde düşey sütunlara grup, yatay sıralara periyot denir."
+   },
+   {
+    "ad": "Soygaz",
+    "tanim": "8A grubu elementleri; kararlıdırlar, oda koşullarında gaz hâlindedirler."
+   }
+  ]
+ },
+ {
+  "id": "fen-023",
+  "ders": "fen",
+  "unite": "Madde ve Endüstri",
+  "kazanimKod": "F.8.4.1.1",
+  "kazanimAd": "Periyodik sistemde, grup ve periyotların nasıl oluşturulduğunu açıklar.",
+  "zorluk": 2,
+  "tip": "cok-adimli",
+  "metin": "Periyodik sistemde elementler artan atom numaralarına göre sıralanır. 1. periyotta 2, 2. ve 3. periyotlarda 8'er element bulunur.<br><br>Atom numarası 11 olan sodyum, 3. periyodun ilk elementidir (1A grubu). Buna göre <b>3. periyodun 7A grubunda</b> bulunan elementin atom numarası kaçtır?",
+  "svg": "",
+  "siklar": [
+   "9",
+   "16",
+   "17",
+   "18"
+  ],
+  "dogru": 2,
+  "ipucu1": "Aynı periyotta sağa doğru her adımda atom numarası kaç artar?",
+  "ipucu2": "1A'dan 7A'ya gitmek için 6 adım sağa ilerlenir. 11'den başlayarak say.",
+  "cozum": [
+   "Aynı periyotta soldan sağa gidildikçe atom numarası birer birer artar.",
+   "3. periyot 1A grubundaki elementin atom numarası 11'dir.",
+   "1A'dan 7A'ya 6 adım vardır: 11 + 6 = 17.",
+   "Doğru cevap: 17."
+  ],
+  "tuzaklar": [
+   "2. periyodun 7A elementi (atom numarası 9) ile karıştırılınca çıkar.",
+   "Adımlar eksik sayılırsa (5 adım) 16 bulunur.",
+   "",
+   "Periyodun son elementi olan 8A grubundaki soygaz (18) ile karıştırılınca çıkar."
+  ],
+  "taktik": "Grup numaraları arasındaki farkı bul ve başlangıç atom numarasına ekle.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "Atom numarası",
+    "tanim": "Periyodik sistemde elementlerin sıralanma ölçütü; soldan sağa birer birer artar."
+   },
+   {
+    "ad": "Periyot",
+    "tanim": "Periyodik sistemdeki yatay sıra."
+   }
+  ]
+ },
+ {
+  "id": "fen-024",
+  "ders": "fen",
+  "unite": "Madde ve Endüstri",
+  "kazanimKod": "F.8.4.2.1",
+  "kazanimAd": "Fiziksel ve kimyasal değişim arasındaki farkları, çeşitli olayları gözlemleyerek açıklar.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Pazar sabahı kahvaltı hazırlayan Defne'nin mutfağında şu olaylar gerçekleşiyor:<br><br>• Tereyağının tavada erimesi<br>• Yumurtanın pişmesi<br>• Ekmeğin kızarması<br>• Şekerin çayda çözünmesi<br>• Domatesin dilimlenmesi<br>• Dolapta unutulan sütün ekşimesi<br><br>Bu olaylardan kaç tanesi <b>kimyasal</b> değişimdir?",
+  "svg": "",
+  "siklar": [
+   "2",
+   "3",
+   "4",
+   "5"
+  ],
+  "dogru": 1,
+  "ipucu1": "Her olay için sor: Yeni bir madde oluştu mu, yoksa aynı maddenin yalnızca görünüşü mü değişti?",
+  "ipucu2": "Erime, çözünme ve kesilme maddenin kimliğini değiştirmez. Pişme, yanma-kızarma ve ekşimede ise yeni maddeler oluşur.",
+  "cozum": [
+   "Fiziksel değişimde maddenin kimliği değişmez: tereyağının erimesi, şekerin çözünmesi, domatesin dilimlenmesi.",
+   "Kimyasal değişimde yeni maddeler oluşur: yumurtanın pişmesi, ekmeğin kızarması, sütün ekşimesi.",
+   "Kimyasal değişim sayısı 3'tür."
+  ],
+  "tuzaklar": [
+   "Ekmeğin kızarması yalnızca renk değişimi sanılıp fiziksel sayılırsa 2 bulunur.",
+   "",
+   "Şekerin çözünmesi 'şeker yok oldu' diye kimyasal sayılırsa 4 bulunur.",
+   "Erime ve çözünme de kimyasal sayılırsa 5 bulunur."
+  ],
+  "taktik": "Hâl değişimi, çözünme, kırılma-kesilme → fiziksel; pişme, yanma, ekşime, çürüme, paslanma → kimyasal.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Fiziksel değişim",
+    "tanim": "Maddenin yalnızca dış görünüşünün değiştiği, kimliğinin korunduğu değişim."
+   },
+   {
+    "ad": "Kimyasal değişim",
+    "tanim": "Maddenin kimliğinin değiştiği, yeni maddelerin oluştuğu değişim."
+   }
+  ]
+ }
+]
