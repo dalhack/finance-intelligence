@@ -950,7 +950,7 @@
   ],
   "dogru": 2,
   "ipucu1": "Periyodik sistemde yatay sıralara ve düşey sütunlara ne ad verilir? Soygazlar hangi grupta yer alır?",
-  "ipucu2": "Her harfin satırını (periyot) ve sütununu (grup) oku. Z harfi 8A sütununda duruyor.",
+  "ipucu2": "Her harfin satırını (periyot) ve sütununu (grup) tek tek oku ve yanına yaz; sonra her şıktaki iddiayı bu adreslerle karşılaştır.",
   "cozum": [
    "Yatay sıralar periyot, düşey sütunlar gruptur.",
    "X: 3. periyot 1A (metal). T: 2. periyot 2A. Y: 2. periyot 7A. Z: 3. periyot 8A.",
@@ -1259,7 +1259,7 @@
   ],
   "dogru": 1,
   "ipucu1": "Grafikte sıcaklığın sabit kaldığı iki bölge var. Isıtıcı çalışmaya devam ederken sıcaklık neden artmıyor olabilir?",
-  "ipucu2": "Saf maddeler hâl değiştirirken sıcaklıkları sabit kalır; aldıkları ısı hâl değişimi için harcanır. İlk yatay bölüm erime, ikinci yatay bölüm kaynamadır.",
+  "ipucu2": "Saf maddeler hâl değiştirirken sıcaklıkları sabit kalır: ilk yatay bölüm erime, ikinci yatay bölüm kaynamadır. Bu bölümlerde ısıtıcı kapalı mı, açık mı?",
   "cozum": [
    "I. bölgede katı ısınıyor; II. bölgede sıcaklık 60 °C'ta sabit: madde eriyor.",
    "III. bölgede sıvı ısınıyor; IV. bölgede sıcaklık 140 °C'ta sabit: madde kaynıyor.",
@@ -1381,7 +1381,7 @@
   "kazanimAd": "Basit makinelerin sağladığı avantajları örnekler üzerinden açıklar.",
   "zorluk": 2,
   "tip": "gorsel",
-  "metin": "Eşit bölmeli, ağırlığı önemsiz bir çubuk şekildeki gibi desteğe yerleştirilmiştir. Çubuğun sol ucuna 60 N ağırlığında bir yük konulmuştur. Yük desteğe 2 bölme, çubuğun sağ ucu ise desteğe 6 bölme uzaklıktadır.<br><br>Çubuğun yatay dengede kalması için sağ uca uygulanması gereken F kuvveti kaç N'dur?",
+  "metin": "Eşit bölmeli, ağırlığı önemsiz bir çubuk şekildeki gibi desteğe yerleştirilmiştir. Çubuğun sol ucuna 60 N ağırlığında bir yük konulmuştur. Yük desteğe 2 bölme, çubuğun sağ ucu ise desteğe 6 bölme uzaklıktadır.<br><br>Dengedeki bir kaldıraçta kuvvet ile kuvvetin desteğe uzaklığının çarpımı, yük ile yükün desteğe uzaklığının çarpımına eşittir.<br><br>Çubuğun yatay dengede kalması için sağ uca uygulanması gereken F kuvveti kaç N'dur?",
   "svg": "<svg viewBox='0 0 320 104' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><rect x='30' y='48' width='256' height='6' class='mf'/><line x1='30' y1='48' x2='30' y2='54' /><line x1='62' y1='48' x2='62' y2='54' /><line x1='94' y1='48' x2='94' y2='54' /><line x1='126' y1='48' x2='126' y2='54' /><line x1='158' y1='48' x2='158' y2='54' /><line x1='190' y1='48' x2='190' y2='54' /><line x1='222' y1='48' x2='222' y2='54' /><line x1='254' y1='48' x2='254' y2='54' /><line x1='286' y1='48' x2='286' y2='54' /><polygon points='94,54 82,82 106,82' class='acf'/><line x1='30' y1='48' x2='30' y2='40' /><rect x='14' y='16' width='32' height='24' class='mf'/><text x='30' y='33' text-anchor='middle' fill='currentColor' stroke='none' font-size='12'>60 N</text><line x1='286' y1='14' x2='286' y2='46' class='ac'/><polygon points='286,46 283.3,39.6 288.7,39.6' fill='currentColor' class='ac'/><text x='294' y='28' text-anchor='start' fill='currentColor' stroke='none' font-size='13'>F</text><text x='94' y='98' text-anchor='middle' fill='currentColor' stroke='none' font-size='12'>destek</text></svg>",
   "siklar": [
    "20",
@@ -1559,7 +1559,7 @@
   "kazanimAd": "Basit makinelerden yararlanarak günlük yaşamda iş kolaylığı sağlayacak bir düzenek tasarlar.",
   "zorluk": 3,
   "tip": "cok-adimli",
-  "metin": "Hasan Dede, köydeki kuyudan su çekmek için bir çıkrık tasarlıyor. Çıkrığın silindirinin yarıçapı 10 cm, çevirme kolunun uzunluğu 30 cm'dir. 150 N ağırlığındaki dolu kovayı sabit hızla çekerken kola 50 N kuvvet uygulaması gerekiyor (sürtünmeler ve ipin ağırlığı önemsizdir).<br><br>Hasan Dede kola uygulayacağı kuvveti <b>30 N</b>'a düşürmek istiyor. Silindiri değiştirmeden çevirme kolunun uzunluğunu kaç cm yapmalıdır?",
+  "metin": "Hasan Dede, köydeki kuyudan su çekmek için bir çıkrık tasarlıyor. Çıkrığın silindirinin yarıçapı 10 cm, çevirme kolunun uzunluğu 30 cm'dir. 150 N ağırlığındaki dolu kovayı sabit hızla çekerken kola 50 N kuvvet uygulaması gerekiyor (sürtünmeler ve ipin ağırlığı önemsizdir).<br><br>Çıkrıkta kola uygulanan kuvvet ile kol uzunluğunun çarpımı, yük ile silindir yarıçapının çarpımına eşittir.<br><br>Hasan Dede kola uygulayacağı kuvveti <b>30 N</b>'a düşürmek istiyor. Silindiri değiştirmeden çevirme kolunun uzunluğunu kaç cm yapmalıdır?",
   "svg": "",
   "siklar": [
    "18",
@@ -1791,7 +1791,7 @@
    "Deney, atmosferde hiç sera gazı bulunmaması gerektiğini göstermiştir."
   ],
   "dogru": 3,
-  "ipucu1": "K kavanozunda da sıcaklık arttı mı? Deneyde 'hiç sera gazı olmayan' bir kavanoz var mıydı?",
+  "ipucu1": "Deney hangi iki durumu karşılaştırıyor? Her yorum için 'Bunu tablodaki veriler ya da deney düzeni gerçekten gösteriyor mu?' diye sor.",
   "ipucu2": "Deney yalnızca karbondioksit artınca ısınmanın arttığını gösteriyor. Sera gazları olmasaydı Dünya'nın ısıyı tutup tutamayacağını düşün.",
   "cozum": [
    "İki kavanoz arasındaki tek fark karbondioksit miktarıdır: bağımsız değişken.",
@@ -1837,7 +1837,7 @@
   ],
   "dogru": 1,
   "ipucu1": "Her öneri için düşün: Su, elektrik ya da ham madde tüketimini azaltıyor mu, artırıyor mu?",
-  "ipucu2": "Çamaşır makinesi dolu da olsa yarı dolu da olsa her çalıştığında su ve elektrik harcar.",
+  "ipucu2": "Aynı işi daha çok su ve elektrik harcayarak yapan öneriyi ara: Bir makineyi dolmadan çalıştırmak, aynı miktar iş için kaç kez çalıştırmak demektir?",
   "cozum": [
    "1. öneri su tasarrufu, 4. öneri elektrik tasarrufu sağlar.",
    "3. öneri atıkların geri dönüştürülmesini, yani ham madde ve enerji tasarrufunu sağlar.",

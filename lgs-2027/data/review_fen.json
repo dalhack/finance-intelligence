@@ -1,0 +1,86 @@
+{
+ "incelenen": 48,
+ "korCozumUyusma": 48,
+ "incelenenKart": 39,
+ "bulgular": [
+  {
+   "id": "fen-036",
+   "tur": "belirsiz",
+   "ciddiyet": "duzelt",
+   "aciklama": "Soru bilimsel olarak doğru ve anahtar doğru (150×10 = 30×L → 50 cm). Ancak 2018 programı F.8.5.1.1-ç 'Matematiksel bağıntılara girilmez' diyor; çıkrıkta 'kuvvet × kol = yük × yarıçap' bağıntısını öğrencinin ezberden bilmesi bekleniyor (program dışı ön bilgi). Bağıntı soru kökünde verilirse soru 'verilen kuralı uygulama' türüne döner ve program sınırında kalır.",
+   "duzeltme": {
+    "metin": "Hasan Dede, köydeki kuyudan su çekmek için bir çıkrık tasarlıyor. Çıkrığın silindirinin yarıçapı 10 cm, çevirme kolunun uzunluğu 30 cm'dir. 150 N ağırlığındaki dolu kovayı sabit hızla çekerken kola 50 N kuvvet uygulaması gerekiyor (sürtünmeler ve ipin ağırlığı önemsizdir).<br><br>Çıkrıkta kola uygulanan kuvvet ile kol uzunluğunun çarpımı, yük ile silindir yarıçapının çarpımına eşittir.<br><br>Hasan Dede kola uygulayacağı kuvveti <b>30 N</b>'a düşürmek istiyor. Silindiri değiştirmeden çevirme kolunun uzunluğunu kaç cm yapmalıdır?"
+   }
+  },
+  {
+   "id": "fen-032",
+   "tur": "belirsiz",
+   "ciddiyet": "kucuk",
+   "aciklama": "Anahtar doğru (60×2 = F×6 → 20 N), şekil metinle tutarlı (destek soldan 2. bölmede, toplam 8 bölme). Ancak F.8.5.1.1-ç 'Matematiksel bağıntılara girilmez' sınırlaması nedeniyle kaldıraç denge bağıntısıyla N cinsinden hesap programın sınırını aşıyor; gerçek LGS'de bu tür sorular sıralama/karşılaştırma biçimindedir. Bağıntıyı kökte vermek yeterli.",
+   "duzeltme": {
+    "metin": "Eşit bölmeli, ağırlığı önemsiz bir çubuk şekildeki gibi desteğe yerleştirilmiştir. Çubuğun sol ucuna 60 N ağırlığında bir yük konulmuştur. Yük desteğe 2 bölme, çubuğun sağ ucu ise desteğe 6 bölme uzaklıktadır.<br><br>Dengedeki bir kaldıraçta kuvvet ile kuvvetin desteğe uzaklığının çarpımı, yük ile yükün desteğe uzaklığının çarpımına eşittir.<br><br>Çubuğun yatay dengede kalması için sağ uca uygulanması gereken F kuvveti kaç N'dur?"
+   }
+  },
+  {
+   "id": "fen-034",
+   "tur": "belirsiz",
+   "ciddiyet": "kucuk",
+   "aciklama": "Anahtar ve şekil doğru (K: 80 N, 2 m; L: 40 N, 4 m; işler eşit 160 J). Not: soru N, m ve J ile sayısal hesap gerektiriyor; program 'matematiksel bağıntılara girilmez' dese de 'hareketli makara kuvveti yarıya indirir, ip iki kat çekilir, işten kazanç yoktur' bilgisi ders kitabında yer aldığı için kabul edilebilir. Değişiklik gerekmez; yalnız bilgi notu.",
+   "duzeltme": {}
+  },
+  {
+   "id": "fen-041",
+   "tur": "ipucu-cevabi-veriyor",
+   "ciddiyet": "duzelt",
+   "aciklama": "ipucu1'deki \"Deneyde 'hiç sera gazı olmayan' bir kavanoz var mıydı?\" cümlesi doğrudan D şıkkındaki 'hiç sera gazı bulunmaması' ifadesine işaret ediyor; ilk ipucu cevabı fiilen veriyor.",
+   "duzeltme": {
+    "ipucu1": "Deney hangi iki durumu karşılaştırıyor? Her yorum için 'Bunu tablodaki veriler ya da deney düzeni gerçekten gösteriyor mu?' diye sor."
+   }
+  },
+  {
+   "id": "fen-042",
+   "tur": "ipucu-cevabi-veriyor",
+   "ciddiyet": "kucuk",
+   "aciklama": "ipucu2 yalnızca 2. öneriden (çamaşır makinesi) söz ederek cevabı doğrudan gösteriyor; şema ipucu2'nin de sonucu vermemesini istiyor.",
+   "duzeltme": {
+    "ipucu2": "Aynı işi daha çok su ve elektrik harcayarak yapan öneriyi ara: Bir makineyi dolmadan çalıştırmak, aynı miktar iş için kaç kez çalıştırmak demektir?"
+   }
+  },
+  {
+   "id": "fen-029",
+   "tur": "ipucu-cevabi-veriyor",
+   "ciddiyet": "kucuk",
+   "aciklama": "ipucu2 'aldıkları ısı hâl değişimi için harcanır' diyerek yanlış olan B şıkkının tam tersini açıkça söylüyor; sonuç verilmiş oluyor. (Anahtar ve grafik doğru: 60 °C erime, 140 °C kaynama.)",
+   "duzeltme": {
+    "ipucu2": "Saf maddeler hâl değiştirirken sıcaklıkları sabit kalır: ilk yatay bölüm erime, ikinci yatay bölüm kaynamadır. Bu bölümlerde ısıtıcı kapalı mı, açık mı?"
+   }
+  },
+  {
+   "id": "fen-022",
+   "tur": "ipucu-cevabi-veriyor",
+   "ciddiyet": "kucuk",
+   "aciklama": "ipucu1 'Soygazlar hangi grupta yer alır?' diye soruyor, ipucu2 ise 'Z harfi 8A sütununda duruyor' diyerek doğru şıkkı (Z soygazdır) doğrudan işaret ediyor.",
+   "duzeltme": {
+    "ipucu2": "Her harfin satırını (periyot) ve sütununu (grup) tek tek oku ve yanına yaz; sonra her şıktaki iddiayı bu adreslerle karşılaştır."
+   }
+  },
+  {
+   "id": "fen-k-017",
+   "tur": "birden-fazla-dogru",
+   "ciddiyet": "duzelt",
+   "aciklama": "Kart testi: '8A elementleri hangi sınıftadır?' sorusunda hem 'Ametal' hem 'Soygaz' savunulabilir; program ve ders kitabı elementleri metal–yarımetal–ametal diye sınıflandırır ve soygazları ametaller içinde ele alır (F.8.4.1.2). Soru 'özel ad' sorulacak ve 'Ametal' şıkkı kaldırılacak biçimde düzeltilmeli.",
+   "duzeltme": {
+    "test": {
+     "soru": "Periyodik sistemin en sağ sütunundaki (8A) elementlere verilen özel ad hangisidir?",
+     "siklar": [
+      "Metaller",
+      "Yarımetaller",
+      "Alaşımlar",
+      "Soygazlar"
+     ],
+     "dogru": 3
+    }
+   }
+  }
+ ]
+}

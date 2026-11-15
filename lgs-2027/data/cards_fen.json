@@ -295,12 +295,12 @@
   "on": "Metal – ametal – yarımetal – soygaz",
   "arka": "Metaller solda ve ortada: parlak, iletken, işlenebilir. Ametaller sağda: mat, kırılgan, yalıtkan. Soygazlar 8A grubunda, kararlıdır.",
   "test": {
-   "soru": "Periyodik sistemin en sağ sütunundaki (8A) elementler hangi sınıftadır?",
+   "soru": "Periyodik sistemin en sağ sütunundaki (8A) elementlere verilen özel ad hangisidir?",
    "siklar": [
-    "Metal",
-    "Yarımetal",
-    "Ametal",
-    "Soygaz"
+    "Metaller",
+    "Yarımetaller",
+    "Alaşımlar",
+    "Soygazlar"
    ],
    "dogru": 3
   }
