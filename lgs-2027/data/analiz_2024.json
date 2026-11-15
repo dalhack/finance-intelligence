@@ -1,0 +1,1272 @@
+{
+ "yil": 2024,
+ "kaynak": {
+  "sozel": "sozel.pdf",
+  "sayisal": "sayisal.pdf"
+ },
+ "sorular": [
+  {
+   "ders": "turkce",
+   "no": 1,
+   "unite": "Sözcükte Anlam ve Deyimler",
+   "kazanimKod": "T.8.3.5",
+   "konu": "çok anlamlı sözcüğün cümledeki anlamı",
+   "tip": "klasik",
+   "ozellik": [
+    "olumsuz-kok"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "A"
+  },
+  {
+   "ders": "turkce",
+   "no": 2,
+   "unite": "Sözcükte Anlam ve Deyimler",
+   "kazanimKod": "T.8.3.6",
+   "konu": "deyimi uygun metinle ilişkilendirme",
+   "tip": "uzun-metin",
+   "ozellik": [
+    "metin-karsilastirma"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "C"
+  },
+  {
+   "ders": "turkce",
+   "no": 3,
+   "unite": "Cümlede Anlam",
+   "kazanimKod": "T.8.3.21",
+   "konu": "cümlede koşul anlamı bulma",
+   "tip": "klasik",
+   "ozellik": [],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "D"
+  },
+  {
+   "ders": "turkce",
+   "no": 4,
+   "unite": "Anlatım Bozuklukları",
+   "kazanimKod": "T.8.3.8",
+   "konu": "anlatım bozukluğu olmayan cümle",
+   "tip": "klasik",
+   "ozellik": [
+    "olumsuz-kok"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "C"
+  },
+  {
+   "ders": "turkce",
+   "no": 5,
+   "unite": "Cümlede Anlam",
+   "kazanimKod": "T.8.3.21",
+   "konu": "üç cümleyi anlamca doğru birleştirme",
+   "tip": "klasik",
+   "ozellik": [
+    "oncullu"
+   ],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "A"
+  },
+  {
+   "ders": "turkce",
+   "no": 6,
+   "unite": "Cümlede Anlam",
+   "kazanimKod": "T.8.3.25",
+   "konu": "cümleye anlamca en yakın yargı",
+   "tip": "klasik",
+   "ozellik": [],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "D"
+  },
+  {
+   "ders": "turkce",
+   "no": 7,
+   "unite": "Sözcükte Anlam ve Deyimler",
+   "kazanimKod": "T.8.3.5",
+   "konu": "söz grubunun anlamına örnek olmayan davranış",
+   "tip": "klasik",
+   "ozellik": [
+    "olumsuz-kok",
+    "gunluk-hayat"
+   ],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "C"
+  },
+  {
+   "ders": "turkce",
+   "no": 8,
+   "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama",
+   "kazanimKod": "T.8.3.35",
+   "konu": "verilen şartların tümünü sağlayan etkinlik",
+   "tip": "uzun-metin",
+   "ozellik": [
+    "oncullu",
+    "sozel-mantik",
+    "metin-karsilastirma"
+   ],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "B"
+  },
+  {
+   "ders": "turkce",
+   "no": 9,
+   "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce",
+   "kazanimKod": "T.8.3.17",
+   "konu": "şiirde anlatılmak istenen düşünce",
+   "tip": "klasik",
+   "ozellik": [],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "A"
+  },
+  {
+   "ders": "turkce",
+   "no": 10,
+   "unite": "Söz Sanatları ve Metin Türleri",
+   "kazanimKod": "T.8.3.26",
+   "konu": "metin türünün özelliğini belirleme (deneme)",
+   "tip": "uzun-metin",
+   "ozellik": [],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "C"
+  },
+  {
+   "ders": "turkce",
+   "no": 11,
+   "unite": "Paragraf – Yapı ve Anlatım",
+   "kazanimKod": "T.8.3.34",
+   "konu": "düşünceyi geliştirme yolları ve anlatım özellikleri",
+   "tip": "uzun-metin",
+   "ozellik": [
+    "oncullu"
+   ],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "B"
+  },
+  {
+   "ders": "turkce",
+   "no": 12,
+   "unite": "Anlatım Bozuklukları",
+   "kazanimKod": "T.8.3.8",
+   "konu": "mantıksal tutarsızlık oluşturan metin tamamlama",
+   "tip": "uzun-metin",
+   "ozellik": [
+    "olumsuz-kok",
+    "metin-karsilastirma"
+   ],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "D"
+  },
+  {
+   "ders": "turkce",
+   "no": 13,
+   "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce",
+   "kazanimKod": "T.8.3.18",
+   "konu": "metinden ulaşılamayan yargı",
+   "tip": "uzun-metin",
+   "ozellik": [
+    "olumsuz-kok"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "A"
+  },
+  {
+   "ders": "turkce",
+   "no": 14,
+   "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama",
+   "kazanimKod": "T.8.3.32",
+   "konu": "daire grafiklerinin desteklemediği haber metni",
+   "tip": "grafik-tablo",
+   "ozellik": [
+    "grafik",
+    "olumsuz-kok",
+    "metin-karsilastirma"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "A"
+  },
+  {
+   "ders": "turkce",
+   "no": 15,
+   "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama",
+   "kazanimKod": "T.8.3.32",
+   "konu": "tablo ve kurallardan sütun grafiği seçme",
+   "tip": "grafik-tablo",
+   "ozellik": [
+    "tablo",
+    "grafik",
+    "sozel-mantik",
+    "gunluk-hayat"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "B"
+  },
+  {
+   "ders": "turkce",
+   "no": 16,
+   "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama",
+   "kazanimKod": "T.8.3.27",
+   "konu": "tablo kurallarını flüt görseliyle eşleştirme",
+   "tip": "gorsel",
+   "ozellik": [
+    "sekil",
+    "tablo",
+    "sozel-mantik",
+    "olumsuz-kok"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "C"
+  },
+  {
+   "ders": "turkce",
+   "no": 17,
+   "unite": "Yazım Kuralları ve Noktalama",
+   "kazanimKod": "T.8.4.16",
+   "konu": "büyük harflerin ve özel adların yazımı",
+   "tip": "klasik",
+   "ozellik": [],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "B"
+  },
+  {
+   "ders": "turkce",
+   "no": 18,
+   "unite": "Yazım Kuralları ve Noktalama",
+   "kazanimKod": "T.8.4.16",
+   "konu": "virgülün metindeki işlevleri",
+   "tip": "klasik",
+   "ozellik": [
+    "olumsuz-kok"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "D"
+  },
+  {
+   "ders": "turkce",
+   "no": 19,
+   "unite": "Fiilimsiler",
+   "kazanimKod": "T.8.3.9",
+   "konu": "fiilimsi olmayan sözcüğü bulma",
+   "tip": "klasik",
+   "ozellik": [
+    "olumsuz-kok"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "D"
+  },
+  {
+   "ders": "turkce",
+   "no": 20,
+   "unite": "Cümle Türleri ve Fiilde Çatı",
+   "kazanimKod": "T.8.4.19",
+   "konu": "cümlenin türünü çok yönlü belirleme",
+   "tip": "klasik",
+   "ozellik": [
+    "olumsuz-kok"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "C"
+  },
+  {
+   "ders": "inkilap",
+   "no": 1,
+   "unite": "Atatürk Dönemi Türk Dış Politikası",
+   "kazanimKod": "İTA.8.6.1",
+   "konu": "yabancı okullar sorunu, tam bağımsızlık ilkesi",
+   "tip": "uzun-metin",
+   "ozellik": [],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "A"
+  },
+  {
+   "ders": "inkilap",
+   "no": 2,
+   "unite": "Millî Bir Destan: Ya İstiklal Ya Ölüm!",
+   "kazanimKod": "İTA.8.3.2",
+   "konu": "Millî Mücadele gelişmeleri durum-sonuç eşleştirme",
+   "tip": "grafik-tablo",
+   "ozellik": [
+    "tablo",
+    "olumsuz-kok"
+   ],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "B"
+  },
+  {
+   "ders": "inkilap",
+   "no": 3,
+   "unite": "Millî Uyanış: Bağımsızlık Yolunda Atılan Adımlar",
+   "kazanimKod": "İTA.8.2.3",
+   "konu": "Paris Barış Konferansı, manda ve himaye",
+   "tip": "klasik",
+   "ozellik": [],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "A"
+  },
+  {
+   "ders": "inkilap",
+   "no": 4,
+   "unite": "Millî Uyanış: Bağımsızlık Yolunda Atılan Adımlar",
+   "kazanimKod": "İTA.8.2.2",
+   "konu": "Osmanlı’nın Almanya yanında savaşa girmesi",
+   "tip": "klasik",
+   "ozellik": [
+    "olumsuz-kok"
+   ],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "D"
+  },
+  {
+   "ders": "inkilap",
+   "no": 5,
+   "unite": "Atatürkçülük ve Çağdaşlaşan Türkiye",
+   "kazanimKod": "İTA.8.4.1",
+   "konu": "inkılapçılık ilkesinin dayandığı esaslar",
+   "tip": "uzun-metin",
+   "ozellik": [],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "C"
+  },
+  {
+   "ders": "inkilap",
+   "no": 6,
+   "unite": "Atatürkçülük ve Çağdaşlaşan Türkiye",
+   "kazanimKod": "İTA.8.4.4",
+   "konu": "Atatürk’ün sözünde eğitim-kültürün önemi",
+   "tip": "uzun-metin",
+   "ozellik": [],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "D"
+  },
+  {
+   "ders": "inkilap",
+   "no": 7,
+   "unite": "Bir Kahraman Doğuyor",
+   "kazanimKod": "İTA.8.1.4",
+   "konu": "Trablusgarp Savaşı’nda Almanya’nın tutumu",
+   "tip": "uzun-metin",
+   "ozellik": [
+    "oncullu"
+   ],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "B"
+  },
+  {
+   "ders": "inkilap",
+   "no": 8,
+   "unite": "Demokratikleşme Çabaları",
+   "kazanimKod": "İTA.8.5.1",
+   "konu": "ordunun siyasetten ayrılması, Terakkiperver Fırka",
+   "tip": "uzun-metin",
+   "ozellik": [],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "C"
+  },
+  {
+   "ders": "inkilap",
+   "no": 9,
+   "unite": "Millî Bir Destan: Ya İstiklal Ya Ölüm!",
+   "kazanimKod": "İTA.8.3.7",
+   "konu": "Yaban romanında savaşın halka etkisi",
+   "tip": "uzun-metin",
+   "ozellik": [],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "A"
+  },
+  {
+   "ders": "inkilap",
+   "no": 10,
+   "unite": "Atatürkçülük ve Çağdaşlaşan Türkiye",
+   "kazanimKod": "İTA.8.4.1",
+   "konu": "laiklik ilkesinin topluma katkıları",
+   "tip": "klasik",
+   "ozellik": [
+    "oncullu"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "B"
+  },
+  {
+   "ders": "din",
+   "no": 1,
+   "unite": "Kader İnancı",
+   "kazanimKod": "DKAB.8.1.3",
+   "konu": "sebat, emek ve başarı ilişkisi",
+   "tip": "uzun-metin",
+   "ozellik": [],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "C"
+  },
+  {
+   "ders": "din",
+   "no": 2,
+   "unite": "Zekât ve Sadaka",
+   "kazanimKod": "DKAB.8.2.5",
+   "konu": "Mâûn suresini hadislerle ilişkilendirme",
+   "tip": "klasik",
+   "ozellik": [
+    "olumsuz-kok",
+    "metin-karsilastirma"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "D"
+  },
+  {
+   "ders": "din",
+   "no": 3,
+   "unite": "Zekât ve Sadaka",
+   "kazanimKod": "DKAB.8.2.2",
+   "konu": "zekât ibadetinin temel özellikleri",
+   "tip": "klasik",
+   "ozellik": [
+    "oncullu"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "A"
+  },
+  {
+   "ders": "din",
+   "no": 4,
+   "unite": "Zekât ve Sadaka",
+   "kazanimKod": "DKAB.8.2.4",
+   "konu": "ayetleri peygamberlerle eşleştirme (Şuayb, Musa, Yusuf)",
+   "tip": "klasik",
+   "ozellik": [
+    "oncullu",
+    "tablo"
+   ],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "B"
+  },
+  {
+   "ders": "din",
+   "no": 5,
+   "unite": "Din ve Hayat",
+   "kazanimKod": "DKAB.8.3.1",
+   "konu": "camilerin ibadet dışı toplumsal işlevleri",
+   "tip": "uzun-metin",
+   "ozellik": [
+    "gunluk-hayat"
+   ],
+   "guven": "dusuk",
+   "okuma": "metin",
+   "dogru": "C"
+  },
+  {
+   "ders": "din",
+   "no": 6,
+   "unite": "Kader İnancı",
+   "kazanimKod": "DKAB.8.1.1",
+   "konu": "evrensel yasaların özellikleri",
+   "tip": "klasik",
+   "ozellik": [
+    "oncullu"
+   ],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "C"
+  },
+  {
+   "ders": "din",
+   "no": 7,
+   "unite": "Din ve Hayat",
+   "kazanimKod": "DKAB.8.3.2",
+   "konu": "can emniyeti ve yaşama hakkı",
+   "tip": "uzun-metin",
+   "ozellik": [
+    "oncullu"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "B"
+  },
+  {
+   "ders": "din",
+   "no": 8,
+   "unite": "Hz. Muhammed’in Örnekliği",
+   "kazanimKod": "DKAB.8.4.4",
+   "konu": "hicret olayında Hz. Muhammed’in özellikleri",
+   "tip": "uzun-metin",
+   "ozellik": [
+    "olumsuz-kok"
+   ],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "D"
+  },
+  {
+   "ders": "din",
+   "no": 9,
+   "unite": "Kader İnancı",
+   "kazanimKod": "DKAB.8.1.1",
+   "konu": "Güneş tutulması ve evrendeki fiziksel yasalar",
+   "tip": "uzun-metin",
+   "ozellik": [],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "B"
+  },
+  {
+   "ders": "din",
+   "no": 10,
+   "unite": "Kur’an-ı Kerim ve Özellikleri",
+   "kazanimKod": "DKAB.8.5.3",
+   "konu": "ayette Kur’an’ın temel özelliği",
+   "tip": "klasik",
+   "ozellik": [],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "A"
+  },
+  {
+   "ders": "ingilizce",
+   "no": 1,
+   "unite": "The Internet",
+   "kazanimKod": "E8.5.R1",
+   "konu": "internet hakkında olumsuz görüş cümlesi",
+   "tip": "klasik",
+   "ozellik": [],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "B"
+  },
+  {
+   "ders": "ingilizce",
+   "no": 2,
+   "unite": "Chores",
+   "kazanimKod": "E8.8.R1",
+   "konu": "ev işi sorumluluğu cümle tamamlama",
+   "tip": "klasik",
+   "ozellik": [
+    "gunluk-hayat"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "D"
+  },
+  {
+   "ders": "ingilizce",
+   "no": 3,
+   "unite": "Tourism",
+   "kazanimKod": "E8.7.R1",
+   "konu": "tur ilanından bilgi çıkarma",
+   "tip": "gorsel",
+   "ozellik": [
+    "olumsuz-kok",
+    "sekil"
+   ],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "A"
+  },
+  {
+   "ders": "ingilizce",
+   "no": 4,
+   "unite": "Teen Life",
+   "kazanimKod": "E8.2.R1",
+   "konu": "koşullara uygun kurs ilanı seçme",
+   "tip": "grafik-tablo",
+   "ozellik": [
+    "tablo",
+    "sozel-mantik",
+    "gunluk-hayat"
+   ],
+   "guven": "dusuk",
+   "okuma": "metin",
+   "dogru": "D"
+  },
+  {
+   "ders": "ingilizce",
+   "no": 5,
+   "unite": "On the Phone",
+   "kazanimKod": "E8.4.R1",
+   "konu": "telefon görüşmesi diyaloğu tamamlama",
+   "tip": "klasik",
+   "ozellik": [
+    "diyalog",
+    "olumsuz-kok"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "C"
+  },
+  {
+   "ders": "ingilizce",
+   "no": 6,
+   "unite": "Adventures",
+   "kazanimKod": "E8.6.R1",
+   "konu": "ekipmandan ekstrem sporu bulma",
+   "tip": "klasik",
+   "ozellik": [],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "B"
+  },
+  {
+   "ders": "ingilizce",
+   "no": 7,
+   "unite": "In the Kitchen",
+   "kazanimKod": "E8.3.R1",
+   "konu": "kek tarifi soruları ve yanıt eşleştirme",
+   "tip": "klasik",
+   "ozellik": [
+    "diyalog",
+    "olumsuz-kok"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "A"
+  },
+  {
+   "ders": "ingilizce",
+   "no": 8,
+   "unite": "Friendship",
+   "kazanimKod": "E8.1.R1",
+   "konu": "parti hakkında konuşmalarda yer bilgisini bulma",
+   "tip": "klasik",
+   "ozellik": [
+    "diyalog"
+   ],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "C"
+  },
+  {
+   "ders": "ingilizce",
+   "no": 9,
+   "unite": "Friendship",
+   "kazanimKod": "E8.1.R2",
+   "konu": "davet kartında yer-zaman-etkinlik bilgisi",
+   "tip": "klasik",
+   "ozellik": [
+    "metin-karsilastirma"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "C"
+  },
+  {
+   "ders": "ingilizce",
+   "no": 10,
+   "unite": "Science",
+   "kazanimKod": "E8.9.R2",
+   "konu": "buluşlar hakkında soru-cevap diyaloğu",
+   "tip": "klasik",
+   "ozellik": [
+    "diyalog",
+    "olumsuz-kok"
+   ],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "D"
+  },
+  {
+   "ders": "matematik",
+   "no": 1,
+   "unite": "Cebirsel İfadeler ve Özdeşlikler",
+   "kazanimKod": "M.8.2.1.1",
+   "konu": "karenin çevresini cebirsel ifadeyle yazma",
+   "tip": "klasik",
+   "ozellik": [],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "D"
+  },
+  {
+   "ders": "matematik",
+   "no": 2,
+   "unite": "Üslü İfadeler",
+   "kazanimKod": "M.8.1.2.5",
+   "konu": "birim çevirip bilimsel gösterimle yazma",
+   "tip": "klasik",
+   "ozellik": [
+    "gunluk-hayat"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "B"
+  },
+  {
+   "ders": "matematik",
+   "no": 3,
+   "unite": "Kareköklü İfadeler",
+   "kazanimKod": "M.8.1.3.8",
+   "konu": "irrasyonel sayıyı belirleme",
+   "tip": "klasik",
+   "ozellik": [],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "A"
+  },
+  {
+   "ders": "matematik",
+   "no": 4,
+   "unite": "Kareköklü İfadeler",
+   "kazanimKod": "M.8.1.3.5",
+   "konu": "kareköklü ifadelerde çıkarma işlemi",
+   "tip": "klasik",
+   "ozellik": [],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "B"
+  },
+  {
+   "ders": "matematik",
+   "no": 5,
+   "unite": "Veri Analizi ve Olasılık",
+   "kazanimKod": "M.8.4.1.2",
+   "konu": "sütun grafiğine uygun tabloyu bulma",
+   "tip": "grafik-tablo",
+   "ozellik": [
+    "grafik",
+    "tablo",
+    "gunluk-hayat"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "B"
+  },
+  {
+   "ders": "matematik",
+   "no": 6,
+   "unite": "Dönüşüm Geometrisi",
+   "kazanimKod": "M.8.3.2.2",
+   "konu": "kilim modelinde doğruya göre yansıma",
+   "tip": "gorsel",
+   "ozellik": [
+    "sekil",
+    "olumsuz-kok",
+    "gunluk-hayat"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "D"
+  },
+  {
+   "ders": "matematik",
+   "no": 7,
+   "unite": "Cebirsel İfadeler ve Özdeşlikler",
+   "kazanimKod": "M.8.2.1.2",
+   "konu": "ötelenen karelerle alanın cebirsel ifadesi",
+   "tip": "gorsel",
+   "ozellik": [
+    "sekil"
+   ],
+   "guven": "orta",
+   "okuma": "goruntu",
+   "dogru": "A"
+  },
+  {
+   "ders": "matematik",
+   "no": 8,
+   "unite": "Doğrusal Denklemler",
+   "kazanimKod": "M.8.2.2.1",
+   "konu": "kalem uzunluklarıyla birinci dereceden denklem",
+   "tip": "cok-adimli",
+   "ozellik": [
+    "sekil",
+    "gunluk-hayat"
+   ],
+   "guven": "orta",
+   "okuma": "goruntu",
+   "dogru": "A"
+  },
+  {
+   "ders": "matematik",
+   "no": 9,
+   "unite": "Eşitsizlikler",
+   "kazanimKod": "M.8.2.3.3",
+   "konu": "satış geliriyle eşitsizlik kurup çözme",
+   "tip": "grafik-tablo",
+   "ozellik": [
+    "tablo",
+    "gunluk-hayat"
+   ],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "B"
+  },
+  {
+   "ders": "matematik",
+   "no": 10,
+   "unite": "Doğrusal Denklemler",
+   "kazanimKod": "M.8.2.2.5",
+   "konu": "doğrusal grafikten başlangıç miktarını bulma",
+   "tip": "grafik-tablo",
+   "ozellik": [
+    "grafik",
+    "gunluk-hayat"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "B"
+  },
+  {
+   "ders": "matematik",
+   "no": 11,
+   "unite": "Kareköklü İfadeler",
+   "kazanimKod": "M.8.1.3.2",
+   "konu": "karekökün en yakın olduğu doğal sayı",
+   "tip": "gorsel",
+   "ozellik": [
+    "sekil",
+    "gunluk-hayat"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "C"
+  },
+  {
+   "ders": "matematik",
+   "no": 12,
+   "unite": "Üçgenler",
+   "kazanimKod": "M.8.3.1.3",
+   "konu": "üçgende kenar-açı ilişkisiyle açı sıralama",
+   "tip": "gorsel",
+   "ozellik": [
+    "sekil"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "D"
+  },
+  {
+   "ders": "matematik",
+   "no": 13,
+   "unite": "Eşitsizlikler",
+   "kazanimKod": "M.8.2.3.2",
+   "konu": "koşu parkurunda eşitsizliği sayı doğrusunda gösterme",
+   "tip": "cok-adimli",
+   "ozellik": [
+    "sekil",
+    "gunluk-hayat"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "A"
+  },
+  {
+   "ders": "matematik",
+   "no": 14,
+   "unite": "Geometrik Cisimler",
+   "kazanimKod": "M.8.3.4.4",
+   "konu": "silindir hacminden taban yarıçapları oranı",
+   "tip": "cok-adimli",
+   "ozellik": [
+    "sekil",
+    "gunluk-hayat"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "D"
+  },
+  {
+   "ders": "matematik",
+   "no": 15,
+   "unite": "Üslü İfadeler",
+   "kazanimKod": "M.8.1.2.2",
+   "konu": "üslü kenar uzunluklarıyla dikdörtgen çevresi",
+   "tip": "cok-adimli",
+   "ozellik": [
+    "sekil"
+   ],
+   "guven": "yuksek",
+   "okuma": "goruntu",
+   "dogru": "C"
+  },
+  {
+   "ders": "matematik",
+   "no": 16,
+   "unite": "Çarpanlar ve Katlar",
+   "kazanimKod": "M.8.1.1.2",
+   "konu": "torbalara bilye paylaştırmada EKOK",
+   "tip": "cok-adimli",
+   "ozellik": [
+    "sekil",
+    "gunluk-hayat"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "C"
+  },
+  {
+   "ders": "matematik",
+   "no": 17,
+   "unite": "Doğrusal Denklemler",
+   "kazanimKod": "M.8.2.2.6",
+   "konu": "çekmece modelinde eğimden uzunluk bulma",
+   "tip": "cok-adimli",
+   "ozellik": [
+    "sekil",
+    "gunluk-hayat"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "D"
+  },
+  {
+   "ders": "matematik",
+   "no": 18,
+   "unite": "Eşlik ve Benzerlik",
+   "kazanimKod": "M.8.3.3.2",
+   "konu": "kareli zeminde benzer üçgenlerle en kısa yol",
+   "tip": "cok-adimli",
+   "ozellik": [
+    "sekil"
+   ],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "C"
+  },
+  {
+   "ders": "matematik",
+   "no": 19,
+   "unite": "Veri Analizi ve Olasılık",
+   "kazanimKod": "M.8.5.1.2",
+   "konu": "olasılık karşılaştırmasıyla gizli sayıları bulma",
+   "tip": "cok-adimli",
+   "ozellik": [
+    "tablo",
+    "sozel-mantik"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "B"
+  },
+  {
+   "ders": "matematik",
+   "no": 20,
+   "unite": "Üçgenler",
+   "kazanimKod": "M.8.3.1.5",
+   "konu": "Pisagor ile doğal sayı uzaklıklı noktalar",
+   "tip": "cok-adimli",
+   "ozellik": [
+    "sekil",
+    "gunluk-hayat"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "C"
+  },
+  {
+   "ders": "fen",
+   "no": 1,
+   "unite": "DNA ve Genetik Kod",
+   "kazanimKod": "F.8.2.1.1",
+   "konu": "DNA, gen, kromozom, organik baz modeli",
+   "tip": "gorsel",
+   "ozellik": [
+    "sekil"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "B"
+  },
+  {
+   "ders": "fen",
+   "no": 2,
+   "unite": "DNA ve Genetik Kod",
+   "kazanimKod": "F.8.2.2.2",
+   "konu": "bezelyede boy uzunluğu çaprazlaması",
+   "tip": "cok-adimli",
+   "ozellik": [
+    "sekil",
+    "olumsuz-kok"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "D"
+  },
+  {
+   "ders": "fen",
+   "no": 3,
+   "unite": "DNA ve Genetik Kod",
+   "kazanimKod": "F.8.2.5.1",
+   "konu": "klonlama basamakları ve klon bireyin kalıtımı",
+   "tip": "klasik",
+   "ozellik": [],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "D"
+  },
+  {
+   "ders": "fen",
+   "no": 4,
+   "unite": "DNA ve Genetik Kod",
+   "kazanimKod": "F.8.2.3.1",
+   "konu": "mutasyonun pigment üretimine etkisi",
+   "tip": "gorsel",
+   "ozellik": [
+    "oncullu",
+    "sekil"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "A"
+  },
+  {
+   "ders": "fen",
+   "no": 5,
+   "unite": "Enerji Dönüşümleri ve Çevre Bilimi",
+   "kazanimKod": "F.8.6.1.1",
+   "konu": "besin zinciri, biyolojik birikim, ekoloji piramidi",
+   "tip": "gorsel",
+   "ozellik": [
+    "sekil"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "B"
+  },
+  {
+   "ders": "fen",
+   "no": 6,
+   "unite": "Enerji Dönüşümleri ve Çevre Bilimi",
+   "kazanimKod": "F.8.6.2.2",
+   "konu": "fotosentez hızını etkileyen faktörler",
+   "tip": "klasik",
+   "ozellik": [
+    "oncullu"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "C"
+  },
+  {
+   "ders": "fen",
+   "no": 7,
+   "unite": "Enerji Dönüşümleri ve Çevre Bilimi",
+   "kazanimKod": "F.8.6.3.1",
+   "konu": "azot döngüsünde bakterilerin rolü",
+   "tip": "klasik",
+   "ozellik": [],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "D"
+  },
+  {
+   "ders": "fen",
+   "no": 8,
+   "unite": "Enerji Dönüşümleri ve Çevre Bilimi",
+   "kazanimKod": "F.8.6.3.3",
+   "konu": "küresel ısınmayı azaltma önlemi",
+   "tip": "klasik",
+   "ozellik": [
+    "gunluk-hayat"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "A"
+  },
+  {
+   "ders": "fen",
+   "no": 9,
+   "unite": "Mevsimler ve İklim",
+   "kazanimKod": "F.8.1.1.1",
+   "konu": "iki şehirde mevsim ve Güneş ışınlarının açısı",
+   "tip": "klasik",
+   "ozellik": [
+    "oncullu"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "C"
+  },
+  {
+   "ders": "fen",
+   "no": 10,
+   "unite": "Basınç",
+   "kazanimKod": "F.8.3.1.1",
+   "konu": "pipet-silgi düzeneğiyle katı basıncı değişkenleri",
+   "tip": "deney",
+   "ozellik": [
+    "sekil"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "D"
+  },
+  {
+   "ders": "fen",
+   "no": 11,
+   "unite": "Basınç",
+   "kazanimKod": "F.8.3.1.2",
+   "konu": "sıvı basıncı hipotezlerini test eden düzenek",
+   "tip": "deney",
+   "ozellik": [
+    "sekil",
+    "oncullu"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "B"
+  },
+  {
+   "ders": "fen",
+   "no": 12,
+   "unite": "Basit Makineler",
+   "kazanimKod": "F.8.5.1.1",
+   "konu": "duvara dayalı tahtada kaldıraç dengesi",
+   "tip": "cok-adimli",
+   "ozellik": [
+    "oncullu",
+    "sekil"
+   ],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "A"
+  },
+  {
+   "ders": "fen",
+   "no": 13,
+   "unite": "Basit Makineler",
+   "kazanimKod": "F.8.5.1.1",
+   "konu": "makara sistemiyle tahta kaldırma",
+   "tip": "cok-adimli",
+   "ozellik": [
+    "oncullu",
+    "sekil",
+    "gunluk-hayat"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "C"
+  },
+  {
+   "ders": "fen",
+   "no": 14,
+   "unite": "Elektrik Yükleri ve Elektrik Enerjisi",
+   "kazanimKod": "F.8.7.1.2",
+   "konu": "balon ve plastik parçaların yük durumu",
+   "tip": "deney",
+   "ozellik": [
+    "oncullu"
+   ],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "A"
+  },
+  {
+   "ders": "fen",
+   "no": 15,
+   "unite": "Elektrik Yükleri ve Elektrik Enerjisi",
+   "kazanimKod": "F.8.7.1.2",
+   "konu": "güneş paneli temizliğinde elektriksel itme-çekme",
+   "tip": "deney",
+   "ozellik": [
+    "oncullu",
+    "sekil",
+    "gunluk-hayat"
+   ],
+   "guven": "orta",
+   "okuma": "metin",
+   "dogru": "C"
+  },
+  {
+   "ders": "fen",
+   "no": 16,
+   "unite": "Madde ve Endüstri",
+   "kazanimKod": "F.8.4.1.2",
+   "konu": "periyodik sistemde metal-ametal-yarı metal dağılımı",
+   "tip": "gorsel",
+   "ozellik": [
+    "sekil"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "D"
+  },
+  {
+   "ders": "fen",
+   "no": 17,
+   "unite": "Madde ve Endüstri",
+   "kazanimKod": "F.8.4.3.1",
+   "konu": "kimyasal tepkimede bileşik oluşumu",
+   "tip": "klasik",
+   "ozellik": [
+    "oncullu"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "B"
+  },
+  {
+   "ders": "fen",
+   "no": 18,
+   "unite": "Madde ve Endüstri",
+   "kazanimKod": "F.8.4.4.5",
+   "konu": "asitlerin demir, mermer ve cama etkisi",
+   "tip": "deney",
+   "ozellik": [
+    "oncullu",
+    "sekil"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "A"
+  },
+  {
+   "ders": "fen",
+   "no": 19,
+   "unite": "Madde ve Endüstri",
+   "kazanimKod": "F.8.4.5.1",
+   "konu": "sıcaklık artışını etkileyen değişkenler deneyi",
+   "tip": "deney",
+   "ozellik": [
+    "oncullu",
+    "sekil"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "B"
+  },
+  {
+   "ders": "fen",
+   "no": 20,
+   "unite": "Madde ve Endüstri",
+   "kazanimKod": "F.8.4.5.3",
+   "konu": "ısınma grafiğinde kütle artışının etkisi",
+   "tip": "grafik-tablo",
+   "ozellik": [
+    "grafik"
+   ],
+   "guven": "yuksek",
+   "okuma": "metin",
+   "dogru": "C"
+  }
+ ]
+}
