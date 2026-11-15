@@ -131,7 +131,7 @@
   "unite": "Üslü İfadeler",
   "kazanimKod": "M.8.1.2.5",
   "on": "Bilimsel gösterim nedir?",
-  "arka": "1 ≤ a &lt; 10 ve n tam sayı olmak üzere a · 10ⁿ biçimidir. Örn: 52 000 = 5,2 · 10⁴",
+  "arka": "1 ≤ a < 10 ve n tam sayı olmak üzere a · 10ⁿ biçimidir. Örn: 52 000 = 5,2 · 10⁴",
   "test": {
    "soru": "0,00036 sayısının bilimsel gösterimi hangisidir?",
    "siklar": [
@@ -473,14 +473,14 @@
   "unite": "Eşitsizlikler",
   "kazanimKod": "M.8.2.3.3",
   "on": "Eşitsizlik ne zaman yön değiştirir?",
-  "arka": "İki taraf negatif bir sayıyla çarpılır ya da bölünürse yön değişir. Örn: −x &lt; 2 → x &gt; −2",
+  "arka": "İki taraf negatif bir sayıyla çarpılır ya da bölünürse yön değişir. Örn: −x < 2 → x > −2",
   "test": {
-   "soru": "−2x &gt; 6 eşitsizliğinin çözümü hangisidir?",
+   "soru": "−2x > 6 eşitsizliğinin çözümü hangisidir?",
    "siklar": [
-    "x &gt; −3",
-    "x &lt; −3",
-    "x &gt; 3",
-    "x &lt; 3"
+    "x > −3",
+    "x < −3",
+    "x > 3",
+    "x < 3"
    ],
    "dogru": 1
   }
@@ -495,9 +495,9 @@
   "test": {
    "soru": "\"Bir asansöre en fazla 8 kişi binebilir.\" Kişi sayısı x ise hangisi doğrudur?",
    "siklar": [
-    "x &lt; 8",
+    "x < 8",
     "x ≥ 8",
-    "x &gt; 8",
+    "x > 8",
     "x ≤ 8"
    ],
    "dogru": 3
@@ -509,7 +509,7 @@
   "unite": "Eşitsizlikler",
   "kazanimKod": "M.8.2.3.2",
   "on": "Sayı doğrusunda içi dolu / içi boş daire",
-  "arka": "≤ ve ≥ için içi dolu daire (sayı dâhil), &lt; ve &gt; için içi boş daire (sayı dâhil değil) kullanılır.",
+  "arka": "≤ ve ≥ için içi dolu daire (sayı dâhil), < ve > için içi boş daire (sayı dâhil değil) kullanılır.",
   "test": {
    "soru": "x ≥ −1 eşitsizliği sayı doğrusunda nasıl gösterilir?",
    "siklar": [
@@ -545,7 +545,7 @@
   "unite": "Üçgenler",
   "kazanimKod": "M.8.3.1.2",
   "on": "Üçgen eşitsizliği",
-  "arka": "Bir kenar, diğer iki kenarın farkından büyük, toplamından küçüktür: |a − b| &lt; c &lt; a + b",
+  "arka": "Bir kenar, diğer iki kenarın farkından büyük, toplamından küçüktür: |a − b| < c < a + b",
   "test": {
    "soru": "İki kenarı 4 cm ve 9 cm olan bir üçgenin üçüncü kenarı hangisi olabilir?",
    "siklar": [

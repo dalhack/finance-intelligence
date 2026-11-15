@@ -1,0 +1,794 @@
+[
+ {
+  "id": "tur-k-001",
+  "ders": "turkce",
+  "unite": "Sözcükte Anlam ve Deyimler",
+  "kazanimKod": "T.8.3.5",
+  "on": "Gerçek anlam – mecaz anlam farkı nedir?",
+  "arka": "Gerçek anlam, sözcüğün akla gelen ilk anlamıdır (soğuk su). Mecaz anlamda sözcük bu anlamdan tamamen uzaklaşır (soğuk bir karşılama).",
+  "test": {
+   "soru": "Hangisinde “ağır” mecaz anlamdadır?",
+   "siklar": [
+    "Bana çok ağır sözler söyledi.",
+    "Bu çanta çok ağır.",
+    "Ağır koliyi iki kişi taşıdı.",
+    "Ağır taşı yerinden oynatamadık."
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "tur-k-002",
+  "ders": "turkce",
+  "unite": "Sözcükte Anlam ve Deyimler",
+  "kazanimKod": "T.8.3.5",
+  "on": "Yan anlam nedir?",
+  "arka": "Sözcüğün gerçek anlamına benzerlikten doğan anlamıdır; hâlâ somut bir şeyi gösterir. Örn: masanın ayağı, şişenin ağzı, iğnenin gözü.",
+  "test": {
+   "soru": "Hangisinde “baş” yan anlamdadır?",
+   "siklar": [
+    "Başım çok ağrıyor.",
+    "Başını cama dayadı.",
+    "Sokağın başında buluştuk.",
+    "Şapkayı başına taktı."
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "tur-k-003",
+  "ders": "turkce",
+  "unite": "Sözcükte Anlam ve Deyimler",
+  "kazanimKod": "T.8.3.6",
+  "on": "Deyim nedir, nasıl tanınır?",
+  "arka": "Çoğunlukla gerçek anlamından uzaklaşmış kalıplaşmış söz öbeğidir; öğüt vermez, bir durumu anlatır. Örn: göz atmak = kısaca bakmak.",
+  "test": {
+   "soru": "“Kulak kabartmak” deyiminin anlamı nedir?",
+   "siklar": [
+    "Çok sevinmek",
+    "Belli etmeden dinlemeye çalışmak",
+    "Sözünü dinlememek",
+    "Çok yorulmak"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "tur-k-004",
+  "ders": "turkce",
+  "unite": "Sözcükte Anlam ve Deyimler",
+  "kazanimKod": "T.8.3.6",
+  "on": "Atasözü ile deyim arasındaki fark nedir?",
+  "arka": "Atasözü tam bir cümledir ve öğüt verir (Damlaya damlaya göl olur). Deyim bir durumu anlatır, öğüt vermez (etekleri zil çalmak).",
+  "test": {
+   "soru": "Hangisi atasözüdür?",
+   "siklar": [
+    "Burnundan kıl aldırmamak",
+    "Ağzı kulaklarına varmak",
+    "Göze girmek",
+    "Sakla samanı, gelir zamanı."
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "tur-k-005",
+  "ders": "turkce",
+  "unite": "Cümlede Anlam",
+  "kazanimKod": "T.8.3.25",
+  "on": "Nesnel ve öznel yargı nasıl ayrılır?",
+  "arka": "Nesnel: kanıtlanabilir, herkes için aynı (Kitap 200 sayfa). Öznel: kişisel beğeni, yorum (Kitap çok sürükleyici).",
+  "test": {
+   "soru": "Hangisi öznel bir yargıdır?",
+   "siklar": [
+    "Film iki saat sürdü.",
+    "Filmin müzikleri büyüleyiciydi.",
+    "Film 2020 yılında çekildi.",
+    "Filmde üç başrol oyuncusu var."
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "tur-k-006",
+  "ders": "turkce",
+  "unite": "Cümlede Anlam",
+  "kazanimKod": "T.8.3.25",
+  "on": "Neden-sonuç mu, amaç-sonuç mu?",
+  "arka": "Neden gerçekleşmiştir (Hasta olduğu için gelmedi). Amaç henüz gerçekleşmemiş bir hedeftir; 'için' yerine 'amacıyla' konabilir (Kilo vermek için yürüyor).",
+  "test": {
+   "soru": "Hangisinde amaç-sonuç ilişkisi vardır?",
+   "siklar": [
+    "Kitap almak için kırtasiyeye gitti.",
+    "Geç kaldığı için özür diledi.",
+    "Kar yağdığından yollar kapandı.",
+    "Yorulduğu için erken yattı."
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "tur-k-007",
+  "ders": "turkce",
+  "unite": "Cümlede Anlam",
+  "kazanimKod": "T.8.3.25",
+  "on": "Koşul (şart) cümlesi nasıl anlaşılır?",
+  "arka": "Bir işin gerçekleşmesi başka bir işe bağlıdır. İpuçları: -sa/-se, -dıkça, -ınca, 'yeter ki', 'ancak … -arak'. Örn: Çalışırsan kazanırsın.",
+  "test": {
+   "soru": "Hangisinde koşul anlamı vardır?",
+   "siklar": [
+    "Erken yattığı için dinç uyandı.",
+    "Dinç uyanmak için erken yattı.",
+    "Erken yatarsan dinç uyanırsın.",
+    "Erken yattı ve dinç uyandı."
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "tur-k-008",
+  "ders": "turkce",
+  "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce",
+  "kazanimKod": "T.8.3.16",
+  "on": "Konu ile ana düşünce arasındaki fark nedir?",
+  "arka": "Konu: metinde neden söz edildiği; kısa bir söz öbeği (okuma alışkanlığı). Ana düşünce: yazarın o konuda verdiği ileti; bir yargı cümlesi (Okuma alışkanlığı küçük yaşta kazanılır).",
+  "test": {
+   "soru": "Hangisi bir ana düşünce cümlesi olabilir?",
+   "siklar": [
+    "Sporun yararları",
+    "Düzenli spor",
+    "Spor ve sağlık",
+    "Spor yapmak insanı zinde tutar."
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "tur-k-009",
+  "ders": "turkce",
+  "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce",
+  "kazanimKod": "T.8.3.17",
+  "on": "Ana düşünce paragrafın neresinde bulunur?",
+  "arka": "Çoğu zaman ilk ya da son cümlededir. 'Kısacası, sonuç olarak, yani, bu yüzden' ile başlayan cümleye dikkat et.",
+  "test": {
+   "soru": "Hangi sözle başlayan cümle büyük olasılıkla ana düşünceyi verir?",
+   "siklar": [
+    "Kısacası",
+    "Örneğin",
+    "Bir gün",
+    "Ayrıca"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "tur-k-010",
+  "ders": "turkce",
+  "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce",
+  "kazanimKod": "T.8.3.18",
+  "on": "Yardımcı düşünce nedir?",
+  "arka": "Ana düşünceyi açıklayan, örnekleyen ayrıntılardır. Bir paragrafta birden çok yardımcı düşünce, tek bir ana düşünce olur.",
+  "test": {
+   "soru": "“Bu metinde hangisine değinilmemiştir?” sorusu neyi ölçer?",
+   "siklar": [
+    "Metnin başlığını bulmayı",
+    "Yardımcı düşünceleri bulmayı",
+    "Anlatım biçimini bulmayı",
+    "Metnin türünü bulmayı"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "tur-k-011",
+  "ders": "turkce",
+  "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce",
+  "kazanimKod": "T.8.3.17",
+  "on": "Ana düşünce sorularındaki üç çeldirici türü nedir?",
+  "arka": "1) Çok dar: yalnızca bir örnek/ayrıntı. 2) Çok geniş: 'her, bütün, asla' ile metni aşan. 3) Metinde olmayan yargı.",
+  "test": {
+   "soru": "Metinde yalnızca bir örnek olarak geçen bilgiyi veren şık hangi tür çeldiricidir?",
+   "siklar": [
+    "Çok geniş",
+    "Metinde olmayan",
+    "Çok dar (yardımcı düşünce)",
+    "Doğru cevap"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "tur-k-012",
+  "ders": "turkce",
+  "unite": "Paragraf – Yapı ve Anlatım",
+  "kazanimKod": "T.8.3.11",
+  "on": "Betimleme ile öyküleme nasıl ayrılır?",
+  "arka": "Betimleme: sözcüklerle resim çizer; renk, koku, biçim ayrıntıları vardır, zaman ilerlemez. Öyküleme: bir olay anlatır; kişi, yer, zaman ve olay akışı vardır.",
+  "test": {
+   "soru": "“Kapıyı açtı, merdivenleri koşarak çıktı ve zili çaldı.” cümlesinde hangi anlatım biçimi vardır?",
+   "siklar": [
+    "Betimleme",
+    "Açıklama",
+    "Tartışma",
+    "Öyküleme"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "tur-k-013",
+  "ders": "turkce",
+  "unite": "Paragraf – Yapı ve Anlatım",
+  "kazanimKod": "T.8.3.11",
+  "on": "Açıklama ile tartışma nasıl ayrılır?",
+  "arka": "Açıklama: bilgi vermek, öğretmek amaçlıdır; nesnel bir dil kullanılır. Tartışma: bir görüş savunulur, karşı görüş çürütülmeye çalışılır.",
+  "test": {
+   "soru": "“Bazıları kitabın öldüğünü söylüyor. Ben buna katılmıyorum; çünkü…” diye başlayan metinde hangi anlatım biçimi vardır?",
+   "siklar": [
+    "Tartışma",
+    "Açıklama",
+    "Betimleme",
+    "Öyküleme"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "tur-k-014",
+  "ders": "turkce",
+  "unite": "Paragraf – Yapı ve Anlatım",
+  "kazanimKod": "T.8.3.34",
+  "on": "Düşünceyi geliştirme yolları nelerdir?",
+  "arka": "Tanımlama (nedir?), örnekleme, karşılaştırma (göre, ise, daha), tanık gösterme (uzman sözü), benzetme (gibi), sayısal verilerden yararlanma (rakamlar).",
+  "test": {
+   "soru": "“Empati, kendini başkasının yerine koymaktır.” cümlesinde hangi yol kullanılmıştır?",
+   "siklar": [
+    "Örnekleme",
+    "Tanımlama",
+    "Karşılaştırma",
+    "Tanık gösterme"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "tur-k-015",
+  "ders": "turkce",
+  "unite": "Paragraf – Yapı ve Anlatım",
+  "kazanimKod": "T.8.3.34",
+  "on": "Tanık gösterme ile örnekleme farkı nedir?",
+  "arka": "Tanık göstermede bir uzmanın sözü aktarılır (… şöyle der: “…”). Örneklemede düşünceyi somutlaştıran olay, durum ya da adlar verilir.",
+  "test": {
+   "soru": "“Türkiye'de birçok göl vardır: Van, Tuz, Beyşehir…” cümlesinde hangi yol kullanılmıştır?",
+   "siklar": [
+    "Tanık gösterme",
+    "Tanımlama",
+    "Örnekleme",
+    "Benzetme"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "tur-k-016",
+  "ders": "turkce",
+  "unite": "Paragraf – Yapı ve Anlatım",
+  "kazanimKod": "T.8.3.10",
+  "on": "Geçiş ve bağlantı ifadeleri ne işe yarar?",
+  "arka": "Oysaki/ancak: zıtlık. Kısaca: özet. Özellikle: vurgu. Böylece: sonuç. İlk olarak/son olarak: sıralama. Başka bir deyişle: aynı düşünceyi yeniden söyleme.",
+  "test": {
+   "soru": "“Çok çalıştı; ---- sınavı kazanamadı.” Boşluğa hangisi gelmelidir?",
+   "siklar": [
+    "böylece",
+    "örneğin",
+    "kısaca",
+    "ancak"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "tur-k-017",
+  "ders": "turkce",
+  "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama",
+  "kazanimKod": "T.8.3.25",
+  "on": "“Kesinlikle doğru” ile “doğru olabilir” farkı nedir?",
+  "arka": "Kesinlikle doğru: kurallara uyan BÜTÜN durumlarda doğrudur. Olabilir: en az bir durumda doğrudur. Tek karşı örnek 'kesinlik'i bozar.",
+  "test": {
+   "soru": "Ali, Can'dan uzundur. Can, Efe'den uzundur. Hangisi kesinlikle doğrudur?",
+   "siklar": [
+    "Ali, Efe'den uzundur.",
+    "Efe, sınıfın en kısasıdır.",
+    "Ali, sınıfın en uzunudur.",
+    "Can ile Efe aynı yaştadır."
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "tur-k-018",
+  "ders": "turkce",
+  "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama",
+  "kazanimKod": "T.8.3.25",
+  "on": "Sıralama sorusu nasıl çözülür?",
+  "arka": "Boş kutular çiz. En çok bilgi veren (en kısıtlayıcı) kuraldan başla, olasılıkları tek tek dene, çelişeni çiz.",
+  "test": {
+   "soru": "Sıralama sorusunda ilk hangi kuraldan başlamak en iyisidir?",
+   "siklar": [
+    "En uzun cümleli kuraldan",
+    "Yeri kesin bildiren ya da en az olasılık bırakan kuraldan",
+    "Her zaman son kuraldan",
+    "Rastgele bir kuraldan"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "tur-k-019",
+  "ders": "turkce",
+  "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama",
+  "kazanimKod": "T.8.3.32",
+  "on": "Tablo ve grafik nasıl okunur?",
+  "arka": "Önce başlığı, satır-sütun adlarını ve birimi oku. Şıklardaki her yargıyı sayılarla kontrol et; 'toplam', 'en çok', 'iki katı' sözlerinde hesap yap.",
+  "test": {
+   "soru": "Bir tabloda “toplamda en çok” sorulursa ne yapılmalıdır?",
+   "siklar": [
+    "Yalnızca ilk sütuna bakılmalıdır.",
+    "Yalnızca son sütuna bakılmalıdır.",
+    "Her satırdaki değerler toplanıp karşılaştırılmalıdır.",
+    "En büyük tek sayıya bakılmalıdır."
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "tur-k-020",
+  "ders": "turkce",
+  "unite": "Fiilimsiler",
+  "kazanimKod": "T.8.3.9",
+  "on": "İsim-fiil ekleri nelerdir?",
+  "arka": "-ma / -ış / -mak (kısaca: “mayışmak”). Fiilden işin adını yapar. Örn: yüzme, bakış, okumak. Dikkat: olumsuzluk eki -ma ile karıştırma (gelme!).",
+  "test": {
+   "soru": "Hangisinde isim-fiil vardır?",
+   "siklar": [
+    "Sakın buraya gelme.",
+    "Dün çok yoruldum.",
+    "Hava birden soğudu.",
+    "Yüzmeyi çok severim."
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "tur-k-021",
+  "ders": "turkce",
+  "unite": "Fiilimsiler",
+  "kazanimKod": "T.8.3.9",
+  "on": "Sıfat-fiil ekleri nelerdir?",
+  "arka": "-an, -ası, -mez, -ar, -dik, -ecek, -miş (kısaca: “anası mezar dikecekmiş”). Bir adı niteler. Örn: koşan çocuk, tanıdık yüz, gelecek hafta.",
+  "test": {
+   "soru": "Hangisinde sıfat-fiil vardır?",
+   "siklar": [
+    "Tanıdık bir yüz gördüm.",
+    "Akşam eve geldik.",
+    "Kitabı dün okudum.",
+    "Yarın sana geleceğim."
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "tur-k-022",
+  "ders": "turkce",
+  "unite": "Fiilimsiler",
+  "kazanimKod": "T.8.3.9",
+  "on": "Zarf-fiil ekleri nelerdir?",
+  "arka": "-ıp, -arak, -ınca, -ken, -madan, -dıkça, -alı, -a…-a, -r…-maz. Yüklemi zaman ya da durum yönünden tamamlar. Örn: gülerek, gelince, koşa koşa.",
+  "test": {
+   "soru": "“Kitabını alıp çıktı.” cümlesindeki fiilimsinin türü nedir?",
+   "siklar": [
+    "İsim-fiil",
+    "Zarf-fiil",
+    "Sıfat-fiil",
+    "Fiilimsi yoktur"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "tur-k-023",
+  "ders": "turkce",
+  "unite": "Fiilimsiler",
+  "kazanimKod": "T.8.3.9",
+  "on": "Fiilimsi ile çekimli fiil nasıl ayrılır?",
+  "arka": "Çekimli fiil kip ve kişi eki alır, yüklem olur (geldik = biz geldik). Fiilimsi kip eki almaz; isim, sıfat, zarf gibi kullanılır (tanıdık yüz). Kalıcı isimler (dondurma, çakmak) fiilimsi değildir.",
+  "test": {
+   "soru": "Hangisindeki altı çizili gibi düşünülen sözcük fiilimsi DEĞİLDİR?",
+   "siklar": [
+    "Gülmek insana iyi gelir. (gülmek)",
+    "Okunacak kitapları ayırdım. (okunacak)",
+    "Akşam yemekte dolma vardı. (dolma)",
+    "Koşarak yanıma geldi. (koşarak)"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "tur-k-024",
+  "ders": "turkce",
+  "unite": "Cümlenin Ögeleri",
+  "kazanimKod": "T.8.4.18",
+  "on": "Ögeler hangi sırayla bulunur?",
+  "arka": "1) Yüklem (genellikle sonda). 2) Özne: kim/ne? 3) Nesne: neyi/kimi/ne? 4) Yer tamlayıcısı: nereye/nerede/nereden/kime? 5) Zarf tümleci: nasıl/ne zaman/niçin/ne kadar?",
+  "test": {
+   "soru": "“Ayşe kitabı okudu.” cümlesinde “kitabı” hangi ögedir?",
+   "siklar": [
+    "Özne",
+    "Zarf tümleci",
+    "Yer tamlayıcısı",
+    "Nesne"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "tur-k-025",
+  "ders": "turkce",
+  "unite": "Cümlenin Ögeleri",
+  "kazanimKod": "T.8.4.18",
+  "on": "Yer tamlayıcısı (dolaylı tümleç) nasıl bulunur?",
+  "arka": "Yükleme 'nereye, nerede, nereden, kime, kimde, kimden' diye sorulur. -e, -de, -den eklerinden birini alır. Örn: Okula gitti.",
+  "test": {
+   "soru": "“Çocuklar bahçede oynuyor.” cümlesinde “bahçede” hangi ögedir?",
+   "siklar": [
+    "Yer tamlayıcısı",
+    "Nesne",
+    "Özne",
+    "Yüklem"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "tur-k-026",
+  "ders": "turkce",
+  "unite": "Cümlenin Ögeleri",
+  "kazanimKod": "T.8.4.18",
+  "on": "Zarf tümleci hangi sorulara cevap verir?",
+  "arka": "Ne zaman, nasıl, ne kadar, niçin, nereye (yön: ileri, geri, içeri). Örn: Dün geldi. Hızlı koştu. Çok güldü.",
+  "test": {
+   "soru": "“Annem yarın gelecek.” cümlesinde “yarın” hangi ögedir?",
+   "siklar": [
+    "Yer tamlayıcısı",
+    "Zarf tümleci",
+    "Nesne",
+    "Özne"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "tur-k-027",
+  "ders": "turkce",
+  "unite": "Cümlenin Ögeleri",
+  "kazanimKod": "T.8.4.18",
+  "on": "Cümlede vurgulanan öge hangisidir?",
+  "arka": "Fiil cümlelerinde yüklemden hemen önceki öge vurguludur. Söz öbekleri (tamlamalar, fiilimsi öbekleri) bölünmez, tek öge sayılır.",
+  "test": {
+   "soru": "“Ali dün sinemaya gitti.” cümlesinde vurgulanan öge hangisidir?",
+   "siklar": [
+    "Özne (Ali)",
+    "Zarf tümleci (dün)",
+    "Yer tamlayıcısı (sinemaya)",
+    "Yüklem (gitti)"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "tur-k-028",
+  "ders": "turkce",
+  "unite": "Cümle Türleri ve Fiilde Çatı",
+  "kazanimKod": "T.8.4.19",
+  "on": "İsim cümlesi – fiil cümlesi nasıl ayrılır?",
+  "arka": "Yüklemin köküne -mak/-mek ekle. Anlamlıysa fiil cümlesi (gel-mek), değilse isim cümlesi (güzel-mek ✗). Örn: Hava güzeldi → isim cümlesi.",
+  "test": {
+   "soru": "Hangisi isim cümlesidir?",
+   "siklar": [
+    "Babam erken geldi.",
+    "Babam kitap okuyor.",
+    "Babam bahçeyi suladı.",
+    "Babam öğretmendir."
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "tur-k-029",
+  "ders": "turkce",
+  "unite": "Cümle Türleri ve Fiilde Çatı",
+  "kazanimKod": "T.8.4.19",
+  "on": "Kurallı – devrik cümle nedir?",
+  "arka": "Yüklemi sonda olan cümle kurallı, sonda olmayan cümle devriktir. Örn: 'Geldi beklediğim gün.' devriktir.",
+  "test": {
+   "soru": "Hangisi devrik cümledir?",
+   "siklar": [
+    "Çok özledim seni.",
+    "Seni çok özledim.",
+    "Bugün hava güzel.",
+    "Kitabı masaya koydu."
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "tur-k-030",
+  "ders": "turkce",
+  "unite": "Cümle Türleri ve Fiilde Çatı",
+  "kazanimKod": "T.8.4.20",
+  "on": "Etken – edilgen fiil farkı nedir?",
+  "arka": "Etken: işi yapan bellidir (Ali camı kırdı). Edilgen: işi yapan belli değildir; fiil -l ya da -n alır (Cam kırıldı). Test: 'birileri tarafından' eklenebilir.",
+  "test": {
+   "soru": "Hangisinde yüklem edilgendir?",
+   "siklar": [
+    "Ayşe mektup yazdı.",
+    "Mektup dün yazıldı.",
+    "Çocuk erkenden uyudu.",
+    "Biz dün sinemaya gittik."
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "tur-k-031",
+  "ders": "turkce",
+  "unite": "Cümle Türleri ve Fiilde Çatı",
+  "kazanimKod": "T.8.4.20",
+  "on": "Geçişli – geçişsiz fiil nedir?",
+  "arka": "Geçişli fiil nesne alabilir; 'onu' sözü eklenebilir (onu okudu ✓). Geçişsiz fiil nesne alamaz (onu uyudu ✗).",
+  "test": {
+   "soru": "Hangisi geçişli bir fiildir?",
+   "siklar": [
+    "uyumak",
+    "gitmek",
+    "okumak",
+    "gülmek"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "tur-k-032",
+  "ders": "turkce",
+  "unite": "Yazım Kuralları ve Noktalama",
+  "kazanimKod": "T.8.4.16",
+  "on": "“de / da” ne zaman ayrı yazılır?",
+  "arka": "Bağlaç olan de/da ayrı yazılır; cümleden çıkarılınca anlam bozulmaz ve asla 'te/ta' olmaz (Ben de geldim). Ek olan -de/-da bitişiktir (Evde kaldım).",
+  "test": {
+   "soru": "Hangisinde yazım yanlışı vardır?",
+   "siklar": [
+    "Sen de gel.",
+    "Okulda kimse yok.",
+    "Ali de bizimle geldi.",
+    "Kitap bende kalmış, bende okudum."
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "tur-k-033",
+  "ders": "turkce",
+  "unite": "Yazım Kuralları ve Noktalama",
+  "kazanimKod": "T.8.4.16",
+  "on": "“ki” ne zaman ayrı yazılır?",
+  "arka": "Bağlaç olan ki ayrı yazılır (Duydum ki gelmişsin). Sıfat yapan -ki (evdeki hesap) ve zamir olan -ki (seninki) bitişiktir. Kalıplaşmışlar bitişik: sanki, oysaki, mademki, belki, hâlbuki, çünkü, meğerki, illaki.",
+  "test": {
+   "soru": "Hangisinde “ki” yanlış yazılmıştır?",
+   "siklar": [
+    "Öyle yorulmuşki hemen uyudu.",
+    "Masadaki kalem benim.",
+    "Seninki daha güzel.",
+    "Bilmem ki ne desem."
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "tur-k-034",
+  "ders": "turkce",
+  "unite": "Yazım Kuralları ve Noktalama",
+  "kazanimKod": "T.8.4.16",
+  "on": "Soru eki “mi” nasıl yazılır?",
+  "arka": "Her zaman kendinden önceki sözcükten ayrı yazılır; kendinden sonraki ekler ona bitişir. Örn: Geldin mi? Güzel miydi? Gelecek misin?",
+  "test": {
+   "soru": "Hangisi doğru yazılmıştır?",
+   "siklar": [
+    "Bugün okula gelecekmisin?",
+    "Bugün okula gelecek misin?",
+    "Bugün okula gelecek mi sin?",
+    "Bugün okula gelecekmi sin?"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "tur-k-035",
+  "ders": "turkce",
+  "unite": "Yazım Kuralları ve Noktalama",
+  "kazanimKod": "T.8.4.16",
+  "on": "Kesme işareti nerede kullanılmaz?",
+  "arka": "Özel adlara gelen çekim ekleri kesmeyle ayrılır (Ankara'ya). Ama kurum, kuruluş ve iş yeri adlarına gelen ekler ayrılmaz: Türk Dil Kurumuna, Millî Eğitim Bakanlığından.",
+  "test": {
+   "soru": "Hangisi doğru yazılmıştır?",
+   "siklar": [
+    "Ablam Ankara Üniversitesi'ni kazandı.",
+    "Ablam ankara üniversitesini kazandı.",
+    "Ablam Ankara Üniversitesini kazandı.",
+    "Ablam Ankara üniversitesi'ni kazandı."
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "tur-k-036",
+  "ders": "turkce",
+  "unite": "Yazım Kuralları ve Noktalama",
+  "kazanimKod": "T.8.4.16",
+  "on": "İki nokta ve noktalı virgül ne zaman kullanılır?",
+  "arka": "İki nokta (:) açıklama ya da örnek verilecek cümlenin sonuna konur. Noktalı virgül (;) virgülle ayrılmış grupları ve ögeleri arasında virgül bulunan sıralı cümleleri ayırır.",
+  "test": {
+   "soru": "“Çantama şunları koydum( ) defter, kalem, silgi.” Ayraçlı yere ne gelmelidir?",
+   "siklar": [
+    "Noktalı virgül (;)",
+    "Virgül (,)",
+    "Soru işareti (?)",
+    "İki nokta (:)"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "tur-k-037",
+  "ders": "turkce",
+  "unite": "Anlatım Bozuklukları",
+  "kazanimKod": "T.8.3.8",
+  "on": "Özne-yüklem uyumsuzluğu nedir?",
+  "arka": "Yüklem özneyle kişi yönünden uyumlu olmalıdır. Ben + başkası = biz; sen + o = siz. Örn: 'Ben ve Ali geldiniz' ✗ → 'geldik' ✓.",
+  "test": {
+   "soru": "“Sen ve ben yarın ----.” cümlesi nasıl tamamlanmalıdır?",
+   "siklar": [
+    "gideceğiz",
+    "gideceksiniz",
+    "gidecekler",
+    "gideceksin"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "tur-k-038",
+  "ders": "turkce",
+  "unite": "Anlatım Bozuklukları",
+  "kazanimKod": "T.8.3.8",
+  "on": "Özne eksikliği (herkes – kimse) nasıl fark edilir?",
+  "arka": "Sıralı cümlede ilk yüklem olumlu, ikinci olumsuzsa 'herkes' ikinci yükleme uymaz; 'kimse' eklenmelidir. Örn: Herkes geldi, kimse konuşmadı.",
+  "test": {
+   "soru": "“Herkes onu seviyor, hiç kırmak istemiyordu.” cümlesi nasıl düzeltilir?",
+   "siklar": [
+    "'herkes' atılarak",
+    "'hiç' sözünden önce 'kimse' getirilerek",
+    "'onu' atılarak",
+    "'seviyor' yerine 'sever' yazılarak"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "tur-k-039",
+  "ders": "turkce",
+  "unite": "Anlatım Bozuklukları",
+  "kazanimKod": "T.8.3.8",
+  "on": "Nesne / tümleç eksikliği nasıl bulunur?",
+  "arka": "Her yükleme ayrı ayrı soru sor (neyi? kime? kiminle?). Ortak öge ikinci yükleme uymuyorsa 'onu, ona, onunla' gibi bir öge eklenmelidir.",
+  "test": {
+   "soru": "“Arkadaşına güvenir, her zaman desteklerdi.” cümlesinde eksik olan sözcük hangisidir?",
+   "siklar": [
+    "ona",
+    "onunla",
+    "onu",
+    "ondan"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "tur-k-040",
+  "ders": "turkce",
+  "unite": "Anlatım Bozuklukları",
+  "kazanimKod": "T.8.3.8",
+  "on": "Yüklem eksikliği nasıl anlaşılır?",
+  "arka": "Virgülle ayrılmış iki bölüm tek yüklemi paylaşıyorsa her bölümü yüklemle ayrı oku. Uymayan bölüme kendi yüklemi eklenir: 'Ben çayı, o kahveyi sever' ✗.",
+  "test": {
+   "soru": "Hangisinde yüklem eksikliği vardır?",
+   "siklar": [
+    "Ben erken yatarım, kardeşim geç yatar.",
+    "Annem çayı, babam kahveyi sever.",
+    "Kedi sütü, köpek mamayı yedi.",
+    "Ben erken, kardeşim geç yatar."
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "tur-k-041",
+  "ders": "turkce",
+  "unite": "Söz Sanatları ve Metin Türleri",
+  "kazanimKod": "T.8.3.7",
+  "on": "Benzetme (teşbih) nedir?",
+  "arka": "Bir varlığı, ortak bir özellik yüzünden daha güçlü bir varlığa benzetmektir. İpucu: gibi, kadar, sanki. Örn: Pamuk gibi eller.",
+  "test": {
+   "soru": "Hangisinde benzetme vardır?",
+   "siklar": [
+    "Aslan gibi güçlü bir çocuktu.",
+    "Güneş bize göz kırptı.",
+    "Bir günde bin kitap okudu.",
+    "Ağaçlar yaprak döktü."
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "tur-k-042",
+  "ders": "turkce",
+  "unite": "Söz Sanatları ve Metin Türleri",
+  "kazanimKod": "T.8.3.7",
+  "on": "Kişileştirme ile konuşturma farkı nedir?",
+  "arka": "Kişileştirme: insan dışı varlığa insan özelliği verilir (Dağlar uyuyor). Konuşturma: o varlık ayrıca konuşur (“Üşüdüm.” dedi serçe).",
+  "test": {
+   "soru": "“Çiçekler güneşe gülümsedi.” cümlesinde hangi söz sanatı vardır?",
+   "siklar": [
+    "Konuşturma",
+    "Kişileştirme",
+    "Abartma",
+    "Karşıtlık"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "tur-k-043",
+  "ders": "turkce",
+  "unite": "Söz Sanatları ve Metin Türleri",
+  "kazanimKod": "T.8.3.7",
+  "on": "Abartma ve karşıtlık nedir?",
+  "arka": "Abartma: bir şeyi olduğundan çok büyük/küçük gösterme (Dünyalar kadar ödevim var). Karşıtlık: zıt kavramları birlikte kullanma (Hem ağladı hem güldü).",
+  "test": {
+   "soru": "“Gözyaşlarım sel oldu, şehri bastı.” cümlesinde hangi söz sanatı vardır?",
+   "siklar": [
+    "Karşıtlık",
+    "Konuşturma",
+    "Abartma",
+    "Kişileştirme"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "tur-k-044",
+  "ders": "turkce",
+  "unite": "Söz Sanatları ve Metin Türleri",
+  "kazanimKod": "T.8.3.26",
+  "on": "Deneme, makale ve fıkra (köşe yazısı) nasıl ayrılır?",
+  "arka": "Deneme: kişisel, samimi, kanıtlama yok. Makale: nesnel, kanıtlarla açıklar. Fıkra: güncel bir konuyu gazete köşesinde kişisel bakışla yorumlar.",
+  "test": {
+   "soru": "Yazarın bilimsel bir konuyu kanıtlarla, nesnel bir dille açıkladığı tür hangisidir?",
+   "siklar": [
+    "Deneme",
+    "Roman",
+    "Destan",
+    "Makale"
+   ],
+   "dogru": 3
+  }
+ }
+]
