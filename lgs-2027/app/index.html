@@ -50,6 +50,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--font-b);font-size:1
 #top .ttl{font-family:var(--font-d);font-weight:700;font-size:18px;letter-spacing:-.01em;flex:1;min-width:0}
 #top .sub{color:var(--muted);font-size:14px;font-variant-numeric:tabular-nums}
 #main{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:4px 16px 28px;display:flex;flex-direction:column;gap:14px}
+#main>*{flex-shrink:0}
 #tabs{display:flex;background:var(--surface);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
 #tabs button{flex:1;min-width:0;border:0;background:none;color:var(--muted);font:500 10.5px/1.1 var(--font-b);
   padding:8px 0 7px;display:flex;flex-direction:column;align-items:center;gap:3px;min-height:54px;cursor:pointer;position:relative}
@@ -729,7 +730,7 @@ function vBaba(){
 }
 function vMeb(){
   var k = CT.kaynaklar || {}, h = '';
-  h += '<p class="muted">Bunlar MEB’in kendi yayımladığı kitapçıklar. Bağlantılar meb.gov.tr üzerindeki PDF’leri yeni sekmede açar. Buradaki uygulama soruları ise bu sınavlara benzer biçimde özel olarak yazıldı.</p>';
+  h += '<p class="muted">Bunlar MEB’in kendi yayımladığı kitapçıklar. Bağlantılar MEB’in kendi sunucularındaki (meb.gov.tr, eba.gov.tr) PDF’leri yeni sekmede açar. Buradaki uygulama soruları ise bu sınavlara benzer biçimde özel olarak yazıldı.</p>';
   if (k.cikmis && k.cikmis.length){
     h += '<h2>Çıkmış sorular</h2>';
     k.cikmis.forEach(function(y){
@@ -744,6 +745,7 @@ function vMeb(){
         d.baglantilar.map(function(b){ return '<a href="' + esc(b.url) + '" target="_blank" rel="noopener">' + esc(b.ad) + '</a>'; }).join('') + '</div></div></details>';
     });
   }
+  if (k.dizin) h += '<div class="lnk"><a href="' + esc(k.dizin) + '" target="_blank" rel="noopener">MEB örnek sorular dizini (tüm dönemler)</a></div>';
   var az = CT.analiz;
   if (az){
     h += '<div class="stack" style="gap:4px"><h2>Hangi konudan kaç soru çıktı?</h2><p class="small muted">' + az.yillar[0] + '–' + az.yillar[az.yillar.length - 1] + ' arasındaki ' + az.yillar.length + ' sınavın ' + az.n + ' sorusu tek tek konulara ayrıldı. 2020 ve 2023 sınavlarında yalnızca birinci dönem konuları soruldu; 2021 kitapçığında da son ünitelerden soru yok.</p></div>';

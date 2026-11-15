@@ -1,0 +1,1858 @@
+{
+  "derlemeTarihi": "2026-11-15",
+  "sinav": {
+    "ad": "Sınavla Öğrenci Alacak Ortaöğretim Kurumlarına İlişkin Merkezî Sınav (LGS kapsamındaki merkezî sınav)",
+    "yapi": [
+      {
+        "oturum": 1,
+        "alan": "Sözel",
+        "baslangic": "09:30",
+        "sureDk": 75,
+        "toplamSoru": 50,
+        "dersler": [
+          {
+            "ders": "Türkçe",
+            "soru": 20
+          },
+          {
+            "ders": "T.C. İnkılap Tarihi ve Atatürkçülük",
+            "soru": 10
+          },
+          {
+            "ders": "Din Kültürü ve Ahlak Bilgisi",
+            "soru": 10
+          },
+          {
+            "ders": "Yabancı Dil",
+            "soru": 10
+          }
+        ],
+        "kaynak": "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2026_04/69cfb9daaf8f2557696260_LGS_Basvuru_ve_Uygulama_K%C4%B1lavuzu_2026.pdf",
+        "dogrulandi": true,
+        "not": "Kılavuz 2026 Tablo-1 ve Madde 10; 2018–2026 A kitapçıklarının kapaklarıyla da tutarlı."
+      },
+      {
+        "oturum": 2,
+        "alan": "Sayısal",
+        "baslangic": "11:30",
+        "sureDk": 80,
+        "toplamSoru": 40,
+        "dersler": [
+          {
+            "ders": "Matematik",
+            "soru": 20
+          },
+          {
+            "ders": "Fen Bilimleri",
+            "soru": 20
+          }
+        ],
+        "kaynak": "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2026_04/69cfb9daaf8f2557696260_LGS_Basvuru_ve_Uygulama_K%C4%B1lavuzu_2026.pdf",
+        "dogrulandi": true,
+        "not": "Kılavuz 2026 Tablo-1 ve Madde 10."
+      }
+    ],
+    "soruTipi": {
+      "deger": "Çoktan seçmeli, toplam 90 soru; A/B/C/D kitapçık türleri (4 seçenekli)",
+      "kaynak": "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2026_04/69cfb9daaf8f2557696260_LGS_Basvuru_ve_Uygulama_K%C4%B1lavuzu_2026.pdf",
+      "dogrulandi": true,
+      "not": "\"çoktan seçmeli 90 soru\" kılavuzdan; 4 seçenek (A–D) kitapçık cevap anahtarlarından gözlendi."
+    },
+    "sure": {
+      "sozelDk": 75,
+      "sayisalDk": 80,
+      "birinciOturumBaslangic": "09:30",
+      "ikinciOturumBaslangic": "11:30",
+      "binadaHazirBulunma": "09:00",
+      "muafiyet": "Din kültürü ve ahlak bilgisi alt testinden muaf öğrenciler için 1. oturum 60 dk.",
+      "ekSure": "Özel eğitim ihtiyacı olan bazı öğrenci gruplarına her oturum için ayrı ayrı 20 dk ek süre.",
+      "kaynak": "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2026_04/69cfb9daaf8f2557696260_LGS_Basvuru_ve_Uygulama_K%C4%B1lavuzu_2026.pdf",
+      "dogrulandi": true,
+      "not": "2026 Başvuru ve Uygulama Kılavuzu (pdftotext ile okundu). 2027 kılavuzu 15.11.2026 itibarıyla yayımlanmamış; 2027 için değişiklik olup olmadığı kılavuz çıkınca teyit edilmeli."
+    },
+    "puanlama": {
+      "hamPuan": "Her alt test için: doğru sayısı − (yanlış sayısı / 3). Yani 3 yanlış 1 doğruyu götürür.",
+      "standartPuan": "SP = 10 × (HP − Ort) / Ss + 50 (her alt test için ortalama 50, standart sapma 10).",
+      "agirlikKatsayilari": {
+        "Türkçe": 4,
+        "Matematik": 4,
+        "Fen Bilimleri": 4,
+        "T.C. İnkılap Tarihi ve Atatürkçülük": 1,
+        "Din Kültürü ve Ahlak Bilgisi": 1,
+        "Yabancı Dil": 1
+      },
+      "toplam": "TASP = ağırlıklı standart puanların toplamı; MSP = 100 + 400 × (TASP − En Küçük TASP) / (En Büyük TASP − En Küçük TASP).",
+      "puanAraligi": {
+        "min": 100,
+        "max": 500
+      },
+      "puanTuru": "Tek puan türü (Merkezî Sınav Puanı, MSP). Oturumlardan birine katılmayan için MSP hesaplanmaz.",
+      "iptalSoru": "İptal edilen sorular değerlendirme dışı bırakılır, geçerli soruların puan değeri yeniden saptanır (6114 s. Kanun md. 7/2).",
+      "kaynak": "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2026_04/69cfb9daaf8f2557696260_LGS_Basvuru_ve_Uygulama_K%C4%B1lavuzu_2026.pdf",
+      "dogrulandi": true,
+      "not": "Kılavuz 2026 Bölüm 11 ve Tablo-2. 2026 Başvuru ve Uygulama Kılavuzu (pdftotext ile okundu). 2027 kılavuzu 15.11.2026 itibarıyla yayımlanmamış; 2027 için değişiklik olup olmadığı kılavuz çıkınca teyit edilmeli."
+    },
+    "tarih2027": {
+      "tarih": "2027-06-13",
+      "gun": "Pazar",
+      "aciklama": "2026-2027 eğitim öğretim yılı LGS kapsamındaki merkezî sınav 13 Haziran 2027 Pazar günü yapılacak.",
+      "oturumSaatleri": {
+        "deger": "09:30 ve 11:30",
+        "dogrulandi": false,
+        "not": "Saatler 2026 kılavuzu ve 2018–2026 kitapçıklarından; 2027 için resmî kılavuz henüz yok."
+      },
+      "kaynak": "https://odsgm.meb.gov.tr/www/lgs-kapsamindaki-merkezi-sinavin-tarihi-belli-oldu/icerik/1755/tr",
+      "kaynak2": "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2026_10/6ae1f9bdee789687307821_2027_YILI_SINAV_UYGULAMA_TAKVIMI.pdf",
+      "dogrulandi": true,
+      "not": "ODSGM haberi (30.10.2026) \"13 Haziran 2027 Pazar\" diyor; 2027 Yılı Sınav Uygulama Takvimi PDF'inde 12. sıra: \"Sınavla Öğrenci Alacak Ortaöğretim Kurumlarına İlişkin Merkezî Sınav (8. Sınıflar) 2027/MS – Basılı Sınav – 13 Haziran 2027\"."
+    },
+    "kapsam": {
+      "deger": "8. sınıf öğretim programlarında belirlenen kazanımlar esas alınır (Türkçe, T.C. İnkılap Tarihi ve Atatürkçülük, Din Kültürü ve Ahlak Bilgisi, Yabancı Dil, Matematik, Fen Bilimleri). Okuduğunu anlama, yorumlama, sonuç çıkarma, problem çözme, analiz, eleştirel düşünme, bilimsel süreç becerilerini ölçen sorular.",
+      "kaynak": "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2026_04/69cfb9daaf8f2557696260_LGS_Basvuru_ve_Uygulama_K%C4%B1lavuzu_2026.pdf",
+      "dogrulandi": true,
+      "not2027": "2027 için ODSGM haberi: \"8'inci sınıf öğrencilerine yönelik sınavda, tüm sorular öğretim programlarında yer alan konu ve kazanımlar doğrultusunda hazırlanacak.\" (kaynak: https://odsgm.meb.gov.tr/www/lgs-kapsamindaki-merkezi-sinavin-tarihi-belli-oldu/icerik/1755/tr). 2026 kılavuzunda konu daraltması/dönem sınırlaması yok (8. sınıf programının tamamı). 2027 kılavuzu yayımlanınca teyit edilmeli.",
+      "gecmisIstisna": "2023 sınavında (deprem nedeniyle) ikinci dönem konuları kapsam dışı tutulmuştu (kaynak: https://www.meb.gov.tr/lgs-kapsamindaki-merkezi-sinav-sonuclari-aciklandi/haber/30262/tr – Bakan açıklaması: \"bahar yarı yılının derslerini sınav kapsamının dışında tutmuştu\"). 2020 sınavında da salgın nedeniyle kapsam 8. sınıf birinci dönem konularıyla sınırlandırılmıştı (kaynak: 2020 merkezî sınav raporu, https://www.meb.gov.tr/meb_iys_dosyalar/2020_07/17104126_2020_Ortaogretim_Kurumlarina_Iliskin_Merkezi_Sinav.pdf)."
+    },
+    "kaynaklar": [
+      "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2026_04/69cfb9daaf8f2557696260_LGS_Basvuru_ve_Uygulama_K%C4%B1lavuzu_2026.pdf",
+      "https://odsgm.meb.gov.tr/www/sinavla-ogrenci-alacak-ortaogretim-kurumlarina-iliskin-merkezi-sinav-basvuru-ve-uygulama-kilavuzu-yayimlandi/icerik/1560/tr",
+      "https://odsgm.meb.gov.tr/www/lgs-kapsamindaki-merkezi-sinavin-tarihi-belli-oldu/icerik/1755/tr",
+      "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2026_10/6ae1f9bdee789687307821_2027_YILI_SINAV_UYGULAMA_TAKVIMI.pdf",
+      "https://odsgm.meb.gov.tr/kilavuzlar/sinavlaogrenci_alacak_ortaogretim_kurumlarina_iliskin_merkezi_sinav_basvuru_ve_uygulama_kilavuzu_2025.pdf",
+      "https://www.meb.gov.tr/meb_iys_dosyalar/2023_03/13111658_BasYvuru_ve_Uygulama_KYlavuzu_2023.pdf",
+      "https://www.meb.gov.tr/meb_iys_dosyalar/2020_05/06105923_BasYvuru_ve_Uygulama_KYlavuzu_2020_GuYncel.pdf"
+    ]
+  },
+  "cikmis": [
+    {
+      "yil": 2018,
+      "tarih": "2018-06-02",
+      "sozel": {
+        "ad": "Sözel Bölüm A kitapçığı",
+        "url": "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2018_06/03153730_SYZEL_BYLYM_A_kitapYY.pdf",
+        "dogrulandi": true,
+        "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2018/sozel.pdf",
+        "metinVar": true,
+        "boyutBayt": 3317422,
+        "kitapcik": "A",
+        "kapakTarihiMetinde": true,
+        "cevapAnahtariIcinde": true
+      },
+      "sayisal": {
+        "ad": "Sayısal Bölüm A kitapçığı",
+        "url": "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2018_06/03153730_SAYISAL_BYLYM_A_kitapYY.pdf",
+        "dogrulandi": true,
+        "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2018/sayisal.pdf",
+        "metinVar": true,
+        "boyutBayt": 6028021,
+        "kitapcik": "A",
+        "kapakTarihiMetinde": true,
+        "cevapAnahtariIcinde": true
+      },
+      "cevap": [
+        {
+          "ad": "Sözel bölüm cevap anahtarı (A kitapçığı) – kitapçık PDF'inin son sayfasında",
+          "url": "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2018_06/03153730_SYZEL_BYLYM_A_kitapYY.pdf",
+          "dogrulandi": true,
+          "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2018/sozel.pdf"
+        },
+        {
+          "ad": "Sayısal bölüm cevap anahtarı (A kitapçığı) – kitapçık PDF'inin son sayfasında",
+          "url": "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2018_06/03153730_SAYISAL_BYLYM_A_kitapYY.pdf",
+          "dogrulandi": true,
+          "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2018/sayisal.pdf"
+        }
+      ],
+      "sayfa": "https://odsgm.meb.gov.tr/www/2-haziran-2018-tarihinde-yapilan-sinavla-ogrenci-alacak-ortaogretim-kurumlarina-iliskin-merkez-sinava-ait-soru-ve-cevap-anahtarlari/icerik/317",
+      "sayfaEk": []
+    },
+    {
+      "yil": 2019,
+      "tarih": "2019-06-01",
+      "sozel": {
+        "ad": "Sözel Bölüm A kitapçığı",
+        "url": "https://www.meb.gov.tr/meb_iys_dosyalar/2019_06/02125953_2019_SOZEL_BOLUM.pdf",
+        "dogrulandi": true,
+        "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2019/sozel.pdf",
+        "metinVar": true,
+        "boyutBayt": 4902464,
+        "kitapcik": "A",
+        "kapakTarihiMetinde": true,
+        "cevapAnahtariIcinde": true
+      },
+      "sayisal": {
+        "ad": "Sayısal Bölüm A kitapçığı",
+        "url": "https://www.meb.gov.tr/meb_iys_dosyalar/2019_06/02130019_2019_SAYISAL_BOLUM.pdf",
+        "dogrulandi": true,
+        "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2019/sayisal.pdf",
+        "metinVar": true,
+        "boyutBayt": 5772481,
+        "kitapcik": "A",
+        "kapakTarihiMetinde": true,
+        "cevapAnahtariIcinde": true
+      },
+      "cevap": [
+        {
+          "ad": "Sözel bölüm cevap anahtarı (A kitapçığı) – kitapçık PDF'inin son sayfasında",
+          "url": "https://www.meb.gov.tr/meb_iys_dosyalar/2019_06/02125953_2019_SOZEL_BOLUM.pdf",
+          "dogrulandi": true,
+          "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2019/sozel.pdf"
+        },
+        {
+          "ad": "Sayısal bölüm cevap anahtarı (A kitapçığı) – kitapçık PDF'inin son sayfasında",
+          "url": "https://www.meb.gov.tr/meb_iys_dosyalar/2019_06/02130019_2019_SAYISAL_BOLUM.pdf",
+          "dogrulandi": true,
+          "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2019/sayisal.pdf"
+        }
+      ],
+      "sayfa": "https://www.meb.gov.tr/01062019-tarihinde-yapilan-sinavla-ogrenci-alacak-ortaogretim-kurumlarina-iliskin-merkezi-sinav-soru-ve-cevap-anahtarlari/duyuru/18776/tr",
+      "sayfaEk": []
+    },
+    {
+      "yil": 2020,
+      "tarih": "2020-06-20",
+      "sozel": {
+        "ad": "Sözel Bölüm A kitapçığı",
+        "url": "https://www.meb.gov.tr/meb_iys_dosyalar/2020_06/21195531_2020_sozel_bolum_a.pdf",
+        "dogrulandi": true,
+        "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2020/sozel.pdf",
+        "metinVar": true,
+        "boyutBayt": 2655724,
+        "kitapcik": "A",
+        "kapakTarihiMetinde": true,
+        "cevapAnahtariIcinde": true
+      },
+      "sayisal": {
+        "ad": "Sayısal Bölüm A kitapçığı",
+        "url": "https://www.meb.gov.tr/meb_iys_dosyalar/2020_06/21195513_2020_sayisal_bolum_a.pdf",
+        "dogrulandi": true,
+        "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2020/sayisal.pdf",
+        "metinVar": true,
+        "boyutBayt": 13956443,
+        "kitapcik": "A",
+        "kapakTarihiMetinde": true,
+        "cevapAnahtariIcinde": true
+      },
+      "cevap": [
+        {
+          "ad": "Sözel bölüm cevap anahtarı (A kitapçığı) – kitapçık PDF'inin son sayfasında",
+          "url": "https://www.meb.gov.tr/meb_iys_dosyalar/2020_06/21195531_2020_sozel_bolum_a.pdf",
+          "dogrulandi": true,
+          "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2020/sozel.pdf"
+        },
+        {
+          "ad": "Sayısal bölüm cevap anahtarı (A kitapçığı) – kitapçık PDF'inin son sayfasında",
+          "url": "https://www.meb.gov.tr/meb_iys_dosyalar/2020_06/21195513_2020_sayisal_bolum_a.pdf",
+          "dogrulandi": true,
+          "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2020/sayisal.pdf"
+        }
+      ],
+      "sayfa": "https://www.meb.gov.tr/20062020-tarihinde-gerceklestirilen-sinavla-ogrenci-alacak-ortaogretim-kurumlarina-iliskin-merkezi-sinav-soru-kitapciklari-ve-cevap-anahtarlari/duyuru/21169/tr",
+      "sayfaEk": []
+    },
+    {
+      "yil": 2021,
+      "tarih": "2021-06-06",
+      "sozel": {
+        "ad": "Sözel Bölüm A kitapçığı",
+        "url": "https://cdn.eba.gov.tr/icerik/lgs/2021_SOZEL_BOLUM_A_.pdf",
+        "dogrulandi": true,
+        "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2021/sozel.pdf",
+        "metinVar": true,
+        "boyutBayt": 3274141,
+        "kitapcik": "A",
+        "kapakTarihiMetinde": true,
+        "cevapAnahtariIcinde": true
+      },
+      "sayisal": {
+        "ad": "Sayısal Bölüm A kitapçığı",
+        "url": "https://cdn.eba.gov.tr/icerik/lgs/2021_SAYISAL_BOLUM_A_.pdf",
+        "dogrulandi": true,
+        "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2021/sayisal.pdf",
+        "metinVar": true,
+        "boyutBayt": 3970874,
+        "kitapcik": "A",
+        "kapakTarihiMetinde": true,
+        "cevapAnahtariIcinde": true
+      },
+      "cevap": [
+        {
+          "ad": "Sözel bölüm cevap anahtarı (A kitapçığı) – kitapçık PDF'inin son sayfasında",
+          "url": "https://cdn.eba.gov.tr/icerik/lgs/2021_SOZEL_BOLUM_A_.pdf",
+          "dogrulandi": true,
+          "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2021/sozel.pdf"
+        },
+        {
+          "ad": "Sayısal bölüm cevap anahtarı (A kitapçığı) – kitapçık PDF'inin son sayfasında",
+          "url": "https://cdn.eba.gov.tr/icerik/lgs/2021_SAYISAL_BOLUM_A_.pdf",
+          "dogrulandi": true,
+          "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2021/sayisal.pdf"
+        }
+      ],
+      "sayfa": "https://www.meb.gov.tr/06062021-tarihinde-uygulanan-sinavla-ogrenci-alacak-ortaogretim-kurumlarina-iliskin-merkezi-sinavin-soru-kitapciklari-sayisal-ve-sozel-ve-cevap-anahtarlari/haber/23363/tr",
+      "sayfaEk": []
+    },
+    {
+      "yil": 2022,
+      "tarih": "2022-06-05",
+      "sozel": {
+        "ad": "Sözel Bölüm A kitapçığı",
+        "url": "https://cdn.eba.gov.tr/icerik/lgs/2022_sozel_bolum_a_kitapcigi_ve_cevap_anahtari.pdf",
+        "dogrulandi": true,
+        "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2022/sozel.pdf",
+        "metinVar": true,
+        "boyutBayt": 2097771,
+        "kitapcik": "A",
+        "kapakTarihiMetinde": true,
+        "cevapAnahtariIcinde": true
+      },
+      "sayisal": {
+        "ad": "Sayısal Bölüm A kitapçığı",
+        "url": "https://cdn.eba.gov.tr/icerik/lgs/2022_sayisal_bolum_a_kitapcigi_ve_cevap_anahtari.pdf",
+        "dogrulandi": true,
+        "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2022/sayisal.pdf",
+        "metinVar": true,
+        "boyutBayt": 7976321,
+        "kitapcik": "A",
+        "kapakTarihiMetinde": true,
+        "cevapAnahtariIcinde": true
+      },
+      "cevap": [
+        {
+          "ad": "Sözel bölüm cevap anahtarı (A kitapçığı) – kitapçık PDF'inin son sayfasında",
+          "url": "https://cdn.eba.gov.tr/icerik/lgs/2022_sozel_bolum_a_kitapcigi_ve_cevap_anahtari.pdf",
+          "dogrulandi": true,
+          "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2022/sozel.pdf"
+        },
+        {
+          "ad": "Sayısal bölüm cevap anahtarı (A kitapçığı) – kitapçık PDF'inin son sayfasında",
+          "url": "https://cdn.eba.gov.tr/icerik/lgs/2022_sayisal_bolum_a_kitapcigi_ve_cevap_anahtari.pdf",
+          "dogrulandi": true,
+          "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2022/sayisal.pdf"
+        }
+      ],
+      "sayfa": "https://odsgm.meb.gov.tr/www/5-haziran-2022-tarihinde-yapilan-sinavla-ogrenci-alacak-ortaogretim-kurumlarina-iliskin-merkezi-sinavin-soru-kitapciklari-ve-cevap-anahtarlari/icerik/822/tr",
+      "sayfaEk": []
+    },
+    {
+      "yil": 2023,
+      "tarih": "2023-06-04",
+      "sozel": {
+        "ad": "Sözel Bölüm A kitapçığı",
+        "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2023/06/2023_sozel.pdf",
+        "dogrulandi": true,
+        "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2023/sozel.pdf",
+        "metinVar": true,
+        "boyutBayt": 4477288,
+        "kitapcik": "A",
+        "kapakTarihiMetinde": true,
+        "cevapAnahtariIcinde": true
+      },
+      "sayisal": {
+        "ad": "Sayısal Bölüm A kitapçığı",
+        "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2023/06/2023_sayisal.pdf",
+        "dogrulandi": true,
+        "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2023/sayisal.pdf",
+        "metinVar": true,
+        "boyutBayt": 7066582,
+        "kitapcik": "A",
+        "kapakTarihiMetinde": true,
+        "cevapAnahtariIcinde": true
+      },
+      "cevap": [
+        {
+          "ad": "Sözel bölüm cevap anahtarı (A kitapçığı) – kitapçık PDF'inin son sayfasında",
+          "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2023/06/2023_sozel.pdf",
+          "dogrulandi": true,
+          "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2023/sozel.pdf"
+        },
+        {
+          "ad": "Sayısal bölüm cevap anahtarı (A kitapçığı) – kitapçık PDF'inin son sayfasında",
+          "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2023/06/2023_sayisal.pdf",
+          "dogrulandi": true,
+          "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2023/sayisal.pdf"
+        }
+      ],
+      "sayfa": "https://odsgm.meb.gov.tr/www/04-haziran-2023-tarihinde-uygulanan-sinavla-ogrenci-alacak-ortaogretim-kurumlarina-iliskin-merkezi-sinavin-soru-kitapciklari-sayisal-ve-sozel-ve-cevap-anahtarlari/icerik/983/tr",
+      "not": "Resmî duyuru sayfaları (ODSGM icerik/983 ve www.meb.gov.tr duyuru/30115) yalnızca meb.ai kısa bağlantıları veriyor (http://meb.ai/ImuyJ7 sözel, http://meb.ai/NADpaE sayısal); meb.ai bu oturumdan açılamadı. Buradaki cdn.eba.gov.tr adresleri web aramasıyla bulundu; dosyalar indirildi, kapakta \"2023 – 04 HAZİRAN 2023 – A kitapçığı – MEB ÖDSGM\" yazdığı metinden doğrulandı. Kısa bağlantının tam olarak bu dosyaya gittiği teyit edilemedi.",
+      "sayfaEk": [
+        "https://www.meb.gov.tr/04062023-tarihinde-uygulanan-sinavla-ogrenci-alacak-ortaogretim-kurumlarina-iliskin-merkezi-sinavin-soru-kitapciklari-sayisal-ve-sozel-ve-cevap-anahtarlari/duyuru/30115/tr"
+      ]
+    },
+    {
+      "yil": 2024,
+      "tarih": "2024-06-02",
+      "sozel": {
+        "ad": "Sözel Bölüm A kitapçığı",
+        "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2024/06/2024sozel.pdf",
+        "dogrulandi": true,
+        "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2024/sozel.pdf",
+        "metinVar": true,
+        "boyutBayt": 4479376,
+        "kitapcik": "A",
+        "kapakTarihiMetinde": true,
+        "cevapAnahtariIcinde": true
+      },
+      "sayisal": {
+        "ad": "Sayısal Bölüm A kitapçığı",
+        "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2024/06/2024sayisal.pdf",
+        "dogrulandi": true,
+        "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2024/sayisal.pdf",
+        "metinVar": true,
+        "boyutBayt": 5018885,
+        "kitapcik": "A",
+        "kapakTarihiMetinde": true,
+        "cevapAnahtariIcinde": true
+      },
+      "cevap": [
+        {
+          "ad": "Sözel bölüm cevap anahtarı (A kitapçığı) – kitapçık PDF'inin son sayfasında",
+          "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2024/06/2024sozel.pdf",
+          "dogrulandi": true,
+          "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2024/sozel.pdf"
+        },
+        {
+          "ad": "Sayısal bölüm cevap anahtarı (A kitapçığı) – kitapçık PDF'inin son sayfasında",
+          "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2024/06/2024sayisal.pdf",
+          "dogrulandi": true,
+          "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2024/sayisal.pdf"
+        }
+      ],
+      "sayfa": "https://odsgm.meb.gov.tr/www/02-haziran-2024-tarihinde-uygulanan-sinavla-ogrenci-alacak-ortaogretim-kurumlarina-iliskin-merkezi-sinavin-soru-kitapciklari-sayisal-ve-sozel-ve-cevap-anahtarlari/icerik/1245/tr",
+      "sayfaEk": [
+        "https://odsgm.meb.gov.tr/www/lgs-kapsamindaki-merkezi-sinav-tamamlandi-soru-kitapciklari-yayimlandi/icerik/1236/tr",
+        "https://www.meb.gov.tr/lgs-kapsamindaki-merkezi-sinav-tamamlandi-soru-kitapciklari-yayimlandi/haber/33944/tr"
+      ]
+    },
+    {
+      "yil": 2025,
+      "tarih": "2025-06-15",
+      "sozel": {
+        "ad": "Sözel Bölüm A kitapçığı",
+        "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2025/06/lgs/2025sozel.pdf",
+        "dogrulandi": true,
+        "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2025/sozel.pdf",
+        "metinVar": true,
+        "boyutBayt": 3513145,
+        "kitapcik": "A",
+        "kapakTarihiMetinde": true,
+        "cevapAnahtariIcinde": true
+      },
+      "sayisal": {
+        "ad": "Sayısal Bölüm A kitapçığı",
+        "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2025/06/lgss/2025sayisal.pdf",
+        "dogrulandi": true,
+        "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2025/sayisal.pdf",
+        "metinVar": true,
+        "boyutBayt": 4566773,
+        "kitapcik": "A",
+        "kapakTarihiMetinde": true,
+        "cevapAnahtariIcinde": true
+      },
+      "cevap": [
+        {
+          "ad": "Sözel bölüm cevap anahtarı (A kitapçığı) – kitapçık PDF'inin son sayfasında",
+          "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2025/06/lgs/2025sozel.pdf",
+          "dogrulandi": true,
+          "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2025/sozel.pdf"
+        },
+        {
+          "ad": "Sayısal bölüm cevap anahtarı (A kitapçığı) – kitapçık PDF'inin son sayfasında",
+          "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2025/06/lgss/2025sayisal.pdf",
+          "dogrulandi": true,
+          "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2025/sayisal.pdf"
+        }
+      ],
+      "sayfa": "https://odsgm.meb.gov.tr/www/lgs-kapsamindaki-merkezi-sinav-tamamlandi-soru-kitapciklari-yayimlandi/icerik/1446/tr",
+      "not": "B/C/D kitapçıkları da aynı sayfada (…/2025/06/lgs/B-2025Sozel.pdf vb.); indirilmedi.",
+      "sayfaEk": [
+        "https://www.meb.gov.tr/lgs-kapsamindaki-merkezi-sinav-tamamlandi-soru-kitapciklari-yayimlandi/haber/37522/tr"
+      ]
+    },
+    {
+      "yil": 2026,
+      "tarih": "2026-06-13",
+      "sozel": {
+        "ad": "Sözel Bölüm A kitapçığı",
+        "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2026/06/trlgs/a_2026_sozel.pdf",
+        "dogrulandi": true,
+        "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2026/sozel.pdf",
+        "metinVar": true,
+        "boyutBayt": 11510187,
+        "kitapcik": "A",
+        "kapakTarihiMetinde": true,
+        "cevapAnahtariIcinde": true
+      },
+      "sayisal": {
+        "ad": "Sayısal Bölüm A kitapçığı",
+        "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2026/06/trlgs/a_2026_sayisal.pdf",
+        "dogrulandi": true,
+        "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2026/sayisal.pdf",
+        "metinVar": true,
+        "boyutBayt": 13570693,
+        "kitapcik": "A",
+        "kapakTarihiMetinde": true,
+        "cevapAnahtariIcinde": true
+      },
+      "cevap": [
+        {
+          "ad": "Sözel bölüm cevap anahtarı (A kitapçığı) – kitapçık PDF'inin son sayfasında",
+          "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2026/06/trlgs/a_2026_sozel.pdf",
+          "dogrulandi": true,
+          "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2026/sozel.pdf"
+        },
+        {
+          "ad": "Sayısal bölüm cevap anahtarı (A kitapçığı) – kitapçık PDF'inin son sayfasında",
+          "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2026/06/trlgs/a_2026_sayisal.pdf",
+          "dogrulandi": true,
+          "yerel": "/tmp/claude-0/-home-user-finance-intelligence/9eca9027-fcd5-5886-9f87-99cf41058c74/scratchpad/pdfs/2026/sayisal.pdf"
+        }
+      ],
+      "sayfa": "https://www.meb.gov.tr/lgs-kapsamindaki-merkezi-sinavin-soru-kitapciklari-ve-cevap-anahtarlari-yayimlandi/haber/41055/tr",
+      "not": "ODSGM sayfası (icerik/1678) A/B/C/D için meb.ai kısa bağlantıları veriyor; A kitapçığının doğrudan cdn.eba.gov.tr bağlantıları www.meb.gov.tr haber/41055 sayfasından alındı. B kitapçığı …/trlgs/b_2026_sozel.pdf de doğrulandı (indirilmedi).",
+      "sayfaEk": [
+        "https://odsgm.meb.gov.tr/www/lgs-kapsamindaki-merkezi-sinavin-soru-kitapciklari-ve-cevap-anahtarlari-yayimlandi/icerik/1678/tr"
+      ]
+    }
+  ],
+  "ornek": [
+    {
+      "donem": "2018-2019",
+      "ay": "Ekim",
+      "bolum": "sayisal",
+      "ad": "2018-2019 Ekim – Sayısal Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/1819/EKIM_SAYISAL.pdf",
+      "dogrulandi": true,
+      "yayin": "2018-10-24",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/356"
+    },
+    {
+      "donem": "2018-2019",
+      "ay": "Ekim",
+      "bolum": "sozel",
+      "ad": "2018-2019 Ekim – Sözel Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/1819/EKIM_SOZEL.pdf",
+      "dogrulandi": true,
+      "yayin": "2018-10-24",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/356"
+    },
+    {
+      "donem": "2018-2019",
+      "ay": "Kasım",
+      "bolum": "sayisal",
+      "ad": "2018-2019 Kasım – Sayısal Bölüm Örnek Soruları",
+      "url": "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2018_11/22105633_Kasim_Ornek_Sorular_Sayisal.pdf",
+      "dogrulandi": true,
+      "yayin": "2018-11-22",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/364"
+    },
+    {
+      "donem": "2018-2019",
+      "ay": "Kasım",
+      "bolum": "sozel",
+      "ad": "2018-2019 Kasım – Sözel Bölüm Örnek Soruları",
+      "url": "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2018_11/22105633_Kasim_Ornek_Sorular_Sozel.pdf",
+      "dogrulandi": true,
+      "yayin": "2018-11-22",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/364"
+    },
+    {
+      "donem": "2018-2019",
+      "ay": "Aralık",
+      "bolum": "sayisal",
+      "ad": "2018-2019 Aralık – Sayısal Bölüm Örnek Soruları",
+      "url": "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2018_12/25095829_aralik_ayi_ornek_sorular_sayisal.pdf",
+      "dogrulandi": true,
+      "yayin": "2018-12-25",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/431"
+    },
+    {
+      "donem": "2018-2019",
+      "ay": "Aralık",
+      "bolum": "sozel",
+      "ad": "2018-2019 Aralık – Sözel Bölüm Örnek Soruları",
+      "url": "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2018_12/25095829_ornek_sorular_aralik_ayi_sozel.pdf",
+      "dogrulandi": true,
+      "yayin": "2018-12-25",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/431"
+    },
+    {
+      "donem": "2018-2019",
+      "ay": "Ocak",
+      "bolum": "sayisal",
+      "ad": "2018-2019 Ocak – Sayısal Bölüm Örnek Soruları",
+      "url": "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2019_01/22120501_ocak_ayi_ornek_sorular_sayisal.pdf",
+      "dogrulandi": true,
+      "yayin": "2019-01-22",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/436"
+    },
+    {
+      "donem": "2018-2019",
+      "ay": "Ocak",
+      "bolum": "sozel",
+      "ad": "2018-2019 Ocak – Sözel Bölüm Örnek Soruları",
+      "url": "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2019_01/22101303_ocak_ayi_ornek_sorular_sozel.pdf",
+      "dogrulandi": true,
+      "yayin": "2019-01-22",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/436"
+    },
+    {
+      "donem": "2018-2019",
+      "ay": "Şubat",
+      "bolum": "sayisal",
+      "ad": "2018-2019 Şubat – Sayısal Bölüm Örnek Soruları",
+      "url": "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2019_02/21094400_sayisal_subat_ayi_ornek_sorular.pdf",
+      "dogrulandi": true,
+      "yayin": "2019-02-21",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/440"
+    },
+    {
+      "donem": "2018-2019",
+      "ay": "Şubat",
+      "bolum": "sozel",
+      "ad": "2018-2019 Şubat – Sözel Bölüm Örnek Soruları",
+      "url": "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2019_02/21094400_sozel_subat_ayi_ornek_sorular.pdf",
+      "dogrulandi": true,
+      "yayin": "2019-02-21",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/440"
+    },
+    {
+      "donem": "2018-2019",
+      "ay": "Mart",
+      "bolum": "sayisal",
+      "ad": "2018-2019 Mart – Sayısal Bölüm Örnek Soruları",
+      "url": "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2019_03/21094324_sayisal_mart_ayi_ornek_sorular_3.pdf",
+      "dogrulandi": true,
+      "yayin": "2019-03-21",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/445"
+    },
+    {
+      "donem": "2018-2019",
+      "ay": "Mart",
+      "bolum": "sozel",
+      "ad": "2018-2019 Mart – Sözel Bölüm Örnek Soruları",
+      "url": "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2019_03/21094324_sozel_mart_ayi_ornek_sorular_3.pdf",
+      "dogrulandi": true,
+      "yayin": "2019-03-21",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/445"
+    },
+    {
+      "donem": "2018-2019",
+      "ay": "Nisan",
+      "bolum": "sayisal",
+      "ad": "2018-2019 Nisan – Sayısal Bölüm Örnek Soruları",
+      "url": "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2019_04/25095311_Sayisal_Nisan_ayi_ornek_sorular.pdf",
+      "dogrulandi": true,
+      "yayin": "2019-04-24",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/457"
+    },
+    {
+      "donem": "2018-2019",
+      "ay": "Nisan",
+      "bolum": "sozel",
+      "ad": "2018-2019 Nisan – Sözel Bölüm Örnek Soruları",
+      "url": "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2019_04/24094331_Sozel_nisan_ayi_ornek_sorular.pdf",
+      "dogrulandi": true,
+      "yayin": "2019-04-24",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/457"
+    },
+    {
+      "donem": "2018-2019",
+      "ay": "Mayıs",
+      "bolum": "sayisal",
+      "ad": "2018-2019 Mayıs – Sayısal Bölüm Örnek Soruları",
+      "url": "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2019_05/24094027_Sayisal_mayis_ornek_sorular.pdf",
+      "dogrulandi": true,
+      "yayin": "2019-05-24",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/460"
+    },
+    {
+      "donem": "2018-2019",
+      "ay": "Mayıs",
+      "bolum": "sozel",
+      "ad": "2018-2019 Mayıs – Sözel Bölüm Örnek Soruları",
+      "url": "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2019_05/24094028_Sozel_Mayis_ayi_ornek_sorular.pdf",
+      "dogrulandi": true,
+      "yayin": "2019-05-24",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/460"
+    },
+    {
+      "donem": "2019-2020",
+      "ay": "Ekim",
+      "bolum": "sayisal",
+      "ad": "2019-2020 Ekim – Sayısal Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/1920/2019_10_EKIM_ORNEKSORULAR_SAY.pdf",
+      "dogrulandi": true,
+      "yayin": "2019-10-24",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/495"
+    },
+    {
+      "donem": "2019-2020",
+      "ay": "Ekim",
+      "bolum": "sozel",
+      "ad": "2019-2020 Ekim – Sözel Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/1920/2019_10_EKIM_ORNEKSORULAR_SOZ.pdf",
+      "dogrulandi": true,
+      "yayin": "2019-10-24",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/495"
+    },
+    {
+      "donem": "2019-2020",
+      "ay": "Kasım",
+      "bolum": "sayisal",
+      "ad": "2019-2020 Kasım – Sayısal Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/1920/2019_11_KASIM_ORNEKSORULAR_SAY.pdf",
+      "dogrulandi": true,
+      "yayin": "2019-11-25",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/499"
+    },
+    {
+      "donem": "2019-2020",
+      "ay": "Kasım",
+      "bolum": "sozel",
+      "ad": "2019-2020 Kasım – Sözel Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/1920/2019_11_KASIM_ORNEKSORULAR_SOZ.pdf",
+      "dogrulandi": true,
+      "yayin": "2019-11-25",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/499"
+    },
+    {
+      "donem": "2019-2020",
+      "ay": "Aralık",
+      "bolum": "sayisal",
+      "ad": "2019-2020 Aralık – Sayısal Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/1920/2019_12_ARALIK_ORNEKSORULAR_SAY.pdf",
+      "dogrulandi": true,
+      "yayin": "2019-12-24",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/505"
+    },
+    {
+      "donem": "2019-2020",
+      "ay": "Aralık",
+      "bolum": "sozel",
+      "ad": "2019-2020 Aralık – Sözel Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/1920/2019_12_ARALIK_ORNEKSORULAR_SOZ.pdf",
+      "dogrulandi": true,
+      "yayin": "2019-12-24",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/505"
+    },
+    {
+      "donem": "2019-2020",
+      "ay": "Ocak",
+      "bolum": "sayisal",
+      "ad": "2019-2020 Ocak – Sayısal Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/1920/2020_01_OCAK_ORNEKSORULAR_SAY.pdf",
+      "dogrulandi": true,
+      "yayin": "2020-01-24",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/508"
+    },
+    {
+      "donem": "2019-2020",
+      "ay": "Ocak",
+      "bolum": "sozel",
+      "ad": "2019-2020 Ocak – Sözel Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/1920/2020_01_OCAK_ORNEKSORULAR_SOZ.pdf",
+      "dogrulandi": true,
+      "yayin": "2020-01-24",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/508"
+    },
+    {
+      "donem": "2019-2020",
+      "ay": "Şubat",
+      "bolum": "sayisal",
+      "ad": "2019-2020 Şubat – Sayısal Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/1920/2020_02_SUBAT_ORNEKSORULAR_SAY.pdf",
+      "dogrulandi": true,
+      "yayin": "2020-02-24",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/519"
+    },
+    {
+      "donem": "2019-2020",
+      "ay": "Şubat",
+      "bolum": "sozel",
+      "ad": "2019-2020 Şubat – Sözel Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/1920/2020_02_SUBAT_ORNEKSORULAR_SOZ.pdf",
+      "dogrulandi": true,
+      "yayin": "2020-02-24",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/519"
+    },
+    {
+      "donem": "2019-2020",
+      "ay": "Mart",
+      "bolum": "sayisal",
+      "ad": "2019-2020 Mart – Sayısal Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/1920/2020_03_MART_ORNEKSORULAR_SAY.pdf",
+      "dogrulandi": true,
+      "yayin": "2020-03-27",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/524"
+    },
+    {
+      "donem": "2019-2020",
+      "ay": "Mart",
+      "bolum": "sozel",
+      "ad": "2019-2020 Mart – Sözel Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/1920/2020_03_MART_ORNEKSORULAR_SOZ_1.pdf",
+      "dogrulandi": true,
+      "yayin": "2020-03-27",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/524"
+    },
+    {
+      "donem": "2019-2020",
+      "ay": "Nisan",
+      "bolum": "sayisal",
+      "ad": "2019-2020 Nisan – Sayısal Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/1920/862469ut_2020_04_NISAN_ORNEKSORULAR_SAY2.pdf",
+      "dogrulandi": true,
+      "yayin": "2020-04-08",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/527"
+    },
+    {
+      "donem": "2019-2020",
+      "ay": "Nisan",
+      "bolum": "sozel",
+      "ad": "2019-2020 Nisan – Sözel Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/1920/886125pg_2020_04_NISAN_ORNEKSORULAR_SOZ1.pdf",
+      "dogrulandi": true,
+      "yayin": "2020-04-08",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/527"
+    },
+    {
+      "donem": "2019-2020",
+      "ay": "Nisan (2.)",
+      "bolum": "sayisal",
+      "ad": "2019-2020 Nisan (2.) – Sayısal Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/1920/951753qw_2020_04_NISAN_ORNEKSORULAR_SAY_2.pdf",
+      "dogrulandi": true,
+      "yayin": "2020-04-22",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/534"
+    },
+    {
+      "donem": "2019-2020",
+      "ay": "Nisan (2.)",
+      "bolum": "sozel",
+      "ad": "2019-2020 Nisan (2.) – Sözel Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/1920/978856zm_2020_04_NISAN_ORNEKSORULAR_SOZ_2.pdf",
+      "dogrulandi": true,
+      "yayin": "2020-04-22",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/534"
+    },
+    {
+      "donem": "2019-2020",
+      "ay": "Mayıs",
+      "bolum": "sayisal",
+      "ad": "2019-2020 Mayıs – Sayısal Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/1920/06114447_u091176d2020p_05_MAYIS_ORNEKSORULAR_SAY1.pdf",
+      "dogrulandi": true,
+      "yayin": "2020-05-06",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/541"
+    },
+    {
+      "donem": "2019-2020",
+      "ay": "Mayıs",
+      "bolum": "sozel",
+      "ad": "2019-2020 Mayıs – Sözel Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/1920/06114451_z358957303a9k_05_MAYIS_ORNEKSORULAR_SOZ1.pdf",
+      "dogrulandi": true,
+      "yayin": "2020-05-06",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/541"
+    },
+    {
+      "donem": "2019-2020",
+      "ay": "Mayıs (2.)",
+      "bolum": "sayisal",
+      "ad": "2019-2020 Mayıs (2.) – Sayısal Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/1920/ed86521456_05_MAYIS_ORNEKSORULAR_SAY2.pdf",
+      "dogrulandi": true,
+      "yayin": "2020-05-20",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/544"
+    },
+    {
+      "donem": "2019-2020",
+      "ay": "Mayıs (2.)",
+      "bolum": "sozel",
+      "ad": "2019-2020 Mayıs (2.) – Sözel Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/1920/kd37955514_05_MAYIS_ORNEKSORULAR_SOZ2.pdf",
+      "dogrulandi": true,
+      "yayin": "2020-05-20",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/544"
+    },
+    {
+      "donem": "2020-2021",
+      "ay": "Aralık",
+      "bolum": "sayisal",
+      "ad": "2020-2021 Aralık – Sayısal Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/2021/65894_12_ARALIK_SAYISAL_ORNEK_SORULAR.pdf",
+      "dogrulandi": true,
+      "yayin": "2020-12-01",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/611"
+    },
+    {
+      "donem": "2020-2021",
+      "ay": "Aralık",
+      "bolum": "sozel",
+      "ad": "2020-2021 Aralık – Sözel Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/2021/84875_12_ARALIK_SOZEL_ORNEK_SORULAR.pdf",
+      "dogrulandi": true,
+      "yayin": "2020-12-01",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/611"
+    },
+    {
+      "donem": "2020-2021",
+      "ay": "Ocak",
+      "bolum": "sayisal",
+      "ad": "2020-2021 Ocak – Sayısal Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/2021/99586_01_OCAK_SAYISAL_ORNEK_SORULAR.pdf",
+      "dogrulandi": true,
+      "yayin": "2021-01-05",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/618"
+    },
+    {
+      "donem": "2020-2021",
+      "ay": "Ocak",
+      "bolum": "sozel",
+      "ad": "2020-2021 Ocak – Sözel Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/2021/68223_01_OCAK_SOZEL_ORNEK_SORULAR.pdf",
+      "dogrulandi": true,
+      "yayin": "2021-01-05",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/618"
+    },
+    {
+      "donem": "2020-2021",
+      "ay": "Şubat",
+      "bolum": "sayisal",
+      "ad": "2020-2021 Şubat – Sayısal Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/2021/02_SUBAT_SAYISAL_ORNEK_SORULAR_63358.pdf",
+      "dogrulandi": true,
+      "yayin": "2021-02-04",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/623"
+    },
+    {
+      "donem": "2020-2021",
+      "ay": "Şubat",
+      "bolum": "sozel",
+      "ad": "2020-2021 Şubat – Sözel Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/2021/02_SUBAT_SOZEL_ORNEK_SORULAR_31589.pdf",
+      "dogrulandi": true,
+      "yayin": "2021-02-04",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/623"
+    },
+    {
+      "donem": "2020-2021",
+      "ay": "Mart",
+      "bolum": "sayisal",
+      "ad": "2020-2021 Mart – Sayısal Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/2021/03_MART_SAYISAL_36974825_ORNEK_SORULAR.pdf",
+      "dogrulandi": true,
+      "yayin": "2021-03-07",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/628"
+    },
+    {
+      "donem": "2020-2021",
+      "ay": "Mart",
+      "bolum": "sozel",
+      "ad": "2020-2021 Mart – Sözel Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/2021/03_MART_SOZEL_66357831_ORNEK_SORULAR.pdf",
+      "dogrulandi": true,
+      "yayin": "2021-03-07",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/628"
+    },
+    {
+      "donem": "2020-2021",
+      "ay": "Nisan",
+      "bolum": "sayisal",
+      "ad": "2020-2021 Nisan – Sayısal Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/2021/04_NISAN_SAYISAL_35t6545y_ORNEK_SORULAR.pdf",
+      "dogrulandi": true,
+      "yayin": "2021-04-09",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/632"
+    },
+    {
+      "donem": "2020-2021",
+      "ay": "Nisan",
+      "bolum": "sozel",
+      "ad": "2020-2021 Nisan – Sözel Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/2021/04_NISAN_SOZEL_15da4785_ORNEK_SORULAR.pdf",
+      "dogrulandi": true,
+      "yayin": "2021-04-09",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/632"
+    },
+    {
+      "donem": "2020-2021",
+      "ay": "Mayıs",
+      "bolum": "sayisal",
+      "ad": "2020-2021 Mayıs – Sayısal Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/2021/04100136_MAYIS_SAYISAL_ORNEK_SORULAR_.pdf",
+      "dogrulandi": true,
+      "yayin": "2021-05-04",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/641"
+    },
+    {
+      "donem": "2020-2021",
+      "ay": "Mayıs",
+      "bolum": "sozel",
+      "ad": "2020-2021 Mayıs – Sözel Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/2021/04002438_MAYIS_SOZEL_ORNEK_SORULAR.pdf",
+      "dogrulandi": true,
+      "yayin": "2021-05-04",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/641"
+    },
+    {
+      "donem": "2021-2022",
+      "ay": "Ekim",
+      "bolum": "sayisal",
+      "ad": "2021-2022 Ekim – Sayısal Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/2122/01_EKIM_SAYISAL_ORNEK_SORULAR_996586.pdf",
+      "dogrulandi": true,
+      "yayin": "2021-10-04",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/740"
+    },
+    {
+      "donem": "2021-2022",
+      "ay": "Ekim",
+      "bolum": "sozel",
+      "ad": "2021-2022 Ekim – Sözel Bölüm Örnek Soruları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2022/01/odsgm/ornek/2122/01_EKIM_SOZEL_ORNEK_SORULAR_657322.pdf",
+      "dogrulandi": true,
+      "yayin": "2021-10-04",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/740"
+    },
+    {
+      "donem": "2021-2022",
+      "ay": "Kasım",
+      "bolum": "sayisal",
+      "ad": "2021-2022 Kasım – Sayısal Bölüm Örnek Soruları",
+      "url": "http://meb.ai/GxekZv",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2021-11-01",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/748"
+    },
+    {
+      "donem": "2021-2022",
+      "ay": "Kasım",
+      "bolum": "sozel",
+      "ad": "2021-2022 Kasım – Sözel Bölüm Örnek Soruları",
+      "url": "http://meb.ai/EPuLyt",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2021-11-01",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/748"
+    },
+    {
+      "donem": "2021-2022",
+      "ay": "Aralık",
+      "bolum": "sayisal",
+      "ad": "2021-2022 Aralık – Sayısal Bölüm Örnek Soruları",
+      "url": "http://meb.ai/sVlqDC",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2021-12-06",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/774"
+    },
+    {
+      "donem": "2021-2022",
+      "ay": "Aralık",
+      "bolum": "sozel",
+      "ad": "2021-2022 Aralık – Sözel Bölüm Örnek Soruları",
+      "url": "http://meb.ai/KNF4lT",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2021-12-06",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/774"
+    },
+    {
+      "donem": "2021-2022",
+      "ay": "Ocak",
+      "bolum": "sayisal",
+      "ad": "2021-2022 Ocak – Sayısal Bölüm Örnek Soruları",
+      "url": "http://meb.ai/vbhSYp",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2022-01-03",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/786"
+    },
+    {
+      "donem": "2021-2022",
+      "ay": "Ocak",
+      "bolum": "sozel",
+      "ad": "2021-2022 Ocak – Sözel Bölüm Örnek Soruları",
+      "url": "http://meb.ai/UVbanM",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2022-01-03",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/786"
+    },
+    {
+      "donem": "2021-2022",
+      "ay": "Şubat",
+      "bolum": "sayisal",
+      "ad": "2021-2022 Şubat – Sayısal Bölüm Örnek Soruları",
+      "url": "http://meb.ai/EGUljl",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2022-02-07",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/793"
+    },
+    {
+      "donem": "2021-2022",
+      "ay": "Şubat",
+      "bolum": "sozel",
+      "ad": "2021-2022 Şubat – Sözel Bölüm Örnek Soruları",
+      "url": "http://meb.ai/UAflMD",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2022-02-07",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/793"
+    },
+    {
+      "donem": "2021-2022",
+      "ay": "Mart",
+      "bolum": "sayisal",
+      "ad": "2021-2022 Mart – Sayısal Bölüm Örnek Soruları",
+      "url": "http://meb.ai/JPaEti",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2022-03-07",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/801"
+    },
+    {
+      "donem": "2021-2022",
+      "ay": "Mart",
+      "bolum": "sozel",
+      "ad": "2021-2022 Mart – Sözel Bölüm Örnek Soruları",
+      "url": "http://meb.ai/egDk1r",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2022-03-07",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/801"
+    },
+    {
+      "donem": "2021-2022",
+      "ay": "Nisan",
+      "bolum": "sayisal",
+      "ad": "2021-2022 Nisan – Sayısal Bölüm Örnek Soruları",
+      "url": "http://meb.ai/skmFzG",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2022-04-04",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/808"
+    },
+    {
+      "donem": "2021-2022",
+      "ay": "Nisan",
+      "bolum": "sozel",
+      "ad": "2021-2022 Nisan – Sözel Bölüm Örnek Soruları",
+      "url": "http://meb.ai/Uwvldt",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2022-04-04",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/808"
+    },
+    {
+      "donem": "2021-2022",
+      "ay": "Mayıs",
+      "bolum": "sayisal",
+      "ad": "2021-2022 Mayıs – Sayısal Bölüm Örnek Soruları",
+      "url": "http://meb.ai/GRcHZK",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2022-05-09",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/818"
+    },
+    {
+      "donem": "2021-2022",
+      "ay": "Mayıs",
+      "bolum": "sozel",
+      "ad": "2021-2022 Mayıs – Sözel Bölüm Örnek Soruları",
+      "url": "http://meb.ai/srjYkS",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2022-05-09",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/818"
+    },
+    {
+      "donem": "2022-2023",
+      "ay": "Ekim",
+      "bolum": "sozel",
+      "ad": "2022-2023 Ekim – Sözel Bölüm Örnek Soruları",
+      "url": "http://meb.ai/MgaS6d",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2022-10-05",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/836"
+    },
+    {
+      "donem": "2022-2023",
+      "ay": "Ekim",
+      "bolum": "sayisal",
+      "ad": "2022-2023 Ekim – Sayısal Bölüm Örnek Soruları",
+      "url": "http://meb.ai/DTmlsA",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2022-10-05",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/836"
+    },
+    {
+      "donem": "2022-2023",
+      "ay": "Kasım",
+      "bolum": "sozel",
+      "ad": "2022-2023 Kasım – Sözel Bölüm Örnek Soruları",
+      "url": "http://meb.ai/UlhbryA",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2022-11-20",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/911"
+    },
+    {
+      "donem": "2022-2023",
+      "ay": "Kasım",
+      "bolum": "sayisal",
+      "ad": "2022-2023 Kasım – Sayısal Bölüm Örnek Soruları",
+      "url": "http://meb.ai/3w6yL3",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2022-11-20",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/911"
+    },
+    {
+      "donem": "2022-2023",
+      "ay": "Aralık",
+      "bolum": "sozel",
+      "ad": "2022-2023 Aralık – Sözel Bölüm Örnek Soruları",
+      "url": "http://meb.ai/NHrAxS",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2022-12-15",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/917"
+    },
+    {
+      "donem": "2022-2023",
+      "ay": "Aralık",
+      "bolum": "sayisal",
+      "ad": "2022-2023 Aralık – Sayısal Bölüm Örnek Soruları",
+      "url": "http://meb.ai/UR2Hs5J",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2022-12-15",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/917"
+    },
+    {
+      "donem": "2022-2023",
+      "ay": "Ocak",
+      "bolum": "sozel",
+      "ad": "2022-2023 Ocak – Sözel Bölüm Örnek Soruları",
+      "url": "http://meb.ai/UXa6xyP",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2023-01-16",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/934"
+    },
+    {
+      "donem": "2022-2023",
+      "ay": "Ocak",
+      "bolum": "sayisal",
+      "ad": "2022-2023 Ocak – Sayısal Bölüm Örnek Soruları",
+      "url": "http://meb.ai/jkXeqk",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2023-01-16",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/934"
+    },
+    {
+      "donem": "2022-2023",
+      "ay": "Şubat",
+      "bolum": "sozel",
+      "ad": "2022-2023 Şubat – Sözel Bölüm Örnek Soruları",
+      "url": "http://meb.ai/IEn3RR",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2023-02-24",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/943"
+    },
+    {
+      "donem": "2022-2023",
+      "ay": "Şubat",
+      "bolum": "sayisal",
+      "ad": "2022-2023 Şubat – Sayısal Bölüm Örnek Soruları",
+      "url": "http://meb.ai/xaUZpZ",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2023-02-24",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/943"
+    },
+    {
+      "donem": "2022-2023",
+      "ay": "Mart",
+      "bolum": "sozel",
+      "ad": "2022-2023 Mart – Sözel Bölüm Örnek Soruları",
+      "url": "http://meb.ai/UuX6D3h",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2023-03-15",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/958"
+    },
+    {
+      "donem": "2022-2023",
+      "ay": "Mart",
+      "bolum": "sayisal",
+      "ad": "2022-2023 Mart – Sayısal Bölüm Örnek Soruları",
+      "url": "http://meb.ai/j4bjDT",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2023-03-15",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/958"
+    },
+    {
+      "donem": "2022-2023",
+      "ay": "Nisan",
+      "bolum": "sozel",
+      "ad": "2022-2023 Nisan – Sözel Bölüm Örnek Soruları",
+      "url": "http://meb.ai/Uf9ExIq",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2023-04-24",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/968"
+    },
+    {
+      "donem": "2022-2023",
+      "ay": "Nisan",
+      "bolum": "sayisal",
+      "ad": "2022-2023 Nisan – Sayısal Bölüm Örnek Soruları",
+      "url": "http://meb.ai/UMpE4O6",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2023-04-24",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/968"
+    },
+    {
+      "donem": "2022-2023",
+      "ay": "Mayıs",
+      "bolum": "sozel",
+      "ad": "2022-2023 Mayıs – Sözel Bölüm Örnek Soruları",
+      "url": "http://meb.ai/UkdazW8",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2023-05-15",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/975"
+    },
+    {
+      "donem": "2022-2023",
+      "ay": "Mayıs",
+      "bolum": "sayisal",
+      "ad": "2022-2023 Mayıs – Sayısal Bölüm Örnek Soruları",
+      "url": "http://meb.ai/kRWvYd",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2023-05-15",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/975"
+    },
+    {
+      "donem": "2023-2024",
+      "ay": "Kasım (1. örnek sorular)",
+      "bolum": "sozel",
+      "ad": "2023-2024 Kasım (1. örnek sorular) – Sözel Bölüm Örnek Soruları",
+      "url": "http://meb.ai/UEvkUKI",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2023-11-15",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/1118"
+    },
+    {
+      "donem": "2023-2024",
+      "ay": "Kasım (1. örnek sorular)",
+      "bolum": "sayisal",
+      "ad": "2023-2024 Kasım (1. örnek sorular) – Sayısal Bölüm Örnek Soruları",
+      "url": "http://meb.ai/xYYq0D",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2023-11-15",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/1118"
+    },
+    {
+      "donem": "2023-2024",
+      "ay": "Şubat (2. örnek sorular)",
+      "bolum": "sozel",
+      "ad": "2023-2024 Şubat (2. örnek sorular) – Sözel Bölüm Örnek Soruları",
+      "url": "https://meb.ai/xtx5MQ",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2024-02-15",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/1171"
+    },
+    {
+      "donem": "2023-2024",
+      "ay": "Şubat (2. örnek sorular)",
+      "bolum": "sayisal",
+      "ad": "2023-2024 Şubat (2. örnek sorular) – Sayısal Bölüm Örnek Soruları",
+      "url": "https://meb.ai/Ubf3tSE",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2024-02-15",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/1171"
+    },
+    {
+      "donem": "2023-2024",
+      "ay": "Şubat (2. örnek sorular)",
+      "bolum": "ek",
+      "ad": "Örnek sorular ile ders kitaplarındaki benzer soru/etkinlik örnekleri",
+      "url": "http://meb.ai/UE4eCUf",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2024-02-15",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/1171"
+    },
+    {
+      "donem": "2023-2024",
+      "ay": "Nisan (3. örnek sorular)",
+      "bolum": "sozel",
+      "ad": "2023-2024 Nisan (3. örnek sorular) – Sözel Bölüm Örnek Soruları",
+      "url": "http://meb.ai/UiUJWKm",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2024-04-17",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/1206"
+    },
+    {
+      "donem": "2023-2024",
+      "ay": "Nisan (3. örnek sorular)",
+      "bolum": "sayisal",
+      "ad": "2023-2024 Nisan (3. örnek sorular) – Sayısal Bölüm Örnek Soruları",
+      "url": "http://meb.ai/U5Lyaps",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2024-04-17",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/1206"
+    },
+    {
+      "donem": "2024-2025",
+      "ay": "Kasım (1. örnek soru kitapçıkları)",
+      "bolum": "sozel",
+      "ad": "2024-2025 Kasım (1. örnek soru kitapçıkları) – Sözel Bölüm Örnek Soruları",
+      "url": "https://meb.ai/NrEYs7",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2024-11-18",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/1321"
+    },
+    {
+      "donem": "2024-2025",
+      "ay": "Kasım (1. örnek soru kitapçıkları)",
+      "bolum": "sayisal",
+      "ad": "2024-2025 Kasım (1. örnek soru kitapçıkları) – Sayısal Bölüm Örnek Soruları",
+      "url": "https://meb.ai/URbuoyJ",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2024-11-18",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/1321"
+    },
+    {
+      "donem": "2024-2025",
+      "ay": "Şubat (2. örnek soru kitapçıkları)",
+      "bolum": "sozel",
+      "ad": "2024-2025 Şubat (2. örnek soru kitapçıkları) – Sözel Bölüm Örnek Soruları",
+      "url": "https://meb.ai/UpK1KvA",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2025-02-10",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/1405"
+    },
+    {
+      "donem": "2024-2025",
+      "ay": "Şubat (2. örnek soru kitapçıkları)",
+      "bolum": "sayisal",
+      "ad": "2024-2025 Şubat (2. örnek soru kitapçıkları) – Sayısal Bölüm Örnek Soruları",
+      "url": "https://meb.ai/UYYU83Z",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2025-02-10",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/1405"
+    },
+    {
+      "donem": "2024-2025",
+      "ay": "Nisan (3. örnek soru kitapçıkları)",
+      "bolum": "sozel",
+      "ad": "2024-2025 Nisan (3. örnek soru kitapçıkları) – Sözel Bölüm Örnek Soruları",
+      "url": "https://meb.ai/UKNwZ9o",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2025-04-15",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/1425"
+    },
+    {
+      "donem": "2024-2025",
+      "ay": "Nisan (3. örnek soru kitapçıkları)",
+      "bolum": "sayisal",
+      "ad": "2024-2025 Nisan (3. örnek soru kitapçıkları) – Sayısal Bölüm Örnek Soruları",
+      "url": "https://meb.ai/aFxpbQ",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi (hedef PDF adresi çözülemedi). Bağlantı resmî ODSGM duyuru sayfasından alındı.",
+      "yayin": "2025-04-15",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/1425"
+    },
+    {
+      "donem": "2025-2026",
+      "ay": "Kasım (1. örnek soru kitapçıkları – MEBİ)",
+      "bolum": "sozel+sayisal",
+      "ad": "2025-2026 Kasım (1. örnek soru kitapçıkları – MEBİ)",
+      "url": "https://mebi.eba.gov.tr/",
+      "dogrulandi": false,
+      "not": "MEBİ platformunda (mebi.eba.gov.tr) yayımlandı; doğrudan PDF bağlantısı duyuruda yok, platform bu oturumdan erişilemedi (giriş gerektirebilir).",
+      "yayin": "2025-11-30",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/1512"
+    },
+    {
+      "donem": "2025-2026",
+      "ay": "Mart (örnek soru kitapçıkları – MEBİ)",
+      "bolum": "sozel+sayisal",
+      "ad": "2025-2026 Mart (örnek soru kitapçıkları – MEBİ)",
+      "url": "https://mebi.eba.gov.tr/",
+      "dogrulandi": false,
+      "not": "MEBİ platformunda (mebi.eba.gov.tr) yayımlandı; doğrudan PDF bağlantısı duyuruda yok, platform bu oturumdan erişilemedi (giriş gerektirebilir).",
+      "yayin": "2026-03-06",
+      "sayfa": "https://odsgm.meb.gov.tr/www/x/icerik/1550"
+    }
+  ],
+  "raporlar": [
+    {
+      "yil": 2018,
+      "ad": "2018 Liselere Geçiş Sistemi (LGS) Merkezi Sınavla Yerleşen Öğrencilerin Performansı",
+      "url": "https://www.meb.gov.tr/meb_iys_dosyalar/2018_12/17094056_2018_lgs_rapor.pdf",
+      "dogrulandi": true,
+      "not": "2018 merkezî sınav sayısal veri raporunun (Haziran 2018) bağlantısı bulunamadı. 2019 raporunda 2018 için yalnız iki değer anılıyor: İnkılap 7,40; Din Kültürü 8,40 doğru ortalaması.",
+      "dersIstatistik2018Kismi": {
+        "T.C. İnkılap Tarihi ve Atatürkçülük": {
+          "dogruOrt": 7.4
+        },
+        "Din Kültürü ve Ahlak Bilgisi": {
+          "dogruOrt": 8.4
+        },
+        "kaynak": "https://www.meb.gov.tr/meb_iys_dosyalar/2019_06/24094730_2019_Ortaogretim_Kurumlarina_Iliskin_Merkezi_Sinav.pdf"
+      }
+    },
+    {
+      "yil": 2019,
+      "ad": "2019 Ortaöğretim Kurumlarına İlişkin Merkezi Sınav (Eğitim Analiz ve Değerlendirme Raporları Serisi)",
+      "url": "https://www.meb.gov.tr/meb_iys_dosyalar/2019_06/24094730_2019_Ortaogretim_Kurumlarina_Iliskin_Merkezi_Sinav.pdf",
+      "dogrulandi": true,
+      "basvuran": 1074013,
+      "katilan": 1029555,
+      "puanOrt": 298.87,
+      "puanSs": 78.73,
+      "dersIstatistik": {
+        "Türkçe": {
+          "soru": 20,
+          "dogruOrt": 11.75,
+          "ss": 5.15
+        },
+        "T.C. İnkılap Tarihi ve Atatürkçülük": {
+          "soru": 10,
+          "dogruOrt": 6.88,
+          "ss": 2.82
+        },
+        "Din Kültürü ve Ahlak Bilgisi": {
+          "soru": 10,
+          "dogruOrt": 6.83,
+          "ss": 2.41
+        },
+        "Yabancı Dil": {
+          "soru": 10,
+          "dogruOrt": 4.65,
+          "ss": 3.21
+        },
+        "Matematik": {
+          "soru": 20,
+          "dogruOrt": 5.09,
+          "ss": 4.24
+        },
+        "Fen Bilimleri": {
+          "soru": 20,
+          "dogruOrt": 9.97,
+          "ss": 4.72
+        }
+      },
+      "veriKaynagi": "Tablo 3, Tablo 4"
+    },
+    {
+      "yil": 2019,
+      "ad": "2019 LGS Kapsamında İlk Yerleştirme Sonuçları Ön Raporu",
+      "url": "https://www.meb.gov.tr/meb_iys_dosyalar/2019_07/22084102_LGS_2019_yerlestirme_22temmuz.pdf",
+      "dogrulandi": true
+    },
+    {
+      "yil": 2020,
+      "ad": "2020 Ortaöğretim Kurumlarına İlişkin Merkezi Sınav",
+      "url": "https://www.meb.gov.tr/meb_iys_dosyalar/2020_07/17104126_2020_Ortaogretim_Kurumlarina_Iliskin_Merkezi_Sinav.pdf",
+      "dogrulandi": true,
+      "basvuran": 1671337,
+      "katilan": 1472088,
+      "puanOrt": 286.35,
+      "puanSs": 69.22,
+      "dersIstatistik": {
+        "Türkçe": {
+          "soru": 20,
+          "dogruOrt": 10.0,
+          "ss": 4.49
+        },
+        "T.C. İnkılap Tarihi ve Atatürkçülük": {
+          "soru": 10,
+          "dogruOrt": 5.05,
+          "ss": 3.07
+        },
+        "Din Kültürü ve Ahlak Bilgisi": {
+          "soru": 10,
+          "dogruOrt": 6.39,
+          "ss": 2.77
+        },
+        "Yabancı Dil": {
+          "soru": 10,
+          "dogruOrt": 3.53,
+          "ss": 3.22
+        },
+        "Matematik": {
+          "soru": 20,
+          "dogruOrt": 4.89,
+          "ss": 3.42
+        },
+        "Fen Bilimleri": {
+          "soru": 20,
+          "dogruOrt": 10.21,
+          "ss": 5.16
+        }
+      },
+      "veriKaynagi": "Tablo 3, Tablo 4",
+      "not": "Başvuru otomatik (tüm 8. sınıflar)."
+    },
+    {
+      "yil": 2020,
+      "ad": "2020 LGS Merkezi Sınavla Yerleşen Öğrencilerin Performansı",
+      "url": "https://www.meb.gov.tr/meb_iys_dosyalar/2020_08/10084528_No14_LGS_2020_Merkezi_Sinavla_Yerlesen_Ogrencilerin_Performansi.pdf",
+      "dogrulandi": true
+    },
+    {
+      "yil": 2021,
+      "ad": "2021 Ortaöğretim Kurumlarına İlişkin Merkezi Sınav",
+      "url": "https://www.meb.gov.tr/meb_iys_dosyalar/2021_07/01113311_2021_Ortaogretim_Kurumlarina_Iliskin_Merkezi_Sinav.pdf",
+      "dogrulandi": true,
+      "basvuran": 1243830,
+      "katilan": 1038492,
+      "puanOrt": 268.35,
+      "puanSs": 66.88,
+      "dersIstatistik": {
+        "Türkçe": {
+          "soru": 20,
+          "dogruOrt": 9.41,
+          "ss": 4.79
+        },
+        "T.C. İnkılap Tarihi ve Atatürkçülük": {
+          "soru": 10,
+          "dogruOrt": 5.23,
+          "ss": 2.87
+        },
+        "Din Kültürü ve Ahlak Bilgisi": {
+          "soru": 10,
+          "dogruOrt": 6.35,
+          "ss": 2.59
+        },
+        "Yabancı Dil": {
+          "soru": 10,
+          "dogruOrt": 4.93,
+          "ss": 3.34
+        },
+        "Matematik": {
+          "soru": 20,
+          "dogruOrt": 4.2,
+          "ss": 3.31
+        },
+        "Fen Bilimleri": {
+          "soru": 20,
+          "dogruOrt": 8.04,
+          "ss": 4.82
+        }
+      },
+      "veriKaynagi": "Tablo 3, Tablo 4",
+      "not": "Başvuru otomatik."
+    },
+    {
+      "yil": 2021,
+      "ad": "2021 LGS Merkezi Sınavla Yerleşen Öğrencilerin Performansı",
+      "url": "https://cdn.eba.gov.tr/icerik/2021/07/rapor/No_17-LGS_2021-merkezi_yerlestirme_211730.pdf",
+      "dogrulandi": true
+    },
+    {
+      "yil": 2021,
+      "ad": "2021 LGS Kapsamında İlk Yerleştirme Sonuçları",
+      "url": "https://cdn.eba.gov.tr/icerik/2021/07/rapor/No_18-LGS_2021-yerel_yerlestirme_182140.pdf",
+      "dogrulandi": true
+    },
+    {
+      "yil": 2022,
+      "ad": "2022 Yılı Ortaöğretim Kurumlarına İlişkin Merkezi Sınav Raporu",
+      "url": "https://cdn.eba.gov.tr/icerik/2022/06/2022_LGS_rapor.pdf",
+      "dogrulandi": true,
+      "basvuran": 1236308,
+      "katilan": 1031799,
+      "puanOrt": 285.88,
+      "puanSs": 73.72,
+      "dersIstatistik": {
+        "Türkçe": {
+          "soru": 20,
+          "dogruOrt": 9.22,
+          "ss": 4.61
+        },
+        "T.C. İnkılap Tarihi ve Atatürkçülük": {
+          "soru": 10,
+          "dogruOrt": 5.54,
+          "ss": 2.59
+        },
+        "Din Kültürü ve Ahlak Bilgisi": {
+          "soru": 10,
+          "dogruOrt": 6.45,
+          "ss": 2.68
+        },
+        "Yabancı Dil": {
+          "soru": 10,
+          "dogruOrt": 4.59,
+          "ss": 3.34
+        },
+        "Matematik": {
+          "soru": 20,
+          "dogruOrt": 4.74,
+          "ss": 4.26
+        },
+        "Fen Bilimleri": {
+          "soru": 20,
+          "dogruOrt": 9.5,
+          "ss": 5.02
+        }
+      },
+      "veriKaynagi": "Tablo 3, Tablo 4",
+      "not": "Başvuru otomatik."
+    },
+    {
+      "yil": 2023,
+      "ad": "2023 merkezî sınav raporu",
+      "url": null,
+      "dogrulandi": false,
+      "not": "ODSGM \"Liselere Geçiş Sistemi Raporları\" (kategori/94) listesinde 2023 ve 2024 için merkezî sınav raporu yok; resmî bağlantı bulunamadı."
+    },
+    {
+      "yil": 2024,
+      "ad": "2024 merkezî sınav raporu",
+      "url": null,
+      "dogrulandi": false,
+      "not": "Resmî rapor bağlantısı bulunamadı. Sonuç haberi: başvuran 1.038.544, katılan 992.906 (%95,61), 352 tam puan.",
+      "basvuran": 1038544,
+      "katilan": 992906,
+      "tamPuan": 352,
+      "kaynak": "https://www.meb.gov.tr/lgs-kapsamindaki-merkezsinavsonuclariaciklandi/haber/34178/tr"
+    },
+    {
+      "yil": 2025,
+      "ad": "2025 Liselere Geçiş Sistemi (LGS) Kapsamında Merkezî Sınav Raporu (özet rapor)",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2025/07/LGS2025MerkeziSinavOzetRapor.pdf",
+      "dogrulandi": true,
+      "katilan": 963142,
+      "katilimOraniYuzde": 95.27,
+      "tamPuan": 719,
+      "dersIstatistik": {
+        "Türkçe": {
+          "ortGucluk": 0.42,
+          "ortAyirtEdicilik": 0.47,
+          "guvenirlik": 0.82
+        },
+        "T.C. İnkılap Tarihi ve Atatürkçülük": {
+          "ortGucluk": 0.49,
+          "ortAyirtEdicilik": 0.56,
+          "guvenirlik": 0.76
+        },
+        "Din Kültürü ve Ahlak Bilgisi": {
+          "ortGucluk": 0.59,
+          "ortAyirtEdicilik": 0.55,
+          "guvenirlik": 0.75
+        },
+        "Yabancı Dil (İngilizce)": {
+          "ortGucluk": 0.44,
+          "ortAyirtEdicilik": 0.67,
+          "guvenirlik": 0.87
+        },
+        "Matematik": {
+          "ortGucluk": 0.28,
+          "ortAyirtEdicilik": 0.56,
+          "guvenirlik": 0.88
+        },
+        "Fen Bilimleri": {
+          "ortGucluk": 0.44,
+          "ortAyirtEdicilik": 0.53,
+          "guvenirlik": 0.87
+        }
+      },
+      "veriKaynagi": "Tablo 8 (ortalama güçlük = doğru yanıtlanma oranı; ders bazında doğru sayısı ortalaması tablosu bu özet raporda yok)"
+    },
+    {
+      "yil": 2025,
+      "ad": "2025 LGS Kapsamında İlk Yerleştirme Sonuçları",
+      "url": "https://cdn.eba.gov.tr/yardimcikaynaklar/2025/08/2025LGSYerlestirmeRaporu.pdf",
+      "dogrulandi": true
+    },
+    {
+      "yil": 2026,
+      "ad": "2026 LGS Kapsamında Merkezî Sınav Raporu",
+      "url": "https://meb.ai/Zt8u7V",
+      "dogrulandi": false,
+      "not": "meb.ai kısa bağlantısı; bu oturumdan erişilemedi. Aşağıdaki veriler www.meb.gov.tr haber metninden (doğrulandı).",
+      "sayfa": "https://odsgm.meb.gov.tr/www/2026-lgs-kapsaminda-merkezi-sinav-raporu/icerik/1695/tr",
+      "haber": "https://www.meb.gov.tr/2026-lgs-kapsaminda-merkezi-sinav-raporu-yayimlandi/haber/41333/tr",
+      "haberDogrulandi": true,
+      "basvuran": 1022658,
+      "katilan": 994358,
+      "katilimOraniYuzde": 97.23,
+      "tamPuan": 452,
+      "dersIstatistik": {
+        "Türkçe": {
+          "ortAyirtEdicilik": 0.48
+        },
+        "T.C. İnkılap Tarihi ve Atatürkçülük": {
+          "ortAyirtEdicilik": 0.6
+        },
+        "Din Kültürü ve Ahlak Bilgisi": {
+          "ortAyirtEdicilik": 0.53
+        },
+        "Yabancı Dil": {
+          "ortAyirtEdicilik": 0.69
+        },
+        "Matematik": {
+          "ortAyirtEdicilik": 0.52
+        },
+        "Fen Bilimleri": {
+          "ortAyirtEdicilik": 0.54
+        }
+      }
+    },
+    {
+      "yil": 2026,
+      "ad": "2026 LGS Kapsamında İlk Yerleştirme Sonuç Raporu",
+      "url": "https://odsgm.meb.gov.tr/meb_iys_dosyalar/2026_08/6a72dd74c263a920303943_lgs_2026_yerlestirme_raporu_kamuoyu_0508.pdf",
+      "dogrulandi": true
+    },
+    {
+      "yil": null,
+      "ad": "ODSGM – Liselere Geçiş Sistemi Raporları (liste sayfası)",
+      "url": "https://odsgm.meb.gov.tr/www/liselere-gecis-sistemi-raporlari/kategori/94",
+      "dogrulandi": true
+    }
+  ],
+  "notlar": [
+    "Derleme tarihi: 2026-11-15. Doğrulama: URL'ler curl ile istenip HTTP 200/206 ve içeriğin %PDF ile başladığı kontrol edildi. cdn.eba.gov.tr bu oturumdan erişilebildi.",
+    "Çıkmış sorular: 2018–2026 her yıl sözel + sayısal A kitapçığı indirildi (18 PDF); hepsinde pdftotext -layout ile metin çıkıyor (taranmış görüntü değil). Ayrı cevap anahtarı dosyası yok: cevap anahtarı her kitapçık PDF'inin son sayfasında (\"CEVAP ANAHTARI\").",
+    "2023 kitapçık URL'leri: resmî sayfalar yalnız meb.ai kısa bağlantısı veriyor; cdn.eba.gov.tr adresi arama ile bulundu ve içerikten doğrulandı (bkz. cikmis[2023].not).",
+    "Örnek sorular: 95 bağlantı listelendi; 50 tanesi PDF olarak doğrulandı (2018-19 Ekim → 2021-22 Ekim arası tüm aylar). 45 tanesi doğrulanamadı: 2021 Kasım → 2025 Nisan arası duyurular yalnız meb.ai kısa bağlantısı içeriyor (meb.ai bu oturumdan erişilemedi), 2025-26 örnek soruları ise yalnız MEBİ platformunda (mebi.eba.gov.tr, erişilemedi).",
+    "2020-2021 döneminde örnek sorular Aralık 2020'de başladı (Ekim/Kasım yayını yok). 2023-24 ve 2024-25'te yılda 3 kitapçık (Kasım, Şubat, Nisan) yayımlandı. 2025-26'da ODSGM sitesinde 2 MEBİ duyurusu var (30.11.2025 birinci kitapçık, 06.03.2026 Mart ayı); arada başka kitapçık yayımlanıp yayımlanmadığı ODSGM duyurularından teyit edilemedi.",
+    "2026-2027 dönemi için (15.11.2026 itibarıyla) ODSGM sitesinde LGS örnek soru duyurusu bulunamadı (icerik 1..1775 tarandı).",
+    "2020 salgın dönemi \"çalışma soruları\" (il ÖDM'lerince hazırlanan; ODSGM icerik/529, 540, 545, 547) örnek soru listesine alınmadı; odsgm.meb.gov.tr/destekmateryal/... altındaki dosyalar HTTP 403 veriyor, cdn.eba.gov.tr/icerik/2020/05-06/ altındakiler erişilebilir.",
+    "Tüm örnek soru duyurularının dizini: https://odsgm.meb.gov.tr/www/ornek-sorular/icerik/1011/tr",
+    "2027 Başvuru ve Uygulama Kılavuzu henüz yayımlanmadı (2026 kılavuzu 23.03.2026'da çıkmıştı); süre/soru sayısı/puanlama bilgileri 2026 kılavuzuna dayanıyor. 2027 sınav tarihi (13 Haziran 2027 Pazar) hem ODSGM haberi hem 2027 Yılı Sınav Uygulama Takvimi PDF'i ile doğrulandı.",
+    "2026 kılavuzu sınav gününü \"13 Haziran 2026 Cumartesi\" olarak veriyor (kitapçık kapakları da 13 HAZİRAN 2026); ODSGM'nin 30.11.2025 tarihli örnek soru haberindeki \"14 Haziran 2026\" ifadesi bununla çelişiyor.",
+    "Raporlar: 2018 (Haziran 2018 merkezî sınav sayısal veriler), 2023 ve 2024 merkezî sınav raporlarının resmî bağlantısı bulunamadı; 2026 raporu yalnız meb.ai kısa bağlantısıyla verilmiş (çözülemedi). Ders bazında doğru cevap ortalamaları yalnız 2019–2022 raporlarından alınabildi.",
+    "Erişilemeyen alan adları: meb.ai, mebi.eba.gov.tr, yardimcikaynaklar.meb.gov.tr, sonuc.meb.gov.tr, il/ilçe MEB alt alan adları."
+  ]
+}

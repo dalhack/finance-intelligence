@@ -35,6 +35,7 @@ let n = 0; const ok = (c, m) => { n++; if (!c) throw new Error('BAŞARISIZ: ' + 
   await page.click('[data-a=basla]');
   let q = await curQ(); ok((q.ders + '|' + q.unite) === konu, 'seçilen konudan soru geldi: ' + konu);
   ok(await page.locator('#tabs').isHidden(), 'soru ekranında sekmeler gizli');
+  ok((await page.locator('.qtext').boundingBox()).height > 20, 'soru metni görünüyor');
 
   console.log('2) İpucu kademeleri');
   ok(await page.locator('.box.hint').count() === 0, 'başta ipucu kapalı');

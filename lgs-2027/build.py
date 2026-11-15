@@ -42,23 +42,27 @@ for d in DERS:
 ids = [q['id'] for q in qs]
 assert len(ids) == len(set(ids)), 'yinelenen id'
 tk = load('taktikler.json'); src = load('sources.json', {}) or {}
+AY = ['', 'Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran', 'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık']
+def tarih(t):
+    try: y, m, d = t.split('-'); return f"{int(d)} {AY[int(m)]} {y}"
+    except Exception: return t or ''
 def links(y):
     out = []
-    for k, ad in [('sozel', 'Sözel kitapçık'), ('sayisal', 'Sayısal kitapçık')]:
+    for k, ad in [('sozel', 'Sözel kitapçık (PDF)'), ('sayisal', 'Sayısal kitapçık (PDF)')]:
         v = y.get(k)
         if v and v.get('url') and v.get('dogrulandi'): out.append({'ad': ad, 'url': v['url']})
-    for c in y.get('cevap') or []:
-        if c.get('url') and c.get('dogrulandi'): out.append({'ad': c.get('ad') or 'Cevap anahtarı', 'url': c['url']})
     return out
-cik = [{'yil': y['yil'], 'tarih': y.get('tarih', ''), 'baglantilar': links(y)} for y in sorted(src.get('cikmis', []), key=lambda y: -y['yil'])]
+cik = [{'yil': y['yil'], 'tarih': tarih(y.get('tarih', '')), 'baglantilar': links(y)} for y in sorted(src.get('cikmis', []), key=lambda y: -y['yil'])]
 cik = [y for y in cik if y['baglantilar']]
 orn = collections.OrderedDict()
 for o in src.get('ornek', []):
     if o.get('url') and o.get('dogrulandi'):
-        orn.setdefault(o.get('donem', ''), []).append({'ad': o.get('ad') or o.get('ay', ''), 'url': o['url']})
+        b = {'sozel': 'Sözel', 'sayisal': 'Sayısal'}.get(o.get('bolum'), '')
+        orn.setdefault(o.get('donem', ''), []).append({'ad': (o.get('ay', '') + ' ' + b).strip() or o.get('ad', ''), 'url': o['url']})
 content = {'sinav': tk['sinav'], 'taktikler': tk['taktikler'], 'kartlar': cards,
            'kaynaklar': {'cikmis': cik, 'ornek': [{'donem': k, 'baglantilar': v} for k, v in sorted(orn.items(), reverse=True)],
-                         'not': 'Bağlantılar 15 Kasım 2026 tarihinde tek tek denetlendi. MEB dosya adreslerini değiştirirse açılmayabilir.'}}
+                         'dizin': 'https://odsgm.meb.gov.tr/www/ornek-sorular/icerik/1011/tr',
+                         'not': 'Cevap anahtarı her kitapçığın son sayfasındadır. Bağlantılar 15 Kasım 2026 tarihinde tek tek denetlendi; MEB dosya adreslerini değiştirirse açılmayabilir. 2021 Kasım sonrası örnek sorular MEB tarafından yalnızca kısa bağlantılarla ve MEBİ platformunda yayımlandığı için burada doğrudan PDF olarak yer almıyor; hepsine yukarıdaki MEB örnek sorular dizininden ulaşılabilir.'}}
 az = load('analiz_ozet.json')
 if az:
     content['analiz'] = {'yillar': az['yillar'], 'n': az['soruSayisi'], 'dersler': [{'ders': d, 'ad': az['dersler'][d]['ad'], 'n': az['dersler'][d]['n'],
