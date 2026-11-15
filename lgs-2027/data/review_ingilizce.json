@@ -1,0 +1,62 @@
+{
+ "incelenen": 45,
+ "korCozumUyusma": 45,
+ "bulgular": [
+  {
+   "id": "ing-041",
+   "tur": "belirsiz",
+   "ciddiyet": "kucuk",
+   "aciklama": "Kural 3 'without permission' diyor; B şıkkında Seda'nın izin alıp almadığı yazmıyor, bu yüzden B'nin kuralı çiğnediği metinden kesin çıkmıyor. Anahtar (C) doğru ve tek kesin cevap; yalnız çeldirici netleştirilmeli.",
+   "duzeltme": {
+    "siklar": [
+     "Hakan is eating a sandwich while he is waiting for the results.",
+     "Seda is smelling the liquid in the test tube without asking her teacher.",
+     "Umut is washing his hands after he finishes his experiment.",
+     "Gizem isn’t wearing her gloves because it is hot in the lab."
+    ]
+   }
+  },
+  {
+   "id": "ing-007",
+   "tur": "ipucu-cevabi-veriyor",
+   "ciddiyet": "kucuk",
+   "aciklama": "ipucu1 doğru şıktaki ifadeyi ('Half of the class') adıyla anıyor; öğrenciyi doğrudan D şıkkına götürüyor.",
+   "duzeltme": {
+    "ipucu1": "Her sütunun sayısını oku. Şıklardaki karşılaştırmaları göz kararı değil, sayılarla kontrol et."
+   }
+  },
+  {
+   "id": "ing-044",
+   "tur": "ipucu-cevabi-veriyor",
+   "ciddiyet": "kucuk",
+   "aciklama": "ipucu1 'Sayı soran şıkka dikkat et' diyor; sayı soran tek şık doğru cevap (B), yani ipucu şıkkı işaret ediyor.",
+   "duzeltme": {
+    "ipucu1": "Her sorunun cevabını haberde tek tek ara; bulduğun bilginin tam olarak soruyu karşılayıp karşılamadığına bak."
+   }
+  },
+  {
+   "id": "ing-028",
+   "tur": "ipucu-cevabi-veriyor",
+   "ciddiyet": "kucuk",
+   "aciklama": "ipucu1 '“Yes, I have.” hangi yardımcı fiille sorulmuş sorunun cevabıdır?' diyor; 'Have' ile başlayan tek şık doğru cevap olduğundan ilk ipucu cevabı fiilen veriyor (ipucu2 düzeyinde bir yönlendirme).",
+   "duzeltme": {
+    "ipucu1": "Rehberin cevabının ilk iki kelimesine bak: sorunun türü (Evet/Hayır sorusu mu, bilgi sorusu mu) hakkında ne söylüyor?"
+   }
+  },
+  {
+   "id": "ing-017",
+   "tur": "ipucu-cevabi-veriyor",
+   "ciddiyet": "kucuk",
+   "aciklama": "ipucu1 doğrudan Bay Tekin'in son cümlesine ve 'beklemek mi / sonra aramak mı' ikilemine yönlendiriyor; bu, doğru şıkkın (C) içeriğinin kendisi.",
+   "duzeltme": {
+    "ipucu1": "Her şıkkı diyalogdaki bir cümleyle eşleştir; telefon deyimlerinin (hold, put through, call back) anlamlarını düşün."
+   }
+  }
+ ],
+ "notlar": [
+  "Kör çözümde 45/45 anahtar ile uyuştu; anahtar-yanlis, birden-fazla-dogru, olgu-hatasi, dil-hatasi veya aciklama-hatasi bulunmadı.",
+  "ing-039: Aziz Sancar yaşayan gerçek bir kişi (SPEC 'gerçek kişileri kullanma' diyor); bilgiler doğru (Savur/Mardin 1946, İstanbul Üniv. tıp, 2015 Nobel Kimya, DNA onarımı) ve MEB 8. sınıf Science ünitesiyle uyumlu, bu yüzden bulgu sayılmadı.",
+  "ing-038: tablo yılları doğru (1876, 1879, 1928, 1989). Grafik SVG'lerinde (007, 020, 043) sütun yükseklikleri değerlerle ölçekli.",
+  "ing-026: şıkta 'Derin and her sister' deniyor; metin Derin'in cinsiyetini belirtmiyor (önemsiz)."
+ ]
+}
