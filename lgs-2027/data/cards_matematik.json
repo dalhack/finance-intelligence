@@ -1,0 +1,794 @@
+[
+ {
+  "id": "mat-k-001",
+  "ders": "matematik",
+  "unite": "Çarpanlar ve Katlar",
+  "kazanimKod": "M.8.1.1.1",
+  "on": "Asal çarpanlara ayırma nedir?",
+  "arka": "Bir sayıyı asal sayıların kuvvetlerinin çarpımı olarak yazmaktır. Örn: 72 = 2³ · 3²",
+  "test": {
+   "soru": "90 sayısının asal çarpanlarına ayrılmış hâli hangisidir?",
+   "siklar": [
+    "2 · 3² · 5",
+    "2 · 5 · 9",
+    "2² · 3 · 5",
+    "3 · 5 · 6"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "mat-k-002",
+  "ders": "matematik",
+  "unite": "Çarpanlar ve Katlar",
+  "kazanimKod": "M.8.1.1.2",
+  "on": "EBOB nedir, ne zaman kullanılır?",
+  "arka": "Ortak bölenlerin en büyüğüdür; eş ve en büyük parçalara ayırma sorularında kullanılır. Örn: EBOB(12, 18) = 6",
+  "test": {
+   "soru": "EBOB(24, 36) kaçtır?",
+   "siklar": [
+    "6",
+    "4",
+    "72",
+    "12"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "mat-k-003",
+  "ders": "matematik",
+  "unite": "Çarpanlar ve Katlar",
+  "kazanimKod": "M.8.1.1.2",
+  "on": "EKOK nedir, ne zaman kullanılır?",
+  "arka": "Ortak katların en küçüğüdür; \"yeniden aynı anda\", \"birlikte tekrar\" sorularında kullanılır. Örn: EKOK(4, 6) = 12",
+  "test": {
+   "soru": "EKOK(6, 8) kaçtır?",
+   "siklar": [
+    "48",
+    "2",
+    "24",
+    "14"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "mat-k-004",
+  "ders": "matematik",
+  "unite": "Çarpanlar ve Katlar",
+  "kazanimKod": "M.8.1.1.3",
+  "on": "Aralarında asal ne demek?",
+  "arka": "1'den başka ortak böleni olmayan sayılardır; sayıların kendilerinin asal olması gerekmez. Örn: 8 ve 9",
+  "test": {
+   "soru": "Hangi sayı çifti aralarında asaldır?",
+   "siklar": [
+    "6 ve 9",
+    "8 ve 15",
+    "10 ve 25",
+    "14 ve 21"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "mat-k-005",
+  "ders": "matematik",
+  "unite": "Üslü İfadeler",
+  "kazanimKod": "M.8.1.2.1",
+  "on": "Negatif üs ne demek?",
+  "arka": "a⁻ⁿ = 1/aⁿ (a ≠ 0). Örn: 5⁻² = 1/25",
+  "test": {
+   "soru": "2⁻³ kaçtır?",
+   "siklar": [
+    "−8",
+    "−6",
+    "1/6",
+    "1/8"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "mat-k-006",
+  "ders": "matematik",
+  "unite": "Üslü İfadeler",
+  "kazanimKod": "M.8.1.2.2",
+  "on": "Aynı tabanda çarpma ve bölme",
+  "arka": "aⁿ · aᵐ = aⁿ⁺ᵐ ve aⁿ ÷ aᵐ = aⁿ⁻ᵐ. Örn: 3⁵ · 3² = 3⁷",
+  "test": {
+   "soru": "5⁶ ÷ 5² işleminin sonucu hangisidir?",
+   "siklar": [
+    "5³",
+    "5⁴",
+    "5⁸",
+    "5¹²"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "mat-k-007",
+  "ders": "matematik",
+  "unite": "Üslü İfadeler",
+  "kazanimKod": "M.8.1.2.2",
+  "on": "Üssün üssü nasıl alınır?",
+  "arka": "(aⁿ)ᵐ = aⁿ·ᵐ; üsler çarpılır. Örn: (3²)⁵ = 3¹⁰",
+  "test": {
+   "soru": "(2³)⁴ hangisine eşittir?",
+   "siklar": [
+    "2¹²",
+    "2⁷",
+    "6⁴",
+    "2⁸¹"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "mat-k-008",
+  "ders": "matematik",
+  "unite": "Üslü İfadeler",
+  "kazanimKod": "M.8.1.2.5",
+  "on": "Bilimsel gösterim nedir?",
+  "arka": "1 ≤ a &lt; 10 ve n tam sayı olmak üzere a · 10ⁿ biçimidir. Örn: 52 000 = 5,2 · 10⁴",
+  "test": {
+   "soru": "0,00036 sayısının bilimsel gösterimi hangisidir?",
+   "siklar": [
+    "36 · 10⁻⁵",
+    "0,36 · 10⁻³",
+    "3,6 · 10⁻⁴",
+    "3,6 · 10⁴"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "mat-k-009",
+  "ders": "matematik",
+  "unite": "Kareköklü İfadeler",
+  "kazanimKod": "M.8.1.3.1",
+  "on": "Tam kare sayı ve karekök",
+  "arka": "Bir doğal sayının karesi olan sayıya tam kare denir; karekökü o doğal sayıdır. Örn: √81 = 9",
+  "test": {
+   "soru": "√144 kaçtır?",
+   "siklar": [
+    "11",
+    "12",
+    "14",
+    "72"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "mat-k-010",
+  "ders": "matematik",
+  "unite": "Kareköklü İfadeler",
+  "kazanimKod": "M.8.1.3.3",
+  "on": "√ içinden sayı nasıl çıkarılır?",
+  "arka": "Kök içindeki tam kare çarpan dışarı çıkar: √(a² · b) = a√b. Örn: √12 = 2√3",
+  "test": {
+   "soru": "√50 hangisine eşittir?",
+   "siklar": [
+    "5√2",
+    "2√5",
+    "25√2",
+    "10√5"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "mat-k-011",
+  "ders": "matematik",
+  "unite": "Kareköklü İfadeler",
+  "kazanimKod": "M.8.1.3.5",
+  "on": "Köklü sayılar nasıl toplanır?",
+  "arka": "Yalnız kök içleri aynı olanların katsayıları toplanır; kök içleri toplanmaz. Örn: 2√3 + 5√3 = 7√3",
+  "test": {
+   "soru": "√8 + √18 kaçtır?",
+   "siklar": [
+    "√26",
+    "13",
+    "6√2",
+    "5√2"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "mat-k-012",
+  "ders": "matematik",
+  "unite": "Kareköklü İfadeler",
+  "kazanimKod": "M.8.1.3.4",
+  "on": "Köklü sayılar nasıl çarpılır?",
+  "arka": "√a · √b = √(a · b). Örn: √2 · √8 = √16 = 4",
+  "test": {
+   "soru": "√3 · √12 kaçtır?",
+   "siklar": [
+    "√15",
+    "36",
+    "6",
+    "3√2"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "mat-k-013",
+  "ders": "matematik",
+  "unite": "Kareköklü İfadeler",
+  "kazanimKod": "M.8.1.3.8",
+  "on": "İrrasyonel sayı nedir?",
+  "arka": "İki tam sayının oranı olarak yazılamayan sayıdır. Tam kare olmayan sayıların karekökleri ve π irrasyoneldir.",
+  "test": {
+   "soru": "Hangisi irrasyonel sayıdır?",
+   "siklar": [
+    "√49",
+    "√7",
+    "0,5",
+    "−3"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "mat-k-014",
+  "ders": "matematik",
+  "unite": "Veri Analizi ve Olasılık",
+  "kazanimKod": "M.8.5.1.5",
+  "on": "Olasılık nasıl hesaplanır?",
+  "arka": "Olasılık = istenen durum sayısı ÷ tüm olası durum sayısı. Örn: zarda 6 gelme olasılığı 1/6",
+  "test": {
+   "soru": "Bir zar atıldığında asal sayı gelme olasılığı kaçtır?",
+   "siklar": [
+    "1/3",
+    "1/6",
+    "2/3",
+    "1/2"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "mat-k-015",
+  "ders": "matematik",
+  "unite": "Veri Analizi ve Olasılık",
+  "kazanimKod": "M.8.5.1.4",
+  "on": "Olasılık hangi değerleri alır?",
+  "arka": "0 ile 1 arasındadır: imkânsız olay 0, kesin olay 1. Olma ve olmama olasılıklarının toplamı 1'dir.",
+  "test": {
+   "soru": "Bir olayın olma olasılığı 3/8 ise olmama olasılığı kaçtır?",
+   "siklar": [
+    "5/8",
+    "3/8",
+    "1",
+    "8/3"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "mat-k-016",
+  "ders": "matematik",
+  "unite": "Veri Analizi ve Olasılık",
+  "kazanimKod": "M.8.4.1.2",
+  "on": "Daire grafiğinde merkez açı",
+  "arka": "Bütün 360°'dir. Merkez açı = (grubun sayısı ÷ toplam) · 360°",
+  "test": {
+   "soru": "40 kişilik bir sınıfta 10 kişinin seçtiği dilimin merkez açısı kaç derecedir?",
+   "siklar": [
+    "25°",
+    "45°",
+    "90°",
+    "100°"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "mat-k-017",
+  "ders": "matematik",
+  "unite": "Veri Analizi ve Olasılık",
+  "kazanimKod": "M.8.4.1.2",
+  "on": "Hangi veri için hangi grafik?",
+  "arka": "Zamana göre değişim → çizgi grafiği; miktarları karşılaştırma → sütun grafiği; bütün içindeki pay → daire grafiği.",
+  "test": {
+   "soru": "Bir fidanın boyunun 6 ay boyunca nasıl değiştiğini göstermek için en uygun gösterim hangisidir?",
+   "siklar": [
+    "Daire grafiği",
+    "Çizgi grafiği",
+    "Şekil grafiği",
+    "Sıklık tablosu"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "mat-k-018",
+  "ders": "matematik",
+  "unite": "Cebirsel İfadeler ve Özdeşlikler",
+  "kazanimKod": "M.8.2.1.3",
+  "on": "(a + b)² özdeşliği",
+  "arka": "(a + b)² = a² + 2ab + b². Ortadaki 2ab terimini unutma!",
+  "test": {
+   "soru": "(x + 3)² ifadesinin açılımı hangisidir?",
+   "siklar": [
+    "x² + 9",
+    "x² + 3x + 9",
+    "x² + 6x + 9",
+    "x² + 6x + 6"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "mat-k-019",
+  "ders": "matematik",
+  "unite": "Cebirsel İfadeler ve Özdeşlikler",
+  "kazanimKod": "M.8.2.1.3",
+  "on": "(a − b)² özdeşliği",
+  "arka": "(a − b)² = a² − 2ab + b². Son terim her zaman pozitiftir.",
+  "test": {
+   "soru": "(2x − 1)² ifadesinin açılımı hangisidir?",
+   "siklar": [
+    "4x² − 4x + 1",
+    "4x² − 1",
+    "2x² − 4x + 1",
+    "4x² − 2x + 1"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "mat-k-020",
+  "ders": "matematik",
+  "unite": "Cebirsel İfadeler ve Özdeşlikler",
+  "kazanimKod": "M.8.2.1.4",
+  "on": "İki kare farkı",
+  "arka": "a² − b² = (a − b)(a + b). Örn: x² − 16 = (x − 4)(x + 4)",
+  "test": {
+   "soru": "x² − 25 ifadesinin çarpanlara ayrılmış hâli hangisidir?",
+   "siklar": [
+    "(x − 5)²",
+    "(x − 5)(x + 5)",
+    "(x − 25)(x + 1)",
+    "x(x − 25)"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "mat-k-021",
+  "ders": "matematik",
+  "unite": "Cebirsel İfadeler ve Özdeşlikler",
+  "kazanimKod": "M.8.2.1.2",
+  "on": "Cebirsel ifadeler nasıl çarpılır?",
+  "arka": "Her terim diğer parantezdeki her terimle çarpılır; katsayılar çarpılır, üsler toplanır. Örn: 2x · 3x = 6x²",
+  "test": {
+   "soru": "3x · (2x − 4) çarpımı hangisidir?",
+   "siklar": [
+    "6x − 12",
+    "6x² − 4",
+    "5x² − 12x",
+    "6x² − 12x"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "mat-k-022",
+  "ders": "matematik",
+  "unite": "Cebirsel İfadeler ve Özdeşlikler",
+  "kazanimKod": "M.8.2.1.4",
+  "on": "Ortak çarpan parantezine alma",
+  "arka": "Her terimde bulunan ortak çarpan parantezin dışına yazılır. Örn: 6x² + 9x = 3x(2x + 3)",
+  "test": {
+   "soru": "4x² − 8x ifadesinin çarpanlara ayrılmış hâli hangisidir?",
+   "siklar": [
+    "4(x² − 8x)",
+    "x(4x − 2)",
+    "4x(x − 2)",
+    "4x(x − 8)"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "mat-k-023",
+  "ders": "matematik",
+  "unite": "Doğrusal Denklemler",
+  "kazanimKod": "M.8.2.2.6",
+  "on": "Eğim nedir?",
+  "arka": "Eğim = dikey değişim ÷ yatay değişim. y = mx + n doğrusunun eğimi m'dir.",
+  "test": {
+   "soru": "y = 3x − 2 doğrusunun eğimi kaçtır?",
+   "siklar": [
+    "−2",
+    "2",
+    "1/3",
+    "3"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "mat-k-024",
+  "ders": "matematik",
+  "unite": "Doğrusal Denklemler",
+  "kazanimKod": "M.8.2.2.4",
+  "on": "Doğru eksenleri nerede keser?",
+  "arka": "x eksenini kestiği noktada y = 0, y eksenini kestiği noktada x = 0 yazılır.",
+  "test": {
+   "soru": "y = 2x − 6 doğrusu x eksenini hangi noktada keser?",
+   "siklar": [
+    "(3, 0)",
+    "(0, −6)",
+    "(−3, 0)",
+    "(0, 3)"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "mat-k-025",
+  "ders": "matematik",
+  "unite": "Doğrusal Denklemler",
+  "kazanimKod": "M.8.2.2.1",
+  "on": "Denklem nasıl çözülür?",
+  "arka": "Bilinmeyenler bir tarafta, sayılar diğer tarafta toplanır; karşıya geçen terimin işareti değişir.",
+  "test": {
+   "soru": "3x − 5 = x + 7 denkleminde x kaçtır?",
+   "siklar": [
+    "1",
+    "3",
+    "6",
+    "12"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "mat-k-026",
+  "ders": "matematik",
+  "unite": "Doğrusal Denklemler",
+  "kazanimKod": "M.8.2.2.2",
+  "on": "Koordinat sisteminde bölgeler",
+  "arka": "(x, y): önce yatay, sonra dikey. I. bölge (+, +), II. bölge (−, +), III. bölge (−, −), IV. bölge (+, −).",
+  "test": {
+   "soru": "A(−3, 4) noktası hangi bölgededir?",
+   "siklar": [
+    "I. bölge",
+    "II. bölge",
+    "III. bölge",
+    "IV. bölge"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "mat-k-027",
+  "ders": "matematik",
+  "unite": "Eşitsizlikler",
+  "kazanimKod": "M.8.2.3.3",
+  "on": "Eşitsizlik ne zaman yön değiştirir?",
+  "arka": "İki taraf negatif bir sayıyla çarpılır ya da bölünürse yön değişir. Örn: −x &lt; 2 → x &gt; −2",
+  "test": {
+   "soru": "−2x &gt; 6 eşitsizliğinin çözümü hangisidir?",
+   "siklar": [
+    "x &gt; −3",
+    "x &lt; −3",
+    "x &gt; 3",
+    "x &lt; 3"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "mat-k-028",
+  "ders": "matematik",
+  "unite": "Eşitsizlikler",
+  "kazanimKod": "M.8.2.3.1",
+  "on": "\"En az\" ve \"en fazla\" hangi işaret?",
+  "arka": "En az a → x ≥ a. En fazla a → x ≤ a. İkisinde de a dâhildir.",
+  "test": {
+   "soru": "\"Bir asansöre en fazla 8 kişi binebilir.\" Kişi sayısı x ise hangisi doğrudur?",
+   "siklar": [
+    "x &lt; 8",
+    "x ≥ 8",
+    "x &gt; 8",
+    "x ≤ 8"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "mat-k-029",
+  "ders": "matematik",
+  "unite": "Eşitsizlikler",
+  "kazanimKod": "M.8.2.3.2",
+  "on": "Sayı doğrusunda içi dolu / içi boş daire",
+  "arka": "≤ ve ≥ için içi dolu daire (sayı dâhil), &lt; ve &gt; için içi boş daire (sayı dâhil değil) kullanılır.",
+  "test": {
+   "soru": "x ≥ −1 eşitsizliği sayı doğrusunda nasıl gösterilir?",
+   "siklar": [
+    "−1'de içi boş daire, sağa doğru",
+    "−1'de içi dolu daire, sola doğru",
+    "−1'de içi dolu daire, sağa doğru",
+    "−1'de içi boş daire, sola doğru"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "mat-k-030",
+  "ders": "matematik",
+  "unite": "Üçgenler",
+  "kazanimKod": "M.8.3.1.5",
+  "on": "Pisagor bağıntısı",
+  "arka": "Dik üçgende a² + b² = c² (c hipotenüs). Örn: 3-4-5, 5-12-13, 8-15-17",
+  "test": {
+   "soru": "Dik kenarları 6 cm ve 8 cm olan dik üçgenin hipotenüsü kaç cm'dir?",
+   "siklar": [
+    "10",
+    "14",
+    "48",
+    "7"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "mat-k-031",
+  "ders": "matematik",
+  "unite": "Üçgenler",
+  "kazanimKod": "M.8.3.1.2",
+  "on": "Üçgen eşitsizliği",
+  "arka": "Bir kenar, diğer iki kenarın farkından büyük, toplamından küçüktür: |a − b| &lt; c &lt; a + b",
+  "test": {
+   "soru": "İki kenarı 4 cm ve 9 cm olan bir üçgenin üçüncü kenarı hangisi olabilir?",
+   "siklar": [
+    "4 cm",
+    "5 cm",
+    "13 cm",
+    "8 cm"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "mat-k-032",
+  "ders": "matematik",
+  "unite": "Üçgenler",
+  "kazanimKod": "M.8.3.1.3",
+  "on": "Açı – kenar ilişkisi",
+  "arka": "Büyük açının karşısında uzun kenar, küçük açının karşısında kısa kenar bulunur.",
+  "test": {
+   "soru": "ABC üçgeninde A = 80°, B = 60°, C = 40° ise en uzun kenar hangisidir?",
+   "siklar": [
+    "AB",
+    "AC",
+    "BC",
+    "Üçü de eşittir"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "mat-k-033",
+  "ders": "matematik",
+  "unite": "Üçgenler",
+  "kazanimKod": "M.8.3.1.1",
+  "on": "Kenarortay, açıortay, yükseklik",
+  "arka": "Kenarortay köşeyi karşı kenarın orta noktasına birleştirir; açıortay açıyı iki eş açıya böler; yükseklik köşeden karşı kenara inen dikmedir.",
+  "test": {
+   "soru": "Bir köşeyi karşı kenarın orta noktasına birleştiren doğru parçası hangisidir?",
+   "siklar": [
+    "Yükseklik",
+    "Kenarortay",
+    "Açıortay",
+    "Hipotenüs"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "mat-k-034",
+  "ders": "matematik",
+  "unite": "Eşlik ve Benzerlik",
+  "kazanimKod": "M.8.3.3.1",
+  "on": "Eş ve benzer şekillerin farkı",
+  "arka": "Eş şekillerde kenarlar ve açılar eşittir. Benzer şekillerde açılar eşit, kenarlar orantılıdır.",
+  "test": {
+   "soru": "Benzer iki üçgen için hangisi her zaman doğrudur?",
+   "siklar": [
+    "Kenar uzunlukları eşittir",
+    "Alanları eşittir",
+    "Karşılıklı açıları eşittir",
+    "Çevreleri eşittir"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "mat-k-035",
+  "ders": "matematik",
+  "unite": "Eşlik ve Benzerlik",
+  "kazanimKod": "M.8.3.3.2",
+  "on": "Benzerlik oranı",
+  "arka": "Karşılıklı kenarların oranıdır ve her kenar çifti için aynıdır. Örn: kenarlar 2 ve 6 ise oran 1/3",
+  "test": {
+   "soru": "Kenarları 3, 4, 5 cm olan üçgene benzer bir üçgenin en kısa kenarı 9 cm ise en uzun kenarı kaç cm'dir?",
+   "siklar": [
+    "15",
+    "12",
+    "11",
+    "20"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "mat-k-036",
+  "ders": "matematik",
+  "unite": "Eşlik ve Benzerlik",
+  "kazanimKod": "M.8.3.3.1",
+  "on": "Her eş şekil benzer midir?",
+  "arka": "Evet; eş şekiller benzerlik oranı 1 olan benzer şekillerdir. Ama her benzer şekil eş değildir.",
+  "test": {
+   "soru": "Benzerlik oranı 1 olan iki üçgen için hangisi söylenir?",
+   "siklar": [
+    "Benzer değildirler",
+    "Eştirler",
+    "Alanları farklıdır",
+    "Açıları farklıdır"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "mat-k-037",
+  "ders": "matematik",
+  "unite": "Dönüşüm Geometrisi",
+  "kazanimKod": "M.8.3.2.1",
+  "on": "Ötelemede koordinatlar nasıl değişir?",
+  "arka": "Sağa +x, sola −x, yukarı +y, aşağı −y. Örn: (1, 2) noktası 3 sağa → (4, 2)",
+  "test": {
+   "soru": "A(2, −1) noktası 3 birim sola ve 4 birim yukarı ötelenirse hangi nokta elde edilir?",
+   "siklar": [
+    "(5, 3)",
+    "(−1, −5)",
+    "(5, −5)",
+    "(−1, 3)"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "mat-k-038",
+  "ders": "matematik",
+  "unite": "Dönüşüm Geometrisi",
+  "kazanimKod": "M.8.3.2.2",
+  "on": "Eksenlere göre yansıma",
+  "arka": "x eksenine göre: (a, b) → (a, −b). y eksenine göre: (a, b) → (−a, b).",
+  "test": {
+   "soru": "A(4, −3) noktasının x eksenine göre yansıması hangisidir?",
+   "siklar": [
+    "(−4, −3)",
+    "(4, 3)",
+    "(−4, 3)",
+    "(−3, 4)"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "mat-k-039",
+  "ders": "matematik",
+  "unite": "Dönüşüm Geometrisi",
+  "kazanimKod": "M.8.3.2.3",
+  "on": "Öteleme ile yansımanın farkı",
+  "arka": "İkisinde de şekil ile görüntüsü eştir. Ötelemede şeklin yönü korunur; yansımada ayna görüntüsü oluşur (yön ters döner).",
+  "test": {
+   "soru": "Hangi dönüşümde şeklin sağı ile solu yer değiştirir (ayna görüntüsü oluşur)?",
+   "siklar": [
+    "Yansıma",
+    "Öteleme",
+    "Her ikisi",
+    "Hiçbiri"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "mat-k-040",
+  "ders": "matematik",
+  "unite": "Geometrik Cisimler",
+  "kazanimKod": "M.8.3.4.4",
+  "on": "Silindirin hacmi",
+  "arka": "V = π · r² · h (taban alanı × yükseklik).",
+  "test": {
+   "soru": "Taban yarıçapı 2 cm, yüksekliği 5 cm olan silindirin hacmi kaç cm³'tür? (π = 3)",
+   "siklar": [
+    "30",
+    "20",
+    "60",
+    "120"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "mat-k-041",
+  "ders": "matematik",
+  "unite": "Geometrik Cisimler",
+  "kazanimKod": "M.8.3.4.3",
+  "on": "Silindirin yüzey alanı",
+  "arka": "Yan yüz: 2πrh. Tüm yüzey: 2πr² + 2πrh (iki taban + yan yüz).",
+  "test": {
+   "soru": "Taban yarıçapı 3 cm, yüksekliği 4 cm olan silindirin yan yüzey alanı kaç cm²'dir? (π = 3)",
+   "siklar": [
+    "36",
+    "108",
+    "126",
+    "72"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "mat-k-042",
+  "ders": "matematik",
+  "unite": "Geometrik Cisimler",
+  "kazanimKod": "M.8.3.4.2",
+  "on": "Silindirin açınımı",
+  "arka": "İki daire (tabanlar) ve bir dikdörtgen (yan yüz). Dikdörtgenin bir kenarı yükseklik, diğeri taban çevresidir (2πr).",
+  "test": {
+   "soru": "Taban yarıçapı 5 cm olan silindirin açınımındaki dikdörtgenin taban çevresine eşit kenarı kaç cm'dir? (π = 3)",
+   "siklar": [
+    "30",
+    "15",
+    "75",
+    "10"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "mat-k-043",
+  "ders": "matematik",
+  "unite": "Geometrik Cisimler",
+  "kazanimKod": "M.8.3.4.5",
+  "on": "Piramidin elemanları",
+  "arka": "Tabanı n kenarlı piramitte n + 1 yüz, n + 1 köşe ve 2n ayrıt vardır. Yan yüzleri üçgendir.",
+  "test": {
+   "soru": "Kare dik piramidin kaç yüzü vardır?",
+   "siklar": [
+    "4",
+    "5",
+    "6",
+    "8"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "mat-k-044",
+  "ders": "matematik",
+  "unite": "Geometrik Cisimler",
+  "kazanimKod": "M.8.3.4.6",
+  "on": "Dik koninin açınımı",
+  "arka": "Bir daire (taban) ve bir daire dilimi (yan yüz). Tepe noktasını taban çemberine birleştiren doğru parçası ana doğrudur.",
+  "test": {
+   "soru": "Dik koninin açınımında yan yüz hangi şekildir?",
+   "siklar": [
+    "Dikdörtgen",
+    "Üçgen",
+    "Daire dilimi",
+    "Daire"
+   ],
+   "dogru": 2
+  }
+ }
+]
