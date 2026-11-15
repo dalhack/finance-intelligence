@@ -1,0 +1,776 @@
+[
+ {
+  "id": "ing-k-001",
+  "ders": "ingilizce",
+  "unite": "Friendship",
+  "kazanimKod": "E8.1.SI1",
+  "on": "Would you like to…?",
+  "arka": "Davet/teklif kalıbı: “… ister misin?” Örn: Would you like to come over tomorrow?",
+  "test": {
+   "soru": "“Would you like to join us?” cümlesinin işlevi nedir?",
+   "siklar": [
+    "Özür dileme",
+    "Davet etme",
+    "Reddetme",
+    "Sebep bildirme"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "ing-k-002",
+  "ders": "ingilizce",
+  "unite": "Friendship",
+  "kazanimKod": "E8.1.SI1",
+  "on": "Sure, that sounds fun! / Yeah, why not?",
+  "arka": "Daveti KABUL etme kalıpları. “Why not?” = “Neden olmasın?” (olumlu cevap).",
+  "test": {
+   "soru": "Hangisi bir daveti kabul eder?",
+   "siklar": [
+    "I’m sorry, but I can’t.",
+    "I’m afraid I’m busy.",
+    "Yeah, why not?",
+    "Maybe another time."
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "ing-k-003",
+  "ders": "ingilizce",
+  "unite": "Friendship",
+  "kazanimKod": "E8.1.SI1",
+  "on": "I’m sorry, but I can’t. / I’d love to, but…",
+  "arka": "Daveti kibarca REDDETME; ardından mazeret gelir. Örn: I’d love to, but I have to study.",
+  "test": {
+   "soru": "“I’d love to, but I have a match.” diyen kişi ne yapıyor?",
+   "siklar": [
+    "Daveti reddediyor",
+    "Daveti kabul ediyor",
+    "Davet ediyor",
+    "Teşekkür ediyor"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "ing-k-004",
+  "ders": "ingilizce",
+  "unite": "Friendship",
+  "kazanimKod": "E8.1.R1",
+  "on": "count on (somebody)",
+  "arka": "Birine güvenmek, bel bağlamak. Örn: You can always count on a true friend.",
+  "test": {
+   "soru": "“I can count on her.” cümlesinde “count on” ne demek?",
+   "siklar": [
+    "saymak",
+    "kavga etmek",
+    "güvenmek",
+    "davet etmek"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "ing-k-005",
+  "ders": "ingilizce",
+  "unite": "Friendship",
+  "kazanimKod": "E8.1.R1",
+  "on": "get on well with",
+  "arka": "Biriyle iyi geçinmek. Örn: I get on well with my classmates.",
+  "test": {
+   "soru": "I _____ my cousin. We never argue.",
+   "siklar": [
+    "back up",
+    "get on well with",
+    "refuse",
+    "apologize to"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "ing-k-006",
+  "ders": "ingilizce",
+  "unite": "Teen Life",
+  "kazanimKod": "E8.2.SP1",
+  "on": "prefer A to B",
+  "arka": "A’yı B’ye tercih etmek (than değil, TO). Örn: I prefer rap to pop.",
+  "test": {
+   "soru": "I prefer reading books _____ watching TV.",
+   "siklar": [
+    "than",
+    "to",
+    "from",
+    "of"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "ing-k-007",
+  "ders": "ingilizce",
+  "unite": "Teen Life",
+  "kazanimKod": "E8.2.SP1",
+  "on": "would rather + fiil (yalın)",
+  "arka": "Tercih bildirir; iki seçenek varsa “than” kullanılır. Örn: I’d rather stay at home than go out.",
+  "test": {
+   "soru": "I’d rather _____ a film than play football.",
+   "siklar": [
+    "watching",
+    "to watch",
+    "watched",
+    "watch"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "ing-k-008",
+  "ders": "ingilizce",
+  "unite": "Teen Life",
+  "kazanimKod": "E8.2.SP1",
+  "on": "be keen on / be fond of / be into",
+  "arka": "Bir şeyi çok sevmek, düşkün olmak. Örn: She is into hip-hop.",
+  "test": {
+   "soru": "“He is keen on skateboarding.” cümlesinin anlamı nedir?",
+   "siklar": [
+    "Kaykay yapmayı çok sever.",
+    "Kaykaydan nefret eder.",
+    "Kaykay yapamaz.",
+    "Kaykay yapmak zorundadır."
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "ing-k-009",
+  "ders": "ingilizce",
+  "unite": "Teen Life",
+  "kazanimKod": "E8.2.SP1",
+  "on": "can’t stand / unbearable",
+  "arka": "can’t stand: katlanamamak. unbearable: dayanılmaz. Örn: I can’t stand heavy metal; it’s unbearable.",
+  "test": {
+   "soru": "“I can’t stand crowded places.” diyen kişi kalabalık yerleri …",
+   "siklar": [
+    "çok sever",
+    "tercih eder",
+    "hiç sevmez",
+    "merak eder"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "ing-k-010",
+  "ders": "ingilizce",
+  "unite": "In the Kitchen",
+  "kazanimKod": "E8.3.W1",
+  "on": "First – Then – After that – Finally",
+  "arka": "İşlem basamaklarını sıralayan sözcükler: ilk olarak – sonra – ondan sonra – son olarak.",
+  "test": {
+   "soru": "Bir tarifte SON adımı hangi sözcük başlatır?",
+   "siklar": [
+    "First",
+    "Then",
+    "Finally",
+    "Next"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "ing-k-011",
+  "ders": "ingilizce",
+  "unite": "In the Kitchen",
+  "kazanimKod": "E8.3.R1",
+  "on": "peel – chop – slice",
+  "arka": "peel: soymak, chop: doğramak, slice: dilimlemek. Örn: Peel the onion and chop it.",
+  "test": {
+   "soru": "“Peel the potatoes.” ne demek?",
+   "siklar": [
+    "Patatesleri haşla.",
+    "Patatesleri soy.",
+    "Patatesleri kızart.",
+    "Patatesleri dilimle."
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "ing-k-012",
+  "ders": "ingilizce",
+  "unite": "In the Kitchen",
+  "kazanimKod": "E8.3.R1",
+  "on": "boil – fry – bake",
+  "arka": "boil: haşlamak/kaynatmak, fry: yağda kızartmak, bake: fırında pişirmek.",
+  "test": {
+   "soru": "We _____ a cake in the oven.",
+   "siklar": [
+    "bake",
+    "boil",
+    "fry",
+    "pour"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "ing-k-013",
+  "ders": "ingilizce",
+  "unite": "In the Kitchen",
+  "kazanimKod": "E8.3.R1",
+  "on": "pour – mix – add",
+  "arka": "pour: dökmek, mix: karıştırmak, add: eklemek. Örn: Pour the milk and mix well.",
+  "test": {
+   "soru": "_____ the milk into the bowl slowly.",
+   "siklar": [
+    "Peel",
+    "Slice",
+    "Chop",
+    "Pour"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "ing-k-014",
+  "ders": "ingilizce",
+  "unite": "On the Phone",
+  "kazanimKod": "E8.4.SI1",
+  "on": "May I speak to …, please?",
+  "arka": "“… ile görüşebilir miyim?” Telefonda arayan kişinin kibar isteği.",
+  "test": {
+   "soru": "Telefonda birini istemek için hangisi söylenir?",
+   "siklar": [
+    "Who’s calling?",
+    "May I speak to Ali, please?",
+    "Hang on, please.",
+    "Can I take a message?"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "ing-k-015",
+  "ders": "ingilizce",
+  "unite": "On the Phone",
+  "kazanimKod": "E8.4.L1",
+  "on": "hang on / hold on",
+  "arka": "(Telefonda) beklemek, hatta kalmak. Örn: Hang on a minute, I’ll get him.",
+  "test": {
+   "soru": "“Hold on, please.” ne demek?",
+   "siklar": [
+    "Lütfen kapatın.",
+    "Lütfen sonra arayın.",
+    "Lütfen hatta bekleyin.",
+    "Lütfen mesaj bırakın."
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "ing-k-016",
+  "ders": "ingilizce",
+  "unite": "On the Phone",
+  "kazanimKod": "E8.4.L1",
+  "on": "put someone through",
+  "arka": "Birini (telefonda) istediği kişiye bağlamak. Örn: I’ll put you through to the manager.",
+  "test": {
+   "soru": "“I’ll put you through.” diyen kişi ne yapacak?",
+   "siklar": [
+    "Sizi bağlayacak",
+    "Telefonu kapatacak",
+    "Mesaj bırakacak",
+    "Sizi geri arayacak"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "ing-k-017",
+  "ders": "ingilizce",
+  "unite": "On the Phone",
+  "kazanimKod": "E8.4.SI1",
+  "on": "leave a message / take a message",
+  "arka": "leave a message: mesaj bırakmak (arayan). take a message: mesaj almak (telefonu açan).",
+  "test": {
+   "soru": "She isn’t here. Would you like to _____ a message?",
+   "siklar": [
+    "take",
+    "put",
+    "hold",
+    "leave"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "ing-k-018",
+  "ders": "ingilizce",
+  "unite": "On the Phone",
+  "kazanimKod": "E8.4.R1",
+  "on": "call back / get back",
+  "arka": "Geri aramak, sonra dönüş yapmak. Örn: I’m busy now; I’ll call you back.",
+  "test": {
+   "soru": "He is in a meeting. Can you _____ later?",
+   "siklar": [
+    "hang up",
+    "call back",
+    "pick up",
+    "put through"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "ing-k-019",
+  "ders": "ingilizce",
+  "unite": "The Internet",
+  "kazanimKod": "E8.5.L2",
+  "on": "sign up / sign in / log off",
+  "arka": "sign up: kaydolmak, sign in (log in): giriş yapmak, log off (sign out): oturumu kapatmak.",
+  "test": {
+   "soru": "Bir siteye İLK KEZ üye olmak için ne yaparsın?",
+   "siklar": [
+    "log off",
+    "sign out",
+    "sign up",
+    "download"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "ing-k-020",
+  "ders": "ingilizce",
+  "unite": "The Internet",
+  "kazanimKod": "E8.5.L2",
+  "on": "download / upload",
+  "arka": "download: indirmek (internetten cihaza). upload: yüklemek (cihazdan internete).",
+  "test": {
+   "soru": "I _____ my holiday photos to my blog so everyone can see them.",
+   "siklar": [
+    "upload",
+    "download",
+    "delete",
+    "search"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "ing-k-021",
+  "ders": "ingilizce",
+  "unite": "The Internet",
+  "kazanimKod": "E8.5.SI1",
+  "on": "How many hours…? / How often…?",
+  "arka": "How many hours: süre sorar (two hours a day). How often: sıklık sorar (every day, twice a week).",
+  "test": {
+   "soru": "“Twice a week.” hangi sorunun cevabıdır?",
+   "siklar": [
+    "How many hours do you spend online?",
+    "What do you do online?",
+    "Where do you go online?",
+    "How often do you go online?"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "ing-k-022",
+  "ders": "ingilizce",
+  "unite": "The Internet",
+  "kazanimKod": "E8.5.R2",
+  "on": "password / account",
+  "arka": "password: şifre, account: hesap. Örn: Never share your password with strangers.",
+  "test": {
+   "soru": "“Don’t share your password.” ne demek?",
+   "siklar": [
+    "Hesabını silme.",
+    "Şifreni paylaşma.",
+    "Fotoğraf yükleme.",
+    "Yorum yapma."
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "ing-k-023",
+  "ders": "ingilizce",
+  "unite": "The Internet",
+  "kazanimKod": "E8.5.SI1",
+  "on": "Internet addict",
+  "arka": "İnternet bağımlısı; internette çok fazla zaman geçiren kişi. Örn: He is online all day; he is an Internet addict.",
+  "test": {
+   "soru": "Günde 10 saat internette olan biri için hangisi söylenir?",
+   "siklar": [
+    "He rarely goes online.",
+    "He is an Internet addict.",
+    "He has no connection.",
+    "He can’t stand the Internet."
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "ing-k-024",
+  "ders": "ingilizce",
+  "unite": "Adventures",
+  "kazanimKod": "E8.6.SP1",
+  "on": "-er than / more … than",
+  "arka": "Karşılaştırma: kısa sıfat + -er (safer than), uzun sıfat more + sıfat (more dangerous than).",
+  "test": {
+   "soru": "Caving is _____ than fishing.",
+   "siklar": [
+    "exciting",
+    "most exciting",
+    "more exciting",
+    "excitinger"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "ing-k-025",
+  "ders": "ingilizce",
+  "unite": "Adventures",
+  "kazanimKod": "E8.6.SI2",
+  "on": "I’d rather … than …",
+  "arka": "“…-mektense …-meyi yeğlerim.” Örn: I’d rather go rafting than go fishing.",
+  "test": {
+   "soru": "“I’d rather swim than ski.” diyen kişi neyi tercih ediyor?",
+   "siklar": [
+    "Yüzmeyi",
+    "Kayak yapmayı",
+    "İkisini de",
+    "Hiçbirini"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "ing-k-026",
+  "ders": "ingilizce",
+  "unite": "Adventures",
+  "kazanimKod": "E8.6.R1",
+  "on": "challenging",
+  "arka": "Zorlu, uğraştırıcı (ama genellikle heyecan verici). Örn: Climbing is a challenging sport.",
+  "test": {
+   "soru": "“Challenging” kelimesine en yakın anlam hangisidir?",
+   "siklar": [
+    "easy",
+    "boring",
+    "safe",
+    "difficult"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "ing-k-027",
+  "ders": "ingilizce",
+  "unite": "Adventures",
+  "kazanimKod": "E8.6.R1",
+  "on": "rafting – kayaking – caving – paragliding",
+  "arka": "rafting: botla akarsu sporu, kayaking: kayakla kürek çekme, caving: mağaracılık, paragliding: yamaç paraşütü.",
+  "test": {
+   "soru": "Hangisi gökyüzünde yapılan bir spordur?",
+   "siklar": [
+    "caving",
+    "paragliding",
+    "rafting",
+    "kayaking"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "ing-k-028",
+  "ders": "ingilizce",
+  "unite": "Tourism",
+  "kazanimKod": "E8.7.SI1",
+  "on": "Have you ever been to…?",
+  "arka": "“Hiç …-e gittin mi?” Deneyim sorar. Cevap: Yes, I have. / No, I haven’t.",
+  "test": {
+   "soru": "“Have you ever been to İzmir?” sorusunun doğru kısa cevabı hangisidir?",
+   "siklar": [
+    "Yes, I did.",
+    "Yes, I am.",
+    "Yes, I have.",
+    "Yes, I do."
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "ing-k-029",
+  "ders": "ingilizce",
+  "unite": "Tourism",
+  "kazanimKod": "E8.7.R1",
+  "on": "all-inclusive / bed and breakfast",
+  "arka": "all-inclusive: her şey dahil. bed and breakfast: oda + kahvaltı.",
+  "test": {
+   "soru": "Yalnızca kahvaltı veren konaklama türü hangisidir?",
+   "siklar": [
+    "bed and breakfast",
+    "all-inclusive",
+    "resort",
+    "full board"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "ing-k-030",
+  "ders": "ingilizce",
+  "unite": "Tourism",
+  "kazanimKod": "E8.7.R1",
+  "on": "rural / urban",
+  "arka": "rural: kırsal (köy, doğa). urban: kentsel (şehir). Örn: I prefer rural areas because they are quiet.",
+  "test": {
+   "soru": "Kalabalık bir şehir merkezi için hangisi kullanılır?",
+   "siklar": [
+    "rural",
+    "ancient",
+    "countryside",
+    "urban"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "ing-k-031",
+  "ders": "ingilizce",
+  "unite": "Tourism",
+  "kazanimKod": "E8.7.R1",
+  "on": "ancient / historic site",
+  "arka": "ancient: antik, çok eski. historic site: tarihî yer. Örn: Ephesus is an ancient city.",
+  "test": {
+   "soru": "Ephesus is an _____ city. It is thousands of years old.",
+   "siklar": [
+    "urban",
+    "ancient",
+    "all-inclusive",
+    "modern"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "ing-k-032",
+  "ders": "ingilizce",
+  "unite": "Chores",
+  "kazanimKod": "E8.8.SP1",
+  "on": "must / have to",
+  "arka": "Zorunluluk: “…-meli / …-mek zorunda”. Örn: I have to make my bed every morning.",
+  "test": {
+   "soru": "Hangisi bir zorunluluk bildirir?",
+   "siklar": [
+    "You don’t have to wash up.",
+    "You can go out.",
+    "You must tidy your room.",
+    "Would you like to help?"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "ing-k-033",
+  "ders": "ingilizce",
+  "unite": "Chores",
+  "kazanimKod": "E8.8.SP1",
+  "on": "mustn’t ≠ don’t have to",
+  "arka": "mustn’t: yasak (yapmamalısın). don’t have to: gerek yok (yapmasan da olur).",
+  "test": {
+   "soru": "“You don’t have to cook tonight.” ne demek?",
+   "siklar": [
+    "Bu akşam yemek yapmana gerek yok.",
+    "Bu akşam yemek yapman yasak.",
+    "Bu akşam yemek yapmalısın.",
+    "Bu akşam yemek yapamazsın."
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "ing-k-034",
+  "ders": "ingilizce",
+  "unite": "Chores",
+  "kazanimKod": "E8.8.SI2",
+  "on": "be responsible for / be in charge of",
+  "arka": "Bir işten sorumlu olmak. Örn: I’m in charge of watering the plants.",
+  "test": {
+   "soru": "Dad is responsible _____ doing the shopping.",
+   "siklar": [
+    "to",
+    "at",
+    "with",
+    "for"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "ing-k-035",
+  "ders": "ingilizce",
+  "unite": "Chores",
+  "kazanimKod": "E8.8.R1",
+  "on": "do the laundry / set the table / take out the rubbish",
+  "arka": "çamaşır yıkamak / sofrayı kurmak / çöpü çıkarmak.",
+  "test": {
+   "soru": "“Set the table” ne demek?",
+   "siklar": [
+    "Masayı silmek",
+    "Sofrayı kurmak",
+    "Bulaşıkları yıkamak",
+    "Yatağı toplamak"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "ing-k-036",
+  "ders": "ingilizce",
+  "unite": "Science",
+  "kazanimKod": "E8.9.SP1",
+  "on": "am / is / are + V-ing",
+  "arka": "Şu anda olan eylemler (Present Continuous). İpuçları: now, at the moment, nowadays, Look!",
+  "test": {
+   "soru": "The scientist _____ a new cure at the moment.",
+   "siklar": [
+    "tests",
+    "tested",
+    "is testing",
+    "test"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "ing-k-037",
+  "ders": "ingilizce",
+  "unite": "Science",
+  "kazanimKod": "E8.9.SI1",
+  "on": "Past Simple (V2)",
+  "arka": "Geçmişte olup bitmiş eylemler. İpuçları: yesterday, ago, last year, in 1879. Örn: Edison invented the light bulb.",
+  "test": {
+   "soru": "Bell _____ the telephone in 1876.",
+   "siklar": [
+    "invented",
+    "invents",
+    "is inventing",
+    "will invent"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "ing-k-038",
+  "ders": "ingilizce",
+  "unite": "Science",
+  "kazanimKod": "E8.9.R2",
+  "on": "invent / discover",
+  "arka": "invent: icat etmek (olmayan bir şeyi yapmak). discover: keşfetmek (var olanı bulmak).",
+  "test": {
+   "soru": "Fleming _____ penicillin in 1928.",
+   "siklar": [
+    "invented",
+    "experimented",
+    "produced",
+    "discovered"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "ing-k-039",
+  "ders": "ingilizce",
+  "unite": "Science",
+  "kazanimKod": "E8.9.R1",
+  "on": "do an experiment",
+  "arka": "Deney yapmak. Örn: We are doing an experiment in the lab.",
+  "test": {
+   "soru": "“Do an experiment” ne demek?",
+   "siklar": [
+    "Sınav olmak",
+    "Deney yapmak",
+    "Ödev yapmak",
+    "Araştırma okumak"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "ing-k-040",
+  "ders": "ingilizce",
+  "unite": "Natural Forces",
+  "kazanimKod": "E8.10.SP1",
+  "on": "will / won’t (predictions)",
+  "arka": "Gelecek tahmini: will + fiil. Örn: There will be less water in the future.",
+  "test": {
+   "soru": "I think it _____ a lot next winter.",
+   "siklar": [
+    "snows",
+    "snowed",
+    "will snow",
+    "is snowing"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "ing-k-041",
+  "ders": "ingilizce",
+  "unite": "Natural Forces",
+  "kazanimKod": "E8.10.R1",
+  "on": "drought / flood",
+  "arka": "drought: kuraklık (yağmur yok). flood: sel (çok fazla su).",
+  "test": {
+   "soru": "Aylarca yağmur yağmayınca hangi doğa olayı yaşanır?",
+   "siklar": [
+    "drought",
+    "flood",
+    "tsunami",
+    "avalanche"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "ing-k-042",
+  "ders": "ingilizce",
+  "unite": "Natural Forces",
+  "kazanimKod": "E8.10.SP2",
+  "on": "because / so / as a result",
+  "arka": "because: çünkü (sebep). so / as a result: bu yüzden / sonuç olarak (sonuç).",
+  "test": {
+   "soru": "It rained heavily, _____ the river flooded.",
+   "siklar": [
+    "because",
+    "but",
+    "if",
+    "so"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "ing-k-043",
+  "ders": "ingilizce",
+  "unite": "Natural Forces",
+  "kazanimKod": "E8.10.SP1",
+  "on": "If + present simple, will + fiil",
+  "arka": "Koşul ve sonucu: “…-irse, …-ecek.” Örn: If we cut down trees, there will be more erosion.",
+  "test": {
+   "soru": "If we waste water, we _____ a water shortage.",
+   "siklar": [
+    "had",
+    "will have",
+    "have had",
+    "having"
+   ],
+   "dogru": 1
+  }
+ }
+]

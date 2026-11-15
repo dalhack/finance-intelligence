@@ -1,0 +1,485 @@
+[
+ {
+  "id": "mat-039",
+  "ders": "matematik",
+  "unite": "Eşlik ve Benzerlik",
+  "kazanimKod": "M.8.3.3.2",
+  "kazanimAd": "Benzer çokgenlerin benzerlik oranını belirler, bir çokgene eş ve benzer çokgenler oluşturur.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Kenar uzunlukları 10 cm ve 15 cm olan dikdörtgen biçimindeki bir fotoğraf, <b>benzeri</b> olacak şekilde büyütülerek bastırılıyor. Büyütülmüş fotoğrafın kısa kenarı 24 cm'dir.<br>Buna göre büyütülmüş fotoğrafın uzun kenarı kaç santimetredir?",
+  "svg": "",
+  "siklar": [
+   "29",
+   "30",
+   "16",
+   "36"
+  ],
+  "dogru": 3,
+  "ipucu1": "Benzer şekillerde karşılıklı kenarların oranı eşittir.",
+  "ipucu2": "Benzerlik oranı 24 ÷ 10'dur. Aynı oranı uzun kenara uygula.",
+  "cozum": [
+   "Benzerlik oranı: 24 ÷ 10 = 2,4.",
+   "Uzun kenar: 15 · 2,4 = 36 cm."
+  ],
+  "tuzaklar": [
+   "Kısa kenardaki artış (14 cm) uzun kenara eklenirse 15 + 14 = 29 bulunur; benzerlikte fark değil oran korunur.",
+   "Uzun kenar doğrudan 2 katına çıkarılırsa 30 bulunur; oran 2 değil 2,4'tür.",
+   "Orantı ters kurulursa (24 · 10 ÷ 15) 16 bulunur.",
+   ""
+  ],
+  "taktik": "10/15 = 2/3 olduğundan kısa kenar uzun kenarın 2/3'üdür: 24 = (2/3) · 36.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Benzerlik oranı",
+    "tanim": "Benzer iki şeklin karşılıklı kenar uzunluklarının oranı. Açılar eşit, kenarlar orantılıdır."
+   }
+  ]
+ },
+ {
+  "id": "mat-040",
+  "ders": "matematik",
+  "unite": "Eşlik ve Benzerlik",
+  "kazanimKod": "M.8.3.3.1",
+  "kazanimAd": "Eşlik ve benzerliği ilişkilendirir, eş ve benzer şekillerin kenar ve açı ilişkilerini belirler.",
+  "zorluk": 2,
+  "tip": "gorsel",
+  "metin": "Güneşli bir günde boyu 1,6 m olan Defne'nin gölgesinin uzunluğu 2 m'dir. Aynı anda, aynı düz zemindeki bir ağacın gölgesinin uzunluğu 7,5 m olarak ölçülüyor. Güneş ışınları aynı açıyla geldiğinden oluşan dik üçgenler benzerdir.<br>Buna göre ağacın boyu kaç metredir?",
+  "svg": "<svg viewBox='0 0 320 175' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><line x1='20' y1='150' x2='305' y2='150' /><line x1='45' y1='150' x2='45' y2='124' stroke-width='2.5'/><circle cx='45' cy='121' r='3' fill='currentColor'/><line x1='45' y1='118' x2='85' y2='150' stroke-dasharray='4 3' stroke-width='1'/><line x1='45' y1='150' x2='85' y2='150' class='ac' stroke-width='4'/><line x1='140' y1='150' x2='140' y2='66' stroke-width='3'/><circle class='mf' cx='140' cy='48' r='18'/><line x1='140' y1='30' x2='290' y2='150' stroke-dasharray='4 3' stroke-width='1'/><line x1='140' y1='150' x2='290' y2='150' class='ac' stroke-width='4'/><text x='45' y='110' text-anchor='middle' fill='currentColor' stroke='none' >1,6 m</text><text x='65' y='166' text-anchor='middle' fill='currentColor' stroke='none' >2 m</text><text x='112' y='90' text-anchor='middle' fill='currentColor' stroke='none' font-weight='bold'>?</text><text x='215' y='166' text-anchor='middle' fill='currentColor' stroke='none' >7,5 m</text></svg>",
+  "siklar": [
+   "6",
+   "9,375",
+   "7,1",
+   "5,5"
+  ],
+  "dogru": 0,
+  "ipucu1": "İki dik üçgen benzer: boy ile gölge uzunluğu aynı oranda.",
+  "ipucu2": "1,6 ÷ 2 = (ağacın boyu) ÷ 7,5 orantısını kur.",
+  "cozum": [
+   "Benzer üçgenlerde boy ÷ gölge oranı eşittir: 1,6 ÷ 2 = 0,8.",
+   "Ağacın boyu ÷ 7,5 = 0,8.",
+   "Ağacın boyu = 7,5 · 0,8 = 6 m."
+  ],
+  "tuzaklar": [
+   "",
+   "Orantı ters kurulursa (7,5 · 2 ÷ 1,6) bu sonuç çıkar.",
+   "Defne'nin boyu ile gölgesi arasındaki fark (0,4 m) ağacın gölgesinden çıkarılırsa 7,1 bulunur.",
+   "Gölgeler arasındaki fark (7,5 − 2) ağacın boyu sanılırsa 5,5 bulunur."
+  ],
+  "taktik": "Orantı kurarken aynı tür uzunlukları aynı hizaya yaz: boy/gölge = boy/gölge.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "Benzer üçgenler",
+    "tanim": "Karşılıklı açıları eşit, karşılıklı kenarları orantılı olan üçgenler."
+   }
+  ]
+ },
+ {
+  "id": "mat-041",
+  "ders": "matematik",
+  "unite": "Eşlik ve Benzerlik",
+  "kazanimKod": "M.8.3.3.1",
+  "kazanimAd": "Eşlik ve benzerliği ilişkilendirir, eş ve benzer şekillerin kenar ve açı ilişkilerini belirler.",
+  "zorluk": 3,
+  "tip": "gorsel",
+  "metin": "Şekildeki A biçimli merdivenin eş uzunluktaki iki ayağının her biri 250 cm'dir. Ayaklar, tepe noktasından itibaren 100 cm aşağıda, zemine paralel 60 cm uzunluğunda bir bağlantı çubuğu ile birbirine bağlanmıştır.<br>Buna göre merdivenin ayakları zeminde birbirinden kaç santimetre uzaktadır?",
+  "svg": "<svg viewBox='0 0 320 192' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><line x1='90' y1='163.1' x2='230' y2='163.1' /><line x1='160' y1='20' x2='115' y2='163.1' stroke-width='2.5'/><line x1='160' y1='20' x2='205' y2='163.1' stroke-width='2.5'/><line x1='142' y1='77.2' x2='178' y2='77.2' class='ac' stroke-width='3'/><text x='144' y='52.6' text-anchor='end' fill='currentColor' stroke='none' >100 cm</text><text x='124' y='124.2' text-anchor='end' fill='currentColor' stroke='none' >150 cm</text><text x='190' y='81.2' text-anchor='start' fill='currentColor' stroke='none' >60 cm</text><text x='160' y='180.1' text-anchor='middle' fill='currentColor' stroke='none' font-weight='bold'>?</text></svg>",
+  "siklar": [
+   "90",
+   "210",
+   "150",
+   "24"
+  ],
+  "dogru": 2,
+  "ipucu1": "Çubuk zemine paralel olduğundan küçük üçgen ile büyük üçgen benzerdir. Kenarları tepe noktasından başlayarak ölç.",
+  "ipucu2": "Küçük üçgenin kenarı 100 cm, büyük üçgenin kenarı 250 cm'dir (150 değil!). Benzerlik oranı 100/250.",
+  "cozum": [
+   "Çubuk zemine paralel olduğundan üstteki küçük üçgen, merdivenin oluşturduğu büyük üçgene benzerdir.",
+   "Benzerlik oranı: 100 ÷ 250 = 2/5.",
+   "60 ÷ x = 2/5 → x = 60 · 5 ÷ 2 = 150.",
+   "Ayaklar arası uzaklık 150 cm'dir."
+  ],
+  "tuzaklar": [
+   "Oran, tepeden itibaren uzunluk (250) yerine çubuğun altında kalan parça (150) ile kurulursa 60 · 150 ÷ 100 = 90 bulunur.",
+   "Benzerlik kurulmadan uzunluklar toplanırsa 60 + 150 = 210 bulunur.",
+   "",
+   "Orantı ters kurulursa (60 · 100 ÷ 250) 24 bulunur."
+  ],
+  "taktik": "İç içe benzer üçgenlerde oranı parça/parça değil, tepe noktasından ölçülen kenar/tüm kenar olarak kur.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "İç içe benzer üçgenler",
+    "tanim": "Bir kenara paralel çizilen doğru, üçgenden benzer bir küçük üçgen ayırır; oran tepe noktasından ölçülen kenarlarla kurulur."
+   }
+  ]
+ },
+ {
+  "id": "mat-042",
+  "ders": "matematik",
+  "unite": "Eşlik ve Benzerlik",
+  "kazanimKod": "M.8.3.3.2",
+  "kazanimAd": "Benzer çokgenlerin benzerlik oranını belirler, bir çokgene eş ve benzer çokgenler oluşturur.",
+  "zorluk": 2,
+  "tip": "cok-adimli",
+  "metin": "Bir mimar, tasarladığı evin maketini gerçeğiyle benzer ve benzerlik oranı <span class=\"frac\"><span>1</span><span>50</span></span> olacak şekilde hazırlıyor. Makette dikdörtgen biçimindeki salonun kenar uzunlukları 12 cm ve 8 cm'dir.<br>Buna göre gerçek salonun alanı kaç metrekaredir?",
+  "svg": "",
+  "siklar": [
+   "0,48",
+   "24",
+   "4,8",
+   "20"
+  ],
+  "dogru": 1,
+  "ipucu1": "Benzerlik oranı uzunluklar içindir. Önce gerçek kenar uzunluklarını bul.",
+  "ipucu2": "Her kenarı 50 ile çarp ve metreye çevir: 12 cm → 600 cm = 6 m.",
+  "cozum": [
+   "Gerçek uzun kenar: 12 · 50 = 600 cm = 6 m.",
+   "Gerçek kısa kenar: 8 · 50 = 400 cm = 4 m.",
+   "Alan = 6 · 4 = 24 m²."
+  ],
+  "tuzaklar": [
+   "Maketteki alan (96 cm²) 50 ile çarpılırsa 4800 cm² = 0,48 m² bulunur; oran alana değil kenarlara uygulanır.",
+   "",
+   "Maketteki alan 50 ile çarpılıp birim çevirmede de hata yapılırsa 4,8 bulunur.",
+   "Alan yerine gerçek salonun çevresi (2 · (6 + 4)) hesaplanırsa 20 bulunur."
+  ],
+  "taktik": "Önce kenarları büyüt ve birimi çevir, alanı en son hesapla; alanlar oranı benzerlik oranının karesidir.",
+  "hataTipi": "birim",
+  "kavramlar": [
+   {
+    "ad": "Benzerlikte alan",
+    "tanim": "Benzerlik oranı k ise alanların oranı k²'dir."
+   }
+  ]
+ },
+ {
+  "id": "mat-043",
+  "ders": "matematik",
+  "unite": "Dönüşüm Geometrisi",
+  "kazanimKod": "M.8.3.2.1",
+  "kazanimAd": "Nokta, doğru parçası ve diğer şekillerin öteleme sonucundaki görüntülerini çizer.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Bir bilgisayar oyununda karakter, koordinat sistemindeki <b>A(−3, 2)</b> noktasında durmaktadır. Oyuncu karakteri önce 5 birim sağa, sonra 4 birim aşağı öteliyor.<br>Buna göre karakterin son konumunun koordinatları nedir?",
+  "svg": "",
+  "siklar": [
+   "(2, −2)",
+   "(−8, 6)",
+   "(2, 6)",
+   "(1, −3)"
+  ],
+  "dogru": 0,
+  "ipucu1": "Sağa-sola öteleme x'i, yukarı-aşağı öteleme y'yi değiştirir.",
+  "ipucu2": "Sağa gidince x artar, aşağı inince y azalır: x için −3 + 5, y için 2 − 4.",
+  "cozum": [
+   "5 birim sağa: x = −3 + 5 = 2.",
+   "4 birim aşağı: y = 2 − 4 = −2.",
+   "Son konum (2, −2)'dir."
+  ],
+  "tuzaklar": [
+   "",
+   "Sağa öteleme çıkarma, aşağı öteleme toplama olarak yapılırsa (yönler ters) bu sonuç çıkar.",
+   "Aşağı ötelemede y'ye 4 eklenirse (yukarı gibi) bu sonuç çıkar.",
+   "Öteleme miktarları karıştırılıp 4 birim sağa, 5 birim aşağı ötelenirse bu sonuç çıkar."
+  ],
+  "taktik": "Sağ (+x), sol (−x), yukarı (+y), aşağı (−y). İşlemi koordinat koordinat yap.",
+  "hataTipi": "islem",
+  "kavramlar": [
+   {
+    "ad": "Öteleme",
+    "tanim": "Şeklin her noktasının aynı yönde ve aynı miktarda kaydırılması; şekil ile görüntüsü eştir."
+   }
+  ]
+ },
+ {
+  "id": "mat-044",
+  "ders": "matematik",
+  "unite": "Dönüşüm Geometrisi",
+  "kazanimKod": "M.8.3.2.2",
+  "kazanimAd": "Nokta, doğru parçası ve diğer şekillerin yansıma sonucu oluşan görüntüsünü oluşturur.",
+  "zorluk": 2,
+  "tip": "gorsel",
+  "metin": "Aşağıdaki koordinat sisteminde P noktası işaretlenmiştir.<br>Buna göre P noktasının <b>y eksenine göre</b> yansıması olan noktanın koordinatları nedir?",
+  "svg": "<svg viewBox='0 0 320 210' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><line x1='50' y1='193' x2='50' y2='17' stroke-width='0.6' stroke-opacity='0.35'/><line x1='72' y1='193' x2='72' y2='17' stroke-width='0.6' stroke-opacity='0.35'/><line x1='94' y1='193' x2='94' y2='17' stroke-width='0.6' stroke-opacity='0.35'/><line x1='116' y1='193' x2='116' y2='17' stroke-width='0.6' stroke-opacity='0.35'/><line x1='138' y1='193' x2='138' y2='17' stroke-width='0.6' stroke-opacity='0.35'/><line x1='160' y1='193' x2='160' y2='17' stroke-width='0.6' stroke-opacity='0.35'/><line x1='182' y1='193' x2='182' y2='17' stroke-width='0.6' stroke-opacity='0.35'/><line x1='204' y1='193' x2='204' y2='17' stroke-width='0.6' stroke-opacity='0.35'/><line x1='226' y1='193' x2='226' y2='17' stroke-width='0.6' stroke-opacity='0.35'/><line x1='248' y1='193' x2='248' y2='17' stroke-width='0.6' stroke-opacity='0.35'/><line x1='270' y1='193' x2='270' y2='17' stroke-width='0.6' stroke-opacity='0.35'/><line x1='50' y1='193' x2='270' y2='193' stroke-width='0.6' stroke-opacity='0.35'/><line x1='50' y1='171' x2='270' y2='171' stroke-width='0.6' stroke-opacity='0.35'/><line x1='50' y1='149' x2='270' y2='149' stroke-width='0.6' stroke-opacity='0.35'/><line x1='50' y1='127' x2='270' y2='127' stroke-width='0.6' stroke-opacity='0.35'/><line x1='50' y1='105' x2='270' y2='105' stroke-width='0.6' stroke-opacity='0.35'/><line x1='50' y1='83' x2='270' y2='83' stroke-width='0.6' stroke-opacity='0.35'/><line x1='50' y1='61' x2='270' y2='61' stroke-width='0.6' stroke-opacity='0.35'/><line x1='50' y1='39' x2='270' y2='39' stroke-width='0.6' stroke-opacity='0.35'/><line x1='50' y1='17' x2='270' y2='17' stroke-width='0.6' stroke-opacity='0.35'/><line x1='42' y1='105' x2='280' y2='105' /><line x1='160' y1='199' x2='160' y2='9' /><text x='72' y='119' text-anchor='middle' fill='currentColor' stroke='none' >−4</text><text x='116' y='119' text-anchor='middle' fill='currentColor' stroke='none' >−2</text><text x='204' y='119' text-anchor='middle' fill='currentColor' stroke='none' >2</text><text x='248' y='119' text-anchor='middle' fill='currentColor' stroke='none' >4</text><text x='155' y='197' text-anchor='end' fill='currentColor' stroke='none' >−4</text><text x='155' y='153' text-anchor='end' fill='currentColor' stroke='none' >−2</text><text x='155' y='65' text-anchor='end' fill='currentColor' stroke='none' >2</text><text x='155' y='21' text-anchor='end' fill='currentColor' stroke='none' >4</text><text x='286' y='109' text-anchor='middle' fill='currentColor' stroke='none' >x</text><text x='169' y='15' text-anchor='middle' fill='currentColor' stroke='none' >y</text><circle cx='116' cy='39' r='4' fill='currentColor'/><text x='109' y='33' text-anchor='end' fill='currentColor' stroke='none' font-weight='bold'>P</text></svg>",
+  "siklar": [
+   "(−2, −3)",
+   "(2, −3)",
+   "(3, −2)",
+   "(2, 3)"
+  ],
+  "dogru": 3,
+  "ipucu1": "Önce P'nin koordinatlarını grafikten oku: önce x (yatay), sonra y (dikey).",
+  "ipucu2": "P(−2, 3). y eksenine göre yansımada nokta y ekseninin öbür tarafına aynı uzaklığa geçer; yüksekliği değişmez.",
+  "cozum": [
+   "Grafikten P(−2, 3) okunur.",
+   "y eksenine göre yansımada x'in işareti değişir, y aynı kalır.",
+   "Görüntü (2, 3)'tür."
+  ],
+  "tuzaklar": [
+   "y ekseni yerine x eksenine göre yansıma alınırsa y'nin işareti değişir.",
+   "İki koordinatın da işareti değiştirilirse (orijine göre simetri) bu sonuç çıkar.",
+   "P noktasının koordinatları (3, −2) diye ters okunursa bu sonuç çıkar.",
+   ""
+  ],
+  "taktik": "Hangi eksene göre yansıtıyorsan o eksenin koordinatı aynı kalır, diğerinin işareti değişir.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "Eksene göre yansıma",
+    "tanim": "x eksenine göre: (a, b) → (a, −b). y eksenine göre: (a, b) → (−a, b)."
+   }
+  ]
+ },
+ {
+  "id": "mat-045",
+  "ders": "matematik",
+  "unite": "Dönüşüm Geometrisi",
+  "kazanimKod": "M.8.3.2.3",
+  "kazanimAd": "Çokgenlerin öteleme ve yansımalar sonucunda ortaya çıkan görüntüsünü oluşturur.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "Bir robot süpürgenin hareketi koordinat sisteminde modelleniyor. Robot <b>P(3, 2)</b> noktasından başlıyor. Konumu önce <b>x eksenine göre yansıtılıyor</b>, ardından 6 birim sola ve 4 birim aşağı öteleniyor.<br>Buna göre robotun son konumu ile başlangıç noktası P arasındaki uzaklık kaç birimdir?",
+  "svg": "",
+  "siklar": [
+   "2√13",
+   "10",
+   "14",
+   "8"
+  ],
+  "dogru": 1,
+  "ipucu1": "Dönüşümleri sırayla uygula ve son noktanın koordinatlarını bul.",
+  "ipucu2": "x eksenine göre yansıma: (3, 2) → (3, −2). Sonra ötelemeyi uygula; iki nokta arasındaki uzaklık için dik üçgen çiz.",
+  "cozum": [
+   "x eksenine göre yansıma: (3, 2) → (3, −2).",
+   "6 birim sola, 4 birim aşağı: (3 − 6, −2 − 4) = (−3, −6).",
+   "P(3, 2) ile (−3, −6) arasında yatay fark 6, dikey fark 8 birimdir.",
+   "Uzaklık: √(6² + 8²) = √100 = 10 birim."
+  ],
+  "tuzaklar": [
+   "Yansıma adımı atlanıp yalnız öteleme yapılırsa son nokta (−3, −2) olur ve uzaklık 2√13 bulunur.",
+   "",
+   "Yatay ve dikey farklar Pisagor yerine doğrudan toplanırsa 6 + 8 = 14 bulunur.",
+   "Yalnız dikey fark (2 ile −6 arası) uzaklık sanılırsa 8 bulunur."
+  ],
+  "taktik": "Her dönüşümden sonra yeni koordinatı yaz; uzaklık için yatay ve dikey farklarla Pisagor kur (6-8-10).",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Ardışık dönüşümler",
+    "tanim": "Dönüşümler verilen sırayla uygulanır; her adımda bir önceki görüntü kullanılır."
+   }
+  ]
+ },
+ {
+  "id": "mat-046",
+  "ders": "matematik",
+  "unite": "Dönüşüm Geometrisi",
+  "kazanimKod": "M.8.3.2.3",
+  "kazanimAd": "Çokgenlerin öteleme ve yansımalar sonucunda ortaya çıkan görüntüsünü oluşturur.",
+  "zorluk": 2,
+  "tip": "gorsel",
+  "metin": "Bir kilim deseni tasarlayan Ayşe, kareli kâğıt üzerindeki I numaralı motife dönüşümler uygulayarak II numaralı motifi elde ediyor. Kareli kâğıtta her karenin kenarı 1 birimdir.<br>Buna göre Ayşe aşağıdaki dönüşümlerden hangisini uygulamıştır?",
+  "svg": "<svg viewBox='0 0 320 190' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><line x1='20' y1='15' x2='20' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='40' y1='15' x2='40' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='60' y1='15' x2='60' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='80' y1='15' x2='80' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='100' y1='15' x2='100' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='120' y1='15' x2='120' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='140' y1='15' x2='140' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='160' y1='15' x2='160' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='180' y1='15' x2='180' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='200' y1='15' x2='200' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='220' y1='15' x2='220' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='240' y1='15' x2='240' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='260' y1='15' x2='260' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='280' y1='15' x2='280' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='300' y1='15' x2='300' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><line x1='20' y1='15' x2='300' y2='15' stroke-width='0.6' stroke-opacity='0.35'/><line x1='20' y1='35' x2='300' y2='35' stroke-width='0.6' stroke-opacity='0.35'/><line x1='20' y1='55' x2='300' y2='55' stroke-width='0.6' stroke-opacity='0.35'/><line x1='20' y1='75' x2='300' y2='75' stroke-width='0.6' stroke-opacity='0.35'/><line x1='20' y1='95' x2='300' y2='95' stroke-width='0.6' stroke-opacity='0.35'/><line x1='20' y1='115' x2='300' y2='115' stroke-width='0.6' stroke-opacity='0.35'/><line x1='20' y1='135' x2='300' y2='135' stroke-width='0.6' stroke-opacity='0.35'/><line x1='20' y1='155' x2='300' y2='155' stroke-width='0.6' stroke-opacity='0.35'/><line x1='20' y1='175' x2='300' y2='175' stroke-width='0.6' stroke-opacity='0.35'/><polygon class='mf' points='60,35 100,35 100,55 80,55 80,115 60,115'/><polygon class='acf' points='260,75 220,75 220,95 240,95 240,155 260,155'/><line x1='160' y1='12' x2='160' y2='178' stroke-dasharray='4 3' stroke-width='2'/><text x='168' y='11' text-anchor='middle' fill='currentColor' stroke='none' >d</text><text x='80' y='30' text-anchor='middle' fill='currentColor' stroke='none' font-weight='bold'>I</text><text x='240' y='70' text-anchor='middle' fill='currentColor' stroke='none' font-weight='bold'>II</text></svg>",
+  "siklar": [
+   "8 birim sağa ve 2 birim aşağı öteleme",
+   "Yalnızca d doğrusuna göre yansıma",
+   "d doğrusuna göre yansıma, sonra 2 birim aşağı öteleme",
+   "d doğrusuna göre yansıma, sonra 2 birim yukarı öteleme"
+  ],
+  "dogru": 2,
+  "ipucu1": "Motifin çıkıntısı I'de sağa, II'de sola bakıyor. Yalnız öteleme şeklin yönünü değiştirir mi?",
+  "ipucu2": "I'i d doğrusuna göre yansıt: köşelerin d'ye uzaklığı aynı kalır. Sonra görüntünün II ile aynı satırlarda olup olmadığına bak.",
+  "cozum": [
+   "Ötelemede şeklin yönü değişmez; II'de çıkıntı ters tarafa baktığı için bir yansıma vardır.",
+   "I, d doğrusuna göre yansıtılınca görüntü d'nin sağında, I ile aynı satırlarda oluşur.",
+   "II ise bu görüntünün 2 satır altındadır.",
+   "Uygulanan dönüşüm: d'ye göre yansıma, sonra 2 birim aşağı öteleme."
+  ],
+  "tuzaklar": [
+   "Motifin yönünün değiştiği (çıkıntının sola baktığı) fark edilmezse yalnız öteleme sanılır.",
+   "Yön değişimi görülüp II'nin 2 birim aşağıda olduğu fark edilmezse bu seçilir.",
+   "",
+   "Ötelemenin yönü ters okunursa bu seçilir."
+  ],
+  "taktik": "Önce şeklin yönüne bak (yön değiştiyse yansıma var), sonra bir köşeyi takip ederek ötelemeyi say.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "Yansıma",
+    "tanim": "Şekil ile görüntüsünün karşılıklı noktaları simetri doğrusuna eşit uzaklıktadır; şeklin yönü ters döner."
+   },
+   {
+    "ad": "Öteleme",
+    "tanim": "Şeklin yönü ve biçimi değişmez, yalnız yeri değişir."
+   }
+  ]
+ },
+ {
+  "id": "mat-047",
+  "ders": "matematik",
+  "unite": "Geometrik Cisimler",
+  "kazanimKod": "M.8.3.4.4",
+  "kazanimAd": "Dik dairesel silindirin hacim bağıntısını oluşturur; ilgili problemleri çözer.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Dik dairesel silindir biçimindeki bir bardağın taban <b>çapı</b> 10 cm, yüksekliği 12 cm'dir.<br>Buna göre bu bardak ağzına kadar doldurulduğunda kaç santimetreküp su alır? (π = 3 alınız.)",
+  "svg": "",
+  "siklar": [
+   "3600",
+   "180",
+   "360",
+   "900"
+  ],
+  "dogru": 3,
+  "ipucu1": "Silindirin hacmi taban alanı ile yüksekliğin çarpımıdır. Çap verilmiş; yarıçap kaç?",
+  "ipucu2": "Yarıçap 5 cm'dir. Taban alanı π · r² = 3 · 25.",
+  "cozum": [
+   "Yarıçap: 10 ÷ 2 = 5 cm.",
+   "Taban alanı: π · r² = 3 · 5² = 75 cm².",
+   "Hacim = 75 · 12 = 900 cm³."
+  ],
+  "tuzaklar": [
+   "Çap (10 cm) yarıçap yerine kullanılırsa 3 · 100 · 12 = 3600 bulunur.",
+   "Yarıçapın karesi alınmazsa 3 · 5 · 12 = 180 bulunur.",
+   "Hacim yerine yan yüzey alanı (2 · 3 · 5 · 12) hesaplanırsa 360 bulunur.",
+   ""
+  ],
+  "taktik": "Soruda çap mı yarıçap mı verilmiş, ilk iş onu işaretle.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Silindirin hacmi",
+    "tanim": "V = π · r² · h (taban alanı × yükseklik)"
+   }
+  ]
+ },
+ {
+  "id": "mat-048",
+  "ders": "matematik",
+  "unite": "Geometrik Cisimler",
+  "kazanimKod": "M.8.3.4.3",
+  "kazanimAd": "Dik dairesel silindirin yüzey alanı bağıntısını oluşturur, ilgili problemleri çözer.",
+  "zorluk": 2,
+  "tip": "gorsel",
+  "metin": "Dik dairesel silindir biçimindeki bir konserve kutusunun açınımı şekilde verilmiştir. Kutunun taban yarıçapı 4 cm, yüksekliği 10 cm'dir. Kutunun yan yüzünün tamamı, üst üste gelmeyecek şekilde bir etiketle kaplanacaktır.<br>Buna göre etiketin alanı kaç santimetrekaredir? (π = 3 alınız.)",
+  "svg": "<svg viewBox='0 0 320 235' fill='none' stroke='currentColor' stroke-width='1.5' font-size='12'><rect class='mf' x='64' y='84' width='192' height='80'/><circle cx='160' cy='52' r='32'/><circle cx='160' cy='196' r='32'/><line x1='160' y1='52' x2='192' y2='52' stroke-width='1'/><circle cx='160' cy='52' r='2' fill='currentColor'/><text x='176' y='47' text-anchor='middle' fill='currentColor' stroke='none' >4 cm</text><text x='58' y='128' text-anchor='end' fill='currentColor' stroke='none' >10 cm</text><text x='160' y='128' text-anchor='middle' fill='currentColor' stroke='none' >etiket</text></svg>",
+  "siklar": [
+   "240",
+   "336",
+   "120",
+   "480"
+  ],
+  "dogru": 0,
+  "ipucu1": "Etiket açınımdaki dikdörtgendir. Dikdörtgenin bir kenarı yükseklik; diğer kenarı neye eşit?",
+  "ipucu2": "Dikdörtgenin uzun kenarı taban çemberinin çevresine eşittir: 2 · π · r.",
+  "cozum": [
+   "Yan yüz açıldığında dikdörtgen olur; bir kenarı yükseklik (10 cm).",
+   "Diğer kenarı taban çevresi: 2 · π · r = 2 · 3 · 4 = 24 cm.",
+   "Etiketin alanı = 24 · 10 = 240 cm²."
+  ],
+  "tuzaklar": [
+   "",
+   "Yan yüzle birlikte iki taban da eklenirse (240 + 96) tüm yüzey alanı bulunur.",
+   "Dikdörtgenin uzun kenarı 2πr yerine πr alınırsa 12 · 10 = 120 bulunur.",
+   "Çevre hesabında yarıçap yerine çap kullanılırsa (2 · 3 · 8 · 10) 480 bulunur."
+  ],
+  "taktik": "Yanal alan = taban çevresi × yükseklik. \"Etiket, boya şeridi\" gibi ifadeler yalnız yan yüzü sorar.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Silindirin yan yüzey alanı",
+    "tanim": "2 · π · r · h (açınımdaki dikdörtgenin alanı)"
+   },
+   {
+    "ad": "Silindirin yüzey alanı",
+    "tanim": "2πr² + 2πrh (iki taban + yan yüz)"
+   }
+  ]
+ },
+ {
+  "id": "mat-049",
+  "ders": "matematik",
+  "unite": "Geometrik Cisimler",
+  "kazanimKod": "M.8.3.4.4",
+  "kazanimAd": "Dik dairesel silindirin hacim bağıntısını oluşturur; ilgili problemleri çözer.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "Dik dairesel silindir biçimindeki bir sürahinin taban yarıçapı 6 cm, yüksekliği 20 cm'dir ve sürahi ağzına kadar limonata ile doludur. Bu limonata, taban yarıçapı 3 cm ve yüksekliği 10 cm olan silindir biçimindeki özdeş bardaklara, her bardağın <span class=\"frac\"><span>4</span><span>5</span></span>'i dolacak şekilde paylaştırılacaktır.<br>Buna göre sürahideki limonatanın tamamı kaç bardağı bu şekilde doldurur? (π = 3 alınız.)",
+  "svg": "",
+  "siklar": [
+   "8",
+   "10",
+   "6",
+   "4"
+  ],
+  "dogru": 1,
+  "ipucu1": "Önce sürahinin hacmini, sonra bir bardağa konan limonata miktarını bul.",
+  "ipucu2": "Sürahi: 3 · 6² · 20. Bardağın tamamı: 3 · 3² · 10; bunun 4/5'ini al.",
+  "cozum": [
+   "Sürahinin hacmi: 3 · 6² · 20 = 2160 cm³.",
+   "Bir bardağın hacmi: 3 · 3² · 10 = 270 cm³.",
+   "Her bardağa 270 · 4/5 = 216 cm³ limonata konur.",
+   "2160 ÷ 216 = 10 bardak dolar."
+  ],
+  "tuzaklar": [
+   "Bardakların tam doldurulduğu düşünülürse 2160 ÷ 270 = 8 bulunur.",
+   "",
+   "8 bardak bulunduktan sonra 4/5 ile çarpılırsa (bölünecekken) yaklaşık 6 bulunur.",
+   "Yarıçapların karesi alınmadan yalnız oranlar çarpılırsa (2 · 2) 4 bulunur."
+  ],
+  "taktik": "π'leri çarpmadan oranla: (6² · 20) ÷ (3² · 10 · 4/5) = 720 ÷ 72 = 10.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Hacim oranı",
+    "tanim": "Yarıçap 2 katına çıkarsa hacim 4 katına, yükseklik 2 katına çıkarsa hacim 2 katına çıkar."
+   }
+  ]
+ },
+ {
+  "id": "mat-050",
+  "ders": "matematik",
+  "unite": "Geometrik Cisimler",
+  "kazanimKod": "M.8.3.4.5",
+  "kazanimAd": "Dik piramidi tanır, temel elemanlarını belirler, inşa eder ve açınımını çizer.",
+  "zorluk": 2,
+  "tip": "cok-adimli",
+  "metin": "Bir tasarım atölyesinde çubuk ve macun topları kullanılarak cisim iskeletleri yapılıyor: her ayrıt için bir çubuk, her köşe için bir macun topu kullanılıyor. Tuna, tabanı <b>altıgen olan bir dik piramit</b> iskeleti; Ada ise <b>üçgen dik prizma</b> iskeleti yapıyor.<br>Buna göre Tuna'nın kullandığı çubuk sayısı ile Ada'nın kullandığı macun topu sayısının toplamı kaçtır?",
+  "svg": "",
+  "siklar": [
+   "13",
+   "21",
+   "18",
+   "12"
+  ],
+  "dogru": 2,
+  "ipucu1": "Çubuk = ayrıt, macun topu = köşe. Her cisim için hangisinin sorulduğuna dikkat et.",
+  "ipucu2": "Altıgen piramitte 6 taban ayrıtı ve tepeye çıkan 6 yan ayrıt vardır. Üçgen prizmanın iki üçgen tabanı vardır.",
+  "cozum": [
+   "Altıgen dik piramit: 6 taban ayrıtı + 6 yan ayrıt = 12 ayrıt → 12 çubuk.",
+   "Üçgen dik prizma: her tabanda 3 köşe, toplam 2 · 3 = 6 köşe → 6 macun topu.",
+   "Toplam: 12 + 6 = 18."
+  ],
+  "tuzaklar": [
+   "Tuna için çubuk yerine macun topu (7 köşe) sayılırsa 7 + 6 = 13 bulunur.",
+   "Ada için macun topu yerine çubuk (9 ayrıt) sayılırsa 12 + 9 = 21 bulunur.",
+   "",
+   "Piramidin yalnız taban ayrıtları (6) sayılıp yan ayrıtlar unutulursa 6 + 6 = 12 bulunur."
+  ],
+  "taktik": "Tabanı n-gen olan piramitte 2n ayrıt, n + 1 köşe; prizmada 3n ayrıt, 2n köşe vardır.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Piramidin elemanları",
+    "tanim": "Tabanı n kenarlı piramit: n + 1 köşe, 2n ayrıt, n + 1 yüz"
+   },
+   {
+    "ad": "Prizmanın elemanları",
+    "tanim": "Tabanı n kenarlı prizma: 2n köşe, 3n ayrıt, n + 2 yüz"
+   }
+  ]
+ }
+]
