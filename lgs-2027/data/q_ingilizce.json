@@ -13,7 +13,7 @@
    "Sure, that sounds fun!",
    "I’m sorry, but I can’t.",
    "Yeah, why not?",
-   "I’d love to. What time is it?"
+   "I’d love to. What time does it start?"
   ],
   "dogru": 1,
   "ipucu1": "Mert boşluktan sonra bir mazeret söylüyor. Mazeret, daveti kabul edenin mi yoksa reddedenin mi cümlesidir?",
@@ -583,7 +583,7 @@
    "Melis chops the tomatoes after she drains the pasta.",
    "Melis adds the salt after the olive oil.",
    "Melis prepares the vegetables while the pasta is cooking.",
-   "Melis mixes the pasta with the vegetables when it is still hot."
+   "Melis mixes the pasta with the vegetables while it is still hot."
   ],
   "dogru": 2,
   "ipucu1": "Zaman bağlaçlarına dikkat et: while (iken), after (…-den sonra), before (…-den önce), until (…-e kadar).",
@@ -708,7 +708,7 @@
   "kazanimAd": "Students will be able to understand short and simple texts with related vocabulary.",
   "zorluk": 2,
   "tip": "uzun-metin",
-  "metin": "<b>Receptionist:</b> Blue Bay Hotel. How can I help you?<br><b>Mr. Tekin:</b> Hello. I’d like to speak to the manager, please.<br><b>Receptionist:</b> Hold on, please. I’ll put you through.<br><b>Receptionist:</b> I’m sorry, his line is busy at the moment. Would you like to hold or call back later?<br><b>Mr. Tekin:</b> I’m in a hurry now. I’ll call back in the afternoon.<br><br>According to the conversation, which of the following is <b>NOT</b> correct?",
+  "metin": "<b>Receptionist:</b> Blue Bay Hotel. How can I help you?<br><b>Mr. Tekin:</b> Hello. I’d like to speak to the manager, please.<br><b>Receptionist:</b> Hold on, please. I’ll put you through.<br><b>Receptionist:</b> <i>(a few seconds later)</i> I’m sorry, his line is busy at the moment. Would you like to hold or call back later?<br><b>Mr. Tekin:</b> I’m in a hurry now. I’ll call back in the afternoon.<br><br>According to the conversation, which of the following is <b>NOT</b> correct?",
   "svg": "",
   "siklar": [
    "Mr. Tekin wants to talk to the manager.",
@@ -1108,7 +1108,7 @@
    "Derin found scuba diving more frightening than paragliding.",
    "Derin’s sister prefers paragliding to scuba diving.",
    "Derin has never tried paragliding.",
-   "Derin and her sister like the same activity more."
+   "Derin and her sister prefer the same activity."
   ],
   "dogru": 1,
   "ipucu1": "Derin’in tercihini ve kız kardeşinin tercihini ayrı ayrı bul.",
@@ -1200,7 +1200,7 @@
   ],
   "dogru": 3,
   "ipucu1": "Rehberin kısa cevabına bak: “Yes, I have.” Hangi yardımcı fiille sorulmuş bir sorunun cevabıdır?",
-  "ipucu2": "“Yes, I have” cevabı “Have you…?” ile başlayan soruya verilir. “Did you…?” sorusunun cevabı “Yes, I did” olurdu.",
+  "ipucu2": "Kısa cevaptaki yardımcı fiil sorudakiyle aynı olur. Örneğin “Did you…?” sorusunun cevabı “Yes, I did” olurdu.",
   "cozum": [
    "Kısa cevap: “Yes, I have.”",
    "Kısa cevaptaki yardımcı fiil, sorudakiyle aynı olur: Have you…? → Yes, I have.",
@@ -1933,7 +1933,7 @@
   "kazanimAd": "Students will be able to identify specific information in simple texts about natural forces and disasters.",
   "zorluk": 3,
   "tip": "uzun-metin",
-  "metin": "Global warming is one of the biggest problems of our planet. Because people burn too much coal and petrol, the Earth is getting hotter. As a result, the ice at the poles is melting, and sea levels are rising. Scientists predict that some cities on the coast will be under water in the future. They also think that there will be longer droughts, so farmers won’t be able to grow enough food. However, it isn’t too late. If we use clean energy such as wind and solar power, we will slow down global warming.<br><br>According to the text, which of the following is <b>NOT</b> correct?",
+  "metin": "Global warming is one of the biggest problems of our planet. Because people burn too much coal and petrol, the Earth is getting hotter. As a result, the ice at the poles is melting, and sea levels are rising. Scientists predict that some cities on the coast will be under water in the future. They also think that there will be longer droughts, so farmers won’t be able to grow enough food. However, they say it isn’t too late. If we use clean energy such as wind and solar power, we will slow down global warming.<br><br>According to the text, which of the following is <b>NOT</b> correct?",
   "svg": "",
   "siklar": [
    "Burning coal and petrol is a reason for the rise in temperature.",

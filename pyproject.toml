@@ -51,9 +51,12 @@ markers = [
 [tool.ruff]
 line-length = 120
 target-version = "py312"
+# lgs-2027/ bağımsız, statik bir çalışma uygulaması; bu projenin lint/tip denetimine dahil değil.
+extend-exclude = ["lgs-2027"]
 
 [tool.mypy]
 python_version = "3.12"
+exclude = ["^lgs-2027/"]
 explicit_package_bases = true
 namespace_packages = true
 ignore_missing_imports = true

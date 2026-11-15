@@ -1,0 +1,632 @@
+[
+ {
+  "id": "din-k-001",
+  "ders": "din",
+  "unite": "Kader İnancı",
+  "kazanimKod": "DKAB.8.1.1",
+  "on": "Kader nedir?",
+  "arka": "Allah’ın her şeyi sonsuz ilmiyle bilip bir ölçüye göre belirlemesidir. Örn: “Biz her şeyi bir ölçüye göre yarattık.” (Kamer, 49)",
+  "test": {
+   "soru": "Allah’ın her şeyi önceden bilip bir ölçüye göre belirlemesine ne denir?",
+   "siklar": [
+    "Kaza",
+    "Kader",
+    "Ecel",
+    "Tevekkül"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "din-k-002",
+  "ders": "din",
+  "unite": "Kader İnancı",
+  "kazanimKod": "DKAB.8.1.1",
+  "on": "Kaza nedir?",
+  "arka": "Allah’ın takdir ettiği şeylerin zamanı gelince gerçekleşmesidir. Sıra: önce kader (plan), sonra kaza (gerçekleşme).",
+  "test": {
+   "soru": "Takdir edilen bir şeyin zamanı gelince gerçekleşmesine ne denir?",
+   "siklar": [
+    "Kader",
+    "Rızık",
+    "Kaza",
+    "Ömür"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "din-k-003",
+  "ders": "din",
+  "unite": "Kader İnancı",
+  "kazanimKod": "DKAB.8.1.1",
+  "on": "Evrensel yasalar (sünnetullah) nelerdir?",
+  "arka": "Fiziksel (yer çekimi), biyolojik (canlının doğup büyümesi, ölmesi) ve toplumsal (adalet → huzur) yasalar. Hepsi Allah’ın koyduğu düzendir.",
+  "test": {
+   "soru": "“Çalışkan ve adaletli toplumlar gelişir.” yargısı hangi yasayla ilgilidir?",
+   "siklar": [
+    "Fiziksel",
+    "Biyolojik",
+    "Toplumsal",
+    "Hiçbiri"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "din-k-004",
+  "ders": "din",
+  "unite": "Kader İnancı",
+  "kazanimKod": "DKAB.8.1.2",
+  "on": "Küllî irade – cüzî irade farkı nedir?",
+  "arka": "Küllî irade Allah’ın sınırsız iradesidir. Cüzî irade insana verilen sınırlı seçme gücüdür; insan bu yüzden yaptıklarından sorumludur.",
+  "test": {
+   "soru": "İnsanın davranışlarından sorumlu tutulmasının temel nedeni nedir?",
+   "siklar": [
+    "Cüzî iradeye sahip olması",
+    "Uzun bir ömrünün olması",
+    "Rızkının belirlenmiş olması",
+    "Evrensel yasalara bağlı olması"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "din-k-005",
+  "ders": "din",
+  "unite": "Kader İnancı",
+  "kazanimKod": "DKAB.8.1.3",
+  "on": "Tevekkül nedir?",
+  "arka": "Elinden gelen çabayı gösterip tedbiri aldıktan sonra sonucu Allah’a bırakmaktır. Örn: Çalışıp sınava girmek, sonra Allah’a güvenmek.",
+  "test": {
+   "soru": "Hangisi tevekküle uygundur?",
+   "siklar": [
+    "Çalışmadan yalnızca dua etmek",
+    "Çalışıp sonucu Allah’a bırakmak",
+    "Sonucu şansa bağlamak",
+    "Tedbiri gereksiz görmek"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "din-k-006",
+  "ders": "din",
+  "unite": "Kader İnancı",
+  "kazanimKod": "DKAB.8.1.3",
+  "on": "Ömür ve ecel farkı nedir?",
+  "arka": "Ömür, doğumdan ölüme kadar geçen süredir. Ecel, bu sürenin sona erdiği andır.",
+  "test": {
+   "soru": "Ömrün sona erdiği ana ne denir?",
+   "siklar": [
+    "Ömür",
+    "Rızık",
+    "Kaza",
+    "Ecel"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "din-k-007",
+  "ders": "din",
+  "unite": "Kader İnancı",
+  "kazanimKod": "DKAB.8.1.6",
+  "on": "Ayetü’l-Kürsi nedir?",
+  "arka": "Bakara suresinin 255. ayetidir. Allah’ın birliğini, diri oluşunu, her şeyi bilip koruduğunu anlatır.",
+  "test": {
+   "soru": "Ayetü’l-Kürsi hangi surede yer alır?",
+   "siklar": [
+    "Bakara",
+    "Yâsîn",
+    "İhlâs",
+    "Fâtiha"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "din-k-008",
+  "ders": "din",
+  "unite": "Zekât ve Sadaka",
+  "kazanimKod": "DKAB.8.2.2",
+  "on": "Zekât nedir?",
+  "arka": "Dinen zengin sayılan Müslümanın yılda bir kez malının belli bir bölümünü ihtiyaç sahiplerine vermesidir; farzdır. Altın ve parada oran kırkta birdir.",
+  "test": {
+   "soru": "Altın ve parada zekât oranı kaçtır?",
+   "siklar": [
+    "Onda bir",
+    "Yirmide bir",
+    "Kırkta bir",
+    "Beşte bir"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "din-k-009",
+  "ders": "din",
+  "unite": "Zekât ve Sadaka",
+  "kazanimKod": "DKAB.8.2.2",
+  "on": "Nisap ne demek?",
+  "arka": "Zekât vermek için gereken en az mal miktarıdır: 80,18 gram altın veya değeri. Borçlar ve temel ihtiyaçlar hesaba katılmaz.",
+  "test": {
+   "soru": "Zekât için gereken en az zenginlik ölçüsüne ne denir?",
+   "siklar": [
+    "Öşür",
+    "Nisap",
+    "Fitre",
+    "İnfak"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "din-k-010",
+  "ders": "din",
+  "unite": "Zekât ve Sadaka",
+  "kazanimKod": "DKAB.8.2.2",
+  "on": "Sadaka nedir?",
+  "arka": "Allah rızası için gönüllü yapılan maddi ve manevi her iyiliktir. Zamanı, miktarı, zenginlik şartı yoktur. Örn: Güler yüz göstermek.",
+  "test": {
+   "soru": "Sadaka ile ilgili hangisi doğrudur?",
+   "siklar": [
+    "Yalnız zenginler verir",
+    "Yılda bir kez verilir",
+    "Miktarı bellidir",
+    "Güler yüz göstermek de sadakadır"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "din-k-011",
+  "ders": "din",
+  "unite": "Zekât ve Sadaka",
+  "kazanimKod": "DKAB.8.2.3",
+  "on": "İnfak nedir?",
+  "arka": "Allah rızası için yapılan her türlü harcama ve yardımın genel adıdır. Zekât ve sadakayı da kapsar.",
+  "test": {
+   "soru": "Zekât ve sadakayı da içine alan genel kavram hangisidir?",
+   "siklar": [
+    "İnfak",
+    "Nisap",
+    "Öşür",
+    "Fitre"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "din-k-012",
+  "ders": "din",
+  "unite": "Zekât ve Sadaka",
+  "kazanimKod": "DKAB.8.2.2",
+  "on": "Öşür nedir?",
+  "arka": "Toprak ürünlerinden verilen zekâttır. Yağmur suyuyla sulanan ürünlerde oran onda birdir.",
+  "test": {
+   "soru": "Yağmurla sulanan tarladan 1000 kg ürün alan çiftçi kaç kg öşür verir?",
+   "siklar": [
+    "25",
+    "50",
+    "100",
+    "200"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "din-k-013",
+  "ders": "din",
+  "unite": "Zekât ve Sadaka",
+  "kazanimKod": "DKAB.8.2.4",
+  "on": "Hz. Şuayb (a.s.) kimdir?",
+  "arka": "Medyen halkına gönderilen peygamberdir. Halkını Allah’a kulluğa, ölçü ve tartıda dürüstlüğe çağırmıştır.",
+  "test": {
+   "soru": "Hz. Şuayb (a.s.) hangi halka gönderilmiştir?",
+   "siklar": [
+    "Medyen",
+    "Mısır",
+    "Mekke",
+    "Medine"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "din-k-014",
+  "ders": "din",
+  "unite": "Zekât ve Sadaka",
+  "kazanimKod": "DKAB.8.2.5",
+  "on": "Mâûn suresinin mesajı nedir?",
+  "arka": "Yetimi ve yoksulu gözetmek, ibadeti gösterişsiz yapmak ve yardıma engel olmamak gerektiğini öğütler. 107. sure, 7 ayet.",
+  "test": {
+   "soru": "Mâûn suresinde hangisi eleştirilmez?",
+   "siklar": [
+    "Yetimi itip kakmak",
+    "Gösteriş yapmak",
+    "Yardıma engel olmak",
+    "Ticaret yapmak"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "din-k-015",
+  "ders": "din",
+  "unite": "Din ve Hayat",
+  "kazanimKod": "DKAB.8.3.2",
+  "on": "Dinin korumayı amaçladığı beş temel değer nedir?",
+  "arka": "Can, nesil, akıl, mal ve din emniyetidir.",
+  "test": {
+   "soru": "Hangisi bu beş temel değerden biri değildir?",
+   "siklar": [
+    "Can",
+    "Mal",
+    "Makam",
+    "Akıl"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "din-k-016",
+  "ders": "din",
+  "unite": "Din ve Hayat",
+  "kazanimKod": "DKAB.8.3.2",
+  "on": "Can emniyeti neyi kapsar?",
+  "arka": "İnsanın yaşama hakkının korunmasıdır. Örn: İş sağlığı ve güvenliği önlemleri, trafik kurallarına uymak.",
+  "test": {
+   "soru": "İş güvenliği önlemleri öncelikle hangi değeri korur?",
+   "siklar": [
+    "Mal",
+    "Can",
+    "Nesil",
+    "Din"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "din-k-017",
+  "ders": "din",
+  "unite": "Din ve Hayat",
+  "kazanimKod": "DKAB.8.3.2",
+  "on": "Mal emniyeti neyi kapsar?",
+  "arka": "Emeğin ve mülkiyetin korunmasıdır. Hırsızlık, rüşvet, hile gibi haksız kazanç yasaktır.",
+  "test": {
+   "soru": "Rüşvetin yasaklanması hangi değerle ilgilidir?",
+   "siklar": [
+    "Akıl",
+    "Nesil",
+    "Din",
+    "Mal"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "din-k-018",
+  "ders": "din",
+  "unite": "Din ve Hayat",
+  "kazanimKod": "DKAB.8.3.2",
+  "on": "Akıl emniyeti neyi kapsar?",
+  "arka": "Sağlıklı düşünmenin korunmasıdır. Alkol, uyuşturucu gibi zararlı alışkanlıklar bu yüzden yasaktır.",
+  "test": {
+   "soru": "Zararlı alışkanlıkların yasaklanması öncelikle neyi korur?",
+   "siklar": [
+    "Akıl",
+    "Mal",
+    "Nesil",
+    "Din"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "din-k-019",
+  "ders": "din",
+  "unite": "Din ve Hayat",
+  "kazanimKod": "DKAB.8.3.2",
+  "on": "Nesil emniyeti neyi kapsar?",
+  "arka": "Aile kurumunun korunması ve sağlıklı nesiller yetiştirilmesidir.",
+  "test": {
+   "soru": "“Aile kurumunun önemi” hangi değerle ilgilidir?",
+   "siklar": [
+    "Can",
+    "Akıl",
+    "Nesil",
+    "Mal"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "din-k-020",
+  "ders": "din",
+  "unite": "Din ve Hayat",
+  "kazanimKod": "DKAB.8.3.3",
+  "on": "Hz. Yusuf’tan (a.s.) hangi ilkeleri öğreniriz?",
+  "arka": "Sabır, dürüstlük, iffet ve affedicilik. Örn: Kendisini kuyuya atan kardeşlerini yıllar sonra bağışlamıştır.",
+  "test": {
+   "soru": "Hz. Yusuf’un kardeşlerini bağışlaması hangi erdeme örnektir?",
+   "siklar": [
+    "Cömertlik",
+    "Affedicilik",
+    "Cesaret",
+    "Çalışkanlık"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "din-k-021",
+  "ders": "din",
+  "unite": "Din ve Hayat",
+  "kazanimKod": "DKAB.8.3.4",
+  "on": "Asr suresine göre kimler ziyanda değildir?",
+  "arka": "İman edenler, salih amel işleyenler, birbirine hakkı ve sabrı tavsiye edenler. 103. sure, 3 ayet.",
+  "test": {
+   "soru": "Hangisi Asr suresinde sayılan özelliklerden değildir?",
+   "siklar": [
+    "İman etmek",
+    "Salih amel işlemek",
+    "Sabrı tavsiye etmek",
+    "Zengin olmak"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "din-k-022",
+  "ders": "din",
+  "unite": "Hz. Muhammed’in Örnekliği",
+  "kazanimKod": "DKAB.8.4.1",
+  "on": "Sıdk ve emanet ne demek?",
+  "arka": "Sıdk: doğru sözlü olmak. Emanet: güvenilir olmak. Hz. Muhammed’e (s.a.v.) bu yüzden “el-Emin” denmiştir.",
+  "test": {
+   "soru": "Peygamberlerin güvenilir olmasına ne denir?",
+   "siklar": [
+    "Sıdk",
+    "Emanet",
+    "Fetanet",
+    "Tebliğ"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "din-k-023",
+  "ders": "din",
+  "unite": "Hz. Muhammed’in Örnekliği",
+  "kazanimKod": "DKAB.8.4.7",
+  "on": "Üsve-i hasene ne demek?",
+  "arka": "“Güzel örnek” demektir. Hz. Muhammed (s.a.v.) söz ve davranışlarıyla insanlara en güzel örnektir (Ahzâb, 21).",
+  "test": {
+   "soru": "“Üsve-i hasene” kavramının anlamı nedir?",
+   "siklar": [
+    "Güzel örnek",
+    "Güvenilir kişi",
+    "Danışma",
+    "Doğru sözlülük"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "din-k-024",
+  "ders": "din",
+  "unite": "Hz. Muhammed’in Örnekliği",
+  "kazanimKod": "DKAB.8.4.3",
+  "on": "İstişare nedir?",
+  "arka": "Karar vermeden önce bilenlere danışmaktır. Örn: Hendek Savaşı öncesi Selman-ı Farisi’nin hendek kazma önerisi kabul edilmiştir.",
+  "test": {
+   "soru": "Medine’nin çevresine hendek kazılmasını kim önermiştir?",
+   "siklar": [
+    "Hz. Ali",
+    "Hz. Ebu Bekir",
+    "Selman-ı Farisi",
+    "Hz. Ömer"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "din-k-025",
+  "ders": "din",
+  "unite": "Hz. Muhammed’in Örnekliği",
+  "kazanimKod": "DKAB.8.4.2",
+  "on": "Peygamberimizin affediciliğine örnek?",
+  "arka": "Mekke’nin fethinde, yıllarca kendisine eziyet edenlerden intikam almamış, onları serbest bırakmıştır.",
+  "test": {
+   "soru": "Mekke’nin fethinde eski düşmanlarını serbest bırakması hangi özelliğini gösterir?",
+   "siklar": [
+    "Kararlılık",
+    "İstişare",
+    "Cömertlik",
+    "Affedicilik"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "din-k-026",
+  "ders": "din",
+  "unite": "Hz. Muhammed’in Örnekliği",
+  "kazanimKod": "DKAB.8.4.4",
+  "on": "Peygamberimizin kararlılığına örnek?",
+  "arka": "Davetten vazgeçmesi için önerilen mal ve makamı reddetmiş, hiçbir teklifin onu davasından döndüremeyeceğini söylemiştir.",
+  "test": {
+   "soru": "Büyük teklifleri reddedip görevini sürdürmesi hangi özelliktir?",
+   "siklar": [
+    "Azim ve kararlılık",
+    "Affedicilik",
+    "İstişare",
+    "Merhamet"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "din-k-027",
+  "ders": "din",
+  "unite": "Hz. Muhammed’in Örnekliği",
+  "kazanimKod": "DKAB.8.4.5",
+  "on": "Hilfü’l-fudûl nedir?",
+  "arka": "Mekke’de haksızlığa uğrayanları korumak için kurulan Erdemliler Topluluğu. Hz. Muhammed (s.a.v.) gençliğinde katılmıştır; hakkı gözetmesine örnektir.",
+  "test": {
+   "soru": "Hilfü’l-fudûl hangi amaçla kurulmuştur?",
+   "siklar": [
+    "Ticareti geliştirmek",
+    "Haksızlığa uğrayanları korumak",
+    "Kâbe’yi onarmak",
+    "Hacılara su dağıtmak"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "din-k-028",
+  "ders": "din",
+  "unite": "Hz. Muhammed’in Örnekliği",
+  "kazanimKod": "DKAB.8.4.9",
+  "on": "Kureyş suresinin mesajı nedir?",
+  "arka": "Kureyş’e verilen nimetler (güvenli yolculuk, bolluk, güven) hatırlatılır ve Kâbe’nin Rabbine kulluk etmeleri istenir. 106. sure, 4 ayet.",
+  "test": {
+   "soru": "Kureyş suresinde nimetlere karşılık ne istenir?",
+   "siklar": [
+    "Ticareti bırakmak",
+    "Yolculuğa çıkmamak",
+    "Allah’a kulluk etmek",
+    "Savaşa hazırlanmak"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "din-k-029",
+  "ders": "din",
+  "unite": "Kur’an-ı Kerim ve Özellikleri",
+  "kazanimKod": "DKAB.8.5.1",
+  "on": "İslam’ın temel kaynakları nelerdir?",
+  "arka": "Birinci kaynak Kur’an-ı Kerim, ikinci kaynak sünnettir.",
+  "test": {
+   "soru": "İslam dininin ikinci temel kaynağı hangisidir?",
+   "siklar": [
+    "Kıssa",
+    "Sünnet",
+    "Tefsir",
+    "Siyer"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "din-k-030",
+  "ders": "din",
+  "unite": "Kur’an-ı Kerim ve Özellikleri",
+  "kazanimKod": "DKAB.8.5.1",
+  "on": "Sünnet nedir, görevi ne?",
+  "arka": "Hz. Muhammed’in (s.a.v.) söz, davranış ve onaylarıdır. Kur’an’ı açıklar ve uygulamasını gösterir. Örn: Namazın nasıl kılınacağı.",
+  "test": {
+   "soru": "Sünnetin Kur’an karşısındaki görevi nedir?",
+   "siklar": [
+    "Onu açıklamak ve uygulamasını göstermek",
+    "Onun yerine geçmek",
+    "Ona yeni sureler eklemek",
+    "Onu başka dillere çevirmek"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "din-k-031",
+  "ders": "din",
+  "unite": "Kur’an-ı Kerim ve Özellikleri",
+  "kazanimKod": "DKAB.8.5.2",
+  "on": "Kur’an’ın ana konuları nelerdir?",
+  "arka": "İnanç, ibadet, ahlak, sosyal hayat ve kıssalar.",
+  "test": {
+   "soru": "Hangisi Kur’an’ın ana konularından biri olarak sayılmaz?",
+   "siklar": [
+    "İnanç",
+    "İbadet",
+    "Coğrafya",
+    "Kıssa"
+   ],
+   "dogru": 2
+  }
+ },
+ {
+  "id": "din-k-032",
+  "ders": "din",
+  "unite": "Kur’an-ı Kerim ve Özellikleri",
+  "kazanimKod": "DKAB.8.5.2",
+  "on": "Kıssa nedir?",
+  "arka": "Kur’an’da geçmiş peygamberlerin ve toplumların ibret alınsın diye anlatılan hikâyeleridir. Örn: Hz. Nuh ve tufan.",
+  "test": {
+   "soru": "Hz. Yusuf’un hayatını anlatan ayetler hangi ana konuya girer?",
+   "siklar": [
+    "İnanç",
+    "İbadet",
+    "Ahlak",
+    "Kıssa"
+   ],
+   "dogru": 3
+  }
+ },
+ {
+  "id": "din-k-033",
+  "ders": "din",
+  "unite": "Kur’an-ı Kerim ve Özellikleri",
+  "kazanimKod": "DKAB.8.5.3",
+  "on": "Kur’an’ın temel özellikleri nelerdir?",
+  "arka": "İyiye, doğruya, güzele yönlendirir; kötülükten sakındırır; yol gösterir; açıklayıcıdır; düşünmeye ve aklı kullanmaya çağırır.",
+  "test": {
+   "soru": "“… ayetlerini düşünsünler …” ifadesi Kur’an’ın hangi özelliğini vurgular?",
+   "siklar": [
+    "Düşünmeye yöneltmesi",
+    "Arapça olması",
+    "Son kitap olması",
+    "Sure sayısı"
+   ],
+   "dogru": 0
+  }
+ },
+ {
+  "id": "din-k-034",
+  "ders": "din",
+  "unite": "Kur’an-ı Kerim ve Özellikleri",
+  "kazanimKod": "DKAB.8.5.3",
+  "on": "Furkan ne demek?",
+  "arka": "Kur’an’ın adlarından biridir: iyiyi kötüden, doğruyu yanlıştan ayıran demektir.",
+  "test": {
+   "soru": "“Doğruyu yanlıştan ayıran” anlamındaki Kur’an adı hangisidir?",
+   "siklar": [
+    "Sünnet",
+    "Furkan",
+    "Kıssa",
+    "Nisap"
+   ],
+   "dogru": 1
+  }
+ },
+ {
+  "id": "din-k-035",
+  "ders": "din",
+  "unite": "Kur’an-ı Kerim ve Özellikleri",
+  "kazanimKod": "DKAB.8.5.4",
+  "on": "Hz. Nuh (a.s.) kavmini neye çağırdı?",
+  "arka": "Tevhide, yani yalnızca Allah’a kulluk etmeye. Uzun yıllar sabırla davet etti; inananlar gemiyle tufandan kurtuldu.",
+  "test": {
+   "soru": "Hangisi Hz. Nuh’un kıssasında yer alır?",
+   "siklar": [
+    "Asa",
+    "Kuyu",
+    "Gemi ve tufan",
+    "Terazi"
+   ],
+   "dogru": 2
+  }
+ }
+]
