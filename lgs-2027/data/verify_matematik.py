@@ -269,7 +269,14 @@ def _(q): return numeric(float(F(24, 10) * 15))(q)
 @check(40)
 def _(q): return numeric(float(F(16, 10) / 2 * F(75, 10)))(q)
 @check(41)
-def _(q): return numeric(float(F(60) * 250 / 100))(q)
+def _(q):
+    ls = [l for l in tags(q["svg"], "line")]; bar = [l for l in ls if l.get("class") == "ac"][0]; ground = ls[0]
+    legs = [l for l in ls if l["y1"] != l["y2"]]
+    barlen = abs(float(bar["x2"]) - float(bar["x1"])); spread = abs(float(legs[0]["x2"]) - float(legs[1]["x2"]))
+    leg = math.dist((float(legs[0]["x1"]), float(legs[0]["y1"])), (float(legs[0]["x2"]), float(legs[0]["y2"])))
+    assert abs(leg / barlen - 250 / 80) < 0.02 and float(ground["y1"]) == float(legs[0]["y2"])   # şekil ölçekli
+    assert abs(spread / barlen * 80 - 200) < 1
+    return numeric(float(F(80) * 250 / 100))(q)
 @check(42)
 def _(q): return numeric(float(F(12 * 50, 100) * F(8 * 50, 100)))(q)
 @check(43)

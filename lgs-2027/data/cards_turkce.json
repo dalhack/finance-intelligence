@@ -403,7 +403,7 @@
   "on": "Fiilimsi ile çekimli fiil nasıl ayrılır?",
   "arka": "Çekimli fiil kip ve kişi eki alır, yüklem olur (geldik = biz geldik). Fiilimsi kip eki almaz; isim, sıfat, zarf gibi kullanılır (tanıdık yüz). Kalıcı isimler (dondurma, çakmak) fiilimsi değildir.",
   "test": {
-   "soru": "Hangisindeki altı çizili gibi düşünülen sözcük fiilimsi DEĞİLDİR?",
+   "soru": "Ayraç içindeki sözcüklerden hangisi fiilimsi DEĞİLDİR?",
    "siklar": [
     "Gülmek insana iyi gelir. (gülmek)",
     "Okunacak kitapları ayırdım. (okunacak)",
@@ -713,7 +713,7 @@
    "siklar": [
     "Ben erken yatarım, kardeşim geç yatar.",
     "Annem çayı, babam kahveyi sever.",
-    "Kedi sütü, köpek mamayı yedi.",
+    "Kedi balığı, köpek mamayı yedi.",
     "Ben erken, kardeşim geç yatar."
    ],
    "dogru": 3

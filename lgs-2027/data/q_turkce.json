@@ -1,0 +1,2359 @@
+[
+ {
+  "id": "tur-001",
+  "ders": "turkce",
+  "unite": "Sözcükte Anlam ve Deyimler",
+  "kazanimKod": "T.8.3.5",
+  "kazanimAd": "Bağlamdan yararlanarak bilmediği kelime ve kelime gruplarının anlamını tahmin eder.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Aşağıdaki cümlelerin hangisinde altı çizili sözcük <b>mecaz anlamda</b> kullanılmıştır?",
+  "svg": "",
+  "siklar": [
+   "Kışlık montunu dolabın <u>üst</u> rafına koydu.",
+   "Annem çorbaya biraz <u>tuz</u> ekledi.",
+   "Öğretmenin <u>sıcak</u> gülümsemesi hepimizi rahatlattı.",
+   "Çocuk, <u>derin</u> kuyuya dikkatle baktı."
+  ],
+  "dogru": 2,
+  "ipucu1": "Mecaz anlamda sözcük, gerçek anlamından uzaklaşır. Kendine sor: Bu şey elle tutulur, ölçülür biçimde gerçekten öyle mi?",
+  "ipucu2": "Bir gülümsemenin sıcaklığını termometreyle ölçebilir misin? Ölçemiyorsan sözcük gerçek anlamında değildir.",
+  "cozum": [
+   "Gerçek anlam: sözcüğün akla gelen ilk, somut anlamıdır.",
+   "Üst raf, tuz ve derin kuyu somut olarak gerçekten öyledir.",
+   "Gülümseme ısı vermez; 'sıcak' burada 'içten, sevgi dolu' demektir.",
+   "Bu yüzden mecaz anlamlı sözcük 'sıcak'tır. Cevap C."
+  ],
+  "tuzaklar": [
+   "Raf gerçekten üsttedir; sözcük ilk akla gelen anlamıyla kullanılmış.",
+   "Çorbaya atılan tuz gerçek tuzdur; anlam değişmemiş.",
+   "",
+   "Kuyu gerçekten derindir; 'derin düşünce' deseydi mecaz olurdu, burada gerçek anlam var."
+  ],
+  "taktik": "Altı çizili sözcüğü 'gerçekten, elle tutulur biçimde öyle mi?' diye test et. Hayır diyorsan mecazdır.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Mecaz anlam",
+    "tanim": "Sözcüğün gerçek anlamından tamamen uzaklaşıp kazandığı yeni anlam. Örn: sıcak gülümseme, ağır söz."
+   },
+   {
+    "ad": "Gerçek anlam",
+    "tanim": "Sözcüğün akla gelen ilk anlamı. Örn: sıcak çorba."
+   }
+  ]
+ },
+ {
+  "id": "tur-002",
+  "ders": "turkce",
+  "unite": "Sözcükte Anlam ve Deyimler",
+  "kazanimKod": "T.8.3.6",
+  "kazanimAd": "Deyim, atasözü ve özdeyişlerin metne katkısını belirler.",
+  "zorluk": 2,
+  "tip": "klasik",
+  "metin": "Aşağıdaki cümlelerin hangisinde altı çizili deyim, ayraç içinde verilen açıklamayla <b>uyuşmamaktadır</b>?",
+  "svg": "",
+  "siklar": [
+   "Sınav sonucunu görünce <u>etekleri zil çaldı</u>. (çok sevinmek)",
+   "Kardeşim uyarılarıma hiç <u>kulak asmadı</u>. (önem vermemek)",
+   "Yeni gelen öğrenci kısa sürede herkesin <u>gözüne girdi</u>. (beğenisini, sevgisini kazanmak)",
+   "Dedem bahçedeki işleri bitirmek için sabah erkenden <u>kolları sıvadı</u>. (bir işten vazgeçmek)"
+  ],
+  "dogru": 3,
+  "ipucu1": "Deyimi cümlenin içinde düşün: Kişi o anda ne yapıyor, ne hissediyor?",
+  "ipucu2": "Dedem işleri <i>bitirmek için</i> bir şey yapıyor. İşi bitirmek isteyen biri vazgeçer mi, yoksa işe mi girişir?",
+  "cozum": [
+   "Her deyimin anlamını cümleye göre kontrol edelim.",
+   "Etekleri zil çalmak = çok sevinmek. Kulak asmamak = önem vermemek. Göze girmek = beğeni kazanmak. Üçü de doğru.",
+   "Kolları sıvamak = bir işe istekle girişmek demektir.",
+   "Ayraçtaki 'vazgeçmek' bunun tam tersidir. Cevap D."
+  ],
+  "tuzaklar": [
+   "Deyimi bilmeyen, zil sesini 'telaş' sanabilir; oysa anlamı gerçekten çok sevinmektir.",
+   "'Kulak asmamak' dinlememek, önem vermemek demektir; açıklama doğru.",
+   "'Göze girmek' birinin sevgisini ve güvenini kazanmaktır; açıklama doğru.",
+   ""
+  ],
+  "taktik": "Deyimi bilmesen bile cümlenin gidişi anlamı verir: 'işleri bitirmek için' diyen biri vazgeçmez.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Deyim",
+    "tanim": "Genellikle gerçek anlamından uzaklaşmış, kalıplaşmış söz öbeği. Örn: kolları sıvamak = işe girişmek."
+   }
+  ]
+ },
+ {
+  "id": "tur-003",
+  "ders": "turkce",
+  "unite": "Sözcükte Anlam ve Deyimler",
+  "kazanimKod": "T.8.3.6",
+  "kazanimAd": "Deyim, atasözü ve özdeyişlerin metne katkısını belirler.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Zehra, bu yıl kendine bir söz verdi: Her gün yalnızca on sayfa kitap okuyacaktı. Arkadaşları “On sayfayla ne olur ki?” diye gülüyordu. Zehra aldırmadı; otobüste, teneffüste, yatmadan önce on sayfasını okudu. Yıl sonunda okuduğu kitapları üst üste dizdiğinde yığın masasının boyunu aşmıştı. Tam otuz iki kitap bitirmişti.<br><br>Bu metinde anlatılan durumu aşağıdaki atasözlerinden hangisi <b>en iyi</b> açıklar?",
+  "svg": "",
+  "siklar": [
+   "Damlaya damlaya göl olur.",
+   "Ağaç yaşken eğilir.",
+   "Bir elin nesi var, iki elin sesi var.",
+   "Sakla samanı, gelir zamanı."
+  ],
+  "dogru": 0,
+  "ipucu1": "Metindeki en önemli karşıtlığı bul: Başta küçük görünen şey sonunda neye dönüştü?",
+  "ipucu2": "'Her gün on sayfa' küçük bir miktar. Sonuç ise otuz iki kitap. Küçük şeylerin birikip büyümesini anlatan atasözünü ara.",
+  "cozum": [
+   "Metnin özü: Her gün az okumak (10 sayfa) → yıl sonunda çok kitap (32).",
+   "Yani küçük şeyler birike birike büyük bir sonuç oluşturuyor.",
+   "'Damlaya damlaya göl olur' tam olarak bunu söyler.",
+   "Öteki atasözleri eğitim, yardımlaşma ve saklama ile ilgilidir. Cevap A."
+  ],
+  "tuzaklar": [
+   "",
+   "Zehra genç olduğu için akla gelebilir; ama metinde küçük yaşta eğitim değil, azar azar birikme anlatılıyor.",
+   "Bu söz yardımlaşmayı anlatır; Zehra ise işi tek başına yapıyor.",
+   "Bu söz 'bir şeyi ileride lazım olur diye saklamak' demektir; metinde saklama değil, küçük adımlarla büyük sonuca ulaşma var."
+  ],
+  "taktik": "Önce metni tek cümleyle özetle, sonra o cümleyle aynı şeyi söyleyen atasözünü seç.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Atasözü",
+    "tanim": "Uzun deneyimlerden çıkmış, öğüt veren kalıplaşmış söz. Genel bir yargı bildirir."
+   },
+   {
+    "ad": "Atasözü–metin eşleştirme",
+    "tanim": "Metnin ana fikri ile atasözünün verdiği öğüt aynı olmalıdır."
+   }
+  ]
+ },
+ {
+  "id": "tur-004",
+  "ders": "turkce",
+  "unite": "Sözcükte Anlam ve Deyimler",
+  "kazanimKod": "T.8.3.5",
+  "kazanimAd": "Bağlamdan yararlanarak bilmediği kelime ve kelime gruplarının anlamını tahmin eder.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "I. Çocuğun <u>gözleri</u> uykusuzluktan kızarmıştı.<br>II. İpliği iğnenin <u>gözünden</u> güçlükle geçirdi.<br>III. Eski fotoğrafları çekmecenin alt <u>gözünde</u> buldum.<br>IV. Sözünü tutmayınca arkadaşlarının <u>gözünden</u> düştü.<br><br>“Göz” sözcüğü numaralanmış cümlelerin hangilerinde <b>yan anlamıyla</b> (bir nesnenin, göze benzediği için aldığı ad olarak) kullanılmıştır?",
+  "svg": "",
+  "siklar": [
+   "I ve II",
+   "II ve III",
+   "II ve IV",
+   "III ve IV"
+  ],
+  "dogru": 1,
+  "ipucu1": "Üç ayrı durumu ayır: gerçek organ mı, organa benzeyen bir nesne mi, yoksa kalıplaşmış bir deyim mi?",
+  "ipucu2": "I. cümlede gerçek göz var. IV. cümlede 'gözden düşmek' birlikte tek bir anlam veriyor. Geriye kalanlarda gösterebileceğin somut bir 'delik/bölme' var mı?",
+  "cozum": [
+   "I: Kızaran göz, görme organıdır → gerçek anlam.",
+   "II: İğnenin gözü, ipliğin geçtiği deliktir; göze benzediği için bu adı almıştır → yan anlam.",
+   "III: Çekmecenin gözü, bir bölmedir; yine benzetme yoluyla adlandırılmıştır → yan anlam.",
+   "IV: 'Gözden düşmek' = sevgisini, değerini yitirmek → deyim (mecaz).",
+   "Yan anlam II ve III'tedir. Cevap B."
+  ],
+  "tuzaklar": [
+   "I. cümledeki göz, görme organıdır; yani gerçek (temel) anlamdır, yan anlam değildir.",
+   "",
+   "IV. cümlede 'gözden düşmek' bir deyimdir; ortada göze benzeyen bir nesne yoktur.",
+   "III doğru ama IV bir deyimdir (değerini yitirmek); deyimle yan anlam karıştırılmış."
+  ],
+  "taktik": "Yan anlamda hâlâ somut, gösterebileceğin bir şey vardır (iğnenin gözü, masanın ayağı). Mecazda ve deyimde yoktur.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Yan anlam",
+    "tanim": "Sözcüğün gerçek anlamıyla bağlantılı, çoğu kez benzerlikten doğan anlamı. Örn: iğnenin gözü, masanın ayağı, şişenin ağzı."
+   },
+   {
+    "ad": "Çok anlamlılık",
+    "tanim": "Bir sözcüğün cümleye göre farklı anlamlar kazanması."
+   }
+  ]
+ },
+ {
+  "id": "tur-005",
+  "ders": "turkce",
+  "unite": "Cümlede Anlam",
+  "kazanimKod": "T.8.3.25",
+  "kazanimAd": "Okudukları ile ilgili çıkarımlarda bulunur.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Nesnel yargılar, kişiden kişiye değişmeyen ve kanıtlanabilen yargılardır.<br><br>Buna göre aşağıdaki cümlelerin hangisi <b>nesnel</b> bir yargı bildirmektedir?",
+  "svg": "",
+  "siklar": [
+   "Bu müze, şehrin en etkileyici yapısıdır.",
+   "İlçe kütüphanesi hafta içi 09.00-17.00 saatleri arasında açıktır.",
+   "Romanın sonu okuru fazlasıyla şaşırtıyor.",
+   "Yazarın sıcak ve içten bir anlatımı var."
+  ],
+  "dogru": 1,
+  "ipucu1": "Her cümle için sor: 'Bunu gidip kontrol edebilir miyim, yoksa bu birinin beğenisi mi?'",
+  "ipucu2": "'En etkileyici, şaşırtıyor, sıcak, içten' gibi beğeni sözlerinin geçtiği cümleleri ele. Saat ve gün gibi kontrol edilebilir bilgi hangisinde var?",
+  "cozum": [
+   "Nesnel yargı kanıtlanabilir; öznel yargı kişisel görüştür.",
+   "A, C ve D'de 'en etkileyici', 'şaşırtıyor', 'sıcak ve içten' gibi yorum sözleri var → öznel.",
+   "B'deki açılış saatleri kapıdaki tabeladan kontrol edilebilir → nesnel.",
+   "Cevap B."
+  ],
+  "tuzaklar": [
+   "'En etkileyici' kişiye göre değişir; başkası başka bir yapıyı beğenebilir.",
+   "",
+   "Herkes şaşırmayabilir; 'fazlasıyla şaşırtıyor' bir yorumdur.",
+   "'Sıcak ve içten' bir beğeni sözüdür, ölçülemez."
+  ],
+  "taktik": "Beğeni/duygu bildiren sıfatların (güzel, etkileyici, sıkıcı, en iyi) altını çiz; onlar varsa cümle özneldir.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Nesnel yargı",
+    "tanim": "Kanıtlanabilen, kişiye göre değişmeyen yargı. Örn: Kitap 240 sayfadır."
+   },
+   {
+    "ad": "Öznel yargı",
+    "tanim": "Kişisel görüş, beğeni bildiren yargı. Örn: Kitap çok sürükleyicidir."
+   }
+  ]
+ },
+ {
+  "id": "tur-006",
+  "ders": "turkce",
+  "unite": "Cümlede Anlam",
+  "kazanimKod": "T.8.3.25",
+  "kazanimAd": "Okudukları ile ilgili çıkarımlarda bulunur.",
+  "zorluk": 2,
+  "tip": "klasik",
+  "metin": "Aşağıdaki cümlelerin hangisinde <b>amaç-sonuç</b> ilişkisi vardır?",
+  "svg": "",
+  "siklar": [
+   "Yağmur yağdığı için maç ertelendi.",
+   "Erken kalkarsan otobüse yetişirsin.",
+   "Çok yorulduğundan erkenden uyudu.",
+   "Sınavda başarılı olmak için her gün düzenli çalışıyor."
+  ],
+  "dogru": 3,
+  "ipucu1": "Amaçta iş henüz gerçekleşmemiştir, ulaşılmak istenen bir hedeftir. Nedende ise olay zaten olmuştur.",
+  "ipucu2": "'İçin' geçen iki cümleyi karşılaştır: Yağmur yağmış mı? Sınavda başarılı olunmuş mu, yoksa bu bir hedef mi?",
+  "cozum": [
+   "Amaç-sonuç: Eylem, bir hedefe ulaşmak için yapılır. 'İçin' yerine 'amacıyla' konabilir.",
+   "D: 'Başarılı olmak amacıyla çalışıyor' denebilir → amaç-sonuç.",
+   "A: 'Yağmur yağmak amacıyla' denemez; yağmur gerçekleşmiş bir nedendir.",
+   "B koşul, C neden bildirir. Cevap D."
+  ],
+  "tuzaklar": [
+   "'İçin' sözcüğü yanıltır: Yağmur zaten yağmış, yani gerçekleşmiş bir neden var → neden-sonuç.",
+   "'-sa/-se' eki koşul bildirir: yetişmek, erken kalkma şartına bağlı → koşul-sonuç.",
+   "Yorgunluk gerçekleşmiş bir nedendir → neden-sonuç.",
+   ""
+  ],
+  "taktik": "'İçin' gördüğünde yerine 'amacıyla' koy. Anlam bozulmuyorsa amaç-sonuç, bozuluyorsa neden-sonuçtur.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Amaç-sonuç",
+    "tanim": "Eylemin hangi hedefe ulaşmak için yapıldığını bildirir. 'Amacıyla' sözüyle sınanır."
+   },
+   {
+    "ad": "Neden-sonuç",
+    "tanim": "Eylemin gerçekleşmiş bir sebebini bildirir. Örn: Yağmur yağdığı için ıslandık."
+   }
+  ]
+ },
+ {
+  "id": "tur-007",
+  "ders": "turkce",
+  "unite": "Cümlede Anlam",
+  "kazanimKod": "T.8.3.25",
+  "kazanimAd": "Okudukları ile ilgili çıkarımlarda bulunur.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "(I) Kasabanın pazarı her cumartesi meydanda kurulur. (II) Tezgâhlardaki domateslerin kokusu insanı çocukluğuna götürür. (III) Pazarda altmışa yakın tezgâh bulunur. (IV) Pazarın en lezzetli peynirini köşedeki yaşlı teyze satar.<br><br>Bu metinde numaralanmış cümlelerin hangileri <b>öznel</b> yargı içermektedir?",
+  "svg": "",
+  "siklar": [
+   "I ve II",
+   "I ve III",
+   "II ve IV",
+   "III ve IV"
+  ],
+  "dogru": 2,
+  "ipucu1": "Her cümlede 'Bunu sayarak ya da gidip görerek kanıtlayabilir miyim?' diye sor.",
+  "ipucu2": "Gün, yer ve sayı bilgisi veren cümleleri ayır. Geriye 'koku insanı çocukluğuna götürür' ve 'en lezzetli' diyen cümleler kalıyor; bunlar herkes için aynı mı?",
+  "cozum": [
+   "I: Pazarın günü ve yeri kontrol edilebilir → nesnel.",
+   "II: Kokunun insanı çocukluğuna götürmesi kişisel bir duygudur → öznel.",
+   "III: Tezgâhlar sayılabilir → nesnel.",
+   "IV: 'En lezzetli' bir beğenidir → öznel.",
+   "Cevap C: II ve IV."
+  ],
+  "tuzaklar": [
+   "II öznel ama I. cümledeki gün ve yer bilgisi herkes için aynıdır, kanıtlanabilir.",
+   "Bu iki cümle tam tersine metnin nesnel cümleleridir; soru kökündeki 'öznel' sözü kaçırılmış olabilir.",
+   "",
+   "IV öznel ama III. cümledeki tezgâh sayısı sayılarak kontrol edilebilir."
+  ],
+  "taktik": "Sayı, tarih, yer bilgisi → nesnel. Duygu ve beğeni sözü → öznel. Şıklara bakmadan önce her cümlenin yanına N ya da Ö yaz.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Öznel yargı",
+    "tanim": "Kişisel duygu, beğeni ve yorum içeren yargı; kanıtlanamaz."
+   },
+   {
+    "ad": "Nesnel yargı",
+    "tanim": "Ölçülebilen, sayılabilen, herkesçe aynı kabul edilen yargı."
+   }
+  ]
+ },
+ {
+  "id": "tur-008",
+  "ders": "turkce",
+  "unite": "Cümlede Anlam",
+  "kazanimKod": "T.8.3.21",
+  "kazanimAd": "Metnin içeriğini yorumlar.",
+  "zorluk": 3,
+  "tip": "uzun-metin",
+  "metin": "“Yalnızca çok satan kitapları okuyan kişi, başkalarının açtığı yoldan yürümüş olur; kendi patikasını bulmak isteyen, rafların tozlu köşelerine de bakmalıdır.”<br><br>Bu cümleden aşağıdaki yargılardan hangisi çıkarılabilir?",
+  "svg": "",
+  "siklar": [
+   "Okur, kitap seçerken yalnızca popüler olana bağlı kalmamalı, kendi merakının peşinden de gitmelidir.",
+   "Çok satan kitaplar, niteliksiz oldukları için okunmamalıdır.",
+   "Eski kitaplar, yeni çıkan kitaplardan her zaman daha değerlidir.",
+   "Kitap seçerken başkalarının önerilerini dinlemek en doğru yoldur."
+  ],
+  "dogru": 0,
+  "ipucu1": "Cümledeki benzetmeleri gerçek hayata çevir: 'başkalarının açtığı yol', 'kendi patikası', 'tozlu köşeler' ne anlama geliyor?",
+  "ipucu2": "'Yalnızca' sözcüğüne dikkat et. Yazar çok satan kitaplara mı karşı, yoksa sadece onlarla yetinmeye mi? 'De' eki de önemli: 'tozlu köşelere <i>de</i> bakmalı'.",
+  "cozum": [
+   "Başkalarının açtığı yol = herkesin okuduğu, popüler kitaplar.",
+   "Kendi patikası = kişinin kendi zevkine göre bulduğu kitaplar. Tozlu köşeler = az bilinen kitaplar.",
+   "'Yalnızca' ve 'de' sözcükleri şunu gösterir: Popüler kitaplar da okunabilir ama onlarla yetinilmemelidir.",
+   "Bu düşünceyi A şıkkı söyler. Öteki şıklarda aşırı ('her zaman', 'okunmamalı') ya da ters yargılar var. Cevap A."
+  ],
+  "tuzaklar": [
+   "",
+   "Cümle çok satanları kötülemiyor; 'yalnızca' onları okumayı eleştiriyor. 'Yalnızca' sözcüğü gözden kaçmış.",
+   "'Tozlu köşeler' az bilinen kitapları anlatır; eski-yeni karşılaştırması ve 'her zaman' gibi kesin bir yargı cümlede yok.",
+   "Bu, cümlenin söylediğinin tersidir: Yazar başkalarının yolundan gitmeyi yeterli bulmuyor."
+  ],
+  "taktik": "Şıklarda 'her zaman, asla, en, tamamen' gibi kesin sözler varsa şüphelen; cümlede o kadar kesin bir şey söylenmiş mi diye geri dön.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Çıkarım",
+    "tanim": "Cümlede açıkça ya da dolaylı olarak söylenenden ulaşılan yargı. Cümlede olmayan bilgi eklenemez."
+   },
+   {
+    "ad": "Sınırlayıcı sözcükler",
+    "tanim": "'Yalnızca, sadece, de/da, bile' gibi sözcükler cümlenin anlamını değiştirir; altını çiz."
+   }
+  ]
+ },
+ {
+  "id": "tur-009",
+  "ders": "turkce",
+  "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce",
+  "kazanimKod": "T.8.3.17",
+  "kazanimAd": "Metnin ana fikrini/ana duygusunu belirler.",
+  "zorluk": 1,
+  "tip": "uzun-metin",
+  "metin": "Kitap okumayı yalnızca boş zaman uğraşı sayanlar yanılıyor. Okuyan insan, hiç gitmediği şehirlerin sokaklarında dolaşır, hiç tanımadığı insanların sevinçlerine ve korkularına ortak olur. Böylece başkalarının dünyaya nasıl baktığını öğrenir. Bir romanın kahramanı haksızlığa uğradığında içimizin sızlaması boşuna değildir; o an kendimizi bir başkasının yerine koymayı öğreniyoruzdur. Okudukça, bizden farklı düşünen insanlara karşı daha sabırlı oluruz. Kısacası kitaplar bize yalnızca bilgi vermez, başkalarını anlayabilen insanlar olmamızı da sağlar.<br><br>Bu metnin ana düşüncesi aşağıdakilerden hangisidir?",
+  "svg": "",
+  "siklar": [
+   "Roman kahramanı haksızlığa uğradığında okur üzüntü duyar.",
+   "Kitap okumak, insanın başkalarını anlama becerisini geliştirir.",
+   "Kitap okuyan insanlar hayatın her alanında başarılı olur.",
+   "Kitap okumak için insanın kendine boş zaman ayırması gerekir."
+  ],
+  "dogru": 1,
+  "ipucu1": "Ana düşünce çoğu zaman 'kısacası, sonuç olarak, yani' gibi sözlerle başlayan cümlede saklıdır.",
+  "ipucu2": "Son cümleye bak: 'Kısacası kitaplar … başkalarını anlayabilen insanlar olmamızı sağlar.' Şıklardan hangisi bu cümleyle aynı şeyi söylüyor?",
+  "cozum": [
+   "Yazar ilk cümlede bir yanlışı düzeltiyor: Okumak sadece boş zaman işi değil.",
+   "Ortadaki cümleler hep aynı şeyi örnekliyor: Okuyan kişi başkalarının duygularını tanıyor.",
+   "Son cümle 'Kısacası' diyerek toparlıyor: Kitaplar başkalarını anlamamızı sağlar.",
+   "Bu düşünceyi B şıkkı veriyor. A çok dar, C çok geniş, D metinde yok. Cevap B."
+  ],
+  "tuzaklar": [
+   "Bu metinde geçiyor ama yalnızca bir örnek; ana düşünceyi destekleyen yardımcı düşüncedir (çok dar).",
+   "",
+   "Metin sadece 'başkalarını anlama'dan söz ediyor; 'her alanda başarı' metni aşan, çok geniş bir yargı.",
+   "Metinde 'boş zaman' sözü geçtiği için cazip; ama yazar boş zaman ayırmayı önermiyor, bu yargı metinde yok."
+  ],
+  "taktik": "Şıkları üç soruyla ele: Metinde var mı? Sadece bir örnek mi (dar)? Metnin söylediğinden fazlasını mı söylüyor (geniş)?",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Ana düşünce",
+    "tanim": "Yazarın okura vermek istediği temel ileti. Bütün cümleler onu destekler."
+   },
+   {
+    "ad": "Yardımcı düşünce",
+    "tanim": "Ana düşünceyi açıklayan, örnekleyen ayrıntılar."
+   }
+  ]
+ },
+ {
+  "id": "tur-010",
+  "ders": "turkce",
+  "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce",
+  "kazanimKod": "T.8.3.16",
+  "kazanimAd": "Metnin konusunu belirler.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Eski mahallelerde çeşmeler yalnızca su içilen yerler değildi. Sabahları kovasını alan kadınlar çeşme başında buluşur, günün haberlerini birbirine anlatırdı. Yolcular atlarını burada sular, çocuklar oyun aralarında koşup avuçlarıyla su içerdi. Çeşmeyi yaptıran kişi adının hayırla anılmasını isterdi; bu yüzden taşına özenle yazılar kazdırırdı. Musluklar evlere girince çeşmelerin önü yavaş yavaş boşaldı. Bugün çoğu kurumuş olsa da o taş yapılar, mahallelinin bir zamanlar nerede bir araya geldiğini bize hâlâ hatırlatıyor.<br><br>Bu metnin konusu aşağıdakilerden hangisidir?",
+  "svg": "",
+  "siklar": [
+   "Çeşmelerin eski mahalle yaşamındaki yeri",
+   "Çeşmelerin mimari özellikleri",
+   "Şehirlerde su sorununun nasıl çözüldüğü",
+   "Eski mahallelerde komşuluk ilişkilerinin bozulması"
+  ],
+  "dogru": 0,
+  "ipucu1": "Konu, 'Bu metinde neden söz ediliyor?' sorusunun cevabıdır. Hemen her cümlede tekrar eden sözcüğü bul.",
+  "ipucu2": "Her cümlede 'çeşme' var. Peki çeşmenin neyi anlatılıyor: yapısı mı, yoksa insanların orada yaptıkları mı?",
+  "cozum": [
+   "Metnin bütün cümleleri çeşmeyle ilgili.",
+   "Kadınların buluşması, yolcuların atlarını sulaması, çocukların su içmesi: Hepsi çeşmenin günlük yaşamdaki yerini anlatıyor.",
+   "Son cümle de çeşmenin 'bir araya gelinen yer' olduğunu vurguluyor.",
+   "Bu yüzden konu, çeşmelerin eski mahalle yaşamındaki yeridir. Cevap A."
+  ],
+  "tuzaklar": [
+   "",
+   "Taşa kazınan yazılardan söz edildiği için cazip; ama bu tek bir ayrıntı, metnin bütünü mimariyi anlatmıyor.",
+   "'Musluklar evlere girdi' cümlesinden yola çıkılmış; metin su sorununu ya da çözümünü anlatmıyor.",
+   "Çeşme başının boşaldığı söyleniyor ama komşuluğun bozulduğuna dair bir yargı yok; metinde olmayan bir yorum."
+  ],
+  "taktik": "Konu kısa bir söz öbeğidir, yargı bildirmez. Önce tekrar eden sözcüğü, sonra o sözcüğün hangi yönünün anlatıldığını bul.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Konu",
+    "tanim": "Metinde üzerinde durulan şey; 'Neden söz ediliyor?' sorusunun cevabı."
+   },
+   {
+    "ad": "Konu – ana düşünce farkı",
+    "tanim": "Konu bir başlık gibidir (çeşmeler); ana düşünce bir yargıdır (çeşmeler insanları bir araya getirirdi)."
+   }
+  ]
+ },
+ {
+  "id": "tur-011",
+  "ders": "turkce",
+  "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce",
+  "kazanimKod": "T.8.3.19",
+  "kazanimAd": "Metnin içeriğine uygun başlık/başlıklar belirler.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Bir ormanda yürürken ağaçları ayrı ayrı canlılar olarak görürüz. Oysa toprağın altında bambaşka bir dünya vardır. Ağaçların kökleri, mantarların incecik iplikleriyle birbirine bağlanır. Bilim insanları, bu bağlar sayesinde ağaçlar arasında su ve besin taşınabildiğini gözlemlemiştir. Yaşlı ve büyük ağaçlar, gölgede kalan fidanlara bu yolla destek olabilir. Hastalanan bir ağaç ise komşularını kimyasal işaretlerle uyarabilir. Yani orman, yan yana dizilmiş ağaçlardan ibaret değildir; üyeleri birbirine yardım eden büyük bir topluluktur.<br><br>Bu metne en uygun başlık aşağıdakilerden hangisidir?",
+  "svg": "",
+  "siklar": [
+   "Mantarların Faydaları",
+   "Ormanları Nasıl Koruruz?",
+   "Toprağın Altındaki Dayanışma",
+   "Yaşlı Ağaçların Uzun Ömrü"
+  ],
+  "dogru": 2,
+  "ipucu1": "Başlık, metnin ana düşüncesini kısaca yansıtmalıdır. Önce ana düşünceyi bul.",
+  "ipucu2": "Son cümle özet veriyor: Orman, 'birbirine yardım eden bir topluluk'. Bu yardımlaşma nerede gerçekleşiyor?",
+  "cozum": [
+   "Metin, ağaçların kökler ve mantar iplikleriyle birbirine bağlandığını anlatıyor.",
+   "Bu bağ toprağın altında kuruluyor ve ağaçlar birbirine besin, su, uyarı gönderiyor.",
+   "Ana düşünce: Ağaçlar toprağın altında yardımlaşır.",
+   "Bunu en iyi 'Toprağın Altındaki Dayanışma' başlığı karşılar. Cevap C."
+  ],
+  "tuzaklar": [
+   "Mantar iplikleri metinde geçiyor ama asıl anlatılan ağaçların birbirine yardımı; başlık çok dar kalıyor.",
+   "Orman sözcüğü çok geçtiği için cazip; fakat metinde ormanı koruma yollarından hiç söz edilmiyor.",
+   "",
+   "Yaşlı ağaçlar yalnızca bir cümlede geçiyor ve ömürleriyle ilgili bilgi verilmiyor."
+  ],
+  "taktik": "Başlık sorusu aslında ana düşünce sorusudur. Yalnızca bir cümleyi kapsayan başlıkları ele.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Başlık",
+    "tanim": "Metnin konusunu ya da ana düşüncesini yansıtan kısa ad. Metnin bütününü kapsamalıdır."
+   }
+  ]
+ },
+ {
+  "id": "tur-012",
+  "ders": "turkce",
+  "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce",
+  "kazanimKod": "T.8.3.18",
+  "kazanimAd": "Metindeki yardımcı fikirleri belirler.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Bal arıları, yiyecek bulduklarında bunu kovandaki arkadaşlarına ilginç bir yolla bildirir. Kaynağı bulan arı, peteğin üzerinde sekiz rakamına benzeyen bir yol çizerek dans eder. Dansın yönü, çiçeklerin güneşe göre hangi tarafta olduğunu gösterir. Dans ne kadar uzun sürerse yiyecek o kadar uzaktadır. Öteki arılar, dans eden arıya dokunarak ve onu izleyerek bu bilgiyi alır, sonra doğruca kaynağa uçar. Bu davranışı uzun yıllar inceleyen Avusturyalı bilim insanı Karl von Frisch, çalışmalarıyla 1973'te Nobel Ödülü kazanmıştır.<br><br>Bu metinde arıların dansıyla ilgili aşağıdakilerden hangisine <b>değinilmemiştir</b>?",
+  "svg": "",
+  "siklar": [
+   "Dansın hangi bilgileri ilettiğine",
+   "Öteki arıların dansı nasıl algıladığına",
+   "Dansı hangi bilim insanının araştırdığına",
+   "Dansın günün hangi saatlerinde yapıldığına"
+  ],
+  "dogru": 3,
+  "ipucu1": "'Değinilmemiştir' sorularında her şıkkı metinde tek tek ara; bulduğunun yanına işaret koy.",
+  "ipucu2": "Metinde 'güneş' sözcüğü geçiyor ama bu, yön bilgisi için. Saat ya da günün bir vakti geçiyor mu?",
+  "cozum": [
+   "A: 'Dansın yönü … gösterir', 'ne kadar uzun sürerse o kadar uzak' → değinilmiş.",
+   "B: 'dokunarak ve onu izleyerek bu bilgiyi alır' → değinilmiş.",
+   "C: 'Karl von Frisch' → değinilmiş.",
+   "D: Dansın yapıldığı saatle ilgili hiçbir bilgi yok. Cevap D."
+  ],
+  "tuzaklar": [
+   "Yön ve uzaklık bilgisinin iletildiği 3. ve 4. cümlelerde açıkça yazıyor.",
+   "5. cümlede 'dokunarak ve izleyerek' aldıkları söyleniyor; hızlı okununca gözden kaçabilir.",
+   "Son cümlede Karl von Frisch'in adı veriliyor.",
+   ""
+  ],
+  "taktik": "Olumsuz köklü sorularda ('değinilmemiştir, çıkarılamaz') metinde bulduğun şıkları tek tek çiz; kalan şık cevaptır.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Yardımcı düşünce",
+    "tanim": "Metinde ana düşünceyi destekleyen her bir ayrıntı."
+   },
+   {
+    "ad": "Olumsuz soru kökü",
+    "tanim": "'-mez, -memiştir, değildir' ile biten kökler. Metinde OLMAYAN aranır."
+   }
+  ]
+ },
+ {
+  "id": "tur-013",
+  "ders": "turkce",
+  "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce",
+  "kazanimKod": "T.8.3.17",
+  "kazanimAd": "Metnin ana fikrini/ana duygusunu belirler.",
+  "zorluk": 3,
+  "tip": "uzun-metin",
+  "metin": "Telefonlarımızdaki harita uygulamaları sayesinde artık hiçbir sokakta kaybolmuyoruz. Ekrandaki mavi çizgiyi izlemek yetiyor. Ne var ki bu kolaylığın bir bedeli olabilir. Yolu kendisi bulmaya çalışan kişi çevresine dikkatle bakar: Köşedeki fırını, eğri çınarı, sarı boyalı evi aklına yazar. Böylece şehrin haritası zihninde yavaş yavaş oluşur. Yalnızca ekrana bakan kişi ise vardığı yeri bilir ama geçtiği yolu hatırlamaz. Bu, uygulamaları silmemiz gerektiği anlamına gelmez. Ancak ara sıra telefonu cebimize koyup yolu kendimiz bulmayı denersek hem şehrimizi daha iyi tanır hem de yön bulma becerimizi canlı tutarız.<br><br>Bu metinde asıl anlatılmak istenen aşağıdakilerden hangisidir?",
+  "svg": "",
+  "siklar": [
+   "Harita uygulamalarından yararlanırken yön bulma becerimizi korumak için zaman zaman yolu kendimiz bulmalıyız.",
+   "Harita uygulamaları insanın çevresini tanımasını engellediği için kullanılmamalıdır.",
+   "Yolu kendisi bulan kişi, çevresindeki ayrıntıları aklında tutar.",
+   "Teknolojik araçlar insanın bütün zihinsel becerilerini zayıflatmaktadır."
+  ],
+  "dogru": 0,
+  "ipucu1": "Yazarın önerisi nerede? 'Ancak, ama, fakat' gibi sözlerden sonra gelen cümleler genellikle asıl düşünceyi taşır.",
+  "ipucu2": "Son iki cümleyi birlikte oku: 'Silmemiz gerekmez. Ancak ara sıra … kendimiz bulmayı denersek…' Yazar ne tamamen karşı ne tamamen yanında; dengeli bir öneri yapıyor.",
+  "cozum": [
+   "Yazar önce kolaylığı kabul ediyor: Artık kaybolmuyoruz.",
+   "Sonra bir sakınca gösteriyor: Yalnızca ekrana bakan, yolu öğrenemiyor.",
+   "En sonda çözümünü söylüyor: Uygulamayı bırakma ama ara sıra yolu kendin bul.",
+   "Bu dengeli öneriyi A şıkkı veriyor. B aşırı, C dar, D geniş. Cevap A."
+  ],
+  "tuzaklar": [
+   "",
+   "Metnin eleştirel havasına kapılınca cazip; ama yazar açıkça 'uygulamaları silmemiz gerekmez' diyor. Bu şık aşırıya kaçıyor.",
+   "Metinde var, doğru bir bilgi; fakat ana düşünceyi destekleyen bir yardımcı düşünce (çok dar).",
+   "Metin yalnızca harita uygulamaları ve yön bulmadan söz ediyor; 'bütün teknoloji, bütün beceriler' çok geniş."
+  ],
+  "taktik": "Zor ana düşünce sorularında yazarın 'ölçülü' mü 'kesin' mi konuştuğuna bak. Yazar ölçülüyse 'asla, bütün, kullanılmamalı' diyen şıklar yanlıştır.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Ana düşünce",
+    "tanim": "Metnin bütününün vardığı sonuç; genellikle yazarın önerisi ya da yargısıdır."
+   },
+   {
+    "ad": "Aşırı genelleme çeldiricisi",
+    "tanim": "Metindeki sınırlı bir yargıyı 'bütün, her, hiç' sözleriyle genişleten yanlış şık."
+   }
+  ]
+ },
+ {
+  "id": "tur-014",
+  "ders": "turkce",
+  "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce",
+  "kazanimKod": "T.8.3.14",
+  "kazanimAd": "Metinle ilgili soruları cevaplar.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Oryantiring, harita ve pusula yardımıyla belirli noktaları en kısa sürede bulmaya dayanan bir doğa sporudur. Yarışmacılara başlangıçta bir harita verilir; haritada işaretli kontrol noktalarına numara sırasıyla uğramak gerekir. İki nokta arasında hangi yoldan gidileceğine yarışmacı kendisi karar verir. Bu yüzden yalnızca hızlı koşmak yetmez; haritayı doğru okumak ve çabuk karar vermek de gerekir. Oryantiring ormanda, parkta, hatta şehir sokaklarında yapılabilir. Her yaştan insanın katılabildiği bu spor, hem bedeni hem zihni çalıştırır.<br><br>Bu metinde aşağıdaki sorulardan hangisinin cevabı <b>yoktur</b>?",
+  "svg": "",
+  "siklar": [
+   "Oryantiring nerelerde yapılabilir?",
+   "Oryantiringde başarılı olmak için neler gerekir?",
+   "Oryantiring ilk olarak hangi ülkede ortaya çıkmıştır?",
+   "Yarışmacılar kontrol noktalarına hangi düzende uğrar?"
+  ],
+  "dogru": 2,
+  "ipucu1": "Her soruyu metne sor ve cevabın geçtiği yerin altını çiz. Altını çizemediğin soru aradığındır.",
+  "ipucu2": "Metinde yer adları (orman, park, sokak) var ama bir ülke adı ya da bir tarih geçiyor mu?",
+  "cozum": [
+   "A: Orman, park, şehir sokakları → cevap var.",
+   "B: Hızlı koşmak, harita okumak, çabuk karar vermek → cevap var.",
+   "D: Numara sırasıyla → cevap var.",
+   "C: Sporun nerede doğduğuna dair hiçbir bilgi yok. Cevap C."
+  ],
+  "tuzaklar": [
+   "'Ormanda, parkta, şehir sokaklarında' diye cevabı var; liste uzun cümlenin içinde olduğu için atlanabilir.",
+   "'Hızlı koşmak, haritayı doğru okumak, çabuk karar vermek' diye cevabı var.",
+   "",
+   "'Numara sırasıyla uğramak gerekir' diye cevabı var; küçük bir ayrıntı olduğu için gözden kaçabilir."
+  ],
+  "taktik": "'Cevabı yoktur' sorularında önce soruları oku, sonra metni. Böylece neyi aradığını bilerek okursun.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Metinle ilgili soru",
+    "tanim": "5N1K (ne, nerede, ne zaman, nasıl, niçin, kim) sorularının cevabı metinde açıkça bulunmalıdır."
+   }
+  ]
+ },
+ {
+  "id": "tur-015",
+  "ders": "turkce",
+  "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce",
+  "kazanimKod": "T.8.3.23",
+  "kazanimAd": "Metinler arasında karşılaştırma yapar.",
+  "zorluk": 3,
+  "tip": "uzun-metin",
+  "metin": "<b>I. metin</b><br>Bir resme bakarken ressamın ne anlatmak istediğini bulmaya çalışmak bana hep yorucu gelmiştir. Bence resim, bakan kişide ne uyandırıyorsa odur. Aynı tablonun önünde biri çocukluğunu hatırlar, öteki hiç görmediği bir denizi özler. İkisi de haklıdır.<br><br><b>II. metin</b><br>Bir tabloyu gerçekten anlamak için ressamın yaşadığı dönemi ve o günlerde neler hissettiğini bilmek gerekir. Sanatçı her fırça darbesini bir amaçla atar. Bu amacı araştırmadan yapılan yorumlar, tablonun önünden öylece geçip gitmekten farksızdır.<br><br>Bu iki metinle ilgili aşağıdakilerden hangisi söylenebilir?",
+  "svg": "",
+  "siklar": [
+   "Her iki metinde de bir resmin tek bir doğru yorumu olduğu savunulmuştur.",
+   "I. metinde izleyicinin duygularına, II. metinde sanatçının amacına öncelik verilmiştir.",
+   "I. metinde sanatçının hayatını bilmenin gerekli olduğu vurgulanmıştır.",
+   "II. metinde resim sanatının herkes tarafından anlaşılamayacağı belirtilmiştir."
+  ],
+  "dogru": 1,
+  "ipucu1": "Her metni tek cümleyle özetle: 'I. metne göre resim …', 'II. metne göre resim …'. Sonra şıkları bu özetlerle karşılaştır.",
+  "ipucu2": "I. metindeki anahtar söz: 'bakan kişide ne uyandırıyorsa'. II. metindeki anahtar söz: 'sanatçı … bir amaçla'. Kimin bakışı öne çıkıyor?",
+  "cozum": [
+   "I. metin: Resmin anlamı, bakan kişinin hissettiğidir. Herkesin yorumu geçerlidir.",
+   "II. metin: Resmi anlamak için ressamın dönemini ve amacını bilmek gerekir.",
+   "Yani I. metin izleyiciyi, II. metin sanatçıyı merkeze alıyor.",
+   "Bunu B şıkkı söylüyor. Cevap B."
+  ],
+  "tuzaklar": [
+   "II. metin buna yakın; ama I. metin 'ikisi de haklıdır' diyerek birden çok yorumu kabul ediyor. 'Her iki' sözü yanlış yapıyor.",
+   "",
+   "Bu görüş I. metne değil, II. metne ait; metinlerin numaraları karıştırılmış.",
+   "II. metin araştırma yapılmasını istiyor ama 'herkes anlayamaz' gibi bir yargı içermiyor; metinde olmayan bir yorum."
+  ],
+  "taktik": "İki metinli sorularda şıklardaki 'her ikisi de', 'I. metinde', 'II. metinde' sözlerini metinlerle tek tek eşleştir; numara karışıklığı en sık yapılan hatadır.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Metinler arası karşılaştırma",
+    "tanim": "İki metnin konu, bakış açısı ve düşünce yönünden benzer ve farklı yönlerini bulma."
+   },
+   {
+    "ad": "Bakış açısı",
+    "tanim": "Yazarın konuya hangi yönden, hangi düşünceyle yaklaştığı."
+   }
+  ]
+ },
+ {
+  "id": "tur-016",
+  "ders": "turkce",
+  "unite": "Paragraf – Ana Düşünce ve Yardımcı Düşünce",
+  "kazanimKod": "T.8.3.18",
+  "kazanimAd": "Metindeki yardımcı fikirleri belirler.",
+  "zorluk": 1,
+  "tip": "uzun-metin",
+  "metin": "Kâğıt, günümüzden yaklaşık iki bin yıl önce Çin'de bulundu. Ondan önce insanlar yazılarını kil tabletlere, papirüse ya da hayvan derisinden yapılan parşömene yazıyordu. Bu malzemeler ya ağır ya da pahalıydı. Kâğıt ise hem hafif hem ucuzdu; bu yüzden zamanla bütün dünyaya yayıldı. Kâğıt ucuzlayınca kitaplar çoğaldı, kitaplar çoğalınca okuma yazma bilenlerin sayısı arttı. Bugün ekranlardan okusak da defterlerimiz ve kitaplarımız hâlâ bu eski buluşa dayanıyor.<br><br>Bu metinden aşağıdakilerden hangisi <b>çıkarılamaz</b>?",
+  "svg": "",
+  "siklar": [
+   "Kâğıttan önce de yazı yazmak için çeşitli malzemeler kullanılmıştır.",
+   "Kâğıdın yayılmasında ucuz ve hafif olması etkili olmuştur.",
+   "Kâğıdın yaygınlaşması okuryazarlığın artmasına katkı sağlamıştır.",
+   "Kâğıt bulunduktan kısa süre sonra parşömen kullanımı tamamen bırakılmıştır."
+  ],
+  "dogru": 3,
+  "ipucu1": "Soru kökündeki olumsuzluğa dikkat: Metinde karşılığı OLMAYAN şıkkı arıyorsun.",
+  "ipucu2": "Metin kâğıdın 'zamanla' yayıldığını söylüyor. Şıklardan birinde bunun tersini düşündüren 'kısa süre sonra' ve 'tamamen' sözleri var mı?",
+  "cozum": [
+   "A, B ve C'nin karşılığı olan cümleler metinde açıkça var.",
+   "D'de iki sorun var: Metin 'zamanla' diyor, şık 'kısa süre sonra' diyor.",
+   "Ayrıca parşömenin tamamen bırakıldığına dair hiçbir bilgi yok.",
+   "Bu yüzden çıkarılamayacak yargı D'dir."
+  ],
+  "tuzaklar": [
+   "Kil tablet, papirüs ve parşömen metinde sayılıyor; bu yargı çıkarılabilir.",
+   "'Hem hafif hem ucuzdu; bu yüzden … yayıldı' cümlesinden çıkarılabilir.",
+   "'Kitaplar çoğalınca okuma yazma bilenlerin sayısı arttı' cümlesinden çıkarılabilir.",
+   ""
+  ],
+  "taktik": "'Tamamen, kısa sürede, hiçbir, yalnızca' gibi kesin sözler taşıyan şıkları metinle özellikle karşılaştır; çoğu zaman metinde bu kadar kesin bir bilgi yoktur.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Çıkarım",
+    "tanim": "Metindeki bilgilere dayanarak ulaşılan yargı. Metinde dayanağı olmayan yargı çıkarılamaz."
+   },
+   {
+    "ad": "Olumsuz soru kökü",
+    "tanim": "'Çıkarılamaz, söylenemez' köklerinde üç şık doğrudur, biri yanlıştır."
+   }
+  ]
+ },
+ {
+  "id": "tur-017",
+  "ders": "turkce",
+  "unite": "Paragraf – Yapı ve Anlatım",
+  "kazanimKod": "T.8.3.14",
+  "kazanimAd": "Metinle ilgili soruları cevaplar.",
+  "zorluk": 1,
+  "tip": "uzun-metin",
+  "metin": "(I) Satranç, iki kişinin karşılıklı oynadığı bir zekâ oyunudur. (II) Oyuncular, rakibin şahını hareket edemez duruma getirmeye çalışır. (III) Her taşın tahta üzerinde kendine özgü bir hareket biçimi vardır. (IV) Dama da aynı tahtada oynanan eğlenceli bir oyundur. (V) İyi bir satranç oyuncusu, yapacağı hamleden önce birkaç hamle sonrasını düşünür. (VI) Bu yüzden satranç, insana sabırlı olmayı ve plan yapmayı da öğretir.<br><br>Bu metinde numaralanmış cümlelerden hangisi düşüncenin akışını bozmaktadır?",
+  "svg": "",
+  "siklar": [
+   "II",
+   "III",
+   "IV",
+   "V"
+  ],
+  "dogru": 2,
+  "ipucu1": "Paragrafın konusunu tek sözcükle söyle. Sonra her cümleye sor: 'Sen de bu konudan mı söz ediyorsun?'",
+  "ipucu2": "Konu satranç. Cümlelerden biri aynı tahtadan söz ediyor ama başka bir oyuna geçiyor. Hangisi?",
+  "cozum": [
+   "Paragrafın konusu satrançtır.",
+   "I, II, III, V ve VI. cümleler satrancın tanımını, amacını, taşlarını ve kazandırdıklarını anlatır.",
+   "IV. cümle 'tahta' sözüyle bağlantılı gibi görünür ama damayı anlatır; konu değişir.",
+   "IV çıkarılınca III'ten V'e geçiş sorunsuz olur. Cevap C."
+  ],
+  "tuzaklar": [
+   "Oyunun amacını anlatıyor; I. cümledeki tanımı devam ettiriyor, akışı bozmuyor.",
+   "Taşların hareketinden söz ediyor; konu hâlâ satranç.",
+   "",
+   "İyi oyuncunun özelliğini veriyor ve VI. cümledeki 'Bu yüzden' buna bağlanıyor; çıkarılırsa VI. cümle boşta kalır."
+  ],
+  "taktik": "Akışı bozan cümle çoğu zaman konuyla ortak bir sözcük taşır ama başka bir şeyden söz eder. Sözcüğe değil, neyin anlatıldığına bak.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Düşüncenin akışı",
+    "tanim": "Paragraftaki cümlelerin aynı konu etrafında birbirine bağlanarak ilerlemesi."
+   },
+   {
+    "ad": "Akışı bozan cümle",
+    "tanim": "Paragrafın konusundan sapan, çıkarıldığında anlamda eksiklik olmayan cümle."
+   }
+  ]
+ },
+ {
+  "id": "tur-018",
+  "ders": "turkce",
+  "unite": "Paragraf – Yapı ve Anlatım",
+  "kazanimKod": "T.8.3.14",
+  "kazanimAd": "Metinle ilgili soruları cevaplar.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "(I) Bisiklet, on dokuzuncu yüzyılın başlarında pedalsız bir araç olarak ortaya çıktı. (II) Sürücü, ayaklarıyla yeri iterek ilerliyordu. (III) Yıllar içinde bu araca pedal, zincir ve havalı lastik eklendi; böylece bisiklet bugünkü görünümüne kavuştu. (IV) Günümüzde bisiklet, şehirlerde giderek daha çok tercih ediliyor. (V) Çünkü trafikte zaman kaybettirmiyor ve havayı kirletmiyor. (VI) Birçok belediye de bisiklet kullanımını artırmak için özel yollar yapıyor.<br><br>Bu metin iki paragrafa ayrılmak istense ikinci paragraf numaralanmış cümlelerden hangisiyle başlar?",
+  "svg": "",
+  "siklar": [
+   "III",
+   "IV",
+   "V",
+   "VI"
+  ],
+  "dogru": 1,
+  "ipucu1": "İkiye bölme sorularında konunun ya da bakış açısının değiştiği yeri ara: geçmişten bugüne, yarardan zarara, tanımdan örneğe…",
+  "ipucu2": "İlk cümleler bisikletin geçmişini anlatıyor. Zamanın değiştiğini gösteren sözü bul: Hangi cümle 'bugün'e geçiyor?",
+  "cozum": [
+   "I, II, III: Bisikletin nasıl ortaya çıktığı ve geliştiği → geçmiş.",
+   "IV, V, VI: Bisikletin bugün şehirlerdeki kullanımı → günümüz.",
+   "Konu 'tarihçe'den 'bugünkü kullanım'a IV. cümlede geçiyor ('Günümüzde').",
+   "İkinci paragraf IV ile başlar. Cevap B."
+  ],
+  "tuzaklar": [
+   "'Yıllar içinde' sözü yeni bir başlangıç gibi görünür; ama cümle hâlâ bisikletin gelişimini, yani tarihini anlatıyor.",
+   "",
+   "'Çünkü' ile başlayan cümle bir önceki cümlenin nedenini açıklar; paragraf başı olamaz.",
+   "'de' bağlacı bu cümleyi öncekilere bağlıyor; yeni bir düşünceye geçilmiyor."
+  ],
+  "taktik": "'Çünkü, bu yüzden, ayrıca, de/da, ise' ile başlayan cümleler paragraf başı olamaz; onları hemen ele.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Paragrafı ikiye bölme",
+    "tanim": "Konunun, zamanın ya da bakış açısının değiştiği cümle yeni paragrafın başıdır."
+   },
+   {
+    "ad": "Bağlayıcı ifadeler",
+    "tanim": "'Çünkü, bu nedenle, ayrıca' gibi sözler cümleyi öncekine bağlar."
+   }
+  ]
+ },
+ {
+  "id": "tur-019",
+  "ders": "turkce",
+  "unite": "Paragraf – Yapı ve Anlatım",
+  "kazanimKod": "T.8.3.11",
+  "kazanimAd": "Metindeki anlatım biçimlerini belirler.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Köyün girişindeki değirmen, derenin kıyısına yaslanmış gibiydi. Taş duvarlarını yosun tutmuş, ahşap kapısı yıllardır boyanmadığı için griye dönmüştü. Çatıdaki kiremitlerin yarısı kırıktı; aralarından sarı otlar fışkırıyordu. Kocaman çarkı artık dönmüyordu ama kanatlarından hâlâ ince ince su damlıyordu. İçeriden küf ve eski un kokusu geliyordu. Kapının önündeki yassı taşın ortası, yıllar boyunca üzerine basan ayaklarla çukurlaşmıştı.<br><br>Bu metnin anlatımında aşağıdaki anlatım biçimlerinden hangisi ağır basmaktadır?",
+  "svg": "",
+  "siklar": [
+   "Betimleme",
+   "Öyküleme",
+   "Açıklama",
+   "Tartışma"
+  ],
+  "dogru": 0,
+  "ipucu1": "Metni okurken aklında ne oluştu: bir olay zinciri mi, bir bilgi mi, yoksa bir resim mi?",
+  "ipucu2": "Metindeki ayrıntılara bak: yosun, gri kapı, kırık kiremit, sarı otlar, küf kokusu. Bunlar hangi duyulara sesleniyor? Bir olay ilerliyor mu?",
+  "cozum": [
+   "Metinde değirmenin duvarı, kapısı, çatısı, çarkı ve kokusu anlatılıyor.",
+   "Görme ve koklama duyularına seslenen ayrıntılar var; yazar sözcüklerle resim çiziyor.",
+   "Zaman ilerlemiyor, bir olay yaşanmıyor; yani öyküleme değil.",
+   "Varlıkları göz önünde canlandırma amacı taşıyan anlatım biçimi betimlemedir. Cevap A."
+  ],
+  "tuzaklar": [
+   "",
+   "Fiiller geçmiş zamanlı olduğu için cazip; ama ortada bir olay, olayı yaşayan kişiler ve 'sonra ne oldu?' yok.",
+   "Bilgi veriliyor gibi görünse de amaç öğretmek değil; renk, koku ve görüntü ayrıntılarıyla bir yer gözümüzde canlandırılıyor.",
+   "Tartışmada bir görüş savunulur, karşı görüş çürütülür; metinde savunulan bir düşünce yok."
+  ],
+  "taktik": "Hızlı test: Olay + zaman akışı → öyküleme. Resim gibi ayrıntı → betimleme. Bilgi verme → açıklama. Görüş savunma → tartışma.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Betimleme",
+    "tanim": "Varlıkları, yerleri duyulara seslenen ayrıntılarla göz önünde canlandırma; sözcüklerle resim çizme."
+   },
+   {
+    "ad": "Öyküleme",
+    "tanim": "Bir olayı kişi, yer ve zaman belirterek, oluş sırasıyla anlatma."
+   }
+  ]
+ },
+ {
+  "id": "tur-020",
+  "ders": "turkce",
+  "unite": "Paragraf – Yapı ve Anlatım",
+  "kazanimKod": "T.8.3.34",
+  "kazanimAd": "Okuduklarında kullanılan düşünceyi geliştirme yollarını belirler.",
+  "zorluk": 3,
+  "tip": "uzun-metin",
+  "metin": "Göç, kuşların mevsimlere göre yaşadıkları yeri değiştirmesidir. Leylekler, kırlangıçlar ve turnalar bu yolculuğu her yıl yapan kuşlardandır. Göçmen kuşlar, yerleşik kuşlara göre daha uzun ve sivri kanatlıdır; bu sayede uzun yolda daha az yorulurlar. Serçe gibi yerleşik kuşlar ise kışı bulundukları yerde geçirir, yiyecek bulmak için kısa mesafeler uçar. Göç yolculuğu tehlikelerle doludur; fırtınalar ve açlık, kuşların karşılaştığı güçlüklerin başında gelir.<br><br>Bu metinde aşağıdaki düşünceyi geliştirme yollarından hangisine <b>başvurulmamıştır</b>?",
+  "svg": "",
+  "siklar": [
+   "Tanımlama",
+   "Örnekleme",
+   "Karşılaştırma",
+   "Tanık gösterme"
+  ],
+  "dogru": 3,
+  "ipucu1": "Her yolu ipucu sözcükleriyle ara: tanım → '…-dır, demektir'; örnek → adlar, 'gibi'; karşılaştırma → 'göre, ise, daha'; tanık → bir uzmanın sözü.",
+  "ipucu2": "İlk cümle 'Göç nedir?' sorusuna cevap veriyor mu? Kuş adları sayılmış mı? İki kuş grubu kıyaslanmış mı? Peki metinde adı verilen bir uzmanın sözü var mı?",
+  "cozum": [
+   "1. cümle: 'Göç, … değiştirmesidir.' → tanımlama var.",
+   "2. ve 4. cümle: leylek, kırlangıç, turna, serçe → örnekleme var.",
+   "3. ve 4. cümle: göçmen kuşlar – yerleşik kuşlar, 'göre', 'ise', 'daha' → karşılaştırma var.",
+   "Metinde konunun uzmanı olan birinin sözü aktarılmamış → tanık gösterme yok. Cevap D."
+  ],
+  "tuzaklar": [
+   "İlk cümle 'Göç, … değiştirmesidir' diyerek göçün ne olduğunu söylüyor; bu bir tanımdır.",
+   "Leylek, kırlangıç, turna ve serçe adları örnek olarak verilmiş.",
+   "Göçmen kuşlarla yerleşik kuşlar kanat ve davranış yönünden kıyaslanmış ('göre', 'ise' sözleri).",
+   ""
+  ],
+  "taktik": "Tanık göstermede mutlaka bir kişi (uzman, yazar, bilim insanı) ve onun sözü bulunur. Kişi yoksa tanık gösterme de yoktur.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Tanık gösterme",
+    "tanim": "Düşünceyi desteklemek için alanında tanınmış bir kişinin sözünü aktarma."
+   },
+   {
+    "ad": "Karşılaştırma",
+    "tanim": "İki varlık ya da kavramı benzer ve farklı yönleriyle ele alma. İpucu: göre, ise, daha, kadar."
+   }
+  ]
+ },
+ {
+  "id": "tur-021",
+  "ders": "turkce",
+  "unite": "Paragraf – Yapı ve Anlatım",
+  "kazanimKod": "T.8.3.14",
+  "kazanimAd": "Metinle ilgili soruları cevaplar.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "I. Bu yüzden eve döner dönmez kendime bir gözlem defteri aldım.<br>II. Geçen yaz dedemin köyünde yıldızlarla dolu bir gece geçirdim.<br>III. Artık her açık gecede gördüklerimi o deftere not ediyorum.<br>IV. Gökyüzündeki ışıkların hiçbirinin adını bilmediğimi o gece fark ettim.<br><br>Numaralanmış cümlelerle anlamlı bir paragraf oluşturulmak istense sıralama aşağıdakilerden hangisi gibi olur?",
+  "svg": "",
+  "siklar": [
+   "II – I – IV – III",
+   "IV – II – I – III",
+   "II – IV – III – I",
+   "II – IV – I – III"
+  ],
+  "dogru": 3,
+  "ipucu1": "Önce ilk cümleyi bul: Hiçbir şeye gönderme yapmayan, 'bu, o, bu yüzden, artık' gibi sözlerle başlamayan cümle hangisi?",
+  "ipucu2": "II. cümle olayı başlatıyor. Şimdi zincirleri kur: 'o gece' → hangi geceye bağlanır? 'Bu yüzden' → neyin sonucudur? 'o defter' → hangi defter?",
+  "cozum": [
+   "II: Yer ve zaman veriyor, hiçbir şeye gönderme yapmıyor → ilk cümle.",
+   "IV: 'o gece' sözü II'deki geceye bağlanıyor → ikinci.",
+   "I: 'Bu yüzden' IV'teki eksikliği fark etmenin sonucu → üçüncü.",
+   "III: 'o deftere' I'deki deftere bağlanıyor; 'artık' ile bugüne geliyor → son.",
+   "Sıralama II – IV – I – III. Cevap D."
+  ],
+  "tuzaklar": [
+   "Başlangıç doğru; ama I. cümledeki 'Bu yüzden'in nedeni IV'te. Neden gelmeden sonuç gelemez.",
+   "IV'teki 'o gece' sözü daha önce bir geceden söz edilmiş olmasını gerektirir; IV başta olamaz.",
+   "III'teki 'o deftere' sözü, defterin daha önce alınmış olmasını gerektirir; I'den önce gelemez.",
+   ""
+  ],
+  "taktik": "Önce ilk cümleyi bul, şıkları ona göre ele. Sonra 'bu, o, bu yüzden' gibi gönderme sözlerinin neye bağlandığını izle.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Cümle sıralama",
+    "tanim": "Paragrafta cümleler zaman, neden-sonuç ve gönderme sözleriyle birbirine bağlanır."
+   },
+   {
+    "ad": "Gönderme sözleri",
+    "tanim": "'Bu, o, böylece, bu yüzden, artık' gibi sözler önceki bir cümleye işaret eder."
+   }
+  ]
+ },
+ {
+  "id": "tur-022",
+  "ders": "turkce",
+  "unite": "Paragraf – Yapı ve Anlatım",
+  "kazanimKod": "T.8.3.10",
+  "kazanimAd": "Geçiş ve bağlantı ifadelerinin metnin anlamına olan katkısını değerlendirir.",
+  "zorluk": 1,
+  "tip": "uzun-metin",
+  "metin": "Küçük kasabalarda yaşamın sıkıcı geçtiği düşünülür. Sinema salonlarının, büyük alışveriş merkezlerinin bulunmaması bu düşünceyi güçlendirir. <b>----</b> orada herkes birbirini tanır; bayramlar, düğünler ve hasat günleri hep birlikte kutlanır. Akşamları kapı önlerinde uzun sohbetler edilir. Böyle bir yerde insanın canı pek sıkılmaz.<br><br>Bu metinde boş bırakılan yere düşüncenin akışına göre aşağıdakilerden hangisi getirilmelidir?",
+  "svg": "",
+  "siklar": [
+   "Oysaki",
+   "Kısaca",
+   "İlk olarak",
+   "Örneğin"
+  ],
+  "dogru": 0,
+  "ipucu1": "Boşluktan önceki ve sonraki cümleler aynı yönde mi, yoksa birbirine zıt mı?",
+  "ipucu2": "Önce: 'Kasaba sıkıcı sanılır.' Sonra: 'Herkes birlikte kutlar, can sıkılmaz.' İki düşünce zıt. Zıtlık bildiren geçiş ifadesini ara.",
+  "cozum": [
+   "Boşluktan önce: Kasaba yaşamı sıkıcı sanılır.",
+   "Boşluktan sonra: Aslında birliktelik vardır, can sıkılmaz.",
+   "İki bölüm birbirine zıt; araya karşıtlık bildiren bir ifade gerekir.",
+   "'Oysaki' karşıtlık bildirir. Cevap A."
+  ],
+  "tuzaklar": [
+   "",
+   "'Kısaca' bir özet başlatır; boşluktan sonra ise özet değil, önceki düşünceye ters yeni bir bilgi geliyor.",
+   "'İlk olarak' bir sıralama başlatır; metinde 'ikinci olarak, son olarak' gibi bir devam yok.",
+   "'Örneğin' önceki düşünceyi destekleyen bir örnek getirir; burada gelen cümleler 'sıkıcı' düşüncesini desteklemiyor, çürütüyor."
+  ],
+  "taktik": "Geçiş ifadelerinin görevini ezberle: oysaki/ancak → zıtlık; kısaca → özet; örneğin → örnek; ilk olarak → sıralama; böylece → sonuç.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Geçiş ve bağlantı ifadeleri",
+    "tanim": "Cümleleri anlamca birbirine bağlayan sözler: oysaki (zıtlık), kısaca (özet), özellikle (vurgu), böylece (sonuç)."
+   }
+  ]
+ },
+ {
+  "id": "tur-023",
+  "ders": "turkce",
+  "unite": "Paragraf – Yapı ve Anlatım",
+  "kazanimKod": "T.8.3.14",
+  "kazanimAd": "Metinle ilgili soruları cevaplar.",
+  "zorluk": 3,
+  "tip": "uzun-metin",
+  "metin": "<b>----</b> Çünkü bir dili konuşan son insan öldüğünde yalnızca sözcükler kaybolmaz. O dille söylenen ninniler, anlatılan masallar, bitkilere ve yıldızlara verilen adlar da onunla birlikte gider. Her dil, dünyaya bakmanın ayrı bir yoludur. Bu yüzden dil bilimciler, az konuşulan dilleri kayda geçirmek için o dilleri konuşanlarla görüşüyor, ses kayıtları alıyor.<br><br>Bu metnin başına düşüncenin akışına göre aşağıdaki cümlelerden hangisi getirilmelidir?",
+  "svg": "",
+  "siklar": [
+   "Dünyada binlerce farklı dil konuşulmaktadır.",
+   "Bir dilin yok olması, bir kültürün de yok olması demektir.",
+   "Dil bilimciler çok zor koşullarda çalışmaktadır.",
+   "Yabancı dil öğrenmek insana yeni kapılar açar."
+  ],
+  "dogru": 1,
+  "ipucu1": "İkinci cümle 'Çünkü' ile başlıyor. Demek ki ilk cümle bir yargı, ikinci cümle onun nedeni olmalı.",
+  "ipucu2": "Her şıkkın ardına 'Çünkü … yalnızca sözcükler kaybolmaz' cümlesini ekleyip oku. Hangisinde 'neden?' sorusunun cevabı gerçekten bu oluyor?",
+  "cozum": [
+   "'Çünkü' ile başlayan cümle, kendinden önceki yargının gerekçesidir.",
+   "Gerekçe: Dil ölünce ninniler, masallar, adlar da kaybolur; yani kültür kaybolur.",
+   "O hâlde ilk cümle 'dilin yok olması = kültürün yok olması' yargısını vermelidir.",
+   "Bu yargı B şıkkındadır; öteki şıklar 'çünkü' ile bağlanamıyor. Cevap B."
+  ],
+  "tuzaklar": [
+   "Genel bir giriş cümlesi gibi durduğu için cazip; ama ardından gelen 'Çünkü' bu cümlenin nedenini açıklamıyor.",
+   "",
+   "Dil bilimciler metnin sonunda geçiyor; fakat ikinci cümle onların çalışma koşullarını açıklamıyor.",
+   "Konu 'dil' olduğu için akla gelebilir; metin yabancı dil öğrenmekten hiç söz etmiyor."
+  ],
+  "taktik": "Boşluk doldurma sorularında boşluğun hemen yanındaki bağlayıcıya ('çünkü, bu yüzden, ancak') bak; cevabı o belirler.",
+  "hataTipi": "okuma",
+  "kavramlar": [
+   {
+    "ad": "Giriş cümlesi",
+    "tanim": "Paragrafın konusunu ortaya koyan, kendinden önceki bir cümleye bağlı olmayan cümle."
+   },
+   {
+    "ad": "Neden bildiren bağlantı",
+    "tanim": "'Çünkü' ile başlayan cümle, bir önceki cümledeki yargının gerekçesini verir."
+   }
+  ]
+ },
+ {
+  "id": "tur-024",
+  "ders": "turkce",
+  "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama",
+  "kazanimKod": "T.8.3.25",
+  "kazanimAd": "Okudukları ile ilgili çıkarımlarda bulunur.",
+  "zorluk": 2,
+  "tip": "cok-adimli",
+  "metin": "Okuma şenliğinde Ada, Bora, Cem, Defne ve Ece, okudukları kitapları birer birer tanıtacaktır. Sunum sırasıyla ilgili şunlar bilinmektedir:<br><br>• Cem, Ada'dan hemen sonra sunum yapacaktır.<br>• Defne ilk ya da son sırada değildir.<br>• Bora, Ece'den önce sunum yapacaktır ve ikisinin arasında yalnızca bir kişi vardır.<br>• Ada ilk sırada değildir.<br><br>Buna göre <b>son sırada</b> kim sunum yapacaktır?",
+  "svg": "",
+  "siklar": [
+   "Ada",
+   "Bora",
+   "Cem",
+   "Ece"
+  ],
+  "dogru": 2,
+  "ipucu1": "Beş boş kutu çiz: 1-2-3-4-5. En çok bilgi veren kuraldan başla: Bora ile Ece arasında tam bir kişi var.",
+  "ipucu2": "Bora–Ece için yalnızca üç olasılık var: (1,3), (2,4), (3,5). Her birini dene; Ada ile Cem'e yan yana iki boş yer kalıyor mu?",
+  "cozum": [
+   "Bora–Ece: (1,3), (2,4) ya da (3,5) olabilir.",
+   "(2,4) olursa boş yerler 1, 3, 5 kalır; Ada–Cem yan yana oturamaz. Olmaz.",
+   "(3,5) olursa Ada–Cem 1 ve 2'ye gelir; Ada ilk olur. Olmaz.",
+   "(1,3) olursa Ada 4, Cem 5 olur; Defne 2'ye yerleşir (ilk ya da son değil, uygun).",
+   "Sıra: Bora, Defne, Ece, Ada, Cem. Son sırada Cem vardır. Cevap C."
+  ],
+  "tuzaklar": [
+   "Cem, Ada'dan hemen sonra geldiği için Ada'nın arkasında mutlaka biri vardır; Ada son olamaz.",
+   "Bora, Ece'den önce olmak zorunda; son sıradaki kişinin arkasında kimse olamaz.",
+   "",
+   "Ece son olursa Bora 3. olur; Ada ile Cem'e yan yana iki yer (1 ve 2) kalır ama o zaman Ada ilk olur, kural bozulur."
+  ],
+  "taktik": "Sıralama sorularında kutucuk çiz ve en kısıtlayıcı kuralın olasılıklarını tek tek dene; çelişen olasılığı hemen çiz.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Sözel mantık – sıralama",
+    "tanim": "Verilen kurallara uyan tek dizilişi bulma. Kutucuk çizip olasılıkları elemek en güvenli yoldur."
+   }
+  ]
+ },
+ {
+  "id": "tur-025",
+  "ders": "turkce",
+  "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama",
+  "kazanimKod": "T.8.3.32",
+  "kazanimAd": "Grafik, tablo ve çizelgeyle sunulan bilgileri yorumlar.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "Mert, Selin, Tuna ve İrem; satranç, tiyatro, robotik ve resim kulüplerinden birer tanesine yazılmıştır. Her kulüpte bu öğrencilerden yalnızca biri vardır. Aşağıdaki tabloda öğrencilerin <b>yazılmak istemediği</b> kulüpler ✗ ile gösterilmiştir.<br><table class=\"t\"><tr><th></th><th>Satranç</th><th>Tiyatro</th><th>Robotik</th><th>Resim</th></tr><tr><td>Mert</td><td>✗</td><td></td><td></td><td>✗</td></tr><tr><td>Selin</td><td></td><td>✗</td><td>✗</td><td></td></tr><tr><td>Tuna</td><td></td><td>✗</td><td>✗</td><td></td></tr><tr><td>İrem</td><td>✗</td><td></td><td></td><td>✗</td></tr></table><br>• Tiyatro ve resim kulüpleri salı günü, satranç ve robotik kulüpleri perşembe günü toplanmaktadır.<br>• Mert ile Selin'in kulüpleri aynı gün toplanmaktadır.<br>• İrem salı günleri kursa gittiği için o gün toplanan bir kulübe yazılmamıştır.<br><br>Buna göre Tuna hangi kulübe yazılmıştır?",
+  "svg": "",
+  "siklar": [
+   "Satranç",
+   "Tiyatro",
+   "Robotik",
+   "Resim"
+  ],
+  "dogru": 0,
+  "ipucu1": "En kesin bilgiden başla. Hangi öğrencinin durumu tek bir kuralla belli oluyor?",
+  "ipucu2": "İrem'e tabloya göre tiyatro ya da robotik kalıyor. Salı günü kulübe gidemediğine göre hangisi? Sonra Mert'e ne kalır?",
+  "cozum": [
+   "Tabloya göre: Mert ve İrem → tiyatro ya da robotik; Selin ve Tuna → satranç ya da resim.",
+   "İrem salı günü gidemez; tiyatro salı günü. O hâlde İrem robotiktedir.",
+   "Mert'e tiyatro kalır (salı).",
+   "Selin, Mert'le aynı gün olmalı: Salı günkü öteki kulüp resim. Selin resimdedir.",
+   "Tuna'ya satranç kalır. Cevap A."
+  ],
+  "tuzaklar": [
+   "",
+   "Tabloda Tuna'nın tiyatro sütununda ✗ var; tablo dikkatli okunmamış.",
+   "Tabloda Tuna'nın robotik sütununda ✗ var; ayrıca robotik İrem'e kalıyor.",
+   "Tablo buna izin veriyor; ama Mert ile Selin'in aynı gün kuralı uygulanınca resim Selin'e gidiyor."
+  ],
+  "taktik": "Tablolu mantık sorularında önce ✗'leri okuyup her kişiye kalan seçenekleri yaz; sonra tek seçeneği kalan kişiden başla.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "Tablo okuma",
+    "tanim": "Satır ve sütunun kesiştiği hücre, o iki bilgi arasındaki ilişkiyi verir."
+   },
+   {
+    "ad": "Eleme yöntemi",
+    "tanim": "Olamayacak seçenekleri çizerek tek olası duruma ulaşma."
+   }
+  ]
+ },
+ {
+  "id": "tur-026",
+  "ders": "turkce",
+  "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama",
+  "kazanimKod": "T.8.3.25",
+  "kazanimAd": "Okudukları ile ilgili çıkarımlarda bulunur.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "Bir kitaplığın altı rafı yukarıdan aşağıya doğru 1'den 6'ya kadar numaralanmıştır. Her rafa şu türlerden biri yerleştirilecektir: roman, şiir, masal, ansiklopedi, dergi, sözlük.<br><br>• Ansiklopediler ve sözlükler ağır olduğu için en alttaki iki rafa (5 ve 6) konacaktır.<br>• Şiir kitapları, romanların <b>hemen üstündeki</b> rafta olacaktır.<br>• Masal kitapları en üst rafta olmayacaktır.<br>• Dergiler, masal kitaplarından daha üstteki bir rafta olacaktır.<br><br>Buna göre aşağıdakilerden hangisi <b>kesinlikle</b> doğrudur?",
+  "svg": "",
+  "siklar": [
+   "Dergiler en üst raftadır.",
+   "Şiir kitapları, masal kitaplarından daha üstteki bir raftadır.",
+   "Ansiklopediler 5 numaralı raftadır.",
+   "Masal kitapları çift numaralı bir raftadır."
+  ],
+  "dogru": 3,
+  "ipucu1": "'Kesinlikle doğru' demek, kurallara uyan BÜTÜN yerleşimlerde doğru demektir. Önce olası bütün yerleşimleri çıkar.",
+  "ipucu2": "5 ve 6 dolu. Üstteki dört rafa şiir–roman ikilisi yan yana üç biçimde konabilir: (1,2), (2,3), (3,4). Her birinde dergi ve masalı yerleştir.",
+  "cozum": [
+   "Ansiklopedi ve sözlük 5–6'da. Üst dört raf: şiir, roman, masal, dergi.",
+   "Şiir–roman (1,2) ise: dergi 3, masal 4.",
+   "Şiir–roman (2,3) ise: kalan raflar 1 ve 4; masal 1 olamaz → dergi 1, masal 4.",
+   "Şiir–roman (3,4) ise: dergi 1, masal 2.",
+   "Masal üç durumda da 4, 4 ve 2 numaralı raflarda; yani hep çift numaralı rafta.",
+   "Öteki şıklar yalnızca bazı durumlarda doğru. Cevap D."
+  ],
+  "tuzaklar": [
+   "İki yerleşimde doğru; ama şiir 1, roman 2, dergi 3, masal 4 dizilişinde dergiler 3. rafta. 'Olabilir' ile 'kesinlikle' karışmış.",
+   "Dergi 1, masal 2, şiir 3, roman 4 dizilişinde şiir masalın altında kalıyor; kesin değil.",
+   "Kural yalnızca '5 ve 6'ya konacak' diyor; hangisinin 5'te olduğu belli değil, sözlük de 5'te olabilir.",
+   ""
+  ],
+  "taktik": "'Kesinlikle' sorularında bir şıkkı çürütmek için tek bir karşı örnek yeter. Olası dizilişleri yazıp şıkları hepsinde dene.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Kesinlikle doğru",
+    "tanim": "Kurallara uyan bütün durumlarda doğru olan yargı."
+   },
+   {
+    "ad": "Olabilir / kesin ayrımı",
+    "tanim": "Bazı durumlarda doğru olan yargı 'olabilir'dir, 'kesin' değildir."
+   }
+  ]
+ },
+ {
+  "id": "tur-027",
+  "ders": "turkce",
+  "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama",
+  "kazanimKod": "T.8.3.32",
+  "kazanimAd": "Grafik, tablo ve çizelgeyle sunulan bilgileri yorumlar.",
+  "zorluk": 1,
+  "tip": "grafik-tablo",
+  "metin": "8/B sınıfı bu hafta bilim müzesine gezi düzenleyecektir. Gezi, müzenin açık olduğu, okul otobüsünün ve rehber öğretmenin uygun olduğu bir günde yapılabilir.<br><table class=\"t\"><tr><th>Gün</th><th>Müze</th><th>Otobüs</th><th>Rehber öğretmen</th></tr><tr><td>Pazartesi</td><td>Kapalı</td><td>Uygun</td><td>Uygun</td></tr><tr><td>Salı</td><td>Açık</td><td>Uygun</td><td>Uygun değil</td></tr><tr><td>Çarşamba</td><td>Açık</td><td>Uygun</td><td>Uygun</td></tr><tr><td>Perşembe</td><td>Açık</td><td>Uygun değil</td><td>Uygun</td></tr><tr><td>Cuma</td><td>Açık</td><td>Uygun</td><td>Uygun</td></tr></table><br>Sınıfın perşembe günü sınavı vardır. Okul kuralına göre sınav günü ve sınavın ertesi günü gezi yapılamaz.<br><br>Buna göre gezi hangi gün yapılabilir?",
+  "svg": "",
+  "siklar": [
+   "Salı",
+   "Çarşamba",
+   "Perşembe",
+   "Cuma"
+  ],
+  "dogru": 1,
+  "ipucu1": "Bir günün uygun olması için o satırdaki üç bilginin de olumlu olması gerekir. Sonra tablonun altındaki kuralı uygula.",
+  "ipucu2": "Önce içinde 'Kapalı' ya da 'Uygun değil' geçen satırları çiz. Geriye iki gün kalacak. Bunlardan biri sınavın ertesi günü mü?",
+  "cozum": [
+   "Pazartesi: müze kapalı → olmaz. Salı: rehber uygun değil → olmaz. Perşembe: otobüs yok → olmaz.",
+   "Tabloya göre uygun günler: Çarşamba ve Cuma.",
+   "Sınav perşembe; ertesi gün cuma. Cuma da elenir.",
+   "Geriye yalnızca çarşamba kalır. Cevap B."
+  ],
+  "tuzaklar": [
+   "Müze açık ve otobüs uygun; ama rehber öğretmen sütunu atlanmış.",
+   "",
+   "Müze açık görünüyor; fakat otobüs uygun değil ve o gün sınav var.",
+   "Tabloda üç sütun da uygun; ancak tablonun altındaki 'sınavın ertesi günü gezi yapılamaz' kuralı unutulmuş."
+  ],
+  "taktik": "Tablo sorularında tablonun dışındaki ek kuralı mutlaka oku; çeldirici genellikle o kuralı unutanlar için hazırlanır.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Tablo yorumlama",
+    "tanim": "Tablodaki bilgiler ile metindeki ek koşullar birlikte değerlendirilir."
+   }
+  ]
+ },
+ {
+  "id": "tur-028",
+  "ders": "turkce",
+  "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama",
+  "kazanimKod": "T.8.3.25",
+  "kazanimAd": "Okudukları ile ilgili çıkarımlarda bulunur.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "Elif, Kerem ve Zeynep'in her biri İzmir, Van ve Rize şehirlerinden farklı birinde yaşamakta; yüzme, okçuluk ve voleybol sporlarından farklı birini yapmaktadır. Bu kişilerle ilgili şunlar bilinmektedir:<br><br>• Kerem İzmir'de yaşamamaktadır.<br>• Rize'de yaşayan kişi voleybol oynamaktadır.<br>• Elif okçuluk yapmaktadır.<br>• Zeynep Van'da yaşamamaktadır.<br>• Yüzme sporu yapan kişi İzmir'de yaşamamaktadır.<br><br>Buna göre aşağıdakilerden hangisi doğrudur?",
+  "svg": "",
+  "siklar": [
+   "Kerem Van'da yaşamakta ve yüzme sporu yapmaktadır.",
+   "Elif Van'da yaşamaktadır.",
+   "Kerem voleybol oynamaktadır.",
+   "Zeynep İzmir'de yaşamaktadır."
+  ],
+  "dogru": 0,
+  "ipucu1": "Küçük bir tablo çiz: kişiler satırda; şehir ve spor sütunda. Elif'in sporu belli; bu, onun hangi şehirde yaşayamayacağını söyler.",
+  "ipucu2": "Elif okçuluk yapıyor; Rize'de yaşayan ise voleybolcu. O hâlde Elif Rize'de olamaz: İzmir ya da Van. İki olasılığı ayrı ayrı dene ve son kuralla kontrol et.",
+  "cozum": [
+   "Elif okçu → Rizeli olamaz (Rizeli voleybolcu). Elif: İzmir ya da Van.",
+   "Elif Van'daysa: Kerem İzmirli olamadığı için Rize'de (voleybol), Zeynep İzmir'de ve yüzücü olur. Bu, son kurala aykırı. Olmaz.",
+   "Elif İzmir'deyse: Zeynep Van'da olamaz → Rize'de (voleybol). Kerem Van'da ve yüzücü olur.",
+   "Bütün kurallar sağlanıyor: Elif–İzmir–okçuluk, Kerem–Van–yüzme, Zeynep–Rize–voleybol.",
+   "Doğru yargı A şıkkındadır."
+  ],
+  "tuzaklar": [
+   "",
+   "Son kural uygulanmazsa bu da mümkün görünür; ama o zaman yüzen kişi (Zeynep) İzmir'de olur ve kural bozulur.",
+   "Elif Van'da sanılırsa Kerem Rize'ye düşer ve voleybolcu olur; bu yerleşim son kurala takılır.",
+   "Yine Elif'i Van'a yerleştiren hatalı yoldan çıkar; yüzme yapan kişi İzmirli olamaz."
+  ],
+  "taktik": "İki özellikli eşleştirmelerde tablo çiz, kesin bilgileri yaz, kalan olasılıkları tek tek deneyip çelişkiye düşeni ele.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Sözel mantık – eşleştirme",
+    "tanim": "Kişileri özelliklerle eşleştirirken kesin bilgiden başlanır, olasılıklar denenerek elenir."
+   },
+   {
+    "ad": "Çelişki",
+    "tanim": "Bir varsayım kurallardan birini bozuyorsa o varsayım yanlıştır."
+   }
+  ]
+ },
+ {
+  "id": "tur-029",
+  "ders": "turkce",
+  "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama",
+  "kazanimKod": "T.8.3.32",
+  "kazanimAd": "Grafik, tablo ve çizelgeyle sunulan bilgileri yorumlar.",
+  "zorluk": 1,
+  "tip": "grafik-tablo",
+  "metin": "Aşağıdaki grafikte bir okul kütüphanesinden beş ay boyunca ödünç alınan kitap sayıları gösterilmiştir.<br><br>Bu grafiğe göre aşağıdakilerden hangisi <b>yanlıştır</b>?",
+  "svg": "<svg viewBox='0 0 320 210'><text x='160' y='14' text-anchor='middle' font-size='12' fill='currentColor'>Ödünç alınan kitap sayısı</text><g stroke='currentColor' stroke-width='0.5' opacity='0.35'><line x1='40' y1='150' x2='310' y2='150'/><line x1='40' y1='120' x2='310' y2='120'/><line x1='40' y1='90' x2='310' y2='90'/><line x1='40' y1='60' x2='310' y2='60'/><line x1='40' y1='30' x2='310' y2='30'/></g><line x1='40' y1='24' x2='40' y2='180' stroke='currentColor'/><line x1='40' y1='180' x2='310' y2='180' stroke='currentColor'/><g font-size='12' fill='currentColor' text-anchor='end'><text x='35' y='184'>0</text><text x='35' y='154'>20</text><text x='35' y='124'>40</text><text x='35' y='94'>60</text><text x='35' y='64'>80</text><text x='35' y='34'>100</text></g><rect class='acf' x='55' y='120' width='36' height='60'/><rect class='acf' x='107' y='90' width='36' height='90'/><rect class='acf' x='159' y='60' width='36' height='120'/><rect class='acf' x='211' y='105' width='36' height='75'/><rect class='acf' x='263' y='135' width='36' height='45'/><g font-size='12' fill='currentColor' text-anchor='middle'><text x='73' y='115'>40</text><text x='125' y='85'>60</text><text x='177' y='55'>80</text><text x='229' y='100'>50</text><text x='281' y='130'>30</text><text x='73' y='197'>Eylül</text><text x='125' y='197'>Ekim</text><text x='177' y='197'>Kasım</text><text x='229' y='197'>Aralık</text><text x='281' y='197'>Ocak</text></g></svg>",
+  "siklar": [
+   "Eylülden kasıma kadar ödünç alınan kitap sayısı her ay artmıştır.",
+   "Aralık ayında, kasım ayına göre daha az kitap ödünç alınmıştır.",
+   "Ocak ayında ödünç alınan kitap sayısı, eylül ayındakinin yarısıdır.",
+   "Ekim ayında ödünç alınan kitap sayısı, ocak ayındakinin iki katıdır."
+  ],
+  "dogru": 2,
+  "ipucu1": "Soru 'yanlış' olanı soruyor. Her şıkta adı geçen ayların sayılarını grafikten bulup yan yana yaz.",
+  "ipucu2": "Eylül 40, ocak 30. 40'ın yarısı kaç eder? Bu sayı ocak ayındaki sayıya eşit mi?",
+  "cozum": [
+   "Sayılar: Eylül 40, Ekim 60, Kasım 80, Aralık 50, Ocak 30.",
+   "A: 40 < 60 < 80 → doğru. B: 50 < 80 → doğru. D: 60 = 2 × 30 → doğru.",
+   "C: Eylülün yarısı 20'dir; ocak ise 30. Eşit değil.",
+   "Yanlış olan yargı C'dir."
+  ],
+  "tuzaklar": [
+   "40 → 60 → 80 biçiminde her ay artmış; bu yargı doğru olduğu için cevap olamaz.",
+   "Kasım 80, aralık 50; azalma var. Doğru bir yargı.",
+   "",
+   "Ekim 60, ocak 30; 60 = 2 × 30. Doğru bir yargı; 'iki katı' sözü hesap yapmadan yanlış sanılabilir."
+  ],
+  "taktik": "Grafik sorularında önce bütün değerleri kâğıda yaz, sonra şıkları bu sayılarla kontrol et; göz kararı karşılaştırma yapma.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "Sütun grafiği",
+    "tanim": "Sütunun yüksekliği o gruba ait miktarı gösterir; değer dikey eksenden okunur."
+   }
+  ]
+ },
+ {
+  "id": "tur-030",
+  "ders": "turkce",
+  "unite": "Sözel Mantık ve Görsel/Tablo Yorumlama",
+  "kazanimKod": "T.8.3.32",
+  "kazanimAd": "Grafik, tablo ve çizelgeyle sunulan bilgileri yorumlar.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "Yeşiltepe Ortaokulunda dört hafta süren bir atık kâğıt toplama kampanyası düzenlenmiştir. Üç sınıfın haftalara göre topladığı kâğıt miktarı (kilogram) tabloda verilmiştir.<br><table class=\"t\"><tr><th>Sınıf</th><th>1. hafta</th><th>2. hafta</th><th>3. hafta</th><th>4. hafta</th></tr><tr><td>8/A</td><td>12</td><td>15</td><td>18</td><td>20</td></tr><tr><td>8/B</td><td>20</td><td>18</td><td>14</td><td>10</td></tr><tr><td>8/C</td><td>9</td><td>9</td><td>16</td><td>25</td></tr></table><br>Bu tabloya göre aşağıdakilerden hangisi <b>söylenemez</b>?",
+  "svg": "",
+  "siklar": [
+   "Kampanya sonunda toplamda en çok kâğıdı 8/B sınıfı toplamıştır.",
+   "8/A sınıfı her hafta bir önceki haftadan daha fazla kâğıt toplamıştır.",
+   "8/B sınıfının topladığı kâğıt miktarı haftadan haftaya azalmıştır.",
+   "Dördüncü hafta en çok kâğıdı 8/C sınıfı toplamıştır."
+  ],
+  "dogru": 0,
+  "ipucu1": "'Toplamda' sözünü gördüğünde her sınıfın dört haftasını toplaman gerekir; tek bir sütuna bakmak yetmez.",
+  "ipucu2": "8/B ilk hafta 20 kg ile en öndeydi. Ama toplamlar ne? 8/A: 12 + 15 + 18 + 20; 8/B: 20 + 18 + 14 + 10. İkisini hesaplayıp karşılaştır.",
+  "cozum": [
+   "B, C ve D şıkları satır ve sütunlar okunarak doğrulanır.",
+   "Toplamlar: 8/A = 12 + 15 + 18 + 20 = 65 kg.",
+   "8/B = 20 + 18 + 14 + 10 = 62 kg; 8/C = 9 + 9 + 16 + 25 = 59 kg.",
+   "En çok kâğıdı 8/A toplamıştır, 8/B değil. Söylenemeyecek yargı A'dır."
+  ],
+  "tuzaklar": [
+   "",
+   "12 < 15 < 18 < 20; tabloyla uyumlu, söylenebilir.",
+   "20 > 18 > 14 > 10; tabloyla uyumlu, söylenebilir.",
+   "4. hafta sütununda en büyük sayı 25 ile 8/C'ye ait; söylenebilir."
+  ],
+  "taktik": "Tabloda 'her hafta' → satırı soldan sağa oku; 'şu haftada en çok' → sütunu yukarıdan aşağı oku; 'toplam' → satırı topla.",
+  "hataTipi": "grafik",
+  "kavramlar": [
+   {
+    "ad": "Tablo yorumlama",
+    "tanim": "Satırlar bir grubun zaman içindeki değişimini, sütunlar aynı andaki grupları karşılaştırmayı sağlar."
+   },
+   {
+    "ad": "İlk izlenim hatası",
+    "tanim": "İlk sütunda önde olan, toplamda önde olmayabilir; hesap yapmadan karar verme."
+   }
+  ]
+ },
+ {
+  "id": "tur-031",
+  "ders": "turkce",
+  "unite": "Fiilimsiler",
+  "kazanimKod": "T.8.3.9",
+  "kazanimAd": "Fiilimsilerin cümledeki işlevlerini kavrar.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Fiilimsiler, fiillere bazı ekler getirilerek türetilen; cümlede isim, sıfat ya da zarf görevinde kullanılan sözcüklerdir.<br><br>Buna göre aşağıdaki cümlelerin hangisinde fiilimsi <b>yoktur</b>?",
+  "svg": "",
+  "siklar": [
+   "Kardeşim dün akşam ödevlerini erkenden bitirdi.",
+   "Koşan çocuklar bahçeyi neşeyle doldurdu.",
+   "Yağmur dinince yola çıktık.",
+   "Kitap okumak beni dinlendiriyor."
+  ],
+  "dogru": 0,
+  "ipucu1": "Her cümlede yüklem dışında, kökü fiil olan başka bir sözcük var mı diye bak.",
+  "ipucu2": "'Koş-, din-, oku-' fiil kökleri. Bu köklerden türeyen ama cümlenin yüklemi olmayan sözcükleri bul. Hangi cümlede böyle bir sözcük yok?",
+  "cozum": [
+   "B: koş-an → sıfat-fiil. C: din-ince → zarf-fiil. D: oku-mak → isim-fiil.",
+   "A: Kardeşim / dün akşam / ödevlerini / erkenden / bitirdi.",
+   "'Bitirdi' cümlenin yüklemidir, çekimli fiildir; fiilimsi değildir. Öteki sözcüklerin kökü fiil değil.",
+   "Fiilimsi bulunmayan cümle A'dır."
+  ],
+  "tuzaklar": [
+   "",
+   "'Koşan' sözcüğü 'koş-' fiilinden türemiş ve 'çocuklar' adını niteliyor (sıfat-fiil); kısa olduğu için gözden kaçabilir.",
+   "'Dinince' sözcüğü 'din-' fiilinden türemiş, zaman bildiriyor (zarf-fiil).",
+   "'Okumak' sözcüğü 'oku-' fiilinden türemiş ve bir işin adı olmuş (isim-fiil)."
+  ],
+  "taktik": "Yüklemi ayır, kalan sözcüklerde fiil kökü ara. Fiil kökü + (-an/-en, -ınca, -mak, -ma, -ış, -arak, -dık, -acak…) görürsen fiilimsidir.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Fiilimsi",
+    "tanim": "Fiilden türeyen ama fiil gibi çekimlenmeyen, cümlede isim, sıfat ya da zarf olarak kullanılan sözcük."
+   },
+   {
+    "ad": "Üç tür",
+    "tanim": "İsim-fiil (-ma, -ış, -mak), sıfat-fiil (-an, -ası, -mez, -ar, -dik, -ecek, -miş), zarf-fiil (-ıp, -arak, -ınca, -ken, -madan…)."
+   }
+  ]
+ },
+ {
+  "id": "tur-032",
+  "ders": "turkce",
+  "unite": "Fiilimsiler",
+  "kazanimKod": "T.8.3.9",
+  "kazanimAd": "Fiilimsilerin cümledeki işlevlerini kavrar.",
+  "zorluk": 2,
+  "tip": "cok-adimli",
+  "metin": "“Güneş batarken sahilde yürümeyi seven yaşlı balıkçı ağlarını topladı.”<br><br>Bu cümlede aşağıdaki fiilimsi türlerinden hangileri vardır?",
+  "svg": "",
+  "siklar": [
+   "Yalnız isim-fiil",
+   "İsim-fiil ve sıfat-fiil",
+   "Sıfat-fiil ve zarf-fiil",
+   "İsim-fiil, sıfat-fiil ve zarf-fiil"
+  ],
+  "dogru": 3,
+  "ipucu1": "Cümlede kökü fiil olan sözcüklerin altını çiz: bat-, yürü-, sev-, topla-. Yüklem hangisi? Geri kalanların eklerine bak.",
+  "ipucu2": "'Topladı' yüklem. 'Batarken' ne zaman sorusuna, 'seven' hangi balıkçı sorusuna cevap veriyor. 'Yürümeyi' ise bir işin adı. Her biri hangi tür?",
+  "cozum": [
+   "batar-ken: 'Ne zaman topladı?' sorusuna cevap verir, zaman bildirir → zarf-fiil.",
+   "yürü-me-yi: yürüme işinin adıdır, hâl eki (-yi) almıştır → isim-fiil.",
+   "sev-en: 'Hangi balıkçı?' sorusuna cevap verir, adı niteler → sıfat-fiil.",
+   "Üç tür de vardır. Cevap D."
+  ],
+  "tuzaklar": [
+   "'Yürümeyi' bulunmuş ama 'seven' ve 'batarken' fark edilmemiş.",
+   "'Batarken' sözcüğü gözden kaçmış; -ken eki zaman bildiren bir zarf-fiil ekidir.",
+   "'Yürümeyi' sözcüğündeki -me eki olumsuzluk eki sanılmış; oysa burada işin adını yapan isim-fiil ekidir.",
+   ""
+  ],
+  "taktik": "Türü soruyla bul: İşin adı mı (isim-fiil)? 'Hangi?' diye mi soruluyor (sıfat-fiil)? 'Ne zaman / nasıl?' diye mi (zarf-fiil)?",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Zarf-fiil",
+    "tanim": "Fiilden türeyip cümlede zarf görevi yapan sözcük. Ekler: -ıp, -arak, -ınca, -ken, -madan, -dıkça, -alı."
+   },
+   {
+    "ad": "Sıfat-fiil",
+    "tanim": "Fiilden türeyip adı niteleyen sözcük. Ekler: -an, -ası, -mez, -ar, -dik, -ecek, -miş."
+   }
+  ]
+ },
+ {
+  "id": "tur-033",
+  "ders": "turkce",
+  "unite": "Fiilimsiler",
+  "kazanimKod": "T.8.3.9",
+  "kazanimAd": "Fiilimsilerin cümledeki işlevlerini kavrar.",
+  "zorluk": 2,
+  "tip": "klasik",
+  "metin": "Aşağıdaki cümlelerin hangisinde zarf-fiil, cümleye <b>zaman</b> anlamı katmıştır?",
+  "svg": "",
+  "siklar": [
+   "Çocuk gülerek yanımıza geldi.",
+   "Zil çalınca herkes sınıfa girdi.",
+   "Hiç dinlenmeden akşama kadar çalıştı.",
+   "Koşa koşa okula gitti."
+  ],
+  "dogru": 1,
+  "ipucu1": "Zarf-fiili bul ve yükleme soru sor: 'Ne zaman?' mı, 'Nasıl?' mı cevap veriyor?",
+  "ipucu2": "'Girdi – ne zaman?', 'geldi – nasıl?', 'çalıştı – nasıl?', 'gitti – nasıl?' sorularını sırayla dene.",
+  "cozum": [
+   "Zarf-fiiller: çalınca, gülerek, dinlenmeden, koşa koşa.",
+   "'Ne zaman girdi?' → Zil çalınca. Zaman bildirir.",
+   "'Nasıl geldi / çalıştı / gitti?' → gülerek, dinlenmeden, koşa koşa. Bunlar durum bildirir.",
+   "Zaman anlamı katan zarf-fiil B'dedir."
+  ],
+  "tuzaklar": [
+   "'Gülerek' sözcüğü 'Nasıl geldi?' sorusuna cevap verir; durum bildirir.",
+   "",
+   "Cümlede 'akşama kadar' zaman bildirdiği için cazip; ama o söz zarf-fiil değil. Zarf-fiil olan 'dinlenmeden', 'Nasıl çalıştı?' sorusuna cevap verir.",
+   "'Koşa koşa' ikilemesi 'Nasıl gitti?' sorusunun cevabıdır; durum bildirir."
+  ],
+  "taktik": "-ınca, -ken, -dığında, -alı, -madan önce genellikle zaman; -arak, -a…-a, -madan genellikle durum bildirir. Yine de yükleme soru sorarak doğrula.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Zarf-fiil (bağ-fiil)",
+    "tanim": "Yüklemi zaman ya da durum yönünden tamamlayan fiilimsi. Örn: Gelince ararım (zaman), gülerek anlattı (durum)."
+   }
+  ]
+ },
+ {
+  "id": "tur-034",
+  "ders": "turkce",
+  "unite": "Fiilimsiler",
+  "kazanimKod": "T.8.3.9",
+  "kazanimAd": "Fiilimsilerin cümledeki işlevlerini kavrar.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "I. <u>Dondurma</u> almak için sıraya girdik.<br>II. Sütü sakın <u>dondurma</u>, tadı bozulur.<br>III. Kışın gölün <u>donması</u> balıkçıları zorluyor.<br>IV. <u>Donmuş</u> yolda yürümek güçtü.<br><br>Numaralanmış cümlelerdeki altı çizili sözcüklerden hangisi <b>isim-fiildir</b>?",
+  "svg": "",
+  "siklar": [
+   "I",
+   "II",
+   "III",
+   "IV"
+  ],
+  "dogru": 2,
+  "ipucu1": "-ma/-me eki üç ayrı işte kullanılır: işin adını yapar (isim-fiil), olumsuzluk bildirir ya da kalıcı bir nesne adı oluşturur.",
+  "ipucu2": "Her sözcük için sor: Bir nesnenin adı mı? Bir emir mi? Bir adı mı niteliyor? Yoksa bir işin, oluşun adı mı?",
+  "cozum": [
+   "I: Dondurma = yenen tatlı. Bir varlığın kalıcı adı → fiilimsi değil.",
+   "II: 'Dondurma!' = dondurmamalısın. Olumsuz emir → çekimli fiil.",
+   "III: Donması = donma olayı. Bir oluşun adı ve iyelik eki almış → isim-fiil.",
+   "IV: Donmuş yol → 'Hangi yol?' sorusuna cevap verir → sıfat-fiil.",
+   "Cevap C."
+  ],
+  "tuzaklar": [
+   "-ma eki göründüğü için cazip; ama buradaki 'dondurma' bir yiyeceğin kalıcı adıdır, artık bir iş bildirmez.",
+   "Buradaki -ma olumsuzluk ekidir: 'Dondurma!' bir emirdir (dondur-ma), yani çekimli fiildir.",
+   "",
+   "'Donmuş' sözcüğü 'yol' adını niteliyor; -muş ekiyle kurulmuş bir sıfat-fiildir."
+  ],
+  "taktik": "-ma ekini test et: Yerine '-mak' koyabiliyorsan isim-fiildir (gölün donmak olayı ✓). Bir eşya/yiyecek adıysa kalıcı isimdir.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "İsim-fiil",
+    "tanim": "Fiilden -ma, -ış, -mak ekleriyle türeyip bir işin, oluşun adı olan sözcük. Örn: gülme, bakış, okumak."
+   },
+   {
+    "ad": "Kalıcı isim",
+    "tanim": "İsim-fiil ekiyle türediği hâlde bir varlığın adı olan sözcük: dondurma, çakmak, dolma. Fiilimsi sayılmaz."
+   }
+  ]
+ },
+ {
+  "id": "tur-035",
+  "ders": "turkce",
+  "unite": "Cümlenin Ögeleri",
+  "kazanimKod": "T.8.4.18",
+  "kazanimAd": "Cümlenin ögelerini ayırt eder.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "“Küçük kız bahçeden bir demet papatya topladı.”<br><br>Bu cümlede aşağıdaki ögelerden hangisi <b>yoktur</b>?",
+  "svg": "",
+  "siklar": [
+   "Özne",
+   "Zarf tümleci",
+   "Nesne",
+   "Yer tamlayıcısı (dolaylı tümleç)"
+  ],
+  "dogru": 1,
+  "ipucu1": "Önce yüklemi bul, sonra yükleme sırayla soru sor: Kim? Neyi/Ne? Nereye/Nerede/Nereden? Nasıl/Ne zaman?",
+  "ipucu2": "Yüklem 'topladı'. 'Kim topladı?', 'Ne topladı?', 'Nereden topladı?' sorularının cevabı var. 'Nasıl?' ya da 'Ne zaman topladı?' sorusuna cevap veren bir söz var mı?",
+  "cozum": [
+   "Yüklem: topladı.",
+   "Kim topladı? → Küçük kız (özne).",
+   "Ne topladı? → bir demet papatya (nesne).",
+   "Nereden topladı? → bahçeden (yer tamlayıcısı).",
+   "Nasıl, ne zaman, niçin sorularına cevap yok → zarf tümleci yoktur. Cevap B."
+  ],
+  "tuzaklar": [
+   "'Toplayan kim?' sorusunun cevabı var: Küçük kız.",
+   "",
+   "'Ne topladı?' sorusunun cevabı var: bir demet papatya (belirtisiz nesne).",
+   "'Nereden topladı?' sorusunun cevabı var: bahçeden."
+  ],
+  "taktik": "Öge bulmada sıra hep aynı: yüklem → özne → nesne → yer tamlayıcısı → zarf tümleci. Her bulduğunu cümlede ayır.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Yer tamlayıcısı (dolaylı tümleç)",
+    "tanim": "Yükleme sorulan 'nereye, nerede, nereden, kime, kimde, kimden' sorularının cevabı; -e, -de, -den ekli öge."
+   },
+   {
+    "ad": "Zarf tümleci",
+    "tanim": "Yüklemi zaman, durum, miktar, yön, neden yönünden tamamlayan öge. Sorular: ne zaman, nasıl, ne kadar, niçin."
+   }
+  ]
+ },
+ {
+  "id": "tur-036",
+  "ders": "turkce",
+  "unite": "Cümlenin Ögeleri",
+  "kazanimKod": "T.8.4.18",
+  "kazanimAd": "Cümlenin ögelerini ayırt eder.",
+  "zorluk": 2,
+  "tip": "klasik",
+  "metin": "Kurallı bir cümlede vurgulanmak istenen öge yüklemin hemen önüne getirilir.<br><br>“Dedem bu saati dün çarşıdaki ustadan aldı.”<br><br>Buna göre bu cümlede vurgulanan öge aşağıdakilerden hangisidir?",
+  "svg": "",
+  "siklar": [
+   "Özne",
+   "Nesne",
+   "Yer tamlayıcısı (dolaylı tümleç)",
+   "Zarf tümleci"
+  ],
+  "dogru": 2,
+  "ipucu1": "Yüklemi bul ve hemen solundaki ögeye bak. Dikkat: Öge tek sözcük olmayabilir, bir söz öbeği olabilir.",
+  "ipucu2": "Yüklem 'aldı'. Hemen önünde 'çarşıdaki ustadan' var. 'Kimden aldı?' sorusuna cevap veren bu öbek hangi ögedir?",
+  "cozum": [
+   "Yüklem: aldı.",
+   "Ögeler: Dedem (özne) / bu saati (nesne) / dün (zarf tümleci) / çarşıdaki ustadan (yer tamlayıcısı).",
+   "Yüklemin hemen önündeki öge: çarşıdaki ustadan.",
+   "'Kimden aldı?' sorusuna cevap verir → yer tamlayıcısı. Cevap C."
+  ],
+  "tuzaklar": [
+   "Özne (Dedem) cümlenin başında; yüklemden en uzak öge.",
+   "'Bu saati' nesnedir ama yüklemin hemen önünde değil.",
+   "",
+   "'Dün' zarf tümlecidir ve yükleme yakın durur; ama yüklemin hemen önündeki öge o değil. 'Çarşıdaki ustadan' sözünü ikiye bölenler bu hataya düşer."
+  ],
+  "taktik": "Vurgu sorusunda bütün ögeleri bulmana gerek yok: Yüklemin hemen önündeki söz öbeğini al, ona soru sor.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Vurgu",
+    "tanim": "Fiil cümlelerinde yüklemden hemen önceki öge vurguludur."
+   },
+   {
+    "ad": "Söz öbeği bölünmez",
+    "tanim": "Sıfat ve isim tamlamaları ögelere ayrılırken parçalanmaz: 'çarşıdaki ustadan' tek ögedir."
+   }
+  ]
+ },
+ {
+  "id": "tur-037",
+  "ders": "turkce",
+  "unite": "Cümlenin Ögeleri",
+  "kazanimKod": "T.8.4.18",
+  "kazanimAd": "Cümlenin ögelerini ayırt eder.",
+  "zorluk": 2,
+  "tip": "klasik",
+  "metin": "Aşağıdaki cümlelerin hangisinde nesne <b>yoktur</b>?",
+  "svg": "",
+  "siklar": [
+   "Öğretmenimiz bize yeni bir şiir okudu.",
+   "Ali kapıyı yavaşça kapattı.",
+   "Annem misafirlere çay ikram etti.",
+   "Kuşlar sonbaharda sıcak ülkelere göç eder."
+  ],
+  "dogru": 3,
+  "ipucu1": "Nesneyi bulmak için yükleme 'neyi, kimi' ya da 'ne' diye sor. Ama önce özneyi ayır ki karışmasın.",
+  "ipucu2": "'Göç eder' birlikte tek bir yüklemdir. 'Kuşlar neyi göç eder?' sorusu anlamlı mı?",
+  "cozum": [
+   "A: Ne okudu? → yeni bir şiir (nesne var).",
+   "B: Neyi kapattı? → kapıyı (nesne var).",
+   "C: Ne ikram etti? → çay (nesne var).",
+   "D: Yüklem 'göç eder'. Kuşlar (özne) / sonbaharda (zarf tümleci) / sıcak ülkelere (yer tamlayıcısı). 'Neyi?' sorusuna cevap yok.",
+   "Nesne bulunmayan cümle D'dir."
+  ],
+  "tuzaklar": [
+   "'Ne okudu?' → yeni bir şiir. Ek almadığı için gözden kaçabilir ama belirtisiz nesnedir.",
+   "'Neyi kapattı?' → kapıyı. -ı eki almış belirtili nesnedir.",
+   "'Ne ikram etti?' → çay. Yüklem 'ikram etti'dir; 'çay' ondan ayrı bir ögedir, belirtisiz nesnedir.",
+   ""
+  ],
+  "taktik": "'Etmek, olmak, yapmak' ile kurulan birleşik fiilleri (göç etmek, yardım etmek) bölme; hepsi birlikte yüklemdir.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Nesne",
+    "tanim": "Öznenin yaptığı işten etkilenen öge. Belirtili nesne -ı, -i, -u, -ü alır (kapıyı); belirtisiz nesne ek almaz (çay)."
+   },
+   {
+    "ad": "Birleşik fiil",
+    "tanim": "İsim + yardımcı fiil (göç etmek, hasta olmak). Yüklem olurken ayrılmaz."
+   }
+  ]
+ },
+ {
+  "id": "tur-038",
+  "ders": "turkce",
+  "unite": "Cümlenin Ögeleri",
+  "kazanimKod": "T.8.4.18",
+  "kazanimAd": "Cümlenin ögelerini ayırt eder.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "“Kitap okumayı seven insanlar, boş zamanlarını kütüphanede geçirir.”<br><br>Bu cümlenin öznesi aşağıdakilerden hangisidir?",
+  "svg": "",
+  "siklar": [
+   "Kitap okumayı seven insanlar",
+   "insanlar",
+   "seven insanlar",
+   "Kitap"
+  ],
+  "dogru": 0,
+  "ipucu1": "Yüklemi bul ve 'Kim geçirir?' diye sor. Cevap tek sözcük olmak zorunda değil.",
+  "ipucu2": "'Hangi insanlar?' diye sor: 'Kitap okumayı seven'. Bu sözlerin hepsi 'insanlar' adını niteliyor. Niteleyen sözler nitelediği addan ayrılabilir mi?",
+  "cozum": [
+   "Yüklem: geçirir.",
+   "Kim geçirir? → insanlar. Hangi insanlar? → kitap okumayı seven insanlar.",
+   "'Seven' bir sıfat-fiildir; 'kitap okumayı' sözünü kendine bağlar ve hepsi birlikte 'insanlar'ı niteler.",
+   "Fiilimsi kendine bağlı sözcüklerle birlikte tek öge oluşturur; bölünmez.",
+   "Özne: 'Kitap okumayı seven insanlar'. Cevap A."
+  ],
+  "tuzaklar": [
+   "",
+   "Öznenin asıl sözcüğü 'insanlar'dır; ama onu niteleyen sözler de öznenin parçasıdır, öbek bölünmez.",
+   "Biraz daha yaklaşılmış; fakat 'kitap okumayı' sözü 'seven' fiilimsisine bağlıdır, o da öznenin içindedir.",
+   "Cümlenin ilk sözcüğü olduğu için özne sanılabilir; ama 'geçirir' işini kitap yapmıyor."
+  ],
+  "taktik": "Cümlede fiilimsi varsa dikkat: Fiilimsi, kendinden önceki sözcükleri yanına alıp tek bir öge oluşturur. Virgüle kadar olan bölüm çoğu zaman öznedir.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Özne",
+    "tanim": "Yüklemin bildirdiği işi yapan ya da oluş içinde bulunan öge. Soru: Kim? Ne?"
+   },
+   {
+    "ad": "Fiilimsi öbeği",
+    "tanim": "Fiilimsi ve ona bağlı sözcükler birlikte tek öge sayılır; ögelere ayırırken parçalanmaz."
+   }
+  ]
+ },
+ {
+  "id": "tur-039",
+  "ders": "turkce",
+  "unite": "Cümle Türleri ve Fiilde Çatı",
+  "kazanimKod": "T.8.4.19",
+  "kazanimAd": "Cümle türlerini tanır.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Yüklemi isim soylu bir sözcük olan cümlelere isim cümlesi denir.<br><br>Buna göre aşağıdakilerden hangisi <b>isim cümlesidir</b>?",
+  "svg": "",
+  "siklar": [
+   "Çocuklar parkta top oynuyor.",
+   "Bu kasabanın havası çok temizdir.",
+   "Yarın erkenden yola çıkacağız.",
+   "Kitabı masanın üstüne bıraktı."
+  ],
+  "dogru": 1,
+  "ipucu1": "Her cümlenin yüklemini (genellikle son sözcüğü) bul. Köküne '-mak/-mek' getirebiliyor musun?",
+  "ipucu2": "'Oynamak, çıkmak, bırakmak' denebilir; bunlar fiil. 'Temizmek' denebilir mi?",
+  "cozum": [
+   "Yüklemler: oynuyor, temizdir, çıkacağız, bıraktı.",
+   "oyna-mak, çık-mak, bırak-mak → fiil kökleri → fiil cümleleri.",
+   "'Temiz' bir sıfattır (isim soylu); '-dir' ek-fiili alarak yüklem olmuştur.",
+   "İsim cümlesi B'dir."
+  ],
+  "tuzaklar": [
+   "Yüklem 'oynuyor'; 'oyna-' bir iş bildirir ve -yor zaman eki almıştır → fiil cümlesi.",
+   "",
+   "Yüklem 'çıkacağız'; 'çık-' fiili gelecek zaman eki almıştır → fiil cümlesi.",
+   "Yüklem 'bıraktı'; 'bırak-' fiili geçmiş zaman eki almıştır → fiil cümlesi."
+  ],
+  "taktik": "Yüklemin köküne -mak/-mek ekle: Anlamlıysa fiil cümlesi, anlamsızsa isim cümlesi.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "İsim cümlesi",
+    "tanim": "Yüklemi isim soylu sözcük olan cümle. Örn: Hava soğuktu. En sevdiğim renk mavidir."
+   },
+   {
+    "ad": "Fiil cümlesi",
+    "tanim": "Yüklemi çekimli fiil olan cümle. Örn: Hava soğudu."
+   }
+  ]
+ },
+ {
+  "id": "tur-040",
+  "ders": "turkce",
+  "unite": "Cümle Türleri ve Fiilde Çatı",
+  "kazanimKod": "T.8.4.19",
+  "kazanimAd": "Cümle türlerini tanır.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "Bir öğrenci, dört cümleyi yükleminin türüne, ögelerinin dizilişine ve anlamına göre inceleyip aşağıdaki tabloyu hazırlamıştır.<br><table class=\"t\"><tr><th>No</th><th>Cümle</th><th>Yüklemin türü</th><th>Öge dizilişi</th><th>Anlamı</th></tr><tr><td>1</td><td>Gelmedi beklediğimiz otobüs.</td><td>Fiil</td><td>Devrik</td><td>Olumsuz</td></tr><tr><td>2</td><td>Bugün hava hiç soğuk değil.</td><td>İsim</td><td>Kurallı</td><td>Olumsuz</td></tr><tr><td>3</td><td>Çok güzeldi dünkü gezi.</td><td>İsim</td><td>Kurallı</td><td>Olumlu</td></tr><tr><td>4</td><td>Kimse bu soruyu çözemedi.</td><td>Fiil</td><td>Kurallı</td><td>Olumsuz</td></tr></table><br>Öğrenci, numaralanmış cümlelerin hangisiyle ilgili bir <b>yanlışlık</b> yapmıştır?",
+  "svg": "",
+  "siklar": [
+   "1",
+   "2",
+   "3",
+   "4"
+  ],
+  "dogru": 2,
+  "ipucu1": "Her cümlede önce yüklemi bul. Yüklem sonda mı (kurallı), değil mi (devrik)? Kökü fiil mi, isim mi? Olumsuzluk (-ma, değil, yok) var mı?",
+  "ipucu2": "3. cümlenin yüklemi hangisi: 'güzeldi' mi, 'gezi' mi? Yüklem cümlenin sonunda mı?",
+  "cozum": [
+   "1: Yüklem 'gelmedi' → fiil, başta olduğu için devrik, -me ile olumsuz. Doğru.",
+   "2: Yüklem 'soğuk değil' → isim, sonda (kurallı), olumsuz. Doğru.",
+   "4: Yüklem 'çözemedi' → fiil, sonda (kurallı), olumsuz. Doğru.",
+   "3: Yüklem 'güzeldi' → isim ve olumlu; ama yüklem sonda değil, 'dünkü gezi' ondan sonra geliyor. Cümle devriktir.",
+   "Tabloda 'kurallı' yazıldığı için yanlışlık 3. cümlededir. Cevap C."
+  ],
+  "tuzaklar": [
+   "Yüklem 'gelmedi' başta (devrik), fiil ve olumsuz; üç bilgi de doğru. Devrik cümle alışılmadık göründüğü için hata burada sanılabilir.",
+   "'Soğuk değil' isim soylu bir yüklemdir, sonda ve olumsuzdur; bilgiler doğru. 'Değil' sözü fiil sanılabilir.",
+   "",
+   "'Çözemedi' fiildir, sondadır, olumsuzdur; bilgiler doğru."
+  ],
+  "taktik": "Kurallı mı devrik mi? Tek soru: Yüklem en sonda mı? Sondaysa kurallı, değilse devrik.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Devrik cümle",
+    "tanim": "Yüklemi sonda olmayan cümle. Örn: Çok güzeldi dünkü gezi."
+   },
+   {
+    "ad": "Olumsuz cümle",
+    "tanim": "Yargının gerçekleşmediğini bildiren cümle. -ma/-me, değil, yok ile kurulur."
+   }
+  ]
+ },
+ {
+  "id": "tur-041",
+  "ders": "turkce",
+  "unite": "Cümle Türleri ve Fiilde Çatı",
+  "kazanimKod": "T.8.4.20",
+  "kazanimAd": "Fiillerin çatı özelliklerinin anlama olan katkısını kavrar.",
+  "zorluk": 2,
+  "tip": "klasik",
+  "metin": "Aşağıdaki cümlelerin hangisinde işi yapanın (gerçek öznenin) kim olduğu <b>belli değildir</b>?",
+  "svg": "",
+  "siklar": [
+   "Ressam duvarı maviye boyadı.",
+   "Çocuk aynanın karşısında saçını taradı.",
+   "Öğrenciler sınıfı balonlarla süsledi.",
+   "Okulun duvarları geçen hafta boyandı."
+  ],
+  "dogru": 3,
+  "ipucu1": "Her cümlede yükleme 'Bu işi kim yaptı?' diye sor.",
+  "ipucu2": "'Kim boyadı?', 'Kim taradı?', 'Kim süsledi?' sorularının cevabı var. 'Duvarları kim boyadı?' sorusunun cevabı cümlede yazıyor mu?",
+  "cozum": [
+   "A: Kim boyadı? → Ressam. B: Kim taradı? → Çocuk. C: Kim süsledi? → Öğrenciler.",
+   "D: Boyanan şey 'okulun duvarları'; ama boyayan kişi söylenmemiş.",
+   "'Boya-n-dı' fiilindeki -n eki, işin başkası tarafından yapıldığını ama yapanın söylenmediğini gösterir (edilgen fiil).",
+   "Cevap D."
+  ],
+  "tuzaklar": [
+   "Boyama işini yapan açıkça söylenmiş: ressam.",
+   "Tarama işini yapan belli: çocuk.",
+   "Süsleme işini yapan belli: öğrenciler.",
+   ""
+  ],
+  "taktik": "Yükleme 'birileri tarafından' sözünü ekle: 'Duvarlar birileri tarafından boyandı.' Anlam uyuyorsa fiil edilgendir, yapan belli değildir.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Edilgen fiil",
+    "tanim": "İşi yapanın belli olmadığı fiil. -l ya da -n ekiyle kurulur: boyandı, yazıldı, açıldı."
+   },
+   {
+    "ad": "Sözde özne",
+    "tanim": "Edilgen cümlede işten etkilendiği hâlde özne yerinde duran öge. Örn: Duvarlar boyandı."
+   }
+  ]
+ },
+ {
+  "id": "tur-042",
+  "ders": "turkce",
+  "unite": "Cümle Türleri ve Fiilde Çatı",
+  "kazanimKod": "T.8.4.20",
+  "kazanimAd": "Fiillerin çatı özelliklerinin anlama olan katkısını kavrar.",
+  "zorluk": 3,
+  "tip": "klasik",
+  "metin": "Bazı fiillerde özne, yaptığı işten kendisi etkilenir. Örneğin “Ali yıkandı.” cümlesinde Ali, yıkama işini hem yapmış hem de bu işten etkilenmiştir.<br><br>Aşağıdaki cümlelerin hangisinde yüklem bu özelliktedir?",
+  "svg": "",
+  "siklar": [
+   "Küçük kız düğüne gitmek için süslendi.",
+   "Sokaklar bayram için süslendi.",
+   "Mektuplar dün postaya verildi.",
+   "Camlar bir taşla kırıldı."
+  ],
+  "dogru": 0,
+  "ipucu1": "Her cümlede sor: Özne bu işi kendi yapabilir mi? Yapıyorsa işten etkilenen de kendisi mi?",
+  "ipucu2": "İki cümlede de 'süslendi' var. 'Kız kendini süsledi' denebilir mi? 'Sokaklar kendini süsledi' denebilir mi?",
+  "cozum": [
+   "Aynı ek (-n, -l) hem 'kendi kendine yapma' hem de 'başkası tarafından yapılma' anlamı verebilir; anlamı özne belirler.",
+   "A: Kız kendini süsledi → işi yapan da etkilenen de kız (dönüşlü).",
+   "B, C, D: Sokaklar, mektuplar ve camlar cansızdır; işi başkaları yapmıştır (edilgen).",
+   "Öznenin yaptığı işten kendisinin etkilendiği cümle A'dır."
+  ],
+  "tuzaklar": [
+   "",
+   "Yüklem aynı ('süslendi') olduğu için en güçlü çeldirici; ama sokaklar kendini süsleyemez, onları başkaları süslemiştir.",
+   "Mektuplar kendini postaya veremez; işi yapan belli değil.",
+   "Camlar kendini kırmaz; kıran kişi söylenmemiş."
+  ],
+  "taktik": "İki test: 'kendi kendine' ekleyebiliyorsan dönüşlü; 'birileri tarafından' ekleyebiliyorsan edilgen.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Dönüşlü fiil",
+    "tanim": "Öznenin yaptığı işten yine kendisinin etkilendiği fiil. Örn: tarandı, yıkandı, süslendi (kendini)."
+   },
+   {
+    "ad": "Edilgen – dönüşlü ayrımı",
+    "tanim": "Aynı ekle kurulurlar. Özne işi kendi yapıyorsa dönüşlü, başkası yapıyorsa edilgendir."
+   }
+  ]
+ },
+ {
+  "id": "tur-043",
+  "ders": "turkce",
+  "unite": "Yazım Kuralları ve Noktalama",
+  "kazanimKod": "T.8.4.16",
+  "kazanimAd": "Yazdıklarını düzenler.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Aşağıdaki cümlelerin hangisinde “de / da”nın yazımıyla ilgili bir <b>yanlışlık</b> yapılmıştır?",
+  "svg": "",
+  "siklar": [
+   "Sen de bizimle sinemaya gelebilirsin.",
+   "Anahtarım evde kalmış.",
+   "Bu soruyu bende çözemedim.",
+   "Sınıfta kimse kalmadı."
+  ],
+  "dogru": 2,
+  "ipucu1": "'De/da'yı cümleden çıkar. Cümle hâlâ anlamlıysa bağlaçtır ve ayrı yazılır; anlam bozuluyorsa ektir, bitişik yazılır.",
+  "ipucu2": "'Bu soruyu ben çözemedim.' cümlesi anlamlı mı? Anlamlıysa oradaki 'de' ayrı mı yazılmalıydı?",
+  "cozum": [
+   "A: 'Sen bizimle gelebilirsin.' Anlamlı → bağlaç, ayrı yazılmış. Doğru.",
+   "B: 'Anahtarım ev kalmış.' Bozuk → ek, bitişik yazılmış. Doğru.",
+   "D: 'Sınıf kimse kalmadı.' Bozuk → ek, bitişik yazılmış. Doğru.",
+   "C: 'Bu soruyu ben çözemedim.' Anlamlı → 'de' bağlaçtır, 'ben de' biçiminde ayrı yazılmalıydı.",
+   "Yanlışlık C'dedir."
+  ],
+  "tuzaklar": [
+   "Buradaki 'de', 'dahi, bile' anlamı veren bağlaçtır ve doğru olarak ayrı yazılmıştır.",
+   "'Evde' sözcüğündeki -de yer bildirir (nerede?); ek olduğu için bitişik yazılır, doğrudur.",
+   "",
+   "'Sınıfta' sözcüğündeki -ta yer bildiren ektir; bitişik ve doğru yazılmıştır."
+  ],
+  "taktik": "Çıkarma testi: 'de'yi at. Cümle bozulmuyorsa AYRI yaz. Ayrıca bağlaç olan 'de' hiçbir zaman 'te/ta' olmaz.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Bağlaç olan de/da",
+    "tanim": "'Dahi, bile' anlamı katar, ayrı yazılır, cümleden çıkınca anlam bozulmaz. Örn: Ben de geldim."
+   },
+   {
+    "ad": "Ek olan -de/-da",
+    "tanim": "Bulunma bildirir, bitişik yazılır. Örn: Evde kimse yok."
+   }
+  ]
+ },
+ {
+  "id": "tur-044",
+  "ders": "turkce",
+  "unite": "Yazım Kuralları ve Noktalama",
+  "kazanimKod": "T.8.4.16",
+  "kazanimAd": "Yazdıklarını düzenler.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Annem pazardan şunları aldı( ) elma, armut ve üzüm. Sonra bana dönüp sordu:<br>— Poşetleri taşımama yardım eder misin( )<br>Sevinçle bağırdım:<br>— Tabii ki( )<br><br>Bu metinde ayraçla gösterilen yerlere sırasıyla aşağıdaki noktalama işaretlerinden hangileri getirilmelidir?",
+  "svg": "",
+  "siklar": [
+   "(;) (?) (!)",
+   "(:) (?) (!)",
+   "(:) (.) (!)",
+   "(,) (?) (.)"
+  ],
+  "dogru": 1,
+  "ipucu1": "Her boşlukta cümlenin görevine bak: Ardından sıralama mı geliyor? Soru mu soruluyor? Güçlü bir duygu mu var?",
+  "ipucu2": "'Şunları aldı' sözünden sonra alınanlar sayılıyor. 'Eder misin' içinde soru eki var. Son sözden önce 'Sevinçle bağırdım' deniyor.",
+  "cozum": [
+   "1. boşluk: 'şunları' sözünden sonra örnekler sayılıyor → iki nokta (:).",
+   "2. boşluk: 'eder misin' soru bildiriyor → soru işareti (?).",
+   "3. boşluk: Sevinçle bağırma var → ünlem işareti (!).",
+   "Sıralama: (:) (?) (!). Cevap B."
+  ],
+  "tuzaklar": [
+   "Noktalı virgül, iki noktaya benzediği için karışır; ama açıklama ya da örnek sıralanacaksa iki nokta gerekir.",
+   "",
+   "'Yardım eder misin' rica gibi görünse de soru eki (mi) taşıyan bir soru cümlesidir; sonuna nokta konmaz.",
+   "Virgül, açıklama başlatmaz; ayrıca 'bağırdım' sözü son cümlenin ünlem istediğini gösteriyor."
+  ],
+  "taktik": "Şıkları boşluk boşluk ele: Önce en emin olduğun boşluğu (örneğin soru işareti) belirle, ona uymayan şıkları çiz.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "İki nokta (:)",
+    "tanim": "Kendisinden sonra açıklama ya da örnek verilecek cümlenin sonuna konur."
+   },
+   {
+    "ad": "Ünlem (!)",
+    "tanim": "Sevinç, korku, şaşkınlık gibi duyguları ve seslenmeleri bildiren cümlelerin sonuna konur."
+   }
+  ]
+ },
+ {
+  "id": "tur-045",
+  "ders": "turkce",
+  "unite": "Yazım Kuralları ve Noktalama",
+  "kazanimKod": "T.8.4.16",
+  "kazanimAd": "Yazdıklarını düzenler.",
+  "zorluk": 2,
+  "tip": "grafik-tablo",
+  "metin": "Aşağıdaki tabloda dört cümle verilmiştir.<br><table class=\"t\"><tr><th>No</th><th>Cümle</th></tr><tr><td>I</td><td>Okulumuz 15 Eylül 2025 Pazartesi günü açıldı.</td></tr><tr><td>II</td><td>Toplantı saat 15.30'da başlayacak.</td></tr><tr><td>III</td><td>Bu yaz ailece Ağrı dağına tırmanacağız.</td></tr><tr><td>IV</td><td>Herkez pikniğe erkenden gelmiş.</td></tr></table><br>Numaralanmış cümlelerin hangilerinde yazım yanlışı vardır?",
+  "svg": "",
+  "siklar": [
+   "I ve II",
+   "I ve III",
+   "II ve IV",
+   "III ve IV"
+  ],
+  "dogru": 3,
+  "ipucu1": "Dört şeyi kontrol et: tarihlerde büyük harf, sayılara gelen ekler, yer adlarının yazımı ve sözcüklerin doğru yazılışı.",
+  "ipucu2": "'Ağrı Dağı' bir yer adıdır: İkinci sözcük nasıl başlamalı? 'Herkes' sözcüğünün son harfi nedir?",
+  "cozum": [
+   "I: Belirli bir tarih bildiren ay ve gün adları büyük yazılır (15 Eylül 2025 Pazartesi). Doğru.",
+   "II: Saat ve dakika arasına nokta konur; sayıya gelen ek kesmeyle ayrılır (15.30'da). Doğru.",
+   "III: Yer adlarında 'dağ, göl, deniz' gibi sözcükler de büyük başlar: Ağrı Dağı'na. Yanlış yazılmış.",
+   "IV: Sözcüğün doğrusu 'herkes'tir. Yanlış yazılmış.",
+   "Cevap D: III ve IV."
+  ],
+  "tuzaklar": [
+   "Bu iki cümle doğrudur: Belirli bir tarihle birlikte yazılan ay ve gün adları büyük başlar; saatte nokta ve kesme doğru kullanılmış.",
+   "III yanlış ama I doğrudur. 'Pazartesi'nin büyük yazılması hata sanılmış; belirli tarihle kullanıldığında büyük yazılır.",
+   "IV yanlış ama II doğrudur. Saat ve dakika arasına nokta konur, sayıya gelen ek kesmeyle ayrılır.",
+   ""
+  ],
+  "taktik": "Yazımı sık karıştırılan sözcükler için küçük bir liste tut: herkes, yalnız, yanlış, şoför, kirpik, tıraş, sürpriz, egzoz.",
+  "hataTipi": "dikkat",
+  "kavramlar": [
+   {
+    "ad": "Yer adlarının yazımı",
+    "tanim": "Yer adlarındaki dağ, göl, nehir, deniz gibi sözcükler de büyük harfle başlar: Ağrı Dağı, Van Gölü."
+   },
+   {
+    "ad": "Tarihlerin yazımı",
+    "tanim": "Belirli bir tarih bildiren ay ve gün adları büyük harfle başlar: 29 Ekim 1923 Pazartesi."
+   }
+  ]
+ },
+ {
+  "id": "tur-046",
+  "ders": "turkce",
+  "unite": "Yazım Kuralları ve Noktalama",
+  "kazanimKod": "T.8.4.16",
+  "kazanimAd": "Yazdıklarını düzenler.",
+  "zorluk": 3,
+  "tip": "klasik",
+  "metin": "Aşağıdaki cümlelerin hangisinde kesme işaretinin (') kullanımıyla ilgili bir <b>yanlışlık</b> yapılmıştır?",
+  "svg": "",
+  "siklar": [
+   "Dayım yıllardır Türk Dil Kurumu'nda çalışıyor.",
+   "Doğu Anadolu'da kışlar sert geçer.",
+   "Ödevimi Ayşe Hanım'a teslim ettim.",
+   "TBMM'nin açılışı 23 Nisan 1920'de gerçekleşti."
+  ],
+  "dogru": 0,
+  "ipucu1": "Kesme işareti özel adlara gelen çekim eklerini ayırır; ama bunun önemli bir istisnası vardır: kurum ve kuruluş adları.",
+  "ipucu2": "Dört cümledeki adları türlerine ayır: bölge adı, kişi adı + unvan, kısaltma + sayı, kurum adı. Hangisine gelen ek kesmeyle ayrılmaz?",
+  "cozum": [
+   "Özel adlara gelen çekim ekleri kesmeyle ayrılır: Anadolu'da, Ayşe Hanım'a.",
+   "Kısaltmalara ve sayılara gelen ekler de kesmeyle ayrılır: TBMM'nin, 1920'de.",
+   "Ancak kurum, kuruluş, kurul ve iş yeri adlarına gelen ekler kesmeyle ayrılmaz.",
+   "Doğrusu: 'Türk Dil Kurumunda'. Yanlışlık A'dadır."
+  ],
+  "tuzaklar": [
+   "",
+   "Bölge adı özel addır; gelen ek kesmeyle ayrılır. Doğru.",
+   "Kişi adından sonra gelen 'Hanım, Bey' gibi sözlere getirilen ekler kesmeyle ayrılır. Doğru; ama 'Hanım' özel ad olmadığı için hata sanılabilir.",
+   "Kısaltmalara ve sayılara gelen ekler kesmeyle ayrılır. Doğru."
+  ],
+  "taktik": "Adın sonunda 'kurumu, bakanlığı, müdürlüğü, üniversitesi, okulu, meclisi' gibi sözler varsa kesme KOYMA: Millî Eğitim Bakanlığına, Ankara Üniversitesinden.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Kesme işareti",
+    "tanim": "Özel adlara, kısaltmalara ve sayılara gelen ekleri ayırır: Ankara'ya, TDK'nin, 1923'te."
+   },
+   {
+    "ad": "Kurum adları istisnası",
+    "tanim": "Kurum, kuruluş, kurul ve iş yeri adlarına gelen ekler kesmeyle ayrılmaz: Türk Dil Kurumundan."
+   }
+  ]
+ },
+ {
+  "id": "tur-047",
+  "ders": "turkce",
+  "unite": "Anlatım Bozuklukları",
+  "kazanimKod": "T.8.3.8",
+  "kazanimAd": "Metindeki anlatım bozukluklarını belirler.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "Aşağıdaki cümlelerin hangisinde özne ile yüklem arasındaki uyumsuzluktan kaynaklanan bir <b>anlatım bozukluğu</b> vardır?",
+  "svg": "",
+  "siklar": [
+   "Biz bu hafta sonu müzeye gideceğiz.",
+   "Ben ve kardeşim yarın dedemlere gideceksiniz.",
+   "Sen ve Ali projeyi birlikte hazırlayacaksınız.",
+   "Öğrenciler törende şiir okudu."
+  ],
+  "dogru": 1,
+  "ipucu1": "Özneyi tek bir zamire çevir (ben + o = biz; sen + o = siz), sonra yüklemin sonundaki kişi ekine bak.",
+  "ipucu2": "'Ben ve kardeşim' hangi zamirin yerini tutar? Yüklem 'gideceksiniz' hangi kişiye göre çekimlenmiş?",
+  "cozum": [
+   "Kural: Öznede 'ben' varsa yüklem 'biz'e göre; 'ben' yok 'sen' varsa 'siz'e göre çekimlenir.",
+   "B: Ben ve kardeşim = biz. Yüklem 'gideceğiz' olmalıydı.",
+   "Cümlede 'gideceksiniz' (siz) denmiş; özne ile yüklem uyumsuz.",
+   "Öteki cümlelerde özne ile yüklem uyumlu. Cevap B."
+  ],
+  "tuzaklar": [
+   "Özne 'biz', yüklem de 'biz'e göre çekimlenmiş (gideceğiz). Uyumlu.",
+   "",
+   "'Sen ve Ali' = siz; yüklem 'hazırlayacaksınız'. Uyumlu; ama iki ayrı kişi sayıldığı için kuşku uyandırabilir.",
+   "Çoğul özneyle tekil yüklem kullanılabilir; bu bir bozukluk değildir."
+  ],
+  "taktik": "Özneyi tek zamire indir: içinde 'ben' varsa → biz; 'ben' yok 'sen' varsa → siz; ikisi de yoksa → onlar.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Özne-yüklem uyumu",
+    "tanim": "Yüklem, özneyle kişi ve tekillik-çoğulluk yönünden uyumlu olmalıdır. Örn: Ben ve sen gideceğiz."
+   },
+   {
+    "ad": "Anlatım bozukluğu",
+    "tanim": "Cümlenin dil bilgisi ya da anlam yönünden kusurlu olması."
+   }
+  ]
+ },
+ {
+  "id": "tur-048",
+  "ders": "turkce",
+  "unite": "Anlatım Bozuklukları",
+  "kazanimKod": "T.8.3.8",
+  "kazanimAd": "Metindeki anlatım bozukluklarını belirler.",
+  "zorluk": 2,
+  "tip": "klasik",
+  "metin": "Aşağıdaki cümlelerin hangisinde <b>anlatım bozukluğu</b> vardır?",
+  "svg": "",
+  "siklar": [
+   "Kardeşim kitabını aldı ve odasına gitti.",
+   "Yağmur dinince hep birlikte bahçeye çıktık.",
+   "Herkes ona güveniyor, sözünden şüphe etmiyordu.",
+   "Öğretmen soruyu sordu, öğrenciler cevapladı."
+  ],
+  "dogru": 2,
+  "ipucu1": "Virgülle bağlanmış iki cümlecik varsa özneyi ikinci yükleme de taşı ve oku. Anlam hâlâ doğru mu?",
+  "ipucu2": "'Herkes … şüphe etmiyordu' diye oku. Olumsuz yüklemle 'herkes' mi kullanılır, 'kimse' mi?",
+  "cozum": [
+   "C: İlk yüklem 'güveniyor' olumlu; öznesi 'herkes'.",
+   "İkinci yüklem 'şüphe etmiyordu' olumsuz; ama ona da 'herkes' özne oluyor.",
+   "Olumsuz yüklemin öznesi 'kimse' olmalı: 'Herkes ona güveniyor, kimse sözünden şüphe etmiyordu.'",
+   "İkinci cümleciğin öznesi eksik olduğu için bozukluk C'dedir."
+  ],
+  "tuzaklar": [
+   "İki yüklemin de öznesi 'kardeşim'; ortak özne iki yükleme de uyuyor.",
+   "Tek yüklemli, eksiği olmayan bir cümle.",
+   "",
+   "Her yüklemin kendi öznesi yazılmış (öğretmen / öğrenciler); eksik yok. 'Soruyu' ortak nesnedir, uygun."
+  ],
+  "taktik": "Sıralı cümlelerde ilk yüklem olumlu, ikinci olumsuzsa (ya da tersi) 'herkes / kimse' eksikliği ara.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Özne eksikliği",
+    "tanim": "Sıralı cümlelerde ilk cümlenin öznesi ikinci yükleme uymuyorsa ikinci özne yazılmalıdır (herkes → kimse)."
+   },
+   {
+    "ad": "Ortak öge",
+    "tanim": "Birden çok yüklemin paylaştığı öge. Her yükleme uygun olmalıdır."
+   }
+  ]
+ },
+ {
+  "id": "tur-049",
+  "ders": "turkce",
+  "unite": "Anlatım Bozuklukları",
+  "kazanimKod": "T.8.3.8",
+  "kazanimAd": "Metindeki anlatım bozukluklarını belirler.",
+  "zorluk": 2,
+  "tip": "klasik",
+  "metin": "Aşağıdaki cümlelerin hangisinde bir ögenin eksikliğinden kaynaklanan <b>anlatım bozukluğu</b> vardır?",
+  "svg": "",
+  "siklar": [
+   "Kitabı okudu ve arkadaşına verdi.",
+   "Babam gazeteyi aldı, dikkatle inceledi.",
+   "Bahçeyi suladı ve çiçekleri budadı.",
+   "Kardeşini çok sever, her gün oyun oynardı."
+  ],
+  "dogru": 3,
+  "ipucu1": "İlk cümlecikteki ögeyi ikinci yüklemle birlikte oku. Uymuyorsa ikinci yüklem kendi ögesini ister.",
+  "ipucu2": "'Kardeşini sever' doğru. Şimdi aynı sözü ikinci yükleme bağla: 'Kardeşini oyun oynardı' denir mi? Doğrusu ne olurdu?",
+  "cozum": [
+   "A, B, C'de ortak nesneler her iki yükleme de uyuyor.",
+   "D: 'Kardeşini çok sever' doğru; 'kardeşini' sözü -i eki almış nesnedir.",
+   "İkinci yüklem 'oynardı' ise 'kiminle?' sorusunun cevabını ister: 'onunla'.",
+   "Doğrusu: 'Kardeşini çok sever, her gün onunla oyun oynardı.' Tümleç eksik. Cevap D."
+  ],
+  "tuzaklar": [
+   "'Kitabı' iki yüklemin de nesnesi olabilir: kitabı okudu, kitabı verdi. Eksik yok.",
+   "'Gazeteyi' iki yükleme de uyuyor: gazeteyi aldı, gazeteyi inceledi. Eksik yok.",
+   "Her yüklemin kendi nesnesi var: bahçeyi suladı, çiçekleri budadı.",
+   ""
+  ],
+  "taktik": "Her yükleme tek tek soru sor (neyi? kime? kiminle?). Cevabı yanlış ek taşıyorsa o yüklemin ögesi eksiktir.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Tümleç eksikliği",
+    "tanim": "Sıralı cümlede ortak kullanılan öge ikinci yükleme uymuyorsa uygun tümleç eklenmelidir (onu, ona, onunla…)."
+   }
+  ]
+ },
+ {
+  "id": "tur-050",
+  "ders": "turkce",
+  "unite": "Anlatım Bozuklukları",
+  "kazanimKod": "T.8.3.8",
+  "kazanimAd": "Metindeki anlatım bozukluklarını belirler.",
+  "zorluk": 3,
+  "tip": "klasik",
+  "metin": "Aşağıdaki cümlelerin hangisinde yüklem eksikliğinden kaynaklanan bir <b>anlatım bozukluğu</b> vardır?",
+  "svg": "",
+  "siklar": [
+   "Annem çayı, babam kahveyi sever.",
+   "Sabah erkenden kalktım ve kahvaltıyı hazırladım.",
+   "Ben romanı, kardeşim de şiir okumayı çok sever.",
+   "Kitabı aldı, çantasına koydu."
+  ],
+  "dogru": 2,
+  "ipucu1": "Virgülden önceki bölümü cümlenin sonundaki yüklemle birleştirip oku. Kişi eki uyuyor mu?",
+  "ipucu2": "'Ben romanı … sever' diye okunuyor. 'Ben' öznesiyle 'sever' uyumlu mu? Doğrusu 'severim' olmaz mıydı?",
+  "cozum": [
+   "A: 'Annem çayı sever, babam kahveyi sever.' Yüklem iki özneye de uyuyor. Doğru.",
+   "C: 'Ben romanı … sever' biçiminde bağlanıyor; 'ben' ile 'sever' uyuşmuyor.",
+   "İlk bölüme kendi yüklemi gerekir: 'Ben romanı severim, kardeşim de şiir okumayı çok sever.'",
+   "Yüklem eksikliği C'dedir."
+  ],
+  "tuzaklar": [
+   "Görünüşü doğru cevaba çok benzer; ama 'annem sever' ve 'babam sever' ikisi de uyumlu olduğu için yüklem ortak kullanılabilir.",
+   "İki ayrı yüklem var, ikisi de 'ben'e göre çekimlenmiş; eksik yok.",
+   "",
+   "İki yüklemin de öznesi (o) ve nesnesi (kitabı) ortak ve uygun."
+  ],
+  "taktik": "Virgülle ayrılmış iki özne tek yüklemi paylaşıyorsa her özneyi yüklemle ayrı ayrı oku: 'ben … sever' gibi bir uyumsuzluk hemen duyulur.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Yüklem eksikliği",
+    "tanim": "Sıralı cümlede ortak kullanılan yüklem, cümleciklerden birine kişi ya da anlam yönünden uymuyorsa ayrı yüklem gerekir."
+   },
+   {
+    "ad": "Ortak yüklem",
+    "tanim": "'Annem çayı, babam kahveyi sever.' gibi her iki cümleciğe de uyan yüklem."
+   }
+  ]
+ },
+ {
+  "id": "tur-051",
+  "ders": "turkce",
+  "unite": "Söz Sanatları ve Metin Türleri",
+  "kazanimKod": "T.8.3.7",
+  "kazanimAd": "Metindeki söz sanatlarını tespit eder.",
+  "zorluk": 1,
+  "tip": "klasik",
+  "metin": "İnsana ait özelliklerin insan dışındaki varlıklara verilmesine kişileştirme denir.<br><br>Buna göre aşağıdaki cümlelerin hangisinde <b>kişileştirme</b> yapılmıştır?",
+  "svg": "",
+  "siklar": [
+   "Çocuğun yanakları elma gibi kırmızıydı.",
+   "O kadar yorgundum ki bin yıl uyuyabilirdim.",
+   "Bahçedeki erik ağacı bu yıl erken çiçek açtı.",
+   "Rüzgâr, penceremin önünde bana eski günleri fısıldadı."
+  ],
+  "dogru": 3,
+  "ipucu1": "İnsan olmayan bir varlık bul ve sor: Yaptığı iş normalde yalnızca insanların yapabileceği bir iş mi?",
+  "ipucu2": "Rüzgâr ve erik ağacı insan değil. Çiçek açmak ağaca özgü. Peki fısıldamak kimin işidir?",
+  "cozum": [
+   "A: 'elma gibi' → benzetme.",
+   "B: 'bin yıl uyumak' → abartma.",
+   "C: Çiçek açmak ağacın doğal özelliğidir → söz sanatı yok.",
+   "D: Fısıldamak insana özgüdür; rüzgâra verilmiş → kişileştirme.",
+   "Cevap D."
+  ],
+  "tuzaklar": [
+   "'Gibi' sözüyle yanaklar elmaya benzetilmiş; bu benzetmedir.",
+   "Bin yıl uyumak olanaksızdır; yorgunluk olduğundan çok büyük gösterilmiş, yani abartma yapılmış.",
+   "Ağaçtan söz edildiği için cazip; ama çiçek açmak ağacın zaten yaptığı bir şeydir, insana özgü değildir.",
+   ""
+  ],
+  "taktik": "İnsan dışı varlık + insana özgü fiil (gülmek, küsmek, fısıldamak, düşünmek) = kişileştirme.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Kişileştirme (teşhis)",
+    "tanim": "İnsan dışındaki varlıklara insan özelliği verme. Örn: Güneş bize gülümsedi."
+   },
+   {
+    "ad": "Benzetme (teşbih)",
+    "tanim": "Bir varlığı ortak bir özellikten dolayı başka bir varlığa benzetme. İpucu: gibi, kadar, sanki."
+   }
+  ]
+ },
+ {
+  "id": "tur-052",
+  "ders": "turkce",
+  "unite": "Söz Sanatları ve Metin Türleri",
+  "kazanimKod": "T.8.3.7",
+  "kazanimAd": "Metindeki söz sanatlarını tespit eder.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Dedemin elleri, kurumuş toprak gibi çatlak çatlaktı. Köyde herkes onun gücünü anlata anlata bitiremezdi. Güya bir sabah kalkmış, öğlene kadar bütün dağı tek başına ağaçlandırmış. Biz çocuklar bu hikâyeyi her dinleyişimizde dedemin ellerine bir kez daha bakardık.<br><br>Bu metinde aşağıdaki söz sanatlarından hangileri kullanılmıştır?",
+  "svg": "",
+  "siklar": [
+   "Benzetme – Abartma",
+   "Kişileştirme – Karşıtlık",
+   "Konuşturma – Benzetme",
+   "Abartma – Konuşturma"
+  ],
+  "dogru": 0,
+  "ipucu1": "İpucu sözcüklerini ara: 'gibi' hangi sanatı gösterir? Gerçekte olması imkânsız bir iş anlatılmış mı?",
+  "ipucu2": "'Kurumuş toprak gibi' sözünde neyin neye benzetildiğini bul. Bir insan yarım günde bütün bir dağı ağaçlandırabilir mi?",
+  "cozum": [
+   "'Eller, kurumuş toprak gibi çatlaktı.' → Eller toprağa benzetilmiş: benzetme.",
+   "'Öğlene kadar bütün dağı tek başına ağaçlandırmış.' → Olanaksız ölçüde büyütülmüş: abartma.",
+   "Metinde konuşan ya da insan gibi davranan bir varlık yok; zıt kavramlar da yok.",
+   "Cevap A: Benzetme – Abartma."
+  ],
+  "tuzaklar": [
+   "",
+   "Metinde insan dışı bir varlığa insan özelliği verilmemiş; birbirine zıt kavramlar da bir arada kullanılmamış.",
+   "Benzetme var; ama konuşturmada insan dışı bir varlık konuşur. Metinde konuşan bir varlık yok.",
+   "Abartma var; fakat 'güya' ile aktarılan söz köylülere aittir, insan dışı bir varlığa değil."
+  ],
+  "taktik": "İkili şıklarda emin olduğun sanatı içermeyen şıkları ele; sonra kalan şıklardaki ikinci sanatı metinde ara.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Abartma (mübalağa)",
+    "tanim": "Bir şeyi olduğundan çok büyük ya da çok küçük gösterme. Örn: Bir bakışıyla dağları eritir."
+   },
+   {
+    "ad": "Benzetme",
+    "tanim": "'Gibi, kadar, sanki' sözleriyle kurulan benzerlik ilişkisi."
+   }
+  ]
+ },
+ {
+  "id": "tur-053",
+  "ders": "turkce",
+  "unite": "Söz Sanatları ve Metin Türleri",
+  "kazanimKod": "T.8.3.26",
+  "kazanimAd": "Metin türlerini ayırt eder.",
+  "zorluk": 2,
+  "tip": "uzun-metin",
+  "metin": "Yürümeyi severim; ama bir yere varmak için değil. Yürürken düşüncelerim de benimle birlikte adım atar sanki. Masamın başında saatlerce çözemediğim bir düğüm, ikinci sokağın köşesinde kendiliğinden çözülüverir. Belki de aklımızın ayaklarımıza ihtiyacı vardır, kim bilir? Bunu kimseye kanıtlayacak değilim; herkesin kendi yolu, kendi yürüyüşü var. Ben yalnızca kendi payıma düşeni söylüyorum: İçim daraldığında ayakkabılarımı giyerim.<br><br>Bu metin aşağıdaki türlerin hangisinden alınmış olabilir?",
+  "svg": "",
+  "siklar": [
+   "Makale",
+   "Deneme",
+   "Roman",
+   "Destan"
+  ],
+  "dogru": 1,
+  "ipucu1": "Yazarın tutumuna bak: Bir şeyi kanıtlamaya mı çalışıyor, bir olay mı anlatıyor, yoksa kendi kendine konuşur gibi düşüncelerini mi paylaşıyor?",
+  "ipucu2": "'Bunu kimseye kanıtlayacak değilim' ve 'kendi payıma düşeni söylüyorum' cümleleri hangi türün en belirgin özelliğini gösterir?",
+  "cozum": [
+   "Yazar kişisel bir konuyu (yürümek) içten bir dille anlatıyor.",
+   "Düşüncesini kanıtlama kaygısı yok: 'kanıtlayacak değilim'.",
+   "Okurla sohbet eder gibi: 'kim bilir?'",
+   "Kişisel görüşlerin kanıtlama amacı güdülmeden, samimi bir dille anlatıldığı tür denemedir. Cevap B."
+  ],
+  "tuzaklar": [
+   "Makalede yazar düşüncesini kanıtlarla ispatlamaya çalışır; bu metinde yazar 'kanıtlayacak değilim' diyor.",
+   "",
+   "Birinci kişili anlatım romanı düşündürebilir; ama ortada bir olay örgüsü, kişiler ve zaman-mekân kurgusu yok.",
+   "Destanda olağanüstü olaylar ve kahramanlar anlatılır; metin günlük ve kişisel bir düşünce yazısı."
+  ],
+  "taktik": "Deneme = 'ben' + samimi sohbet + kanıt yok. Makale = bilgi + kanıt + nesnel dil. Fıkra (köşe yazısı) = güncel konu + kişisel yorum.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Deneme",
+    "tanim": "Yazarın dilediği bir konudaki kişisel düşüncelerini kanıtlama amacı gütmeden, içten bir dille anlattığı tür."
+   },
+   {
+    "ad": "Makale",
+    "tanim": "Bir düşünceyi ya da bilgiyi kanıtlarla açıklayan, nesnel ve ciddi dilli yazı türü."
+   }
+  ]
+ },
+ {
+  "id": "tur-054",
+  "ders": "turkce",
+  "unite": "Söz Sanatları ve Metin Türleri",
+  "kazanimKod": "T.8.3.7",
+  "kazanimAd": "Metindeki söz sanatlarını tespit eder.",
+  "zorluk": 3,
+  "tip": "cok-adimli",
+  "metin": "I. “Beni bu sıcakta susuz bırakma.” dedi saksıdaki menekşe.<br>II. Kalabalığın ortasında yapayalnızdı.<br>III. Kardeşimin saçları ipek gibi yumuşaktı.<br>IV. Bulutlar gökyüzünde saklambaç oynuyordu.<br><br>Numaralanmış cümlelerle ilgili aşağıdaki eşleştirmelerden hangisi <b>yanlıştır</b>?",
+  "svg": "",
+  "siklar": [
+   "I – Konuşturma",
+   "II – Karşıtlık",
+   "III – Kişileştirme",
+   "IV – Kişileştirme"
+  ],
+  "dogru": 2,
+  "ipucu1": "Her cümlede ipucunu bul: tırnak içinde konuşan bir varlık, zıt iki kavram, 'gibi' sözü, insana özgü bir iş.",
+  "ipucu2": "III. cümlede 'gibi' sözü var. Saçlar insan gibi bir iş mi yapıyor, yoksa bir şeye mi benzetiliyor?",
+  "cozum": [
+   "I: Menekşe konuşuyor → konuşturma (intak). Doğru.",
+   "II: Kalabalık ↔ yalnız → karşıtlık (tezat). Doğru.",
+   "IV: Bulutlar saklambaç oynuyor → kişileştirme. Doğru.",
+   "III: Saçlar ipeğe benzetilmiş ('gibi') → benzetme. Kişileştirme değil.",
+   "Yanlış eşleştirme C'dedir."
+  ],
+  "tuzaklar": [
+   "Menekşe insan gibi konuşmuş; bu konuşturmadır. Eşleştirme doğru.",
+   "'Kalabalık' ve 'yapayalnız' zıt anlamlı kavramlardır ve bir arada kullanılmıştır. Eşleştirme doğru; zıtlık ilk bakışta fark edilmeyebilir.",
+   "",
+   "Saklambaç oynamak insana özgüdür, bulutlara verilmiş. Eşleştirme doğru."
+  ],
+  "taktik": "Konuşturma varsa kişileştirme de vardır; ama her kişileştirmede konuşma yoktur. Varlık konuşuyorsa 'konuşturma' de.",
+  "hataTipi": "kavram",
+  "kavramlar": [
+   {
+    "ad": "Konuşturma (intak)",
+    "tanim": "İnsan dışındaki varlıkları insan gibi konuşturma. Örn: 'Üşüyorum.' dedi küçük serçe."
+   },
+   {
+    "ad": "Karşıtlık (tezat)",
+    "tanim": "Zıt anlamlı kavram ya da durumları bir arada kullanma. Örn: Ağlarken güldürdü."
+   }
+  ]
+ }
+]
