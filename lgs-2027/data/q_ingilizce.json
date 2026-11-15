@@ -279,7 +279,7 @@
    "Half of the class prefers pop music."
   ],
   "dogru": 3,
-  "ipucu1": "Her sütunun sayısını oku. “Half of the class” için sınıf mevcudunu kullanman gerekir.",
+  "ipucu1": "Her sütunun sayısını oku. Şıklardaki karşılaştırmaları göz kararı değil, sayılarla kontrol et.",
   "ipucu2": "Sınıf 30 kişi. Yarısı kaç eder? Bunu pop sütunundaki sayıyla karşılaştır.",
   "cozum": [
    "Grafik: Pop 12, Rap 8, Rock 6, Classical 4.",
@@ -717,7 +717,7 @@
    "Mr. Tekin can’t talk to the manager at that moment."
   ],
   "dogru": 2,
-  "ipucu1": "Bay Tekin’in son cümlesine odaklan: beklemeyi mi, sonra aramayı mı seçiyor?",
+  "ipucu1": "Her şıkkı diyalogdaki bir cümleyle eşleştir; telefon deyimlerinin (hold, put through, call back) anlamlarını düşün.",
   "ipucu2": "“Hold” = hatta beklemek, “call back” = geri aramak. Bay Tekin “I’m in a hurry” (acelem var) diyor.",
   "cozum": [
    "“I’d like to speak to the manager” → A doğru.",
@@ -1199,7 +1199,7 @@
    "Have you ever been to Cappadocia?"
   ],
   "dogru": 3,
-  "ipucu1": "Rehberin kısa cevabına bak: “Yes, I have.” Hangi yardımcı fiille sorulmuş bir sorunun cevabıdır?",
+  "ipucu1": "Rehberin cevabının ilk iki kelimesine bak: sorunun türü (Evet/Hayır sorusu mu, bilgi sorusu mu) hakkında ne söylüyor?",
   "ipucu2": "Kısa cevaptaki yardımcı fiil sorudakiyle aynı olur. Örneğin “Did you…?” sorusunun cevabı “Yes, I did” olurdu.",
   "cozum": [
    "Kısa cevap: “Yes, I have.”",
@@ -1762,7 +1762,7 @@
   "svg": "<svg viewBox='0 0 320 147'><rect x='6' y='6' width='308' height='135' rx='10' fill='none' stroke='currentColor' stroke-width='1.5'/><text x='160' y='26' text-anchor='middle' font-size='14' font-weight='bold' fill='currentColor'>LAB SAFETY RULES</text><line x1='18' y1='35' x2='302' y2='35' class='ac' stroke='currentColor'/><text x='20' y='55' font-size='12' fill='currentColor'>1. Wear your safety goggles and gloves.</text><text x='20' y='73' font-size='12' fill='currentColor'>2. Don’t eat or drink in the lab.</text><text x='20' y='91' font-size='12' fill='currentColor'>3. Don’t touch or smell the chemicals</text><text x='20' y='109' font-size='12' fill='currentColor'>    without permission.</text><text x='20' y='127' font-size='12' fill='currentColor'>4. Wash your hands after the experiment.</text></svg>",
   "siklar": [
    "Hakan is eating a sandwich while he is waiting for the results.",
-   "Seda is smelling the liquid in the test tube to guess what it is.",
+   "Seda is smelling the liquid in the test tube without asking her teacher.",
    "Umut is washing his hands after he finishes his experiment.",
    "Gizem isn’t wearing her gloves because it is hot in the lab."
   ],
@@ -1898,7 +1898,7 @@
    "What do experts predict for tomorrow?"
   ],
   "dogru": 1,
-  "ipucu1": "Sayı soran şıkka dikkat et: metinde hangi sayılar var ve neye ait?",
+  "ipucu1": "Her sorunun cevabını haberde tek tek ara; bulduğun bilginin tam olarak soruyu karşılayıp karşılamadığına bak.",
   "ipucu2": "Metinde “two metres” ve “about fifty houses” geçiyor. Yüksek yerlere çıkan insanların sayısı verilmiş mi?",
   "cozum": [
    "“Heavy rain caused a flood” (şiddetli yağmur) → A’nın cevabı var.",

@@ -113,7 +113,7 @@
   "unite": "Cümlede Anlam",
   "kazanimKod": "T.8.3.25",
   "on": "Koşul (şart) cümlesi nasıl anlaşılır?",
-  "arka": "Bir işin gerçekleşmesi başka bir işe bağlıdır. İpuçları: -sa/-se, -dıkça, -ınca, 'yeter ki', 'ancak … -arak'. Örn: Çalışırsan kazanırsın.",
+  "arka": "Bir işin gerçekleşmesi başka bir işe bağlıdır. İpuçları: -sa/-se, -dıkça, 'yeter ki', 'ancak … -arak'. Örn: Çalışırsan kazanırsın.",
   "test": {
    "soru": "Hangisinde koşul anlamı vardır?",
    "siklar": [
@@ -365,11 +365,11 @@
   "unite": "Fiilimsiler",
   "kazanimKod": "T.8.3.9",
   "on": "Sıfat-fiil ekleri nelerdir?",
-  "arka": "-an, -ası, -mez, -ar, -dik, -ecek, -miş (kısaca: “anası mezar dikecekmiş”). Bir adı niteler. Örn: koşan çocuk, tanıdık yüz, gelecek hafta.",
+  "arka": "-an, -ası, -mez, -ar, -dik, -ecek, -miş (kısaca: “anası mezar dikecekmiş”). Bir adı niteler. Örn: koşan çocuk, okuduğum kitap, gelecek hafta.",
   "test": {
    "soru": "Hangisinde sıfat-fiil vardır?",
    "siklar": [
-    "Tanıdık bir yüz gördüm.",
+    "Okuduğum kitabı sana vereceğim.",
     "Akşam eve geldik.",
     "Kitabı dün okudum.",
     "Yarın sana geleceğim."

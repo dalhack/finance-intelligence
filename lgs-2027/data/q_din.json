@@ -216,7 +216,7 @@
   "kazanimAd": "Kaza ve kader ile ilgili kavramları analiz eder.",
   "zorluk": 3,
   "tip": "cok-adimli",
-  "metin": "<i>“… İş konusunda onlarla istişare et. Karar verdiğin zaman da Allah’a tevekkül et. …”</i> (Âl-i İmrân suresi, 159. ayet)<br><br>Köy muhtarı Hasan Bey, kuraklığa karşı sulama kanalı açmak için köylülerle toplantı yapmıştır. Ortak karar alınmış, kanal birlikte kazılmıştır. İş bitince Hasan Bey, “Üzerimize düşeni yaptık, bundan sonrası için Allah’a güveniyoruz.” demiştir.<br><br>Ayet ve örnek olay birlikte düşünüldüğünde;<br>I. Tevekkül, gerekli adımlar atıldıktan sonra Allah’a güvenmektir.<br>II. Önemli işlerde başkalarının görüşünü almak doğru bir davranıştır.<br>III. Allah’a güvenen kişinin tedbir almasına gerek kalmaz.<br><br><b>yargılarından hangilerine ulaşılabilir?</b>",
+  "metin": "<i>“… İş konusunda onlarla müşavere et. Bir kere de karar verip azmettin mi, artık Allah’a tevekkül et. …”</i> (Âl-i İmrân suresi, 159. ayet)<br><br>Köy muhtarı Hasan Bey, kuraklığa karşı sulama kanalı açmak için köylülerle toplantı yapmıştır. Ortak karar alınmış, kanal birlikte kazılmıştır. İş bitince Hasan Bey, “Üzerimize düşeni yaptık, bundan sonrası için Allah’a güveniyoruz.” demiştir.<br><br>Ayet ve örnek olay birlikte düşünüldüğünde;<br>I. Tevekkül, gerekli adımlar atıldıktan sonra Allah’a güvenmektir.<br>II. Önemli işlerde başkalarının görüşünü almak doğru bir davranıştır.<br>III. Allah’a güvenen kişinin tedbir almasına gerek kalmaz.<br><br><b>yargılarından hangilerine ulaşılabilir?</b>",
   "svg": "",
   "siklar": [
    "Yalnız I",
@@ -228,14 +228,14 @@
   "ipucu1": "Her yargıyı tek tek hem ayetle hem de Hasan Bey’in yaptıklarıyla karşılaştır.",
   "ipucu2": "Hasan Bey önce toplantı yaptı, sonra kanalı kazdırdı, en son Allah’a güvendiğini söyledi. III. yargı bu sırayla uyuşuyor mu?",
   "cozum": [
-   "Ayette önce istişare, sonra karar, sonra tevekkül sıralanıyor.",
+   "Ayette önce danışma (müşavere), sonra karar, sonra tevekkül sıralanıyor.",
    "Hasan Bey danıştı, kanalı kazdırdı, sonra Allah’a güvendi. I. yargı doğru.",
    "Hem ayet hem toplantı, danışmanın önemini gösteriyor. II. yargı doğru.",
    "Kanal kazmak bir tedbirdir; III. yargı metinle çelişir.",
    "Cevap: I ve II."
   ],
   "tuzaklar": [
-   "I. yargı kolayca görülür; ayetteki “istişare et” ifadesi atlanırsa II. yargı gözden kaçar.",
+   "I. yargı kolayca görülür; ayetteki “müşavere et” (danış) ifadesi atlanırsa II. yargı gözden kaçar.",
    "Tevekkül “her şeyi Allah’a bırakmak” diye eksik bilinirse III doğru sanılır.",
    "II doğru bulunur ama tevekkül yanlış anlaşılırsa III de eklenir.",
    ""
@@ -261,7 +261,7 @@
   "kazanimAd": "Kaza ve kader ile ilgili kavramları analiz eder.",
   "zorluk": 2,
   "tip": "uzun-metin",
-  "metin": "<i>“Yeryüzünde hiçbir canlı yoktur ki rızkı Allah’a ait olmasın. …”</i> (Hûd suresi, 6. ayet)<br><br><i>“İnsan için ancak çalıştığının karşılığı vardır.”</i> (Necm suresi, 39. ayet)<br><br><b>Bu iki ayet birlikte değerlendirildiğinde aşağıdakilerden hangisine ulaşılır?</b>",
+  "metin": "<i>“Yeryüzünde hiçbir canlı yoktur ki rızkı Allah’a ait olmasın. …”</i> (Hûd suresi, 6. ayet)<br><br><i>“İnsan için ancak çalıştığı vardır.”</i> (Necm suresi, 39. ayet)<br><br><b>Bu iki ayet birlikte değerlendirildiğinde aşağıdakilerden hangisine ulaşılır?</b>",
   "svg": "",
   "siklar": [
    "Rızkı veren Allah’tır; insanın da rızkını elde etmek için çalışması gerekir.",
@@ -1185,8 +1185,8 @@
    "Sabırlı olmasını"
   ],
   "dogru": 2,
-  "ipucu1": "Mekkelilerin ona verdiği lakaba dikkat et: “el-Emin” ne anlama gelir?",
-  "ipucu2": "Anlaşmazlık içindeki herkes onun kararına hemen razı oluyor. İnsanlar kimin kararına gönül rahatlığıyla razı olur?",
+  "ipucu1": "Anlaşmazlık içindeki kabileler onun kararına neden hemen razı oldu? İnsanlar kimin kararını gönül rahatlığıyla kabul eder?",
+  "ipucu2": "Mekkelilerin ona verdiği lakaba dikkat et: “el-Emin” ne anlama gelir?",
   "cozum": [
    "Mekkeliler ona “el-Emin” yani “güvenilir kişi” diyordu.",
    "Herkesin onun hakemliğine razı olması, ona duyulan güveni gösterir.",
@@ -1583,7 +1583,7 @@
   "kazanimAd": "Ayetlerden hareketle Kur’an’ın ana konularını sınıflandırır.",
   "zorluk": 2,
   "tip": "grafik-tablo",
-  "metin": "Bir öğrenci, bazı ayetleri Kur’an’ın ana konularıyla eşleştirmiştir:<table class=\"t\"><tr><th>No</th><th>Ayet</th><th>Ana konu</th></tr><tr><td>1</td><td>“De ki: O, Allah’tır, bir tektir.” (İhlâs, 1)</td><td>İnanç</td></tr><tr><td>2</td><td>“Ey iman edenler! … oruç, sizden öncekilere farz kılındığı gibi size de farz kılındı.” (Bakara, 183)</td><td>İbadet</td></tr><tr><td>3</td><td>“… Birbirinizin kusurlarını araştırmayın. Birbirinizin gıybetini yapmayın. …” (Hucurât, 12)</td><td>İbadet</td></tr><tr><td>4</td><td>“Andolsun, onların kıssalarında akıl sahipleri için ibret vardır. …” (Yûsuf, 111)</td><td>Kıssa</td></tr></table><b>Öğrenci, numaralanmış eşleştirmelerden hangisinde hata yapmıştır?</b>",
+  "metin": "Bir öğrenci, bazı ayetleri Kur’an’ın ana konularıyla eşleştirmiştir:<table class=\"t\"><tr><th>No</th><th>Ayet</th><th>Ana konu</th></tr><tr><td>1</td><td>“De ki: O, Allah’tır, bir tektir.” (İhlâs, 1)</td><td>İnanç</td></tr><tr><td>2</td><td>“Ey iman edenler! … oruç, sizden öncekilere farz kılındığı gibi size de farz kılındı.” (Bakara, 183)</td><td>İbadet</td></tr><tr><td>3</td><td>“… Birbirinizin kusurlarını … araştırmayın. Birbirinizin gıybetini yapmayın. …” (Hucurât, 12)</td><td>İbadet</td></tr><tr><td>4</td><td>“Andolsun, onların kıssalarında akıl sahipleri için ibret vardır. …” (Yûsuf, 111)</td><td>Kıssa</td></tr></table><b>Öğrenci, numaralanmış eşleştirmelerden hangisinde hata yapmıştır?</b>",
   "svg": "",
   "siklar": [
    "1",

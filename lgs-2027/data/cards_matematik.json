@@ -221,7 +221,7 @@
   "unite": "Kareköklü İfadeler",
   "kazanimKod": "M.8.1.3.8",
   "on": "İrrasyonel sayı nedir?",
-  "arka": "İki tam sayının oranı olarak yazılamayan sayıdır. Tam kare olmayan sayıların karekökleri ve π irrasyoneldir.",
+  "arka": "İki tam sayının oranı olarak yazılamayan sayıdır. Tam kare olmayan doğal sayıların karekökleri ve π irrasyoneldir.",
   "test": {
    "soru": "Hangisi irrasyonel sayıdır?",
    "siklar": [

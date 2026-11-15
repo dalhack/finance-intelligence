@@ -1514,7 +1514,7 @@
   "kazanimAd": "Mustafa Kemal’e suikast girişimini analiz eder.",
   "zorluk": 2,
   "tip": "uzun-metin",
-  "metin": "1926'da Mustafa Kemal'in İzmir gezisi sırasında kendisine suikast yapılması planlandı; ancak plan önceden öğrenildi ve girişim engellendi. Mustafa Kemal bu olayın ardından şu sözü söyledi:<br><br><i>“Benim naçiz vücudum elbet bir gün toprak olacaktır; ancak Türkiye Cumhuriyeti ilelebet payidar kalacaktır.”</i><br>(naçiz: önemsiz, değersiz · payidar: kalıcı)<br><br>Bu sözle aşağıdakilerden hangisi vurgulanmıştır?",
+  "metin": "1926'da Mustafa Kemal'in İzmir gezisi sırasında kendisine suikast yapılması planlandı; ancak plan önceden öğrenildi ve girişim engellendi. Mustafa Kemal bu olayın ardından şu sözü söyledi:<br><br><i>“Benim naçiz vücudum elbet bir gün toprak olacaktır, fakat Türkiye Cumhuriyeti ilelebet payidar kalacaktır.”</i><br>(naçiz: önemsiz, değersiz · payidar: kalıcı)<br><br>Bu sözle aşağıdakilerden hangisi vurgulanmıştır?",
   "svg": "",
   "siklar": [
    "Cumhuriyet'in kişilere bağlı olmadığı ve sonsuza kadar yaşayacağı",
@@ -1690,7 +1690,7 @@
   "kazanimAd": "Atatürk Dönemi Türk dış politikasında yaşanan gelişmeleri analiz eder.",
   "zorluk": 3,
   "tip": "grafik-tablo",
-  "metin": "1930'lu yıllarda İtalya ve Almanya'nın yayılmacı politikaları dünya barışını tehdit etmeye başladı. Türkiye bu dönemde komşularıyla aşağıdaki iş birliklerini kurdu.<table class='t'><tr><th>İş birliği</th><th>Yıl</th><th>Üyeler</th></tr><tr><td>Balkan Antantı</td><td>1934</td><td>Türkiye, Yunanistan, Yugoslavya, Romanya</td></tr><tr><td>Sadabat Paktı</td><td>1937</td><td>Türkiye, İran, Irak, Afganistan</td></tr></table><br>Bu bilgilere göre,<br>I. Türkiye, güvenliğini bölgesel iş birlikleriyle güçlendirmeye çalışmıştır.<br>II. Türkiye, hem batı hem doğu sınırlarının güvenliğini önemsemiştir.<br>III. Türkiye, bu iş birlikleriyle yeni topraklar kazanmayı hedeflemiştir.<br>yargılarından hangilerine ulaşılabilir?",
+  "metin": "1930'lu yıllarda İtalya ve Almanya'nın yayılmacı politikaları dünya barışını tehdit etmeye başladı. Türkiye bu dönemde bölgesindeki ülkelerle aşağıdaki iş birliklerini kurdu.<table class='t'><tr><th>İş birliği</th><th>Yıl</th><th>Üyeler</th></tr><tr><td>Balkan Antantı</td><td>1934</td><td>Türkiye, Yunanistan, Yugoslavya, Romanya</td></tr><tr><td>Sadabat Paktı</td><td>1937</td><td>Türkiye, İran, Irak, Afganistan</td></tr></table><br>Bu bilgilere göre,<br>I. Türkiye, güvenliğini bölgesel iş birlikleriyle güçlendirmeye çalışmıştır.<br>II. Türkiye, hem batı hem doğu sınırlarının güvenliğini önemsemiştir.<br>III. Türkiye, bu iş birlikleriyle yeni topraklar kazanmayı hedeflemiştir.<br>yargılarından hangilerine ulaşılabilir?",
   "svg": "",
   "siklar": [
    "Yalnız I",
@@ -1702,7 +1702,7 @@
   "ipucu1": "Üye ülkelerin Türkiye'ye göre hangi yönde olduğunu düşün: Balkan ülkeleri nerede, İran ve Irak nerede?",
   "ipucu2": "Metin iş birliklerinin nedenini açıklıyor: “barışı tehdit eden yayılmacı politikalar”. Tehdide karşı kurulan bir iş birliğinin amacı korunmak mıdır, toprak kazanmak mı?",
   "cozum": [
-   "I: Türkiye komşularıyla iki ayrı iş birliği kurmuş → doğru.",
+   "I: Türkiye bölgesindeki ülkelerle iki ayrı iş birliği kurmuş → doğru.",
    "II: Balkan ülkeleri batıda; İran, Irak ve Afganistan doğuda → iki yön de güvenceye alınmış. Doğru.",
    "III: Amaç tehdide karşı korunmak; toprak kazanma hedefi yok. Yanlış.",
    "Cevap: I ve II."
@@ -1743,7 +1743,7 @@
    "Atatürk, Hatay meselesine özel önem vermiştir."
   ],
   "dogru": 1,
-  "ipucu1": "Metindeki yıllara dikkat et: 1936, 1938, 1939. Bunları Atatürk'ün ölüm tarihiyle karşılaştır.",
+  "ipucu1": "Soru “ulaşılamaz” diyor: her şık için metinde bir dayanak ara. Metindeki yıllara (1936, 1938, 1939) da dikkat et.",
   "ipucu2": "Atatürk 10 Kasım 1938'de hayatını kaybetti. Hatay'ın Türkiye'ye katılma kararı hangi yıl alındı?",
   "cozum": [
    "A: Sorun görüşmelerle ve Meclis kararıyla çözüldü → ulaşılır.",
